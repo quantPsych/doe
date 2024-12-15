@@ -2,100 +2,254 @@
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html",
     "href": "lectures/week1_DOE_fundamental_ch1.html",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "",
     "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code.\n\n\n\n\nUnderstand the theoretical foundations and objectives of experimental design in statistics.\nDistinguish between observational and experimental studies, emphasizing the advantages experiments provide.\nLearn the fundamental techniques of replication, blocking, and randomization.\nDiscuss how factorial experiments efficiently explore multiple factors simultaneously.\nUnderstand how design decisions affect data analysis and the validity of inferential procedures.\nReinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.\nExplore advanced mathematical derivations and proofs in the Appendix."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#introduction",
     "href": "lectures/week1_DOE_fundamental_ch1.html#introduction",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "",
     "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#objectives",
     "href": "lectures/week1_DOE_fundamental_ch1.html#objectives",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "",
     "text": "Understand the theoretical foundations and objectives of experimental design in statistics.\nDistinguish between observational and experimental studies, emphasizing the advantages experiments provide.\nLearn the fundamental techniques of replication, blocking, and randomization.\nDiscuss how factorial experiments efficiently explore multiple factors simultaneously.\nUnderstand how design decisions affect data analysis and the validity of inferential procedures.\nReinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.\nExplore advanced mathematical derivations and proofs in the Appendix."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#experimentation-vs.-observation",
     "href": "lectures/week1_DOE_fundamental_ch1.html#experimentation-vs.-observation",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "2.1 Experimentation vs. Observation",
     "text": "2.1 Experimentation vs. Observation\n\nObservational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.\nControlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#goals-of-experimentation",
     "href": "lectures/week1_DOE_fundamental_ch1.html#goals-of-experimentation",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "2.2 Goals of Experimentation",
     "text": "2.2 Goals of Experimentation\n\nDetermine causes of variation in response.\nFind optimal conditions and treatment combinations.\nCompare responses across different treatments.\nDevelop predictive models that accurately reflect the underlying process.\n\nEffective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#importance-of-experimental-design",
     "href": "lectures/week1_DOE_fundamental_ch1.html#importance-of-experimental-design",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "2.3 Importance of Experimental Design",
     "text": "2.3 Importance of Experimental Design\n\nCause-and-Effect: Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.\nResource Allocation: Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.\nEfficient Analysis: A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.\n\n(See Montgomery, 2019, Design and Analysis of Experiments for a comprehensive treatment.)"
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#replication",
     "href": "lectures/week1_DOE_fundamental_ch1.html#replication",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "3.1 Replication",
     "text": "3.1 Replication\n\nDefinition: Replication means repeating the entire set of treatments independently on different experimental units.\nPurpose: Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.\nContrast with Repeated Measurements: Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.\n\nWithout adequate replication, it is difficult to separate true treatment effects from random noise."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#blocking",
     "href": "lectures/week1_DOE_fundamental_ch1.html#blocking",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "3.2 Blocking",
     "text": "3.2 Blocking\n\nConcept: Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.\nExample: If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.\nOutcome: Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#randomization",
     "href": "lectures/week1_DOE_fundamental_ch1.html#randomization",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "3.3 Randomization",
-    "text": "3.3 Randomization\n\nRationale: Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.\nBenefits:\n\n  - Prevents experimenter preferences or unconscious patterns from influencing results.\n  - Justifies the use of standard statistical distributions (F, t) for inference.\n  - Confirms that observed effects can be attributed to treatments and not assignment bias.\nReference: Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.\n\nMethods of Randomization\n\nRandom Number Generators (RNG): Computer programs or calculators produce pseudo-random digits, used to assign treatments.\nRandom Number Tables: Historically used, a random table combined with random starting points can ensure unbiased allocations.\nEnsuring True Randomness: Use objective random devices (dice, RNGs) and avoid human-chosen “random” sequences, as humans are prone to inadvertent patterns."
+    "text": "3.3 Randomization\n\nRationale: Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.\nBenefits:\n\n  - Prevents experimenter preferences or unconscious patterns from influencing results.\n  - Justifies the use of standard statistical distributions (F, t) for inference.\n  - Confirms that observed effects can be attributed to treatments and not assignment bias.\nReference: Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.\n\n3.3.1 Methods of Randomization\n\nRandom Number Generators (RNG): Computer programs or calculators produce pseudo-random digits, used to assign treatments.\nRandom Number Tables: Historically used, a random table combined with random starting points can ensure unbiased allocations.\nEnsuring True Randomness: Use objective random devices (dice, RNGs) and avoid human-chosen “random” sequences, as humans are prone to inadvertent patterns."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#example-random-assignment-and-anova",
     "href": "lectures/week1_DOE_fundamental_ch1.html#example-random-assignment-and-anova",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "7.1 Example: Random Assignment and ANOVA",
     "text": "7.1 Example: Random Assignment and ANOVA\nSuppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.\n# Set seed for reproducibility\n\nset.seed(123)\n# Treatments\n\ntreatments &lt;- c(\"A\", \"B\", \"C\")\n# We have 9 units, randomly assign treatments\n\nassignments &lt;- sample(rep(treatments, each=3))\nassignments\nThis code generates a random permutation of A, B, and C assigned to the units.\nNow assume we collected data (simulated responses):\n# Simulate responses with a true difference: A &lt;-  B &lt;-  C\ntrue_means &lt;- c(A=10, B=12, C=15)\nresponses &lt;- rnorm(9, mean=rep(true_means, each=3), sd=2)\ndata &lt;- data.frame(\n  unit = 1:9,\n  treatment = assignments,\n  response = responses\n)\n\n# Fit an ANOVA model\n\nfit &lt;- aov(response ~ treatment, data=data)\nsummary(fit)\nThe ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.\nConclusion\nExperimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.\nKey Takeaways:\n\nRandomization prevents systematic bias and validates inferential methods.\nReplication provides robust estimates of variability and supports generalizability.\nBlocking controls known sources of variation, improving precision.\nFactorial designs offer a more comprehensive view of multiple factors simultaneously.\n\nFuture sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#references",
     "href": "lectures/week1_DOE_fundamental_ch1.html#references",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "7.2 References",
     "text": "7.2 References\n\nMontgomery, D. C. (2019). Design and Analysis of Experiments. Wiley.\nKempthorne, O. (1977). Design and Analysis of Experiments. Robert E. Krieger Publishing Company.\nScheffé, H. (1959). The Analysis of Variance. Wiley.\n[Chapter on Experimental Design and Analysis](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_3_Chapter.html&gt;&gt;)\n[Chapter on Error Modeling](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;)"
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#a-proof-of-randomizations-role-in-distributional-assumptions",
     "href": "lectures/week1_DOE_fundamental_ch1.html#a-proof-of-randomizations-role-in-distributional-assumptions",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "8.1 A Proof of Randomization’s Role in Distributional Assumptions",
     "text": "8.1 A Proof of Randomization’s Role in Distributional Assumptions\nUnder a completely randomized design, every unit is equally likely to receive any treatment. Let \\(Y_{ij}\\) represent the response from the \\(j\\)-th replicate of treatment \\(i\\). Assuming \\(Y_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij}\\) with \\(\\varepsilon_{ij} \\sim N(0,\\sigma^2)\\):\n\nRandomization ensures that \\((\\varepsilon_{ij})\\) are exchangeable random variables.\nUnder \\(H_0: \\alpha_i=0\\), the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).\nWithout randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.\n\nFor more technical details, see Kempthorne (1977, Ch. 2)."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#a-derivation-of-expected-mean-squares",
     "href": "lectures/week1_DOE_fundamental_ch1.html#a-derivation-of-expected-mean-squares",
-    "title": "Fundamentals of Experimental Design: Randomization, Blocking, and Replication",
+    "title": "Syllabus",
     "section": "8.2 A Derivation of Expected Mean Squares",
     "text": "8.2 A Derivation of Expected Mean Squares\nFor the simple one-way ANOVA model:\n\\[\nY_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij},\n\\]\nwith \\(\\sum \\alpha_i = 0\\), the expected mean squares are:\n\\[\nE(MS_{\\text{Treatment}}) = \\sigma^2 + n \\sum \\alpha_i^2/(g-1),\n\\]\n\\[\nE(MS_{\\text{Error}}) = \\sigma^2.\n\\]\nThese derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959)."
   },
   {
+    "objectID": "syllabus/syllabus-final.html",
+    "href": "syllabus/syllabus-final.html",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "",
+    "text": "Instructor: Dr. Davood Tofighi\nLocation: Science Math Learning Center 120\nTime: Tuesday & Thursday, 2:00 pm – 3:15 pm\nOffice Hours: By appointment\nCourse Website:\n\nUNM Canvas\nhttps://quantpsych.github.io/doe/."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#course-information",
+    "href": "syllabus/syllabus-final.html#course-information",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "",
+    "text": "Instructor: Dr. Davood Tofighi\nLocation: Science Math Learning Center 120\nTime: Tuesday & Thursday, 2:00 pm – 3:15 pm\nOffice Hours: By appointment\nCourse Website:\n\nUNM Canvas\nhttps://quantpsych.github.io/doe/."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#course-description",
+    "href": "syllabus/syllabus-final.html#course-description",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Course Description",
+    "text": "Course Description\nThis course provides a rigorous introduction to experimental design and analysis of variance (ANOVA) methodologies, with an emphasis on their integration into linear modeling frameworks. Topics include fundamental principles of experimental design (randomization, replication, and blocking), handling unbalanced data, diagnostics for model assumptions, and advanced designs such as split-plot, nested, and mixed-effects models. Students will develop skills in designing experiments, selecting appropriate statistical approaches, analyzing data using R, and communicating findings effectively."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#learning-outcomes",
+    "href": "syllabus/syllabus-final.html#learning-outcomes",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\nBy the end of this course, students will be able to:\n\nDesign experiments using principles of randomization, replication, and blocking.\nImplement one-way, two-way, and higher-order factorial ANOVA techniques.\nAnalyze unbalanced data using modern statistical methods.\nConduct residual analysis, transformations, and diagnostics for model assumptions.\nPerform multiple comparisons and construct contrasts for treatment effect interpretation.\nIncorporate covariates into ANOVA frameworks through analysis of covariance (ANCOVA).\nApply advanced designs like row–column, nested, and split-plot experiments.\nUtilize statistical software (e.g., R) to perform experimental analyses and generate reproducible workflows."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#prerequisite",
+    "href": "syllabus/syllabus-final.html#prerequisite",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Prerequisite",
+    "text": "Prerequisite\nA prior course in statistics, such as STAT 440/550, is strongly recommended. Students without this background must meet with the instructor to discuss their preparation."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#textbook-and-software",
+    "href": "syllabus/syllabus-final.html#textbook-and-software",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Textbook And Software",
+    "text": "Textbook And Software\n\nTextbook: Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Springer.\n\nAvailable as a free eBook through the UNM Library. Use your UNM credentials to access it.\n\nSoftware:\n\nR (version 4.2 or higher), paired with RStudio, VS Code, or Positron, along with Quarto for reproducible workflows.\nKey R packages: lm, emmeans, multcomp, lme4, and others as introduced during the course."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#course-resources",
+    "href": "syllabus/syllabus-final.html#course-resources",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Course Resources",
+    "text": "Course Resources\n1. Lecture Notes and Online Resources\n\nLecture notes and online tutorials will be made available in HTML/PDF format on the dedicated GitHub Pages website for this course. This platform ensures easy access to interactive and organized course materials.\nGitHub Pages Website Address: https://quantpsych.github.io/doe/.\nThe GitHub Pages website will be regularly updated with new materials. However, please note that:\n\nSome supplemental readings may not be available on the website due to copyright restrictions.\nOnly supplemental readings in the public domain or with proper permissions will be provided on GitHub Pages.\n\n\nImportant Note about GitHub Pages and Browser Caching\n\nGitHub Pages occasionally caches content, which may result in outdated materials being displayed. To ensure you are viewing the latest updates:\nRefresh your browser: Press Ctrl + F5 (Windows) or Cmd + Shift + R (Mac) for a hard refresh.\nClear your browser cache: If refreshing doesn’t work, clear your browser’s cache in your browser’s settings and revisit the website.\nUse an Incognito Window: Opening the website in an incognito or private browsing window can bypass cached content.\n\n2. Canvas Course Platform\n\nAll other course materials, such as:\nHomework assignments\nQuarto templates\nSubmission portals\nSupplemental readings not in the public domain\nAnnouncements\nDiscussion boards\n\nwill be hosted on Canvas.\n\nStudents are responsible for checking Canvas regularly for important updates, announcements, and access to restricted course materials.\n\n3. Supplemental Readings\n\nSupplemental readings will be provided through Canvas whenever possible. However:\nReadings under copyright or without appropriate permissions will not be distributed directly.\nWhere applicable, references or external links will be shared for you to access materials through UNM’s library system or other authorized platforms.\n\nContact for Technical Issues\n\nIf you encounter persistent issues accessing materials on GitHub Pages or Canvas, please notify the instructor or TA immediately for assistance.\n\nBy leveraging GitHub Pages for publicly available materials and Canvas for copyright-restricted or logistical resources, the course provides a seamless blend of accessibility and compliance."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#communication-guidelines",
+    "href": "syllabus/syllabus-final.html#communication-guidelines",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Communication Guidelines",
+    "text": "Communication Guidelines\n\nAnnouncements: All important course announcements will be posted on Canvas. It is your responsibility to regularly check Canvas to stay updated. Missing important information due to not checking Canvas will not be considered an acceptable excuse.\nDiscussion/Questions: For course-related questions, post them on the Canvas discussion board. Do not email me or the TA directly for general questions about the course. Before posting, review the syllabus to ensure your question hasn’t already been addressed. Questions that are already answered in the syllabus will not receive a response.\nEmail: All email communication must be sent through Canvas. Direct emails to my university or personal email address will not receive a response. Please ensure that all personal or sensitive matters requiring email communication are sent via Canvas.\nPersonal Matters: For personal concerns, contact me only through Canvas email or visit during office hours.\nOffice Hours (by Appointment): Please feel free to schedule an appointment with me or the TA if you need additional help or clarification. Office hours are a great opportunity to discuss your questions and ensure your understanding of the material.\n\nReminder: Checking Canvas regularly is essential for staying informed and up-to-date with the course."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#grading-and-assessments",
+    "href": "syllabus/syllabus-final.html#grading-and-assessments",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Grading And Assessments",
+    "text": "Grading And Assessments\nThe final grade in this course will be determined by the following components and their respective weights:\n\n\n\nComponent\nWeight\n\n\n\n\nHomework Assignments\n50%\n\n\nMidterm Exam\n20%\n\n\nFinal Exam\n30%\n\n\nExtra Credit\nUp to 4%\n\n\n\n\nGrading Scale\nThe following cut-off values will be used to assign final letter grades:\n\n\n\nPercentage\nLetter Grade\n\n\n\n\n98–100\nA+\n\n\n93–97.99\nA\n\n\n90–92.99\nA-\n\n\n87–89.99\nB+\n\n\n83–86.99\nB\n\n\n80–82.99\nB-\n\n\n77–79.99\nC+\n\n\n73–76.99\nC\n\n\n70–72.99\nC-\n\n\n67–69.99\nD+\n\n\n63–66.99\nD\n\n\n60–62.99\nD-\n\n\nBelow 60\nF\n\n\n\n\n\nHomework (50%)\n\nHomework Submission Guidelines\n\nFormat and Template:\nAll homework assignments must be completed using the Quarto template provided on the course website. You are required to submit the rendered PDF version of the Quarto document. Failure to use the provided template or submit the correct format will result in point deductions.\nSubmission Platform:\nSubmit your completed assignments electronically through Canvas. Navigate to the “Assignments” folder, click on the appropriate homework assignment, and attach your rendered PDF file.\nPlagiarism Check:\nAll submitted assignments will be automatically checked for plagiarism by Canvas. Any instances of plagiarism or academic dishonesty will be handled in accordance with UNM’s Student Code of Conduct and the Support in Receiving Help and Doing What is Right section outlined in this syllabus. Please familiarize yourself with the academic integrity policies detailed in the syllabus and on the UNM website. Ignorance of the policy is not an excuse for violations.\nNo Late Submissions Accepted:\nAll homework assignments are due by the specified deadline on Canvas. Late submissions will not be accepted under any circumstances. This policy is strict and applies to all students without exceptions.\nExtra Credit Opportunity:\nIf you miss an assignment, you may compensate for it by earning extra credit as outlined in the syllabus. This provides an opportunity to recover points without requiring extensions or exceptions for missed deadlines.\nDo Not Email About Late Assignments:\nPlease do not email me or the TA regarding missed or late homework submissions. We cannot make exceptions or accept late assignments under any conditions. Instead, focus on utilizing the extra credit opportunities provided in the syllabus.\nContent Requirements:\n\nAll responses must be typed within the Quarto document.\nIf you include hand-written calculations or derivations, they must be scanned and appended to the Quarto document as an appendix before rendering the final PDF.\n\nIndependence:\nAll homework assignments must be completed independently. While collaboration in studying is encouraged, your final submission must reflect your own work.\nGrading and Feedback:\nAssignments will be graded and feedback will be provided through Canvas. Be sure to review comments and feedback promptly to address any misunderstandings before the next assignment.\n\nImportant Note: To avoid missing deadlines, plan your work carefully and submit your assignments early. If you are unfamiliar with Quarto or need assistance using the template, refer to the “Resources” section on Canvas for tutorials or contact me during office hours.\n\n\n\nExams (50%)\nMidterm Exam (20%)\n\nDate: Thursday, March 6, 2025 (during class time)\nLocation: Classroom (as specified in the syllabus)\nContent: Covers topics from Weeks 1–7.\n\nFinal Exam (30%)\n\nDate: Tuesday, May 13, 2025, from 10:00 a.m. to 12:00 p.m.\nLocation: Classroom (as specified in the syllabus)\nContent: Comprehensive, covering the entire course.\n\nExam Guidelines\n\nFormat: Exams are closed book but you may bring up to three double-sided cheat sheets (US Letter size) and a calculator. No other electronics or materials (e.g., books, lecture notes) are allowed.\nQuestion Types: Includes a combination of short-answer questions, computations, and application-based problems.\n\nNo Make-Up Exams Policy\n\nMake-up exams will only be granted in cases of proven emergency that meet the criteria set forth by the Department of Mathematics and Statistics and UNM policies (e.g., documented medical emergencies, official university-sponsored activities, or other unavoidable situations as defined by university guidelines).\nIf you anticipate a potential conflict or emergency, you must notify the instructor in advance of the exam date whenever possible. Failure to do so will result in forfeiture of the opportunity to take a make-up exam.\nFor non-emergency situations, personal conflicts, or reasons outside of those outlined in this document (e.g., vacation, workload, or personal oversight), make-up exams will not be permitted.\n\nProven Emergency Requirements:\n\nMedical emergencies: Provide a signed note from a licensed healthcare provider explaining the need for absence.\nUniversity-sponsored activities: Submit official documentation from the relevant department.\nOther emergencies: Submit verifiable proof (e.g., legal documentation, official notifications).\n\nIn all cases, documentation must be provided as soon as possible and must align with UNM’s student policies on academic integrity and attendance. For more information, consult the UNM Student Handbook: https://pathfinder.unm.edu.\nImportance of Timely Notification\nIf you foresee a conflict or are unable to attend an exam due to an emergency, notify the instructor as early as possible. While advance notice does not guarantee a make-up exam, failing to provide notice will disqualify you from consideration for a make-up opportunity.\nBy adhering to this policy, we ensure fairness and consistency for all students while maintaining compliance with university guidelines. If you have further questions or concerns, please contact the instructor before the exam dates.\n\n\nExtra Credit Opportunities\nStudents have the opportunity to earn up to 4% extra credit toward their final grade by completing the following tasks:\n1. End-of-Semester Course Evaluation (Up to 3%)\n\nStudents who complete the end-of-semester course evaluation will receive up to 3% extra credit.\nTo receive the extra credit, students must:\nSubmit the course evaluation through the university’s designated system (e.g., UNM’s course evaluation platform).\nPost a screenshot or copy of the receipt of submission (no personal information visible) to the “Course Evaluation” discussion board on Canvas.\nDeadline for posting the receipt will be announced during the final week of class.\n\n2. Background and Syllabus Quiz (1%)\n\nA “Background and Syllabus Quiz” will be available on the course website during the first week of class.\nThis quiz will assess familiarity with the syllabus and the course’s policies and expectations. Completing the quiz will earn 1% extra credit.\nNote: The availability of this quiz may vary by semester and will be announced at the start of the course.\n\nImportant Notes:\n\nThese extra credit opportunities are designed to encourage engagement with the course policies and participation in university processes.\nExtra credit is optional and cannot replace or make up for missed assignments, exams, or other coursework.\nThe maximum total extra credit available is 4%, which will be applied to your final grade at the end of the semester.\nStudents are encouraged to review the “Grading and Assessments” section of the syllabus to understand how extra credit impacts their overall grade.\n\nPlease take advantage of these opportunities to improve your final grade while reinforcing your understanding of the course and contributing to constructive course feedback."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#what-to-expect-and-how-to-study-and-be-successful-in-this-course",
+    "href": "syllabus/syllabus-final.html#what-to-expect-and-how-to-study-and-be-successful-in-this-course",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "What to Expect and How to Study and Be Successful in This Course",
+    "text": "What to Expect and How to Study and Be Successful in This Course\nThis course is designed to be both rigorous and rewarding, equipping you with essential skills in experimental design and analysis of variance (ANOVA). Success in this course requires preparation, consistent effort, and active engagement with the material. Below are some key recommendations and expectations to help you succeed:\n1. Expect to Invest Significant Time\n\nMastery of the material requires dedicated study time each week. Plan to spend at least 8-10 hours per week outside of class on:\nReading assigned materials.\nCompleting homework assignments.\nPracticing statistical techniques in R.\nReviewing notes and working through practice problems.\n\n2. Prioritize Class Attendance\n\nAttendance is critical to your success in this course.\nClasses are designed to build upon each other, with cumulative content.\nDiscussions, group activities, and real-time problem-solving in class will reinforce your understanding.\nHistorical data has shown that students who miss class sessions struggle to keep up with the material.\nIf you must miss a class, review the lecture notes and course materials promptly, and reach out to classmates for additional support.\n\n3. Come Prepared for Every Class\n\nRead the assigned materials before class:\nFamiliarize yourself with the key topics to be covered.\nJot down questions or areas of confusion to bring to class discussions.\nEngage with supplemental materials like videos, tutorials, or examples provided on Canvas.\nStay organized by keeping track of due dates, reading assignments, and planned lectures using the course schedule.\n\n4. Stay Active During Class\n\nTake detailed notes during lectures and participate in discussions.\nActively engage in group activities. Collaborating with classmates helps deepen your understanding and clarifies difficult concepts.\nAsk questions during class or post them on Canvas if you need further clarification.\n\n5. Utilize Office Hours and Discussion Boards\n\nOffice hours are an excellent opportunity for one-on-one assistance with:\nUnderstanding difficult concepts.\nReviewing homework problems.\nDiscussing your specific challenges with course material.\nUse the Canvas Discussion Boards for peer-to-peer support and quick clarifications from the instructor or TA.\n\n6. Practice Regularly\n\nMastery of statistical methods requires consistent practice.\nWork through examples provided in class and additional exercises from the textbook.\nAttempt problems in R to solidify your understanding of statistical tools and software.\n\n7. Review and Revise\n\nAfter each class, set aside time to:\nReview your notes.\nSummarize key concepts in your own words.\nAttempt practice problems to apply what you’ve learned.\n\n8. Focus on Understanding, Not Memorization\n\nThis course emphasizes application and critical thinking.\nStrive to understand the “why” behind statistical techniques and experimental designs.\nApply concepts to real-world scenarios or examples from your own field of study.\n\n9. Manage Your Time Wisely\n\nStart assignments early to avoid last-minute stress.\nBreak down large tasks into smaller steps and set achievable goals for each study session.\nUse tools like planners or digital calendars to track deadlines and manage your workload effectively.\n\n10. Maintain a Growth Mindset\n\nStatistics can be challenging, but persistence is key.\nEmbrace mistakes as part of the learning process.\nReach out for help early if you’re struggling with a concept or assignment.\n\n11. Make Use of the Resources Provided\n\nThe course provides several resources to support your learning:\nA Quarto template for homework submissions.\nSupplemental readings, videos, and tutorials.\nAccess to the course textbook through UNM’s library system.\nR and VS Code or RStudio (or equivalent IDEs) for conducting statistical analyses.\n\n12. Avoid Falling Behind\n\nGiven the cumulative nature of this course, falling behind on one topic will make subsequent topics more difficult to grasp.\nStay on top of assignments and make reviewing previous material part of your weekly routine.\n\n13. Academic Honesty and Collaboration\n\nWhile collaboration is encouraged during study sessions or discussions, ensure all submitted work reflects your own understanding.\nFamiliarize yourself with the Support In Receiving Help and Doing What is Right section of the syllabus to avoid issues related to academic dishonesty.\n\nBy following these recommendations, staying engaged, and managing your time wisely, you’ll position yourself for success in this course. Remember, learning statistics is a journey that requires consistent effort and a positive attitude. I am here to support you every step of the way, so don’t hesitate to reach out for assistance."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#accommodation",
+    "href": "syllabus/syllabus-final.html#accommodation",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Accommodation",
+    "text": "Accommodation\nIn accordance with University Policy 2310 and the Americans with Disabilities Act (ADA), academic accommodations will be provided for students who notify the instructor of their need. It is the student’s responsibility to inform the instructor promptly so accommodations can be arranged. Instructors are not legally permitted to inquire about disabilities or the need for accommodations. For assistance in arranging accommodations, contact the Accessibility Resource Center (ARC):\n\nPhone: 277-3506\nEmail: arcsrvs@unm.edu\nWebsite: Accessibility Resource Center\n\nStudents who may require assistance in emergency evacuations should also contact the instructor to discuss the most appropriate procedures to follow.\nUNM is dedicated to fostering an inclusive, accessible, and supportive learning environment for all participants. If you encounter physical, academic, or mental health barriers, or concerns related to physical health, mental health, or COVID-19, you are encouraged to communicate these concerns to the instructor via Canvas email, phone, or during office hours. Additional support is available through the Accessibility Resource Center. Let’s work together to ensure you have equitable access to this course."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#title-ix",
+    "href": "syllabus/syllabus-final.html#title-ix",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Title IX",
+    "text": "Title IX\nAs part of UNM’s commitment to a safe and equitable campus environment, faculty, Teaching Assistants (TAs), and Graduate Assistants (GAs) are considered “responsible employees” by the Department of Education. This means that any report of gender discrimination—including sexual harassment, misconduct, or violence—shared with a faculty member, TA, or GA must be reported to the Title IX Coordinator at the Office of Equal Opportunity (OEO).\n\nOffice of Equal Opportunity Website: https://oeo.unm.edu\nTitle IX policy details: https://policy.unm.edu/university-policies/2000/2740.html\n\nFor more information on reporting obligations, see the Title IX Guidelines (https://www2.ed.gov/about/offices/list/ocr/docs/qa-201404-title-ix.pdf). If you prefer to discuss sensitive concerns confidentially, please consider reaching out to the UNM LoboRESPECT Advocacy Center or other confidential resources on campus."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#support-in-receiving-help-and-doing-what-is-right",
+    "href": "syllabus/syllabus-final.html#support-in-receiving-help-and-doing-what-is-right",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Support In Receiving Help and Doing What is Right",
+    "text": "Support In Receiving Help and Doing What is Right\nUNM provides a range of services and policies to help students succeed academically and thrive within the university community. If you are unsure where to begin, consult the UNM Student Services website (https://students.unm.edu) or reach out to the instructor for guidance in identifying the right resource.\nKey Policies and Support Resources:\n\nStudent Grievances: Policies D175 and D176 in the Faculty Handbook detail procedures for addressing grievances.\nAcademic Dishonesty: Adhere to UNM’s policies outlined in the Faculty Handbook D100, which address plagiarism and academic misconduct.\nRespectful Campus Policy: Uphold UNM’s guidelines for fostering a respectful academic environment (Faculty Handbook C09).\n\nFind these resources in the Student Pathfinder (https://pathfinder.unm.edu) or the Faculty Handbook (https://handbook.unm.edu).\nPlagiarism and Academic Dishonesty: Violations of academic integrity have serious consequences, including failing an assignment or course, and potential suspension or expulsion. If you have any questions about avoiding plagiarism, please ask the instructor or consult UNM’s policies. It is always better to ask for clarification than to risk committing an academic violation.\nIf you need assistance understanding the guidelines or accessing these resources, please do not hesitate to reach out."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#land-acknowledgement",
+    "href": "syllabus/syllabus-final.html#land-acknowledgement",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Land Acknowledgement",
+    "text": "Land Acknowledgement\nFounded in 1889, the University of New Mexico sits on the traditional homelands of the Pueblo of Sandia. The original peoples of New Mexico Pueblo, Navajo, and Apache since time immemorial, have deep connections to the land and have made significant contributions to the broader community statewide. We honor the land itself and those who remain stewards of this land throughout the generations and also acknowledge our committed relationship to Indigenous peoples. We gratefully recognize our history."
+  },
+  {
+    "objectID": "syllabus/syllabus-final.html#course-schedule-assignment-deadlines-and-exam-dates",
+    "href": "syllabus/syllabus-final.html#course-schedule-assignment-deadlines-and-exam-dates",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Course Schedule, Assignment Deadlines, and Exam Dates",
+    "text": "Course Schedule, Assignment Deadlines, and Exam Dates\nThe course schedule, including assignment due dates and the midterm exam date, is subject to change based on the progress of the class, unforeseen circumstances, or instructor discretion. Students are responsible for regularly checking Canvas and announcements on the course GitHub page for the most up-to-date information regarding deadlines and schedule adjustments.\nHowever, the final exam date is not subject to change, as it is determined and scheduled by the university. Please plan accordingly based on the final exam schedule provided by UNM:\n\nFinal Exam Date: Tuesday, May 13, 2025, 10:00 a.m.–12:00 p.m.\nLocation: Classroom (as specified in the syllabus)\n\nStudents are strongly encouraged to stay proactive, monitor changes, and ensure they meet all revised deadlines and expectations as announced.\n\nTentative Course Schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopics\nReadings & Homework Assignments\n\n\n\n\n1\nJan. 21 & 23, 2025\nIntroduction to Experimental Design\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nJan. 28 & 30, 2025\nCompletely Randomized Designs (CRD)\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nFeb. 4 & 6, 2025\nBlocking & RCBD\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nFeb. 11 & 13, 2025\nMultiple Comparisons\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nFeb. 18 & 20, 2025\nChecking Model Assumptions\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFeb. 25 & 27, 2025\nTwo-Way Factorial Designs\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMar. 4 & 6, 2025\nMidterm Exam\nReview all chapters and notes.\n\n\n8\nMar. 11 & 13, 2025\nHigher-Order Factorial Designs\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nMar. 16–20, 2025\n==Spring Break==\nNo classes.\n\n\n10\nMar. 25 & 27, 2025\nAnalysis of Covariance (ANCOVA)\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nApr. 1 & 3, 2025\nComplete Block Designs\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nApr. 8 & 10, 2025\nRow–Column (Latin square) Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nApr. 15 & 17, 2025\nRandom & Mixed Models\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nApr. 22 & 24, 2025\nNested Models\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nApr. 29 & May 1, 2025\nSplit-Plot Designs\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nMay 6 & 8, 2025\nCatching Up and Review\nComprehensive review and Q&A.\n\n\n17\nMay 13\nFinal Exam\nComprehensive (Weeks 1–15)."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "DOE",
+    "title": "",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Code"
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis course introduces the principles of experimental design and analysis of variance (ANOVA), integrating these methods into a regression framework. Topics include:\n\nExperimental design principles: randomization, replication, and blocking.\nOne-way and factorial ANOVA models.\nManaging unbalanced data and covariates.\nAdvanced designs: split-plot, nested, and mixed-effects models.\nResidual diagnostics, transformations, and multiple comparisons."
+  },
+  {
+    "objectID": "index.html#important-course-links",
+    "href": "index.html#important-course-links",
+    "title": "",
+    "section": "Important Course Links",
+    "text": "Important Course Links\n\nSyllabus: Course Syllabus PDF\nLecture Notes: Available on the course GitHub page\n\nHTML Format: Access the latest lecture notes here.\nTroubleshooting GitHub Cache: Press Ctrl+F5 (Windows) or Cmd+Shift+R (Mac) to refresh.\n\nClear browser cache via settings if issues persist.\n\n\nAssignments: Posted and submitted through Canvas Assignments.\nSupplemental Readings: Public domain materials will be shared on Canvas. Note: Some readings may not be shared due to copyright restrictions.\nSoftware Tools:\n\nR Project Download\nRStudio IDE\nVS Code"
+  },
+  {
+    "objectID": "index.html#key-policies",
+    "href": "index.html#key-policies",
+    "title": "",
+    "section": "Key Policies",
+    "text": "Key Policies\n\nGrading And Assessments\n\n\n\nComponent\nWeight\n\n\n\n\nHomework Assignments\n50%\n\n\nMidterm Exam\n20%\n\n\nFinal Exam\n30%\n\n\nExtra Credit\nUp to 4%\n\n\n\nGrading Scale: A+: 98–100, A: 93–97.99, A-: 90–92.99, B+: 87–89.99, B: 83–86.99, B-: 80–82.99, C+: 77–79.99, C: 73–76.99, C-: 70–72.99, D: 63–66.99, F: &lt;60.\n\n\nExams\n\nMidterm Exam: Thursday, March 6, 2025 (Weeks 1–7)\nFinal Exam: Tuesday, May 13, 2025, 10:00 AM – 12:00 PM (Comprehensive)\n\nPolicies:\n\nNo make-up exams except in proven emergencies.\nClosed book, but students are allowed three double-sided cheat sheets (US Letter size) and a calculator.\n\n\n\nHomework Submission\n\nHomework assignments must be completed using the Quarto template provided on Canvas.\nSubmit rendered PDF versions of your Quarto document through Canvas.\nLate submissions are not accepted."
+  },
+  {
+    "objectID": "index.html#communication-guidelines",
+    "href": "index.html#communication-guidelines",
+    "title": "",
+    "section": "Communication Guidelines",
+    "text": "Communication Guidelines\n\nAnnouncements:\n\nAll important course announcements will be posted on Canvas.\nStudents are responsible for checking Canvas regularly.\n\nQuestions:\n\nPost all course-related questions on the Canvas Discussion Board.\nDo not email the instructor or TA for general questions answered in the syllabus.\n\nEmails:\n\nUse the Canvas email system for personal matters. Direct emails will not be responded to."
+  },
+  {
+    "objectID": "index.html#extra-credit-opportunities",
+    "href": "index.html#extra-credit-opportunities",
+    "title": "",
+    "section": "Extra Credit Opportunities",
+    "text": "Extra Credit Opportunities\n\n3% Extra Credit: Complete the end-of-semester course evaluation and post the receipt on Canvas.\n1% Extra Credit: Complete the syllabus and background quiz in the first week of class (if available)."
+  },
+  {
+    "objectID": "index.html#student-resources-and-support",
+    "href": "index.html#student-resources-and-support",
+    "title": "",
+    "section": "Student Resources and Support",
+    "text": "Student Resources and Support\n\nAccessibility Accommodations: Contact the Accessibility Resource Center at arcsrvs@unm.edu or call (505) 277-3506.\nUNM Policies and Support:\n\nStudent Grievances\nAcademic Integrity\n\nTitle IX Information: For reports of gender discrimination or misconduct, visit UNM Office of Equal Opportunity."
+  },
+  {
+    "objectID": "index.html#land-acknowledgment",
+    "href": "index.html#land-acknowledgment",
+    "title": "",
+    "section": "Land Acknowledgment",
+    "text": "Land Acknowledgment\nThe University of New Mexico acknowledges the traditional homelands of the Pueblo of Sandia and honors the Indigenous peoples of New Mexico, including the Pueblo, Navajo, and Apache communities.\nLet’s work together to make this a productive and successful semester!"
   },
   {
     "objectID": "about.html",
