@@ -1,81 +1,77 @@
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #000000;
+  --accent-color: #007bff;
+  --background-color: #f8f9fa;
+}
+
 body {
   background-image: url("../images/home.webp");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
+  color: var(--secondary-color);
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar {
+.navbar, .nav-footer {
   background-color: transparent !important;
+  transition: background-color 0.3s ease;
 }
 
-.nav-footer {
-  background-color: transparent !important;
+.navbar:hover, .nav-footer:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 .home-container {
   max-width: 1200px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   height: 100%;
+  margin: 0 auto;
+  padding: 2em;
 }
 
 .home-grid-parent {
-  display: -ms-grid;
   display: grid;
   margin: auto;
-  padding-left: 2em;
-  padding-right: 2em;
-  padding-top: 2em;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+  padding: 2em;
   align-items: center;
-  -ms-grid-columns: 10fr 2em 9fr;
-  grid-template-columns: 10fr 9fr;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 2em;
   grid-template-areas: "text hero";
-  /*grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));*/
 }
 
-.home-grid-child-left {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
+.home-grid-parent > .text {
   grid-area: text;
 }
 
-.home-grid-child-right {
-  -ms-grid-row: 1;
-  -ms-grid-column: 3;
+.home-grid-parent > .hero {
   grid-area: hero;
 }
 
-@media only screen and (max-width: 768px) {
-  .home-grid-parent {
-    -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
-    grid-column-gap: 0;
-    grid-template-areas: "hero" "text";
-  }
-
-  .home-grid-child-left {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-  }
-
-  .home-grid-child-right {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-  }
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.home-grid-child-left h2 {
-    margin-top: 0.5em;
+a:hover {
+  color: var(--secondary-color);
+}
+
+button {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
 }
