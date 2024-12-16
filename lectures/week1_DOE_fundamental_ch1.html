@@ -8,7 +8,7 @@
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>Syllabus – Design of Experiments</title>
+<title>Fundamentals of Experimental Design – Design of Experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -133,8 +153,8 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Syllabus – Design of Experiments">
-<meta property="og:description" content="Design of Experiments">
+<meta property="og:title" content="Fundamentals of Experimental Design – Design of Experiments">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:site_name" content="Design of Experiments">
 </head>
 
@@ -190,38 +210,36 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syllabus" id="toc-syllabus" class="nav-link active" data-scroll-target="#syllabus"><span class="header-section-number">1</span> Syllabus</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">0.1</span> Introduction</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><span class="header-section-number">0.2</span> Objectives</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">0.3</span> Readings</a></li>
+  <li><a href="#fundamentals-of-experimental-design" id="toc-fundamentals-of-experimental-design" class="nav-link" data-scroll-target="#fundamentals-of-experimental-design"><span class="header-section-number">1</span> Fundamentals of Experimental Design</a>
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">1.1</span> Introduction</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><span class="header-section-number">1.2</span> Objectives</a></li>
+  <li><a href="#experimentation-vs.-observation" id="toc-experimentation-vs.-observation" class="nav-link" data-scroll-target="#experimentation-vs.-observation"><span class="header-section-number">1.1</span> Experimentation vs.&nbsp;Observation</a></li>
+  <li><a href="#goals-of-experimentation" id="toc-goals-of-experimentation" class="nav-link" data-scroll-target="#goals-of-experimentation"><span class="header-section-number">1.2</span> Goals of Experimentation</a></li>
+  <li><a href="#importance-of-experimental-design" id="toc-importance-of-experimental-design" class="nav-link" data-scroll-target="#importance-of-experimental-design"><span class="header-section-number">1.3</span> Importance of Experimental Design</a></li>
   </ul></li>
-  <li><a href="#fundamentals-of-experimental-design" id="toc-fundamentals-of-experimental-design" class="nav-link" data-scroll-target="#fundamentals-of-experimental-design"><span class="header-section-number">2</span> Fundamentals of Experimental Design</a>
+  <li><a href="#key-techniques-replication-blocking-and-randomization" id="toc-key-techniques-replication-blocking-and-randomization" class="nav-link" data-scroll-target="#key-techniques-replication-blocking-and-randomization"><span class="header-section-number">2</span> Key Techniques: Replication, Blocking, and Randomization</a>
   <ul class="collapse">
-  <li><a href="#experimentation-vs.-observation" id="toc-experimentation-vs.-observation" class="nav-link" data-scroll-target="#experimentation-vs.-observation"><span class="header-section-number">2.1</span> Experimentation vs.&nbsp;Observation</a></li>
-  <li><a href="#goals-of-experimentation" id="toc-goals-of-experimentation" class="nav-link" data-scroll-target="#goals-of-experimentation"><span class="header-section-number">2.2</span> Goals of Experimentation</a></li>
-  <li><a href="#importance-of-experimental-design" id="toc-importance-of-experimental-design" class="nav-link" data-scroll-target="#importance-of-experimental-design"><span class="header-section-number">2.3</span> Importance of Experimental Design</a></li>
-  </ul></li>
-  <li><a href="#key-techniques-replication-blocking-and-randomization" id="toc-key-techniques-replication-blocking-and-randomization" class="nav-link" data-scroll-target="#key-techniques-replication-blocking-and-randomization"><span class="header-section-number">3</span> Key Techniques: Replication, Blocking, and Randomization</a>
+  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication"><span class="header-section-number">2.1</span> Replication</a></li>
+  <li><a href="#blocking" id="toc-blocking" class="nav-link" data-scroll-target="#blocking"><span class="header-section-number">2.2</span> Blocking</a></li>
+  <li><a href="#randomization" id="toc-randomization" class="nav-link" data-scroll-target="#randomization"><span class="header-section-number">2.3</span> Randomization</a>
   <ul class="collapse">
-  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication"><span class="header-section-number">3.1</span> Replication</a></li>
-  <li><a href="#blocking" id="toc-blocking" class="nav-link" data-scroll-target="#blocking"><span class="header-section-number">3.2</span> Blocking</a></li>
-  <li><a href="#randomization" id="toc-randomization" class="nav-link" data-scroll-target="#randomization"><span class="header-section-number">3.3</span> Randomization</a>
-  <ul class="collapse">
-  <li><a href="#methods-of-randomization" id="toc-methods-of-randomization" class="nav-link" data-scroll-target="#methods-of-randomization"><span class="header-section-number">3.3.1</span> Methods of Randomization</a></li>
+  <li><a href="#methods-of-randomization" id="toc-methods-of-randomization" class="nav-link" data-scroll-target="#methods-of-randomization"><span class="header-section-number">2.3.1</span> Methods of Randomization</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#factorial-experiments" id="toc-factorial-experiments" class="nav-link" data-scroll-target="#factorial-experiments"><span class="header-section-number">4</span> Factorial Experiments</a></li>
-  <li><a href="#interaction-between-design-and-analysis" id="toc-interaction-between-design-and-analysis" class="nav-link" data-scroll-target="#interaction-between-design-and-analysis"><span class="header-section-number">5</span> Interaction Between Design and Analysis</a></li>
-  <li><a href="#robustness-and-error-modeling" id="toc-robustness-and-error-modeling" class="nav-link" data-scroll-target="#robustness-and-error-modeling"><span class="header-section-number">6</span> Robustness and Error Modeling</a></li>
-  <li><a href="#practical-applications-r-examples" id="toc-practical-applications-r-examples" class="nav-link" data-scroll-target="#practical-applications-r-examples"><span class="header-section-number">7</span> Practical Applications: R Examples</a>
+  <li><a href="#factorial-experiments" id="toc-factorial-experiments" class="nav-link" data-scroll-target="#factorial-experiments"><span class="header-section-number">3</span> Factorial Experiments</a></li>
+  <li><a href="#interaction-between-design-and-analysis" id="toc-interaction-between-design-and-analysis" class="nav-link" data-scroll-target="#interaction-between-design-and-analysis"><span class="header-section-number">4</span> Interaction Between Design and Analysis</a></li>
+  <li><a href="#robustness-and-error-modeling" id="toc-robustness-and-error-modeling" class="nav-link" data-scroll-target="#robustness-and-error-modeling"><span class="header-section-number">5</span> Robustness and Error Modeling</a></li>
+  <li><a href="#practical-applications-r-examples" id="toc-practical-applications-r-examples" class="nav-link" data-scroll-target="#practical-applications-r-examples"><span class="header-section-number">6</span> Practical Applications: R Examples</a>
   <ul class="collapse">
-  <li><a href="#example-random-assignment-and-anova" id="toc-example-random-assignment-and-anova" class="nav-link" data-scroll-target="#example-random-assignment-and-anova"><span class="header-section-number">7.1</span> Example: Random Assignment and ANOVA</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7.2</span> References</a></li>
+  <li><a href="#example-random-assignment-and-anova" id="toc-example-random-assignment-and-anova" class="nav-link" data-scroll-target="#example-random-assignment-and-anova"><span class="header-section-number">6.1</span> Example: Random Assignment and ANOVA</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6.2</span> References</a></li>
   </ul></li>
-  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations"><span class="header-section-number">8</span> Appendix: Advanced Mathematical Derivations</a>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations"><span class="header-section-number">7</span> Appendix: Advanced Mathematical Derivations</a>
   <ul class="collapse">
-  <li><a href="#a-proof-of-randomizations-role-in-distributional-assumptions" id="toc-a-proof-of-randomizations-role-in-distributional-assumptions" class="nav-link" data-scroll-target="#a-proof-of-randomizations-role-in-distributional-assumptions"><span class="header-section-number">8.1</span> A Proof of Randomization’s Role in Distributional Assumptions</a></li>
-  <li><a href="#a-derivation-of-expected-mean-squares" id="toc-a-derivation-of-expected-mean-squares" class="nav-link" data-scroll-target="#a-derivation-of-expected-mean-squares"><span class="header-section-number">8.2</span> A Derivation of Expected Mean Squares</a></li>
+  <li><a href="#a-proof-of-randomizations-role-in-distributional-assumptions" id="toc-a-proof-of-randomizations-role-in-distributional-assumptions" class="nav-link" data-scroll-target="#a-proof-of-randomizations-role-in-distributional-assumptions"><span class="header-section-number">7.1</span> A Proof of Randomization’s Role in Distributional Assumptions</a></li>
+  <li><a href="#a-derivation-of-expected-mean-squares" id="toc-a-derivation-of-expected-mean-squares" class="nav-link" data-scroll-target="#a-derivation-of-expected-mean-squares"><span class="header-section-number">7.2</span> A Derivation of Expected Mean Squares</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -231,7 +249,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Syllabus</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Fundamentals of Experimental Design</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -260,15 +278,13 @@ window.Quarto = {
 </header>
 
 
-<section id="syllabus" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Syllabus</h1>
-<section id="introduction" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">0.1</span> Introduction</h2>
 <p>In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage <strong>randomization</strong>, <strong>blocking</strong>, and <strong>replication</strong> to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.</p>
 <p>The following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code.</p>
 </section>
-<section id="objectives" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="objectives"><span class="header-section-number">1.2</span> Objectives</h2>
+<section id="objectives" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="objectives"><span class="header-section-number">0.2</span> Objectives</h2>
 <ol type="1">
 <li>Understand the theoretical foundations and objectives of experimental design in statistics.</li>
 <li>Distinguish between observational and experimental studies, emphasizing the advantages experiments provide.</li>
@@ -279,18 +295,21 @@ window.Quarto = {
 <li>Explore advanced mathematical derivations and proofs in the Appendix.</li>
 </ol>
 </section>
+<section id="readings" class="level2" data-number="0.3">
+<h2 data-number="0.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">0.3</span> Readings</h2>
+<p><span class="citation" data-cites="dean2017">Dean, Voss, and Draguljić (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 1 and 2)</span></p>
 </section>
-<section id="fundamentals-of-experimental-design" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Fundamentals of Experimental Design</h1>
-<section id="experimentation-vs.-observation" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="experimentation-vs.-observation"><span class="header-section-number">2.1</span> Experimentation vs.&nbsp;Observation</h2>
+<section id="fundamentals-of-experimental-design" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Fundamentals of Experimental Design</h1>
+<section id="experimentation-vs.-observation" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="experimentation-vs.-observation"><span class="header-section-number">1.1</span> Experimentation vs.&nbsp;Observation</h2>
 <ul>
 <li>Observational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.</li>
 <li>Controlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions.</li>
 </ul>
 </section>
-<section id="goals-of-experimentation" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="goals-of-experimentation"><span class="header-section-number">2.2</span> Goals of Experimentation</h2>
+<section id="goals-of-experimentation" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="goals-of-experimentation"><span class="header-section-number">1.2</span> Goals of Experimentation</h2>
 <ol type="1">
 <li>Determine causes of variation in response.</li>
 <li>Find optimal conditions and treatment combinations.</li>
@@ -299,8 +318,8 @@ window.Quarto = {
 </ol>
 <p>Effective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout.</p>
 </section>
-<section id="importance-of-experimental-design" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="importance-of-experimental-design"><span class="header-section-number">2.3</span> Importance of Experimental Design</h2>
+<section id="importance-of-experimental-design" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="importance-of-experimental-design"><span class="header-section-number">1.3</span> Importance of Experimental Design</h2>
 <ul>
 <li><strong>Cause-and-Effect:</strong> Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.</li>
 <li><strong>Resource Allocation:</strong> Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.</li>
@@ -309,10 +328,10 @@ window.Quarto = {
 <p>(See Montgomery, 2019, <em>Design and Analysis of Experiments</em> for a comprehensive treatment.)</p>
 </section>
 </section>
-<section id="key-techniques-replication-blocking-and-randomization" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Key Techniques: Replication, Blocking, and Randomization</h1>
-<section id="replication" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="replication"><span class="header-section-number">3.1</span> Replication</h2>
+<section id="key-techniques-replication-blocking-and-randomization" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Key Techniques: Replication, Blocking, and Randomization</h1>
+<section id="replication" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="replication"><span class="header-section-number">2.1</span> Replication</h2>
 <ul>
 <li><strong>Definition:</strong> Replication means repeating the entire set of treatments independently on different experimental units.</li>
 <li><strong>Purpose:</strong> Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.</li>
@@ -320,16 +339,16 @@ window.Quarto = {
 </ul>
 <p>Without adequate replication, it is difficult to separate true treatment effects from random noise.</p>
 </section>
-<section id="blocking" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="blocking"><span class="header-section-number">3.2</span> Blocking</h2>
+<section id="blocking" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="blocking"><span class="header-section-number">2.2</span> Blocking</h2>
 <ul>
 <li><strong>Concept:</strong> Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.</li>
 <li><strong>Example:</strong> If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.</li>
 <li><strong>Outcome:</strong> Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences.</li>
 </ul>
 </section>
-<section id="randomization" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="randomization"><span class="header-section-number">3.3</span> Randomization</h2>
+<section id="randomization" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="randomization"><span class="header-section-number">2.3</span> Randomization</h2>
 <ul>
 <li><strong>Rationale:</strong> Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.</li>
 <li><strong>Benefits:</strong></li>
@@ -338,8 +357,8 @@ window.Quarto = {
 <p>&nbsp; - Justifies the use of standard statistical distributions (F, t) for inference.</p>
 <p>&nbsp; - Confirms that observed effects can be attributed to treatments and not assignment bias.</p>
 <p><strong>Reference:</strong> Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.</p>
-<section id="methods-of-randomization" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="methods-of-randomization"><span class="header-section-number">3.3.1</span> Methods of Randomization</h3>
+<section id="methods-of-randomization" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="methods-of-randomization"><span class="header-section-number">2.3.1</span> Methods of Randomization</h3>
 <ul>
 <li><strong>Random Number Generators (RNG):</strong> Computer programs or calculators produce pseudo-random digits, used to assign treatments.</li>
 <li><strong>Random Number Tables:</strong> Historically used, a random table combined with random starting points can ensure unbiased allocations.</li>
@@ -348,8 +367,8 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="factorial-experiments" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Factorial Experiments</h1>
+<section id="factorial-experiments" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Factorial Experiments</h1>
 <p>A <strong>factorial experiment</strong> examines multiple factors simultaneously, each at various levels. Rather than testing factors one at a time, factorial designs consider all combinations of factor levels, providing:</p>
 <ul>
 <li>More information from fewer observations.</li>
@@ -357,8 +376,8 @@ window.Quarto = {
 </ul>
 <p>This approach is more efficient and comprehensive, revealing a richer picture of the underlying system.</p>
 </section>
-<section id="interaction-between-design-and-analysis" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Interaction Between Design and Analysis</h1>
+<section id="interaction-between-design-and-analysis" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Interaction Between Design and Analysis</h1>
 <p>Experimental design and statistical analysis are interdependent:</p>
 <ul>
 <li>A good design ensures data that align well with modeling assumptions.</li>
@@ -368,8 +387,8 @@ window.Quarto = {
 <p>Without proper design, even the most sophisticated analysis tools will be less effective. Conversely, the best design is chosen with the intended analysis in mind.</p>
 <hr>
 </section>
-<section id="robustness-and-error-modeling" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Robustness and Error Modeling</h1>
+<section id="robustness-and-error-modeling" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Robustness and Error Modeling</h1>
 <ul>
 <li>Most standard inference procedures assume normality of errors and independence of observations.</li>
 <li>Experimental designs strive to meet these assumptions or at least ensure that deviations are not severe.</li>
@@ -379,11 +398,11 @@ window.Quarto = {
 <p>For further reading, see [Chapter on Error Modeling](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;).</p>
 <hr>
 </section>
-<section id="practical-applications-r-examples" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Practical Applications: R Examples</h1>
+<section id="practical-applications-r-examples" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Practical Applications: R Examples</h1>
 <p>Using R for design and analysis streamlines computations, produces diagnostic plots, and executes randomization schemes easily. R is free and widely used, offering packages like <code>agricolae</code> for experimental designs and <code>emmeans</code> for mean comparisons.</p>
-<section id="example-random-assignment-and-anova" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="example-random-assignment-and-anova"><span class="header-section-number">7.1</span> Example: Random Assignment and ANOVA</h2>
+<section id="example-random-assignment-and-anova" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="example-random-assignment-and-anova"><span class="header-section-number">6.1</span> Example: Random Assignment and ANOVA</h2>
 <p>Suppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -422,8 +441,8 @@ window.Quarto = {
 </ul>
 <p>Future sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis.</p>
 </section>
-<section id="references" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="references"><span class="header-section-number">7.2</span> References</h2>
+<section id="references" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="references"><span class="header-section-number">6.2</span> References</h2>
 <ul>
 <li>Montgomery, D. C. (2019). <em>Design and Analysis of Experiments</em>. Wiley.</li>
 <li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Robert E. Krieger Publishing Company.</li>
@@ -433,10 +452,10 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="appendix-advanced-mathematical-derivations" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Appendix: Advanced Mathematical Derivations</h1>
-<section id="a-proof-of-randomizations-role-in-distributional-assumptions" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="a-proof-of-randomizations-role-in-distributional-assumptions"><span class="header-section-number">8.1</span> A Proof of Randomization’s Role in Distributional Assumptions</h2>
+<section id="appendix-advanced-mathematical-derivations" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Appendix: Advanced Mathematical Derivations</h1>
+<section id="a-proof-of-randomizations-role-in-distributional-assumptions" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="a-proof-of-randomizations-role-in-distributional-assumptions"><span class="header-section-number">7.1</span> A Proof of Randomization’s Role in Distributional Assumptions</h2>
 <p>Under a completely randomized design, every unit is equally likely to receive any treatment. Let <span class="math inline">\(Y_{ij}\)</span> represent the response from the <span class="math inline">\(j\)</span>-th replicate of treatment <span class="math inline">\(i\)</span>. Assuming <span class="math inline">\(Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}\)</span> with <span class="math inline">\(\varepsilon_{ij} \sim N(0,\sigma^2)\)</span>:</p>
 <ol type="1">
 <li>Randomization ensures that <span class="math inline">\((\varepsilon_{ij})\)</span> are exchangeable random variables.</li>
@@ -445,8 +464,8 @@ window.Quarto = {
 </ol>
 <p>For more technical details, see Kempthorne (1977, Ch. 2).</p>
 </section>
-<section id="a-derivation-of-expected-mean-squares" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="a-derivation-of-expected-mean-squares"><span class="header-section-number">8.2</span> A Derivation of Expected Mean Squares</h2>
+<section id="a-derivation-of-expected-mean-squares" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="a-derivation-of-expected-mean-squares"><span class="header-section-number">7.2</span> A Derivation of Expected Mean Squares</h2>
 <p>For the simple one-way ANOVA model:</p>
 <p><span class="math display">\[
 Y_{ij} = \mu + \alpha_i + \varepsilon_{ij},
@@ -459,14 +478,20 @@ E(MS_{\text{Treatment}}) = \sigma^2 + n \sum \alpha_i^2/(g-1),
 E(MS_{\text{Error}}) = \sigma^2.
 \]</span></p>
 <p>These derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959).</p>
+<p>##References</p>
 
 
 <!-- -->
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-dean2017" class="csl-entry" role="listitem">
+Dean, Angela, Daniel Voss, and Danel Draguljić. 2017. <em>Design and Analysis of Experiments</em>. 2nd ed. Springer <span>Texts</span> in <span>Statistics</span>. Cham, Switzerland: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -936,213 +961,221 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Syllabus"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># Syllabus</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Fundamentals of Experimental Design"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#bibliography: references.bib</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#csl: apa.csl</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">nocite:</span><span class="co"> |</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    @dean2017</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage **randomization**, **blocking**, and **replication** to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>The following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code.</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectives</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Understand the theoretical foundations and objectives of experimental design in statistics.</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Distinguish between observational and experimental studies, emphasizing the advantages experiments provide.</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Learn the fundamental techniques of replication, blocking, and randomization.</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Discuss how factorial experiments efficiently explore multiple factors simultaneously.</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Understand how design decisions affect data analysis and the validity of inferential procedures.</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Reinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Explore advanced mathematical derivations and proofs in the Appendix.</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu"># Fundamentals of Experimental Design</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## Experimentation vs. Observation</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Observational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Controlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions.</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Goals of Experimentation</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Determine causes of variation in response.</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Find optimal conditions and treatment combinations.</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Compare responses across different treatments.</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Develop predictive models that accurately reflect the underlying process.</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>Effective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout.</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Importance of Experimental Design</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cause-and-Effect:** Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Resource Allocation:** Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Efficient Analysis:** A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage **randomization**, **blocking**, and **replication** to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>The following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code.</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Understand the theoretical foundations and objectives of experimental design in statistics.</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Distinguish between observational and experimental studies, emphasizing the advantages experiments provide.</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Learn the fundamental techniques of replication, blocking, and randomization.</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Discuss how factorial experiments efficiently explore multiple factors simultaneously.</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Understand how design decisions affect data analysis and the validity of inferential procedures.</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Reinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Explore advanced mathematical derivations and proofs in the Appendix.</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Readings</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>@dean2017 <span class="co">[</span><span class="ot">Ch. 1 and 2</span><span class="co">]</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu"># Fundamentals of Experimental Design</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Experimentation vs. Observation</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Observational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Controlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions.</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Goals of Experimentation</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Determine causes of variation in response.</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Find optimal conditions and treatment combinations.</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Compare responses across different treatments.</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Develop predictive models that accurately reflect the underlying process.</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>Effective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout.</span>
 <span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>(See Montgomery, 2019, *Design and Analysis of Experiments* for a comprehensive treatment.)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Importance of Experimental Design</span></span>
 <span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="fu"># Key Techniques: Replication, Blocking, and Randomization</span></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Replication</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cause-and-Effect:** Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Resource Allocation:** Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Efficient Analysis:** A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.</span>
 <span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Definition:** Replication means repeating the entire set of treatments independently on different experimental units.</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Purpose:** Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Contrast with Repeated Measurements:** Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>(See Montgomery, 2019, *Design and Analysis of Experiments* for a comprehensive treatment.)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="fu"># Key Techniques: Replication, Blocking, and Randomization</span></span>
 <span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>Without adequate replication, it is difficult to separate true treatment effects from random noise.</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Replication</span></span>
 <span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Blocking</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Concept:** Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Example:** If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Outcome:** Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences.</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Definition:** Replication means repeating the entire set of treatments independently on different experimental units.</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Purpose:** Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Contrast with Repeated Measurements:** Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>Without adequate replication, it is difficult to separate true treatment effects from random noise.</span>
 <span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Randomization</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Blocking</span></span>
 <span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Rationale:** Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Benefits:**</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="ss">&nbsp; - </span>Prevents experimenter preferences or unconscious patterns from influencing results.</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="ss">&nbsp; - </span>Justifies the use of standard statistical distributions (F, t) for inference.</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="ss">&nbsp; - </span>Confirms that observed effects can be attributed to treatments and not assignment bias.</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Concept:** Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Example:** If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Outcome:** Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences.</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Randomization</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Rationale:** Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Benefits:**</span>
 <span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>**Reference:** Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="ss">&nbsp; - </span>Prevents experimenter preferences or unconscious patterns from influencing results.</span>
 <span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Methods of Randomization</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="ss">&nbsp; - </span>Justifies the use of standard statistical distributions (F, t) for inference.</span>
 <span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Random Number Generators (RNG):** Computer programs or calculators produce pseudo-random digits, used to assign treatments.</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Random Number Tables:** Historically used, a random table combined with random starting points can ensure unbiased allocations.</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Ensuring True Randomness:** Use objective random devices (dice, RNGs) and avoid human-chosen "random" sequences, as humans are prone to inadvertent patterns.</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="ss">&nbsp; - </span>Confirms that observed effects can be attributed to treatments and not assignment bias.</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>**Reference:** Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.</span>
 <span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="fu"># Factorial Experiments</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### Methods of Randomization</span></span>
 <span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>A **factorial experiment** examines multiple factors simultaneously, each at various levels. Rather than testing factors one at a time, factorial designs consider all combinations of factor levels, providing:</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>More information from fewer observations.</span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ability to detect interactions between factors (how the effect of one factor changes depending on another factor's level).</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>This approach is more efficient and comprehensive, revealing a richer picture of the underlying system.</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="fu"># Interaction Between Design and Analysis</span></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>Experimental design and statistical analysis are interdependent:</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Random Number Generators (RNG):** Computer programs or calculators produce pseudo-random digits, used to assign treatments.</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Random Number Tables:** Historically used, a random table combined with random starting points can ensure unbiased allocations.</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Ensuring True Randomness:** Use objective random devices (dice, RNGs) and avoid human-chosen "random" sequences, as humans are prone to inadvertent patterns.</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="fu"># Factorial Experiments</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>A **factorial experiment** examines multiple factors simultaneously, each at various levels. Rather than testing factors one at a time, factorial designs consider all combinations of factor levels, providing:</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>More information from fewer observations.</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ability to detect interactions between factors (how the effect of one factor changes depending on another factor's level).</span>
 <span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A good design ensures data that align well with modeling assumptions.</span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Understanding the intended statistical analysis can guide design choices (e.g., number of replicates, arrangement of treatments, use of blocking).</span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The modeling approach (linear models, least squares estimation, restricted maximum likelihood) depends on having a structure that can be adequately represented and interpreted.</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>This approach is more efficient and comprehensive, revealing a richer picture of the underlying system.</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="fu"># Interaction Between Design and Analysis</span></span>
 <span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>Without proper design, even the most sophisticated analysis tools will be less effective. Conversely, the best design is chosen with the intended analysis in mind.</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>Experimental design and statistical analysis are interdependent:</span>
 <span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="fu"># Robustness and Error Modeling</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A good design ensures data that align well with modeling assumptions.</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Understanding the intended statistical analysis can guide design choices (e.g., number of replicates, arrangement of treatments, use of blocking).</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The modeling approach (linear models, least squares estimation, restricted maximum likelihood) depends on having a structure that can be adequately represented and interpreted.</span>
 <span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Most standard inference procedures assume normality of errors and independence of observations.</span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Experimental designs strive to meet these assumptions or at least ensure that deviations are not severe.</span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Procedures based on linear models (e.g., ANOVA) are generally robust to mild deviations from normality but can be sensitive to extreme outliers.</span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If normality is questionable, transformations or nonparametric methods might be employed.</span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>For further reading, see <span class="sc">\[</span>Chapter on Error Modeling<span class="sc">\]</span>(&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;).</span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="fu"># Practical Applications: R Examples</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>Without proper design, even the most sophisticated analysis tools will be less effective. Conversely, the best design is chosen with the intended analysis in mind.</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="fu"># Robustness and Error Modeling</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Most standard inference procedures assume normality of errors and independence of observations.</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Experimental designs strive to meet these assumptions or at least ensure that deviations are not severe.</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Procedures based on linear models (e.g., ANOVA) are generally robust to mild deviations from normality but can be sensitive to extreme outliers.</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If normality is questionable, transformations or nonparametric methods might be employed.</span>
 <span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>Using R for design and analysis streamlines computations, produces diagnostic plots, and executes randomization schemes easily. R is free and widely used, offering packages like <span class="in">`agricolae`</span> for experimental designs and <span class="in">`emmeans`</span> for mean comparisons.</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>For further reading, see <span class="sc">\[</span>Chapter on Error Modeling<span class="sc">\]</span>(&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;).</span>
 <span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: Random Assignment and ANOVA</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>Suppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="fu"># Practical Applications: R Examples</span></span>
 <span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="co"># Treatments</span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>Using R for design and analysis streamlines computations, produces diagnostic plots, and executes randomization schemes easily. R is free and widely used, offering packages like <span class="in">`agricolae`</span> for experimental designs and <span class="in">`emmeans`</span> for mean comparisons.</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: Random Assignment and ANOVA</span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>Suppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.</span>
 <span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="co"># We have 9 units, randomly assign treatments</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
 <span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatments, <span class="at">each=</span><span class="dv">3</span>))</span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>assignments</span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>This code generates a random permutation of A, B, and C assigned to the units.</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="co"># Treatments</span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="co"># We have 9 units, randomly assign treatments</span></span>
 <span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>Now assume we collected data (simulated responses):</span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with a true difference: A &lt;-  B &lt;-  C</span></span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>true_means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A=</span><span class="dv">10</span>, <span class="at">B=</span><span class="dv">12</span>, <span class="at">C=</span><span class="dv">15</span>)</span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">9</span>, <span class="at">mean=</span><span class="fu">rep</span>(true_means, <span class="at">each=</span><span class="dv">3</span>), <span class="at">sd=</span><span class="dv">2</span>)</span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,</span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">treatment =</span> assignments,</span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">response =</span> responses</span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> treatment, <span class="at">data=</span>data)</span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatments, <span class="at">each=</span><span class="dv">3</span>))</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>assignments</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>This code generates a random permutation of A, B, and C assigned to the units.</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>Now assume we collected data (simulated responses):</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with a true difference: A &lt;-  B &lt;-  C</span></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>true_means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A=</span><span class="dv">10</span>, <span class="at">B=</span><span class="dv">12</span>, <span class="at">C=</span><span class="dv">15</span>)</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">9</span>, <span class="at">mean=</span><span class="fu">rep</span>(true_means, <span class="at">each=</span><span class="dv">3</span>), <span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">treatment =</span> assignments,</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">response =</span> responses</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>The ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
 <span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>**Conclusion**</span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>Experimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> treatment, <span class="at">data=</span>data)</span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>**Key Takeaways:**</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>The ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.</span>
 <span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Randomization prevents systematic bias and validates inferential methods.</span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Replication provides robust estimates of variability and supports generalizability.</span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Blocking controls known sources of variation, improving precision.</span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Factorial designs offer a more comprehensive view of multiple factors simultaneously.</span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>Future sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis.</span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Montgomery, D. C. (2019). *Design and Analysis of Experiments*. Wiley.</span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Kempthorne, O. (1977). *Design and Analysis of Experiments*. Robert E. Krieger Publishing Company.</span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Scheffé, H. (1959). *The Analysis of Variance*. Wiley.</span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\[</span>Chapter on Experimental Design and Analysis<span class="sc">\]</span>(&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_3_Chapter.html&gt;&gt;)</span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\[</span>Chapter on Error Modeling<span class="sc">\]</span>(&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;)</span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a>**Conclusion**</span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a>Experimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.</span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>**Key Takeaways:**</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Randomization prevents systematic bias and validates inferential methods.</span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Replication provides robust estimates of variability and supports generalizability.</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Blocking controls known sources of variation, improving precision.</span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Factorial designs offer a more comprehensive view of multiple factors simultaneously.</span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a>Future sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis.</span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
 <span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="fu"># Appendix: Advanced Mathematical Derivations</span></span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Proof of Randomization's Role in Distributional Assumptions</span></span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>Under a completely randomized design, every unit is equally likely to receive any treatment. Let $Y_{ij}$ represent the response from the $j$-th replicate of treatment $i$. Assuming $Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}$ with $\varepsilon_{ij} \sim N(0,\sigma^2)$:</span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Montgomery, D. C. (2019). *Design and Analysis of Experiments*. Wiley.</span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Kempthorne, O. (1977). *Design and Analysis of Experiments*. Robert E. Krieger Publishing Company.</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Scheffé, H. (1959). *The Analysis of Variance*. Wiley.</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\[</span>Chapter on Experimental Design and Analysis<span class="sc">\]</span>(&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_3_Chapter.html&gt;&gt;)</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\[</span>Chapter on Error Modeling<span class="sc">\]</span>(&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;)</span>
 <span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Randomization ensures that $(\varepsilon_{ij})$ are exchangeable random variables.</span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Under $H_0: \alpha_i=0$, the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).</span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Without randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.</span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="fu"># Appendix: Advanced Mathematical Derivations</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Proof of Randomization's Role in Distributional Assumptions</span></span>
 <span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>For more technical details, see Kempthorne (1977, Ch. 2).</span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>Under a completely randomized design, every unit is equally likely to receive any treatment. Let $Y_{ij}$ represent the response from the $j$-th replicate of treatment $i$. Assuming $Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}$ with $\varepsilon_{ij} \sim N(0,\sigma^2)$:</span>
 <span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Derivation of Expected Mean Squares</span></span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>For the simple one-way ANOVA model:</span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Randomization ensures that $(\varepsilon_{ij})$ are exchangeable random variables.</span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Under $H_0: \alpha_i=0$, the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).</span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Without randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.</span>
 <span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>Y_{ij} = \mu + \alpha_i + \varepsilon_{ij},</span>
-<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>For more technical details, see Kempthorne (1977, Ch. 2).</span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Derivation of Expected Mean Squares</span></span>
 <span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>with $\sum \alpha_i = 0$, the expected mean squares are:</span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>For the simple one-way ANOVA model:</span>
 <span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>E(MS_{\text{Treatment}}) = \sigma^2 + n \sum \alpha_i^2/(g-1),</span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>Y_{ij} = \mu + \alpha_i + \varepsilon_{ij},</span>
 <span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>E(MS_{\text{Error}}) = \sigma^2.</span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>with $\sum \alpha_i = 0$, the expected mean squares are:</span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>These derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959).</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>E(MS_{\text{Treatment}}) = \sigma^2 + n \sum \alpha_i^2/(g-1),</span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>E(MS_{\text{Error}}) = \sigma^2.</span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a>These derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959).</span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a>##References</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

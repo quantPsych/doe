@@ -2,93 +2,100 @@
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html",
     "href": "lectures/week1_DOE_fundamental_ch1.html",
-    "title": "Syllabus",
+    "title": "Fundamentals of Experimental Design",
     "section": "",
-    "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code.\n\n\n\n\nUnderstand the theoretical foundations and objectives of experimental design in statistics.\nDistinguish between observational and experimental studies, emphasizing the advantages experiments provide.\nLearn the fundamental techniques of replication, blocking, and randomization.\nDiscuss how factorial experiments efficiently explore multiple factors simultaneously.\nUnderstand how design decisions affect data analysis and the validity of inferential procedures.\nReinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.\nExplore advanced mathematical derivations and proofs in the Appendix."
+    "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#introduction",
     "href": "lectures/week1_DOE_fundamental_ch1.html#introduction",
-    "title": "Syllabus",
+    "title": "Fundamentals of Experimental Design",
     "section": "",
     "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#objectives",
     "href": "lectures/week1_DOE_fundamental_ch1.html#objectives",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Understand the theoretical foundations and objectives of experimental design in statistics.\nDistinguish between observational and experimental studies, emphasizing the advantages experiments provide.\nLearn the fundamental techniques of replication, blocking, and randomization.\nDiscuss how factorial experiments efficiently explore multiple factors simultaneously.\nUnderstand how design decisions affect data analysis and the validity of inferential procedures.\nReinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.\nExplore advanced mathematical derivations and proofs in the Appendix."
+    "title": "Fundamentals of Experimental Design",
+    "section": "0.2 Objectives",
+    "text": "0.2 Objectives\n\nUnderstand the theoretical foundations and objectives of experimental design in statistics.\nDistinguish between observational and experimental studies, emphasizing the advantages experiments provide.\nLearn the fundamental techniques of replication, blocking, and randomization.\nDiscuss how factorial experiments efficiently explore multiple factors simultaneously.\nUnderstand how design decisions affect data analysis and the validity of inferential procedures.\nReinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.\nExplore advanced mathematical derivations and proofs in the Appendix."
+  },
+  {
+    "objectID": "lectures/week1_DOE_fundamental_ch1.html#readings",
+    "href": "lectures/week1_DOE_fundamental_ch1.html#readings",
+    "title": "Fundamentals of Experimental Design",
+    "section": "0.3 Readings",
+    "text": "0.3 Readings\nDean, Voss, and Draguljić (2017, Ch. 1 and 2)"
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#experimentation-vs.-observation",
     "href": "lectures/week1_DOE_fundamental_ch1.html#experimentation-vs.-observation",
-    "title": "Syllabus",
-    "section": "2.1 Experimentation vs. Observation",
-    "text": "2.1 Experimentation vs. Observation\n\nObservational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.\nControlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions."
+    "title": "Fundamentals of Experimental Design",
+    "section": "1.1 Experimentation vs. Observation",
+    "text": "1.1 Experimentation vs. Observation\n\nObservational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.\nControlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#goals-of-experimentation",
     "href": "lectures/week1_DOE_fundamental_ch1.html#goals-of-experimentation",
-    "title": "Syllabus",
-    "section": "2.2 Goals of Experimentation",
-    "text": "2.2 Goals of Experimentation\n\nDetermine causes of variation in response.\nFind optimal conditions and treatment combinations.\nCompare responses across different treatments.\nDevelop predictive models that accurately reflect the underlying process.\n\nEffective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout."
+    "title": "Fundamentals of Experimental Design",
+    "section": "1.2 Goals of Experimentation",
+    "text": "1.2 Goals of Experimentation\n\nDetermine causes of variation in response.\nFind optimal conditions and treatment combinations.\nCompare responses across different treatments.\nDevelop predictive models that accurately reflect the underlying process.\n\nEffective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#importance-of-experimental-design",
     "href": "lectures/week1_DOE_fundamental_ch1.html#importance-of-experimental-design",
-    "title": "Syllabus",
-    "section": "2.3 Importance of Experimental Design",
-    "text": "2.3 Importance of Experimental Design\n\nCause-and-Effect: Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.\nResource Allocation: Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.\nEfficient Analysis: A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.\n\n(See Montgomery, 2019, Design and Analysis of Experiments for a comprehensive treatment.)"
+    "title": "Fundamentals of Experimental Design",
+    "section": "1.3 Importance of Experimental Design",
+    "text": "1.3 Importance of Experimental Design\n\nCause-and-Effect: Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.\nResource Allocation: Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.\nEfficient Analysis: A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.\n\n(See Montgomery, 2019, Design and Analysis of Experiments for a comprehensive treatment.)"
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#replication",
     "href": "lectures/week1_DOE_fundamental_ch1.html#replication",
-    "title": "Syllabus",
-    "section": "3.1 Replication",
-    "text": "3.1 Replication\n\nDefinition: Replication means repeating the entire set of treatments independently on different experimental units.\nPurpose: Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.\nContrast with Repeated Measurements: Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.\n\nWithout adequate replication, it is difficult to separate true treatment effects from random noise."
+    "title": "Fundamentals of Experimental Design",
+    "section": "2.1 Replication",
+    "text": "2.1 Replication\n\nDefinition: Replication means repeating the entire set of treatments independently on different experimental units.\nPurpose: Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.\nContrast with Repeated Measurements: Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.\n\nWithout adequate replication, it is difficult to separate true treatment effects from random noise."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#blocking",
     "href": "lectures/week1_DOE_fundamental_ch1.html#blocking",
-    "title": "Syllabus",
-    "section": "3.2 Blocking",
-    "text": "3.2 Blocking\n\nConcept: Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.\nExample: If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.\nOutcome: Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences."
+    "title": "Fundamentals of Experimental Design",
+    "section": "2.2 Blocking",
+    "text": "2.2 Blocking\n\nConcept: Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.\nExample: If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.\nOutcome: Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#randomization",
     "href": "lectures/week1_DOE_fundamental_ch1.html#randomization",
-    "title": "Syllabus",
-    "section": "3.3 Randomization",
-    "text": "3.3 Randomization\n\nRationale: Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.\nBenefits:\n\n  - Prevents experimenter preferences or unconscious patterns from influencing results.\n  - Justifies the use of standard statistical distributions (F, t) for inference.\n  - Confirms that observed effects can be attributed to treatments and not assignment bias.\nReference: Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.\n\n3.3.1 Methods of Randomization\n\nRandom Number Generators (RNG): Computer programs or calculators produce pseudo-random digits, used to assign treatments.\nRandom Number Tables: Historically used, a random table combined with random starting points can ensure unbiased allocations.\nEnsuring True Randomness: Use objective random devices (dice, RNGs) and avoid human-chosen “random” sequences, as humans are prone to inadvertent patterns."
+    "title": "Fundamentals of Experimental Design",
+    "section": "2.3 Randomization",
+    "text": "2.3 Randomization\n\nRationale: Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.\nBenefits:\n\n  - Prevents experimenter preferences or unconscious patterns from influencing results.\n  - Justifies the use of standard statistical distributions (F, t) for inference.\n  - Confirms that observed effects can be attributed to treatments and not assignment bias.\nReference: Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.\n\n2.3.1 Methods of Randomization\n\nRandom Number Generators (RNG): Computer programs or calculators produce pseudo-random digits, used to assign treatments.\nRandom Number Tables: Historically used, a random table combined with random starting points can ensure unbiased allocations.\nEnsuring True Randomness: Use objective random devices (dice, RNGs) and avoid human-chosen “random” sequences, as humans are prone to inadvertent patterns."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#example-random-assignment-and-anova",
     "href": "lectures/week1_DOE_fundamental_ch1.html#example-random-assignment-and-anova",
-    "title": "Syllabus",
-    "section": "7.1 Example: Random Assignment and ANOVA",
-    "text": "7.1 Example: Random Assignment and ANOVA\nSuppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.\n# Set seed for reproducibility\n\nset.seed(123)\n# Treatments\n\ntreatments &lt;- c(\"A\", \"B\", \"C\")\n# We have 9 units, randomly assign treatments\n\nassignments &lt;- sample(rep(treatments, each=3))\nassignments\nThis code generates a random permutation of A, B, and C assigned to the units.\nNow assume we collected data (simulated responses):\n# Simulate responses with a true difference: A &lt;-  B &lt;-  C\ntrue_means &lt;- c(A=10, B=12, C=15)\nresponses &lt;- rnorm(9, mean=rep(true_means, each=3), sd=2)\ndata &lt;- data.frame(\n  unit = 1:9,\n  treatment = assignments,\n  response = responses\n)\n\n# Fit an ANOVA model\n\nfit &lt;- aov(response ~ treatment, data=data)\nsummary(fit)\nThe ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.\nConclusion\nExperimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.\nKey Takeaways:\n\nRandomization prevents systematic bias and validates inferential methods.\nReplication provides robust estimates of variability and supports generalizability.\nBlocking controls known sources of variation, improving precision.\nFactorial designs offer a more comprehensive view of multiple factors simultaneously.\n\nFuture sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis."
+    "title": "Fundamentals of Experimental Design",
+    "section": "6.1 Example: Random Assignment and ANOVA",
+    "text": "6.1 Example: Random Assignment and ANOVA\nSuppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.\n# Set seed for reproducibility\n\nset.seed(123)\n# Treatments\n\ntreatments &lt;- c(\"A\", \"B\", \"C\")\n# We have 9 units, randomly assign treatments\n\nassignments &lt;- sample(rep(treatments, each=3))\nassignments\nThis code generates a random permutation of A, B, and C assigned to the units.\nNow assume we collected data (simulated responses):\n# Simulate responses with a true difference: A &lt;-  B &lt;-  C\ntrue_means &lt;- c(A=10, B=12, C=15)\nresponses &lt;- rnorm(9, mean=rep(true_means, each=3), sd=2)\ndata &lt;- data.frame(\n  unit = 1:9,\n  treatment = assignments,\n  response = responses\n)\n\n# Fit an ANOVA model\n\nfit &lt;- aov(response ~ treatment, data=data)\nsummary(fit)\nThe ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.\nConclusion\nExperimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.\nKey Takeaways:\n\nRandomization prevents systematic bias and validates inferential methods.\nReplication provides robust estimates of variability and supports generalizability.\nBlocking controls known sources of variation, improving precision.\nFactorial designs offer a more comprehensive view of multiple factors simultaneously.\n\nFuture sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#references",
     "href": "lectures/week1_DOE_fundamental_ch1.html#references",
-    "title": "Syllabus",
-    "section": "7.2 References",
-    "text": "7.2 References\n\nMontgomery, D. C. (2019). Design and Analysis of Experiments. Wiley.\nKempthorne, O. (1977). Design and Analysis of Experiments. Robert E. Krieger Publishing Company.\nScheffé, H. (1959). The Analysis of Variance. Wiley.\n[Chapter on Experimental Design and Analysis](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_3_Chapter.html&gt;&gt;)\n[Chapter on Error Modeling](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;)"
+    "title": "Fundamentals of Experimental Design",
+    "section": "6.2 References",
+    "text": "6.2 References\n\nMontgomery, D. C. (2019). Design and Analysis of Experiments. Wiley.\nKempthorne, O. (1977). Design and Analysis of Experiments. Robert E. Krieger Publishing Company.\nScheffé, H. (1959). The Analysis of Variance. Wiley.\n[Chapter on Experimental Design and Analysis](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_3_Chapter.html&gt;&gt;)\n[Chapter on Error Modeling](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;)"
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#a-proof-of-randomizations-role-in-distributional-assumptions",
     "href": "lectures/week1_DOE_fundamental_ch1.html#a-proof-of-randomizations-role-in-distributional-assumptions",
-    "title": "Syllabus",
-    "section": "8.1 A Proof of Randomization’s Role in Distributional Assumptions",
-    "text": "8.1 A Proof of Randomization’s Role in Distributional Assumptions\nUnder a completely randomized design, every unit is equally likely to receive any treatment. Let \\(Y_{ij}\\) represent the response from the \\(j\\)-th replicate of treatment \\(i\\). Assuming \\(Y_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij}\\) with \\(\\varepsilon_{ij} \\sim N(0,\\sigma^2)\\):\n\nRandomization ensures that \\((\\varepsilon_{ij})\\) are exchangeable random variables.\nUnder \\(H_0: \\alpha_i=0\\), the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).\nWithout randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.\n\nFor more technical details, see Kempthorne (1977, Ch. 2)."
+    "title": "Fundamentals of Experimental Design",
+    "section": "7.1 A Proof of Randomization’s Role in Distributional Assumptions",
+    "text": "7.1 A Proof of Randomization’s Role in Distributional Assumptions\nUnder a completely randomized design, every unit is equally likely to receive any treatment. Let \\(Y_{ij}\\) represent the response from the \\(j\\)-th replicate of treatment \\(i\\). Assuming \\(Y_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij}\\) with \\(\\varepsilon_{ij} \\sim N(0,\\sigma^2)\\):\n\nRandomization ensures that \\((\\varepsilon_{ij})\\) are exchangeable random variables.\nUnder \\(H_0: \\alpha_i=0\\), the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).\nWithout randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.\n\nFor more technical details, see Kempthorne (1977, Ch. 2)."
   },
   {
     "objectID": "lectures/week1_DOE_fundamental_ch1.html#a-derivation-of-expected-mean-squares",
     "href": "lectures/week1_DOE_fundamental_ch1.html#a-derivation-of-expected-mean-squares",
-    "title": "Syllabus",
-    "section": "8.2 A Derivation of Expected Mean Squares",
-    "text": "8.2 A Derivation of Expected Mean Squares\nFor the simple one-way ANOVA model:\n\\[\nY_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij},\n\\]\nwith \\(\\sum \\alpha_i = 0\\), the expected mean squares are:\n\\[\nE(MS_{\\text{Treatment}}) = \\sigma^2 + n \\sum \\alpha_i^2/(g-1),\n\\]\n\\[\nE(MS_{\\text{Error}}) = \\sigma^2.\n\\]\nThese derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959)."
+    "title": "Fundamentals of Experimental Design",
+    "section": "7.2 A Derivation of Expected Mean Squares",
+    "text": "7.2 A Derivation of Expected Mean Squares\nFor the simple one-way ANOVA model:\n\\[\nY_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij},\n\\]\nwith \\(\\sum \\alpha_i = 0\\), the expected mean squares are:\n\\[\nE(MS_{\\text{Treatment}}) = \\sigma^2 + n \\sum \\alpha_i^2/(g-1),\n\\]\n\\[\nE(MS_{\\text{Error}}) = \\sigma^2.\n\\]\nThese derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959).\n##References"
   },
   {
     "objectID": "syllabus/syllabus-final.html",
