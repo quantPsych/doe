@@ -153,6 +153,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../assets/styles/css/home.css">
 <meta property="og:title" content="Fundamentals of Experimental Design – Design of Experiments">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:site_name" content="Design of Experiments">
@@ -203,7 +204,7 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -211,42 +212,42 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">0.1</span> Introduction</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><span class="header-section-number">0.2</span> Objectives</a></li>
-  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">0.3</span> Readings</a></li>
-  <li><a href="#fundamentals-of-experimental-design" id="toc-fundamentals-of-experimental-design" class="nav-link" data-scroll-target="#fundamentals-of-experimental-design"><span class="header-section-number">1</span> Fundamentals of Experimental Design</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
+  <li><a href="#fundamentals-of-experimental-design" id="toc-fundamentals-of-experimental-design" class="nav-link" data-scroll-target="#fundamentals-of-experimental-design">Fundamentals of Experimental Design</a>
   <ul class="collapse">
-  <li><a href="#experimentation-vs.-observation" id="toc-experimentation-vs.-observation" class="nav-link" data-scroll-target="#experimentation-vs.-observation"><span class="header-section-number">1.1</span> Experimentation vs.&nbsp;Observation</a></li>
-  <li><a href="#goals-of-experimentation" id="toc-goals-of-experimentation" class="nav-link" data-scroll-target="#goals-of-experimentation"><span class="header-section-number">1.2</span> Goals of Experimentation</a></li>
-  <li><a href="#importance-of-experimental-design" id="toc-importance-of-experimental-design" class="nav-link" data-scroll-target="#importance-of-experimental-design"><span class="header-section-number">1.3</span> Importance of Experimental Design</a></li>
+  <li><a href="#experimentation-vs.-observation" id="toc-experimentation-vs.-observation" class="nav-link" data-scroll-target="#experimentation-vs.-observation">Experimentation vs.&nbsp;Observation</a></li>
+  <li><a href="#goals-of-experimentation" id="toc-goals-of-experimentation" class="nav-link" data-scroll-target="#goals-of-experimentation">Goals of Experimentation</a></li>
+  <li><a href="#importance-of-experimental-design" id="toc-importance-of-experimental-design" class="nav-link" data-scroll-target="#importance-of-experimental-design">Importance of Experimental Design</a></li>
   </ul></li>
-  <li><a href="#key-techniques-replication-blocking-and-randomization" id="toc-key-techniques-replication-blocking-and-randomization" class="nav-link" data-scroll-target="#key-techniques-replication-blocking-and-randomization"><span class="header-section-number">2</span> Key Techniques: Replication, Blocking, and Randomization</a>
+  <li><a href="#key-techniques-replication-blocking-and-randomization" id="toc-key-techniques-replication-blocking-and-randomization" class="nav-link" data-scroll-target="#key-techniques-replication-blocking-and-randomization">Key Techniques: Replication, Blocking, and Randomization</a>
   <ul class="collapse">
-  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication"><span class="header-section-number">2.1</span> Replication</a></li>
-  <li><a href="#blocking" id="toc-blocking" class="nav-link" data-scroll-target="#blocking"><span class="header-section-number">2.2</span> Blocking</a></li>
-  <li><a href="#randomization" id="toc-randomization" class="nav-link" data-scroll-target="#randomization"><span class="header-section-number">2.3</span> Randomization</a>
+  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication">Replication</a></li>
+  <li><a href="#blocking" id="toc-blocking" class="nav-link" data-scroll-target="#blocking">Blocking</a></li>
+  <li><a href="#randomization" id="toc-randomization" class="nav-link" data-scroll-target="#randomization">Randomization</a>
   <ul class="collapse">
-  <li><a href="#methods-of-randomization" id="toc-methods-of-randomization" class="nav-link" data-scroll-target="#methods-of-randomization"><span class="header-section-number">2.3.1</span> Methods of Randomization</a></li>
+  <li><a href="#methods-of-randomization" id="toc-methods-of-randomization" class="nav-link" data-scroll-target="#methods-of-randomization">Methods of Randomization</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#factorial-experiments" id="toc-factorial-experiments" class="nav-link" data-scroll-target="#factorial-experiments"><span class="header-section-number">3</span> Factorial Experiments</a></li>
-  <li><a href="#interaction-between-design-and-analysis" id="toc-interaction-between-design-and-analysis" class="nav-link" data-scroll-target="#interaction-between-design-and-analysis"><span class="header-section-number">4</span> Interaction Between Design and Analysis</a></li>
-  <li><a href="#robustness-and-error-modeling" id="toc-robustness-and-error-modeling" class="nav-link" data-scroll-target="#robustness-and-error-modeling"><span class="header-section-number">5</span> Robustness and Error Modeling</a></li>
-  <li><a href="#practical-applications-r-examples" id="toc-practical-applications-r-examples" class="nav-link" data-scroll-target="#practical-applications-r-examples"><span class="header-section-number">6</span> Practical Applications: R Examples</a>
+  <li><a href="#factorial-experiments" id="toc-factorial-experiments" class="nav-link" data-scroll-target="#factorial-experiments">Factorial Experiments</a></li>
+  <li><a href="#interaction-between-design-and-analysis" id="toc-interaction-between-design-and-analysis" class="nav-link" data-scroll-target="#interaction-between-design-and-analysis">Interaction Between Design and Analysis</a></li>
+  <li><a href="#robustness-and-error-modeling" id="toc-robustness-and-error-modeling" class="nav-link" data-scroll-target="#robustness-and-error-modeling">Robustness and Error Modeling</a></li>
+  <li><a href="#practical-applications-r-examples" id="toc-practical-applications-r-examples" class="nav-link" data-scroll-target="#practical-applications-r-examples">Practical Applications: R Examples</a>
   <ul class="collapse">
-  <li><a href="#example-random-assignment-and-anova" id="toc-example-random-assignment-and-anova" class="nav-link" data-scroll-target="#example-random-assignment-and-anova"><span class="header-section-number">6.1</span> Example: Random Assignment and ANOVA</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6.2</span> References</a></li>
+  <li><a href="#example-random-assignment-and-anova" id="toc-example-random-assignment-and-anova" class="nav-link" data-scroll-target="#example-random-assignment-and-anova">Example: Random Assignment and ANOVA</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
-  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations"><span class="header-section-number">7</span> Appendix: Advanced Mathematical Derivations</a>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
   <ul class="collapse">
-  <li><a href="#a-proof-of-randomizations-role-in-distributional-assumptions" id="toc-a-proof-of-randomizations-role-in-distributional-assumptions" class="nav-link" data-scroll-target="#a-proof-of-randomizations-role-in-distributional-assumptions"><span class="header-section-number">7.1</span> A Proof of Randomization’s Role in Distributional Assumptions</a></li>
-  <li><a href="#a-derivation-of-expected-mean-squares" id="toc-a-derivation-of-expected-mean-squares" class="nav-link" data-scroll-target="#a-derivation-of-expected-mean-squares"><span class="header-section-number">7.2</span> A Derivation of Expected Mean Squares</a></li>
+  <li><a href="#a-proof-of-randomizations-role-in-distributional-assumptions" id="toc-a-proof-of-randomizations-role-in-distributional-assumptions" class="nav-link" data-scroll-target="#a-proof-of-randomizations-role-in-distributional-assumptions">A Proof of Randomization’s Role in Distributional Assumptions</a></li>
+  <li><a href="#a-derivation-of-expected-mean-squares" id="toc-a-derivation-of-expected-mean-squares" class="nav-link" data-scroll-target="#a-derivation-of-expected-mean-squares">A Derivation of Expected Mean Squares</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -255,7 +256,7 @@ window.Quarto = {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -279,13 +280,13 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">0.1</span> Introduction</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage <strong>randomization</strong>, <strong>blocking</strong>, and <strong>replication</strong> to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.</p>
 <p>The following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code.</p>
 </section>
-<section id="objectives" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="objectives"><span class="header-section-number">0.2</span> Objectives</h2>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ol type="1">
 <li>Understand the theoretical foundations and objectives of experimental design in statistics.</li>
 <li>Distinguish between observational and experimental studies, emphasizing the advantages experiments provide.</li>
@@ -296,21 +297,21 @@ window.Quarto = {
 <li>Explore advanced mathematical derivations and proofs in the Appendix.</li>
 </ol>
 </section>
-<section id="readings" class="level2" data-number="0.3">
-<h2 data-number="0.3" class="anchored" data-anchor-id="readings"><span class="header-section-number">0.3</span> Readings</h2>
+<section id="readings" class="level2">
+<h2 class="anchored" data-anchor-id="readings">Readings</h2>
 <p><span class="citation" data-cites="dean2017">Dean, Voss, and Draguljić (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 1 and 2)</span></p>
 </section>
-<section id="fundamentals-of-experimental-design" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Fundamentals of Experimental Design</h1>
-<section id="experimentation-vs.-observation" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="experimentation-vs.-observation"><span class="header-section-number">1.1</span> Experimentation vs.&nbsp;Observation</h2>
+<section id="fundamentals-of-experimental-design" class="level1">
+<h1>Fundamentals of Experimental Design</h1>
+<section id="experimentation-vs.-observation" class="level2">
+<h2 class="anchored" data-anchor-id="experimentation-vs.-observation">Experimentation vs.&nbsp;Observation</h2>
 <ul>
 <li>Observational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.</li>
 <li>Controlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions.</li>
 </ul>
 </section>
-<section id="goals-of-experimentation" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="goals-of-experimentation"><span class="header-section-number">1.2</span> Goals of Experimentation</h2>
+<section id="goals-of-experimentation" class="level2">
+<h2 class="anchored" data-anchor-id="goals-of-experimentation">Goals of Experimentation</h2>
 <ol type="1">
 <li>Determine causes of variation in response.</li>
 <li>Find optimal conditions and treatment combinations.</li>
@@ -319,8 +320,8 @@ window.Quarto = {
 </ol>
 <p>Effective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout.</p>
 </section>
-<section id="importance-of-experimental-design" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="importance-of-experimental-design"><span class="header-section-number">1.3</span> Importance of Experimental Design</h2>
+<section id="importance-of-experimental-design" class="level2">
+<h2 class="anchored" data-anchor-id="importance-of-experimental-design">Importance of Experimental Design</h2>
 <ul>
 <li><strong>Cause-and-Effect:</strong> Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.</li>
 <li><strong>Resource Allocation:</strong> Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.</li>
@@ -329,10 +330,10 @@ window.Quarto = {
 <p>(See Montgomery, 2019, <em>Design and Analysis of Experiments</em> for a comprehensive treatment.)</p>
 </section>
 </section>
-<section id="key-techniques-replication-blocking-and-randomization" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Key Techniques: Replication, Blocking, and Randomization</h1>
-<section id="replication" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="replication"><span class="header-section-number">2.1</span> Replication</h2>
+<section id="key-techniques-replication-blocking-and-randomization" class="level1">
+<h1>Key Techniques: Replication, Blocking, and Randomization</h1>
+<section id="replication" class="level2">
+<h2 class="anchored" data-anchor-id="replication">Replication</h2>
 <ul>
 <li><strong>Definition:</strong> Replication means repeating the entire set of treatments independently on different experimental units.</li>
 <li><strong>Purpose:</strong> Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.</li>
@@ -340,16 +341,16 @@ window.Quarto = {
 </ul>
 <p>Without adequate replication, it is difficult to separate true treatment effects from random noise.</p>
 </section>
-<section id="blocking" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="blocking"><span class="header-section-number">2.2</span> Blocking</h2>
+<section id="blocking" class="level2">
+<h2 class="anchored" data-anchor-id="blocking">Blocking</h2>
 <ul>
 <li><strong>Concept:</strong> Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.</li>
 <li><strong>Example:</strong> If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.</li>
 <li><strong>Outcome:</strong> Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences.</li>
 </ul>
 </section>
-<section id="randomization" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="randomization"><span class="header-section-number">2.3</span> Randomization</h2>
+<section id="randomization" class="level2">
+<h2 class="anchored" data-anchor-id="randomization">Randomization</h2>
 <ul>
 <li><strong>Rationale:</strong> Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.</li>
 <li><strong>Benefits:</strong></li>
@@ -358,8 +359,8 @@ window.Quarto = {
 <p>&nbsp; - Justifies the use of standard statistical distributions (F, t) for inference.</p>
 <p>&nbsp; - Confirms that observed effects can be attributed to treatments and not assignment bias.</p>
 <p><strong>Reference:</strong> Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.</p>
-<section id="methods-of-randomization" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="methods-of-randomization"><span class="header-section-number">2.3.1</span> Methods of Randomization</h3>
+<section id="methods-of-randomization" class="level3">
+<h3 class="anchored" data-anchor-id="methods-of-randomization">Methods of Randomization</h3>
 <ul>
 <li><strong>Random Number Generators (RNG):</strong> Computer programs or calculators produce pseudo-random digits, used to assign treatments.</li>
 <li><strong>Random Number Tables:</strong> Historically used, a random table combined with random starting points can ensure unbiased allocations.</li>
@@ -368,8 +369,8 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="factorial-experiments" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Factorial Experiments</h1>
+<section id="factorial-experiments" class="level1">
+<h1>Factorial Experiments</h1>
 <p>A <strong>factorial experiment</strong> examines multiple factors simultaneously, each at various levels. Rather than testing factors one at a time, factorial designs consider all combinations of factor levels, providing:</p>
 <ul>
 <li>More information from fewer observations.</li>
@@ -377,8 +378,8 @@ window.Quarto = {
 </ul>
 <p>This approach is more efficient and comprehensive, revealing a richer picture of the underlying system.</p>
 </section>
-<section id="interaction-between-design-and-analysis" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Interaction Between Design and Analysis</h1>
+<section id="interaction-between-design-and-analysis" class="level1">
+<h1>Interaction Between Design and Analysis</h1>
 <p>Experimental design and statistical analysis are interdependent:</p>
 <ul>
 <li>A good design ensures data that align well with modeling assumptions.</li>
@@ -388,8 +389,8 @@ window.Quarto = {
 <p>Without proper design, even the most sophisticated analysis tools will be less effective. Conversely, the best design is chosen with the intended analysis in mind.</p>
 <hr>
 </section>
-<section id="robustness-and-error-modeling" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Robustness and Error Modeling</h1>
+<section id="robustness-and-error-modeling" class="level1">
+<h1>Robustness and Error Modeling</h1>
 <ul>
 <li>Most standard inference procedures assume normality of errors and independence of observations.</li>
 <li>Experimental designs strive to meet these assumptions or at least ensure that deviations are not severe.</li>
@@ -399,11 +400,11 @@ window.Quarto = {
 <p>For further reading, see [Chapter on Error Modeling](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;).</p>
 <hr>
 </section>
-<section id="practical-applications-r-examples" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Practical Applications: R Examples</h1>
+<section id="practical-applications-r-examples" class="level1">
+<h1>Practical Applications: R Examples</h1>
 <p>Using R for design and analysis streamlines computations, produces diagnostic plots, and executes randomization schemes easily. R is free and widely used, offering packages like <code>agricolae</code> for experimental designs and <code>emmeans</code> for mean comparisons.</p>
-<section id="example-random-assignment-and-anova" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="example-random-assignment-and-anova"><span class="header-section-number">6.1</span> Example: Random Assignment and ANOVA</h2>
+<section id="example-random-assignment-and-anova" class="level2">
+<h2 class="anchored" data-anchor-id="example-random-assignment-and-anova">Example: Random Assignment and ANOVA</h2>
 <p>Suppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -442,8 +443,8 @@ window.Quarto = {
 </ul>
 <p>Future sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis.</p>
 </section>
-<section id="references" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="references"><span class="header-section-number">6.2</span> References</h2>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
 <li>Montgomery, D. C. (2019). <em>Design and Analysis of Experiments</em>. Wiley.</li>
 <li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Robert E. Krieger Publishing Company.</li>
@@ -453,10 +454,10 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="appendix-advanced-mathematical-derivations" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Appendix: Advanced Mathematical Derivations</h1>
-<section id="a-proof-of-randomizations-role-in-distributional-assumptions" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="a-proof-of-randomizations-role-in-distributional-assumptions"><span class="header-section-number">7.1</span> A Proof of Randomization’s Role in Distributional Assumptions</h2>
+<section id="appendix-advanced-mathematical-derivations" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="a-proof-of-randomizations-role-in-distributional-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="a-proof-of-randomizations-role-in-distributional-assumptions">A Proof of Randomization’s Role in Distributional Assumptions</h2>
 <p>Under a completely randomized design, every unit is equally likely to receive any treatment. Let <span class="math inline">\(Y_{ij}\)</span> represent the response from the <span class="math inline">\(j\)</span>-th replicate of treatment <span class="math inline">\(i\)</span>. Assuming <span class="math inline">\(Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}\)</span> with <span class="math inline">\(\varepsilon_{ij} \sim N(0,\sigma^2)\)</span>:</p>
 <ol type="1">
 <li>Randomization ensures that <span class="math inline">\((\varepsilon_{ij})\)</span> are exchangeable random variables.</li>
@@ -465,8 +466,8 @@ window.Quarto = {
 </ol>
 <p>For more technical details, see Kempthorne (1977, Ch. 2).</p>
 </section>
-<section id="a-derivation-of-expected-mean-squares" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="a-derivation-of-expected-mean-squares"><span class="header-section-number">7.2</span> A Derivation of Expected Mean Squares</h2>
+<section id="a-derivation-of-expected-mean-squares" class="level2">
+<h2 class="anchored" data-anchor-id="a-derivation-of-expected-mean-squares">A Derivation of Expected Mean Squares</h2>
 <p>For the simple one-way ANOVA model:</p>
 <p><span class="math display">\[
 Y_{ij} = \mu + \alpha_i + \varepsilon_{ij},
