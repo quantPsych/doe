@@ -8,7 +8,7 @@
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>Fundamentals of Experimental Design – Design of Experiments</title>
+<title>Fundamentals of Experimental Design – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,6 +122,11 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta property="og:title" content="Fundamentals of Experimental Design – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://quantpsych.github.io/doe/lectures/assets/images/home.webp">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+</head><body class="nav-fixed"><img src="assets/images/home.webp" alt="Course Banner" style="width: 100%; height: auto;">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -154,20 +159,17 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
-<meta property="og:title" content="Fundamentals of Experimental Design – Design of Experiments">
-<meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:site_name" content="Design of Experiments">
-</head>
 
-<body class="nav-fixed">
+
+
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Design of Experiments</span>
+    <span class="navbar-title">STAT 454/545 - Analysis of Variance and Experimental Design</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -204,7 +206,35 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Fundamentals of Experimental Design</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Davood Tofighi, Ph.D. </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">15-Dec-2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -213,8 +243,10 @@ window.Quarto = {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a>
+  <ul class="collapse">
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
+  </ul></li>
   <li><a href="#fundamentals-of-experimental-design" id="toc-fundamentals-of-experimental-design" class="nav-link" data-scroll-target="#fundamentals-of-experimental-design">Fundamentals of Experimental Design</a>
   <ul class="collapse">
   <li><a href="#experimentation-vs.-observation" id="toc-experimentation-vs.-observation" class="nav-link" data-scroll-target="#experimentation-vs.-observation">Experimentation vs.&nbsp;Observation</a></li>
@@ -247,37 +279,10 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Fundamentals of Experimental Design</h1>
-</div>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta column-page-left">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Davood Tofighi, Ph.D. </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">15-Dec-2024</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <section id="introduction" class="level2">
@@ -296,10 +301,12 @@ window.Quarto = {
 <li>Reinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.</li>
 <li>Explore advanced mathematical derivations and proofs in the Appendix.</li>
 </ol>
+<section id="readings" class="level3">
+<h3 class="anchored" data-anchor-id="readings">Readings</h3>
+<ul>
+<li><span class="citation" data-cites="dean2017">Dean, Voss, and Draguljić (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 1 and 2)</span></li>
+</ul>
 </section>
-<section id="readings" class="level2">
-<h2 class="anchored" data-anchor-id="readings">Readings</h2>
-<p><span class="citation" data-cites="dean2017">Dean, Voss, and Draguljić (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 1 and 2)</span></p>
 </section>
 <section id="fundamentals-of-experimental-design" class="level1">
 <h1>Fundamentals of Experimental Design</h1>
@@ -387,7 +394,6 @@ window.Quarto = {
 <li>The modeling approach (linear models, least squares estimation, restricted maximum likelihood) depends on having a structure that can be adequately represented and interpreted.</li>
 </ul>
 <p>Without proper design, even the most sophisticated analysis tools will be less effective. Conversely, the best design is chosen with the intended analysis in mind.</p>
-<hr>
 </section>
 <section id="robustness-and-error-modeling" class="level1">
 <h1>Robustness and Error Modeling</h1>
@@ -397,8 +403,6 @@ window.Quarto = {
 <li>Procedures based on linear models (e.g., ANOVA) are generally robust to mild deviations from normality but can be sensitive to extreme outliers.</li>
 <li>If normality is questionable, transformations or nonparametric methods might be employed.</li>
 </ul>
-<p>For further reading, see [Chapter on Error Modeling](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;).</p>
-<hr>
 </section>
 <section id="practical-applications-r-examples" class="level1">
 <h1>Practical Applications: R Examples</h1>
@@ -406,7 +410,10 @@ window.Quarto = {
 <section id="example-random-assignment-and-anova" class="level2">
 <h2 class="anchored" data-anchor-id="example-random-assignment-and-anova">Example: Random Assignment and ANOVA</h2>
 <p>Suppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Treatments</span></span>
@@ -416,21 +423,31 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatments, <span class="at">each=</span><span class="dv">3</span>))</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>assignments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C" "A" "C" "B" "C" "A" "B"</code></pre>
+</div>
+</div>
 <p>This code generates a random permutation of A, B, and C assigned to the units.</p>
 <p>Now assume we collected data (simulated responses):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with a true difference: A &lt;-  B &lt;-  C</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>true_means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A=</span><span class="dv">10</span>, <span class="at">B=</span><span class="dv">12</span>, <span class="at">C=</span><span class="dv">15</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">9</span>, <span class="at">mean=</span><span class="fu">rep</span>(true_means, <span class="at">each=</span><span class="dv">3</span>), <span class="at">sd=</span><span class="dv">2</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">treatment =</span> assignments,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="at">response =</span> responses</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> treatment, <span class="at">data=</span>data)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with a true difference: A &lt;-  B &lt;-  C</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>true_means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A=</span><span class="dv">10</span>, <span class="at">B=</span><span class="dv">12</span>, <span class="at">C=</span><span class="dv">15</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">9</span>, <span class="at">mean=</span><span class="fu">rep</span>(true_means, <span class="at">each=</span><span class="dv">3</span>), <span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,<span class="at">treatment =</span> assignments, <span class="at">response =</span> responses)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> treatment, <span class="at">data=</span>data)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)
+treatment    2  32.01   16.00   1.287  0.343
+Residuals    6  74.61   12.44               </code></pre>
+</div>
+</div>
 <p>The ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.</p>
 <p><strong>Conclusion</strong></p>
 <p>Experimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.</p>
@@ -449,8 +466,6 @@ window.Quarto = {
 <li>Montgomery, D. C. (2019). <em>Design and Analysis of Experiments</em>. Wiley.</li>
 <li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Robert E. Krieger Publishing Company.</li>
 <li>Scheffé, H. (1959). <em>The Analysis of Variance</em>. Wiley.</li>
-<li>[Chapter on Experimental Design and Analysis](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_3_Chapter.html&gt;&gt;)</li>
-<li>[Chapter on Error Modeling](&lt;- &lt;ibooks://DF789124DAAE7BE32572580B8ED0738E/A48126_2_En_19_Chapter.html&gt;&gt;)</li>
 </ul>
 </section>
 </section>
@@ -480,7 +495,6 @@ E(MS_{\text{Treatment}}) = \sigma^2 + n \sum \alpha_i^2/(g-1),
 E(MS_{\text{Error}}) = \sigma^2.
 \]</span></p>
 <p>These derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959).</p>
-<p>##References</p>
 
 
 
