@@ -98,6 +98,146 @@
     "text": "7.2 A Derivation of Expected Mean Squares\nFor the simple one-way ANOVA model:\n\\[\nY_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij},\n\\]\nwith \\(\\sum \\alpha_i = 0\\), the expected mean squares are:\n\\[\nE(MS_{\\text{Treatment}}) = \\sigma^2 + n \\sum \\alpha_i^2/(g-1),\n\\]\n\\[\nE(MS_{\\text{Error}}) = \\sigma^2.\n\\]\nThese derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959).\n##References"
   },
   {
+    "objectID": "syllabus/schedule.html",
+    "href": "syllabus/schedule.html",
+    "title": "STAT 454/545 - Course Schedule",
+    "section": "",
+    "text": "Course Schedule, Assignment Deadlines, and Exam Dates\nThe course schedule, including assignment due dates and the midterm exam date, is subject to change based on the progress of the class, unforeseen circumstances, or instructor discretion. Students are responsible for regularly checking Canvas and announcements on the course GitHub page for the most up-to-date information regarding deadlines and schedule adjustments.\nHowever, the final exam date is not subject to change, as it is determined and scheduled by the university. Please plan accordingly based on the final exam schedule provided by UNM:\n\nFinal Exam Date: Tuesday, May 13, 2025, 10:00 a.m.–12:00 p.m.\nLocation: Classroom (as specified in the syllabus)\n\nStudents are strongly encouraged to stay proactive, monitor changes, and ensure they meet all revised deadlines and expectations as announced.\n\nTentative Course Schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopics\nReadings & Homework Assignments\n\n\n\n\n1\nJan. 21 & 23, 2025\nIntroduction to Experimental Design\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nJan. 28 & 30, 2025\nCompletely Randomized Designs (CRD)\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nFeb. 4 & 6, 2025\nBlocking & RCBD\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nFeb. 11 & 13, 2025\nMultiple Comparisons\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nFeb. 18 & 20, 2025\nChecking Model Assumptions\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFeb. 25 & 27, 2025\nTwo-Way Factorial Designs\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMar. 4 & 6, 2025\nMidterm Exam\nReview all chapters and notes.\n\n\n8\nMar. 11 & 13, 2025\nHigher-Order Factorial Designs\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nMar. 16–20, 2025\n==Spring Break==\nNo classes.\n\n\n10\nMar. 25 & 27, 2025\nAnalysis of Covariance (ANCOVA)\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nApr. 1 & 3, 2025\nComplete Block Designs\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nApr. 8 & 10, 2025\nRow–Column (Latin square) Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nApr. 15 & 17, 2025\nRandom & Mixed Models\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nApr. 22 & 24, 2025\nNested Models\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nApr. 29 & May 1, 2025\nSplit-Plot Designs\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nMay 6 & 8, 2025\nCatching Up and Review\nComprehensive review and Q&A.\n\n\n17\nMay 13\nFinal Exam\nComprehensive (Weeks 1–15)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis course introduces the principles of experimental design and analysis of variance (ANOVA), integrating these methods into a regression framework. Topics include:\n\nExperimental design principles: randomization, replication, and blocking.\n\nOne-way and factorial ANOVA models.\n\nManaging unbalanced data and covariates.\n\nAdvanced designs: split-plot, nested, and mixed-effects models.\n\nResidual diagnostics, transformations, and multiple comparisons."
+  },
+  {
+    "objectID": "index.html#textbook-and-materials",
+    "href": "index.html#textbook-and-materials",
+    "title": "",
+    "section": "Textbook and Materials",
+    "text": "Textbook and Materials\n\nRequired Text:\n\nDean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Springer.\nNote: An electronic version is available through Springer eBooks on Mathematics & Statistics.\n\nSupplemental Readings:\n\nPublic domain materials will be shared on Canvas. Some readings may not be shared due to copyright restrictions."
+  },
+  {
+    "objectID": "index.html#key-course-links",
+    "href": "index.html#key-course-links",
+    "title": "",
+    "section": "Key Course Links",
+    "text": "Key Course Links\n\nSyllabus: Full Course Syllabus\n\nLecture Notes: Available on the Course GitHub Page.\n\nImportant: Because GitHub caches pages, you may need to refresh your browser after accessing the website.\n\nSolutions for Cache Issues:\n\nPress Ctrl + Shift + R (Windows) or Cmd + Shift + R (Mac).\n\nClear your browser cache if issues persist.\n\n\n\nAssignments: Posted and submitted through Canvas Assignments.\nSoftware Tools:\n\nR Project Download\n\nRStudio IDE\n\nVS Code"
+  },
+  {
+    "objectID": "index.html#grading-and-assessments",
+    "href": "index.html#grading-and-assessments",
+    "title": "",
+    "section": "Grading and Assessments",
+    "text": "Grading and Assessments\n\n\n\nComponent\nWeight\n\n\n\n\nHomework Assignments\n50%\n\n\nMidterm Exam\n20%\n\n\nFinal Exam\n30%\n\n\nExtra Credit\nUp to 4%"
+  },
+  {
+    "objectID": "index.html#exams-and-policies",
+    "href": "index.html#exams-and-policies",
+    "title": "",
+    "section": "Exams and Policies",
+    "text": "Exams and Policies\n\nMidterm Exam: Thursday, March 6, 2025 (Weeks 1–7 topics).\n\nFinal Exam: Tuesday, May 13, 2025, 10:00 AM – 12:00 PM (Comprehensive).\n\nImportant Policies:\n- No make-up exams unless in the case of proven emergencies as outlined in the syllabus.\n- If you foresee a conflict, notify the instructor before the exam date.\n- Exams are closed book, but students are allowed up to three double-sided cheat sheets (US Letter size) and a calculator."
+  },
+  {
+    "objectID": "index.html#communication",
+    "href": "index.html#communication",
+    "title": "",
+    "section": "Communication",
+    "text": "Communication\n\nAnnouncements: All course announcements will be posted on Canvas. It is your responsibility to check Canvas regularly for updates.\n\nPersonal Questions: Use Canvas email to contact the instructor or TA. Direct emails will not be responded to."
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "",
+    "section": "Contact",
+    "text": "Contact\nFor personal matters, email me through Canvas Email.\n© 2025 Davood Tofighi | Course Developed by Dr. Davood Tofighi\nUNM Canvas | Course GitHub Page | Privacy Policy | Accessibility"
+  },
+  {
+    "objectID": "contents.html",
+    "href": "contents.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "contents.html#course-syllabus",
+    "href": "contents.html#course-syllabus",
+    "title": "",
+    "section": "Course Syllabus",
+    "text": "Course Syllabus\nThe course syllabus contains all essential details about the course structure, policies, assignments, and exam dates.\n\n📄 Download Full Course Syllabus (PDF)\n\nImportant: You must read the syllabus carefully, as it contains critical information not available elsewhere."
+  },
+  {
+    "objectID": "contents.html#course-schedule",
+    "href": "contents.html#course-schedule",
+    "title": "",
+    "section": "Course Schedule",
+    "text": "Course Schedule\nThe course schedule provides a week-by-week breakdown of topics, reading assignments, and due dates.\n\n📅 View Course Schedule"
+  },
+  {
+    "objectID": "contents.html#lecture-notes",
+    "href": "contents.html#lecture-notes",
+    "title": "",
+    "section": "Lecture Notes",
+    "text": "Lecture Notes\nLecture notes and slides will be posted on the Course GitHub Page in HTML format.\n\n📚 Access Lecture Notes\n\nNote: GitHub Pages may cache content. Refresh your browser if the notes appear outdated.\n\nTo refresh, use:\n\nCtrl + Shift + R (Windows/Linux)\n\nCmd + Shift + R (Mac)\n\n\n\n\n\nWeek-by-Week Lecture Notes\n\n\n\nWeek\nTopic\nLecture Notes Link\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes\n\n\n3\nBlocking and RCBD\nWeek 3 Notes\n\n\n4\nMultiple Comparisons & Contrasts\nWeek 4 Notes\n\n\n…\nContinue for all weeks\nLinks to be added incrementally"
+  },
+  {
+    "objectID": "contents.html#assignments",
+    "href": "contents.html#assignments",
+    "title": "",
+    "section": "Assignments",
+    "text": "Assignments\nAssignments will be posted on Canvas and must be submitted via Canvas. All assignments require the use of the Quarto template provided.\n\n🔗 Quarto Template"
+  },
+  {
+    "objectID": "contents.html#supplemental-readings",
+    "href": "contents.html#supplemental-readings",
+    "title": "",
+    "section": "Supplemental Readings",
+    "text": "Supplemental Readings\nSupplemental readings will be provided as needed. Public domain readings will be posted on Canvas.\n\n🔗 Access Supplemental Readings on Canvas\n\nNote: Some readings may not be shared due to copyright restrictions."
+  },
+  {
+    "objectID": "contents.html#software-tools-and-resources",
+    "href": "contents.html#software-tools-and-resources",
+    "title": "",
+    "section": "Software Tools and Resources",
+    "text": "Software Tools and Resources\nTo complete assignments and analyses, you will need access to R and related tools.\n\nR Installation: Download R\n\nRStudio IDE: Download RStudio\n\nVS Code IDE: Download VS Code\n\n\nAdditional Resources:\n\nQuarto Documentation: Learn Quarto\n\nR Tutorials: R Basics for Beginners"
+  },
+  {
+    "objectID": "contents.html#exams-and-policies",
+    "href": "contents.html#exams-and-policies",
+    "title": "",
+    "section": "Exams and Policies",
+    "text": "Exams and Policies\n\nMidterm Exam\n\n📅 Date: Thursday, March 6, 2025\n\nCoverage: Topics from Weeks 1–7\n\n\n\nFinal Exam\n\n📅 Date: Tuesday, May 13, 2025 (10:00 AM – 12:00 PM)\n\nLocation: Classroom\n\nPolicies:\n- Exams are closed book.\n- You are allowed up to three double-sided cheat sheets (US Letter size) and a calculator.\n- No make-up exams will be offered except for proven emergencies as per department and UNM policies."
+  },
+  {
+    "objectID": "contents.html#communication-and-announcements",
+    "href": "contents.html#communication-and-announcements",
+    "title": "",
+    "section": "Communication and Announcements",
+    "text": "Communication and Announcements\n\nAll announcements will be posted on Canvas. It is your responsibility to check Canvas regularly.\n\nFor questions of a personal nature, email the instructor through Canvas Email only.\n\nCourse-related discussions should be posted in the Canvas Discussion Board."
+  },
+  {
+    "objectID": "contents.html#extra-credit-opportunities",
+    "href": "contents.html#extra-credit-opportunities",
+    "title": "",
+    "section": "Extra Credit Opportunities",
+    "text": "Extra Credit Opportunities\n\n📊 Course Evaluation: Up to 3% extra credit for completing the end-of-semester evaluation and submitting the receipt on the Canvas discussion board.\n\n📝 Syllabus Quiz: 1% extra credit for completing the “Background and Syllabus” quiz during Week 1."
+  },
+  {
+    "objectID": "contents.html#contact-information",
+    "href": "contents.html#contact-information",
+    "title": "",
+    "section": "Contact Information",
+    "text": "Contact Information\n\nInstructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment (schedule via Canvas Email).\n\nCourse Website: Course GitHub Page\n\nCanvas Link: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | STAT 454/545 | University of New Mexico"
+  },
+  {
     "objectID": "syllabus/syllabus-final.html",
     "href": "syllabus/syllabus-final.html",
     "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
@@ -201,62 +341,6 @@
     "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
     "section": "Course Schedule, Assignment Deadlines, and Exam Dates",
     "text": "Course Schedule, Assignment Deadlines, and Exam Dates\nThe course schedule, including assignment due dates and the midterm exam date, is subject to change based on the progress of the class, unforeseen circumstances, or instructor discretion. Students are responsible for regularly checking Canvas and announcements on the course GitHub page for the most up-to-date information regarding deadlines and schedule adjustments.\nHowever, the final exam date is not subject to change, as it is determined and scheduled by the university. Please plan accordingly based on the final exam schedule provided by UNM:\n\nFinal Exam Date: Tuesday, May 13, 2025, 10:00 a.m.–12:00 p.m.\nLocation: Classroom (as specified in the syllabus)\n\nStudents are strongly encouraged to stay proactive, monitor changes, and ensure they meet all revised deadlines and expectations as announced.\n\nTentative Course Schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopics\nReadings & Homework Assignments\n\n\n\n\n1\nJan. 21 & 23, 2025\nIntroduction to Experimental Design\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nJan. 28 & 30, 2025\nCompletely Randomized Designs (CRD)\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nFeb. 4 & 6, 2025\nBlocking & RCBD\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nFeb. 11 & 13, 2025\nMultiple Comparisons\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nFeb. 18 & 20, 2025\nChecking Model Assumptions\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFeb. 25 & 27, 2025\nTwo-Way Factorial Designs\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMar. 4 & 6, 2025\nMidterm Exam\nReview all chapters and notes.\n\n\n8\nMar. 11 & 13, 2025\nHigher-Order Factorial Designs\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nMar. 16–20, 2025\n==Spring Break==\nNo classes.\n\n\n10\nMar. 25 & 27, 2025\nAnalysis of Covariance (ANCOVA)\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nApr. 1 & 3, 2025\nComplete Block Designs\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nApr. 8 & 10, 2025\nRow–Column (Latin square) Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nApr. 15 & 17, 2025\nRandom & Mixed Models\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nApr. 22 & 24, 2025\nNested Models\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nApr. 29 & May 1, 2025\nSplit-Plot Designs\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nMay 6 & 8, 2025\nCatching Up and Review\nComprehensive review and Q&A.\n\n\n17\nMay 13\nFinal Exam\nComprehensive (Weeks 1–15)."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "",
-    "section": "",
-    "text": "Code"
-  },
-  {
-    "objectID": "index.html#course-overview",
-    "href": "index.html#course-overview",
-    "title": "",
-    "section": "Course Overview",
-    "text": "Course Overview\nThis course introduces the principles of experimental design and analysis of variance (ANOVA), integrating these methods into a regression framework. Topics include:\n\nExperimental design principles: randomization, replication, and blocking.\n\nOne-way and factorial ANOVA models.\n\nManaging unbalanced data and covariates.\n\nAdvanced designs: split-plot, nested, and mixed-effects models.\n\nResidual diagnostics, transformations, and multiple comparisons."
-  },
-  {
-    "objectID": "index.html#textbook-and-materials",
-    "href": "index.html#textbook-and-materials",
-    "title": "",
-    "section": "Textbook and Materials",
-    "text": "Textbook and Materials\n\nRequired Text:\n\nDean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Springer.\nNote: An electronic version is available through Springer eBooks on Mathematics & Statistics.\n\nSupplemental Readings:\n\nPublic domain materials will be shared on Canvas. Some readings may not be shared due to copyright restrictions."
-  },
-  {
-    "objectID": "index.html#key-course-links",
-    "href": "index.html#key-course-links",
-    "title": "",
-    "section": "Key Course Links",
-    "text": "Key Course Links\n\nSyllabus: Full Course Syllabus\n\nLecture Notes: Available on the Course GitHub Page.\n\nImportant: Because GitHub caches pages, you may need to refresh your browser after accessing the website.\n\nSolutions for Cache Issues:\n\nPress Ctrl + Shift + R (Windows) or Cmd + Shift + R (Mac).\n\nClear your browser cache if issues persist.\n\n\n\nAssignments: Posted and submitted through Canvas Assignments.\nSoftware Tools:\n\nR Project Download\n\nRStudio IDE\n\nVS Code"
-  },
-  {
-    "objectID": "index.html#grading-and-assessments",
-    "href": "index.html#grading-and-assessments",
-    "title": "",
-    "section": "Grading and Assessments",
-    "text": "Grading and Assessments\n\n\n\nComponent\nWeight\n\n\n\n\nHomework Assignments\n50%\n\n\nMidterm Exam\n20%\n\n\nFinal Exam\n30%\n\n\nExtra Credit\nUp to 4%"
-  },
-  {
-    "objectID": "index.html#exams-and-policies",
-    "href": "index.html#exams-and-policies",
-    "title": "",
-    "section": "Exams and Policies",
-    "text": "Exams and Policies\n\nMidterm Exam: Thursday, March 6, 2025 (Weeks 1–7 topics).\n\nFinal Exam: Tuesday, May 13, 2025, 10:00 AM – 12:00 PM (Comprehensive).\n\nImportant Policies:\n- No make-up exams unless in the case of proven emergencies as outlined in the syllabus.\n- If you foresee a conflict, notify the instructor before the exam date.\n- Exams are closed book, but students are allowed up to three double-sided cheat sheets (US Letter size) and a calculator."
-  },
-  {
-    "objectID": "index.html#communication",
-    "href": "index.html#communication",
-    "title": "",
-    "section": "Communication",
-    "text": "Communication\n\nAnnouncements: All course announcements will be posted on Canvas. It is your responsibility to check Canvas regularly for updates.\n\nPersonal Questions: Use Canvas email to contact the instructor or TA. Direct emails will not be responded to."
-  },
-  {
-    "objectID": "index.html#contact",
-    "href": "index.html#contact",
-    "title": "",
-    "section": "Contact",
-    "text": "Contact\nFor personal matters, email me through Canvas Email.\n© 2025 Davood Tofighi | Course Developed by Dr. Davood Tofighi\nUNM Canvas | Course GitHub Page | Privacy Policy | Accessibility"
   },
   {
     "objectID": "about.html",
