@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lecture Notes - STAT 454/545 – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>week-12_mixed-models – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0852ff3597291122f7ac2063d05b99e8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8b6335de900061f91a8df9c48d28ea53.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0852ff3597291122f7ac2063d05b99e8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8b6335de900061f91a8df9c48d28ea53.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,16 +67,13 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="Lecture Notes - STAT 454/545">
-<meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://quantpsych.github.io/doe/assets/images/home.png">
+<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://quantpsych.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image:height" content="300">
-<meta property="og:image:width" content="1200">
 </head><body class="nav-fixed"><img src="assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 
 
-<link rel="stylesheet" href="assets/styles/css/home.css">
+<link rel="stylesheet" href="../assets/styles/css/home.css">
 
 
 
@@ -86,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">STAT 454/545 - Analysis of Variance and Experimental Design</span>
     </a>
   </div>
@@ -97,23 +94,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./home_lectures.html" aria-current="page"> 
+    <a class="nav-link" href="../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -124,218 +121,43 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page">
+      
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">18-Dec-2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
-<section id="lecture-notes---stat-454545" class="level1">
-<h1>Lecture Notes - STAT 454/545</h1>
-<p>Welcome to the <strong>Lecture Notes</strong> page for <strong>STAT 454/545: Analysis of Variance and Experimental Design</strong>. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.</p>
-<section id="important-notes" class="level2">
-<h2 class="anchored" data-anchor-id="important-notes"><strong>Important Notes</strong></h2>
-<ul>
-<li>Lecture notes are available in <strong>HTML format</strong> for easy access and navigation.<br>
-</li>
-<li>Visit the <strong>GitHub Pages link</strong> to access the latest versions. If content appears outdated, refresh your browser:
-<ul>
-<li><strong>Windows/Linux:</strong> Press <strong>Ctrl + Shift + R</strong><br>
-</li>
-<li><strong>Mac:</strong> Press <strong>Cmd + Shift + R</strong><br>
-</li>
-</ul></li>
-<li>For persistent issues, clear your browser cache using the following guides:
-<ul>
-<li><a href="https://support.google.com/accounts/answer/32050">Chrome Cache Clearing</a><br>
-</li>
-<li><a href="https://support.mozilla.org/en-US/kb/how-clear-firefox-cache">Firefox Cache Clearing</a></li>
-</ul></li>
-</ul>
-<!-- 
-
-| File Name                            | Description                                                   |
-| ------------------------------------ | ------------------------------------------------------------- |
-| `week-01_intro-design.html`          | Week 1: Introduction to Experimental Design (Quarto format).  |
-| `week-02_crd-overview.html`          | Week 2: Completely Randomized Design (Overview).              |
-| `week-03_rcbd-blocking.html`         | Week 3: Randomized Complete Block Design (Blocking Concepts). |
-| `week-04_comparisons-contrasts.html` | Week 4: Multiple Comparisons and Contrasts.                   |
-| `week-05_model-diagnostics.html`     | Week 5: Checking Model Assumptions.                           |
-| `week-06_factorial-anova.html`       | Week 6: Two-Factor ANOVA.                                     |
-| `week-07_midterm-review.html`        | Week 7: Midterm Review.                                       |
-| `week-08_higher-order.html`          | Week 8: Higher-Order Factorial Designs.                       |
-| `week-09_ancova.html`                | Week 9: Analysis of Covariance.                               |
-| `week-10_complete-blocks.html`       | Week 10: Complete Block Designs.                              |
-| `week-11_row-column.html`            | Week 11: Row–Column Designs.                                  |
-| `week-12_mixed-models.html`          | Week 12: Random and Mixed-Effects Models.                     |
-| `week-13_nested-models.html`         | Week 13: Nested Models.                                       |
-| `week-14_split-plot.html`            | Week 14: Split-Plot Designs.                                  |
-| `week-15_final-review.html`          | Week 15: Final Exam Review.                                   | -->
-</section>
-<section id="weekly-lecture-notes" class="level2">
-<h2 class="anchored" data-anchor-id="weekly-lecture-notes"><strong>Weekly Lecture Notes</strong></h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-<th>Lecture Notes Link</th>
-<th>Supplemental Resources</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Introduction to Experimental Design</td>
-<td><a href="lectures/week-01_intro-design.html">Week 1 Notes</a></td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Completely Randomized Designs (CRD)</td>
-<td><a href="lectures/week-02_crd-overview.html">Week 2 Notes</a></td>
-<td>Chapter 3 Examples</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Blocking and RCBD</td>
-<td><a href="lectures/week-03_rcbd-blocking.html">Week 3 Notes</a></td>
-<td>Blocking Efficiency Examples</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Multiple Comparisons and Contrasts</td>
-<td><a href="lectures/week-04_comparisons-contrasts.html">Week 4 Notes</a></td>
-<td>Tukey, Bonferroni Methods</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Checking Model Assumptions</td>
-<td><a href="lectures/week-05_model-diagnostics.html">Week 5 Notes</a></td>
-<td>Residual Analysis Resources</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Factorial Designs</td>
-<td><a href="lectures/week-06_factorial-anova.html">Week 6 Notes</a></td>
-<td>Two-Way ANOVA Examples</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Midterm Review &amp; Exam</td>
-<td><a href="lectures/week-07_midterm-review.html">Week 7 Notes</a></td>
-<td>Review Notes &amp; Practice Exams</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>Higher-Order Factorial Designs</td>
-<td><a href="lectures/week-08_higher-order.html">Week 8 Notes</a></td>
-<td>Interaction Plots</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Spring Break</td>
-<td><em>No Class This Week</em></td>
-<td><em>Relax &amp; Review</em></td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Analysis of Covariance (ANCOVA)</td>
-<td><a href="lectures/week-10_complete-blocks.html">Week 10 Notes</a></td>
-<td>ANCOVA Step-by-Step Example</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>Complete Block Designs</td>
-<td><a href="lectures/week-11_row-column.html">Week 11 Notes</a></td>
-<td>Factorial Treatments in Blocks</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>Row–Column Designs</td>
-<td><a href="lectures/week-12_mixed-models.html">Week 12 Notes</a></td>
-<td>Latin Square Designs</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>Random and Mixed Effects</td>
-<td><a href="lectures/week-13_nested-models.html">Week 13 Notes</a></td>
-<td>Variance Component Analysis</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>Nested Models</td>
-<td><a href="lectures/week-14_split-plot.html">Week 14 Notes</a></td>
-<td>Nested Designs Case Study</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>Split-Plot Designs</td>
-<td><a href="lectures/week-15_final-review.html">Week 15 Notes</a></td>
-<td>Split-Split-Plot Extensions</td>
-</tr>
-<tr class="even">
-<td>16</td>
-<td>Catch-Up Week</td>
-<td><a href="lectures/">Week 16 Notes</a></td>
-<td>Extra Practice Problems</td>
-</tr>
-<tr class="odd">
-<td>17</td>
-<td>Final Review and Exam</td>
-<td><a href="">Final Review Notes</a></td>
-<td>Final Exam Practice Set</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="supplemental-resources" class="level2">
-<h2 class="anchored" data-anchor-id="supplemental-resources"><strong>Supplemental Resources</strong></h2>
-<p>In addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.</p>
-<ul>
-<li>📁 <strong>GitHub Repository:</strong> <a href="https://github.com/course-page-url">Course Repository</a><br>
-</li>
-<li>🔗 <strong>Supplemental Readings:</strong> Available on Canvas or shared links.</li>
-</ul>
-</section>
-<section id="how-to-use-lecture-notes" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use-lecture-notes"><strong>How to Use Lecture Notes</strong></h2>
-<ol type="1">
-<li><strong>Pre-Class Preparation</strong>: Read the lecture notes and supplemental readings <strong>before each class</strong> to familiarize yourself with the topics.<br>
-</li>
-<li><strong>During Class</strong>: Focus on key points highlighted in the notes. Participate in group activities and discussions.<br>
-</li>
-<li><strong>Post-Class Review</strong>: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.</li>
-</ol>
-</section>
-<section id="troubleshooting-github-pages" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting-github-pages"><strong>Troubleshooting GitHub Pages</strong></h2>
-<p>If you experience issues accessing the lecture notes:<br>
-1. Refresh your browser as noted earlier.<br>
-2. Try accessing the page in <strong>incognito mode</strong>.<br>
-3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).</p>
-<p>If problems persist, contact the instructor via <strong>Canvas Email</strong> for further assistance.</p>
-</section>
-<section id="contact-information" class="level2">
-<h2 class="anchored" data-anchor-id="contact-information"><strong>Contact Information</strong></h2>
-<ul>
-<li><strong>Instructor:</strong> Dr.&nbsp;Davood Tofighi<br>
-</li>
-<li><strong>Office Hours:</strong> By appointment<br>
-</li>
-<li><strong>Course GitHub Page:</strong> <a href="https://github.com/course-page-url">Access Here</a><br>
-</li>
-<li><strong>Canvas Course Page:</strong> <a href="https://canvasinfo.unm.edu/">UNM Canvas</a></li>
-</ul>
-<p>© 2025 Dr.&nbsp;Davood Tofighi | University of New Mexico</p>
 
 
-</section>
-</section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -760,5 +582,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

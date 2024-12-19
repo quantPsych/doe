@@ -74,9 +74,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-8b6335de900061f91a8df9c48d28ea53.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,15 +102,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <meta property="og:title" content="Planning Experiments – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://quantpsych.github.io/doe/lectures/week-02_crd-overview_files/figure-html/unnamed-chunk-3-1.png">
+<meta property="og:image" content="https://quantpsych.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head><body class="nav-fixed"><img src="assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -214,7 +206,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">17-Dec-2024</p>
+        <p class="date">18-Dec-2024</p>
       </div>
     </div>
     
@@ -230,106 +222,48 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#planning-experiments" id="toc-planning-experiments" class="nav-link active" data-scroll-target="#planning-experiments">Planning Experiments</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#identifying-experiment-objectives-and-variation-sources" id="toc-identifying-experiment-objectives-and-variation-sources" class="nav-link" data-scroll-target="#identifying-experiment-objectives-and-variation-sources">Identifying Experiment Objectives and Variation Sources</a>
-  <ul class="collapse">
-  <li><a href="#setting-objectives" id="toc-setting-objectives" class="nav-link" data-scroll-target="#setting-objectives">Setting Objectives</a></li>
-  <li><a href="#variation-sources" id="toc-variation-sources" class="nav-link" data-scroll-target="#variation-sources">Variation Sources</a>
-  <ul class="collapse">
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#activity-think-pair-share" id="toc-activity-think-pair-share" class="nav-link" data-scroll-target="#activity-think-pair-share">Activity: Think-Pair-Share</a></li>
-  <li><a href="#challenges-and-common-mistakes" id="toc-challenges-and-common-mistakes" class="nav-link" data-scroll-target="#challenges-and-common-mistakes">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#treatment-factors-and-levels" id="toc-treatment-factors-and-levels" class="nav-link" data-scroll-target="#treatment-factors-and-levels">Treatment Factors and Levels</a>
+  <li><a href="#experimental-designs-and-the-completely-randomized-design" id="toc-experimental-designs-and-the-completely-randomized-design" class="nav-link" data-scroll-target="#experimental-designs-and-the-completely-randomized-design">Experimental Designs and the Completely Randomized Design</a>
   <ul class="collapse">
-  <li><a href="#defining-treatment-factors" id="toc-defining-treatment-factors" class="nav-link" data-scroll-target="#defining-treatment-factors">Defining Treatment Factors</a></li>
-  <li><a href="#factor-levels" id="toc-factor-levels" class="nav-link" data-scroll-target="#factor-levels">Factor Levels</a>
+  <li><a href="#defining-experimental-design" id="toc-defining-experimental-design" class="nav-link" data-scroll-target="#defining-experimental-design">Defining Experimental Design</a></li>
+  <li><a href="#randomization-procedure" id="toc-randomization-procedure" class="nav-link" data-scroll-target="#randomization-procedure">Randomization Procedure</a></li>
+  </ul></li>
+  <li><a href="#the-one-way-anova-model" id="toc-the-one-way-anova-model" class="nav-link" data-scroll-target="#the-one-way-anova-model">The One-Way ANOVA Model</a>
   <ul class="collapse">
-  <li><a href="#activity-design-your-own-factorial" id="toc-activity-design-your-own-factorial" class="nav-link" data-scroll-target="#activity-design-your-own-factorial">Activity: Design Your Own Factorial</a></li>
-  <li><a href="#challenges-and-common-mistakes-1" id="toc-challenges-and-common-mistakes-1" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-1">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
+  <li><a href="#model-formulation" id="toc-model-formulation" class="nav-link" data-scroll-target="#model-formulation">Model Formulation</a></li>
+  <li><a href="#estimability-and-least-squares-estimation" id="toc-estimability-and-least-squares-estimation" class="nav-link" data-scroll-target="#estimability-and-least-squares-estimation">Estimability and Least Squares Estimation</a></li>
+  <li><a href="#distribution-of-estimators" id="toc-distribution-of-estimators" class="nav-link" data-scroll-target="#distribution-of-estimators">Distribution of Estimators</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#experimental-units-blocking-and-nuisance-factors" id="toc-experimental-units-blocking-and-nuisance-factors" class="nav-link" data-scroll-target="#experimental-units-blocking-and-nuisance-factors">Experimental Units, Blocking, and Nuisance Factors</a>
+  <li><a href="#hypothesis-testing-and-anova" id="toc-hypothesis-testing-and-anova" class="nav-link" data-scroll-target="#hypothesis-testing-and-anova">Hypothesis Testing and ANOVA</a>
   <ul class="collapse">
-  <li><a href="#experimental-units" id="toc-experimental-units" class="nav-link" data-scroll-target="#experimental-units">Experimental Units</a></li>
-  <li><a href="#blocking-factors" id="toc-blocking-factors" class="nav-link" data-scroll-target="#blocking-factors">Blocking Factors</a></li>
-  <li><a href="#noise-factors-and-covariates" id="toc-noise-factors-and-covariates" class="nav-link" data-scroll-target="#noise-factors-and-covariates">Noise Factors and Covariates</a>
+  <li><a href="#the-anova-f-test" id="toc-the-anova-f-test" class="nav-link" data-scroll-target="#the-anova-f-test">The ANOVA F-Test</a></li>
+  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a></li>
+  </ul></li>
+  <li><a href="#sample-size-power-and-confidence-limits" id="toc-sample-size-power-and-confidence-limits" class="nav-link" data-scroll-target="#sample-size-power-and-confidence-limits">Sample Size, Power, and Confidence Limits</a>
   <ul class="collapse">
-  <li><a href="#visual-aid-factor-classification-flowchart" id="toc-visual-aid-factor-classification-flowchart" class="nav-link" data-scroll-target="#visual-aid-factor-classification-flowchart">Visual Aid: Factor Classification Flowchart</a></li>
-  <li><a href="#activity-blocking-brainstorm" id="toc-activity-blocking-brainstorm" class="nav-link" data-scroll-target="#activity-blocking-brainstorm">Activity: Blocking Brainstorm</a></li>
-  <li><a href="#challenges-and-common-mistakes-2" id="toc-challenges-and-common-mistakes-2" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-2">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">Exercises</a></li>
+  <li><a href="#determining-sample-size-and-power" id="toc-determining-sample-size-and-power" class="nav-link" data-scroll-target="#determining-sample-size-and-power">Determining Sample Size and Power</a></li>
+  <li><a href="#confidence-limits-for-variance" id="toc-confidence-limits-for-variance" class="nav-link" data-scroll-target="#confidence-limits-for-variance">Confidence Limits for Variance</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#principles-of-randomization" id="toc-principles-of-randomization" class="nav-link" data-scroll-target="#principles-of-randomization">Principles of Randomization</a>
+  <li><a href="#practical-r-examples" id="toc-practical-r-examples" class="nav-link" data-scroll-target="#practical-r-examples">Practical R Examples</a>
   <ul class="collapse">
-  <li><a href="#randomization-concept" id="toc-randomization-concept" class="nav-link" data-scroll-target="#randomization-concept">Randomization Concept</a>
+  <li><a href="#randomization-in-r" id="toc-randomization-in-r" class="nav-link" data-scroll-target="#randomization-in-r">Randomization in R</a>
   <ul class="collapse">
-  <li><a href="#r-example-simple-random-assignment" id="toc-r-example-simple-random-assignment" class="nav-link" data-scroll-target="#r-example-simple-random-assignment">R Example: Simple Random Assignment</a></li>
-  <li><a href="#activity-randomization-drill" id="toc-activity-randomization-drill" class="nav-link" data-scroll-target="#activity-randomization-drill">Activity: Randomization Drill</a></li>
-  <li><a href="#challenges-and-common-mistakes-3" id="toc-challenges-and-common-mistakes-3" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-3">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3">Exercises</a></li>
+  <li><a href="#explanation-of-the-key-functions-in-r" id="toc-explanation-of-the-key-functions-in-r" class="nav-link" data-scroll-target="#explanation-of-the-key-functions-in-r">Explanation of the Key Functions in R</a></li>
   </ul></li>
+  <li><a href="#fitting-a-one-way-anova-model" id="toc-fitting-a-one-way-anova-model" class="nav-link" data-scroll-target="#fitting-a-one-way-anova-model">Fitting a One-Way ANOVA Model</a></li>
+  <li><a href="#estimating-means-and-contrasts" id="toc-estimating-means-and-contrasts" class="nav-link" data-scroll-target="#estimating-means-and-contrasts">Estimating Means and Contrasts</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
-  <li><a href="#standard-experimental-designs" id="toc-standard-experimental-designs" class="nav-link" data-scroll-target="#standard-experimental-designs">Standard Experimental Designs</a>
+  <li><a href="#appendix-advanced-mathematical-details" id="toc-appendix-advanced-mathematical-details" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-details">Appendix: Advanced Mathematical Details</a>
   <ul class="collapse">
-  <li><a href="#completely-randomized-design-crd" id="toc-completely-randomized-design-crd" class="nav-link" data-scroll-target="#completely-randomized-design-crd">Completely Randomized Design (CRD)</a></li>
-  <li><a href="#randomized-block-design-rbd" id="toc-randomized-block-design-rbd" class="nav-link" data-scroll-target="#randomized-block-design-rbd">Randomized Block Design (RBD)</a></li>
-  <li><a href="#row-column-and-latin-squares" id="toc-row-column-and-latin-squares" class="nav-link" data-scroll-target="#row-column-and-latin-squares">Row-Column and Latin Squares</a></li>
-  <li><a href="#factorial-designs" id="toc-factorial-designs" class="nav-link" data-scroll-target="#factorial-designs">Factorial Designs</a></li>
-  <li><a href="#split-plot-designs" id="toc-split-plot-designs" class="nav-link" data-scroll-target="#split-plot-designs">Split-Plot Designs</a>
-  <ul class="collapse">
-  <li><a href="#visual-aid-factorial-design-example-in-r" id="toc-visual-aid-factorial-design-example-in-r" class="nav-link" data-scroll-target="#visual-aid-factorial-design-example-in-r">Visual Aid: Factorial Design Example in R</a></li>
-  <li><a href="#activity-design-match-up" id="toc-activity-design-match-up" class="nav-link" data-scroll-target="#activity-design-match-up">Activity: Design Match-Up</a></li>
-  <li><a href="#challenges-and-common-mistakes-4" id="toc-challenges-and-common-mistakes-4" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-4">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-4" id="toc-exercises-4" class="nav-link" data-scroll-target="#exercises-4">Exercises</a></li>
+  <li><a href="#a.1-normal-equations-and-estimability" id="toc-a.1-normal-equations-and-estimability" class="nav-link" data-scroll-target="#a.1-normal-equations-and-estimability">A.1 Normal Equations and Estimability</a></li>
+  <li><a href="#a.2-distribution-of-the-f-statistic" id="toc-a.2-distribution-of-the-f-statistic" class="nav-link" data-scroll-target="#a.2-distribution-of-the-f-statistic">A.2 Distribution of the F-Statistic</a></li>
+  <li><a href="#a.3-power-calculations" id="toc-a.3-power-calculations" class="nav-link" data-scroll-target="#a.3-power-calculations">A.3 Power Calculations</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#model-specification-and-effect-types" id="toc-model-specification-and-effect-types" class="nav-link" data-scroll-target="#model-specification-and-effect-types">Model Specification and Effect Types</a>
-  <ul class="collapse">
-  <li><a href="#linear-models-and-anova" id="toc-linear-models-and-anova" class="nav-link" data-scroll-target="#linear-models-and-anova">Linear Models and ANOVA</a></li>
-  <li><a href="#fixed-vs.-random-effects" id="toc-fixed-vs.-random-effects" class="nav-link" data-scroll-target="#fixed-vs.-random-effects">Fixed vs.&nbsp;Random Effects</a>
-  <ul class="collapse">
-  <li><a href="#activity-fixed-or-random" id="toc-activity-fixed-or-random" class="nav-link" data-scroll-target="#activity-fixed-or-random">Activity: Fixed or Random?</a></li>
-  <li><a href="#challenges-and-common-mistakes-5" id="toc-challenges-and-common-mistakes-5" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-5">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-5" id="toc-exercises-5" class="nav-link" data-scroll-target="#exercises-5">Exercises</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#planning-data-collection-and-pilot-experiments" id="toc-planning-data-collection-and-pilot-experiments" class="nav-link" data-scroll-target="#planning-data-collection-and-pilot-experiments">Planning Data Collection and Pilot Experiments</a>
-  <ul class="collapse">
-  <li><a href="#measurement-and-procedure" id="toc-measurement-and-procedure" class="nav-link" data-scroll-target="#measurement-and-procedure">Measurement and Procedure</a></li>
-  <li><a href="#pilot-experiments" id="toc-pilot-experiments" class="nav-link" data-scroll-target="#pilot-experiments">Pilot Experiments</a>
-  <ul class="collapse">
-  <li><a href="#activity-pilot-study-discussion" id="toc-activity-pilot-study-discussion" class="nav-link" data-scroll-target="#activity-pilot-study-discussion">Activity: Pilot Study Discussion</a></li>
-  <li><a href="#challenges-and-common-mistakes-6" id="toc-challenges-and-common-mistakes-6" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-6">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-6" id="toc-exercises-6" class="nav-link" data-scroll-target="#exercises-6">Exercises</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#determining-the-number-of-observations" id="toc-determining-the-number-of-observations" class="nav-link" data-scroll-target="#determining-the-number-of-observations">Determining the Number of Observations</a>
-  <ul class="collapse">
-  <li><a href="#sample-size-and-power" id="toc-sample-size-and-power" class="nav-link" data-scroll-target="#sample-size-and-power">Sample Size and Power</a>
-  <ul class="collapse">
-  <li><a href="#activity-sample-size-calculation" id="toc-activity-sample-size-calculation" class="nav-link" data-scroll-target="#activity-sample-size-calculation">Activity: Sample Size Calculation</a></li>
-  <li><a href="#challenges-and-common-mistakes-7" id="toc-challenges-and-common-mistakes-7" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-7">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-7" id="toc-exercises-7" class="nav-link" data-scroll-target="#exercises-7">Exercises</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#practical-example-in-r" id="toc-practical-example-in-r" class="nav-link" data-scroll-target="#practical-example-in-r">Practical Example in R</a>
-  <ul class="collapse">
-  <li><a href="#example-a-simple-crd" id="toc-example-a-simple-crd" class="nav-link" data-scroll-target="#example-a-simple-crd">Example: A Simple CRD</a>
-  <ul class="collapse">
-  <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code">R Code</a></li>
-  <li><a href="#activity-interpret-r-output" id="toc-activity-interpret-r-output" class="nav-link" data-scroll-target="#activity-interpret-r-output">Activity: Interpret R Output</a></li>
-  <li><a href="#challenges-and-common-mistakes-8" id="toc-challenges-and-common-mistakes-8" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-8">Challenges and Common Mistakes</a></li>
-  <li><a href="#exercises-8" id="toc-exercises-8" class="nav-link" data-scroll-target="#exercises-8">Exercises</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#summary-of-key-takeaways" id="toc-summary-of-key-takeaways" class="nav-link" data-scroll-target="#summary-of-key-takeaways">Summary of Key Takeaways</a></li>
-  <li><a href="#definitions-of-key-terms" id="toc-definitions-of-key-terms" class="nav-link" data-scroll-target="#definitions-of-key-terms">Definitions of Key Terms</a></li>
   </ul>
 </nav>
     </div>
@@ -340,549 +274,393 @@ window.Quarto = {
 
 
 
-<section id="planning-experiments" class="level1">
-<h1>Planning Experiments</h1>
-<p>Experimental design forms the foundation of scientific inquiry whenever the goal is to understand how certain controllable inputs (factors) influence outcomes (responses). By carefully planning how to collect data and assigning treatments to experimental units, we can draw valid causal inferences about these relationships. Unlike observational studies, experiments involve actively manipulating factors to reveal their effects while controlling for unwanted variability.</p>
-<p>This set of lecture notes provides a comprehensive overview of experimental design concepts and applications. We will address how to define clear objectives, classify sources of variation, choose appropriate experimental designs, apply randomization, incorporate blocking, specify statistical models, and determine appropriate sample sizes. Real-world examples and R code snippets will illustrate key ideas. Additionally, we will integrate exercises, class activities, summaries, challenges, and visual aids to reinforce understanding.</p>
-</section>
-<section id="objectives" class="level1">
-<h1>Objectives</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In mathematical statistics, well-structured experimental designs and robust analytical methods are essential for drawing valid conclusions about treatment effects. One of the simplest yet fundamental designs is the <strong>completely randomized design (CRD)</strong>. Under a CRD, each experimental unit is randomly assigned to one of several treatment conditions without any blocking factors. This approach ensures that all treatments have an equal chance of being applied to each unit, thereby mitigating systematic biases and facilitating straightforward inference.</p>
+<p>A key tool for analyzing CRDs is the <strong>one-way analysis of variance (ANOVA)</strong>. The one-way ANOVA tests whether at least two of several treatment means differ significantly. Building upon principles of linear models, least squares estimation, and classical hypothesis testing, the one-way ANOVA provides a comprehensive framework to quantify uncertainty and make decisions about treatments based on observed data.</p>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ol type="1">
-<li>Understand how to identify and classify sources of variation in an experiment.</li>
-<li>Define treatment factors, factor levels, and experimental units.</li>
-<li>Explore blocking, nuisance factors, and strategies to manage them.</li>
-<li>Grasp the principles of randomization and why it underpins statistical inference.</li>
-<li>Examine standard experimental designs (CRD, RBD, Factorial, Latin Square, Split-Plot) and when to use each.</li>
-<li>Understand the distinction between fixed and random effects in modeling.</li>
-<li>Learn how to plan data collection, run pilot experiments, and determine the number of observations (sample size).</li>
-<li>Gain hands-on experience using R code for randomization, exploratory data analysis, and basic ANOVA.</li>
+<li>Understand the structure and rationale behind the completely randomized design.</li>
+<li>Learn the randomization procedure and the role of coding treatments.</li>
+<li>Formulate the one-way ANOVA model and understand its assumptions.</li>
+<li>Explore concepts of estimability, least squares estimation, and the distribution of estimators.</li>
+<li>Apply the ANOVA test to decide whether treatments differ significantly.</li>
+<li>Calculate sample size and power, and incorporate these insights when planning experiments.</li>
+<li>Demonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables.</li>
 </ol>
 </section>
-<section id="identifying-experiment-objectives-and-variation-sources" class="level1">
-<h1>Identifying Experiment Objectives and Variation Sources</h1>
-<section id="setting-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="setting-objectives">Setting Objectives</h2>
-<p>Every experiment must start with a clear research objective. Ask: <em>What do we hope to learn or achieve?</em> Objectives may include:</p>
-<ul>
-<li>Determining which manufacturing process leads to the highest product quality.</li>
-<li>Comparing new teaching methods for improved student performance.</li>
-<li>Finding the optimal settings of machine parameters to reduce defects.</li>
-</ul>
-<p>Without well-defined objectives, the experiment risks being unfocused, making the results difficult to interpret.</p>
 </section>
-<section id="variation-sources" class="level2">
-<h2 class="anchored" data-anchor-id="variation-sources">Variation Sources</h2>
-<p>Variation in responses can arise from multiple sources:</p>
+<section id="experimental-designs-and-the-completely-randomized-design" class="level1">
+<h1>Experimental Designs and the Completely Randomized Design</h1>
+<section id="defining-experimental-design" class="level2">
+<h2 class="anchored" data-anchor-id="defining-experimental-design">Defining Experimental Design</h2>
+<p>An experimental design is a rule determining how experimental units are assigned to treatments. In a <strong>completely randomized design (CRD)</strong>, no blocking factors are considered; all experimental units are assigned to treatments purely at random. This simplicity allows:</p>
 <ul>
-<li><strong>Major Variation (Treatment Effects):</strong> Due to the factors of interest (e.g., different fertilizers or drug dosages).</li>
-<li><strong>Nuisance Factors:</strong> Variables that influence the response but are not of primary interest (e.g., room temperature, operator skill). Some nuisance factors can be controlled or incorporated as blocking factors, while others must be accepted as noise.</li>
+<li>Equal probability of treatment assignment.</li>
+<li>Avoidance of experimenter bias.</li>
+<li>Straightforward statistical analysis.</li>
 </ul>
-<p>By identifying and classifying sources of variation, we can decide which factors to manipulate as treatments, which to fix or control, and which to block or treat as covariates.</p>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
-<p>Consider an agricultural experiment testing different fertilizer types (A, B, C). The main factors are the fertilizer types. Soil heterogeneity could be a nuisance factor. If the field has varying soil quality, it might mask the fertilizer effect. Recognizing this early allows us to incorporate blocking or other strategies to handle this nuisance variation.</p>
+<p>Examples include testing different battery types or comparing rotary pump speeds to measure fluid flow. When no major nuisance factors (like day-to-day variation or spatial differences) need controlling, a CRD is often appropriate.</p>
 </section>
-<section id="activity-think-pair-share" class="level3">
-<h3 class="anchored" data-anchor-id="activity-think-pair-share">Activity: Think-Pair-Share</h3>
+<section id="randomization-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="randomization-procedure">Randomization Procedure</h2>
+<p>Randomization ensures fairness and the validity of the statistical distributions underlying standard tests. Treatments, labeled 1 through <span class="math inline">\(v\)</span>, are assigned to experimental units by generating random numbers and sorting them. Modern software (<code>R</code>) or random number tables can be used. For instance, if testing three treatment levels (A, B, C) with equal sample sizes, we can:</p>
 <ol type="1">
-<li><strong>Think:</strong> Imagine you are testing two workout plans (high-intensity vs.&nbsp;moderate-intensity) to improve muscle strength.</li>
-<li><strong>Pair:</strong> Discuss with a partner what the main objective is and what factors could cause unwanted variation (e.g., baseline fitness level, diet).</li>
-<li><strong>Share:</strong> Volunteer pairs share their classification of factors and whether they could be controlled or blocked.</li>
+<li>Generate random numbers for each unit.</li>
+<li>Rank units by their random numbers.</li>
+<li>Assign treatments in order based on the desired allocation.</li>
 </ol>
-</section>
-<section id="challenges-and-common-mistakes" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes">Challenges and Common Mistakes</h3>
-<ul>
-<li>Starting without a clear objective can lead to inconclusive results.</li>
-<li>Confusing major variation with nuisance variation can misdirect the design.</li>
-</ul>
-</section>
-<section id="exercises" class="level3">
-<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Why must objectives be clear before starting an experiment?</li>
-<li><strong>Numerical:</strong> Given three fertilizer types and two soil conditions, identify which factors should be considered treatments and which might be nuisance factors.</li>
-<li><strong>Proof/Derivation:</strong> Show mathematically that failing to control a nuisance factor increases the variance of treatment effect estimates.</li>
-</ol>
-<p><strong>Key Takeaways:</strong> - Well-defined objectives shape the experiment. - Classifying factors into treatment and nuisance categories enhances design efficiency.</p>
+<p>This procedure ensures every arrangement is equally likely, aligning with the assumptions in ANOVA and related inference.</p>
 </section>
 </section>
-</section>
-<section id="treatment-factors-and-levels" class="level1">
-<h1>Treatment Factors and Levels</h1>
-<section id="defining-treatment-factors" class="level2">
-<h2 class="anchored" data-anchor-id="defining-treatment-factors">Defining Treatment Factors</h2>
-<p>A <strong>treatment factor</strong> is any variable deliberately manipulated by the experimenter to study its effect on the response.</p>
-<p><strong>Example:</strong> In a detergent study, water temperature and detergent concentration are treatment factors.</p>
-</section>
-<section id="factor-levels" class="level2">
-<h2 class="anchored" data-anchor-id="factor-levels">Factor Levels</h2>
-<p>Factor levels are the specific settings or categories of a factor. For instance, twist levels in a cotton-spinning experiment might be 1.63, 1.69, 1.78, and 1.90 turns per inch. Chosen based on subject matter knowledge, factor levels must be realistic and relevant.</p>
-<section id="activity-design-your-own-factorial" class="level3">
-<h3 class="anchored" data-anchor-id="activity-design-your-own-factorial">Activity: Design Your Own Factorial</h3>
-<p>Individually pick a factor (e.g., cooking time) and propose three levels. Pair up with another student who has chosen a different factor (e.g., oven temperature), and combine them into a factorial design. Discuss the complexity and the number of total treatment combinations.</p>
-</section>
-<section id="challenges-and-common-mistakes-1" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-1">Challenges and Common Mistakes</h3>
-<ul>
-<li>Choosing impractical or irrelevant factor levels can undermine the experiment’s usefulness.</li>
-<li>Too many factor levels complicate analysis without necessarily adding insight.</li>
-</ul>
-</section>
-<section id="exercises-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> What criteria guide the selection of factor levels?</li>
-<li><strong>Numerical:</strong> For a factor with 4 levels and another with 3 levels, determine how many treatment combinations exist.</li>
-<li><strong>Proof/Derivation:</strong> Show that increasing replicates per factor level (with total resources fixed) decreases the variance of treatment effect estimates.</li>
-</ol>
-<p><strong>Key Takeaways:</strong> - Treatments factors are deliberately manipulated variables. - Factor levels must be meaningful, informed by real-world considerations or pilot data.</p>
-</section>
-</section>
-</section>
-<section id="experimental-units-blocking-and-nuisance-factors" class="level1">
-<h1>Experimental Units, Blocking, and Nuisance Factors</h1>
-<section id="experimental-units" class="level2">
-<h2 class="anchored" data-anchor-id="experimental-units">Experimental Units</h2>
-<p>The <strong>experimental unit</strong> is the smallest entity to which treatments are independently assigned. This concept is crucial for valid statistical inference.</p>
-<p><strong>Example:</strong> - Plants in a field trial if each plant gets a different fertilizer. - Engine test benches if each engine is run under a unique setup.</p>
-</section>
-<section id="blocking-factors" class="level2">
-<h2 class="anchored" data-anchor-id="blocking-factors">Blocking Factors</h2>
-<p>When a known nuisance factor could confound results, use <strong>blocking</strong>. Blocking forms groups of similar experimental units, each block receiving all treatments. This controls for block-to-block variation, increasing precision.</p>
-<p><strong>Equation (Block Design):</strong></p>
+<section id="the-one-way-anova-model" class="level1">
+<h1>The One-Way ANOVA Model</h1>
+<section id="model-formulation" class="level2">
+<h2 class="anchored" data-anchor-id="model-formulation">Model Formulation</h2>
+<p>Consider <span class="math inline">\(v\)</span> treatments with <span class="math inline">\(n\)</span> observations each (for simplicity). Let <span class="math inline">\(Y_{ij}\)</span> denote the response from the <span class="math inline">\(j\)</span>-th unit receiving treatment <span class="math inline">\(i\)</span>, with <span class="math inline">\(i=1,\dots,v\)</span> and <span class="math inline">\(j=1,\dots,n\)</span>. A common model is:</p>
 <p><span class="math display">\[
-Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
+Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
 \]</span></p>
-<p>Here, <span class="math inline">\(\tau_i\)</span> is the treatment effect and <span class="math inline">\(\beta_j\)</span> the block effect.</p>
-</section>
-<section id="noise-factors-and-covariates" class="level2">
-<h2 class="anchored" data-anchor-id="noise-factors-and-covariates">Noise Factors and Covariates</h2>
+<p>where:</p>
 <ul>
-<li><strong>Noise Factors:</strong> Uncontrollable variations like daily temperature fluctuations.</li>
-<li><strong>Covariates:</strong> Measured continuous variables (e.g., initial weight) that help explain variation when included in the model.</li>
+<li><span class="math inline">\(\mu\)</span> is the overall mean response.</li>
+<li><span class="math inline">\(\tau_i\)</span> is the effect of the <span class="math inline">\(i\)</span>-th treatment.</li>
+<li><span class="math inline">\(\varepsilon_{ij}\)</span> are independent, normally distributed errors with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>.</li>
 </ul>
-<section id="visual-aid-factor-classification-flowchart" class="level3">
-<h3 class="anchored" data-anchor-id="visual-aid-factor-classification-flowchart">Visual Aid: Factor Classification Flowchart</h3>
-<p>Below is R code to generate a decision flowchart. (This code can be run separately.)</p>
-<div class="cell" data-layout-align="left">
+<p>The assumptions are:</p>
+<ul>
+<li>Errors <span class="math inline">\(\varepsilon_{ij}\)</span> are i.i.d. <span class="math inline">\(N(0,\sigma^2)\)</span>.</li>
+<li>Treatment effects sum to zero: <span class="math inline">\(\sum_{i=1}^v \tau_i = 0\)</span> for identifiability.</li>
+</ul>
+<p>This linear model model underpins the ANOVA. The null hypothesis for testing no treatment differences is <span class="math inline">\(H_0: \tau_1 = \tau_2 = \cdots = \tau_v = 0\)</span>.</p>
+</section>
+<section id="estimability-and-least-squares-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="estimability-and-least-squares-estimation">Estimability and Least Squares Estimation</h2>
+<p>Not all model parameters (<span class="math inline">\(\tau_i\)</span>) are independently estimable. However, <strong>estimable functions</strong>, linear combinations of parameters that correspond to expected values of observed data, can be estimated uniquely.</p>
+<p>The least squares estimators (LSEs) solve the normal equations obtained by minimizing the sum of squared errors (SSE):</p>
+<p><span class="math display">\[
+\text{SSE} = \sum_{i=1}^v \sum_{j=1}^n (Y_{ij} - \hat{\mu}_i)^2,
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\mu}_i\)</span> is the estimated mean for treatment <span class="math inline">\(i\)</span>. The LSE for each treatment mean <span class="math inline">\(\mu_i = \mu + \tau_i\)</span> is simply the sample mean <span class="math inline">\(\bar{Y}_i = \frac{1}{n}\sum_{j=1}^n Y_{ij}\)</span>.</p>
+<p>Because the normal equations are linearly dependent, an additional constraint is needed (e.g., <span class="math inline">\(\sum \tau_i = 0\)</span>). Still, any estimable function (like differences between treatment means) can be uniquely estimated.</p>
+</section>
+<section id="distribution-of-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-estimators">Distribution of Estimators</h2>
+<p>Under the normal error assumption, each estimator <span class="math inline">\(\bar{Y}_i\)</span> is normally distributed, with:</p>
+<p><span class="math display">\[
+E(\bar{Y}_i) = \mu_i, \quad \text{Var}(\bar{Y}_i) = \frac{\sigma^2}{n}.
+\]</span></p>
+<p>The error variance <span class="math inline">\(\sigma^2\)</span> is estimated by the mean square error (MSE):</p>
+<p><span class="math display">\[
+\hat{\sigma}^2 = \frac{\text{SSE}}{N - v},
+\]</span></p>
+<p>where <span class="math inline">\(N = v \cdot n\)</span> is the total number of observations.</p>
+</section>
+</section>
+<section id="hypothesis-testing-and-anova" class="level1">
+<h1>Hypothesis Testing and ANOVA</h1>
+<section id="the-anova-f-test" class="level2">
+<h2 class="anchored" data-anchor-id="the-anova-f-test">The ANOVA F-Test</h2>
+<p>To test <span class="math inline">\(H_0: \tau_1 = \cdots = \tau_v = 0\)</span> against <span class="math inline">\(H_a:\)</span> at least two <span class="math inline">\(\tau_i\)</span> differ, we use the ANOVA F-statistic:</p>
+<p><span class="math display">\[
+F = \frac{\text{MST}}{\text{MSE}},
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\text{SST}\)</span> = treatment sum of squares measures variation among treatment means.</li>
+<li><span class="math inline">\(\text{MSE}\)</span> = error mean square, <span class="math inline">\(\text{MSE} = \text{SSE}/(N-v)\)</span>.</li>
+<li><span class="math inline">\(\text{MST} = \text{SST}/(v-1)\)</span>.</li>
+</ul>
+<p>Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(F \sim F_{v-1, N-v}\)</span>. If <span class="math inline">\(F\)</span>-value exceeds a critical value (or the p-value is below a chosen <span class="math inline">\(\alpha\)</span>), we reject <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="anova-table" class="level2">
+<h2 class="anchored" data-anchor-id="anova-table">ANOVA Table</h2>
+<p>The ANOVA table summarizes the decomposition of total variability:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>DF</th>
+<th>SS</th>
+<th>MS</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td><span class="math inline">\(v-1\)</span></td>
+<td>SST</td>
+<td>MST=SST/(v-1)</td>
+<td>MST/MSE</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><span class="math inline">\(N - v\)</span></td>
+<td>SSE</td>
+<td>MSE=SSE/(N-v)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td>SSTotal</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Rejecting <span class="math inline">\(H_0\)</span> indicates that not all treatment means are equal.</p>
+</section>
+</section>
+<section id="sample-size-power-and-confidence-limits" class="level1">
+<h1>Sample Size, Power, and Confidence Limits</h1>
+<section id="determining-sample-size-and-power" class="level2">
+<h2 class="anchored" data-anchor-id="determining-sample-size-and-power">Determining Sample Size and Power</h2>
+<p>To ensure the experiment can detect meaningful differences, consider the <strong>power analysis</strong>. Power calculations (detailed in referenced texts) help determine the number of replicates <span class="math inline">\(n\)</span> per treatment to achieve a desired probability of detecting a specified difference at a given significance level <span class="math inline">\(\alpha\)</span>.</p>
+<p>Use methods from Montgomery, Peck &amp; Vining (2020) or Dean, Voss &amp; Draguljić (2017), along with pilot data, to estimate <span class="math inline">\(\sigma^2\)</span> and decide on sample size. If resources are limited, one may have to adjust objectives or accept lower power.</p>
+</section>
+<section id="confidence-limits-for-variance" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-limits-for-variance">Confidence Limits for Variance</h2>
+<p>A one-sided confidence interval on <span class="math inline">\(\sigma^2\)</span> prevents underestimating required observations. The upper confidence limit is derived from the chi-squared distribution:</p>
+<p><span class="math display">\[
+\frac{(N-v)\hat{\sigma}^2}{\sigma^2} \sim \chi^2_{N-v}.
+\]</span></p>
+<p>Such intervals guide planning by addressing uncertainty in the variance estimate.</p>
+</section>
+</section>
+<section id="practical-r-examples" class="level1">
+<h1>Practical R Examples</h1>
+<section id="randomization-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="randomization-in-r">Randomization in R</h2>
+<p>Suppose we have 3 treatments (A, B, C) and total 9 units (3 per treatment):</p>
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    A[All Factors]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    B[Interested in studying the effect?]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    C[Treatment Factors]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    D[Nuisance Factors]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    E[Can we group by factor levels?]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    F[Block Factor]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    G[Noise/Uncontrolled Factor]</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code demonstrates the process of complete randomization in a Completely Randomized Design (CRD):</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Sets a random seed for reproducibility</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Defines total experimental units (n=9)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Creates a balanced treatment allocation (A, B, C with 3 replicates each)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Assigns random numbers to each unit using uniform distribution</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Creates a data frame with unit IDs, treatments, and random numbers</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Sorts the data frame by random numbers to achieve randomization</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The result is a randomized assignment of treatments to experimental units.</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    A --&gt; B</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    B --&gt;|Yes| C</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    B --&gt;|No| D</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    D --&gt; E</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    E --&gt;|Yes| F</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    E --&gt;|No| G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Total units</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">9</span> <span class="co"># Assign treatments to units, e.g., AAABBBCCC</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">3</span>) <span class="co"># Assign random numbers</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>rand_nums <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">9</span>) <span class="co"># Genrates random numbers</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">Treatment =</span> treatments, <span class="at">RN =</span> rand_nums)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>data_frame_sorted <span class="ot">&lt;-</span> data_frame[<span class="fu">order</span>(data_frame<span class="sc">$</span>RN), ] <span class="co"># Sort by RN</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>data_frame_sorted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div id="tbl-randomization" class="cell quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Randomized Treatment Allocation Data
+</figcaption>
+<div aria-describedby="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A[All Factors]
-    B[Interested in studying the effect?]
-    C[Treatment Factors]
-    D[Nuisance Factors]
-    E[Can we group by factor levels?]
-    F[Block Factor]
-    G[Noise/Uncontrolled Factor]
-
-    A --&gt; B
-    B --&gt;|Yes| C
-    B --&gt;|No| D
-    D --&gt; E
-    E --&gt;|Yes| F
-    E --&gt;|No| G
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="activity-blocking-brainstorm" class="level3">
-<h3 class="anchored" data-anchor-id="activity-blocking-brainstorm">Activity: Blocking Brainstorm</h3>
-<p>Consider a baking experiment where ovens differ in temperature calibration. Could ovens form blocks? Discuss how blocking might improve detection of differences in recipes.</p>
-</section>
-<section id="challenges-and-common-mistakes-2" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-2">Challenges and Common Mistakes</h3>
-<ul>
-<li>Confusing the experimental unit with observational units leads to incorrect analysis.</li>
-<li>Ignoring a known source of variation that could be blocked may inflate residual error.</li>
-</ul>
-</section>
-<section id="exercises-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-2">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Differentiate between experimental and observational units.</li>
-<li><strong>Numerical:</strong> If you have 4 treatments and 6 blocks (each block gets all 4 treatments), how many total experimental units are there?</li>
-<li><strong>Proof/Derivation:</strong> Show that including a block factor in the model reduces the residual variance compared to an unblocked design.</li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>Correctly identifying experimental units is essential.</li>
-<li>Blocking controls known nuisance factors, improving the experiment’s power to detect treatment effects.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="principles-of-randomization" class="level1">
-<h1>Principles of Randomization</h1>
-<section id="randomization-concept" class="level2">
-<h2 class="anchored" data-anchor-id="randomization-concept">Randomization Concept</h2>
-<p>Randomization ensures that each experimental unit has an equal chance of receiving any treatment. This prevents systematic bias and justifies the assumptions underlying standard statistical tests.</p>
-<p><strong>Example:</strong> Use a random number generator to assign treatments to plots, ensuring no predetermined pattern.</p>
-<section id="r-example-simple-random-assignment" class="level3">
-<h3 class="anchored" data-anchor-id="r-example-simple-random-assignment">R Example: Simple Random Assignment</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each=</span><span class="dv">4</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>assignments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "A" "C" "C" "A" "B" "C" "B" "A" "C" "B" "A" "B"</code></pre>
+<div class="kable-table">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Unit</th>
+<th style="text-align: left;">Treatment</th>
+<th style="text-align: right;">RN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">0.0455565</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">0.2875775</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">0.4089769</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">0.5281055</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">0.5514350</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">0.7883051</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">0.8830174</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">0.8924190</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">0.9404673</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</section>
-<section id="activity-randomization-drill" class="level3">
-<h3 class="anchored" data-anchor-id="activity-randomization-drill">Activity: Randomization Drill</h3>
-<p>Write down three treatments on slips of paper and randomly assign them to hypothetical units. Discuss how randomization prevents biased placement of favorable treatments.</p>
-</section>
-<section id="challenges-and-common-mistakes-3" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-3">Challenges and Common Mistakes</h3>
-<ul>
-<li>Assigning treatments alphabetically or in a patterned manner is not randomization.</li>
-<li>Randomization must be deliberate, not haphazard.</li>
-</ul>
-</section>
-<section id="exercises-3" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-3">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Why is randomization crucial for valid statistical inference?</li>
-<li><strong>Numerical:</strong> With 12 units and 3 treatments, show one method of random assignment.</li>
-<li><strong>Proof/Derivation:</strong> Under randomization and the null hypothesis, show that the expected difference between treatment means is zero.</li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>Randomization removes systematic bias.</li>
-<li>It underpins the validity of ANOVA and other inferential methods.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="standard-experimental-designs" class="level1">
-<h1>Standard Experimental Designs</h1>
-<section id="completely-randomized-design-crd" class="level2">
-<h2 class="anchored" data-anchor-id="completely-randomized-design-crd">Completely Randomized Design (CRD)</h2>
-<ul>
-<li>No blocking, treatments assigned entirely at random.</li>
-<li>Suitable when units are homogeneous.</li>
-</ul>
-</section>
-<section id="randomized-block-design-rbd" class="level2">
-<h2 class="anchored" data-anchor-id="randomized-block-design-rbd">Randomized Block Design (RBD)</h2>
-<ul>
-<li>Introduce a blocking factor to control known variation.</li>
-<li>Each block receives all treatments, improving the precision of treatment comparisons.</li>
-</ul>
-</section>
-<section id="row-column-and-latin-squares" class="level2">
-<h2 class="anchored" data-anchor-id="row-column-and-latin-squares">Row-Column and Latin Squares</h2>
-<ul>
-<li>Control for two perpendicular nuisance factors simultaneously.</li>
-</ul>
-</section>
-<section id="factorial-designs" class="level2">
-<h2 class="anchored" data-anchor-id="factorial-designs">Factorial Designs</h2>
-<ul>
-<li>Study multiple factors and their interactions simultaneously.</li>
-<li>Efficiently explore how factors work together.</li>
-</ul>
-</section>
-<section id="split-plot-designs" class="level2">
-<h2 class="anchored" data-anchor-id="split-plot-designs">Split-Plot Designs</h2>
-<ul>
-<li>Useful when some factors are harder to change than others.</li>
-<li>Creates a hierarchy of experimental units (e.g., fields as main plots and subplots within fields).</li>
-</ul>
-<section id="visual-aid-factorial-design-example-in-r" class="level3">
-<h3 class="anchored" data-anchor-id="visual-aid-factorial-design-example-in-r">Visual Aid: Factorial Design Example in R</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>design_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Flyer =</span> <span class="fu">c</span>(<span class="st">"Ordinary"</span>, <span class="st">"Special"</span>),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Twist =</span> <span class="fu">c</span>(<span class="st">"1.63"</span>, <span class="st">"1.69"</span>, <span class="st">"1.78"</span>, <span class="st">"1.90"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>design_data<span class="sc">$</span>Yield <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(design_data), <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(design_data, <span class="fu">aes</span>(<span class="at">x =</span> Twist, <span class="at">y =</span> Yield, <span class="at">color =</span> Flyer)) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Example Factorial Design"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Twist Level"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Response (Yield)"</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="week-02_crd-overview_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week-02_crd-overview_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
+</div>
 </figure>
 </div>
 </div>
+<p>This yields a random allocation order.</p>
+<section id="explanation-of-the-key-functions-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-the-key-functions-in-r">Explanation of the Key Functions in R</h3>
+<ul>
+<li><code>set.seed(123)</code>: Sets a seed for reproducibility.</li>
+<li><code>rep(c("A", "B", "C"), each = 3)</code>: Creates a balanced treatment allocation, where <code>each = 3</code> assigns 3 units to each treatment. ::: {.cell}</li>
+</ul>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">times=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "A" "B" "B" "B"</code></pre>
 </div>
-</section>
-<section id="activity-design-match-up" class="level3">
-<h3 class="anchored" data-anchor-id="activity-design-match-up">Activity: Design Match-Up</h3>
-<p>Given three scenarios (no nuisance factor, known nuisance factor, and multiple factors with a complex structure), choose the appropriate design (CRD, RBD, Factorial, Latin Square).</p>
-</section>
-<section id="challenges-and-common-mistakes-4" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-4">Challenges and Common Mistakes</h3>
-<ul>
-<li>Using a CRD when a known nuisance factor should be blocked.</li>
-<li>Ignoring interactions in factorial experiments.</li>
-</ul>
-</section>
-<section id="exercises-4" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-4">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Under what conditions would you choose a CRD over an RBD?</li>
-<li><strong>Numerical:</strong> Compute the number of runs in a 2x4 factorial with 3 replicates.</li>
-<li><strong>Proof/Derivation:</strong> Show how the variance decomposition changes from CRD to RBD, highlighting the block effect.</li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>Different designs address different research needs.</li>
-<li>Factorial designs detect interactions, blocking improves precision, and split-plots handle difficult-to-change factors.</li>
-</ul>
+<p>::: - <code>runif(9)</code>: Generates 9 random numbers from a uniform distribution. - <code>order</code>: Sorts the data frame based on the random numbers. The result of the function is row indices that would sort the data frame.</p>
 </section>
 </section>
+<section id="fitting-a-one-way-anova-model" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-a-one-way-anova-model">Fitting a One-Way ANOVA Model</h2>
+<p>Assume we have data from a soap experiment (soap.txt) with three soap types (regular, deodorant, moisturizing):</p>
+<div class="cell" data-tbl-cap="ANOVA Results for Soap Experiment">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>soap.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"dean2017"</span>, <span class="st">"soap.txt"</span>), <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>soap.data<span class="sc">$</span>fSoap <span class="ot">&lt;-</span> <span class="fu">factor</span>(soap.data<span class="sc">$</span>Soap)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a one-way ANOVA</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(WtLoss <span class="sc">~</span> fSoap, <span class="at">data=</span>soap.data)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+fSoap        2 16.122   8.061   104.5 5.91e-07 ***
+Residuals    9  0.695   0.077                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The ANOVA summary shows if soap type affects weight loss significantly.</p>
 </section>
-<section id="model-specification-and-effect-types" class="level1">
-<h1>Model Specification and Effect Types</h1>
-<section id="linear-models-and-anova" class="level2">
-<h2 class="anchored" data-anchor-id="linear-models-and-anova">Linear Models and ANOVA</h2>
-<p>Experiments often use a linear model to relate responses to treatments and blocks:</p>
-<p><span class="math display">\[
-Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment effects} + \text{block effects} + \text{error}
-\]</span></p>
-<p>ANOVA decomposes total variation into components attributable to treatments, blocks, and error, enabling inference on treatment effects.</p>
-</section>
-<section id="fixed-vs.-random-effects" class="level2">
-<h2 class="anchored" data-anchor-id="fixed-vs.-random-effects">Fixed vs.&nbsp;Random Effects</h2>
-<ul>
-<li><strong>Fixed Effects:</strong> Chosen levels of interest; inferences apply only to those tested levels.</li>
-<li><strong>Random Effects:</strong> Levels are a random sample from a broader population; inferences generalize beyond observed levels.</li>
-</ul>
-<section id="activity-fixed-or-random" class="level3">
-<h3 class="anchored" data-anchor-id="activity-fixed-or-random">Activity: Fixed or Random?</h3>
-<p>Consider an experiment with 3 specific fertilizer brands (likely fixed) vs.&nbsp;an experiment using 3 randomly chosen brands from a large market (random). Discuss how interpretation changes.</p>
-</section>
-<section id="challenges-and-common-mistakes-5" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-5">Challenges and Common Mistakes</h3>
-<ul>
-<li>Treating random factors as fixed or vice versa leads to incorrect conclusions.</li>
-<li>Confusing the meaning of random effects with randomization.</li>
-</ul>
-</section>
-<section id="exercises-5" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-5">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Why is it important to distinguish fixed and random effects?</li>
-<li><strong>Numerical:</strong> In an RBD, show how expected mean squares differ for a random block factor vs.&nbsp;a fixed block factor.</li>
-<li><strong>Proof/Derivation:</strong> Derive the expected mean squares for a two-way ANOVA with one random factor.</li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>Correct model specification ensures valid inference.</li>
-<li>Fixed vs.&nbsp;random distinction affects interpretation and generalized conclusions.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="planning-data-collection-and-pilot-experiments" class="level1">
-<h1>Planning Data Collection and Pilot Experiments</h1>
-<section id="measurement-and-procedure" class="level2">
-<h2 class="anchored" data-anchor-id="measurement-and-procedure">Measurement and Procedure</h2>
-<p>Careful data collection planning ensures relevance and quality:</p>
-<ul>
-<li>Choose appropriate measurement scales and ensure instruments are calibrated.</li>
-<li>Train personnel to reduce measurement errors.</li>
-</ul>
-</section>
-<section id="pilot-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="pilot-experiments">Pilot Experiments</h2>
-<p>A small-scale pilot run can identify unforeseen difficulties, refine factor levels, and confirm data collection procedures before launching the main study.</p>
-<section id="activity-pilot-study-discussion" class="level3">
-<h3 class="anchored" data-anchor-id="activity-pilot-study-discussion">Activity: Pilot Study Discussion</h3>
-<p>Discuss what a pilot experiment might reveal in a crop study (e.g., unexpected soil pests) and how that influences the main experiment’s design.</p>
-</section>
-<section id="challenges-and-common-mistakes-6" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-6">Challenges and Common Mistakes</h3>
-<ul>
-<li>Omitting a pilot study can lead to costly mistakes in the main experiment.</li>
-<li>Relying on untested procedures risks invalid data collection.</li>
-</ul>
-</section>
-<section id="exercises-6" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-6">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Why are pilot experiments beneficial?</li>
-<li><strong>Numerical:</strong> If pilot data suggest variance = 4 and you want a margin of error = 1, how many samples per treatment are needed (assuming normality)?</li>
-<li><strong>Proof/Derivation:</strong> Show how a pilot-based variance estimate informs sample size calculations.</li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>Planning and pilot testing prevent wasted resources.</li>
-<li>Well-designed procedures and preliminary runs ensure high-quality, interpretable data.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="determining-the-number-of-observations" class="level1">
-<h1>Determining the Number of Observations</h1>
-<section id="sample-size-and-power" class="level2">
-<h2 class="anchored" data-anchor-id="sample-size-and-power">Sample Size and Power</h2>
-<p>The number of observations affects the experiment’s ability to detect true effects:</p>
-<ul>
-<li><strong>Power:</strong> Probability of detecting a true effect if it exists.</li>
-<li>Larger sample size generally increases power but also increases cost.</li>
-</ul>
-<p>Power calculations balance desired precision, variance estimates, and available resources.</p>
-<section id="activity-sample-size-calculation" class="level3">
-<h3 class="anchored" data-anchor-id="activity-sample-size-calculation">Activity: Sample Size Calculation</h3>
-<p>Given an estimated variance and a desired effect size, estimate the required sample size. Discuss trade-offs between resource constraints and statistical power.</p>
-</section>
-<section id="challenges-and-common-mistakes-7" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-7">Challenges and Common Mistakes</h3>
-<ul>
-<li>Choosing sample size arbitrarily can lead to low power or wasted resources.</li>
-<li>Overly large samples may be unnecessary and expensive.</li>
-</ul>
-</section>
-<section id="exercises-7" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-7">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Explain why sample size must be justified.</li>
-<li><strong>Numerical:</strong> Given effect size = 2 (SD=3) and desired power = 0.8, calculate required sample size per group.</li>
-<li><strong>Proof/Derivation:</strong> Derive a basic formula relating power, effect size, and sample size for a one-way ANOVA.</li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>Adequate sample size ensures meaningful, reliable conclusions.</li>
-<li>Power analysis guides optimal resource allocation.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="practical-example-in-r" class="level1">
-<h1>Practical Example in R</h1>
-<section id="example-a-simple-crd" class="level2">
-<h2 class="anchored" data-anchor-id="example-a-simple-crd">Example: A Simple CRD</h2>
-<p>Compare three battery types (A, B, C) with 4 replicates each.</p>
-<section id="r-code" class="level3">
-<h3 class="anchored" data-anchor-id="r-code">R Code</h3>
+<section id="estimating-means-and-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-means-and-contrasts">Estimating Means and Contrasts</h2>
+<p>We can estimate treatment means (least squares means) and test contrasts using <code>emmeans</code> or <code>multcomp</code> packages. For example:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">4</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate some response data</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> <span class="fu">factor</span>(assignments))</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("emmeans") # Run once if not installed</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(fit, <span class="sc">~</span> fSoap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>                    Df Sum Sq Mean Sq F value Pr(&gt;F)
-factor(assignments)  2   14.2    7.08   0.163  0.852
-Residuals            9  391.5   43.50               </code></pre>
+<pre><code> fSoap emmean    SE df lower.CL upper.CL
+ 1     -0.035 0.139  9   -0.349    0.279
+ 2      2.700 0.139  9    2.386    3.014
+ 3      1.992 0.139  9    1.678    2.307
+
+Confidence level used: 0.95 </code></pre>
 </div>
 </div>
-<p>Interpret the ANOVA table:</p>
-<ul>
-<li>If the p-value for factor(assignments) is small, it suggests a difference among battery types.</li>
-</ul>
+<p>This provides estimates and confidence intervals for each soap type’s mean weight loss.</p>
 </section>
-<section id="activity-interpret-r-output" class="level3">
-<h3 class="anchored" data-anchor-id="activity-interpret-r-output">Activity: Interpret R Output</h3>
-<p>Examine the ANOVA table. Identify the F-statistic and p-value, and discuss whether treatments differ.</p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>A completely randomized design and its corresponding one-way ANOVA analysis form the bedrock of experimental inference when blocking is unnecessary. By carefully randomizing treatments, modeling responses, and applying least squares estimation, one can confidently infer whether treatments differ.</p>
+<p>We introduced the conceptual framework and key formulae, showed how to conduct hypothesis tests and interpret ANOVA results, discussed sample size and power considerations, and provided R code for practical execution. Mastery of these fundamentals empowers researchers to design efficient experiments, maximize the utility of collected data, and confidently draw conclusions about treatment effects.</p>
 </section>
-<section id="challenges-and-common-mistakes-8" class="level3">
-<h3 class="anchored" data-anchor-id="challenges-and-common-mistakes-8">Challenges and Common Mistakes</h3>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>Misinterpreting p-values without context.</li>
-<li>Ignoring model assumptions such as normality and equal variances.</li>
-</ul>
-</section>
-<section id="exercises-8" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-8">Exercises</h3>
-<ol type="1">
-<li><strong>Conceptual:</strong> Explain why randomization is essential before running ANOVA.</li>
-<li><strong>Numerical:</strong> Modify the code for 2 treatments with 5 replicates and interpret results.</li>
-<li><strong>Proof/Derivation:</strong> Show how the F-statistic relates to the ratio of variances in ANOVA.</li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>R facilitates practical application of design concepts.</li>
-<li>Interpreting software output requires understanding design principles and model assumptions.</li>
+<li>Christensen, R. (2018). <em>Analysis of variance, design, and regression: Linear modeling for unbalanced data (2nd Ed.)</em>. Chapman and Hall/CRC.</li>
+<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em>. Springer. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a></li>
+<li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Wiley.</li>
+<li>Montgomery, D. C., Peck, E. A., &amp; Vining, G. G. (2020). <em>Introduction to linear regression analysis (5th Ed.)</em>. Wiley.</li>
 </ul>
 </section>
 </section>
+<section id="appendix-advanced-mathematical-details" class="level1">
+<h1>Appendix: Advanced Mathematical Details</h1>
+<section id="a.1-normal-equations-and-estimability" class="level2">
+<h2 class="anchored" data-anchor-id="a.1-normal-equations-and-estimability">A.1 Normal Equations and Estimability</h2>
+<p>The one-way ANOVA model can be written as:</p>
+<p><span class="math display">\[
+Y_{ij} = \mu_i + \varepsilon_{ij}, \quad \text{with } \mu_i = \mu + \tau_i.
+\]</span></p>
+<p>The least squares approach forms normal equations from partial derivatives of SSE. Because <span class="math inline">\(\sum \tau_i = 0\)</span>, only differences in means are estimable. The space of estimable functions includes contrasts like <span class="math inline">\(\mu_1 - \mu_2\)</span>, but not individual <span class="math inline">\(\tau_i\)</span> alone.</p>
 </section>
-<section id="summary-of-key-takeaways" class="level1">
-<h1>Summary of Key Takeaways</h1>
-<ul>
-<li><strong>Objectives:</strong> Clear objectives guide the entire design and analysis.</li>
-<li><strong>Factors and Levels:</strong> Treatment factors and meaningful factor levels ensure relevance.</li>
-<li><strong>Experimental Units and Blocking:</strong> Correct identification of units and use of blocking increases precision.</li>
-<li><strong>Randomization:</strong> Ensures unbiased estimates and valid statistical inference.</li>
-<li><strong>Designs (CRD, RBD, Factorial, etc.):</strong> Different designs solve different problems; factorial designs explore interactions, blocking controls known variation.</li>
-<li><strong>Fixed vs.&nbsp;Random Effects:</strong> Proper classification determines the scope of inferences.</li>
-<li><strong>Planning and Pilots:</strong> Thoughtful planning and preliminary trials prevent costly errors.</li>
-<li><strong>Sample Size and Power:</strong> Adequate sample size ensures detectable effects without wasting resources.</li>
-<li><strong>R Implementation:</strong> Practical coding examples reinforce theoretical principles.</li>
-</ul>
+<section id="a.2-distribution-of-the-f-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="a.2-distribution-of-the-f-statistic">A.2 Distribution of the F-Statistic</h2>
+<p>Under <span class="math inline">\(H_0\)</span>:</p>
+<p><span class="math display">\[
+F = \frac{MST}{MSE} \sim F_{v-1, N-v}.
+\]</span></p>
+<p>If treatments truly differ, F follows a noncentral F-distribution, enabling power calculations and minimum detectable differences.</p>
 </section>
-<section id="definitions-of-key-terms" class="level1">
-<h1>Definitions of Key Terms</h1>
-<ul>
-<li><strong>Objective:</strong> The main research question or goal of the experiment.</li>
-<li><strong>Nuisance Factor:</strong> A variable that affects the response but is not of primary interest.</li>
-<li><strong>Treatment Factor:</strong> A variable manipulated by the experimenter.</li>
-<li><strong>Factor Levels:</strong> The specific settings or categories of a factor.</li>
-<li><strong>Experimental Unit:</strong> The entity to which a treatment is applied independently.</li>
-<li><strong>Block Factor:</strong> A factor used to group units into homogeneous sets.</li>
-<li><strong>Randomization:</strong> Assigning treatments randomly to avoid bias.</li>
-<li><strong>CRD (Completely Randomized Design):</strong> A design without blocking; treatments are assigned randomly.</li>
-<li><strong>RBD (Randomized Block Design):</strong> A design that uses blocks to control known nuisance factors.</li>
-<li><strong>Factorial Design:</strong> A design that includes multiple factors simultaneously.</li>
-<li><strong>Fixed Effects:</strong> Effects of chosen factor levels of specific interest.</li>
-<li><strong>Random Effects:</strong> Effects of factor levels considered as a random sample from a population.</li>
-<li><strong>Pilot Experiment:</strong> A small preliminary study to refine methods before the main experiment.</li>
-<li><strong>Power:</strong> The probability of detecting a true treatment effect.</li>
-<li><strong>ANOVA:</strong> A statistical method for comparing means across groups.</li>
-</ul>
+<section id="a.3-power-calculations" class="level2">
+<h2 class="anchored" data-anchor-id="a.3-power-calculations">A.3 Power Calculations</h2>
+<p>Power for detecting a difference <span class="math inline">\(\delta\)</span> in means involves the noncentrality parameter of the F-distribution. By selecting <span class="math inline">\(\alpha, \sigma^2, \delta,\)</span> and desired power, tables or software (e.g., <code>pwr</code> package in R) guide sample size choices.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example using pwr package</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pwr") # if not installed</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(pwr)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.anova.test</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">f =</span> <span class="fl">0.4</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Balanced one-way analysis of variance power calculation 
+
+              k = 3
+              n = 21.10364
+              f = 0.4
+      sig.level = 0.05
+          power = 0.8
+
+NOTE: n is number in each group</code></pre>
+</div>
+</div>
+<p>This computes required sample size per treatment to achieve 80% power with a given effect size <span class="math inline">\(f\)</span>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1304,38 +1082,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

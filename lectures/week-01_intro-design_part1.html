@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Davood Tofighi, Ph.D.">
+
+<title>Fundamentals of Experimental Design – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0852ff3597291122f7ac2063d05b99e8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8b6335de900061f91a8df9c48d28ea53.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<meta property="og:title" content="Fundamentals of Experimental Design – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://quantpsych.github.io/doe/lectures/assets/images/home.png">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+</head><body class="nav-fixed"><img src="assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/styles/css/home.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 454/545 - Analysis of Variance and Experimental Design</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Fundamentals of Experimental Design</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Davood Tofighi, Ph.D. </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">15-Dec-2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a>
+  <ul class="collapse">
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
+  </ul></li>
+  <li><a href="#fundamentals-of-experimental-design" id="toc-fundamentals-of-experimental-design" class="nav-link" data-scroll-target="#fundamentals-of-experimental-design">Fundamentals of Experimental Design</a>
+  <ul class="collapse">
+  <li><a href="#experimentation-vs.-observation" id="toc-experimentation-vs.-observation" class="nav-link" data-scroll-target="#experimentation-vs.-observation">Experimentation vs.&nbsp;Observation</a></li>
+  <li><a href="#goals-of-experimentation" id="toc-goals-of-experimentation" class="nav-link" data-scroll-target="#goals-of-experimentation">Goals of Experimentation</a></li>
+  <li><a href="#importance-of-experimental-design" id="toc-importance-of-experimental-design" class="nav-link" data-scroll-target="#importance-of-experimental-design">Importance of Experimental Design</a></li>
+  </ul></li>
+  <li><a href="#key-techniques-replication-blocking-and-randomization" id="toc-key-techniques-replication-blocking-and-randomization" class="nav-link" data-scroll-target="#key-techniques-replication-blocking-and-randomization">Key Techniques: Replication, Blocking, and Randomization</a>
+  <ul class="collapse">
+  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication">Replication</a></li>
+  <li><a href="#blocking" id="toc-blocking" class="nav-link" data-scroll-target="#blocking">Blocking</a></li>
+  <li><a href="#randomization" id="toc-randomization" class="nav-link" data-scroll-target="#randomization">Randomization</a>
+  <ul class="collapse">
+  <li><a href="#methods-of-randomization" id="toc-methods-of-randomization" class="nav-link" data-scroll-target="#methods-of-randomization">Methods of Randomization</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#factorial-experiments" id="toc-factorial-experiments" class="nav-link" data-scroll-target="#factorial-experiments">Factorial Experiments</a></li>
+  <li><a href="#interaction-between-design-and-analysis" id="toc-interaction-between-design-and-analysis" class="nav-link" data-scroll-target="#interaction-between-design-and-analysis">Interaction Between Design and Analysis</a></li>
+  <li><a href="#robustness-and-error-modeling" id="toc-robustness-and-error-modeling" class="nav-link" data-scroll-target="#robustness-and-error-modeling">Robustness and Error Modeling</a></li>
+  <li><a href="#practical-applications-r-examples" id="toc-practical-applications-r-examples" class="nav-link" data-scroll-target="#practical-applications-r-examples">Practical Applications: R Examples</a>
+  <ul class="collapse">
+  <li><a href="#example-random-assignment-and-anova" id="toc-example-random-assignment-and-anova" class="nav-link" data-scroll-target="#example-random-assignment-and-anova">Example: Random Assignment and ANOVA</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#a-proof-of-randomizations-role-in-distributional-assumptions" id="toc-a-proof-of-randomizations-role-in-distributional-assumptions" class="nav-link" data-scroll-target="#a-proof-of-randomizations-role-in-distributional-assumptions">A Proof of Randomization’s Role in Distributional Assumptions</a></li>
+  <li><a href="#a-derivation-of-expected-mean-squares" id="toc-a-derivation-of-expected-mean-squares" class="nav-link" data-scroll-target="#a-derivation-of-expected-mean-squares">A Derivation of Expected Mean Squares</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage <strong>randomization</strong>, <strong>blocking</strong>, and <strong>replication</strong> to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.</p>
+<p>The following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code.</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ol type="1">
+<li>Understand the theoretical foundations and objectives of experimental design in statistics.</li>
+<li>Distinguish between observational and experimental studies, emphasizing the advantages experiments provide.</li>
+<li>Learn the fundamental techniques of replication, blocking, and randomization.</li>
+<li>Discuss how factorial experiments efficiently explore multiple factors simultaneously.</li>
+<li>Understand how design decisions affect data analysis and the validity of inferential procedures.</li>
+<li>Reinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.</li>
+<li>Explore advanced mathematical derivations and proofs in the Appendix.</li>
+</ol>
+<section id="readings" class="level3">
+<h3 class="anchored" data-anchor-id="readings">Readings</h3>
+<ul>
+<li><span class="citation" data-cites="dean2017">Dean, Voss, and Draguljić (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 1 and 2)</span></li>
+</ul>
+</section>
+</section>
+<section id="fundamentals-of-experimental-design" class="level1">
+<h1>Fundamentals of Experimental Design</h1>
+<section id="experimentation-vs.-observation" class="level2">
+<h2 class="anchored" data-anchor-id="experimentation-vs.-observation">Experimentation vs.&nbsp;Observation</h2>
+<ul>
+<li>Observational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.</li>
+<li>Controlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions.</li>
+</ul>
+</section>
+<section id="goals-of-experimentation" class="level2">
+<h2 class="anchored" data-anchor-id="goals-of-experimentation">Goals of Experimentation</h2>
+<ol type="1">
+<li>Determine causes of variation in response.</li>
+<li>Find optimal conditions and treatment combinations.</li>
+<li>Compare responses across different treatments.</li>
+<li>Develop predictive models that accurately reflect the underlying process.</li>
+</ol>
+<p>Effective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout.</p>
+</section>
+<section id="importance-of-experimental-design" class="level2">
+<h2 class="anchored" data-anchor-id="importance-of-experimental-design">Importance of Experimental Design</h2>
+<ul>
+<li><strong>Cause-and-Effect:</strong> Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.</li>
+<li><strong>Resource Allocation:</strong> Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.</li>
+<li><strong>Efficient Analysis:</strong> A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.</li>
+</ul>
+<p>(See Montgomery, 2019, <em>Design and Analysis of Experiments</em> for a comprehensive treatment.)</p>
+</section>
+</section>
+<section id="key-techniques-replication-blocking-and-randomization" class="level1">
+<h1>Key Techniques: Replication, Blocking, and Randomization</h1>
+<section id="replication" class="level2">
+<h2 class="anchored" data-anchor-id="replication">Replication</h2>
+<ul>
+<li><strong>Definition:</strong> Replication means repeating the entire set of treatments independently on different experimental units.</li>
+<li><strong>Purpose:</strong> Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.</li>
+<li><strong>Contrast with Repeated Measurements:</strong> Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.</li>
+</ul>
+<p>Without adequate replication, it is difficult to separate true treatment effects from random noise.</p>
+</section>
+<section id="blocking" class="level2">
+<h2 class="anchored" data-anchor-id="blocking">Blocking</h2>
+<ul>
+<li><strong>Concept:</strong> Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.</li>
+<li><strong>Example:</strong> If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.</li>
+<li><strong>Outcome:</strong> Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences.</li>
+</ul>
+</section>
+<section id="randomization" class="level2">
+<h2 class="anchored" data-anchor-id="randomization">Randomization</h2>
+<ul>
+<li><strong>Rationale:</strong> Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.</li>
+<li><strong>Benefits:</strong></li>
+</ul>
+<p>&nbsp; - Prevents experimenter preferences or unconscious patterns from influencing results.</p>
+<p>&nbsp; - Justifies the use of standard statistical distributions (F, t) for inference.</p>
+<p>&nbsp; - Confirms that observed effects can be attributed to treatments and not assignment bias.</p>
+<p><strong>Reference:</strong> Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.</p>
+<section id="methods-of-randomization" class="level3">
+<h3 class="anchored" data-anchor-id="methods-of-randomization">Methods of Randomization</h3>
+<ul>
+<li><strong>Random Number Generators (RNG):</strong> Computer programs or calculators produce pseudo-random digits, used to assign treatments.</li>
+<li><strong>Random Number Tables:</strong> Historically used, a random table combined with random starting points can ensure unbiased allocations.</li>
+<li><strong>Ensuring True Randomness:</strong> Use objective random devices (dice, RNGs) and avoid human-chosen “random” sequences, as humans are prone to inadvertent patterns.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="factorial-experiments" class="level1">
+<h1>Factorial Experiments</h1>
+<p>A <strong>factorial experiment</strong> examines multiple factors simultaneously, each at various levels. Rather than testing factors one at a time, factorial designs consider all combinations of factor levels, providing:</p>
+<ul>
+<li>More information from fewer observations.</li>
+<li>Ability to detect interactions between factors (how the effect of one factor changes depending on another factor’s level).</li>
+</ul>
+<p>This approach is more efficient and comprehensive, revealing a richer picture of the underlying system.</p>
+</section>
+<section id="interaction-between-design-and-analysis" class="level1">
+<h1>Interaction Between Design and Analysis</h1>
+<p>Experimental design and statistical analysis are interdependent:</p>
+<ul>
+<li>A good design ensures data that align well with modeling assumptions.</li>
+<li>Understanding the intended statistical analysis can guide design choices (e.g., number of replicates, arrangement of treatments, use of blocking).</li>
+<li>The modeling approach (linear models, least squares estimation, restricted maximum likelihood) depends on having a structure that can be adequately represented and interpreted.</li>
+</ul>
+<p>Without proper design, even the most sophisticated analysis tools will be less effective. Conversely, the best design is chosen with the intended analysis in mind.</p>
+</section>
+<section id="robustness-and-error-modeling" class="level1">
+<h1>Robustness and Error Modeling</h1>
+<ul>
+<li>Most standard inference procedures assume normality of errors and independence of observations.</li>
+<li>Experimental designs strive to meet these assumptions or at least ensure that deviations are not severe.</li>
+<li>Procedures based on linear models (e.g., ANOVA) are generally robust to mild deviations from normality but can be sensitive to extreme outliers.</li>
+<li>If normality is questionable, transformations or nonparametric methods might be employed.</li>
+</ul>
+</section>
+<section id="practical-applications-r-examples" class="level1">
+<h1>Practical Applications: R Examples</h1>
+<p>Using R for design and analysis streamlines computations, produces diagnostic plots, and executes randomization schemes easily. R is free and widely used, offering packages like <code>agricolae</code> for experimental designs and <code>emmeans</code> for mean comparisons.</p>
+<section id="example-random-assignment-and-anova" class="level2">
+<h2 class="anchored" data-anchor-id="example-random-assignment-and-anova">Example: Random Assignment and ANOVA</h2>
+<p>Suppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Treatments</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We have 9 units, randomly assign treatments</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatments, <span class="at">each=</span><span class="dv">3</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>assignments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C" "A" "C" "B" "C" "A" "B"</code></pre>
+</div>
+</div>
+<p>This code generates a random permutation of A, B, and C assigned to the units.</p>
+<p>Now assume we collected data (simulated responses):</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with a true difference: A &lt;-  B &lt;-  C</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>true_means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A=</span><span class="dv">10</span>, <span class="at">B=</span><span class="dv">12</span>, <span class="at">C=</span><span class="dv">15</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">9</span>, <span class="at">mean=</span><span class="fu">rep</span>(true_means, <span class="at">each=</span><span class="dv">3</span>), <span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,<span class="at">treatment =</span> assignments, <span class="at">response =</span> responses)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> treatment, <span class="at">data=</span>data)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)
+treatment    2  32.01   16.00   1.287  0.343
+Residuals    6  74.61   12.44               </code></pre>
+</div>
+</div>
+<p>The ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.</p>
+<p><strong>Conclusion</strong></p>
+<p>Experimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.</p>
+<p><strong>Key Takeaways:</strong></p>
+<ul>
+<li>Randomization prevents systematic bias and validates inferential methods.</li>
+<li>Replication provides robust estimates of variability and supports generalizability.</li>
+<li>Blocking controls known sources of variation, improving precision.</li>
+<li>Factorial designs offer a more comprehensive view of multiple factors simultaneously.</li>
+</ul>
+<p>Future sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>Montgomery, D. C. (2019). <em>Design and Analysis of Experiments</em>. Wiley.</li>
+<li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Robert E. Krieger Publishing Company.</li>
+<li>Scheffé, H. (1959). <em>The Analysis of Variance</em>. Wiley.</li>
+</ul>
+</section>
+</section>
+<section id="appendix-advanced-mathematical-derivations" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="a-proof-of-randomizations-role-in-distributional-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="a-proof-of-randomizations-role-in-distributional-assumptions">A Proof of Randomization’s Role in Distributional Assumptions</h2>
+<p>Under a completely randomized design, every unit is equally likely to receive any treatment. Let <span class="math inline">\(Y_{ij}\)</span> represent the response from the <span class="math inline">\(j\)</span>-th replicate of treatment <span class="math inline">\(i\)</span>. Assuming <span class="math inline">\(Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}\)</span> with <span class="math inline">\(\varepsilon_{ij} \sim N(0,\sigma^2)\)</span>:</p>
+<ol type="1">
+<li>Randomization ensures that <span class="math inline">\((\varepsilon_{ij})\)</span> are exchangeable random variables.</li>
+<li>Under <span class="math inline">\(H_0: \alpha_i=0\)</span>, the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).</li>
+<li>Without randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.</li>
+</ol>
+<p>For more technical details, see Kempthorne (1977, Ch. 2).</p>
+</section>
+<section id="a-derivation-of-expected-mean-squares" class="level2">
+<h2 class="anchored" data-anchor-id="a-derivation-of-expected-mean-squares">A Derivation of Expected Mean Squares</h2>
+<p>For the simple one-way ANOVA model:</p>
+<p><span class="math display">\[
+Y_{ij} = \mu + \alpha_i + \varepsilon_{ij},
+\]</span></p>
+<p>with <span class="math inline">\(\sum \alpha_i = 0\)</span>, the expected mean squares are:</p>
+<p><span class="math display">\[
+E(MS_{\text{Treatment}}) = \sigma^2 + n \sum \alpha_i^2/(g-1),
+\]</span></p>
+<p><span class="math display">\[
+E(MS_{\text{Error}}) = \sigma^2.
+\]</span></p>
+<p>These derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959).</p>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-dean2017" class="csl-entry" role="listitem">
+Dean, Angela, Daniel Voss, and Danel Draguljić. 2017. <em>Design and Analysis of Experiments</em>. 2nd ed. Springer <span>Texts</span> in <span>Statistics</span>. Cham, Switzerland: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/quantpsych\.github\.io\/doe\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,143 +1,234 @@
 [
   {
-    "objectID": "lectures/week-02_crd-overview.html",
-    "href": "lectures/week-02_crd-overview.html",
+    "objectID": "lectures/week-01_intro-design_part2.html",
+    "href": "lectures/week-01_intro-design_part2.html",
     "title": "Planning Experiments",
     "section": "",
     "text": "Experimental design forms the foundation of scientific inquiry whenever the goal is to understand how certain controllable inputs (factors) influence outcomes (responses). By carefully planning how to collect data and assigning treatments to experimental units, we can draw valid causal inferences about these relationships. Unlike observational studies, experiments involve actively manipulating factors to reveal their effects while controlling for unwanted variability.\nThis set of lecture notes provides a comprehensive overview of experimental design concepts and applications. We will address how to define clear objectives, classify sources of variation, choose appropriate experimental designs, apply randomization, incorporate blocking, specify statistical models, and determine appropriate sample sizes. Real-world examples and R code snippets will illustrate key ideas. Additionally, we will integrate exercises, class activities, summaries, challenges, and visual aids to reinforce understanding."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#setting-objectives",
-    "href": "lectures/week-02_crd-overview.html#setting-objectives",
+    "objectID": "lectures/week-01_intro-design_part2.html#setting-objectives",
+    "href": "lectures/week-01_intro-design_part2.html#setting-objectives",
     "title": "Planning Experiments",
     "section": "Setting Objectives",
     "text": "Setting Objectives\nEvery experiment must start with a clear research objective. Ask: What do we hope to learn or achieve? Objectives may include:\n\nDetermining which manufacturing process leads to the highest product quality.\nComparing new teaching methods for improved student performance.\nFinding the optimal settings of machine parameters to reduce defects.\n\nWithout well-defined objectives, the experiment risks being unfocused, making the results difficult to interpret."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#variation-sources",
-    "href": "lectures/week-02_crd-overview.html#variation-sources",
+    "objectID": "lectures/week-01_intro-design_part2.html#variation-sources",
+    "href": "lectures/week-01_intro-design_part2.html#variation-sources",
     "title": "Planning Experiments",
     "section": "Variation Sources",
     "text": "Variation Sources\nVariation in responses can arise from multiple sources:\n\nMajor Variation (Treatment Effects): Due to the factors of interest (e.g., different fertilizers or drug dosages).\nNuisance Factors: Variables that influence the response but are not of primary interest (e.g., room temperature, operator skill). Some nuisance factors can be controlled or incorporated as blocking factors, while others must be accepted as noise.\n\nBy identifying and classifying sources of variation, we can decide which factors to manipulate as treatments, which to fix or control, and which to block or treat as covariates.\n\nExample\nConsider an agricultural experiment testing different fertilizer types (A, B, C). The main factors are the fertilizer types. Soil heterogeneity could be a nuisance factor. If the field has varying soil quality, it might mask the fertilizer effect. Recognizing this early allows us to incorporate blocking or other strategies to handle this nuisance variation.\n\n\nActivity: Think-Pair-Share\n\nThink: Imagine you are testing two workout plans (high-intensity vs. moderate-intensity) to improve muscle strength.\nPair: Discuss with a partner what the main objective is and what factors could cause unwanted variation (e.g., baseline fitness level, diet).\nShare: Volunteer pairs share their classification of factors and whether they could be controlled or blocked.\n\n\n\nChallenges and Common Mistakes\n\nStarting without a clear objective can lead to inconclusive results.\nConfusing major variation with nuisance variation can misdirect the design.\n\n\n\nExercises\n\nConceptual: Why must objectives be clear before starting an experiment?\nNumerical: Given three fertilizer types and two soil conditions, identify which factors should be considered treatments and which might be nuisance factors.\nProof/Derivation: Show mathematically that failing to control a nuisance factor increases the variance of treatment effect estimates.\n\nKey Takeaways: - Well-defined objectives shape the experiment. - Classifying factors into treatment and nuisance categories enhances design efficiency."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#defining-treatment-factors",
-    "href": "lectures/week-02_crd-overview.html#defining-treatment-factors",
+    "objectID": "lectures/week-01_intro-design_part2.html#defining-treatment-factors",
+    "href": "lectures/week-01_intro-design_part2.html#defining-treatment-factors",
     "title": "Planning Experiments",
     "section": "Defining Treatment Factors",
     "text": "Defining Treatment Factors\nA treatment factor is any variable deliberately manipulated by the experimenter to study its effect on the response.\nExample: In a detergent study, water temperature and detergent concentration are treatment factors."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#factor-levels",
-    "href": "lectures/week-02_crd-overview.html#factor-levels",
+    "objectID": "lectures/week-01_intro-design_part2.html#factor-levels",
+    "href": "lectures/week-01_intro-design_part2.html#factor-levels",
     "title": "Planning Experiments",
     "section": "Factor Levels",
     "text": "Factor Levels\nFactor levels are the specific settings or categories of a factor. For instance, twist levels in a cotton-spinning experiment might be 1.63, 1.69, 1.78, and 1.90 turns per inch. Chosen based on subject matter knowledge, factor levels must be realistic and relevant.\n\nActivity: Design Your Own Factorial\nIndividually pick a factor (e.g., cooking time) and propose three levels. Pair up with another student who has chosen a different factor (e.g., oven temperature), and combine them into a factorial design. Discuss the complexity and the number of total treatment combinations.\n\n\nChallenges and Common Mistakes\n\nChoosing impractical or irrelevant factor levels can undermine the experiment’s usefulness.\nToo many factor levels complicate analysis without necessarily adding insight.\n\n\n\nExercises\n\nConceptual: What criteria guide the selection of factor levels?\nNumerical: For a factor with 4 levels and another with 3 levels, determine how many treatment combinations exist.\nProof/Derivation: Show that increasing replicates per factor level (with total resources fixed) decreases the variance of treatment effect estimates.\n\nKey Takeaways: - Treatments factors are deliberately manipulated variables. - Factor levels must be meaningful, informed by real-world considerations or pilot data."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#experimental-units",
-    "href": "lectures/week-02_crd-overview.html#experimental-units",
+    "objectID": "lectures/week-01_intro-design_part2.html#experimental-units",
+    "href": "lectures/week-01_intro-design_part2.html#experimental-units",
     "title": "Planning Experiments",
     "section": "Experimental Units",
     "text": "Experimental Units\nThe experimental unit is the smallest entity to which treatments are independently assigned. This concept is crucial for valid statistical inference.\nExample: - Plants in a field trial if each plant gets a different fertilizer. - Engine test benches if each engine is run under a unique setup."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#blocking-factors",
-    "href": "lectures/week-02_crd-overview.html#blocking-factors",
+    "objectID": "lectures/week-01_intro-design_part2.html#blocking-factors",
+    "href": "lectures/week-01_intro-design_part2.html#blocking-factors",
     "title": "Planning Experiments",
     "section": "Blocking Factors",
     "text": "Blocking Factors\nWhen a known nuisance factor could confound results, use blocking. Blocking forms groups of similar experimental units, each block receiving all treatments. This controls for block-to-block variation, increasing precision.\nEquation (Block Design):\n\\[\nY_{ij} = \\mu + \\tau_i + \\beta_j + \\varepsilon_{ij}\n\\]\nHere, \\(\\tau_i\\) is the treatment effect and \\(\\beta_j\\) the block effect."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#noise-factors-and-covariates",
-    "href": "lectures/week-02_crd-overview.html#noise-factors-and-covariates",
+    "objectID": "lectures/week-01_intro-design_part2.html#noise-factors-and-covariates",
+    "href": "lectures/week-01_intro-design_part2.html#noise-factors-and-covariates",
     "title": "Planning Experiments",
     "section": "Noise Factors and Covariates",
     "text": "Noise Factors and Covariates\n\nNoise Factors: Uncontrollable variations like daily temperature fluctuations.\nCovariates: Measured continuous variables (e.g., initial weight) that help explain variation when included in the model.\n\n\nVisual Aid: Factor Classification Flowchart\nBelow is R code to generate a decision flowchart. (This code can be run separately.)\n\n\nCode\nflowchart TD\n    A[All Factors]\n    B[Interested in studying the effect?]\n    C[Treatment Factors]\n    D[Nuisance Factors]\n    E[Can we group by factor levels?]\n    F[Block Factor]\n    G[Noise/Uncontrolled Factor]\n\n    A --&gt; B\n    B --&gt;|Yes| C\n    B --&gt;|No| D\n    D --&gt; E\n    E --&gt;|Yes| F\n    E --&gt;|No| G\n\n\n\n\n\nflowchart TD\n    A[All Factors]\n    B[Interested in studying the effect?]\n    C[Treatment Factors]\n    D[Nuisance Factors]\n    E[Can we group by factor levels?]\n    F[Block Factor]\n    G[Noise/Uncontrolled Factor]\n\n    A --&gt; B\n    B --&gt;|Yes| C\n    B --&gt;|No| D\n    D --&gt; E\n    E --&gt;|Yes| F\n    E --&gt;|No| G\n\n\n\n\n\n\n\n\nActivity: Blocking Brainstorm\nConsider a baking experiment where ovens differ in temperature calibration. Could ovens form blocks? Discuss how blocking might improve detection of differences in recipes.\n\n\nChallenges and Common Mistakes\n\nConfusing the experimental unit with observational units leads to incorrect analysis.\nIgnoring a known source of variation that could be blocked may inflate residual error.\n\n\n\nExercises\n\nConceptual: Differentiate between experimental and observational units.\nNumerical: If you have 4 treatments and 6 blocks (each block gets all 4 treatments), how many total experimental units are there?\nProof/Derivation: Show that including a block factor in the model reduces the residual variance compared to an unblocked design.\n\nKey Takeaways:\n\nCorrectly identifying experimental units is essential.\nBlocking controls known nuisance factors, improving the experiment’s power to detect treatment effects."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#randomization-concept",
-    "href": "lectures/week-02_crd-overview.html#randomization-concept",
+    "objectID": "lectures/week-01_intro-design_part2.html#randomization-concept",
+    "href": "lectures/week-01_intro-design_part2.html#randomization-concept",
     "title": "Planning Experiments",
     "section": "Randomization Concept",
     "text": "Randomization Concept\nRandomization ensures that each experimental unit has an equal chance of receiving any treatment. This prevents systematic bias and justifies the assumptions underlying standard statistical tests.\nExample: Use a random number generator to assign treatments to plots, ensuring no predetermined pattern.\n\nR Example: Simple Random Assignment\n\n\nCode\nset.seed(123)\ntreatments &lt;- rep(c(\"A\",\"B\",\"C\"), each=4)\nassignments &lt;- sample(treatments)\nassignments\n\n\n [1] \"A\" \"C\" \"C\" \"A\" \"B\" \"C\" \"B\" \"A\" \"C\" \"B\" \"A\" \"B\"\n\n\n\n\nActivity: Randomization Drill\nWrite down three treatments on slips of paper and randomly assign them to hypothetical units. Discuss how randomization prevents biased placement of favorable treatments.\n\n\nChallenges and Common Mistakes\n\nAssigning treatments alphabetically or in a patterned manner is not randomization.\nRandomization must be deliberate, not haphazard.\n\n\n\nExercises\n\nConceptual: Why is randomization crucial for valid statistical inference?\nNumerical: With 12 units and 3 treatments, show one method of random assignment.\nProof/Derivation: Under randomization and the null hypothesis, show that the expected difference between treatment means is zero.\n\nKey Takeaways:\n\nRandomization removes systematic bias.\nIt underpins the validity of ANOVA and other inferential methods."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#completely-randomized-design-crd",
-    "href": "lectures/week-02_crd-overview.html#completely-randomized-design-crd",
+    "objectID": "lectures/week-01_intro-design_part2.html#completely-randomized-design-crd",
+    "href": "lectures/week-01_intro-design_part2.html#completely-randomized-design-crd",
     "title": "Planning Experiments",
     "section": "Completely Randomized Design (CRD)",
     "text": "Completely Randomized Design (CRD)\n\nNo blocking, treatments assigned entirely at random.\nSuitable when units are homogeneous."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#randomized-block-design-rbd",
-    "href": "lectures/week-02_crd-overview.html#randomized-block-design-rbd",
+    "objectID": "lectures/week-01_intro-design_part2.html#randomized-block-design-rbd",
+    "href": "lectures/week-01_intro-design_part2.html#randomized-block-design-rbd",
     "title": "Planning Experiments",
     "section": "Randomized Block Design (RBD)",
     "text": "Randomized Block Design (RBD)\n\nIntroduce a blocking factor to control known variation.\nEach block receives all treatments, improving the precision of treatment comparisons."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#row-column-and-latin-squares",
-    "href": "lectures/week-02_crd-overview.html#row-column-and-latin-squares",
+    "objectID": "lectures/week-01_intro-design_part2.html#row-column-and-latin-squares",
+    "href": "lectures/week-01_intro-design_part2.html#row-column-and-latin-squares",
     "title": "Planning Experiments",
     "section": "Row-Column and Latin Squares",
     "text": "Row-Column and Latin Squares\n\nControl for two perpendicular nuisance factors simultaneously."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#factorial-designs",
-    "href": "lectures/week-02_crd-overview.html#factorial-designs",
+    "objectID": "lectures/week-01_intro-design_part2.html#factorial-designs",
+    "href": "lectures/week-01_intro-design_part2.html#factorial-designs",
     "title": "Planning Experiments",
     "section": "Factorial Designs",
     "text": "Factorial Designs\n\nStudy multiple factors and their interactions simultaneously.\nEfficiently explore how factors work together."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#split-plot-designs",
-    "href": "lectures/week-02_crd-overview.html#split-plot-designs",
+    "objectID": "lectures/week-01_intro-design_part2.html#split-plot-designs",
+    "href": "lectures/week-01_intro-design_part2.html#split-plot-designs",
     "title": "Planning Experiments",
     "section": "Split-Plot Designs",
     "text": "Split-Plot Designs\n\nUseful when some factors are harder to change than others.\nCreates a hierarchy of experimental units (e.g., fields as main plots and subplots within fields).\n\n\nVisual Aid: Factorial Design Example in R\n\n\nCode\nlibrary(ggplot2)\ndesign_data &lt;- expand.grid(\n    Flyer = c(\"Ordinary\", \"Special\"),\n    Twist = c(\"1.63\", \"1.69\", \"1.78\", \"1.90\")\n)\ndesign_data$Yield &lt;- rnorm(nrow(design_data), mean = 50, sd = 5)\nggplot(design_data, aes(x = Twist, y = Yield, color = Flyer)) +\n    geom_point(size = 3) +\n    labs(\n        title = \"Example Factorial Design\",\n        x = \"Twist Level\",\n        y = \"Response (Yield)\"\n    ) +\n    theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\nActivity: Design Match-Up\nGiven three scenarios (no nuisance factor, known nuisance factor, and multiple factors with a complex structure), choose the appropriate design (CRD, RBD, Factorial, Latin Square).\n\n\nChallenges and Common Mistakes\n\nUsing a CRD when a known nuisance factor should be blocked.\nIgnoring interactions in factorial experiments.\n\n\n\nExercises\n\nConceptual: Under what conditions would you choose a CRD over an RBD?\nNumerical: Compute the number of runs in a 2x4 factorial with 3 replicates.\nProof/Derivation: Show how the variance decomposition changes from CRD to RBD, highlighting the block effect.\n\nKey Takeaways:\n\nDifferent designs address different research needs.\nFactorial designs detect interactions, blocking improves precision, and split-plots handle difficult-to-change factors."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#linear-models-and-anova",
-    "href": "lectures/week-02_crd-overview.html#linear-models-and-anova",
+    "objectID": "lectures/week-01_intro-design_part2.html#linear-models-and-anova",
+    "href": "lectures/week-01_intro-design_part2.html#linear-models-and-anova",
     "title": "Planning Experiments",
     "section": "Linear Models and ANOVA",
     "text": "Linear Models and ANOVA\nExperiments often use a linear model to relate responses to treatments and blocks:\n\\[\nY=μ+treatment effects+block effects+errorY = \\mu + \\text{treatment effects} + \\text{block effects} + \\text{error}\n\\]\nANOVA decomposes total variation into components attributable to treatments, blocks, and error, enabling inference on treatment effects."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#fixed-vs.-random-effects",
-    "href": "lectures/week-02_crd-overview.html#fixed-vs.-random-effects",
+    "objectID": "lectures/week-01_intro-design_part2.html#fixed-vs.-random-effects",
+    "href": "lectures/week-01_intro-design_part2.html#fixed-vs.-random-effects",
     "title": "Planning Experiments",
     "section": "Fixed vs. Random Effects",
     "text": "Fixed vs. Random Effects\n\nFixed Effects: Chosen levels of interest; inferences apply only to those tested levels.\nRandom Effects: Levels are a random sample from a broader population; inferences generalize beyond observed levels.\n\n\nActivity: Fixed or Random?\nConsider an experiment with 3 specific fertilizer brands (likely fixed) vs. an experiment using 3 randomly chosen brands from a large market (random). Discuss how interpretation changes.\n\n\nChallenges and Common Mistakes\n\nTreating random factors as fixed or vice versa leads to incorrect conclusions.\nConfusing the meaning of random effects with randomization.\n\n\n\nExercises\n\nConceptual: Why is it important to distinguish fixed and random effects?\nNumerical: In an RBD, show how expected mean squares differ for a random block factor vs. a fixed block factor.\nProof/Derivation: Derive the expected mean squares for a two-way ANOVA with one random factor.\n\nKey Takeaways:\n\nCorrect model specification ensures valid inference.\nFixed vs. random distinction affects interpretation and generalized conclusions."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#measurement-and-procedure",
-    "href": "lectures/week-02_crd-overview.html#measurement-and-procedure",
+    "objectID": "lectures/week-01_intro-design_part2.html#measurement-and-procedure",
+    "href": "lectures/week-01_intro-design_part2.html#measurement-and-procedure",
     "title": "Planning Experiments",
     "section": "Measurement and Procedure",
     "text": "Measurement and Procedure\nCareful data collection planning ensures relevance and quality:\n\nChoose appropriate measurement scales and ensure instruments are calibrated.\nTrain personnel to reduce measurement errors."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#pilot-experiments",
-    "href": "lectures/week-02_crd-overview.html#pilot-experiments",
+    "objectID": "lectures/week-01_intro-design_part2.html#pilot-experiments",
+    "href": "lectures/week-01_intro-design_part2.html#pilot-experiments",
     "title": "Planning Experiments",
     "section": "Pilot Experiments",
     "text": "Pilot Experiments\nA small-scale pilot run can identify unforeseen difficulties, refine factor levels, and confirm data collection procedures before launching the main study.\n\nActivity: Pilot Study Discussion\nDiscuss what a pilot experiment might reveal in a crop study (e.g., unexpected soil pests) and how that influences the main experiment’s design.\n\n\nChallenges and Common Mistakes\n\nOmitting a pilot study can lead to costly mistakes in the main experiment.\nRelying on untested procedures risks invalid data collection.\n\n\n\nExercises\n\nConceptual: Why are pilot experiments beneficial?\nNumerical: If pilot data suggest variance = 4 and you want a margin of error = 1, how many samples per treatment are needed (assuming normality)?\nProof/Derivation: Show how a pilot-based variance estimate informs sample size calculations.\n\nKey Takeaways:\n\nPlanning and pilot testing prevent wasted resources.\nWell-designed procedures and preliminary runs ensure high-quality, interpretable data."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#sample-size-and-power",
-    "href": "lectures/week-02_crd-overview.html#sample-size-and-power",
+    "objectID": "lectures/week-01_intro-design_part2.html#sample-size-and-power",
+    "href": "lectures/week-01_intro-design_part2.html#sample-size-and-power",
     "title": "Planning Experiments",
     "section": "Sample Size and Power",
     "text": "Sample Size and Power\nThe number of observations affects the experiment’s ability to detect true effects:\n\nPower: Probability of detecting a true effect if it exists.\nLarger sample size generally increases power but also increases cost.\n\nPower calculations balance desired precision, variance estimates, and available resources.\n\nActivity: Sample Size Calculation\nGiven an estimated variance and a desired effect size, estimate the required sample size. Discuss trade-offs between resource constraints and statistical power.\n\n\nChallenges and Common Mistakes\n\nChoosing sample size arbitrarily can lead to low power or wasted resources.\nOverly large samples may be unnecessary and expensive.\n\n\n\nExercises\n\nConceptual: Explain why sample size must be justified.\nNumerical: Given effect size = 2 (SD=3) and desired power = 0.8, calculate required sample size per group.\nProof/Derivation: Derive a basic formula relating power, effect size, and sample size for a one-way ANOVA.\n\nKey Takeaways:\n\nAdequate sample size ensures meaningful, reliable conclusions.\nPower analysis guides optimal resource allocation."
   },
   {
-    "objectID": "lectures/week-02_crd-overview.html#example-a-simple-crd",
-    "href": "lectures/week-02_crd-overview.html#example-a-simple-crd",
+    "objectID": "lectures/week-01_intro-design_part2.html#example-a-simple-crd",
+    "href": "lectures/week-01_intro-design_part2.html#example-a-simple-crd",
     "title": "Planning Experiments",
     "section": "Example: A Simple CRD",
     "text": "Example: A Simple CRD\nCompare three battery types (A, B, C) with 4 replicates each.\n\nR Code\n\n\nCode\nset.seed(123)\ntreatments &lt;- rep(c(\"A\", \"B\", \"C\"), each = 4)\nassignments &lt;- sample(treatments)\n\n# Simulate some response data\nresponse &lt;- rnorm(12, mean = 50, sd = 5)\n\n# Fit ANOVA model\nmodel &lt;- aov(response ~ factor(assignments))\nsummary(model)\n\n\n                    Df Sum Sq Mean Sq F value Pr(&gt;F)\nfactor(assignments)  2   14.2    7.08   0.163  0.852\nResiduals            9  391.5   43.50               \n\n\nInterpret the ANOVA table:\n\nIf the p-value for factor(assignments) is small, it suggests a difference among battery types.\n\n\n\nActivity: Interpret R Output\nExamine the ANOVA table. Identify the F-statistic and p-value, and discuss whether treatments differ.\n\n\nChallenges and Common Mistakes\n\nMisinterpreting p-values without context.\nIgnoring model assumptions such as normality and equal variances.\n\n\n\nExercises\n\nConceptual: Explain why randomization is essential before running ANOVA.\nNumerical: Modify the code for 2 treatments with 5 replicates and interpret results.\nProof/Derivation: Show how the F-statistic relates to the ratio of variances in ANOVA.\n\nKey Takeaways:\n\nR facilitates practical application of design concepts.\nInterpreting software output requires understanding design principles and model assumptions."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html",
+    "href": "lectures/week-01_intro-design_part1.html",
+    "title": "Fundamentals of Experimental Design",
+    "section": "",
+    "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#introduction",
+    "href": "lectures/week-01_intro-design_part1.html#introduction",
+    "title": "Fundamentals of Experimental Design",
+    "section": "",
+    "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#objectives",
+    "href": "lectures/week-01_intro-design_part1.html#objectives",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Objectives",
+    "text": "Objectives\n\nUnderstand the theoretical foundations and objectives of experimental design in statistics.\nDistinguish between observational and experimental studies, emphasizing the advantages experiments provide.\nLearn the fundamental techniques of replication, blocking, and randomization.\nDiscuss how factorial experiments efficiently explore multiple factors simultaneously.\nUnderstand how design decisions affect data analysis and the validity of inferential procedures.\nReinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.\nExplore advanced mathematical derivations and proofs in the Appendix.\n\n\nReadings\n\nDean, Voss, and Draguljić (2017, Ch. 1 and 2)"
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#experimentation-vs.-observation",
+    "href": "lectures/week-01_intro-design_part1.html#experimentation-vs.-observation",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Experimentation vs. Observation",
+    "text": "Experimentation vs. Observation\n\nObservational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.\nControlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#goals-of-experimentation",
+    "href": "lectures/week-01_intro-design_part1.html#goals-of-experimentation",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Goals of Experimentation",
+    "text": "Goals of Experimentation\n\nDetermine causes of variation in response.\nFind optimal conditions and treatment combinations.\nCompare responses across different treatments.\nDevelop predictive models that accurately reflect the underlying process.\n\nEffective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#importance-of-experimental-design",
+    "href": "lectures/week-01_intro-design_part1.html#importance-of-experimental-design",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Importance of Experimental Design",
+    "text": "Importance of Experimental Design\n\nCause-and-Effect: Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.\nResource Allocation: Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.\nEfficient Analysis: A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.\n\n(See Montgomery, 2019, Design and Analysis of Experiments for a comprehensive treatment.)"
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#replication",
+    "href": "lectures/week-01_intro-design_part1.html#replication",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Replication",
+    "text": "Replication\n\nDefinition: Replication means repeating the entire set of treatments independently on different experimental units.\nPurpose: Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.\nContrast with Repeated Measurements: Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.\n\nWithout adequate replication, it is difficult to separate true treatment effects from random noise."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#blocking",
+    "href": "lectures/week-01_intro-design_part1.html#blocking",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Blocking",
+    "text": "Blocking\n\nConcept: Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.\nExample: If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.\nOutcome: Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#randomization",
+    "href": "lectures/week-01_intro-design_part1.html#randomization",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Randomization",
+    "text": "Randomization\n\nRationale: Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.\nBenefits:\n\n  - Prevents experimenter preferences or unconscious patterns from influencing results.\n  - Justifies the use of standard statistical distributions (F, t) for inference.\n  - Confirms that observed effects can be attributed to treatments and not assignment bias.\nReference: Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.\n\nMethods of Randomization\n\nRandom Number Generators (RNG): Computer programs or calculators produce pseudo-random digits, used to assign treatments.\nRandom Number Tables: Historically used, a random table combined with random starting points can ensure unbiased allocations.\nEnsuring True Randomness: Use objective random devices (dice, RNGs) and avoid human-chosen “random” sequences, as humans are prone to inadvertent patterns."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#example-random-assignment-and-anova",
+    "href": "lectures/week-01_intro-design_part1.html#example-random-assignment-and-anova",
+    "title": "Fundamentals of Experimental Design",
+    "section": "Example: Random Assignment and ANOVA",
+    "text": "Example: Random Assignment and ANOVA\nSuppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.\n\n\nCode\n# Set seed for reproducibility\n\nset.seed(123)\n# Treatments\n\ntreatments &lt;- c(\"A\", \"B\", \"C\")\n# We have 9 units, randomly assign treatments\n\nassignments &lt;- sample(rep(treatments, each=3))\nassignments\n\n\n[1] \"A\" \"B\" \"C\" \"A\" \"C\" \"B\" \"C\" \"A\" \"B\"\n\n\nThis code generates a random permutation of A, B, and C assigned to the units.\nNow assume we collected data (simulated responses):\n\n\nCode\n# Simulate responses with a true difference: A &lt;-  B &lt;-  C\ntrue_means &lt;- c(A=10, B=12, C=15)\nresponses &lt;- rnorm(9, mean=rep(true_means, each=3), sd=2)\ndata &lt;- data.frame(unit = 1:9,treatment = assignments, response = responses)\n\n# Fit an ANOVA model\nfit &lt;- aov(response ~ treatment, data=data)\nsummary(fit)\n\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)\ntreatment    2  32.01   16.00   1.287  0.343\nResiduals    6  74.61   12.44               \n\n\nThe ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.\nConclusion\nExperimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.\nKey Takeaways:\n\nRandomization prevents systematic bias and validates inferential methods.\nReplication provides robust estimates of variability and supports generalizability.\nBlocking controls known sources of variation, improving precision.\nFactorial designs offer a more comprehensive view of multiple factors simultaneously.\n\nFuture sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#references",
+    "href": "lectures/week-01_intro-design_part1.html#references",
+    "title": "Fundamentals of Experimental Design",
+    "section": "References",
+    "text": "References\n\nMontgomery, D. C. (2019). Design and Analysis of Experiments. Wiley.\nKempthorne, O. (1977). Design and Analysis of Experiments. Robert E. Krieger Publishing Company.\nScheffé, H. (1959). The Analysis of Variance. Wiley."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#a-proof-of-randomizations-role-in-distributional-assumptions",
+    "href": "lectures/week-01_intro-design_part1.html#a-proof-of-randomizations-role-in-distributional-assumptions",
+    "title": "Fundamentals of Experimental Design",
+    "section": "A Proof of Randomization’s Role in Distributional Assumptions",
+    "text": "A Proof of Randomization’s Role in Distributional Assumptions\nUnder a completely randomized design, every unit is equally likely to receive any treatment. Let \\(Y_{ij}\\) represent the response from the \\(j\\)-th replicate of treatment \\(i\\). Assuming \\(Y_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij}\\) with \\(\\varepsilon_{ij} \\sim N(0,\\sigma^2)\\):\n\nRandomization ensures that \\((\\varepsilon_{ij})\\) are exchangeable random variables.\nUnder \\(H_0: \\alpha_i=0\\), the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).\nWithout randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.\n\nFor more technical details, see Kempthorne (1977, Ch. 2)."
+  },
+  {
+    "objectID": "lectures/week-01_intro-design_part1.html#a-derivation-of-expected-mean-squares",
+    "href": "lectures/week-01_intro-design_part1.html#a-derivation-of-expected-mean-squares",
+    "title": "Fundamentals of Experimental Design",
+    "section": "A Derivation of Expected Mean Squares",
+    "text": "A Derivation of Expected Mean Squares\nFor the simple one-way ANOVA model:\n\\[\nY_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij},\n\\]\nwith \\(\\sum \\alpha_i = 0\\), the expected mean squares are:\n\\[\nE(MS_{\\text{Treatment}}) = \\sigma^2 + n \\sum \\alpha_i^2/(g-1),\n\\]\n\\[\nE(MS_{\\text{Error}}) = \\sigma^2.\n\\]\nThese derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959)."
   },
   {
     "objectID": "about.html",
@@ -256,7 +347,7 @@
     "href": "contents.html",
     "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "This page organizes the key course materials, including lecture notes, assignments, supplemental readings, and important resources.\n\n\nThe course syllabus contains all essential details about the course structure, policies, assignments, and exam dates.\n\n📄 Download Full Course Syllabus (PDF)\nImportant: You must read the syllabus carefully, as it contains critical information not available elsewhere.\n\n\n\n\nLecture notes and slides will be posted on the Course GitHub Page in HTML format.\n\n📚 Access Lecture Notes\n\nNote: GitHub Pages may cache content. Refresh your browser if the notes appear outdated.\n\nTo refresh, use:\n\nCtrl + Shift + R (Windows/Linux)\n\nCmd + Shift + R (Mac)\n\n\n\n\n\n\n\nThe course schedule provides a week-by-week breakdown of topics, reading assignments, and due dates.\n\n📅 View Course Schedule\n\n\n\n\nAssignments will be posted on Canvas and must be submitted via Canvas. All assignments require the use of the Quarto template provided.\n\n🔗 Quarto Template\n\n\n\n\n\nSupplemental readings will be provided as needed. Public domain readings will be posted on Canvas.\n\n🔗 Access Supplemental Readings on Canvas\n\nNote: Some readings may not be shared due to copyright restrictions.\n\n\n\nTo complete assignments and analyses, you will need access to R and related tools.\n\nR Installation: Download R\n\nRStudio IDE: Download RStudio\n\nVS Code IDE: Download VS Code\n\n\n\n\nQuarto Documentation: Learn Quarto\n\nR Tutorials: R Basics for Beginners"
+    "text": "This page organizes the key course materials, including lecture notes, assignments, supplemental readings, and important resources.\n\n\nThe course syllabus contains all essential details about the course structure, policies, assignments, and exam dates.\n\n📄 Download Full Course Syllabus (PDF)\nImportant: You must read the syllabus carefully, as it contains critical information not available elsewhere.\n\n\n\n\nLecture notes and slides will be posted on the Course GitHub Page in HTML format.\n\n📚 Access Lecture Notes\n\nNote: GitHub Pages may cache content. Refresh your browser if the notes appear outdated.\n\nTo refresh, use:\n\nCtrl + Shift + R (Windows/Linux)\n\nCmd + Shift + R (Mac)\n\n\n\n\n\n\n\nThe course schedule provides a week-by-week breakdown of topics, reading assignments, and due dates.\n\n📅 View Course Schedule\n\n\n\n\nAssignments will be posted on Canvas and must be submitted via Canvas. All assignments require the use of the Quarto template provided.\n\n🔗 Quarto Template\n\n\n\n\n\nSupplemental readings will be provided as needed. Public domain readings will be posted on the Contents page.\n\n🔗 Access Supplemental Readings on Canvas\n\nNote: Some readings may not be shared due to copyright restrictions.\n\n\n\nTo complete assignments and analyses, you will need access to R and related tools.\n\nR Installation: Download R\n\nRStudio IDE: Download RStudio\n\nVS Code IDE: Download VS Code\n\n\n\n\nQuarto Documentation: Learn Quarto\n\nR Tutorials: R Basics for Beginners"
   },
   {
     "objectID": "contents.html#course-syllabus",
@@ -291,7 +382,7 @@
     "href": "contents.html#supplemental-readings",
     "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "Supplemental readings will be provided as needed. Public domain readings will be posted on Canvas.\n\n🔗 Access Supplemental Readings on Canvas\n\nNote: Some readings may not be shared due to copyright restrictions."
+    "text": "Supplemental readings will be provided as needed. Public domain readings will be posted on the Contents page.\n\n🔗 Access Supplemental Readings on Canvas\n\nNote: Some readings may not be shared due to copyright restrictions."
   },
   {
     "objectID": "contents.html#software-tools-and-resources",
@@ -357,11 +448,53 @@
     "text": "For personal matters, email me through Canvas Email.\n© 2025 Davood Tofighi | Course Developed by Dr. Davood Tofighi\nUNM Canvas | Course GitHub Page | Privacy Policy | Accessibility"
   },
   {
+    "objectID": "appendix/r-base/r-rep-basics.html",
+    "href": "appendix/r-base/r-rep-basics.html",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.\n\n\n\nThe rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\n\nCode\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\n\nCode\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\n\nCode\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\n\nCode\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n\n[1] 1 2 3 1 2\n\n\n\n\n\n\nCombining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\n\nCode\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\n\nCode\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\n\nCode\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n\n[1] NA NA  1  1\n\n\n\n\n\nBasic Usage:\n\n\nCode\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n\n[1] 1 2 3 1 2 3\n\n\nCode\n# Output: 1 2 3 1 2 3\n\n\nUsing each:\n\n\nCode\n# Repeat each element twice\nrep(1:3, each = 2)\n\n\n[1] 1 1 2 2 3 3\n\n\nCode\n# Output: 1 1 2 2 3 3\n\n\nCustom Length:\n\n\nCode\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n\n[1] 1 2 3 1\n\n\nCode\n# Output: 1 2 3 1\n\n\nCombining each and times:\n\n\nCode\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n\nCode\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3\n\n\n\n\n\n\nNegative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n\nCode\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n\nCode\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n\nCode\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n\nCode\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#function-overview",
+    "href": "appendix/r-base/r-rep-basics.html#function-overview",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation."
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "href": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\n\nCode\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\n\nCode\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\n\nCode\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\n\nCode\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n\n[1] 1 2 3 1 2"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "href": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Combining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\n\nCode\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\n\nCode\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\n\nCode\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n\n[1] NA NA  1  1"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#examples",
+    "href": "appendix/r-base/r-rep-basics.html#examples",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Basic Usage:\n\n\nCode\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n\n[1] 1 2 3 1 2 3\n\n\nCode\n# Output: 1 2 3 1 2 3\n\n\nUsing each:\n\n\nCode\n# Repeat each element twice\nrep(1:3, each = 2)\n\n\n[1] 1 1 2 2 3 3\n\n\nCode\n# Output: 1 1 2 2 3 3\n\n\nCustom Length:\n\n\nCode\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n\n[1] 1 2 3 1\n\n\nCode\n# Output: 1 2 3 1\n\n\nCombining each and times:\n\n\nCode\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n\nCode\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "href": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n\nCode\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n\nCode\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n\nCode\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n\nCode\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
     "objectID": "home_lectures.html",
     "href": "home_lectures.html",
     "title": "Lecture Notes - STAT 454/545",
     "section": "",
-    "text": "Welcome to the Lecture Notes page for STAT 454/545: Analysis of Variance and Experimental Design. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.\n\n\n\nLecture notes are available in HTML format for easy access and navigation.\n\nVisit the GitHub Pages link to access the latest versions. If content appears outdated, refresh your browser:\n\nWindows/Linux: Press Ctrl + Shift + R\n\nMac: Press Cmd + Shift + R\n\n\nFor persistent issues, clear your browser cache using the following guides:\n\nChrome Cache Clearing\n\nFirefox Cache Clearing\n\n\n\n\n\n\n\n\nWeek\nTopic\nLecture Notes Link\nSupplemental Resources\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes\nNone\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes\nChapter 3 Examples\n\n\n3\nBlocking and RCBD\nWeek 3 Notes\nBlocking Efficiency Examples\n\n\n4\nMultiple Comparisons and Contrasts\nWeek 4 Notes\nTukey, Bonferroni Methods\n\n\n5\nChecking Model Assumptions\nWeek 5 Notes\nResidual Analysis Resources\n\n\n6\nFactorial Designs\nWeek 6 Notes\nTwo-Way ANOVA Examples\n\n\n7\nMidterm Review & Exam\nWeek 7 Notes\nReview Notes & Practice Exams\n\n\n8\nHigher-Order Factorial Designs\nWeek 8 Notes\nInteraction Plots\n\n\n9\nSpring Break\nNo Class This Week\nRelax & Review\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes\nANCOVA Step-by-Step Example\n\n\n11\nComplete Block Designs\nWeek 11 Notes\nFactorial Treatments in Blocks\n\n\n12\nRow–Column Designs\nWeek 12 Notes\nLatin Square Designs\n\n\n13\nRandom and Mixed Effects\nWeek 13 Notes\nVariance Component Analysis\n\n\n14\nNested Models\nWeek 14 Notes\nNested Designs Case Study\n\n\n15\nSplit-Plot Designs\nWeek 15 Notes\nSplit-Split-Plot Extensions\n\n\n16\nCatch-Up Week\nWeek 16 Notes\nExtra Practice Problems\n\n\n17\nFinal Review and Exam\nFinal Review Notes\nFinal Exam Practice Set\n\n\n\n\n\n\nIn addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links.\n\n\n\n\n\nPre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.\n\n\n\n\nIf you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance.\n\n\n\n\nInstructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
+    "text": "Welcome to the Lecture Notes page for STAT 454/545: Analysis of Variance and Experimental Design. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.\n\n\n\nLecture notes are available in HTML format for easy access and navigation.\n\nVisit the GitHub Pages link to access the latest versions. If content appears outdated, refresh your browser:\n\nWindows/Linux: Press Ctrl + Shift + R\n\nMac: Press Cmd + Shift + R\n\n\nFor persistent issues, clear your browser cache using the following guides:\n\nChrome Cache Clearing\n\nFirefox Cache Clearing\n\n\n\n\n\n\n\n\n\nWeek\nTopic\nLecture Notes Link\nSupplemental Resources\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes\nNone\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes\nChapter 3 Examples\n\n\n3\nBlocking and RCBD\nWeek 3 Notes\nBlocking Efficiency Examples\n\n\n4\nMultiple Comparisons and Contrasts\nWeek 4 Notes\nTukey, Bonferroni Methods\n\n\n5\nChecking Model Assumptions\nWeek 5 Notes\nResidual Analysis Resources\n\n\n6\nFactorial Designs\nWeek 6 Notes\nTwo-Way ANOVA Examples\n\n\n7\nMidterm Review & Exam\nWeek 7 Notes\nReview Notes & Practice Exams\n\n\n8\nHigher-Order Factorial Designs\nWeek 8 Notes\nInteraction Plots\n\n\n9\nSpring Break\nNo Class This Week\nRelax & Review\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes\nANCOVA Step-by-Step Example\n\n\n11\nComplete Block Designs\nWeek 11 Notes\nFactorial Treatments in Blocks\n\n\n12\nRow–Column Designs\nWeek 12 Notes\nLatin Square Designs\n\n\n13\nRandom and Mixed Effects\nWeek 13 Notes\nVariance Component Analysis\n\n\n14\nNested Models\nWeek 14 Notes\nNested Designs Case Study\n\n\n15\nSplit-Plot Designs\nWeek 15 Notes\nSplit-Split-Plot Extensions\n\n\n16\nCatch-Up Week\nWeek 16 Notes\nExtra Practice Problems\n\n\n17\nFinal Review and Exam\nFinal Review Notes\nFinal Exam Practice Set\n\n\n\n\n\n\nIn addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links.\n\n\n\n\n\nPre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.\n\n\n\n\nIf you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance.\n\n\n\n\nInstructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
   },
   {
     "objectID": "home_lectures.html#important-notes",
@@ -476,94 +609,136 @@
     "text": "Course Schedule, Assignment Deadlines, and Exam Dates\nThe course schedule, including assignment due dates and the midterm exam date, is subject to change based on the progress of the class, unforeseen circumstances, or instructor discretion. Students are responsible for regularly checking Canvas and announcements on the course GitHub page for the most up-to-date information regarding deadlines and schedule adjustments.\nHowever, the final exam date is not subject to change, as it is determined and scheduled by the university. Please plan accordingly based on the final exam schedule provided by UNM:\n\nFinal Exam Date: Tuesday, May 13, 2025, 10:00 a.m.–12:00 p.m.\nLocation: Classroom (as specified in the syllabus)\n\nStudents are strongly encouraged to stay proactive, monitor changes, and ensure they meet all revised deadlines and expectations as announced.\n\nTentative Course Schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopics\nReadings & Homework Assignments\n\n\n\n\n1\nJan. 21 & 23, 2025\nIntroduction to Experimental Design\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nJan. 28 & 30, 2025\nCompletely Randomized Designs (CRD)\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nFeb. 4 & 6, 2025\nBlocking & RCBD\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nFeb. 11 & 13, 2025\nMultiple Comparisons\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nFeb. 18 & 20, 2025\nChecking Model Assumptions\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFeb. 25 & 27, 2025\nTwo-Way Factorial Designs\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMar. 4 & 6, 2025\nMidterm Exam\nReview all chapters and notes.\n\n\n8\nMar. 11 & 13, 2025\nHigher-Order Factorial Designs\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nMar. 16–20, 2025\n==Spring Break==\nNo classes.\n\n\n10\nMar. 25 & 27, 2025\nAnalysis of Covariance (ANCOVA)\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nApr. 1 & 3, 2025\nComplete Block Designs\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nApr. 8 & 10, 2025\nRow–Column (Latin square) Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nApr. 15 & 17, 2025\nRandom & Mixed Models\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nApr. 22 & 24, 2025\nNested Models\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nApr. 29 & May 1, 2025\nSplit-Plot Designs\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nMay 6 & 8, 2025\nCatching Up and Review\nComprehensive review and Q&A.\n\n\n17\nMay 13\nFinal Exam\nComprehensive (Weeks 1–15)."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html",
-    "href": "lectures/week-01_intro-design.html",
-    "title": "Fundamentals of Experimental Design",
+    "objectID": "lectures/week-02_crd-overview.html",
+    "href": "lectures/week-02_crd-overview.html",
+    "title": "Planning Experiments",
     "section": "",
-    "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code."
+    "text": "In mathematical statistics, well-structured experimental designs and robust analytical methods are essential for drawing valid conclusions about treatment effects. One of the simplest yet fundamental designs is the completely randomized design (CRD). Under a CRD, each experimental unit is randomly assigned to one of several treatment conditions without any blocking factors. This approach ensures that all treatments have an equal chance of being applied to each unit, thereby mitigating systematic biases and facilitating straightforward inference.\nA key tool for analyzing CRDs is the one-way analysis of variance (ANOVA). The one-way ANOVA tests whether at least two of several treatment means differ significantly. Building upon principles of linear models, least squares estimation, and classical hypothesis testing, the one-way ANOVA provides a comprehensive framework to quantify uncertainty and make decisions about treatments based on observed data.\n\n\n\nUnderstand the structure and rationale behind the completely randomized design.\nLearn the randomization procedure and the role of coding treatments.\nFormulate the one-way ANOVA model and understand its assumptions.\nExplore concepts of estimability, least squares estimation, and the distribution of estimators.\nApply the ANOVA test to decide whether treatments differ significantly.\nCalculate sample size and power, and incorporate these insights when planning experiments.\nDemonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#introduction",
-    "href": "lectures/week-01_intro-design.html#introduction",
-    "title": "Fundamentals of Experimental Design",
+    "objectID": "lectures/week-02_crd-overview.html#objectives",
+    "href": "lectures/week-02_crd-overview.html#objectives",
+    "title": "Planning Experiments",
     "section": "",
-    "text": "In experimental design, the goal is to identify how various factors or treatments influence a response variable. Unlike observational studies, well-planned experiments leverage randomization, blocking, and replication to control and isolate sources of variation, thereby allowing robust causal conclusions. By thoughtfully designing experiments, researchers can more efficiently use resources, reduce systematic biases, and interpret data using classical statistical frameworks.\nThe following lecture notes will cover the fundamental principles of experimental design in the context of mathematical statistics. We will discuss the logic and practice of key techniques—randomization, blocking, and replication—and explore their role in ensuring valid and efficient inference. We will also highlight the interplay between design and analysis, referencing classical texts in design of experiments and illustrating concepts through examples and R code."
+    "text": "Understand the structure and rationale behind the completely randomized design.\nLearn the randomization procedure and the role of coding treatments.\nFormulate the one-way ANOVA model and understand its assumptions.\nExplore concepts of estimability, least squares estimation, and the distribution of estimators.\nApply the ANOVA test to decide whether treatments differ significantly.\nCalculate sample size and power, and incorporate these insights when planning experiments.\nDemonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#objectives",
-    "href": "lectures/week-01_intro-design.html#objectives",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Objectives",
-    "text": "Objectives\n\nUnderstand the theoretical foundations and objectives of experimental design in statistics.\nDistinguish between observational and experimental studies, emphasizing the advantages experiments provide.\nLearn the fundamental techniques of replication, blocking, and randomization.\nDiscuss how factorial experiments efficiently explore multiple factors simultaneously.\nUnderstand how design decisions affect data analysis and the validity of inferential procedures.\nReinforce concepts with R-based numerical examples and demonstrate their application to real or simulated data.\nExplore advanced mathematical derivations and proofs in the Appendix.\n\n\nReadings\n\nDean, Voss, and Draguljić (2017, Ch. 1 and 2)"
+    "objectID": "lectures/week-02_crd-overview.html#defining-experimental-design",
+    "href": "lectures/week-02_crd-overview.html#defining-experimental-design",
+    "title": "Planning Experiments",
+    "section": "Defining Experimental Design",
+    "text": "Defining Experimental Design\nAn experimental design is a rule determining how experimental units are assigned to treatments. In a completely randomized design (CRD), no blocking factors are considered; all experimental units are assigned to treatments purely at random. This simplicity allows:\n\nEqual probability of treatment assignment.\nAvoidance of experimenter bias.\nStraightforward statistical analysis.\n\nExamples include testing different battery types or comparing rotary pump speeds to measure fluid flow. When no major nuisance factors (like day-to-day variation or spatial differences) need controlling, a CRD is often appropriate."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#experimentation-vs.-observation",
-    "href": "lectures/week-01_intro-design.html#experimentation-vs.-observation",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Experimentation vs. Observation",
-    "text": "Experimentation vs. Observation\n\nObservational studies record data without intervention, often leaving confounding factors unaccounted for. Causal interpretations are limited.\nControlled experiments, on the other hand, manipulate factor levels and apply treatments to subjects (experimental units). By controlling the allocation of treatments, experiments more reliably identify causes of variation and support causal conclusions."
+    "objectID": "lectures/week-02_crd-overview.html#randomization-procedure",
+    "href": "lectures/week-02_crd-overview.html#randomization-procedure",
+    "title": "Planning Experiments",
+    "section": "Randomization Procedure",
+    "text": "Randomization Procedure\nRandomization ensures fairness and the validity of the statistical distributions underlying standard tests. Treatments, labeled 1 through \\(v\\), are assigned to experimental units by generating random numbers and sorting them. Modern software (R) or random number tables can be used. For instance, if testing three treatment levels (A, B, C) with equal sample sizes, we can:\n\nGenerate random numbers for each unit.\nRank units by their random numbers.\nAssign treatments in order based on the desired allocation.\n\nThis procedure ensures every arrangement is equally likely, aligning with the assumptions in ANOVA and related inference."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#goals-of-experimentation",
-    "href": "lectures/week-01_intro-design.html#goals-of-experimentation",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Goals of Experimentation",
-    "text": "Goals of Experimentation\n\nDetermine causes of variation in response.\nFind optimal conditions and treatment combinations.\nCompare responses across different treatments.\nDevelop predictive models that accurately reflect the underlying process.\n\nEffective experimental design ensures that maximum information is gained while efficiently using resources. These objectives directly influence how we choose the number of observations, treatment combinations, and the structure of the experimental layout."
+    "objectID": "lectures/week-02_crd-overview.html#model-formulation",
+    "href": "lectures/week-02_crd-overview.html#model-formulation",
+    "title": "Planning Experiments",
+    "section": "Model Formulation",
+    "text": "Model Formulation\nConsider \\(v\\) treatments with \\(n\\) observations each (for simplicity). Let \\(Y_{ij}\\) denote the response from the \\(j\\)-th unit receiving treatment \\(i\\), with \\(i=1,\\dots,v\\) and \\(j=1,\\dots,n\\). A common model is:\n\\[\nY_{ij} = \\mu + \\tau_i + \\varepsilon_{ij},\n\\]\nwhere:\n\n\\(\\mu\\) is the overall mean response.\n\\(\\tau_i\\) is the effect of the \\(i\\)-th treatment.\n\\(\\varepsilon_{ij}\\) are independent, normally distributed errors with mean 0 and variance \\(\\sigma^2\\).\n\nThe assumptions are:\n\nErrors \\(\\varepsilon_{ij}\\) are i.i.d. \\(N(0,\\sigma^2)\\).\nTreatment effects sum to zero: \\(\\sum_{i=1}^v \\tau_i = 0\\) for identifiability.\n\nThis linear model model underpins the ANOVA. The null hypothesis for testing no treatment differences is \\(H_0: \\tau_1 = \\tau_2 = \\cdots = \\tau_v = 0\\)."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#importance-of-experimental-design",
-    "href": "lectures/week-01_intro-design.html#importance-of-experimental-design",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Importance of Experimental Design",
-    "text": "Importance of Experimental Design\n\nCause-and-Effect: Only experiments can directly assess causal relationships, unlike observational studies prone to confounding.\nResource Allocation: Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.\nEfficient Analysis: A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.\n\n(See Montgomery, 2019, Design and Analysis of Experiments for a comprehensive treatment.)"
+    "objectID": "lectures/week-02_crd-overview.html#estimability-and-least-squares-estimation",
+    "href": "lectures/week-02_crd-overview.html#estimability-and-least-squares-estimation",
+    "title": "Planning Experiments",
+    "section": "Estimability and Least Squares Estimation",
+    "text": "Estimability and Least Squares Estimation\nNot all model parameters (\\(\\tau_i\\)) are independently estimable. However, estimable functions, linear combinations of parameters that correspond to expected values of observed data, can be estimated uniquely.\nThe least squares estimators (LSEs) solve the normal equations obtained by minimizing the sum of squared errors (SSE):\n\\[\n\\text{SSE} = \\sum_{i=1}^v \\sum_{j=1}^n (Y_{ij} - \\hat{\\mu}_i)^2,\n\\]\nwhere \\(\\hat{\\mu}_i\\) is the estimated mean for treatment \\(i\\). The LSE for each treatment mean \\(\\mu_i = \\mu + \\tau_i\\) is simply the sample mean \\(\\bar{Y}_i = \\frac{1}{n}\\sum_{j=1}^n Y_{ij}\\).\nBecause the normal equations are linearly dependent, an additional constraint is needed (e.g., \\(\\sum \\tau_i = 0\\)). Still, any estimable function (like differences between treatment means) can be uniquely estimated."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#replication",
-    "href": "lectures/week-01_intro-design.html#replication",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Replication",
-    "text": "Replication\n\nDefinition: Replication means repeating the entire set of treatments independently on different experimental units.\nPurpose: Replication estimates the experimental error, allowing generalization of conclusions to a broader population of similar units.\nContrast with Repeated Measurements: Repeated measurements on the same unit (e.g., measuring the same subject multiple times) do not constitute independent replications. True replication involves distinct subjects or units.\n\nWithout adequate replication, it is difficult to separate true treatment effects from random noise."
+    "objectID": "lectures/week-02_crd-overview.html#distribution-of-estimators",
+    "href": "lectures/week-02_crd-overview.html#distribution-of-estimators",
+    "title": "Planning Experiments",
+    "section": "Distribution of Estimators",
+    "text": "Distribution of Estimators\nUnder the normal error assumption, each estimator \\(\\bar{Y}_i\\) is normally distributed, with:\n\\[\nE(\\bar{Y}_i) = \\mu_i, \\quad \\text{Var}(\\bar{Y}_i) = \\frac{\\sigma^2}{n}.\n\\]\nThe error variance \\(\\sigma^2\\) is estimated by the mean square error (MSE):\n\\[\n\\hat{\\sigma}^2 = \\frac{\\text{SSE}}{N - v},\n\\]\nwhere \\(N = v \\cdot n\\) is the total number of observations."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#blocking",
-    "href": "lectures/week-01_intro-design.html#blocking",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Blocking",
-    "text": "Blocking\n\nConcept: Blocking is used to control extraneous variation by grouping experimental units into homogeneous subsets called blocks. Treatments are then compared within these blocks.\nExample: If environmental conditions vary across different times of day, you may form blocks of time periods and randomly assign treatments within each block. This reduces noise and increases the precision of comparisons among treatments.\nOutcome: Blocking improves the precision of inference by removing a known source of variability, making it easier to detect treatment differences."
+    "objectID": "lectures/week-02_crd-overview.html#the-anova-f-test",
+    "href": "lectures/week-02_crd-overview.html#the-anova-f-test",
+    "title": "Planning Experiments",
+    "section": "The ANOVA F-Test",
+    "text": "The ANOVA F-Test\nTo test \\(H_0: \\tau_1 = \\cdots = \\tau_v = 0\\) against \\(H_a:\\) at least two \\(\\tau_i\\) differ, we use the ANOVA F-statistic:\n\\[\nF = \\frac{\\text{MST}}{\\text{MSE}},\n\\]\nwhere:\n\n\\(\\text{SST}\\) = treatment sum of squares measures variation among treatment means.\n\\(\\text{MSE}\\) = error mean square, \\(\\text{MSE} = \\text{SSE}/(N-v)\\).\n\\(\\text{MST} = \\text{SST}/(v-1)\\).\n\nUnder \\(H_0\\), \\(F \\sim F_{v-1, N-v}\\). If \\(F\\)-value exceeds a critical value (or the p-value is below a chosen \\(\\alpha\\)), we reject \\(H_0\\)."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#randomization",
-    "href": "lectures/week-01_intro-design.html#randomization",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Randomization",
-    "text": "Randomization\n\nRationale: Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.\nBenefits:\n\n  - Prevents experimenter preferences or unconscious patterns from influencing results.\n  - Justifies the use of standard statistical distributions (F, t) for inference.\n  - Confirms that observed effects can be attributed to treatments and not assignment bias.\nReference: Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.\n\nMethods of Randomization\n\nRandom Number Generators (RNG): Computer programs or calculators produce pseudo-random digits, used to assign treatments.\nRandom Number Tables: Historically used, a random table combined with random starting points can ensure unbiased allocations.\nEnsuring True Randomness: Use objective random devices (dice, RNGs) and avoid human-chosen “random” sequences, as humans are prone to inadvertent patterns."
+    "objectID": "lectures/week-02_crd-overview.html#anova-table",
+    "href": "lectures/week-02_crd-overview.html#anova-table",
+    "title": "Planning Experiments",
+    "section": "ANOVA Table",
+    "text": "ANOVA Table\nThe ANOVA table summarizes the decomposition of total variability:\n\n\n\nSource\nDF\nSS\nMS\nF-ratio\n\n\n\n\nTreatment\n\\(v-1\\)\nSST\nMST=SST/(v-1)\nMST/MSE\n\n\nError\n\\(N - v\\)\nSSE\nMSE=SSE/(N-v)\n-\n\n\nTotal\n\\(N-1\\)\nSSTotal\n-\n-\n\n\n\nRejecting \\(H_0\\) indicates that not all treatment means are equal."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#example-random-assignment-and-anova",
-    "href": "lectures/week-01_intro-design.html#example-random-assignment-and-anova",
-    "title": "Fundamentals of Experimental Design",
-    "section": "Example: Random Assignment and ANOVA",
-    "text": "Example: Random Assignment and ANOVA\nSuppose we have three treatments (A, B, C) and want to randomly assign them to 9 experimental units.\n\n\nCode\n# Set seed for reproducibility\n\nset.seed(123)\n# Treatments\n\ntreatments &lt;- c(\"A\", \"B\", \"C\")\n# We have 9 units, randomly assign treatments\n\nassignments &lt;- sample(rep(treatments, each=3))\nassignments\n\n\n[1] \"A\" \"B\" \"C\" \"A\" \"C\" \"B\" \"C\" \"A\" \"B\"\n\n\nThis code generates a random permutation of A, B, and C assigned to the units.\nNow assume we collected data (simulated responses):\n\n\nCode\n# Simulate responses with a true difference: A &lt;-  B &lt;-  C\ntrue_means &lt;- c(A=10, B=12, C=15)\nresponses &lt;- rnorm(9, mean=rep(true_means, each=3), sd=2)\ndata &lt;- data.frame(unit = 1:9,treatment = assignments, response = responses)\n\n# Fit an ANOVA model\nfit &lt;- aov(response ~ treatment, data=data)\nsummary(fit)\n\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)\ntreatment    2  32.01   16.00   1.287  0.343\nResiduals    6  74.61   12.44               \n\n\nThe ANOVA table will show how between-treatment variability compares to within-treatment variability. With a large enough difference and adequate replication, we expect a significant treatment effect.\nConclusion\nExperimental design is a cornerstone of scientific inquiry. By employing replication, blocking, and randomization, statisticians and researchers can draw clearer causal conclusions, improve the efficiency of experimentation, and ensure the validity of statistical tests.\nKey Takeaways:\n\nRandomization prevents systematic bias and validates inferential methods.\nReplication provides robust estimates of variability and supports generalizability.\nBlocking controls known sources of variation, improving precision.\nFactorial designs offer a more comprehensive view of multiple factors simultaneously.\n\nFuture sessions may delve deeper into specific complex designs (e.g., Latin squares, split-plots) and advanced analysis methods, ensuring students appreciate the rich interplay between design and analysis."
+    "objectID": "lectures/week-02_crd-overview.html#determining-sample-size-and-power",
+    "href": "lectures/week-02_crd-overview.html#determining-sample-size-and-power",
+    "title": "Planning Experiments",
+    "section": "Determining Sample Size and Power",
+    "text": "Determining Sample Size and Power\nTo ensure the experiment can detect meaningful differences, consider the power analysis. Power calculations (detailed in referenced texts) help determine the number of replicates \\(n\\) per treatment to achieve a desired probability of detecting a specified difference at a given significance level \\(\\alpha\\).\nUse methods from Montgomery, Peck & Vining (2020) or Dean, Voss & Draguljić (2017), along with pilot data, to estimate \\(\\sigma^2\\) and decide on sample size. If resources are limited, one may have to adjust objectives or accept lower power."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#references",
-    "href": "lectures/week-01_intro-design.html#references",
-    "title": "Fundamentals of Experimental Design",
+    "objectID": "lectures/week-02_crd-overview.html#confidence-limits-for-variance",
+    "href": "lectures/week-02_crd-overview.html#confidence-limits-for-variance",
+    "title": "Planning Experiments",
+    "section": "Confidence Limits for Variance",
+    "text": "Confidence Limits for Variance\nA one-sided confidence interval on \\(\\sigma^2\\) prevents underestimating required observations. The upper confidence limit is derived from the chi-squared distribution:\n\\[\n\\frac{(N-v)\\hat{\\sigma}^2}{\\sigma^2} \\sim \\chi^2_{N-v}.\n\\]\nSuch intervals guide planning by addressing uncertainty in the variance estimate."
+  },
+  {
+    "objectID": "lectures/week-02_crd-overview.html#randomization-in-r",
+    "href": "lectures/week-02_crd-overview.html#randomization-in-r",
+    "title": "Planning Experiments",
+    "section": "Randomization in R",
+    "text": "Randomization in R\nSuppose we have 3 treatments (A, B, C) and total 9 units (3 per treatment):\n\n\nCode\n# This code demonstrates the process of complete randomization in a Completely Randomized Design (CRD):\n# 1. Sets a random seed for reproducibility\n# 2. Defines total experimental units (n=9)\n# 3. Creates a balanced treatment allocation (A, B, C with 3 replicates each)\n# 4. Assigns random numbers to each unit using uniform distribution\n# 5. Creates a data frame with unit IDs, treatments, and random numbers\n# 6. Sorts the data frame by random numbers to achieve randomization\n# The result is a randomized assignment of treatments to experimental units.\n\nset.seed(123) # Total units\nn &lt;- 9 # Assign treatments to units, e.g., AAABBBCCC\ntreatments &lt;- rep(c(\"A\", \"B\", \"C\"), each = 3) # Assign random numbers\nrand_nums &lt;- runif(9) # Genrates random numbers\ndata_frame &lt;- data.frame(Unit = 1:9, Treatment = treatments, RN = rand_nums)\ndata_frame_sorted &lt;- data_frame[order(data_frame$RN), ] # Sort by RN\ndata_frame_sorted\n\n\n\n\nTable 1: Randomized Treatment Allocation Data\n\n\n\n\n\n\n\n\nUnit\nTreatment\nRN\n\n\n\n\n6\n6\nB\n0.0455565\n\n\n1\n1\nA\n0.2875775\n\n\n3\n3\nA\n0.4089769\n\n\n7\n7\nC\n0.5281055\n\n\n9\n9\nC\n0.5514350\n\n\n2\n2\nA\n0.7883051\n\n\n4\n4\nB\n0.8830174\n\n\n8\n8\nC\n0.8924190\n\n\n5\n5\nB\n0.9404673\n\n\n\n\n\n\n\n\n\nThis yields a random allocation order.\n\nExplanation of the Key Functions in R\n\nset.seed(123): Sets a seed for reproducibility.\nrep(c(\"A\", \"B\", \"C\"), each = 3): Creates a balanced treatment allocation, where each = 3 assigns 3 units to each treatment. ::: {.cell}\n\n\nCode\nrep(c(\"A\", \"B\"), times= c(2, 3))\n\n\n[1] \"A\" \"A\" \"B\" \"B\" \"B\"\n\n::: - runif(9): Generates 9 random numbers from a uniform distribution. - order: Sorts the data frame based on the random numbers. The result of the function is row indices that would sort the data frame."
+  },
+  {
+    "objectID": "lectures/week-02_crd-overview.html#fitting-a-one-way-anova-model",
+    "href": "lectures/week-02_crd-overview.html#fitting-a-one-way-anova-model",
+    "title": "Planning Experiments",
+    "section": "Fitting a One-Way ANOVA Model",
+    "text": "Fitting a One-Way ANOVA Model\nAssume we have data from a soap experiment (soap.txt) with three soap types (regular, deodorant, moisturizing):\n\n\nCode\npacman::p_load(here)\n# Read data\n\n\nsoap.data &lt;- read.table(here(\"data\",\"dean2017\", \"soap.txt\"), header=TRUE)\nsoap.data$fSoap &lt;- factor(soap.data$Soap)\n\n# Fit a one-way ANOVA\nfit &lt;- aov(WtLoss ~ fSoap, data=soap.data)\nsummary(fit)\n\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nfSoap        2 16.122   8.061   104.5 5.91e-07 ***\nResiduals    9  0.695   0.077                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe ANOVA summary shows if soap type affects weight loss significantly."
+  },
+  {
+    "objectID": "lectures/week-02_crd-overview.html#estimating-means-and-contrasts",
+    "href": "lectures/week-02_crd-overview.html#estimating-means-and-contrasts",
+    "title": "Planning Experiments",
+    "section": "Estimating Means and Contrasts",
+    "text": "Estimating Means and Contrasts\nWe can estimate treatment means (least squares means) and test contrasts using emmeans or multcomp packages. For example:\n\n\nCode\n# install.packages(\"emmeans\") # Run once if not installed\npacman::p_load(emmeans)\nemmeans(fit, ~ fSoap)\n\n\n fSoap emmean    SE df lower.CL upper.CL\n 1     -0.035 0.139  9   -0.349    0.279\n 2      2.700 0.139  9    2.386    3.014\n 3      1.992 0.139  9    1.678    2.307\n\nConfidence level used: 0.95 \n\n\nThis provides estimates and confidence intervals for each soap type’s mean weight loss."
+  },
+  {
+    "objectID": "lectures/week-02_crd-overview.html#conclusion",
+    "href": "lectures/week-02_crd-overview.html#conclusion",
+    "title": "Planning Experiments",
+    "section": "Conclusion",
+    "text": "Conclusion\nA completely randomized design and its corresponding one-way ANOVA analysis form the bedrock of experimental inference when blocking is unnecessary. By carefully randomizing treatments, modeling responses, and applying least squares estimation, one can confidently infer whether treatments differ.\nWe introduced the conceptual framework and key formulae, showed how to conduct hypothesis tests and interpret ANOVA results, discussed sample size and power considerations, and provided R code for practical execution. Mastery of these fundamentals empowers researchers to design efficient experiments, maximize the utility of collected data, and confidently draw conclusions about treatment effects."
+  },
+  {
+    "objectID": "lectures/week-02_crd-overview.html#references",
+    "href": "lectures/week-02_crd-overview.html#references",
+    "title": "Planning Experiments",
     "section": "References",
-    "text": "References\n\nMontgomery, D. C. (2019). Design and Analysis of Experiments. Wiley.\nKempthorne, O. (1977). Design and Analysis of Experiments. Robert E. Krieger Publishing Company.\nScheffé, H. (1959). The Analysis of Variance. Wiley."
+    "text": "References\n\nChristensen, R. (2018). Analysis of variance, design, and regression: Linear modeling for unbalanced data (2nd Ed.). Chapman and Hall/CRC.\nDean, A., Voss, D., & Draguljić, D. (2017). Design and analysis of experiments. Springer. https://doi.org/10.1007/978-3-319-52250-0\nKempthorne, O. (1977). Design and Analysis of Experiments. Wiley.\nMontgomery, D. C., Peck, E. A., & Vining, G. G. (2020). Introduction to linear regression analysis (5th Ed.). Wiley."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#a-proof-of-randomizations-role-in-distributional-assumptions",
-    "href": "lectures/week-01_intro-design.html#a-proof-of-randomizations-role-in-distributional-assumptions",
-    "title": "Fundamentals of Experimental Design",
-    "section": "A Proof of Randomization’s Role in Distributional Assumptions",
-    "text": "A Proof of Randomization’s Role in Distributional Assumptions\nUnder a completely randomized design, every unit is equally likely to receive any treatment. Let \\(Y_{ij}\\) represent the response from the \\(j\\)-th replicate of treatment \\(i\\). Assuming \\(Y_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij}\\) with \\(\\varepsilon_{ij} \\sim N(0,\\sigma^2)\\):\n\nRandomization ensures that \\((\\varepsilon_{ij})\\) are exchangeable random variables.\nUnder \\(H_0: \\alpha_i=0\\), the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).\nWithout randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.\n\nFor more technical details, see Kempthorne (1977, Ch. 2)."
+    "objectID": "lectures/week-02_crd-overview.html#a.1-normal-equations-and-estimability",
+    "href": "lectures/week-02_crd-overview.html#a.1-normal-equations-and-estimability",
+    "title": "Planning Experiments",
+    "section": "A.1 Normal Equations and Estimability",
+    "text": "A.1 Normal Equations and Estimability\nThe one-way ANOVA model can be written as:\n\\[\nY_{ij} = \\mu_i + \\varepsilon_{ij}, \\quad \\text{with } \\mu_i = \\mu + \\tau_i.\n\\]\nThe least squares approach forms normal equations from partial derivatives of SSE. Because \\(\\sum \\tau_i = 0\\), only differences in means are estimable. The space of estimable functions includes contrasts like \\(\\mu_1 - \\mu_2\\), but not individual \\(\\tau_i\\) alone."
   },
   {
-    "objectID": "lectures/week-01_intro-design.html#a-derivation-of-expected-mean-squares",
-    "href": "lectures/week-01_intro-design.html#a-derivation-of-expected-mean-squares",
-    "title": "Fundamentals of Experimental Design",
-    "section": "A Derivation of Expected Mean Squares",
-    "text": "A Derivation of Expected Mean Squares\nFor the simple one-way ANOVA model:\n\\[\nY_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij},\n\\]\nwith \\(\\sum \\alpha_i = 0\\), the expected mean squares are:\n\\[\nE(MS_{\\text{Treatment}}) = \\sigma^2 + n \\sum \\alpha_i^2/(g-1),\n\\]\n\\[\nE(MS_{\\text{Error}}) = \\sigma^2.\n\\]\nThese derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959)."
+    "objectID": "lectures/week-02_crd-overview.html#a.2-distribution-of-the-f-statistic",
+    "href": "lectures/week-02_crd-overview.html#a.2-distribution-of-the-f-statistic",
+    "title": "Planning Experiments",
+    "section": "A.2 Distribution of the F-Statistic",
+    "text": "A.2 Distribution of the F-Statistic\nUnder \\(H_0\\):\n\\[\nF = \\frac{MST}{MSE} \\sim F_{v-1, N-v}.\n\\]\nIf treatments truly differ, F follows a noncentral F-distribution, enabling power calculations and minimum detectable differences."
+  },
+  {
+    "objectID": "lectures/week-02_crd-overview.html#a.3-power-calculations",
+    "href": "lectures/week-02_crd-overview.html#a.3-power-calculations",
+    "title": "Planning Experiments",
+    "section": "A.3 Power Calculations",
+    "text": "A.3 Power Calculations\nPower for detecting a difference \\(\\delta\\) in means involves the noncentrality parameter of the F-distribution. By selecting \\(\\alpha, \\sigma^2, \\delta,\\) and desired power, tables or software (e.g., pwr package in R) guide sample size choices.\n\n\nCode\n# Example using pwr package\n# install.packages(\"pwr\") # if not installed\npacman::p_load(pwr)\npwr.anova.test(k = 3, f = 0.4, sig.level = 0.05, power = 0.8)\n\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 3\n              n = 21.10364\n              f = 0.4\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\nThis computes required sample size per treatment to achieve 80% power with a given effect size \\(f\\)."
   }
 ]
