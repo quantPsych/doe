@@ -24,10 +24,12 @@
  * Breakpoints: None defined (consider adding for better responsiveness)
  */
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #000000;
-  --accent-color: #007bff;
-  --background-color: #f8f9fa;
+  --primary-color: #ffffff; /* Primary color used for backgrounds and text */
+  --secondary-color: #000000; /* Secondary color used for text and other elements */
+  --accent-color: #ff5733; /* Accent color used for headings, links, and buttons */
+  --background-color: #f8f9fa; /* Background color for the body */
+  --code-block-bg: #e9ecef; /* Background color for code blocks */
+  --code-color: #333; /* Text color for code blocks */
 }
 
 body {
@@ -36,7 +38,8 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
-  color: var(--secondary-color);
+  background-color: var(--background-color); /* Maps to the main background of the page */
+  color: var(--secondary-color); /* Maps to the primary text color */
   font-family: 'Roboto', sans-serif;
   font-size: 16px; /* Updated to match $font-size-base */
   line-height: 1.6; /* Updated to match $line-height-base */
@@ -44,20 +47,16 @@ body {
   padding: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
-  color: var(--accent-color); /* Updated to match $accent-color */
+  color: var(--accent-color); /* Maps to the color of headings */
 }
 
-code,
-pre {
+code, pre {
   font-family: 'Fira Code', monospace;
   font-size: 14px; /* Updated to match $font-size-code */
+  background-color: var(--code-block-bg); /* Maps to the background of code blocks */
+  color: var(--code-color); /* Maps to the text color within code blocks */
 }
 
 .navbar,
@@ -99,7 +98,7 @@ pre {
 }
 
 a {
-  color: var(--accent-color);
+  color: var(--accent-color); /* Maps to the color of links */
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -109,8 +108,8 @@ a:hover {
 }
 
 button {
-  background-color: var(--accent-color);
-  color: var(--primary-color);
+  background-color: var(--accent-color); /* Maps to the background color of buttons */
+  color: var(--primary-color); /* Maps to the text color of buttons */
   border: none;
   padding: 0.5em 1em;
   cursor: pointer;
