@@ -1,3 +1,28 @@
+/**
+ * Project root styling for DOE website
+ * =================================
+ * 
+ * This CSS file defines the core styles for the DOE website homepage.
+ * 
+ * Color Variables:
+ * - primary-color: White (#ffffff)
+ * - secondary-color: Black (#000000) 
+ * - accent-color: Blue (#007bff)
+ * - background-color: Light gray (#f8f9fa)
+ *
+ * Key Components:
+ * - Body: Full-screen background image setup with Roboto font
+ * - Typography: Montserrat for headings, Fira Code for code blocks
+ * - Navigation: Transparent navbar and footer with hover effects
+ * - Layout: Responsive grid system with two-column layout
+ * - Interactive Elements: Links and buttons with hover transitions
+ *
+ * Grid Areas:
+ * - text: Left column content
+ * - hero: Right column content
+ *
+ * Breakpoints: None defined (consider adding for better responsiveness)
+ */
 :root {
   --primary-color: #ffffff;
   --secondary-color: #000000;
@@ -6,23 +31,42 @@
 }
 
 body {
-  background-image: url("../assets/images/home.png");
+  /* background-image: url("../assets/images/home.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
   color: var(--secondary-color);
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   margin: 0;
   padding: 0;
 }
 
-.navbar, .nav-footer {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+code,
+pre {
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+
+.navbar,
+.nav-footer {
   background-color: transparent !important;
   transition: background-color 0.3s ease;
 }
 
-.navbar:hover, .nav-footer:hover {
+.navbar:hover,
+.nav-footer:hover {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -45,11 +89,11 @@ body {
   grid-template-areas: "text hero";
 }
 
-.home-grid-parent > .text {
+.home-grid-parent>.text {
   grid-area: text;
 }
 
-.home-grid-parent > .hero {
+.home-grid-parent>.hero {
   grid-area: hero;
 }
 

@@ -135,6 +135,7 @@ div.csl-indent {
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
 </head><body class="nav-fixed"><img src="assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -495,8 +496,6 @@ Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
 <h3 class="anchored" data-anchor-id="visual-aid-factor-classification-flowchart">Visual Aid: Factor Classification Flowchart</h3>
 <p>Below is R code to generate a decision flowchart. (This code can be run separately.)</p>
 <div class="cell" data-layout-align="left">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    A[All Factors]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    B[Interested in studying the effect?]</span>
@@ -512,7 +511,6 @@ Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    D --&gt; E</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    E --&gt;|Yes| F</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    E --&gt;|No| G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -574,13 +572,10 @@ Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
 <section id="r-example-simple-random-assignment" class="level3">
 <h3 class="anchored" data-anchor-id="r-example-simple-random-assignment">R Example: Simple Random Assignment</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each=</span><span class="dv">4</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>assignments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "A" "C" "C" "A" "B" "C" "B" "A" "C" "B" "A" "B"</code></pre>
 </div>
@@ -650,8 +645,6 @@ Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
 <section id="visual-aid-factorial-design-example-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="visual-aid-factorial-design-example-in-r">Visual Aid: Factorial Design Example in R</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>design_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Flyer =</span> <span class="fu">c</span>(<span class="st">"Ordinary"</span>, <span class="st">"Special"</span>),</span>
@@ -666,7 +659,6 @@ Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Response (Yield)"</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -827,8 +819,6 @@ Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment ef
 <section id="r-code" class="level3">
 <h3 class="anchored" data-anchor-id="r-code">R Code</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">4</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
@@ -839,7 +829,6 @@ Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment ef
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> <span class="fu">factor</span>(assignments))</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    Df Sum Sq Mean Sq F value Pr(&gt;F)
 factor(assignments)  2   14.2    7.08   0.163  0.852

@@ -107,6 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:image" content="https://quantpsych.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -436,8 +437,6 @@ F = \frac{\text{MST}}{\text{MSE}},
 <h2 class="anchored" data-anchor-id="randomization-in-r">Randomization in R</h2>
 <p>Suppose we have 3 treatments (A, B, C) and total 9 units (3 per treatment):</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Total units</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">9</span> <span class="co"># Assign treatments to units, e.g., AAABBBCCC</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">3</span>) <span class="co"># Assign random numbers</span></span>
@@ -445,7 +444,6 @@ F = \frac{\text{MST}}{\text{MSE}},
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">Treatment =</span> treatments, <span class="at">RN =</span> rand_nums)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_frame_sorted <span class="ot">&lt;-</span> data_frame[<span class="fu">order</span>(data_frame<span class="sc">$</span>RN), ] <span class="co"># Sort by RN</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data_frame_sorted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div id="tbl-randomization" class="cell quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -541,8 +539,6 @@ Table&nbsp;1: Randomized Treatment Allocation Data
 <h2 class="anchored" data-anchor-id="fitting-a-one-way-anova-model">Fitting a One-Way ANOVA Model</h2>
 <p>Assume we have data from a soap experiment (soap.txt) with three soap types (regular, deodorant, moisturizing):</p>
 <div class="cell" data-tbl-cap="ANOVA Results for Soap Experiment">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -553,7 +549,6 @@ Table&nbsp;1: Randomized Treatment Allocation Data
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a one-way ANOVA</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(WtLoss <span class="sc">~</span> fSoap, <span class="at">data=</span>soap.data)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 fSoap        2 16.122   8.061   104.5 5.91e-07 ***
@@ -568,12 +563,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2 class="anchored" data-anchor-id="estimating-means-and-contrasts">Estimating Means and Contrasts</h2>
 <p>We can estimate treatment means (least squares means) and test contrasts using <code>emmeans</code> or <code>multcomp</code> packages. For example:</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("emmeans") # Run once if not installed</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(fit, <span class="sc">~</span> fSoap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code> fSoap emmean    SE df lower.CL upper.CL
  1     -0.035 0.139  9   -0.349    0.279
@@ -622,13 +614,10 @@ F = \frac{MST}{MSE} \sim F_{v-1, N-v}.
 <h2 class="anchored" data-anchor-id="a.3-power-calculations">A.3 Power Calculations</h2>
 <p>Power for detecting a difference <span class="math inline">\(\delta\)</span> in means involves the noncentrality parameter of the F-distribution. By selecting <span class="math inline">\(\alpha, \sigma^2, \delta,\)</span> and desired power, tables or software (e.g., <code>pwr</code> package in R) guide sample size choices.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example using pwr package</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pwr") # if not installed</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(pwr)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.anova.test</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">f =</span> <span class="fl">0.4</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Balanced one-way analysis of variance power calculation 
