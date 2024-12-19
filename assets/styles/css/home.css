@@ -38,8 +38,8 @@ body {
   background-attachment: scroll;
   color: var(--secondary-color);
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 16px; /* Updated to match $font-size-base */
+  line-height: 1.6; /* Updated to match $line-height-base */
   margin: 0;
   padding: 0;
 }
@@ -51,12 +51,13 @@ h4,
 h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
+  color: var(--accent-color); /* Updated to match $accent-color */
 }
 
 code,
 pre {
   font-family: 'Fira Code', monospace;
-  font-size: 14px;
+  font-size: 14px; /* Updated to match $font-size-code */
 }
 
 .navbar,
