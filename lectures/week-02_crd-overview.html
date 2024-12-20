@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <meta property="og:title" content="Planning Experiments – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://quantpsych.github.io/doe/lectures/assets/images/home.png">
@@ -207,7 +209,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">19-Dec-2024</p>
+        <p class="date">20-Dec-2024</p>
       </div>
     </div>
     
@@ -269,7 +271,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
 
 
 
@@ -285,7 +287,7 @@ window.Quarto = {
 <li>Understand the structure and rationale behind the completely randomized design.</li>
 <li>Learn the randomization procedure and the role of coding treatments.</li>
 <li>Formulate the one-way ANOVA model and understand its assumptions.</li>
-<li>Explore concepts of estimability, least squares estimation, and the distribution of estimators.</li>
+<li>Explore concepts of <em>estimability</em>, least squares estimation, and the distribution of estimators.</li>
 <li>Apply the ANOVA test to decide whether treatments differ significantly.</li>
 <li>Calculate sample size and power, and incorporate these insights when planning experiments.</li>
 <li>Demonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables.</li>
@@ -315,14 +317,14 @@ window.Quarto = {
 <p>This procedure ensures every arrangement is equally likely, aligning with the assumptions in ANOVA and related inference.</p>
 </section>
 </section>
-<section id="the-one-way-anova-model" class="level1">
+<section id="the-one-way-anova-model" class="level1 page-columns page-full">
 <h1>The One-Way ANOVA Model</h1>
-<section id="model-formulation" class="level2">
+<section id="model-formulation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="model-formulation">Model Formulation</h2>
 <p>Consider <span class="math inline">\(v\)</span> treatments with <span class="math inline">\(n\)</span> observations each (for simplicity). Let <span class="math inline">\(Y_{ij}\)</span> denote the response from the <span class="math inline">\(j\)</span>-th unit receiving treatment <span class="math inline">\(i\)</span>, with <span class="math inline">\(i=1,\dots,v\)</span> and <span class="math inline">\(j=1,\dots,n\)</span>. A common model is:</p>
 <p><span class="math display">\[
 Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
-\]</span></p>
+\]</span> {#eq:anova-model}</p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(\mu\)</span> is the overall mean response.</li>
@@ -332,17 +334,22 @@ Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
 <p>The assumptions are:</p>
 <ul>
 <li>Errors <span class="math inline">\(\varepsilon_{ij}\)</span> are i.i.d. <span class="math inline">\(N(0,\sigma^2)\)</span>.</li>
-<li>Treatment effects sum to zero: <span class="math inline">\(\sum_{i=1}^v \tau_i = 0\)</span> for identifiability.</li>
+<li>Treatment effects sum to zero: <span class="math inline">\(\sum_{i=1}^v \tau_i = 0\)</span> for <em>identifiability</em>.</li>
 </ul>
 <p>This linear model model underpins the ANOVA. The null hypothesis for testing no treatment differences is <span class="math inline">\(H_0: \tau_1 = \tau_2 = \cdots = \tau_v = 0\)</span>.</p>
-</section>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<ul>
+<li><em>identifiability:</em></li>
+</ul>
+</div></div></section>
 <section id="estimability-and-least-squares-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="estimability-and-least-squares-estimation">Estimability and Least Squares Estimation</h2>
 <p>Not all model parameters (<span class="math inline">\(\tau_i\)</span>) are independently estimable. However, <strong>estimable functions</strong>, linear combinations of parameters that correspond to expected values of observed data, can be estimated uniquely.</p>
 <p>The least squares estimators (LSEs) solve the normal equations obtained by minimizing the sum of squared errors (SSE):</p>
 <p><span class="math display">\[
 \text{SSE} = \sum_{i=1}^v \sum_{j=1}^n (Y_{ij} - \hat{\mu}_i)^2,
-\]</span></p>
+\]</span> {#eq:sse}</p>
 <p>where <span class="math inline">\(\hat{\mu}_i\)</span> is the estimated mean for treatment <span class="math inline">\(i\)</span>. The LSE for each treatment mean <span class="math inline">\(\mu_i = \mu + \tau_i\)</span> is simply the sample mean <span class="math inline">\(\bar{Y}_i = \frac{1}{n}\sum_{j=1}^n Y_{ij}\)</span>.</p>
 <p>Because the normal equations are linearly dependent, an additional constraint is needed (e.g., <span class="math inline">\(\sum \tau_i = 0\)</span>). Still, any estimable function (like differences between treatment means) can be uniquely estimated.</p>
 </section>
@@ -351,22 +358,22 @@ Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
 <p>Under the normal error assumption, each estimator <span class="math inline">\(\bar{Y}_i\)</span> is normally distributed, with:</p>
 <p><span class="math display">\[
 E(\bar{Y}_i) = \mu_i, \quad \text{Var}(\bar{Y}_i) = \frac{\sigma^2}{n}.
-\]</span></p>
+\]</span> {#eq:estimator-variance}</p>
 <p>The error variance <span class="math inline">\(\sigma^2\)</span> is estimated by the mean square error (MSE):</p>
 <p><span class="math display">\[
 \hat{\sigma}^2 = \frac{\text{SSE}}{N - v},
-\]</span></p>
+\]</span> {#eq:mse}</p>
 <p>where <span class="math inline">\(N = v \cdot n\)</span> is the total number of observations.</p>
 </section>
 </section>
-<section id="hypothesis-testing-and-anova" class="level1">
+<section id="hypothesis-testing-and-anova" class="level1 page-columns page-full">
 <h1>Hypothesis Testing and ANOVA</h1>
 <section id="the-anova-f-test" class="level2">
 <h2 class="anchored" data-anchor-id="the-anova-f-test">The ANOVA F-Test</h2>
 <p>To test <span class="math inline">\(H_0: \tau_1 = \cdots = \tau_v = 0\)</span> against <span class="math inline">\(H_a:\)</span> at least two <span class="math inline">\(\tau_i\)</span> differ, we use the ANOVA F-statistic:</p>
 <p><span class="math display">\[
 F = \frac{\text{MST}}{\text{MSE}},
-\]</span></p>
+\]</span> {#eq:f-statistic}</p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(\text{SST}\)</span> = treatment sum of squares measures variation among treatment means.</li>
@@ -375,10 +382,13 @@ F = \frac{\text{MST}}{\text{MSE}},
 </ul>
 <p>Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(F \sim F_{v-1, N-v}\)</span>. If <span class="math inline">\(F\)</span>-value exceeds a critical value (or the p-value is below a chosen <span class="math inline">\(\alpha\)</span>), we reject <span class="math inline">\(H_0\)</span>.</p>
 </section>
-<section id="anova-table" class="level2">
+<section id="anova-table" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="anova-table">ANOVA Table</h2>
 <p>The ANOVA table summarizes the decomposition of total variability:</p>
-<table class="caption-top table">
+<div id="tbl-anova" class="striped hover bordered quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover table-bordered table">
 <thead>
 <tr class="header">
 <th>Source</th>
@@ -401,17 +411,24 @@ F = \frac{\text{MST}}{\text{MSE}},
 <td><span class="math inline">\(N - v\)</span></td>
 <td>SSE</td>
 <td>MSE=SSE/(N-v)</td>
-<td>-</td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Total</td>
 <td><span class="math inline">\(N-1\)</span></td>
 <td>SSTotal</td>
-<td>-</td>
-<td>-</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: ANOVA Table for a Completely Randomized Design
+</figcaption>
+</figure>
+</div>
+<p>The table provides a concise summary of the ANOVA results, including degrees of freedom (DF), sum of squares (SS), mean squares (MS), and the F-ratio.</p>
 <p>Rejecting <span class="math inline">\(H_0\)</span> indicates that not all treatment means are equal.</p>
 </section>
 </section>
@@ -427,16 +444,16 @@ F = \frac{\text{MST}}{\text{MSE}},
 <p>A one-sided confidence interval on <span class="math inline">\(\sigma^2\)</span> prevents underestimating required observations. The upper confidence limit is derived from the chi-squared distribution:</p>
 <p><span class="math display">\[
 \frac{(N-v)\hat{\sigma}^2}{\sigma^2} \sim \chi^2_{N-v}.
-\]</span></p>
+\]</span> {#eq:variance-ci}</p>
 <p>Such intervals guide planning by addressing uncertainty in the variance estimate.</p>
 </section>
 </section>
-<section id="practical-r-examples" class="level1">
+<section id="practical-r-examples" class="level1 page-columns page-full">
 <h1>Practical R Examples</h1>
-<section id="randomization-in-r" class="level2">
+<section id="randomization-in-r" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="randomization-in-r">Randomization in R</h2>
 <p>Suppose we have 3 treatments (A, B, C) and total 9 units (3 per treatment):</p>
-<div class="cell">
+<div class="cell page-columns page-full" width="60%">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Total units</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">9</span> <span class="co"># Assign treatments to units, e.g., AAABBBCCC</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">3</span>) <span class="co"># Assign random numbers</span></span>
@@ -444,83 +461,20 @@ F = \frac{\text{MST}}{\text{MSE}},
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">Treatment =</span> treatments, <span class="at">RN =</span> rand_nums)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_frame_sorted <span class="ot">&lt;-</span> data_frame[<span class="fu">order</span>(data_frame<span class="sc">$</span>RN), ] <span class="co"># Sort by RN</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data_frame_sorted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-randomization" class="cell quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Randomized Treatment Allocation Data
-</figcaption>
+<div id="tbl-randomization" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full" width="60%">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="kable-table">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">Unit</th>
-<th style="text-align: left;">Treatment</th>
-<th style="text-align: right;">RN</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">6</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">0.0455565</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">0.2875775</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">0.4089769</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">C</td>
-<td style="text-align: right;">0.5281055</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">9</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">C</td>
-<td style="text-align: right;">0.5514350</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">0.7883051</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">4</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">0.8830174</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">8</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">C</td>
-<td style="text-align: right;">0.8924190</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">0.9404673</td>
-</tr>
-</tbody>
-</table>
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Unit"],"name":[1],"type":["int"],"align":["right"]},{"label":["Treatment"],"name":[2],"type":["chr"],"align":["left"]},{"label":["RN"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"6","2":"B","3":"0.0455565","_rn_":"6"},{"1":"1","2":"A","3":"0.2875775","_rn_":"1"},{"1":"3","2":"A","3":"0.4089769","_rn_":"3"},{"1":"7","2":"C","3":"0.5281055","_rn_":"7"},{"1":"9","2":"C","3":"0.5514350","_rn_":"9"},{"1":"2","2":"A","3":"0.7883051","_rn_":"2"},{"1":"4","2":"B","3":"0.8830174","_rn_":"4"},{"1":"8","2":"C","3":"0.8924190","_rn_":"8"},{"1":"5","2":"B","3":"0.9404673","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
 </div>
 </div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Randomized Treatment Allocation Data
+</figcaption>
 </figure>
 </div>
 </div>
@@ -528,7 +482,7 @@ Table&nbsp;1: Randomized Treatment Allocation Data
 <section id="explanation-of-the-key-functions-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="explanation-of-the-key-functions-in-r">Explanation of the Key Functions in R</h3>
 <ul>
-<li><code>set.seed(123)</code>: Sets a seed for reproducibility.</li>
+<li><code>set.seed(123)</code>: Sets a seed for <em>reproducibility</em>.</li>
 <li><code>rep(c("A", "B", "C"), each = 3)</code>: Creates a balanced treatment allocation, where <code>each = 3</code> assigns 3 units to each treatment.</li>
 <li><code>runif(9)</code>: Generates 9 random numbers from a uniform distribution.</li>
 <li><code>order</code>: Sorts the data frame based on the random numbers. The result of the function is row indices that would sort the data frame.</li>
@@ -541,14 +495,12 @@ Table&nbsp;1: Randomized Treatment Allocation Data
 <div class="cell" data-tbl-cap="ANOVA Results for Soap Experiment">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>soap.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"dean2017"</span>, <span class="st">"soap.txt"</span>), <span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>soap.data<span class="sc">$</span>fSoap <span class="ot">&lt;-</span> <span class="fu">factor</span>(soap.data<span class="sc">$</span>Soap)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a one-way ANOVA</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(WtLoss <span class="sc">~</span> fSoap, <span class="at">data=</span>soap.data)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>soap.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"dean2017"</span>, <span class="st">"soap.txt"</span>), <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>soap.data<span class="sc">$</span>fSoap <span class="ot">&lt;-</span> <span class="fu">factor</span>(soap.data<span class="sc">$</span>Soap)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a one-way ANOVA</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(WtLoss <span class="sc">~</span> fSoap, <span class="at">data=</span>soap.data)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 fSoap        2 16.122   8.061   104.5 5.91e-07 ***
@@ -586,7 +538,7 @@ Confidence level used: 0.95 </code></pre>
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
 <li>Christensen, R. (2018). <em>Analysis of variance, design, and regression: Linear modeling for unbalanced data (2nd Ed.)</em>. Chapman and Hall/CRC.</li>
-<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em>. Springer. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a></li>
+<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em>. Springer. <a href="https://doi.org/10.1007/978-3-319-52250-0" class="uri">https://doi.org/10.1007/978-3-319-52250-0</a></li>
 <li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Wiley.</li>
 <li>Montgomery, D. C., Peck, E. A., &amp; Vining, G. G. (2020). <em>Introduction to linear regression analysis (5th Ed.)</em>. Wiley.</li>
 </ul>

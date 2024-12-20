@@ -8,7 +8,7 @@
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>Tutorial on rep function in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Randomizing Treatments in R Using sample() – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,7 +104,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 <link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<meta property="og:title" content="Tutorial on rep function in R – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Randomizing Treatments in R Using sample() – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://quantpsych.github.io/doe/appendix/r-base/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
@@ -162,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Tutorial on <code>rep</code> function in R</h1>
+      <h1 class="title">Randomizing Treatments in R Using <code>sample()</code></h1>
                       </div>
   </div>
     
@@ -179,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">18-Dec-2024</p>
+        <p class="date">20-Dec-2024</p>
       </div>
     </div>
     
@@ -195,14 +196,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tutorial-mastering-the-rep-function-in-r" id="toc-tutorial-mastering-the-rep-function-in-r" class="nav-link active" data-scroll-target="#tutorial-mastering-the-rep-function-in-r">Tutorial: Mastering the <code>rep</code> Function in R</a>
+  <li><a href="#function-description" id="toc-function-description" class="nav-link active" data-scroll-target="#function-description"><strong>Function Description</strong></a>
   <ul class="collapse">
-  <li><a href="#function-overview" id="toc-function-overview" class="nav-link" data-scroll-target="#function-overview">1. Function Overview</a></li>
-  <li><a href="#arguments-explanation" id="toc-arguments-explanation" class="nav-link" data-scroll-target="#arguments-explanation">2. Arguments Explanation</a></li>
-  <li><a href="#nuances-and-advanced-features" id="toc-nuances-and-advanced-features" class="nav-link" data-scroll-target="#nuances-and-advanced-features">3. Nuances and Advanced Features</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">4. Examples</a></li>
-  <li><a href="#common-errors-and-troubleshooting" id="toc-common-errors-and-troubleshooting" class="nav-link" data-scroll-target="#common-errors-and-troubleshooting">5. Common Errors and Troubleshooting</a></li>
+  <li><a href="#key-arguments" id="toc-key-arguments" class="nav-link" data-scroll-target="#key-arguments"><strong>Key Arguments</strong></a></li>
   </ul></li>
+  <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features"><strong>Key Features</strong></a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><strong>Examples</strong></a>
+  <ul class="collapse">
+  <li><a href="#random-permutation" id="toc-random-permutation" class="nav-link" data-scroll-target="#random-permutation">1. Random Permutation</a></li>
+  <li><a href="#sampling-with-replacement" id="toc-sampling-with-replacement" class="nav-link" data-scroll-target="#sampling-with-replacement">2. Sampling With Replacement</a></li>
+  <li><a href="#weighted-sampling" id="toc-weighted-sampling" class="nav-link" data-scroll-target="#weighted-sampling">3. Weighted Sampling</a></li>
+  <li><a href="#default-behavior-for-single-integer" id="toc-default-behavior-for-single-integer" class="nav-link" data-scroll-target="#default-behavior-for-single-integer">4. Default Behavior for Single Integer</a></li>
+  <li><a href="#safeguarding-edge-cases-with-sample.int" id="toc-safeguarding-edge-cases-with-sample.int" class="nav-link" data-scroll-target="#safeguarding-edge-cases-with-sample.int">5. Safeguarding Edge Cases with <code>sample.int</code></a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><strong>Best Practices</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -213,216 +220,188 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="tutorial-mastering-the-rep-function-in-r" class="level1">
-<h1>Tutorial: Mastering the <code>rep</code> Function in R</h1>
-<section id="function-overview" class="level2">
-<h2 class="anchored" data-anchor-id="function-overview">1. Function Overview</h2>
-<p>The <code>rep</code> function in R replicates the elements of vectors. It is commonly used to:</p>
+<section id="function-description" class="level2">
+<h2 class="anchored" data-anchor-id="function-description"><strong>Function Description</strong></h2>
+<p>The <code>sample()</code> function operates on vectors or integers and uses random number generation to produce randomized output.</p>
+<section id="key-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="key-arguments"><strong>Key Arguments</strong></h3>
+<ol type="1">
+<li><strong><code>x</code></strong>:
 <ul>
-<li>Repeat single values or sequences.</li>
-<li>Expand data sets with repetitive patterns.</li>
-<li>Create predictable test cases for analysis or debugging.</li>
-</ul>
-<p>It is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.</p>
-</section>
-<section id="arguments-explanation" class="level2">
-<h2 class="anchored" data-anchor-id="arguments-explanation">2. Arguments Explanation</h2>
-<p>The <code>rep</code> function has the following arguments:</p>
-<ul>
-<li><strong>x</strong>:
-<ul>
-<li><strong>Description</strong>: The vector to be replicated.</li>
-<li><strong>Type</strong>: Numeric, character, logical, or any other R object.</li>
-<li><strong>Required</strong>: Yes.</li>
-<li><strong>Examples</strong>:</li>
+<li>A vector of elements to sample from.</li>
+<li>If <code>x</code> is a single positive integer, <code>sample()</code> assumes <code>x</code> as <code>1:x</code> (i.e., the sequence from 1 to <code>x</code>).</li>
 </ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="dv">2</span>) <span class="co"># Output: 1 2 3 1 2 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 1 2 3</code></pre>
-</div>
-</div>
+<li><strong><code>size</code></strong>:
 <ul>
-<li><strong>times</strong>:
-<ul>
-<li><strong>Description</strong>: Specifies the number of times to repeat each element.</li>
-<li><strong>Type</strong>: Numeric vector (must be non-negative integers).</li>
-<li><strong>Default</strong>: None; must be explicitly defined if used.</li>
-<li><strong>Examples</strong>:</li>
+<li>Specifies the number of elements to sample. Default is the length of <code>x</code> (i.e., it permutes the entire input if <code>size</code> is not specified).</li>
 </ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)) <span class="co"># Output: 1 1 2 2 2 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 1 2 2 2 3</code></pre>
-</div>
-</div>
+<li><strong><code>replace</code></strong>:
 <ul>
-<li><strong>each</strong>:
-<ul>
-<li><strong>Description</strong>: Specifies the number of times to repeat each element individually.</li>
-<li><strong>Type</strong>: Numeric scalar (non-negative integer).</li>
-<li><strong>Default</strong>: 1.</li>
-<li><strong>Examples</strong>:</li>
+<li>Logical, determines if sampling is with replacement (<code>TRUE</code>) or without replacement (<code>FALSE</code>).</li>
+<li>Default: <code>FALSE</code>.</li>
 </ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>) <span class="co"># Output: 1 1 2 2 3 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 1 2 2 3 3</code></pre>
-</div>
-</div>
+<li><strong><code>prob</code></strong>:
 <ul>
-<li><strong>length.out</strong>:
-<ul>
-<li><strong>Description</strong>: Specifies the total length of the resulting vector.</li>
-<li><strong>Type</strong>: Numeric scalar.</li>
-<li><strong>Default</strong>: NULL (calculated based on other arguments).</li>
-<li><strong>Examples</strong>:</li>
+<li>A vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.</li>
+<li>Default: <code>NULL</code> (uniform probabilities).</li>
 </ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">5</span>) <span class="co"># Output: 1 2 3 1 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 1 2</code></pre>
+<li><strong><code>useHash</code></strong> (in <code>sample.int</code>):
+<ul>
+<li>Optimizes sampling for large datasets when <code>replace = FALSE</code>, <code>prob = NULL</code>, and <code>size &lt;= n/2</code>.</li>
+</ul></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <code>replace = FALSE</code>, <code>size</code> should not exceed the length of <code>x</code>. Otherwise, an error occurs.</p>
 </div>
 </div>
 </section>
-<section id="nuances-and-advanced-features" class="level2">
-<h2 class="anchored" data-anchor-id="nuances-and-advanced-features">3. Nuances and Advanced Features</h2>
+</section>
+<section id="key-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-features"><strong>Key Features</strong></h2>
 <ol type="1">
-<li><strong>Combining <code>each</code> and <code>times</code></strong>:
+<li><strong>Random Permutation</strong>:
 <ul>
-<li>When both <code>each</code> and <code>times</code> are specified, <code>each</code> operates first, followed by <code>times</code>.</li>
+<li>If no <code>size</code> is provided and <code>replace = FALSE</code>, the function shuffles all elements of <code>x</code>:</li>
 </ul></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">2</span>) <span class="co"># Output: 1 1 2 2 1 1 2 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># For reproducibility</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)  <span class="co"># Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 1 2 2 1 1 2 2</code></pre>
+<pre><code>[1] 1 5 4 3 2</code></pre>
 </div>
 </div>
-<ol type="1">
-<li><strong>Non-integer inputs</strong>:
+<ol start="2" type="1">
+<li><strong>With Replacement</strong>:
 <ul>
-<li>Non-integer <code>times</code>, <code>each</code>, or <code>length.out</code> values are truncated to their integer part.</li>
+<li>Allows sampling the same element multiple times:</li>
 </ul></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">times =</span> <span class="fl">2.7</span>) <span class="co"># Output: 1 1 2 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># Outputs, e.g., c(1, 3, 2, 2, 1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 1 2</code></pre>
+<pre><code>[1] 2 2 1 3 3</code></pre>
 </div>
 </div>
-<ol type="1">
-<li><strong>Handling NA values</strong>:
+<ol start="3" type="1">
+<li><strong>Weighted Sampling</strong>:
 <ul>
-<li>Works seamlessly with vectors containing <code>NA</code>.</li>
+<li>Sampling based on a specified probability vector:</li>
 </ul></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">2</span>) <span class="co"># Output: NA NA 1 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">size =</span> <span class="dv">6</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.7</span>, <span class="fl">0.2</span>), <span class="at">replace =</span> <span class="cn">TRUE</span> )  <span class="co"># Likely favors "2"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] NA NA  1  1</code></pre>
+<pre><code>[1] 2 2 1 1 2 2</code></pre>
 </div>
 </div>
+<ol start="4" type="1">
+<li><strong>Default Behavior with Single Numeric <code>x</code></strong>:
+<ul>
+<li>Treats <code>x</code> as <code>1:x</code>:</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">5</span>)  <span class="co"># Equivalent to sample(1:5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 4 1 5</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li><strong>Edge Cases</strong>:
+<ul>
+<li>If <code>size = 0</code> and <code>x</code> is empty or has length zero, the result is a zero-length vector.</li>
+<li>Non-integer <code>x</code> or <code>n</code> is truncated to the nearest smaller integer.</li>
+</ul></li>
+</ol>
 </section>
 <section id="examples" class="level2">
-<h2 class="anchored" data-anchor-id="examples">4. Examples</h2>
-<p><strong>Basic Usage</strong>:</p>
+<h2 class="anchored" data-anchor-id="examples"><strong>Examples</strong></h2>
+<section id="random-permutation" class="level3">
+<h3 class="anchored" data-anchor-id="random-permutation">1. Random Permutation</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat the sequence twice</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(x)  <span class="co"># Randomly shuffles elements, e.g., c("C", "A", "D", "B")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 1 2 3</code></pre>
+<pre><code>[1] "C" "A" "D" "B"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 1 2 3 1 2 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Using <code>each</code></strong>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat each element twice</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 1 2 2 3 3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 1 1 2 2 3 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Custom Length</strong>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Truncate the output to a specific length</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 1 2 3 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Combining <code>each</code> and <code>times</code></strong>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A complex repetition pattern</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 1 1 2 2 3 3 1 1 2 2 3 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="common-errors-and-troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="common-errors-and-troubleshooting">5. Common Errors and Troubleshooting</h2>
-<ol type="1">
-<li><p><strong>Negative values for <code>times</code> or <code>each</code></strong>:</p>
-<ul>
-<li>Error: <code>Error in rep.int: invalid 'times' argument</code></li>
-<li>Fix: Ensure <code>times</code> and <code>each</code> are non-negative integers.</li>
-</ul></li>
-</ol>
+<section id="sampling-with-replacement" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-with-replacement">2. Sampling With Replacement</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="co"># Error</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">size =</span> <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 2 4 4 3</code></pre>
 </div>
-<ol type="1">
-<li><p><strong>Mismatched lengths for <code>times</code></strong>:</p>
-<ul>
-<li>The <code>times</code> vector length must match <code>x</code> or be recycled appropriately.</li>
-</ul></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)) <span class="co"># Warning: longer object length is not a multiple of shorter object length</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs, e.g., c(2, 4, 1, 3, 2, 4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol type="1">
-<li><p><strong>Non-numeric inputs</strong>:</p>
-<ul>
-<li>Ensure that all arguments like <code>length.out</code>, <code>each</code>, and <code>times</code> are numeric.</li>
-</ul></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="st">"two"</span>) <span class="co"># Error</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol type="1">
-<li><strong>Recycling</strong>:
-<ul>
-<li>If <code>times</code> or <code>each</code> is shorter than <code>x</code>, it generates an error.</li>
-</ul></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)) <span class="co"># Output: 1 1 2 2 2 3</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-
 </section>
+<section id="weighted-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="weighted-sampling">3. Weighted Sampling</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="dv">5</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "e" "a" "a" "d" "b"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heavily favors "a" in the output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="default-behavior-for-single-integer" class="level3">
+<h3 class="anchored" data-anchor-id="default-behavior-for-single-integer">4. Default Behavior for Single Integer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">5</span>)  <span class="co"># Equivalent to sample(1:5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 5 2 4 1</code></pre>
+</div>
+</div>
+</section>
+<section id="safeguarding-edge-cases-with-sample.int" class="level3">
+<h3 class="anchored" data-anchor-id="safeguarding-edge-cases-with-sample.int">5. Safeguarding Edge Cases with <code>sample.int</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Programmatically handle edge cases for length(x) &gt; 1:</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>resample <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) x[<span class="fu">sample.int</span>(<span class="fu">length</span>(x), ...)]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">resample</span>(x[x <span class="sc">&gt;</span> <span class="dv">8</span>])   <span class="co"># Properly handles cases where x has length &lt; 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10  9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resample</span>(x[x <span class="sc">&gt;</span> <span class="dv">10</span>])  <span class="co"># Returns an empty vector safely</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>integer(0)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices"><strong>Best Practices</strong></h2>
+<ol type="1">
+<li><strong>Reproducibility</strong>: Use <code>set.seed()</code> to ensure reproducible randomization:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 5 4 3 2</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p><strong>Edge Cases</strong>: Use <code>sample.int</code> for numeric sequences, especially in programmatic contexts, to avoid surprises with default <code>sample()</code> behavior.</p></li>
+<li><p><strong>Weight Verification</strong>: Ensure that weights in <code>prob</code> are non-negative and not all zero.</p></li>
+<li><p><strong>Large Dataset Efficiency</strong>: Use <code>useHash</code> (via <code>sample.int</code>) for large <code>n</code> to optimize memory and performance.</p></li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->

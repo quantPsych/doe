@@ -94,9 +94,6 @@ div.csl-indent {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-aff2639e191a0a8d05f4f3608923e904.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -129,12 +126,12 @@ div.csl-indent {
 <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
 <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <meta property="og:title" content="Planning Experiments – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://quantpsych.github.io/doe/lectures/week-01_intro-design_part2_files/figure-html/unnamed-chunk-3-1.png">
+<meta property="og:image" content="https://quantpsych.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
@@ -236,7 +233,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">19-Dec-2024</p>
+        <p class="date">20-Dec-2024</p>
       </div>
     </div>
     
@@ -257,48 +254,63 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
   </ul></li>
+  <li><a href="#checklist-for-experimental-design" id="toc-checklist-for-experimental-design" class="nav-link" data-scroll-target="#checklist-for-experimental-design">Checklist for Experimental Design</a>
+  <ul class="collapse">
+  <li><a href="#steps-in-planning-an-experiment" id="toc-steps-in-planning-an-experiment" class="nav-link" data-scroll-target="#steps-in-planning-an-experiment">Steps in Planning an Experiment</a>
+  <ul class="collapse">
+  <li><a href="#define-the-objectives-of-the-experiment" id="toc-define-the-objectives-of-the-experiment" class="nav-link" data-scroll-target="#define-the-objectives-of-the-experiment">1. Define the Objectives of the Experiment</a></li>
+  <li><a href="#identify-all-sources-of-variation" id="toc-identify-all-sources-of-variation" class="nav-link" data-scroll-target="#identify-all-sources-of-variation">2. Identify All Sources of Variation</a></li>
+  <li><a href="#choose-a-rule-for-assigning-experimental-units-to-treatments" id="toc-choose-a-rule-for-assigning-experimental-units-to-treatments" class="nav-link" data-scroll-target="#choose-a-rule-for-assigning-experimental-units-to-treatments">3. Choose a Rule for Assigning Experimental Units to Treatments</a></li>
+  <li><a href="#specify-the-measurements-procedure-and-anticipated-difficulties" id="toc-specify-the-measurements-procedure-and-anticipated-difficulties" class="nav-link" data-scroll-target="#specify-the-measurements-procedure-and-anticipated-difficulties">4. Specify the Measurements, Procedure, and Anticipated Difficulties</a></li>
+  <li><a href="#run-a-pilot-experiment" id="toc-run-a-pilot-experiment" class="nav-link" data-scroll-target="#run-a-pilot-experiment">5. Run a Pilot Experiment</a></li>
+  <li><a href="#specify-the-statistical-model" id="toc-specify-the-statistical-model" class="nav-link" data-scroll-target="#specify-the-statistical-model">6. Specify the Statistical Model</a></li>
+  <li><a href="#outline-the-analysis" id="toc-outline-the-analysis" class="nav-link" data-scroll-target="#outline-the-analysis">7. Outline the Analysis</a></li>
+  <li><a href="#calculate-sample-size" id="toc-calculate-sample-size" class="nav-link" data-scroll-target="#calculate-sample-size">8. Calculate Sample Size</a></li>
+  <li><a href="#review-and-revise" id="toc-review-and-revise" class="nav-link" data-scroll-target="#review-and-revise">9. Review and Revise</a></li>
+  </ul></li>
+  <li><a href="#flowchart-of-experimental-design-steps" id="toc-flowchart-of-experimental-design-steps" class="nav-link" data-scroll-target="#flowchart-of-experimental-design-steps">Flowchart of Experimental Design Steps</a></li>
+  </ul></li>
+  <li><a href="#explaining-experimental-design-concepts" id="toc-explaining-experimental-design-concepts" class="nav-link" data-scroll-target="#explaining-experimental-design-concepts">Explaining Experimental Design Concepts</a>
+  <ul class="collapse">
   <li><a href="#identifying-experiment-objectives-and-variation-sources" id="toc-identifying-experiment-objectives-and-variation-sources" class="nav-link" data-scroll-target="#identifying-experiment-objectives-and-variation-sources">Identifying Experiment Objectives and Variation Sources</a>
   <ul class="collapse">
   <li><a href="#setting-objectives" id="toc-setting-objectives" class="nav-link" data-scroll-target="#setting-objectives">Setting Objectives</a></li>
-  <li><a href="#variation-sources" id="toc-variation-sources" class="nav-link" data-scroll-target="#variation-sources">Variation Sources</a>
-  <ul class="collapse">
+  <li><a href="#variation-sources" id="toc-variation-sources" class="nav-link" data-scroll-target="#variation-sources">Variation Sources</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#activity-think-pair-share" id="toc-activity-think-pair-share" class="nav-link" data-scroll-target="#activity-think-pair-share">Activity: Think-Pair-Share</a></li>
+  <li><a href="#activity-work-out-experiment-think-pair-share" id="toc-activity-work-out-experiment-think-pair-share" class="nav-link" data-scroll-target="#activity-work-out-experiment-think-pair-share">Activity (Work Out Experiment): Think-Pair-Share</a></li>
   <li><a href="#challenges-and-common-mistakes" id="toc-challenges-and-common-mistakes" class="nav-link" data-scroll-target="#challenges-and-common-mistakes">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  </ul></li>
   </ul></li>
   <li><a href="#treatment-factors-and-levels" id="toc-treatment-factors-and-levels" class="nav-link" data-scroll-target="#treatment-factors-and-levels">Treatment Factors and Levels</a>
   <ul class="collapse">
   <li><a href="#defining-treatment-factors" id="toc-defining-treatment-factors" class="nav-link" data-scroll-target="#defining-treatment-factors">Defining Treatment Factors</a></li>
-  <li><a href="#factor-levels" id="toc-factor-levels" class="nav-link" data-scroll-target="#factor-levels">Factor Levels</a>
-  <ul class="collapse">
-  <li><a href="#activity-design-your-own-factorial" id="toc-activity-design-your-own-factorial" class="nav-link" data-scroll-target="#activity-design-your-own-factorial">Activity: Design Your Own Factorial</a></li>
+  <li><a href="#factor-levels" id="toc-factor-levels" class="nav-link" data-scroll-target="#factor-levels">Factor Levels</a></li>
+  <li><a href="#activity-baking-experiment-design-your-own-factorial-experiment" id="toc-activity-baking-experiment-design-your-own-factorial-experiment" class="nav-link" data-scroll-target="#activity-baking-experiment-design-your-own-factorial-experiment">Activity (Baking Experiment): Design Your Own Factorial Experiment</a></li>
   <li><a href="#challenges-and-common-mistakes-1" id="toc-challenges-and-common-mistakes-1" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-1">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
-  </ul></li>
   </ul></li>
   <li><a href="#experimental-units-blocking-and-nuisance-factors" id="toc-experimental-units-blocking-and-nuisance-factors" class="nav-link" data-scroll-target="#experimental-units-blocking-and-nuisance-factors">Experimental Units, Blocking, and Nuisance Factors</a>
   <ul class="collapse">
   <li><a href="#experimental-units" id="toc-experimental-units" class="nav-link" data-scroll-target="#experimental-units">Experimental Units</a></li>
+  <li><a href="#examples-of-experimental-units" id="toc-examples-of-experimental-units" class="nav-link" data-scroll-target="#examples-of-experimental-units">Examples of Experimental Units</a></li>
   <li><a href="#blocking-factors" id="toc-blocking-factors" class="nav-link" data-scroll-target="#blocking-factors">Blocking Factors</a></li>
-  <li><a href="#noise-factors-and-covariates" id="toc-noise-factors-and-covariates" class="nav-link" data-scroll-target="#noise-factors-and-covariates">Noise Factors and Covariates</a>
-  <ul class="collapse">
-  <li><a href="#visual-aid-factor-classification-flowchart" id="toc-visual-aid-factor-classification-flowchart" class="nav-link" data-scroll-target="#visual-aid-factor-classification-flowchart">Visual Aid: Factor Classification Flowchart</a></li>
+  <li><a href="#noise-factors-and-covariates" id="toc-noise-factors-and-covariates" class="nav-link" data-scroll-target="#noise-factors-and-covariates">Noise Factors and Covariates</a></li>
+  <li><a href="#factor-classification-flowchart" id="toc-factor-classification-flowchart" class="nav-link" data-scroll-target="#factor-classification-flowchart">Factor Classification Flowchart</a></li>
   <li><a href="#activity-blocking-brainstorm" id="toc-activity-blocking-brainstorm" class="nav-link" data-scroll-target="#activity-blocking-brainstorm">Activity: Blocking Brainstorm</a></li>
   <li><a href="#challenges-and-common-mistakes-2" id="toc-challenges-and-common-mistakes-2" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-2">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">Exercises</a></li>
   </ul></li>
-  </ul></li>
   <li><a href="#principles-of-randomization" id="toc-principles-of-randomization" class="nav-link" data-scroll-target="#principles-of-randomization">Principles of Randomization</a>
   <ul class="collapse">
-  <li><a href="#randomization-concept" id="toc-randomization-concept" class="nav-link" data-scroll-target="#randomization-concept">Randomization Concept</a>
-  <ul class="collapse">
+  <li><a href="#randomization-concept" id="toc-randomization-concept" class="nav-link" data-scroll-target="#randomization-concept">Randomization Concept</a></li>
+  <li><a href="#how-to-perform-randomization" id="toc-how-to-perform-randomization" class="nav-link" data-scroll-target="#how-to-perform-randomization">How to Perform Randomization</a></li>
+  <li><a href="#pseudocode-for-randomization" id="toc-pseudocode-for-randomization" class="nav-link" data-scroll-target="#pseudocode-for-randomization"><strong>Pseudocode for Randomization</strong></a></li>
+  <li><a href="#r-implementation-randomization-examples" id="toc-r-implementation-randomization-examples" class="nav-link" data-scroll-target="#r-implementation-randomization-examples">R Implementation: Randomization Examples</a></li>
+  <li><a href="#explanation-in-r" id="toc-explanation-in-r" class="nav-link" data-scroll-target="#explanation-in-r">Explanation in R</a></li>
   <li><a href="#r-example-simple-random-assignment" id="toc-r-example-simple-random-assignment" class="nav-link" data-scroll-target="#r-example-simple-random-assignment">R Example: Simple Random Assignment</a></li>
   <li><a href="#activity-randomization-drill" id="toc-activity-randomization-drill" class="nav-link" data-scroll-target="#activity-randomization-drill">Activity: Randomization Drill</a></li>
   <li><a href="#challenges-and-common-mistakes-3" id="toc-challenges-and-common-mistakes-3" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-3">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3">Exercises</a></li>
-  </ul></li>
   </ul></li>
   <li><a href="#standard-experimental-designs" id="toc-standard-experimental-designs" class="nav-link" data-scroll-target="#standard-experimental-designs">Standard Experimental Designs</a>
   <ul class="collapse">
@@ -306,60 +318,50 @@ window.Quarto = {
   <li><a href="#randomized-block-design-rbd" id="toc-randomized-block-design-rbd" class="nav-link" data-scroll-target="#randomized-block-design-rbd">Randomized Block Design (RBD)</a></li>
   <li><a href="#row-column-and-latin-squares" id="toc-row-column-and-latin-squares" class="nav-link" data-scroll-target="#row-column-and-latin-squares">Row-Column and Latin Squares</a></li>
   <li><a href="#factorial-designs" id="toc-factorial-designs" class="nav-link" data-scroll-target="#factorial-designs">Factorial Designs</a></li>
-  <li><a href="#split-plot-designs" id="toc-split-plot-designs" class="nav-link" data-scroll-target="#split-plot-designs">Split-Plot Designs</a>
-  <ul class="collapse">
-  <li><a href="#visual-aid-factorial-design-example-in-r" id="toc-visual-aid-factorial-design-example-in-r" class="nav-link" data-scroll-target="#visual-aid-factorial-design-example-in-r">Visual Aid: Factorial Design Example in R</a></li>
+  <li><a href="#split-plot-designs" id="toc-split-plot-designs" class="nav-link" data-scroll-target="#split-plot-designs">Split-Plot Designs</a></li>
   <li><a href="#activity-design-match-up" id="toc-activity-design-match-up" class="nav-link" data-scroll-target="#activity-design-match-up">Activity: Design Match-Up</a></li>
   <li><a href="#challenges-and-common-mistakes-4" id="toc-challenges-and-common-mistakes-4" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-4">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-4" id="toc-exercises-4" class="nav-link" data-scroll-target="#exercises-4">Exercises</a></li>
   </ul></li>
-  </ul></li>
   <li><a href="#model-specification-and-effect-types" id="toc-model-specification-and-effect-types" class="nav-link" data-scroll-target="#model-specification-and-effect-types">Model Specification and Effect Types</a>
   <ul class="collapse">
   <li><a href="#linear-models-and-anova" id="toc-linear-models-and-anova" class="nav-link" data-scroll-target="#linear-models-and-anova">Linear Models and ANOVA</a></li>
-  <li><a href="#fixed-vs.-random-effects" id="toc-fixed-vs.-random-effects" class="nav-link" data-scroll-target="#fixed-vs.-random-effects">Fixed vs.&nbsp;Random Effects</a>
-  <ul class="collapse">
+  <li><a href="#fixed-vs.-random-effects" id="toc-fixed-vs.-random-effects" class="nav-link" data-scroll-target="#fixed-vs.-random-effects">Fixed vs.&nbsp;Random Effects</a></li>
   <li><a href="#activity-fixed-or-random" id="toc-activity-fixed-or-random" class="nav-link" data-scroll-target="#activity-fixed-or-random">Activity: Fixed or Random?</a></li>
   <li><a href="#challenges-and-common-mistakes-5" id="toc-challenges-and-common-mistakes-5" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-5">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-5" id="toc-exercises-5" class="nav-link" data-scroll-target="#exercises-5">Exercises</a></li>
   </ul></li>
-  </ul></li>
   <li><a href="#planning-data-collection-and-pilot-experiments" id="toc-planning-data-collection-and-pilot-experiments" class="nav-link" data-scroll-target="#planning-data-collection-and-pilot-experiments">Planning Data Collection and Pilot Experiments</a>
   <ul class="collapse">
   <li><a href="#measurement-and-procedure" id="toc-measurement-and-procedure" class="nav-link" data-scroll-target="#measurement-and-procedure">Measurement and Procedure</a></li>
-  <li><a href="#pilot-experiments" id="toc-pilot-experiments" class="nav-link" data-scroll-target="#pilot-experiments">Pilot Experiments</a>
-  <ul class="collapse">
+  <li><a href="#pilot-experiments" id="toc-pilot-experiments" class="nav-link" data-scroll-target="#pilot-experiments">Pilot Experiments</a></li>
   <li><a href="#activity-pilot-study-discussion" id="toc-activity-pilot-study-discussion" class="nav-link" data-scroll-target="#activity-pilot-study-discussion">Activity: Pilot Study Discussion</a></li>
   <li><a href="#challenges-and-common-mistakes-6" id="toc-challenges-and-common-mistakes-6" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-6">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-6" id="toc-exercises-6" class="nav-link" data-scroll-target="#exercises-6">Exercises</a></li>
   </ul></li>
-  </ul></li>
   <li><a href="#determining-the-number-of-observations" id="toc-determining-the-number-of-observations" class="nav-link" data-scroll-target="#determining-the-number-of-observations">Determining the Number of Observations</a>
   <ul class="collapse">
-  <li><a href="#sample-size-and-power" id="toc-sample-size-and-power" class="nav-link" data-scroll-target="#sample-size-and-power">Sample Size and Power</a>
-  <ul class="collapse">
+  <li><a href="#sample-size-and-power" id="toc-sample-size-and-power" class="nav-link" data-scroll-target="#sample-size-and-power">Sample Size and Power</a></li>
   <li><a href="#activity-sample-size-calculation" id="toc-activity-sample-size-calculation" class="nav-link" data-scroll-target="#activity-sample-size-calculation">Activity: Sample Size Calculation</a></li>
   <li><a href="#challenges-and-common-mistakes-7" id="toc-challenges-and-common-mistakes-7" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-7">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-7" id="toc-exercises-7" class="nav-link" data-scroll-target="#exercises-7">Exercises</a></li>
   </ul></li>
-  </ul></li>
   <li><a href="#practical-example-in-r" id="toc-practical-example-in-r" class="nav-link" data-scroll-target="#practical-example-in-r">Practical Example in R</a>
   <ul class="collapse">
-  <li><a href="#example-a-simple-crd" id="toc-example-a-simple-crd" class="nav-link" data-scroll-target="#example-a-simple-crd">Example: A Simple CRD</a>
-  <ul class="collapse">
+  <li><a href="#example-a-simple-crd" id="toc-example-a-simple-crd" class="nav-link" data-scroll-target="#example-a-simple-crd">Example: A Simple CRD</a></li>
   <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code">R Code</a></li>
   <li><a href="#activity-interpret-r-output" id="toc-activity-interpret-r-output" class="nav-link" data-scroll-target="#activity-interpret-r-output">Activity: Interpret R Output</a></li>
   <li><a href="#challenges-and-common-mistakes-8" id="toc-challenges-and-common-mistakes-8" class="nav-link" data-scroll-target="#challenges-and-common-mistakes-8">Challenges and Common Mistakes</a></li>
   <li><a href="#exercises-8" id="toc-exercises-8" class="nav-link" data-scroll-target="#exercises-8">Exercises</a></li>
   </ul></li>
-  </ul></li>
   <li><a href="#summary-of-key-takeaways" id="toc-summary-of-key-takeaways" class="nav-link" data-scroll-target="#summary-of-key-takeaways">Summary of Key Takeaways</a></li>
   <li><a href="#definitions-of-key-terms" id="toc-definitions-of-key-terms" class="nav-link" data-scroll-target="#definitions-of-key-terms">Definitions of Key Terms</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
 
 
 
@@ -389,10 +391,289 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="identifying-experiment-objectives-and-variation-sources" class="level1">
-<h1>Identifying Experiment Objectives and Variation Sources</h1>
-<section id="setting-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="setting-objectives">Setting Objectives</h2>
+<section id="checklist-for-experimental-design" class="level1 page-columns page-full">
+<h1>Checklist for Experimental Design</h1>
+<section id="steps-in-planning-an-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="steps-in-planning-an-experiment">Steps in Planning an Experiment</h2>
+<p>It is very tempting to jump into data collection without a clear plan. However, a well-thought-out experimental design is crucial for obtaining valid and interpretable results. Here is a checklist of steps to guide you through the planning process:</p>
+<section id="define-the-objectives-of-the-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="define-the-objectives-of-the-experiment">1. Define the Objectives of the Experiment</h3>
+<ul>
+<li>Clearly state the goals (e.g., comparing treatments, optimizing factors, studying interactions).</li>
+<li>Write objectives as specific questions or hypotheses to guide the design.</li>
+</ul>
+</section>
+<section id="identify-all-sources-of-variation" class="level3">
+<h3 class="anchored" data-anchor-id="identify-all-sources-of-variation">2. Identify All Sources of Variation</h3>
+<ol type="1">
+<li><strong>Treatment Factors and Their Levels</strong>
+<ul>
+<li>Factors actively manipulated (e.g., temperature, dosage) and their specific levels.</li>
+<li>Example: Dosage levels: 10 mg, 20 mg, 30 mg.</li>
+</ul></li>
+<li><strong>Experimental Units</strong>
+<ul>
+<li>Smallest division of material receiving a treatment independently.</li>
+<li>Example: Individual plants in a field trial.</li>
+</ul></li>
+<li><strong>Blocking Factors, Noise Factors, and Covariates</strong>
+<ul>
+<li>Blocking: Group similar units (e.g., day of testing).</li>
+<li>Noise: Uncontrollable variability (e.g., weather conditions).</li>
+<li>Covariates: Measureable properties (e.g., baseline performance).</li>
+</ul></li>
+</ol>
+<!-- ## Steps in Planning an Experiment (cont'd) -->
+</section>
+<section id="choose-a-rule-for-assigning-experimental-units-to-treatments" class="level3">
+<h3 class="anchored" data-anchor-id="choose-a-rule-for-assigning-experimental-units-to-treatments">3. Choose a Rule for Assigning Experimental Units to Treatments</h3>
+<ul>
+<li>Select randomization techniques:
+<ul>
+<li>Completely Randomized Design (CRD).</li>
+<li>Randomized Block Design (RBD).</li>
+<li>Split-Plot Design.</li>
+</ul></li>
+</ul>
+</section>
+<section id="specify-the-measurements-procedure-and-anticipated-difficulties" class="level3">
+<h3 class="anchored" data-anchor-id="specify-the-measurements-procedure-and-anticipated-difficulties">4. Specify the Measurements, Procedure, and Anticipated Difficulties</h3>
+<ol type="1">
+<li><strong>Measurements</strong>
+<ul>
+<li>Specify precision, units, and frequency of measurement.</li>
+<li>Example: Growth in cm, tensile strength in MPa.</li>
+</ul></li>
+<li><strong>Procedure</strong>
+<ul>
+<li>Step-by-step instructions for consistent data collection.</li>
+</ul></li>
+<li><strong>Anticipated Difficulties</strong>
+<ul>
+<li>Identify challenges (e.g., equipment failure) and mitigation strategies.</li>
+</ul></li>
+</ol>
+<!-- ## Steps in Planning an Experiment (cont'd) -->
+</section>
+<section id="run-a-pilot-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="run-a-pilot-experiment">5. Run a Pilot Experiment</h3>
+<ul>
+<li>Test feasibility, validate instruments, and refine factor levels or treatment combinations.</li>
+</ul>
+</section>
+<section id="specify-the-statistical-model" class="level3">
+<h3 class="anchored" data-anchor-id="specify-the-statistical-model">6. Specify the Statistical Model</h3>
+<ul>
+<li>Example for one-way ANOVA: <span class="math display">\[
+Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
+\]</span></li>
+</ul>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(Y_{ij}\)</span>: Observed response.</li>
+<li><span class="math inline">\(\mu\)</span>: Overall mean.</li>
+<li><span class="math inline">\(\tau_i\)</span>: Treatment effect.</li>
+<li><span class="math inline">\(\varepsilon_{ij}\)</span>: Random error term.</li>
+</ul>
+<!-- ## Steps in Planning an Experiment (cont'd) -->
+</section>
+<section id="outline-the-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="outline-the-analysis">7. Outline the Analysis</h3>
+<ul>
+<li>Plan descriptive and inferential methods (e.g., ANOVA, regression).</li>
+<li>Include diagnostic checks for model assumptions.</li>
+</ul>
+</section>
+<section id="calculate-sample-size" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-sample-size">8. Calculate Sample Size</h3>
+<ul>
+<li>Perform power analysis based on variability estimates and desired precision.</li>
+</ul>
+</section>
+<section id="review-and-revise" class="level3">
+<h3 class="anchored" data-anchor-id="review-and-revise">9. Review and Revise</h3>
+<ul>
+<li>Revisit and refine all decisions based on pilot results and practical constraints.</li>
+</ul>
+</section>
+</section>
+<section id="flowchart-of-experimental-design-steps" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="flowchart-of-experimental-design-steps">Flowchart of Experimental Design Steps</h2>
+<div class="cell page-columns page-full" data-layout-align="left">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-doe-plan-flowchart" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-doe-plan-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 431.00 702.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 698.4)">
+<title>ExperimentalDesign</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-698.4 427,-698.4 427,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>cluster_planning</title>
+<polygon fill="none" stroke="lightblue" points="8,-8 8,-228.8 216,-228.8 216,-8 8,-8"></polygon>
+<text text-anchor="middle" x="112" y="-212.2" font-family="Times,serif" font-size="14.00">Planning</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_implementation</title>
+<polygon fill="none" stroke="lightgreen" points="159,-465.6 159,-686.4 415,-686.4 415,-465.6 159,-465.6"></polygon>
+<text text-anchor="middle" x="287" y="-669.8" font-family="Times,serif" font-size="14.00">Implementation</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_analysis</title>
+<polygon fill="none" stroke="orange" points="194,-236.8 194,-457.6 378,-457.6 378,-236.8 194,-236.8"></polygon>
+<text text-anchor="middle" x="286" y="-441" font-family="Times,serif" font-size="14.00">Analysis</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_iteration</title>
+<polygon fill="none" stroke="lightcoral" points="224,-152 224,-228.8 376,-228.8 376,-152 224,-152"></polygon>
+<text text-anchor="middle" x="300" y="-212.2" font-family="Times,serif" font-size="14.00">Iteration</text>
+</g>
+<!-- Define Objectives -->
+<g id="node1" class="node">
+<title>Define Objectives</title>
+<polygon fill="lightblue" stroke="black" points="190.72,-196 65.28,-196 65.28,-160 190.72,-160 190.72,-196"></polygon>
+<text text-anchor="middle" x="128" y="-173.8" font-family="Arial" font-size="14.00">Define Objectives</text>
+</g>
+<!-- Identify Sources of Variation -->
+<g id="node2" class="node">
+<title>Identify Sources of Variation</title>
+<polygon fill="lightblue" stroke="black" points="207.6,-124 16.4,-124 16.4,-88 207.6,-88 207.6,-124"></polygon>
+<text text-anchor="middle" x="112" y="-101.8" font-family="Arial" font-size="14.00">Identify Sources of Variation</text>
+</g>
+<!-- Define Objectives&#45;&gt;Identify Sources of Variation -->
+<g id="edge1" class="edge">
+<title>Define Objectives-&gt;Identify Sources of Variation</title>
+<path fill="none" stroke="black" d="M124.04,-159.7C122.28,-151.98 120.16,-142.71 118.2,-134.11"></path>
+<polygon fill="black" stroke="black" points="121.55,-133.07 115.91,-124.1 114.73,-134.63 121.55,-133.07"></polygon>
+</g>
+<!-- Choose Assignment Rules -->
+<g id="node3" class="node">
+<title>Choose Assignment Rules</title>
+<polygon fill="lightblue" stroke="black" points="205.47,-52 24.53,-52 24.53,-16 205.47,-16 205.47,-52"></polygon>
+<text text-anchor="middle" x="115" y="-29.8" font-family="Arial" font-size="14.00">Choose Assignment Rules</text>
+</g>
+<!-- Identify Sources of Variation&#45;&gt;Choose Assignment Rules -->
+<g id="edge2" class="edge">
+<title>Identify Sources of Variation-&gt;Choose Assignment Rules</title>
+<path fill="none" stroke="black" d="M112.74,-87.7C113.07,-79.98 113.47,-70.71 113.84,-62.11"></path>
+<polygon fill="black" stroke="black" points="117.34,-62.25 114.27,-52.1 110.34,-61.95 117.34,-62.25"></polygon>
+</g>
+<!-- Specify Measurements &amp; Procedure -->
+<g id="node4" class="node">
+<title>Specify Measurements &amp; Procedure</title>
+<polygon fill="lightgreen" stroke="black" points="407.1,-653.6 166.9,-653.6 166.9,-617.6 407.1,-617.6 407.1,-653.6"></polygon>
+<text text-anchor="middle" x="287" y="-631.4" font-family="Arial" font-size="14.00">Specify Measurements &amp; Procedure</text>
+</g>
+<!-- Choose Assignment Rules&#45;&gt;Specify Measurements &amp; Procedure -->
+<g id="edge3" class="edge">
+<title>Choose Assignment Rules-&gt;Specify Measurements &amp; Procedure</title>
+<path fill="none" stroke="black" d="M205.48,-41.76C290.9,-53.66 406,-86.49 406,-177 406,-492.6 406,-492.6 406,-492.6 406,-533.05 411.38,-549.32 387,-581.6 377,-594.84 362.71,-605.12 348.05,-612.94"></path>
+<polygon fill="black" stroke="black" points="346.3,-609.9 338.91,-617.5 349.42,-616.17 346.3,-609.9"></polygon>
+</g>
+<!-- Identify Anticipated Difficulties -->
+<g id="node5" class="node">
+<title>Identify Anticipated Difficulties</title>
+<polygon fill="lightgreen" stroke="black" points="377.98,-581.6 176.02,-581.6 176.02,-545.6 377.98,-545.6 377.98,-581.6"></polygon>
+<text text-anchor="middle" x="277" y="-559.4" font-family="Arial" font-size="14.00">Identify Anticipated Difficulties</text>
+</g>
+<!-- Specify Measurements &amp; Procedure&#45;&gt;Identify Anticipated Difficulties -->
+<g id="edge4" class="edge">
+<title>Specify Measurements &amp; Procedure-&gt;Identify Anticipated Difficulties</title>
+<path fill="none" stroke="black" d="M284.53,-617.3C283.43,-609.58 282.1,-600.31 280.87,-591.71"></path>
+<polygon fill="black" stroke="black" points="284.32,-591.11 279.44,-581.7 277.39,-592.1 284.32,-591.11"></polygon>
+</g>
+<!-- Run Pilot Experiment -->
+<g id="node6" class="node">
+<title>Run Pilot Experiment</title>
+<polygon fill="lightgreen" stroke="black" points="354.5,-509.6 207.5,-509.6 207.5,-473.6 354.5,-473.6 354.5,-509.6"></polygon>
+<text text-anchor="middle" x="281" y="-487.4" font-family="Arial" font-size="14.00">Run Pilot Experiment</text>
+</g>
+<!-- Identify Anticipated Difficulties&#45;&gt;Run Pilot Experiment -->
+<g id="edge5" class="edge">
+<title>Identify Anticipated Difficulties-&gt;Run Pilot Experiment</title>
+<path fill="none" stroke="black" d="M277.99,-545.3C278.43,-537.58 278.96,-528.31 279.45,-519.71"></path>
+<polygon fill="black" stroke="black" points="282.95,-519.89 280.02,-509.7 275.96,-519.49 282.95,-519.89"></polygon>
+</g>
+<!-- Specify Statistical Model -->
+<g id="node7" class="node">
+<title>Specify Statistical Model</title>
+<polygon fill="orange" stroke="black" points="369.73,-424.8 202.27,-424.8 202.27,-388.8 369.73,-388.8 369.73,-424.8"></polygon>
+<text text-anchor="middle" x="286" y="-402.6" font-family="Arial" font-size="14.00">Specify Statistical Model</text>
+</g>
+<!-- Run Pilot Experiment&#45;&gt;Specify Statistical Model -->
+<g id="edge6" class="edge">
+<title>Run Pilot Experiment-&gt;Specify Statistical Model</title>
+<path fill="none" stroke="black" d="M282.04,-473.44C282.71,-462.34 283.59,-447.65 284.36,-434.98"></path>
+<polygon fill="black" stroke="black" points="287.86,-435.13 284.97,-424.93 280.87,-434.71 287.86,-435.13"></polygon>
+</g>
+<!-- Outline Analysis -->
+<g id="node8" class="node">
+<title>Outline Analysis</title>
+<polygon fill="orange" stroke="black" points="345.38,-352.8 228.62,-352.8 228.62,-316.8 345.38,-316.8 345.38,-352.8"></polygon>
+<text text-anchor="middle" x="287" y="-330.6" font-family="Arial" font-size="14.00">Outline Analysis</text>
+</g>
+<!-- Specify Statistical Model&#45;&gt;Outline Analysis -->
+<g id="edge7" class="edge">
+<title>Specify Statistical Model-&gt;Outline Analysis</title>
+<path fill="none" stroke="black" d="M286.25,-388.5C286.36,-380.78 286.49,-371.51 286.61,-362.91"></path>
+<polygon fill="black" stroke="black" points="290.11,-362.95 286.76,-352.9 283.11,-362.85 290.11,-362.95"></polygon>
+</g>
+<!-- Calculate Sample Size -->
+<g id="node9" class="node">
+<title>Calculate Sample Size</title>
+<polygon fill="orange" stroke="black" points="368.35,-280.8 211.65,-280.8 211.65,-244.8 368.35,-244.8 368.35,-280.8"></polygon>
+<text text-anchor="middle" x="290" y="-258.6" font-family="Arial" font-size="14.00">Calculate Sample Size</text>
+</g>
+<!-- Outline Analysis&#45;&gt;Calculate Sample Size -->
+<g id="edge8" class="edge">
+<title>Outline Analysis-&gt;Calculate Sample Size</title>
+<path fill="none" stroke="black" d="M287.74,-316.5C288.07,-308.78 288.47,-299.51 288.84,-290.91"></path>
+<polygon fill="black" stroke="black" points="292.34,-291.05 289.27,-280.9 285.34,-290.75 292.34,-291.05"></polygon>
+</g>
+<!-- Review and Revise -->
+<g id="node10" class="node">
+<title>Review and Revise</title>
+<polygon fill="lightcoral" stroke="black" points="367.83,-196 232.17,-196 232.17,-160 367.83,-160 367.83,-196"></polygon>
+<text text-anchor="middle" x="300" y="-173.8" font-family="Arial" font-size="14.00">Review and Revise</text>
+</g>
+<!-- Calculate Sample Size&#45;&gt;Review and Revise -->
+<g id="edge9" class="edge">
+<title>Calculate Sample Size-&gt;Review and Revise</title>
+<path fill="none" stroke="black" d="M292.07,-244.64C293.41,-233.54 295.19,-218.85 296.72,-206.18"></path>
+<polygon fill="black" stroke="black" points="300.21,-206.48 297.93,-196.13 293.26,-205.64 300.21,-206.48"></polygon>
+</g>
+<!-- Review and Revise&#45;&gt;Define Objectives -->
+<g id="edge10" class="edge">
+<title>Review and Revise-&gt;Define Objectives</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M231.76,-178C221.53,-178 211.29,-178 201.06,-178"></path>
+<polygon fill="red" stroke="red" points="200.82,-174.5 190.82,-178 200.82,-181.5 200.82,-174.5"></polygon>
+</g>
+<!-- Review and Revise&#45;&gt;Identify Sources of Variation -->
+<g id="edge11" class="edge">
+<title>Review and Revise-&gt;Identify Sources of Variation</title>
+<path fill="none" stroke="red" stroke-dasharray="5,2" d="M254.01,-159.88C227.85,-150.14 194.91,-137.87 167.35,-127.61"></path>
+<polygon fill="red" stroke="red" points="168.43,-124.28 157.84,-124.07 165.99,-130.84 168.43,-124.28"></polygon>
+</g>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-doe-plan-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Experimental Design Planning Flowchart
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="explaining-experimental-design-concepts" class="level1 page-columns page-full">
+<h1>Explaining Experimental Design Concepts</h1>
+<section id="identifying-experiment-objectives-and-variation-sources" class="level2">
+<h2 class="anchored" data-anchor-id="identifying-experiment-objectives-and-variation-sources">Identifying Experiment Objectives and Variation Sources</h2>
+<section id="setting-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="setting-objectives">Setting Objectives</h3>
 <p>Every experiment must start with a clear research objective. Ask: <em>What do we hope to learn or achieve?</em> Objectives may include:</p>
 <ul>
 <li>Determining which manufacturing process leads to the highest product quality.</li>
@@ -401,20 +682,21 @@ window.Quarto = {
 </ul>
 <p>Without well-defined objectives, the experiment risks being unfocused, making the results difficult to interpret.</p>
 </section>
-<section id="variation-sources" class="level2">
-<h2 class="anchored" data-anchor-id="variation-sources">Variation Sources</h2>
+<section id="variation-sources" class="level3">
+<h3 class="anchored" data-anchor-id="variation-sources">Variation Sources</h3>
 <p>Variation in responses can arise from multiple sources:</p>
 <ul>
 <li><strong>Major Variation (Treatment Effects):</strong> Due to the factors of interest (e.g., different fertilizers or drug dosages).</li>
-<li><strong>Nuisance Factors:</strong> Variables that influence the response but are not of primary interest (e.g., room temperature, operator skill). Some nuisance factors can be controlled or incorporated as blocking factors, while others must be accepted as noise.</li>
+<li><strong>Nuisance Factors (noise):</strong> Variables that influence the response but are not of primary interest (e.g., room temperature, operator skill). Some nuisance factors can be controlled or incorporated as blocking factors, while others must be accepted as noise.</li>
 </ul>
 <p>By identifying and classifying sources of variation, we can decide which factors to manipulate as treatments, which to fix or control, and which to block or treat as covariates.</p>
+</section>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
 <p>Consider an agricultural experiment testing different fertilizer types (A, B, C). The main factors are the fertilizer types. Soil heterogeneity could be a nuisance factor. If the field has varying soil quality, it might mask the fertilizer effect. Recognizing this early allows us to incorporate blocking or other strategies to handle this nuisance variation.</p>
 </section>
-<section id="activity-think-pair-share" class="level3">
-<h3 class="anchored" data-anchor-id="activity-think-pair-share">Activity: Think-Pair-Share</h3>
+<section id="activity-work-out-experiment-think-pair-share" class="level3">
+<h3 class="anchored" data-anchor-id="activity-work-out-experiment-think-pair-share">Activity (Work Out Experiment): Think-Pair-Share</h3>
 <ol type="1">
 <li><strong>Think:</strong> Imagine you are testing two workout plans (high-intensity vs.&nbsp;moderate-intensity) to improve muscle strength.</li>
 <li><strong>Pair:</strong> Discuss with a partner what the main objective is and what factors could cause unwanted variation (e.g., baseline fitness level, diet).</li>
@@ -431,26 +713,26 @@ window.Quarto = {
 <section id="exercises" class="level3">
 <h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
 <ol type="1">
-<li><strong>Conceptual:</strong> Why must objectives be clear before starting an experiment?</li>
-<li><strong>Numerical:</strong> Given three fertilizer types and two soil conditions, identify which factors should be considered treatments and which might be nuisance factors.</li>
-<li><strong>Proof/Derivation:</strong> Show mathematically that failing to control a nuisance factor increases the variance of treatment effect estimates.</li>
+<li>Why must objectives be clear before starting an experiment?</li>
+<li>Given three fertilizer types and two soil conditions, identify which factors should be considered treatments and which might be nuisance factors.</li>
+<li>Explain how failing to control a nuisance factor increases the variance of treatment effect estimates.</li>
 </ol>
 <p><strong>Key Takeaways:</strong> - Well-defined objectives shape the experiment. - Classifying factors into treatment and nuisance categories enhances design efficiency.</p>
 </section>
 </section>
-</section>
-<section id="treatment-factors-and-levels" class="level1">
-<h1>Treatment Factors and Levels</h1>
-<section id="defining-treatment-factors" class="level2">
-<h2 class="anchored" data-anchor-id="defining-treatment-factors">Defining Treatment Factors</h2>
-<p>A <strong>treatment factor</strong> is any variable deliberately manipulated by the experimenter to study its effect on the response.</p>
+<section id="treatment-factors-and-levels" class="level2">
+<h2 class="anchored" data-anchor-id="treatment-factors-and-levels">Treatment Factors and Levels</h2>
+<section id="defining-treatment-factors" class="level3">
+<h3 class="anchored" data-anchor-id="defining-treatment-factors">Defining Treatment Factors</h3>
+<p>A <strong>treatment factor</strong> is any variable <strong>deliberately</strong> manipulated by the experimenter to study its effect on the response.</p>
 <p><strong>Example:</strong> In a detergent study, water temperature and detergent concentration are treatment factors.</p>
 </section>
-<section id="factor-levels" class="level2">
-<h2 class="anchored" data-anchor-id="factor-levels">Factor Levels</h2>
+<section id="factor-levels" class="level3">
+<h3 class="anchored" data-anchor-id="factor-levels">Factor Levels</h3>
 <p>Factor levels are the specific settings or categories of a factor. For instance, twist levels in a cotton-spinning experiment might be 1.63, 1.69, 1.78, and 1.90 turns per inch. Chosen based on subject matter knowledge, factor levels must be realistic and relevant.</p>
-<section id="activity-design-your-own-factorial" class="level3">
-<h3 class="anchored" data-anchor-id="activity-design-your-own-factorial">Activity: Design Your Own Factorial</h3>
+</section>
+<section id="activity-baking-experiment-design-your-own-factorial-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="activity-baking-experiment-design-your-own-factorial-experiment">Activity (Baking Experiment): Design Your Own Factorial Experiment</h3>
 <p>Individually pick a factor (e.g., cooking time) and propose three levels. Pair up with another student who has chosen a different factor (e.g., oven temperature), and combine them into a factorial design. Discuss the complexity and the number of total treatment combinations.</p>
 </section>
 <section id="challenges-and-common-mistakes-1" class="level3">
@@ -463,42 +745,50 @@ window.Quarto = {
 <section id="exercises-1" class="level3">
 <h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
 <ol type="1">
-<li><strong>Conceptual:</strong> What criteria guide the selection of factor levels?</li>
-<li><strong>Numerical:</strong> For a factor with 4 levels and another with 3 levels, determine how many treatment combinations exist.</li>
-<li><strong>Proof/Derivation:</strong> Show that increasing replicates per factor level (with total resources fixed) decreases the variance of treatment effect estimates.</li>
+<li>What criteria guide the selection of factor levels?</li>
+<li>For a factor with 4 levels and another with 3 levels, determine how many treatment combinations exist.</li>
+<li>Explain how replicates per factor level (with total resources fixed) decreases the variance of treatment effect estimates.</li>
 </ol>
 <p><strong>Key Takeaways:</strong> - Treatments factors are deliberately manipulated variables. - Factor levels must be meaningful, informed by real-world considerations or pilot data.</p>
 </section>
 </section>
-</section>
-<section id="experimental-units-blocking-and-nuisance-factors" class="level1">
-<h1>Experimental Units, Blocking, and Nuisance Factors</h1>
-<section id="experimental-units" class="level2">
-<h2 class="anchored" data-anchor-id="experimental-units">Experimental Units</h2>
+<section id="experimental-units-blocking-and-nuisance-factors" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="experimental-units-blocking-and-nuisance-factors">Experimental Units, Blocking, and Nuisance Factors</h2>
+<section id="experimental-units" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-units">Experimental Units</h3>
 <p>The <strong>experimental unit</strong> is the smallest entity to which treatments are independently assigned. This concept is crucial for valid statistical inference.</p>
-<p><strong>Example:</strong> - Plants in a field trial if each plant gets a different fertilizer. - Engine test benches if each engine is run under a unique setup.</p>
 </section>
-<section id="blocking-factors" class="level2">
-<h2 class="anchored" data-anchor-id="blocking-factors">Blocking Factors</h2>
-<p>When a known nuisance factor could confound results, use <strong>blocking</strong>. Blocking forms groups of similar experimental units, each block receiving all treatments. This controls for block-to-block variation, increasing precision.</p>
+<section id="examples-of-experimental-units" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-experimental-units">Examples of Experimental Units</h3>
+<ul>
+<li>Plants in a field trial if each plant gets a different fertilizer.</li>
+<li>Engine test benches if each engine is run under a unique setup.</li>
+<li>Students in a classroom if each student receives a different teaching method.</li>
+<li>Patients in a clinical trial if each patient gets a different drug.</li>
+</ul>
+</section>
+<section id="blocking-factors" class="level3">
+<h3 class="anchored" data-anchor-id="blocking-factors">Blocking Factors</h3>
+<p>When a known nuisance factor could confound results, use <strong>blocking</strong>. Blocking forms groups of similar experimental units, each block receiving all treatments. This controls for block-to-block variation, increasing <em>precision</em>.</p>
 <p><strong>Equation (Block Design):</strong></p>
 <p><span class="math display">\[
 Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
-\]</span></p>
+\]</span> {#eq:block-design}</p>
 <p>Here, <span class="math inline">\(\tau_i\)</span> is the treatment effect and <span class="math inline">\(\beta_j\)</span> the block effect.</p>
 </section>
-<section id="noise-factors-and-covariates" class="level2">
-<h2 class="anchored" data-anchor-id="noise-factors-and-covariates">Noise Factors and Covariates</h2>
+<section id="noise-factors-and-covariates" class="level3">
+<h3 class="anchored" data-anchor-id="noise-factors-and-covariates">Noise Factors and Covariates</h3>
 <ul>
 <li><strong>Noise Factors:</strong> Uncontrollable variations like daily temperature fluctuations.</li>
 <li><strong>Covariates:</strong> Measured continuous variables (e.g., initial weight) that help explain variation when included in the model.</li>
 </ul>
-<section id="visual-aid-factor-classification-flowchart" class="level3">
-<h3 class="anchored" data-anchor-id="visual-aid-factor-classification-flowchart">Visual Aid: Factor Classification Flowchart</h3>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div id="fig-mermaid" class="quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-fig figure">
+</section>
+<section id="factor-classification-flowchart" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="factor-classification-flowchart">Factor Classification Flowchart</h3>
+<div class="cell page-columns page-full" data-layout-align="left">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-mermaid" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-mermaid">flowchart TD
@@ -519,8 +809,8 @@ Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
 </pre>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Factor Classification Flowchart
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Factor Classification Flowchart
 </figcaption>
 </figure>
 </div>
@@ -552,20 +842,181 @@ Figure&nbsp;1: Factor Classification Flowchart
 </ul>
 </section>
 </section>
-</section>
-<section id="principles-of-randomization" class="level1">
-<h1>Principles of Randomization</h1>
-<section id="randomization-concept" class="level2">
-<h2 class="anchored" data-anchor-id="randomization-concept">Randomization Concept</h2>
+<section id="principles-of-randomization" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="principles-of-randomization">Principles of Randomization</h2>
+<section id="randomization-concept" class="level3">
+<h3 class="anchored" data-anchor-id="randomization-concept">Randomization Concept</h3>
 <p>Randomization ensures that each experimental unit has an equal chance of receiving any treatment. This prevents systematic bias and justifies the assumptions underlying standard statistical tests.</p>
 <p><strong>Example:</strong> Use a random number generator to assign treatments to plots, ensuring no predetermined pattern.</p>
+</section>
+<section id="how-to-perform-randomization" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-perform-randomization">How to Perform Randomization</h3>
+<p>Randomization ensures unbiased allocation of experimental units to treatments and reduces the risk of systematic error. Here’s how you can perform randomization in practice:</p>
+<section id="procedure" class="level4">
+<h4 class="anchored" data-anchor-id="procedure"><strong>Procedure</strong></h4>
+<ol type="1">
+<li><strong>List Experimental Units</strong>:
+<ul>
+<li>Create a list of all experimental units (e.g., subjects, plots of land).</li>
+</ul></li>
+<li><strong>List Treatments</strong>:
+<ul>
+<li>Specify the treatments or factor levels to be assigned.</li>
+</ul></li>
+<li><strong>Determine Design Type</strong>:
+<ul>
+<li>Choose a design type: Completely Randomized Design (CRD), Randomized Block Design (RBD), or Split-Plot Design.</li>
+</ul></li>
+<li><strong>Generate Random Numbers</strong>:
+<ul>
+<li>Use random number generation to assign treatments to units.</li>
+</ul></li>
+<li><strong>Assign Treatments</strong>:
+<ul>
+<li>Pair random numbers with treatments to allocate them to experimental units.</li>
+</ul></li>
+<li><strong>Verify</strong>:
+<ul>
+<li>Ensure assignments are correct and check for any unintended patterns.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="pseudocode-for-randomization" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-for-randomization"><strong>Pseudocode for Randomization</strong></h3>
+<section id="completely-randomized-design" class="level4">
+<h4 class="anchored" data-anchor-id="completely-randomized-design"><strong>Completely Randomized Design</strong></h4>
+<pre class="pseudo"><code>INPUT: List of experimental units, List of treatments
+OUTPUT: Randomized assignments of treatments to units
+
+1. Define N = Total number of experimental units
+2. Define T = List of treatments
+3. Repeat T to match the number of experimental units if unbalanced
+4. Shuffle the list of treatments randomly
+5. Assign shuffled treatments to the experimental units
+6. Return randomized assignments</code></pre>
+</section>
+<section id="randomized-block-design" class="level4">
+<h4 class="anchored" data-anchor-id="randomized-block-design"><strong>Randomized Block Design</strong></h4>
+<pre class="pseudo"><code>INPUT: List of blocks, List of treatments
+OUTPUT: Randomized assignments within each block
+
+1. For each block in blocks:
+    a. Shuffle the list of treatments randomly
+    b. Assign shuffled treatments to experimental units in the block
+2. Combine all block-level assignments
+3. Return randomized assignments</code></pre>
+</section>
+</section>
+<section id="r-implementation-randomization-examples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="r-implementation-randomization-examples">R Implementation: Randomization Examples</h3>
+<section id="completely-randomized-design-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="completely-randomized-design-1">1. Completely Randomized Design</h4>
+<div id="tbl-random-assignment-crd" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-random-assignment-crd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># Number of experimental units</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define experimental units and treatments</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>experimental_units <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n  <span class="co"># 10 experimental units</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)  <span class="co"># 3 treatments</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat treatments to match the number of units</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(treatments, <span class="at">length.out =</span> n)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle treatments randomly</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>randomized_treatments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with randomized assignments</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>randomization_crd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> experimental_units, <span class="at">Treatment =</span> randomized_treatments)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(randomization_crd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Unit Treatment
+1     1         C
+2     2         A
+3     3         B
+4     4         B
+5     5         C
+6     6         C
+7     7         A
+8     8         A
+9     9         B
+10   10         A</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-random-assignment-crd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Randomized Assignments in CRD
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="randomized-block-design-1" class="level4">
+<h4 class="anchored" data-anchor-id="randomized-block-design-1"><strong>2. Randomized Block Design</strong></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define blocks and treatments</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="co"># 4 blocks</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>) <span class="co"># 3 treatments</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame to store results</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>randomization_rbd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Block =</span> <span class="fu">integer</span>(), <span class="at">Unit =</span> <span class="fu">integer</span>(), <span class="at">Treatment =</span> <span class="fu">character</span>())</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomize within each block</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (block <span class="cf">in</span> blocks) {</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomize treatments</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    randomized_treatments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assign treatments to units within the block</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    block_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">Block =</span> block,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">Unit =</span> <span class="fu">seq_len</span>(<span class="fu">length</span>(treatments)),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">Treatment =</span> randomized_treatments</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    randomization_rbd <span class="ot">&lt;-</span> <span class="fu">rbind</span>(randomization_rbd, block_data)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(randomization_rbd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Block Unit Treatment
+1      1    1         C
+2      1    2         A
+3      1    3         B
+4      2    1         B
+5      2    2         A
+6      2    3         C
+7      3    1         B
+8      3    2         C
+9      3    3         A
+10     4    1         A
+11     4    2         B
+12     4    3         C</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="explanation-in-r" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="explanation-in-r">Explanation in R</h3>
+<ul>
+<li><strong><code>rep()</code></strong>: Repeats the treatment list to match the total number of experimental units.</li>
+<li><strong><code>sample()</code></strong>: Randomizes the order of the treatments.</li>
+<li><strong><code>set.seed()</code></strong>: Ensures reproducibility of the randomization process.</li>
+<li><strong><code>for</code> loop (RBD)</strong>: Iterates through blocks, randomizing treatments for each.</li>
+</ul>
+<p>These R scripts provide easy-to-follow approaches to randomization, ensuring balanced and unbiased treatment assignment. Let me know if you’d like further assistance with advanced designs!</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<ul>
+<li>See the help page for <a href="../appendix/r-base/r-rep-basics.html">rep()</a> in the Appendix for more details.</li>
+<li>See the help page for <a href="../appendix/r-base/r-sample-basic.html">sample()</a> in the Appendix for more details.</li>
+</ul>
+</div></div></section>
 <section id="r-example-simple-random-assignment" class="level3">
 <h3 class="anchored" data-anchor-id="r-example-simple-random-assignment">R Example: Simple Random Assignment</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each=</span><span class="dv">4</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>assignments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each=</span><span class="dv">4</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>assignments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "A" "C" "C" "A" "B" "C" "B" "A" "C" "B" "A" "B"</code></pre>
 </div>
@@ -585,9 +1036,9 @@ Figure&nbsp;1: Factor Classification Flowchart
 <section id="exercises-3" class="level3">
 <h3 class="anchored" data-anchor-id="exercises-3">Exercises</h3>
 <ol type="1">
-<li><strong>Conceptual:</strong> Why is randomization crucial for valid statistical inference?</li>
-<li><strong>Numerical:</strong> With 12 units and 3 treatments, show one method of random assignment.</li>
-<li><strong>Proof/Derivation:</strong> Under randomization and the null hypothesis, show that the expected difference between treatment means is zero.</li>
+<li>Why is randomization crucial for valid statistical inference?</li>
+<li>With 12 units and 3 treatments, show one method of random assignment.</li>
+<li>Under randomization and the null hypothesis, show that the expected difference between treatment means is zero.</li>
 </ol>
 <p><strong>Key Takeaways:</strong></p>
 <ul>
@@ -596,67 +1047,41 @@ Figure&nbsp;1: Factor Classification Flowchart
 </ul>
 </section>
 </section>
-</section>
-<section id="standard-experimental-designs" class="level1">
-<h1>Standard Experimental Designs</h1>
-<section id="completely-randomized-design-crd" class="level2">
-<h2 class="anchored" data-anchor-id="completely-randomized-design-crd">Completely Randomized Design (CRD)</h2>
+<section id="standard-experimental-designs" class="level2">
+<h2 class="anchored" data-anchor-id="standard-experimental-designs">Standard Experimental Designs</h2>
+<section id="completely-randomized-design-crd" class="level3">
+<h3 class="anchored" data-anchor-id="completely-randomized-design-crd">Completely Randomized Design (CRD)</h3>
 <ul>
 <li>No blocking, treatments assigned entirely at random.</li>
 <li>Suitable when units are homogeneous.</li>
 </ul>
 </section>
-<section id="randomized-block-design-rbd" class="level2">
-<h2 class="anchored" data-anchor-id="randomized-block-design-rbd">Randomized Block Design (RBD)</h2>
+<section id="randomized-block-design-rbd" class="level3">
+<h3 class="anchored" data-anchor-id="randomized-block-design-rbd">Randomized Block Design (RBD)</h3>
 <ul>
 <li>Introduce a blocking factor to control known variation.</li>
 <li>Each block receives all treatments, improving the precision of treatment comparisons.</li>
 </ul>
 </section>
-<section id="row-column-and-latin-squares" class="level2">
-<h2 class="anchored" data-anchor-id="row-column-and-latin-squares">Row-Column and Latin Squares</h2>
+<section id="row-column-and-latin-squares" class="level3">
+<h3 class="anchored" data-anchor-id="row-column-and-latin-squares">Row-Column and Latin Squares</h3>
 <ul>
 <li>Control for two perpendicular nuisance factors simultaneously.</li>
 </ul>
 </section>
-<section id="factorial-designs" class="level2">
-<h2 class="anchored" data-anchor-id="factorial-designs">Factorial Designs</h2>
+<section id="factorial-designs" class="level3">
+<h3 class="anchored" data-anchor-id="factorial-designs">Factorial Designs</h3>
 <ul>
 <li>Study multiple factors and their interactions simultaneously.</li>
 <li>Efficiently explore how factors work together.</li>
 </ul>
 </section>
-<section id="split-plot-designs" class="level2">
-<h2 class="anchored" data-anchor-id="split-plot-designs">Split-Plot Designs</h2>
+<section id="split-plot-designs" class="level3">
+<h3 class="anchored" data-anchor-id="split-plot-designs">Split-Plot Designs</h3>
 <ul>
 <li>Useful when some factors are harder to change than others.</li>
 <li>Creates a hierarchy of experimental units (e.g., fields as main plots and subplots within fields).</li>
 </ul>
-<section id="visual-aid-factorial-design-example-in-r" class="level3">
-<h3 class="anchored" data-anchor-id="visual-aid-factorial-design-example-in-r">Visual Aid: Factorial Design Example in R</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>design_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Flyer =</span> <span class="fu">c</span>(<span class="st">"Ordinary"</span>, <span class="st">"Special"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Twist =</span> <span class="fu">c</span>(<span class="st">"1.63"</span>, <span class="st">"1.69"</span>, <span class="st">"1.78"</span>, <span class="st">"1.90"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>design_data<span class="sc">$</span>Yield <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(design_data), <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(design_data, <span class="fu">aes</span>(<span class="at">x =</span> Twist, <span class="at">y =</span> Yield, <span class="at">color =</span> Flyer)) <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Example Factorial Design"</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Twist Level"</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Response (Yield)"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="week-01_intro-design_part2_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week-01_intro-design_part2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
 <section id="activity-design-match-up" class="level3">
 <h3 class="anchored" data-anchor-id="activity-design-match-up">Activity: Design Match-Up</h3>
@@ -683,23 +1108,23 @@ Figure&nbsp;1: Factor Classification Flowchart
 </ul>
 </section>
 </section>
-</section>
-<section id="model-specification-and-effect-types" class="level1">
-<h1>Model Specification and Effect Types</h1>
-<section id="linear-models-and-anova" class="level2">
-<h2 class="anchored" data-anchor-id="linear-models-and-anova">Linear Models and ANOVA</h2>
+<section id="model-specification-and-effect-types" class="level2">
+<h2 class="anchored" data-anchor-id="model-specification-and-effect-types">Model Specification and Effect Types</h2>
+<section id="linear-models-and-anova" class="level3">
+<h3 class="anchored" data-anchor-id="linear-models-and-anova">Linear Models and ANOVA</h3>
 <p>Experiments often use a linear model to relate responses to treatments and blocks:</p>
 <p><span class="math display">\[
-Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment effects} + \text{block effects} + \text{error}
-\]</span></p>
+Y = \mu + \text{treatment effects} + \text{block effects} + \text{error}
+\]</span> {#eq:linear-model}</p>
 <p>ANOVA decomposes total variation into components attributable to treatments, blocks, and error, enabling inference on treatment effects.</p>
 </section>
-<section id="fixed-vs.-random-effects" class="level2">
-<h2 class="anchored" data-anchor-id="fixed-vs.-random-effects">Fixed vs.&nbsp;Random Effects</h2>
+<section id="fixed-vs.-random-effects" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-vs.-random-effects">Fixed vs.&nbsp;Random Effects</h3>
 <ul>
 <li><strong>Fixed Effects:</strong> Chosen levels of interest; inferences apply only to those tested levels.</li>
 <li><strong>Random Effects:</strong> Levels are a random sample from a broader population; inferences generalize beyond observed levels.</li>
 </ul>
+</section>
 <section id="activity-fixed-or-random" class="level3">
 <h3 class="anchored" data-anchor-id="activity-fixed-or-random">Activity: Fixed or Random?</h3>
 <p>Consider an experiment with 3 specific fertilizer brands (likely fixed) vs.&nbsp;an experiment using 3 randomly chosen brands from a large market (random). Discuss how interpretation changes.</p>
@@ -725,20 +1150,20 @@ Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment ef
 </ul>
 </section>
 </section>
-</section>
-<section id="planning-data-collection-and-pilot-experiments" class="level1">
-<h1>Planning Data Collection and Pilot Experiments</h1>
-<section id="measurement-and-procedure" class="level2">
-<h2 class="anchored" data-anchor-id="measurement-and-procedure">Measurement and Procedure</h2>
+<section id="planning-data-collection-and-pilot-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="planning-data-collection-and-pilot-experiments">Planning Data Collection and Pilot Experiments</h2>
+<section id="measurement-and-procedure" class="level3">
+<h3 class="anchored" data-anchor-id="measurement-and-procedure">Measurement and Procedure</h3>
 <p>Careful data collection planning ensures relevance and quality:</p>
 <ul>
 <li>Choose appropriate measurement scales and ensure instruments are calibrated.</li>
 <li>Train personnel to reduce measurement errors.</li>
 </ul>
 </section>
-<section id="pilot-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="pilot-experiments">Pilot Experiments</h2>
+<section id="pilot-experiments" class="level3">
+<h3 class="anchored" data-anchor-id="pilot-experiments">Pilot Experiments</h3>
 <p>A small-scale pilot run can identify unforeseen difficulties, refine factor levels, and confirm data collection procedures before launching the main study.</p>
+</section>
 <section id="activity-pilot-study-discussion" class="level3">
 <h3 class="anchored" data-anchor-id="activity-pilot-study-discussion">Activity: Pilot Study Discussion</h3>
 <p>Discuss what a pilot experiment might reveal in a crop study (e.g., unexpected soil pests) and how that influences the main experiment’s design.</p>
@@ -753,9 +1178,9 @@ Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment ef
 <section id="exercises-6" class="level3">
 <h3 class="anchored" data-anchor-id="exercises-6">Exercises</h3>
 <ol type="1">
-<li><strong>Conceptual:</strong> Why are pilot experiments beneficial?</li>
-<li><strong>Numerical:</strong> If pilot data suggest variance = 4 and you want a margin of error = 1, how many samples per treatment are needed (assuming normality)?</li>
-<li><strong>Proof/Derivation:</strong> Show how a pilot-based variance estimate informs sample size calculations.</li>
+<li>Why are pilot experiments beneficial?</li>
+<li>If pilot data suggest variance = 4 and you want a margin of error = 1, how many samples per treatment are needed (assuming normality)?</li>
+<li>Show how a pilot-based variance estimate informs sample size calculations.</li>
 </ol>
 <p><strong>Key Takeaways:</strong></p>
 <ul>
@@ -764,17 +1189,17 @@ Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment ef
 </ul>
 </section>
 </section>
-</section>
-<section id="determining-the-number-of-observations" class="level1">
-<h1>Determining the Number of Observations</h1>
-<section id="sample-size-and-power" class="level2">
-<h2 class="anchored" data-anchor-id="sample-size-and-power">Sample Size and Power</h2>
+<section id="determining-the-number-of-observations" class="level2">
+<h2 class="anchored" data-anchor-id="determining-the-number-of-observations">Determining the Number of Observations</h2>
+<section id="sample-size-and-power" class="level3">
+<h3 class="anchored" data-anchor-id="sample-size-and-power">Sample Size and Power</h3>
 <p>The number of observations affects the experiment’s ability to detect true effects:</p>
 <ul>
 <li><strong>Power:</strong> Probability of detecting a true effect if it exists.</li>
 <li>Larger sample size generally increases power but also increases cost.</li>
 </ul>
 <p>Power calculations balance desired precision, variance estimates, and available resources.</p>
+</section>
 <section id="activity-sample-size-calculation" class="level3">
 <h3 class="anchored" data-anchor-id="activity-sample-size-calculation">Activity: Sample Size Calculation</h3>
 <p>Given an estimated variance and a desired effect size, estimate the required sample size. Discuss trade-offs between resource constraints and statistical power.</p>
@@ -800,36 +1225,36 @@ Y=μ+treatment&nbsp;effects+block&nbsp;effects+errorY = \mu + \text{treatment ef
 </ul>
 </section>
 </section>
-</section>
-<section id="practical-example-in-r" class="level1">
-<h1>Practical Example in R</h1>
-<section id="example-a-simple-crd" class="level2">
-<h2 class="anchored" data-anchor-id="example-a-simple-crd">Example: A Simple CRD</h2>
+<section id="practical-example-in-r" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="practical-example-in-r">Practical Example in R</h2>
+<section id="example-a-simple-crd" class="level3">
+<h3 class="anchored" data-anchor-id="example-a-simple-crd">Example: A Simple CRD</h3>
 <p>Compare three battery types (A, B, C) with 4 replicates each.</p>
-<section id="r-code" class="level3">
+</section>
+<section id="r-code" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="r-code">R Code</h3>
-<div id="tbl-anova-example" class="cell quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anova-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: ANOVA Table
-</figcaption>
+<div id="tbl-anova-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-anova-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">4</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate some response data</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> <span class="fu">factor</span>(assignments))</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">4</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate some response data</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> <span class="fu">factor</span>(assignments))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    Df Sum Sq Mean Sq F value Pr(&gt;F)
 factor(assignments)  2   14.2    7.08   0.163  0.852
 Residuals            9  391.5   43.50               </code></pre>
 </div>
 </div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: ANOVA Table
+</figcaption>
 </figure>
 </div>
 <p>Interpret the ANOVA table:</p>
@@ -862,9 +1287,8 @@ Residuals            9  391.5   43.50               </code></pre>
 </ul>
 </section>
 </section>
-</section>
-<section id="summary-of-key-takeaways" class="level1">
-<h1>Summary of Key Takeaways</h1>
+<section id="summary-of-key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-key-takeaways">Summary of Key Takeaways</h2>
 <ul>
 <li><strong>Objectives:</strong> Clear objectives guide the entire design and analysis.</li>
 <li><strong>Factors and Levels:</strong> Treatment factors and meaningful factor levels ensure relevance.</li>
@@ -877,8 +1301,8 @@ Residuals            9  391.5   43.50               </code></pre>
 <li><strong>R Implementation:</strong> Practical coding examples reinforce theoretical principles.</li>
 </ul>
 </section>
-<section id="definitions-of-key-terms" class="level1">
-<h1>Definitions of Key Terms</h1>
+<section id="definitions-of-key-terms" class="level2">
+<h2 class="anchored" data-anchor-id="definitions-of-key-terms">Definitions of Key Terms</h2>
 <ul>
 <li><strong>Objective:</strong> The main research question or goal of the experiment.</li>
 <li><strong>Nuisance Factor:</strong> A variable that affects the response but is not of primary interest.</li>
@@ -899,6 +1323,7 @@ Residuals            9  391.5   43.50               </code></pre>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -1336,38 +1761,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
