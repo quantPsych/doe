@@ -174,11 +174,15 @@ window.Quarto = {
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contents.html"> 
+    <a class="nav-link" href="../home_contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -220,55 +224,7 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  </ul></li>
-  <li><a href="#experimental-designs-and-the-completely-randomized-design" id="toc-experimental-designs-and-the-completely-randomized-design" class="nav-link" data-scroll-target="#experimental-designs-and-the-completely-randomized-design">Experimental Designs and the Completely Randomized Design</a>
-  <ul class="collapse">
-  <li><a href="#defining-experimental-design" id="toc-defining-experimental-design" class="nav-link" data-scroll-target="#defining-experimental-design">Defining Experimental Design</a></li>
-  <li><a href="#randomization-procedure" id="toc-randomization-procedure" class="nav-link" data-scroll-target="#randomization-procedure">Randomization Procedure</a></li>
-  </ul></li>
-  <li><a href="#the-one-way-anova-model" id="toc-the-one-way-anova-model" class="nav-link" data-scroll-target="#the-one-way-anova-model">The One-Way ANOVA Model</a>
-  <ul class="collapse">
-  <li><a href="#model-formulation" id="toc-model-formulation" class="nav-link" data-scroll-target="#model-formulation">Model Formulation</a></li>
-  <li><a href="#estimability-and-least-squares-estimation" id="toc-estimability-and-least-squares-estimation" class="nav-link" data-scroll-target="#estimability-and-least-squares-estimation">Estimability and Least Squares Estimation</a></li>
-  <li><a href="#distribution-of-estimators" id="toc-distribution-of-estimators" class="nav-link" data-scroll-target="#distribution-of-estimators">Distribution of Estimators</a></li>
-  </ul></li>
-  <li><a href="#hypothesis-testing-and-anova" id="toc-hypothesis-testing-and-anova" class="nav-link" data-scroll-target="#hypothesis-testing-and-anova">Hypothesis Testing and ANOVA</a>
-  <ul class="collapse">
-  <li><a href="#the-anova-f-test" id="toc-the-anova-f-test" class="nav-link" data-scroll-target="#the-anova-f-test">The ANOVA F-Test</a></li>
-  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a></li>
-  </ul></li>
-  <li><a href="#sample-size-power-and-confidence-limits" id="toc-sample-size-power-and-confidence-limits" class="nav-link" data-scroll-target="#sample-size-power-and-confidence-limits">Sample Size, Power, and Confidence Limits</a>
-  <ul class="collapse">
-  <li><a href="#determining-sample-size-and-power" id="toc-determining-sample-size-and-power" class="nav-link" data-scroll-target="#determining-sample-size-and-power">Determining Sample Size and Power</a></li>
-  <li><a href="#confidence-limits-for-variance" id="toc-confidence-limits-for-variance" class="nav-link" data-scroll-target="#confidence-limits-for-variance">Confidence Limits for Variance</a></li>
-  </ul></li>
-  <li><a href="#practical-r-examples" id="toc-practical-r-examples" class="nav-link" data-scroll-target="#practical-r-examples">Practical R Examples</a>
-  <ul class="collapse">
-  <li><a href="#randomization-in-r" id="toc-randomization-in-r" class="nav-link" data-scroll-target="#randomization-in-r">Randomization in R</a>
-  <ul class="collapse">
-  <li><a href="#explanation-of-the-key-functions-in-r" id="toc-explanation-of-the-key-functions-in-r" class="nav-link" data-scroll-target="#explanation-of-the-key-functions-in-r">Explanation of the Key Functions in R</a></li>
-  </ul></li>
-  <li><a href="#fitting-a-one-way-anova-model" id="toc-fitting-a-one-way-anova-model" class="nav-link" data-scroll-target="#fitting-a-one-way-anova-model">Fitting a One-Way ANOVA Model</a></li>
-  <li><a href="#estimating-means-and-contrasts" id="toc-estimating-means-and-contrasts" class="nav-link" data-scroll-target="#estimating-means-and-contrasts">Estimating Means and Contrasts</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  <li><a href="#appendix-advanced-mathematical-details" id="toc-appendix-advanced-mathematical-details" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-details">Appendix: Advanced Mathematical Details</a>
-  <ul class="collapse">
-  <li><a href="#a.1-normal-equations-and-estimability" id="toc-a.1-normal-equations-and-estimability" class="nav-link" data-scroll-target="#a.1-normal-equations-and-estimability">A.1 Normal Equations and Estimability</a></li>
-  <li><a href="#a.2-distribution-of-the-f-statistic" id="toc-a.2-distribution-of-the-f-statistic" class="nav-link" data-scroll-target="#a.2-distribution-of-the-f-statistic">A.2 Distribution of the F-Statistic</a></li>
-  <li><a href="#a.3-power-calculations" id="toc-a.3-power-calculations" class="nav-link" data-scroll-target="#a.3-power-calculations">A.3 Power Calculations</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
