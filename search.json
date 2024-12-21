@@ -210,6 +210,139 @@
     "text": "A Derivation of Expected Mean Squares\nFor the simple one-way ANOVA model:\n\\[\nY_{ij} = \\mu + \\alpha_i + \\varepsilon_{ij},\n\\]\nwith \\(\\sum \\alpha_i = 0\\), the expected mean squares are:\n\\[\nE(MS_{\\text{Treatment}}) = \\sigma^2 + n \\sum \\alpha_i^2/(g-1),\n\\]\n\\[\nE(MS_{\\text{Error}}) = \\sigma^2.\n\\]\nThese derivations rely on properties of orthogonal decompositions of sums of squares and can be found in Montgomery (2019) and Scheffé (1959)."
   },
   {
+    "objectID": "lectures/week-03_rcbd-blocking.html",
+    "href": "lectures/week-03_rcbd-blocking.html",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "",
+    "text": "In mathematical statistics, well-structured experimental designs and robust analytical methods are essential for drawing valid conclusions about treatment effects. One of the simplest yet fundamental designs is the completely randomized design (CRD). Under a CRD, each experimental unit is randomly assigned to one of several treatment conditions without any blocking factors. This approach ensures that all treatments have an equal chance of being applied to each unit, thereby mitigating systematic biases and facilitating straightforward inference.\nA key tool for analyzing CRDs is the one-way analysis of variance (ANOVA). The one-way ANOVA tests whether at least two of several treatment means differ significantly. Building upon principles of linear models, least squares estimation, and classical hypothesis testing, the one-way ANOVA provides a comprehensive framework to quantify uncertainty and make decisions about treatments based on observed data.\n\n\n\nUnderstand the structure and rationale behind the completely randomized design.\nLearn the randomization procedure and the role of coding treatments.\nFormulate the one-way ANOVA model and understand its assumptions.\nExplore concepts of estimability, least squares estimation, and the distribution of estimators.\nApply the ANOVA test to decide whether treatments differ significantly.\nCalculate sample size and power, and incorporate these insights when planning experiments.\nDemonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#objectives",
+    "href": "lectures/week-03_rcbd-blocking.html#objectives",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "",
+    "text": "Understand the structure and rationale behind the completely randomized design.\nLearn the randomization procedure and the role of coding treatments.\nFormulate the one-way ANOVA model and understand its assumptions.\nExplore concepts of estimability, least squares estimation, and the distribution of estimators.\nApply the ANOVA test to decide whether treatments differ significantly.\nCalculate sample size and power, and incorporate these insights when planning experiments.\nDemonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#defining-experimental-design",
+    "href": "lectures/week-03_rcbd-blocking.html#defining-experimental-design",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Defining Experimental Design",
+    "text": "Defining Experimental Design\nAn experimental design is a rule determining how experimental units are assigned to treatments. In a completely randomized design (CRD), no blocking factors are considered; all experimental units are assigned to treatments purely at random. This simplicity allows:\n\nEqual probability of treatment assignment.\nAvoidance of experimenter bias.\nStraightforward statistical analysis.\n\nExamples include testing different battery types or comparing rotary pump speeds to measure fluid flow. When no major nuisance factors (like day-to-day variation or spatial differences) need controlling, a CRD is often appropriate."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#randomization-procedure",
+    "href": "lectures/week-03_rcbd-blocking.html#randomization-procedure",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Randomization Procedure",
+    "text": "Randomization Procedure\nRandomization ensures fairness and the validity of the statistical distributions underlying standard tests. Treatments, labeled 1 through \\(v\\), are assigned to experimental units by generating random numbers and sorting them. Modern software (R, SAS) or random number tables can be used. For instance, if testing three treatment levels (A, B, C) with equal sample sizes, we can:\n\nGenerate random numbers for each unit.\nRank units by their random numbers.\nAssign treatments in order based on the desired allocation.\n\nThis procedure ensures every arrangement is equally likely, aligning with the assumptions in ANOVA and related inference."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#model-formulation",
+    "href": "lectures/week-03_rcbd-blocking.html#model-formulation",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Model Formulation",
+    "text": "Model Formulation\nConsider \\(v\\) treatments with \\(n\\) observations each (for simplicity). Let \\(Y_{ij}\\) denote the response from the \\(j\\)-th unit receiving treatment \\(i\\), with \\(i=1,\\dots,v\\) and \\(j=1,\\dots,n\\). A common model is:\n\\[\nY_{ij} = \\mu + \\tau_i + \\varepsilon_{ij},\n\\]\nwhere:\n\n\\(\\mu\\) is the overall mean response.\n\\(\\tau_i\\) is the effect of the \\(i\\)-th treatment.\n\\(\\varepsilon_{ij}\\) are independent, normally distributed errors with mean 0 and variance \\(\\sigma^2\\).\n\nThe assumptions are:\n\nErrors \\(\\varepsilon_{ij}\\) are i.i.d. \\(N(0,\\sigma^2)\\).\nTreatment effects sum to zero: \\(\\sum_{i=1}^v \\tau_i = 0\\) for identifiability.\n\nThis linear model model underpins the ANOVA. The null hypothesis for testing no treatment differences is \\(H_0: \\tau_1 = \\tau_2 = \\cdots = \\tau_v = 0\\)."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#estimability-and-least-squares-estimation",
+    "href": "lectures/week-03_rcbd-blocking.html#estimability-and-least-squares-estimation",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Estimability and Least Squares Estimation",
+    "text": "Estimability and Least Squares Estimation\nNot all model parameters (\\(\\tau_i\\)) are independently estimable. However, estimable functions, linear combinations of parameters that correspond to expected values of observed data, can be estimated uniquely.\nThe least squares estimators (LSEs) solve the normal equations obtained by minimizing the sum of squared errors (SSE):\n\\[\n\\text{SSE} = \\sum_{i=1}^v \\sum_{j=1}^n (Y_{ij} - \\hat{\\mu}_i)^2,\n\\]\nwhere \\(\\hat{\\mu}_i\\) is the estimated mean for treatment \\(i\\). The LSE for each treatment mean \\(\\mu_i = \\mu + \\tau_i\\) is simply the sample mean \\(\\bar{Y}_i = \\frac{1}{n}\\sum_{j=1}^n Y_{ij}\\).\nBecause the normal equations are linearly dependent, an additional constraint is needed (e.g., \\(\\sum \\tau_i = 0\\)). Still, any estimable function (like differences between treatment means) can be uniquely estimated."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#distribution-of-estimators",
+    "href": "lectures/week-03_rcbd-blocking.html#distribution-of-estimators",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Distribution of Estimators",
+    "text": "Distribution of Estimators\nUnder the normal error assumption, each estimator \\(\\bar{Y}_i\\) is normally distributed, with:\n\\[\nE(\\bar{Y}_i) = \\mu_i, \\quad \\text{Var}(\\bar{Y}_i) = \\frac{\\sigma^2}{n}.\n\\]\nThe error variance \\(\\sigma^2\\) is estimated by the mean square error (MSE):\n\\[\n\\hat{\\sigma}^2 = \\frac{\\text{SSE}}{N - v},\n\\]\nwhere \\(N = v \\cdot n\\) is the total number of observations."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#the-anova-f-test",
+    "href": "lectures/week-03_rcbd-blocking.html#the-anova-f-test",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "The ANOVA F-Test",
+    "text": "The ANOVA F-Test\nTo test \\(H_0: \\tau_1 = \\cdots = \\tau_v = 0\\) against \\(H_a:\\) at least two \\(\\tau_i\\) differ, we use the ANOVA F-statistic:\n\\[\nF = \\frac{\\text{MST}}{\\text{MSE}},\n\\]\nwhere:\n\n\\(\\text{SST}\\) = treatment sum of squares measures variation among treatment means.\n\\(\\text{MSE}\\) = error mean square, \\(\\text{MSE} = \\text{SSE}/(N-v)\\).\n\\(\\text{MST} = \\text{SST}/(v-1)\\).\n\nUnder \\(H_0\\), \\(F \\sim F_{v-1, N-v}\\). If \\(F\\)-value exceeds a critical value (or the p-value is below a chosen \\(\\alpha\\)), we reject \\(H_0\\)."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#anova-table",
+    "href": "lectures/week-03_rcbd-blocking.html#anova-table",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "ANOVA Table",
+    "text": "ANOVA Table\nThe ANOVA table summarizes the decomposition of total variability:\n\n\n\nSource\nDF\nSS\nMS\nF-ratio\n\n\n\n\nTreatment\n\\(v-1\\)\nSST\nMST=SST/(v-1)\nMST/MSE\n\n\nError\n\\(N - v\\)\nSSE\nMSE=SSE/(N-v)\n-\n\n\nTotal\n\\(N-1\\)\nSSTotal\n-\n-\n\n\n\nRejecting \\(H_0\\) indicates that not all treatment means are equal."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#determining-sample-size-and-power",
+    "href": "lectures/week-03_rcbd-blocking.html#determining-sample-size-and-power",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Determining Sample Size and Power",
+    "text": "Determining Sample Size and Power\nTo ensure the experiment can detect meaningful differences, consider the power analysis. Power calculations (detailed in referenced texts) help determine the number of replicates \\(n\\) per treatment to achieve a desired probability of detecting a specified difference at a given significance level \\(\\alpha\\).\nUse methods from Montgomery, Peck & Vining (2020) or Dean, Voss & Draguljić (2017), along with pilot data, to estimate \\(\\sigma^2\\) and decide on sample size. If resources are limited, one may have to adjust objectives or accept lower power."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#confidence-limits-for-variance",
+    "href": "lectures/week-03_rcbd-blocking.html#confidence-limits-for-variance",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Confidence Limits for Variance",
+    "text": "Confidence Limits for Variance\nA one-sided confidence interval on \\(\\sigma^2\\) prevents underestimating required observations. The upper confidence limit is derived from the chi-squared distribution:\n\\[\n\\frac{(N-v)\\hat{\\sigma}^2}{\\sigma^2} \\sim \\chi^2_{N-v}.\n\\]\nSuch intervals guide planning by addressing uncertainty in the variance estimate."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#randomization-in-r",
+    "href": "lectures/week-03_rcbd-blocking.html#randomization-in-r",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Randomization in R",
+    "text": "Randomization in R\nSuppose we have 3 treatments (A, B, C) and total 9 units (3 per treatment):\n\nset.seed(123)\ntreatments &lt;- rep(c(\"A\",\"B\",\"C\"), each=3)\n# Assign random numbers\nrand_nums &lt;- runif(9) \ndata_frame &lt;- data.frame(Unit=1:9, Treatment=treatments, RN=rand_nums)\n# Sort by RN\ndata_frame_sorted &lt;- data_frame[order(data_frame$RN), ]\ndata_frame_sorted\n\n\n  \n\n\n\nThis yields a random allocation order."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#fitting-a-one-way-anova-model",
+    "href": "lectures/week-03_rcbd-blocking.html#fitting-a-one-way-anova-model",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Fitting a One-Way ANOVA Model",
+    "text": "Fitting a One-Way ANOVA Model\nAssume we have data from a soap experiment (soap.txt) with three soap types (regular, deodorant, moisturizing):\n\n# Read data\npacman::p_load(here)\nsoap.data &lt;- read.table(here(\"data\",\"dean2017\", \"soap.txt\"), header=TRUE)\nsoap.data$fSoap &lt;- factor(soap.data$Soap)\n\n# Fit a one-way ANOVA\nfit &lt;- aov(WtLoss ~ fSoap, data=soap.data)\nsummary(fit)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nfSoap        2 16.122   8.061   104.5 5.91e-07 ***\nResiduals    9  0.695   0.077                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe ANOVA summary shows if soap type affects weight loss significantly."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#estimating-means-and-contrasts",
+    "href": "lectures/week-03_rcbd-blocking.html#estimating-means-and-contrasts",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Estimating Means and Contrasts",
+    "text": "Estimating Means and Contrasts\nWe can estimate treatment means (least squares means) and test contrasts using emmeans or multcomp packages. For example:\n\npacman::p_load(emmeans)\nemmeans(fit, ~ fSoap)\n\n fSoap emmean    SE df lower.CL upper.CL\n 1     -0.035 0.139  9   -0.349    0.279\n 2      2.700 0.139  9    2.386    3.014\n 3      1.992 0.139  9    1.678    2.307\n\nConfidence level used: 0.95 \n\n\nThis provides estimates and confidence intervals for each soap type’s mean weight loss."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#conclusion",
+    "href": "lectures/week-03_rcbd-blocking.html#conclusion",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Conclusion",
+    "text": "Conclusion\nA completely randomized design and its corresponding one-way ANOVA analysis form the bedrock of experimental inference when blocking is unnecessary. By carefully randomizing treatments, modeling responses, and applying least squares estimation, one can confidently infer whether treatments differ.\nWe introduced the conceptual framework and key formulae, showed how to conduct hypothesis tests and interpret ANOVA results, discussed sample size and power considerations, and provided R code for practical execution. Mastery of these fundamentals empowers researchers to design efficient experiments, maximize the utility of collected data, and confidently draw conclusions about treatment effects."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#references",
+    "href": "lectures/week-03_rcbd-blocking.html#references",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "References",
+    "text": "References\n\nChristensen, R. (2018). Analysis of variance, design, and regression: Linear modeling for unbalanced data (2nd Ed.). Chapman and Hall/CRC.\nDean, A., Voss, D., & Draguljić, D. (2017). Design and analysis of experiments. Springer. https://doi.org/10.1007/978-3-319-52250-0\nKempthorne, O. (1977). Design and Analysis of Experiments. Wiley.\nMontgomery, D. C., Peck, E. A., & Vining, G. G. (2020). Introduction to linear regression analysis (5th Ed.). Wiley."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#a.1-normal-equations-and-estimability",
+    "href": "lectures/week-03_rcbd-blocking.html#a.1-normal-equations-and-estimability",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "A.1 Normal Equations and Estimability",
+    "text": "A.1 Normal Equations and Estimability\nThe one-way ANOVA model can be written as:\n\\[\nY_{ij} = \\mu_i + \\varepsilon_{ij}, \\quad \\text{with } \\mu_i = \\mu + \\tau_i.\n\\]\nThe least squares approach forms normal equations from partial derivatives of SSE. Because \\(\\sum \\tau_i = 0\\), only differences in means are estimable. The space of estimable functions includes contrasts like \\(\\mu_1 - \\mu_2\\), but not individual \\(\\tau_i\\) alone."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#a.2-distribution-of-the-f-statistic",
+    "href": "lectures/week-03_rcbd-blocking.html#a.2-distribution-of-the-f-statistic",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "A.2 Distribution of the F-Statistic",
+    "text": "A.2 Distribution of the F-Statistic\nUnder \\(H_0\\):\n\\[\nF = \\frac{MST}{MSE} \\sim F_{v-1, N-v}.\n\\]\nIf treatments truly differ, F follows a noncentral F-distribution, enabling power calculations and minimum detectable differences."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#a.3-power-calculations",
+    "href": "lectures/week-03_rcbd-blocking.html#a.3-power-calculations",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "A.3 Power Calculations",
+    "text": "A.3 Power Calculations\nPower for detecting a difference \\(\\delta\\) in means involves the noncentrality parameter of the F-distribution. By selecting \\(\\alpha, \\sigma^2, \\delta,\\) and desired power, tables or software (e.g., pwr package in R) guide sample size choices.\n\n# Example using pwr package\n# install.packages(\"pwr\") # if not installed\npacman::p_load(pwr)\npwr.anova.test(k = 3, f = 0.4, sig.level = 0.05, power = 0.8)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 3\n              n = 21.10364\n              f = 0.4\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\nThis computes required sample size per treatment to achieve 80% power with a given effect size \\(f\\)."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -361,7 +494,7 @@
     "href": "assignments/assignment2_completely_randomized_design.html#problems",
     "title": "Assignment 2: One-Way ANOVA Analysis",
     "section": "Problems",
-    "text": "Problems\n\nSet 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)\n\n1.1 Balloon Experiment\nData Source: Dean et al. (2017), Chapter 3, Exercise 12\nData Overview: The data for this experiment is provided below:\n\n\n\nTime Order\nCoded Color\nInflation Time (seconds)\n\n\n\n\n1\n1\n22.0\n\n\n2\n3\n24.6\n\n\n3\n1\n20.3\n\n\n4\n4\n19.8\n\n\n5\n3\n24.3\n\n\n6\n2\n22.2\n\n\n7\n2\n28.5\n\n\n8\n2\n25.7\n\n\n9\n3\n20.2\n\n\n10\n1\n19.6\n\n\n11\n2\n28.8\n\n\n12\n4\n24.0\n\n\n13\n4\n17.1\n\n\n14\n4\n19.3\n\n\n15\n3\n24.2\n\n\n16\n1\n15.8\n\n\n17\n2\n18.3\n\n\n18\n1\n17.5\n\n\n19\n4\n18.7\n\n\n20\n3\n22.9\n\n\n21\n1\n16.3\n\n\n22\n4\n14.0\n\n\n23\n4\n16.6\n\n\n24\n2\n18.1\n\n\n25\n2\n18.9\n\n\n26\n4\n16.0\n\n\n27\n2\n20.1\n\n\n28\n3\n22.5\n\n\n29\n3\n16.0\n\n\n30\n1\n19.3\n\n\n31\n1\n15.9\n\n\n32\n3\n20.3\n\n\n\nThe codes for balloon colors are as follows:\n\n1 = Pink\n2 = Yellow\n3 = Orange\n4 = Blue\n\nTasks:\n\n\nPlot inflation time versus balloon color and comment on the results.\n\n\nEstimate the mean inflation time for each balloon color and add these estimates to the plot from part (a).\n\n\nConstruct an analysis of variance (ANOVA) table and test the hypothesis that balloon color has no effect on inflation time (\\(\\alpha = 0.05\\)).\n\n\nPlot the data for each color in the order it was collected. Discuss whether the assumptions of the ANOVA model (e.g., normality, independence) appear satisfied.\n\n\nEvaluate whether the analysis in part (c) is adequate. If not, suggest improvements.\n\n\n\n\n\n1.2 Conceptual Question\n\nDiscuss how increasing the number of replicates affects the power of a one-way ANOVA test.\n\n\n\n\n1.3 Graphical Analysis\n\nCreate a boxplot of inflation times for each balloon color. Based on the plot, comment on visual evidence of differences among the treatments.\n\n\n\n\n\nSet 2: Advanced Computational and Proof-Based Questions (Graduate Level)\n\n2.1 Derivation of \\(t\\)-Statistic for Contrasts in ANOVA\nData Source: Christensen (2018)., Exercise 12.7.12\nIn a one-way ANOVA, the sum of squares for error (\\(SSE\\)) divided by the population variance (\\(\\sigma^2\\)) follows a chi-squared distribution with degrees of freedom equal to \\(df_E\\):\n\\[\n\\frac{SSE}{\\sigma^2} \\sim \\chi^2(df_E),\n\\]\nand the mean square error (\\(MSE\\)) is independent of all sample means (\\(\\bar{y}_i\\)). Show that the following expression follows a \\(t\\)-distribution with \\(df_E\\) degrees of freedom:\n\\[\n\\frac{\\sum_{i=1}^a \\lambda_i \\bar{y}_i - \\sum_{i=1}^a \\lambda_i \\mu_i}{\\sqrt{MSE \\sum_{i=1}^a \\frac{\\lambda_i^2}{N_i}}} \\sim t(df_E).\n\\]\nTasks:\n\n\nDerive the above expression step-by-step, starting with the variance of the contrast \\(\\sum_{i=1}^a \\lambda_i \\bar{y}_i\\).\n\n\nExplain why \\(MSE\\) serves as an unbiased estimate of \\(\\sigma^2\\).\n\n\nUsing the result, construct a hypothesis test for a contrast in a one-way ANOVA and provide a practical interpretation of the result.\n\n\n\n\n\n2.2 Implications of Assumption Violations\n\nDiscuss the implications of violating the assumption of homogeneity of variances in a one-way ANOVA. Suggest two methods to address such violations.\n\n\n\n\n2.3 Power Analysis\n\nCalculate the sample size required for a one-way ANOVA with four groups to detect a medium effect size (\\(f = 0.25\\)) at a significance level of \\(\\alpha = 0.05\\) and a power of \\(1 - \\beta = 0.8\\)."
+    "text": "Problems\n\nSet 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)\n\n1.1 Balloon Experiment\nData Source: Dean et al. (2017), Chapter 3, Exercise 12\nData Overview: The data for this experiment is provided below:\n\n\n\nTime Order\nCoded Color\nInflation Time (seconds)\n\n\n\n\n1\n1\n22.0\n\n\n2\n3\n24.6\n\n\n3\n1\n20.3\n\n\n4\n4\n19.8\n\n\n5\n3\n24.3\n\n\n6\n2\n22.2\n\n\n7\n2\n28.5\n\n\n8\n2\n25.7\n\n\n9\n3\n20.2\n\n\n10\n1\n19.6\n\n\n11\n2\n28.8\n\n\n12\n4\n24.0\n\n\n13\n4\n17.1\n\n\n14\n4\n19.3\n\n\n15\n3\n24.2\n\n\n16\n1\n15.8\n\n\n17\n2\n18.3\n\n\n18\n1\n17.5\n\n\n19\n4\n18.7\n\n\n20\n3\n22.9\n\n\n21\n1\n16.3\n\n\n22\n4\n14.0\n\n\n23\n4\n16.6\n\n\n24\n2\n18.1\n\n\n25\n2\n18.9\n\n\n26\n4\n16.0\n\n\n27\n2\n20.1\n\n\n28\n3\n22.5\n\n\n29\n3\n16.0\n\n\n30\n1\n19.3\n\n\n31\n1\n15.9\n\n\n32\n3\n20.3\n\n\n\nThe codes for balloon colors are as follows:\n\n1 = Pink\n2 = Yellow\n3 = Orange\n4 = Blue\n\nTasks:\n\n\nPlot inflation time versus balloon color and comment on the results.\n\n\nEstimate the mean inflation time for each balloon color and add these estimates to the plot from part (a).\n\n\nConstruct an analysis of variance (ANOVA) table and test the hypothesis that balloon color has no effect on inflation time (\\(\\alpha = 0.05\\)).\n\n\nPlot the data for each color in the order it was collected. Discuss whether the assumptions of the ANOVA model (e.g., normality, independence) appear satisfied.\n\n\nEvaluate whether the analysis in part (c) is adequate. If not, suggest improvements.\n\n\n\n\n\n1.2 Conceptual Question\n\nDiscuss how increasing the number of replicates affects the power of a one-way ANOVA test.\n\n\n\n\n1.3 Graphical Analysis\n\nCreate a boxplot of inflation times for each balloon color. Based on the plot, comment on visual evidence of differences among the treatments.\n\n\n\n\n\nSet 2: Advanced Computational and Proof-Based Questions (Graduate Level)\n\n2.1 Derivation of \\(t\\)-Statistic for Contrasts in ANOVA\nData Source: Christensen (2018)., Exercise 12.7.12\nIn a one-way ANOVA, the sum of squares for error (\\(SSE\\)) divided by the population variance (\\(\\sigma^2\\)) follows a chi-squared distribution with degrees of freedom equal to \\(df_E\\):\n\\[\n\\frac{SSE}{\\sigma^2} \\sim \\chi^2(df_E),\n\\]\nand the mean square error (\\(MSE\\)) is independent of all sample means (\\(\\bar{y}_i\\)). Show that the following expression follows a \\(t\\)-distribution with \\(df_E\\) degrees of freedom:\n\\[\n\\frac{\\sum_{i=1}^a \\lambda_i \\bar{y}_i - \\sum_{i=1}^a \\lambda_i \\mu_i}{\\sqrt{MSE \\sum_{i=1}^a \\frac{\\lambda_i^2}{N_i}}} \\sim t(df_E).\n\\]\nTasks:\n\nDerive the above expression step-by-step, starting with the variance of the contrast \\(\\sum_{i=1}^a \\lambda_i \\bar{y}_i\\).\nExplain why \\(MSE\\) serves as an unbiased estimate of \\(\\sigma^2\\).\nUsing the result, construct a hypothesis test for a contrast in a one-way ANOVA and provide a practical interpretation of the result.\n\n\n\n\n2.2 Implications of Assumption Violations\n\nDiscuss the implications of violating the assumption of homogeneity of variances in a one-way ANOVA. Suggest two methods to address such violations.\n\n\n\n\n2.3 Power Analysis\n\nCalculate the sample size required for a one-way ANOVA with four groups to detect a medium effect size (\\(f = 0.25\\)) at a significance level of \\(\\alpha = 0.05\\) and a power of \\(1 - \\beta = 0.8\\)."
   },
   {
     "objectID": "assignments/assignment2_completely_randomized_design.html#points-distribution",
