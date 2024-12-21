@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>assignment2_completely_randomized_design – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 2: One-Way ANOVA Analysis – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,12 +67,41 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 2: One-Way ANOVA Analysis – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -129,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page">
-      
+      <h1 class="title">Assignment 2: One-Way ANOVA Analysis</h1>
                       </div>
   </div>
     
@@ -159,8 +188,311 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions:</h2>
+<ul>
+<li>Complete all questions below.</li>
+<li>Use the R programming language for computational problems. Include annotated R code and relevant output.</li>
+<li>Provide clear and concise explanations and interpretations for all tasks.</li>
+</ul>
+<hr>
+</section>
+<section id="problems" class="level2">
+<h2 class="anchored" data-anchor-id="problems">Problems</h2>
+<section id="set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students" class="level3">
+<h3 class="anchored" data-anchor-id="set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students">Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)</h3>
+<section id="balloon-experiment" class="level4">
+<h4 class="anchored" data-anchor-id="balloon-experiment"><strong>1.1 Balloon Experiment</strong></h4>
+<p><em>Data Source: Dean et al.&nbsp;(2017), Chapter 3, Exercise 12</em></p>
+<p><strong>Data Overview</strong>: The data for this experiment is provided below:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Time Order</strong></th>
+<th><strong>Coded Color</strong></th>
+<th><strong>Inflation Time (seconds)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>22.0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+<td>24.6</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+<td>20.3</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>4</td>
+<td>19.8</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>3</td>
+<td>24.3</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>2</td>
+<td>22.2</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>2</td>
+<td>28.5</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>2</td>
+<td>25.7</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>3</td>
+<td>20.2</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>1</td>
+<td>19.6</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>2</td>
+<td>28.8</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>4</td>
+<td>24.0</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>4</td>
+<td>17.1</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>4</td>
+<td>19.3</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>3</td>
+<td>24.2</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>1</td>
+<td>15.8</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>2</td>
+<td>18.3</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>1</td>
+<td>17.5</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>4</td>
+<td>18.7</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>3</td>
+<td>22.9</td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td>1</td>
+<td>16.3</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>4</td>
+<td>14.0</td>
+</tr>
+<tr class="odd">
+<td>23</td>
+<td>4</td>
+<td>16.6</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>2</td>
+<td>18.1</td>
+</tr>
+<tr class="odd">
+<td>25</td>
+<td>2</td>
+<td>18.9</td>
+</tr>
+<tr class="even">
+<td>26</td>
+<td>4</td>
+<td>16.0</td>
+</tr>
+<tr class="odd">
+<td>27</td>
+<td>2</td>
+<td>20.1</td>
+</tr>
+<tr class="even">
+<td>28</td>
+<td>3</td>
+<td>22.5</td>
+</tr>
+<tr class="odd">
+<td>29</td>
+<td>3</td>
+<td>16.0</td>
+</tr>
+<tr class="even">
+<td>30</td>
+<td>1</td>
+<td>19.3</td>
+</tr>
+<tr class="odd">
+<td>31</td>
+<td>1</td>
+<td>15.9</td>
+</tr>
+<tr class="even">
+<td>32</td>
+<td>3</td>
+<td>20.3</td>
+</tr>
+</tbody>
+</table>
+<p>The codes for balloon colors are as follows:</p>
+<ul>
+<li>1 = Pink</li>
+<li>2 = Yellow</li>
+<li>3 = Orange</li>
+<li>4 = Blue</li>
+</ul>
+<p><strong>Tasks</strong>: 1. (a) Plot inflation time versus balloon color and comment on the results. 2. (b) Estimate the mean inflation time for each balloon color and add these estimates to the plot from part (a). 3. (c) Construct an analysis of variance (ANOVA) table and test the hypothesis that balloon color has no effect on inflation time (<span class="math inline">\(\alpha = 0.05\)</span>). 4. (d) Plot the data for each color in the order it was collected. Discuss whether the assumptions of the ANOVA model (e.g., normality, independence) appear satisfied. 5. (e) Evaluate whether the analysis in part (c) is adequate. If not, suggest improvements.</p>
+<hr>
+</section>
+<section id="conceptual-question" class="level4">
+<h4 class="anchored" data-anchor-id="conceptual-question">1.2 Conceptual Question</h4>
+<ul>
+<li>Discuss how increasing the number of replicates affects the power of a one-way ANOVA test.</li>
+</ul>
+<hr>
+</section>
+<section id="graphical-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="graphical-analysis">1.3 Graphical Analysis</h4>
+<ul>
+<li>Create a boxplot of inflation times for each balloon color. Based on the plot, comment on visual evidence of differences among the treatments.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="set-2-advanced-computational-and-proof-based-questions-graduate-level" class="level3">
+<h3 class="anchored" data-anchor-id="set-2-advanced-computational-and-proof-based-questions-graduate-level">Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)</h3>
+<section id="derivation-of-t-statistic-for-contrasts-in-anova" class="level4">
+<h4 class="anchored" data-anchor-id="derivation-of-t-statistic-for-contrasts-in-anova">2.1 Derivation of <span class="math inline">\(t\)</span>-Statistic for Contrasts in ANOVA</h4>
+<p><em>Data Source: Christensen (2018)., Exercise 12.7.12</em></p>
+<p>In a one-way ANOVA, the sum of squares for error (<span class="math inline">\(SSE\)</span>) divided by the population variance (<span class="math inline">\(\sigma^2\)</span>) follows a chi-squared distribution with degrees of freedom equal to <span class="math inline">\(df_E\)</span>:</p>
+<p><span class="math display">\[
+\frac{SSE}{\sigma^2} \sim \chi^2(df_E),
+\]</span></p>
+<p>and the mean square error (<span class="math inline">\(MSE\)</span>) is independent of all sample means (<span class="math inline">\(\bar{y}_i\)</span>). Show that the following expression follows a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(df_E\)</span> degrees of freedom:</p>
+<p><span class="math display">\[
+\frac{\sum_{i=1}^a \lambda_i \bar{y}_i - \sum_{i=1}^a \lambda_i \mu_i}{\sqrt{MSE \sum_{i=1}^a \frac{\lambda_i^2}{N_i}}} \sim t(df_E).
+\]</span></p>
+<p><strong>Tasks</strong>: 1. (a) Derive the above expression step-by-step, starting with the variance of the contrast <span class="math inline">\(\sum_{i=1}^a \lambda_i \bar{y}_i\)</span>. 2. (b) Explain why <span class="math inline">\(MSE\)</span> serves as an unbiased estimate of <span class="math inline">\(\sigma^2\)</span>. 3. (c) Using the result, construct a hypothesis test for a contrast in a one-way ANOVA and provide a practical interpretation of the result.</p>
+<hr>
+</section>
+<section id="implications-of-assumption-violations" class="level4">
+<h4 class="anchored" data-anchor-id="implications-of-assumption-violations">2.2 Implications of Assumption Violations</h4>
+<ul>
+<li>Discuss the implications of violating the assumption of homogeneity of variances in a one-way ANOVA. Suggest two methods to address such violations.</li>
+</ul>
+<hr>
+</section>
+<section id="power-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="power-analysis">2.3 Power Analysis</h4>
+<ul>
+<li>Calculate the sample size required for a one-way ANOVA with four groups to detect a medium effect size (<span class="math inline">\(f = 0.25\)</span>) at a significance level of <span class="math inline">\(\alpha = 0.05\)</span> and a power of <span class="math inline">\(1 - \beta = 0.8\)</span>.</li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="points-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="points-distribution">Points Distribution</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Task</strong></th>
+<th><strong>Points</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Set 1: Foundational Questions</strong></td>
+<td><strong>50</strong></td>
+</tr>
+<tr class="even">
+<td>1.1 Balloon Experiment</td>
+<td>30</td>
+</tr>
+<tr class="odd">
+<td>1.2 Conceptual Question</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>1.3 Graphical Analysis</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td><strong>Set 2: Advanced Questions</strong></td>
+<td><strong>50</strong></td>
+</tr>
+<tr class="even">
+<td>2.1 Derivation of <span class="math inline">\(t\)</span>-Statistic</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td>2.2 Implications of Assumption Violations</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>2.3 Power Analysis</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<section id="submission-guidelines" class="level3">
+<h3 class="anchored" data-anchor-id="submission-guidelines">Submission Guidelines:</h3>
+<ul>
+<li>Submit your assignment as a Quarto document, rendered to PDF, via the course submission portal.</li>
+<li>Include all R code and outputs for computational tasks.</li>
+<li>Ensure clarity and precision in your explanations.</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
