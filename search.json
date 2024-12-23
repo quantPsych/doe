@@ -361,7 +361,7 @@
     "href": "lectures/week-04_comparisons-contrasts.html#example-2-testing-a-specific-contrast",
     "title": "Comparisons and Contrasts",
     "section": "Example 2: Testing a Specific Contrast",
-    "text": "Example 2: Testing a Specific Contrast\nDefining a Contrast:\n\nlibrary(emmeans)\n\n# Suppose we want to test (A,B) vs (C,D)\ncontrast_vec &lt;- c(0.5, 0.5, -0.5, -0.5)\n\nemm &lt;- emmeans(fit, ~Treatment)\ncontrast(emm, method = list(\"AB_vs_CD\" = contrast_vec))\n\n contrast estimate    SE df t.ratio p.value\n AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001\n\n\n\nInterpretation\nThe output gives an estimate, standard error, t-value, and p-value. If p &lt; alpha, we conclude there is evidence that (A,B) differ from (C,D)."
+    "text": "Example 2: Testing a Specific Contrast\nDefining a Contrast:\n\nlibrary(emmeans)\n\n# Suppose we want to test (A,B) vs (C,D)\ncontrast_vec &lt;- c(0.5, 0.5, -0.5, -0.5)\n\nemm &lt;- emmeans(fit, ~Treatment)\ncontrast(emm, method = list(\"AB_vs_CD\" = contrast_vec))\n\n contrast estimate    SE df t.ratio p.value\n AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001\n\n\n\n\nFor more detail on the emmeans package, see the tutorial page emmeans in the appendix.\n\nInterpretation\nThe output gives an estimate, standard error, t-value, and p-value. If p &lt; alpha, we conclude there is evidence that (A,B) differ from (C,D)."
   },
   {
     "objectID": "lectures/week-04_comparisons-contrasts.html#medium-difficulty",
@@ -546,6 +546,244 @@
     "text": "Instructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
   },
   {
+    "objectID": "appendix/r-packages/emmeans.html",
+    "href": "appendix/r-packages/emmeans.html",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "",
+    "text": "The emmeans package in R simplifies post-hoc analysis and estimation of marginal means from statistical models. It provides tools to estimate, compare, and test means across levels of predictors while accounting for the model structure."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#introduction",
+    "href": "appendix/r-packages/emmeans.html#introduction",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "",
+    "text": "The emmeans package in R simplifies post-hoc analysis and estimation of marginal means from statistical models. It provides tools to estimate, compare, and test means across levels of predictors while accounting for the model structure."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#overview",
+    "href": "appendix/r-packages/emmeans.html#overview",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Overview",
+    "text": "Overview\n\nPurpose: Provides estimated marginal means (EMMs) or least-squares means.\nCore Features:\n\nCompute EMMs for any combination of factors.\nPerform pairwise comparisons or custom contrasts.\nIntegrate with popular visualization packages like ggplot2.\nEasily handle model interactions and transformations.\n\nKey Supported Models:\n\nLinear models (lm, aov).\nGeneralized linear models (glm).\nMixed-effects models (lme4, nlme)."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#what-are-marginal-means",
+    "href": "appendix/r-packages/emmeans.html#what-are-marginal-means",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "What Are Marginal Means?",
+    "text": "What Are Marginal Means?\nMarginal means are predicted values from a model, adjusted to account for the distribution of covariates or other factors. They provide a clearer interpretation of group effects compared to raw means."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#getting-started",
+    "href": "appendix/r-packages/emmeans.html#getting-started",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "2. Getting Started",
+    "text": "2. Getting Started"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#loading-the-package",
+    "href": "appendix/r-packages/emmeans.html#loading-the-package",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Loading the Package",
+    "text": "Loading the Package\n\nlibrary(emmeans)"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#example-dataset",
+    "href": "appendix/r-packages/emmeans.html#example-dataset",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Example Dataset",
+    "text": "Example Dataset\nWe will use the warpbreaks dataset, which contains data on the number of breaks in yarn (response variable breaks) across two factors: wool type (wool) and tension level (tension)."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#basic-model",
+    "href": "appendix/r-packages/emmeans.html#basic-model",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Basic Model",
+    "text": "Basic Model\n\n# Fitting a linear model\nlm_model &lt;- lm(breaks ~ wool * tension, data = warpbreaks)"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#basic-marginal-means",
+    "href": "appendix/r-packages/emmeans.html#basic-marginal-means",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Basic Marginal Means",
+    "text": "Basic Marginal Means\n\n# Marginal means by wool\nemmeans(lm_model, ~ wool)\n\n wool emmean   SE df lower.CL upper.CL\n A      31.0 2.11 48     26.8     35.3\n B      25.3 2.11 48     21.0     29.5\n\nResults are averaged over the levels of: tension \nConfidence level used: 0.95"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#key-functions-in-emmeans",
+    "href": "appendix/r-packages/emmeans.html#key-functions-in-emmeans",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "3. Key Functions in emmeans",
+    "text": "3. Key Functions in emmeans"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#emmeans",
+    "href": "appendix/r-packages/emmeans.html#emmeans",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "3.1 emmeans()",
+    "text": "3.1 emmeans()\nThe emmeans() function is the foundation of the package, used to estimate marginal means.\nUsage:\nemmeans(object, specs, by = NULL, options = NULL, ...)\nArguments:\n\nobject: A fitted model (e.g., lm, glm, or lmer).\nspecs: Formula specifying factors for which marginal means are computed. Use | to specify conditions (e.g., ~ wool | tension).\nby: Variables to group results.\noptions: Adjustments like type of prediction (response, link, etc.).\n\nExamples:\n\n# Marginal means for wool\nemmeans(lm_model, ~wool)\n\n wool emmean   SE df lower.CL upper.CL\n A      31.0 2.11 48     26.8     35.3\n B      25.3 2.11 48     21.0     29.5\n\nResults are averaged over the levels of: tension \nConfidence level used: 0.95 \n\n# Marginal means of tension within each wool group\nemmeans(lm_model, ~ tension | wool)\n\nwool = A:\n tension emmean   SE df lower.CL upper.CL\n L         44.6 3.65 48     37.2     51.9\n M         24.0 3.65 48     16.7     31.3\n H         24.6 3.65 48     17.2     31.9\n\nwool = B:\n tension emmean   SE df lower.CL upper.CL\n L         28.2 3.65 48     20.9     35.6\n M         28.8 3.65 48     21.4     36.1\n H         18.8 3.65 48     11.4     26.1\n\nConfidence level used: 0.95"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#contrast",
+    "href": "appendix/r-packages/emmeans.html#contrast",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "3.2 contrast()",
+    "text": "3.2 contrast()\nThe contrast() function performs post-hoc comparisons between marginal means, such as pairwise comparisons or custom contrasts.\nUsage:\ncontrast(object, method = \"pairwise\", interaction = FALSE, by = NULL, ...)\nArguments:\n\nobject: An emmGrid object (output of emmeans()).\nmethod: Type of comparison. Common methods:\n\n\"pairwise\": Pairwise differences.\n\"poly\": Polynomial contrasts.\n\"eff\": Effect contrasts (deviation from overall mean).\n\ninteraction: Defines interaction contrasts, generating contrasts of contrasts for multi-factor interactions.\nby: Grouping variables for separate contrasts.\n\nExamples:\n\n# Pairwise comparisons of tension levels\nwarp.emm &lt;- emmeans(lm_model, ~ tension | wool)\ncontrast(warp.emm, method = \"pairwise\")\n\nwool = A:\n contrast estimate   SE df t.ratio p.value\n L - M      20.556 5.16 48   3.986  0.0007\n L - H      20.000 5.16 48   3.878  0.0009\n M - H      -0.556 5.16 48  -0.108  0.9936\n\nwool = B:\n contrast estimate   SE df t.ratio p.value\n L - M      -0.556 5.16 48  -0.108  0.9936\n L - H       9.444 5.16 48   1.831  0.1704\n M - H      10.000 5.16 48   1.939  0.1389\n\nP value adjustment: tukey method for comparing a family of 3 estimates \n\n# Custom contrasts for tension levels\ncontrast(warp.emm, list(mid.vs.ends = c(-1, 2, -1) / 2, lo.vs.hi = c(1, 0, -1)))\n\nwool = A:\n contrast    estimate   SE df t.ratio p.value\n mid.vs.ends   -10.56 4.47 48  -2.363  0.0222\n lo.vs.hi       20.00 5.16 48   3.878  0.0003\n\nwool = B:\n contrast    estimate   SE df t.ratio p.value\n mid.vs.ends     5.28 4.47 48   1.182  0.2432\n lo.vs.hi        9.44 5.16 48   1.831  0.0733"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#pairs",
+    "href": "appendix/r-packages/emmeans.html#pairs",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "3.3 pairs()",
+    "text": "3.3 pairs()\nThis function simplifies pairwise comparisons (shortcut for contrast(…, method = \"pairwise\")).\nUsage:\npairs(object, reverse = FALSE, ...)\nArguments:\n\nreverse: If TRUE, reverses the order of comparisons.\n\nExample:\n\n# Pairwise comparisons for tension\npairs(warp.emm)\n\nwool = A:\n contrast estimate   SE df t.ratio p.value\n L - M      20.556 5.16 48   3.986  0.0007\n L - H      20.000 5.16 48   3.878  0.0009\n M - H      -0.556 5.16 48  -0.108  0.9936\n\nwool = B:\n contrast estimate   SE df t.ratio p.value\n L - M      -0.556 5.16 48  -0.108  0.9936\n L - H       9.444 5.16 48   1.831  0.1704\n M - H      10.000 5.16 48   1.939  0.1389\n\nP value adjustment: tukey method for comparing a family of 3 estimates"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#advanced-functionality",
+    "href": "appendix/r-packages/emmeans.html#advanced-functionality",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "4. Advanced Functionality",
+    "text": "4. Advanced Functionality"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#interaction-contrasts",
+    "href": "appendix/r-packages/emmeans.html#interaction-contrasts",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "4.1 Interaction Contrasts",
+    "text": "4.1 Interaction Contrasts\nInteraction contrasts allow you to compare interactions between factors. The interaction argument in contrast() enables this.\nExample:\n\n# Interaction contrast for wool and tension\ninteraction_contrast &lt;- contrast(warp.emm, interaction = c(wool = \"eff\", tension = \"poly\"))\ninteraction_contrast\n\nwool = A:\n tension_eff estimate   SE df t.ratio p.value\n L effect       13.52 2.98 48   4.540  &lt;.0001\n M effect       -7.04 2.98 48  -2.363  0.0222\n H effect       -6.48 2.98 48  -2.177  0.0344\n\nwool = B:\n tension_eff estimate   SE df t.ratio p.value\n L effect        2.96 2.98 48   0.995  0.3247\n M effect        3.52 2.98 48   1.182  0.2432\n H effect       -6.48 2.98 48  -2.177  0.0344\n\ncoef(interaction_contrast)  # View coefficients"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#scaling-and-offsetting",
+    "href": "appendix/r-packages/emmeans.html#scaling-and-offsetting",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "4.2 Scaling and Offsetting",
+    "text": "4.2 Scaling and Offsetting\nUse scale and offset to transform results for interpretation (e.g., converting units).\nExample:\n\n# Convert temperature from Celsius to Fahrenheit\nmod &lt;- lm(Water.Temp ~ poly(stack.loss, degree = 2), data = stackloss)\nemm &lt;- emmeans(mod, \"stack.loss\", at = list(stack.loss = 10 * (1:4)))\ncontrast(emm, \"identity\", scale = 9 / 5, offset = 32)\n\n contrast     estimate    SE df t.ratio p.value\n stack.loss10     65.9 0.833 18  79.138  &lt;.0001\n stack.loss20     72.1 1.020 18  71.059  &lt;.0001\n stack.loss30     76.8 1.160 18  66.067  &lt;.0001\n stack.loss40     80.0 1.720 18  46.389  &lt;.0001"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#adjusting-for-multiple-comparisons",
+    "href": "appendix/r-packages/emmeans.html#adjusting-for-multiple-comparisons",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "4.3 Adjusting for Multiple Comparisons",
+    "text": "4.3 Adjusting for Multiple Comparisons\nUse the adjust argument to control corrections like Bonferroni or Tukey:\n\ncontrast(warp.emm, method = \"pairwise\", adjust = \"tukey\")\n\nwool = A:\n contrast estimate   SE df t.ratio p.value\n L - M      20.556 5.16 48   3.986  0.0007\n L - H      20.000 5.16 48   3.878  0.0009\n M - H      -0.556 5.16 48  -0.108  0.9936\n\nwool = B:\n contrast estimate   SE df t.ratio p.value\n L - M      -0.556 5.16 48  -0.108  0.9936\n L - H       9.444 5.16 48   1.831  0.1704\n M - H      10.000 5.16 48   1.939  0.1389\n\nP value adjustment: tukey method for comparing a family of 3 estimates"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#visualizing-results",
+    "href": "appendix/r-packages/emmeans.html#visualizing-results",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "5. Visualizing Results",
+    "text": "5. Visualizing Results"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#interaction-plots",
+    "href": "appendix/r-packages/emmeans.html#interaction-plots",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Interaction Plots",
+    "text": "Interaction Plots\nThe emmip() function creates interaction plots to visualize EMMs:\n\n# Interaction plot for wool and tension\nlibrary(ggplot2)\nemmip(warp.emm, wool ~ tension)"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#pairwise-comparisons-plot",
+    "href": "appendix/r-packages/emmeans.html#pairwise-comparisons-plot",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Pairwise Comparisons Plot",
+    "text": "Pairwise Comparisons Plot\n\n# Pairwise comparison plot\nplot(pairs(warp.emm))"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#common-issues-and-troubleshooting",
+    "href": "appendix/r-packages/emmeans.html#common-issues-and-troubleshooting",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "6. Common Issues and Troubleshooting",
+    "text": "6. Common Issues and Troubleshooting"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#common-issues",
+    "href": "appendix/r-packages/emmeans.html#common-issues",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Common Issues",
+    "text": "Common Issues\n\nDegrees of freedom not available:\n\nSome models (e.g., Bayesian) require manual specification of degrees of freedom.\n\nInvalid contrast method:\n\nEnsure the method matches the structure of your emmGrid object."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#best-practices",
+    "href": "appendix/r-packages/emmeans.html#best-practices",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Best Practices",
+    "text": "Best Practices\n\nAlways inspect the emmGrid object using summary() before applying contrasts.\nUse confint() to obtain confidence intervals.\nApply adjust for proper corrections in multiple comparisons."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#detailed-argument-reference",
+    "href": "appendix/r-packages/emmeans.html#detailed-argument-reference",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "7. Detailed Argument Reference",
+    "text": "7. Detailed Argument Reference"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#emmeans-specific-arguments",
+    "href": "appendix/r-packages/emmeans.html#emmeans-specific-arguments",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "emmeans() Specific Arguments",
+    "text": "emmeans() Specific Arguments\n\nspecs: Defines the terms of interest. For example:\n\n~ factor1: Marginal means for factor1.\n~ factor1 | factor2: Marginal means of factor1 grouped by factor2."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#contrast-specific-arguments",
+    "href": "appendix/r-packages/emmeans.html#contrast-specific-arguments",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "contrast() Specific Arguments",
+    "text": "contrast() Specific Arguments\n\ninteraction: Defines contrasts for interactions. Example:\n\n\ncontrast(warp.emm, interaction = list(wool = \"pairwise\", tension = \"eff\"))\n\nwool = A:\n tension_pairwise estimate   SE df t.ratio p.value\n L - M              20.556 5.16 48   3.986  0.0002\n L - H              20.000 5.16 48   3.878  0.0003\n M - H              -0.556 5.16 48  -0.108  0.9147\n\nwool = B:\n tension_pairwise estimate   SE df t.ratio p.value\n L - M              -0.556 5.16 48  -0.108  0.9147\n L - H               9.444 5.16 48   1.831  0.0733\n M - H              10.000 5.16 48   1.939  0.0584\n\n\n\nscale and offset: For transforming estimates. Example:\n\n\ncontrast(warp.emm, method = \"identity\", scale = 2, offset = 1)\n\nwool = A:\n contrast estimate   SE df t.ratio p.value\n L            90.1 7.29 48  12.355  &lt;.0001\n M            49.0 7.29 48   6.718  &lt;.0001\n H            50.1 7.29 48   6.871  &lt;.0001\n\nwool = B:\n contrast estimate   SE df t.ratio p.value\n L            57.4 7.29 48   7.876  &lt;.0001\n M            58.6 7.29 48   8.028  &lt;.0001\n H            38.6 7.29 48   5.286  &lt;.0001"
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#conclusion",
+    "href": "appendix/r-packages/emmeans.html#conclusion",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "8. Conclusion",
+    "text": "8. Conclusion\nThe emmeans package provides a robust framework for estimating and interpreting marginal means. With extensive support for complex models and versatile post-hoc analysis tools, it is essential for data analysis workflows."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#next-steps",
+    "href": "appendix/r-packages/emmeans.html#next-steps",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "Next Steps",
+    "text": "Next Steps\n\nExplore advanced vignettes in the package documentation.\nIntegrate results into visualizations with ggplot2."
+  },
+  {
+    "objectID": "appendix/r-packages/emmeans.html#references-and-resources",
+    "href": "appendix/r-packages/emmeans.html#references-and-resources",
+    "title": "Tutorial: Using the emmeans R Package",
+    "section": "9. References and Resources",
+    "text": "9. References and Resources\n\nemmeans CRAN Page\nVignettes: Estimated Marginal Means\nGitHub Repository"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html",
+    "href": "appendix/r-base/r-sample-basic.html",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
+    "href": "appendix/r-base/r-sample-basic.html#function-description",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
+    "href": "appendix/r-base/r-sample-basic.html#key-features",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Key Features",
+    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#examples",
+    "href": "appendix/r-base/r-sample-basic.html#examples",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Examples",
+    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
+    "href": "appendix/r-base/r-sample-basic.html#best-practices",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Best Practices",
+    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
+  },
+  {
     "objectID": "appendix/r-base/r-rep-basics.html",
     "href": "appendix/r-base/r-rep-basics.html",
     "title": "Tutorial on rep function in R",
@@ -586,41 +824,6 @@
     "title": "Tutorial on rep function in R",
     "section": "",
     "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html",
-    "href": "appendix/r-base/r-sample-basic.html",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
-    "href": "appendix/r-base/r-sample-basic.html#function-description",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
-    "href": "appendix/r-base/r-sample-basic.html#key-features",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Key Features",
-    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#examples",
-    "href": "appendix/r-base/r-sample-basic.html#examples",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Examples",
-    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
-    "href": "appendix/r-base/r-sample-basic.html#best-practices",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Best Practices",
-    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
   },
   {
     "objectID": "assignments/assignment2_completely_randomized_design.html",
@@ -977,7 +1180,7 @@
     "href": "lectures/week-03_rcbd-blocking.html#numerical-example-with-contrasts",
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
     "section": "Numerical Example with Contrasts",
-    "text": "Numerical Example with Contrasts\n\n3.1 Scenario\nA researcher tests three fertilizers (\\(A\\), \\(B\\), \\(C\\)) on plant growth across four fields. The goal is to:\n\nCompare \\(A\\) vs \\(B\\),\nCompare \\(A\\) vs the average of \\(B\\) and \\(C\\).\n\nData:\n\n\n\n\n\n\nBlock (Field)\nFertilizer A\nFertilizer B\nFertilizer C\n\n\n\n\n1\n20\n25\n22\n\n\n2\n18\n21\n19\n\n\n3\n22\n24\n23\n\n\n4\n19\n20\n21\n\n\n\n\n\nTable 8: Plant Growth Data for Fertilizer Experiment\n\n\n\n\n\n3.2 ANOVA Analysis\nStep 1: Compute Sums of Squares (as in prior example)\n\n\n\n\n\n\nSource\nDF\nSS\nMS\nF\n\n\n\n\nTreatment\n2\n12.67\n6.33\n19.02\n\n\nBlock\n3\n21.33\n7.11\n\n\n\nError\n6\n1.33\n0.22\n\n\n\nTotal\n11\n35.33\n\n\n\n\n\n\n\nTable 9: ANOVA Table for Fertilizer Experiment\n\n\n\n\n\n3.3 Step-by-Step Contrast Computations\n\nTreatment Means:\n\n\\(\\bar{Y}_A = 19.75, \\; \\bar{Y}_B = 22.50, \\; \\bar{Y}_C = 21.25\\).\n\nContrast 1 (\\(A\\) vs \\(B\\)):\n\n\\[\nC_1 = \\bar{Y}_A - \\bar{Y}_B = 19.75 - 22.50 = -2.75\n\\]\n\nContrast 2 (\\(A\\) vs Average of \\(B\\) and \\(C\\)):\n\n\\[\nC_2 = \\bar{Y}_A - \\frac{\\bar{Y}_B + \\bar{Y}_C}{2} = 19.75 - \\frac{22.50 + 21.25}{2} = -2.63\n\\]\n\nStandard Error of Contrasts:\n\n\\[\nSE(C) = \\sqrt{\\frac{\\sigma^2}{b} \\sum_i c_i^2},\n\\]\nwhere:\n\n\\(\\sigma^2 = MS_{\\text{Error}} = 0.22\\),\n\\(b = 4\\) (number of blocks).\n\nFor \\(C_1\\) (\\(1, -1, 0\\)):\n\\[\nSE(C_1) = \\sqrt{\\frac{0.22}{4} \\cdot (1^2 + (-1)^2 + 0^2)} = 0.33\n\\]\nFor \\(C_2\\) (\\(1, -0.5, -0.5\\)):\n\\[\nSE(C_2) = \\sqrt{\\frac{0.22}{4} \\cdot (1^2 + (-0.5)^2 + (-0.5)^2)} = 0.28\n\\]\n\nt-Statistics:\n\n\\[\nt = \\frac{C}{SE(C)}.\n\\]\n\nFor \\(C_1\\): \\(t_1 = \\frac{-2.75}{0.33} = -8.33\\).\nFor \\(C_2\\): \\(t_2 = \\frac{-2.63}{0.28} = -9.39\\).\n\n\np-Values: With 6 degrees of freedom (\\(DF_{\\text{Error}}\\)):\n\n\\(p_1 &lt; 0.001\\), \\(p_2 &lt; 0.001\\).\n\n\n\n\n3.4 R Code to Analyze Contrasts\n\n# Data\ndata &lt;- data.frame(\n    Block = factor(rep(1:4, each = 3)),\n    Fertilizer = factor(rep(c(\"A\", \"B\", \"C\"), times = 4)),\n    Response = c(20, 25, 22, 18, 21, 19, 22, 24, 23, 19, 20, 21)\n)\n\n# Fit ANOVA Model\nmodel &lt;- aov(Response ~ Fertilizer + Block, data = data)\nsummary(model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nFertilizer   2 15.167   7.583   7.378 0.0242 *\nBlock        3 28.333   9.444   9.189 0.0116 *\nResiduals    6  6.167   1.028                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Contrasts\nlibrary(emmeans)\nem &lt;- emmeans(model, \"Fertilizer\")\n\n# Contrast 1: A vs B\ncontrast(em, list(\"A vs B\" = c(1, -1, 0)))\n\n contrast estimate    SE df t.ratio p.value\n A vs B      -2.75 0.717  6  -3.836  0.0086\n\nResults are averaged over the levels of: Block \n\n# Contrast 2: A vs (B + C)/2\ncontrast(em, list(\"A vs Avg(B, C)\" = c(1, -0.5, -0.5)))\n\n contrast       estimate    SE df t.ratio p.value\n A vs Avg(B, C)    -2.12 0.621  6  -3.423  0.0141\n\nResults are averaged over the levels of: Block \n\n\n\n\n3.5 Explanation of R Output\n\nANOVA Table:\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nFertilizer   2 15.167   7.583   7.378 0.0242 *\nBlock        3 28.333   9.444   9.189 0.0116 *\nResiduals    6  6.167   1.028                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nTreatments are significant (\\(p = 0.002\\)).\n\n\nContrast Results:\n\n\n\\(A\\) vs \\(B\\):\n\n contrast estimate    SE df t.ratio p.value\n A vs B      -2.75 0.717  6  -3.836  0.0086\n\nResults are averaged over the levels of: Block\n\nFertilizer \\(B\\) significantly outperforms \\(A\\).\n\\(A\\) vs \\((B+C)/2\\):\n\n contrast       estimate    SE df t.ratio p.value\n A vs Avg(B, C)    -2.12 0.621  6  -3.423  0.0141\n\nResults are averaged over the levels of: Block \n\nThe average of \\(B\\) and \\(C\\) significantly outperforms \\(A\\)."
+    "text": "Numerical Example with Contrasts\n\n3.1 Scenario\nA researcher tests three fertilizers (\\(A\\), \\(B\\), \\(C\\)) on plant growth across four fields. The goal is to:\n\nCompare \\(A\\) vs \\(B\\),\nCompare \\(A\\) vs the average of \\(B\\) and \\(C\\).\n\nData:\n\n\n\n\n\n\nBlock (Field)\nFertilizer A\nFertilizer B\nFertilizer C\n\n\n\n\n1\n20\n25\n22\n\n\n2\n18\n21\n19\n\n\n3\n22\n24\n23\n\n\n4\n19\n20\n21\n\n\n\n\n\nTable 8: Plant Growth Data for Fertilizer Experiment\n\n\n\n\n\n3.2 ANOVA Analysis\nStep 1: Compute Sums of Squares (as in prior example)\n\n\n\n\n\n\nSource\nDF\nSS\nMS\nF\n\n\n\n\nTreatment\n2\n12.67\n6.33\n19.02\n\n\nBlock\n3\n21.33\n7.11\n\n\n\nError\n6\n1.33\n0.22\n\n\n\nTotal\n11\n35.33\n\n\n\n\n\n\n\nTable 9: ANOVA Table for Fertilizer Experiment\n\n\n\n\n\n3.3 Step-by-Step Contrast Computations\n\nTreatment Means:\n\n\\(\\bar{Y}_A = 19.75, \\; \\bar{Y}_B = 22.50, \\; \\bar{Y}_C = 21.25\\).\n\nContrast 1 (\\(A\\) vs \\(B\\)):\n\n\\[\nC_1 = \\bar{Y}_A - \\bar{Y}_B = 19.75 - 22.50 = -2.75\n\\]\n\nContrast 2 (\\(A\\) vs Average of \\(B\\) and \\(C\\)):\n\n\\[\nC_2 = \\bar{Y}_A - \\frac{\\bar{Y}_B + \\bar{Y}_C}{2} = 19.75 - \\frac{22.50 + 21.25}{2} = -2.63\n\\]\n\nStandard Error of Contrasts:\n\n\\[\nSE(C) = \\sqrt{\\frac{\\sigma^2}{b} \\sum_i c_i^2},\n\\]\nwhere:\n\n\\(\\sigma^2 = MS_{\\text{Error}} = 0.22\\),\n\\(b = 4\\) (number of blocks).\n\nFor \\(C_1\\) (\\(1, -1, 0\\)):\n\\[\nSE(C_1) = \\sqrt{\\frac{0.22}{4} \\cdot (1^2 + (-1)^2 + 0^2)} = 0.33\n\\]\nFor \\(C_2\\) (\\(1, -0.5, -0.5\\)):\n\\[\nSE(C_2) = \\sqrt{\\frac{0.22}{4} \\cdot (1^2 + (-0.5)^2 + (-0.5)^2)} = 0.28\n\\]\n\nt-Statistics:\n\n\\[\nt = \\frac{C}{SE(C)}.\n\\]\n\nFor \\(C_1\\): \\(t_1 = \\frac{-2.75}{0.33} = -8.33\\).\nFor \\(C_2\\): \\(t_2 = \\frac{-2.63}{0.28} = -9.39\\).\n\n\np-Values: With 6 degrees of freedom (\\(DF_{\\text{Error}}\\)):\n\n\\(p_1 &lt; 0.001\\), \\(p_2 &lt; 0.001\\).\n\n\n\n\n3.4 R Code to Analyze Contrasts\n\n# Data\ndata &lt;- data.frame(\n    Block = factor(rep(1:4, each = 3)),\n    Fertilizer = factor(rep(c(\"A\", \"B\", \"C\"), times = 4)),\n    Response = c(20, 25, 22, 18, 21, 19, 22, 24, 23, 19, 20, 21)\n)\n\n# Fit ANOVA Model\nmodel &lt;- aov(Response ~ Fertilizer + Block, data = data)\nsummary(model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nFertilizer   2 15.167   7.583   7.378 0.0242 *\nBlock        3 28.333   9.444   9.189 0.0116 *\nResiduals    6  6.167   1.028                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n# Contrasts\nlibrary(emmeans)\nem &lt;- emmeans(model, \"Fertilizer\")\n\n# Contrast 1: A vs B\ncontrast(em, list(\"A vs B\" = c(1, -1, 0)))\n\n contrast estimate    SE df t.ratio p.value\n A vs B      -2.75 0.717  6  -3.836  0.0086\n\nResults are averaged over the levels of: Block \n\n# Contrast 2: A vs (B + C)/2\ncontrast(em, list(\"A vs Avg(B, C)\" = c(1, -0.5, -0.5)))\n\n contrast       estimate    SE df t.ratio p.value\n A vs Avg(B, C)    -2.12 0.621  6  -3.423  0.0141\n\nResults are averaged over the levels of: Block \n\n\n\n\n3.5 Explanation of R Output\n\nANOVA Table:\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nFertilizer   2 15.167   7.583   7.378 0.0242 *\nBlock        3 28.333   9.444   9.189 0.0116 *\nResiduals    6  6.167   1.028                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nTreatments are significant (\\(p = 0.002\\)).\n\n\nContrast Results:\n\n\n\\(A\\) vs \\(B\\):\n\n contrast estimate    SE df t.ratio p.value\n A vs B      -2.75 0.717  6  -3.836  0.0086\n\nResults are averaged over the levels of: Block\n\nFertilizer \\(B\\) significantly outperforms \\(A\\).\n\\(A\\) vs \\((B+C)/2\\):\n\n contrast       estimate    SE df t.ratio p.value\n A vs Avg(B, C)    -2.12 0.621  6  -3.423  0.0141\n\nResults are averaged over the levels of: Block \n\nThe average of \\(B\\) and \\(C\\) significantly outperforms \\(A\\)."
   },
   {
     "objectID": "lectures/week-03_rcbd-blocking.html#interpretation",

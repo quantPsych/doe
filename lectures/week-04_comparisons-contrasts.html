@@ -195,13 +195,13 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Comparisons and Contrasts</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -224,9 +224,10 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
 
 
 
@@ -353,7 +354,7 @@ L = \frac{\mu_A + \mu_B}{2} - \frac{\mu_C + \mu_D}{2}.
 <li><strong>Scheffé:</strong> Very flexible, but can be conservative.</li>
 </ul>
 </section>
-<section id="practical-applications-in-r" class="level1">
+<section id="practical-applications-in-r" class="level1 page-columns page-full">
 <h1>Practical Applications in R</h1>
 <section id="example-1-pairwise-comparisons-with-tukeys-hsd" class="level2">
 <h2 class="anchored" data-anchor-id="example-1-pairwise-comparisons-with-tukeys-hsd">Example 1: Pairwise Comparisons with Tukey’s HSD</h2>
@@ -400,7 +401,7 @@ D-C  4.602881  0.8023889  8.403373 0.0151748</code></pre>
 </ul>
 </section>
 </section>
-<section id="example-2-testing-a-specific-contrast" class="level2">
+<section id="example-2-testing-a-specific-contrast" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="example-2-testing-a-specific-contrast">Example 2: Testing a Specific Contrast</h2>
 <p><strong>Defining a Contrast:</strong></p>
 <div class="cell">
@@ -416,7 +417,10 @@ D-C  4.602881  0.8023889  8.403373 0.0151748</code></pre>
  AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001</code></pre>
 </div>
 </div>
-<section id="interpretation-1" class="level3">
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>For more detail on the <code>emmeans</code> package, see the tutorial page <a href="../appendix/r-packages/emmeans.html">emmeans</a> in the appendix.</p>
+</div></div><section id="interpretation-1" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
 <p>The output gives an estimate, standard error, t-value, and p-value. If p &lt; alpha, we conclude there is evidence that (A,B) differ from (C,D).</p>
 </section>
