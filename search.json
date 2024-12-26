@@ -298,7 +298,7 @@
     "href": "lectures/week-04_comparisons-contrasts.html",
     "title": "Comparisons and Contrasts",
     "section": "",
-    "text": "In many experiments, researchers compare multiple treatments or conditions to understand their effects on a response variable. For example, consider a horticulturalist testing various fertilizers on plant growth or a biologist examining different drugs on patient outcomes. After performing an ANOVA and finding evidence that not all treatment means are equal, the next step is to determine which treatments differ, and by how much.\nMultiple Comparison Procedures (MCPs) and contrasts address this challenge:\n\nMCPs control the overall probability of false positives (Type I errors) when making many comparisons.\nContrasts focus on specific, pre-defined linear combinations of treatment means, often reflecting scientific questions.\n\nThe combination of MCPs and contrasts ensures valid inferences, mitigating the risk of drawing erroneous conclusions from multiple tests while retaining interpretability and power.\n\n\n\nUnderstand the rationale for performing multiple comparisons after ANOVA.\nExplore common MCPs: Fisher’s LSD, Tukey’s HSD, Bonferroni, and Scheffé methods.\nLearn how to construct orthogonal and non-orthogonal contrasts and interpret their results.\nUtilize R to perform multiple comparisons and test contrasts on real or simulated data.\nDiscuss Type I error control, power considerations, and the trade-offs in choosing different procedures.\nDevelop deeper theoretical insights (in the Appendix) and practice through exercises of medium and challenging difficulty."
+    "text": "In many experiments, researchers compare multiple treatments or conditions to understand their effects on a response variable. For example, consider a horticulturalist testing various fertilizers on plant growth or a biologist examining different drugs on patient outcomes. After performing an ANOVA and finding evidence that not all treatment means are equal, the next step is to determine which treatments differ, and by how much.\nMultiple Comparison Procedures (MCPs) and contrasts address this challenge:\n\nMCPs control the overall probability of false positives (Type I errors) when making many comparisons.\nContrasts focus on specific, pre-defined linear combinations of treatment means, often reflecting scientific questions.\n\nThe combination of MCPs and contrasts ensures valid inferences, mitigating the risk of drawing erroneous conclusions from multiple tests while retaining interpretability and power.\n\n\n\nUnderstand the rationale for performing multiple comparisons after ANOVA.\nExplore common MCPs: Fisher’s LSD, Tukey’s HSD, Bonferroni, and Scheffé methods.\nLearn how to construct orthogonal and non-orthogonal contrasts and interpret their results.\nUtilize R to perform multiple comparisons and test contrasts on real or simulated data.\nDiscuss Type I error control, power considerations, and the trade-offs in choosing different procedures.\nDevelop deeper theoretical insights (in the Appendix) and practice through exercises of medium and challenging difficulty.\n\n\n\n\nTo implement MCPs and contrasts in R, we will use the following packages:\n\npacman::p_load(emmeans, pwr, multcomp, agricolae, lsmeans, car)\n\n\nemmeans: For computing contrasts and post-hoc tests.\npwr: For power analysis and sample size calculations.\nmultcomp: For multiple comparison procedures.\nagricolae: For conducting multiple comparisons and post-hoc tests.\nlsmeans: For computing least-squares means and contrasts.\ncar: For linear contrasts and hypothesis testing.\n\n\n\n\nImagine testing four battery types (A, B, C, D) to see which lasts longest. After ANOVA suggests at least one mean differs, you want to pinpoint where differences lie:\n\nAre A and B different?\nIs C worse than the average of A and B?\nDoes D stand apart?\n\nWithout controlling for multiple testing, repeated pairwise comparisons inflate the risk of false positives. MCPs handle this by adjusting significance criteria, while contrasts let you test targeted hypotheses, such as comparing the average performance of two treatments against another group’s mean.\n\n\n\nMail Sorting Analogy: Consider sorting through a large pile of mail (treatment comparisons). Without rules (MCPs), you might mistakenly pick “important” letters (differences) that are actually junk (Type I errors). MCPs act like filters, reducing the chance you misclassify too many letters as important.\nMagnifying Glass for Specific Questions (Contrasts): Instead of looking at all letters at once, a contrast is like using a magnifying glass to focus on a subset of letters (treatment means) to answer a specific question."
   },
   {
     "objectID": "lectures/week-04_comparisons-contrasts.html#objectives",
@@ -306,6 +306,20 @@
     "title": "Comparisons and Contrasts",
     "section": "",
     "text": "Understand the rationale for performing multiple comparisons after ANOVA.\nExplore common MCPs: Fisher’s LSD, Tukey’s HSD, Bonferroni, and Scheffé methods.\nLearn how to construct orthogonal and non-orthogonal contrasts and interpret their results.\nUtilize R to perform multiple comparisons and test contrasts on real or simulated data.\nDiscuss Type I error control, power considerations, and the trade-offs in choosing different procedures.\nDevelop deeper theoretical insights (in the Appendix) and practice through exercises of medium and challenging difficulty."
+  },
+  {
+    "objectID": "lectures/week-04_comparisons-contrasts.html#r-packages",
+    "href": "lectures/week-04_comparisons-contrasts.html#r-packages",
+    "title": "Comparisons and Contrasts",
+    "section": "",
+    "text": "To implement MCPs and contrasts in R, we will use the following packages:\n\npacman::p_load(emmeans, pwr, multcomp, agricolae, lsmeans, car)\n\n\nemmeans: For computing contrasts and post-hoc tests.\npwr: For power analysis and sample size calculations.\nmultcomp: For multiple comparison procedures.\nagricolae: For conducting multiple comparisons and post-hoc tests.\nlsmeans: For computing least-squares means and contrasts.\ncar: For linear contrasts and hypothesis testing."
+  },
+  {
+    "objectID": "lectures/week-04_comparisons-contrasts.html#motivation-and-context",
+    "href": "lectures/week-04_comparisons-contrasts.html#motivation-and-context",
+    "title": "Comparisons and Contrasts",
+    "section": "",
+    "text": "Imagine testing four battery types (A, B, C, D) to see which lasts longest. After ANOVA suggests at least one mean differs, you want to pinpoint where differences lie:\n\nAre A and B different?\nIs C worse than the average of A and B?\nDoes D stand apart?\n\nWithout controlling for multiple testing, repeated pairwise comparisons inflate the risk of false positives. MCPs handle this by adjusting significance criteria, while contrasts let you test targeted hypotheses, such as comparing the average performance of two treatments against another group’s mean.\n\n\n\nMail Sorting Analogy: Consider sorting through a large pile of mail (treatment comparisons). Without rules (MCPs), you might mistakenly pick “important” letters (differences) that are actually junk (Type I errors). MCPs act like filters, reducing the chance you misclassify too many letters as important.\nMagnifying Glass for Specific Questions (Contrasts): Instead of looking at all letters at once, a contrast is like using a magnifying glass to focus on a subset of letters (treatment means) to answer a specific question."
   },
   {
     "objectID": "lectures/week-04_comparisons-contrasts.html#what-is-a-contrast",
@@ -546,6 +560,153 @@
     "text": "Instructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
   },
   {
+    "objectID": "appendix/r-packages/pwr.html",
+    "href": "appendix/r-packages/pwr.html",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "The pwr package in R is a powerful tool for conducting power analysis. Power analysis is essential in determining the sample size needed to detect an effect of a given size with a certain level of confidence. It is widely used in experimental design and statistical hypothesis testing.\n\n\n\n\nDetermining the required sample size for an experiment.\nCalculating the power of a test given sample size and effect size.\nComparing the sensitivity of different statistical tests.\n\n\n\n\n\nSimplifies power analysis for various statistical tests.\nProvides built-in functions for common tests such as t-tests, ANOVA, and correlation.\nEasy integration with R workflows for reproducibility.\n\n\n\n\n\n\n\n\npacman::p_load(pwr)\n\n\n\n\nHere is a simple example of using pwr.t.test to calculate the sample size needed for a one-sample t-test:\n\n# Calculate required sample size for a one-sample t-test\nresult &lt;- pwr.t.test(d = 0.5, power = 0.8, sig.level = 0.05, type = \"one.sample\")\nprint(result)\n\n\n     One-sample t test power calculation \n\n              n = 33.36713\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nThis calculates the required sample size to achieve a power of 0.8 for detecting an effect size of 0.5 at a significance level of 0.05.\n\n\n\n\n\n\n\n\nCalculates power, effect size, or sample size for t-tests.\n\n\n\npwr.t.test(n = NULL, d = NULL, sig.level = NULL, power = NULL, type = \"two.sample\", alternative = \"two.sided\")\n\nn: Sample size.\nd: Effect size.\nsig.level: Significance level (default is 0.05).\npower: Desired power (1 - Type II error probability).\ntype: Type of t-test (\"one.sample\", \"two.sample\", or \"paired\").\nalternative: Specifies whether the test is \"two.sided\" or \"greater\"/\"less\".\n\n\n\n\n\n# Power analysis for a two-sample t-test\npwr.t.test(n = 30, d = 0.5, sig.level = 0.05, type = \"two.sample\")\n\n\n     Two-sample t test power calculation \n\n              n = 30\n              d = 0.5\n      sig.level = 0.05\n          power = 0.4778965\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\n\n\n\n\nPerforms power analysis for balanced one-way ANOVA.\n\n\n\npwr.anova.test(k = NULL, n = NULL, f = NULL, sig.level = NULL, power = NULL)\n\nk: Number of groups.\nn: Sample size per group.\nf: Effect size.\nsig.level: Significance level.\npower: Desired power.\n\n\n\n\n\n# Power analysis for a one-way ANOVA\npwr.anova.test(k = 4, f = 0.25, sig.level = 0.05, power = 0.8)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 4\n              n = 44.59927\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\n\n\n\n\n\n\nCalculates power for correlation tests.\n\n\n\npwr.r.test(n = NULL, r = NULL, sig.level = NULL, power = NULL, alternative = \"two.sided\")\n\nr: Correlation coefficient.\n\n\n\n\n\n# Power analysis for correlation\npwr.r.test(r = 0.3, sig.level = 0.05, power = 0.8)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 84.07364\n              r = 0.3\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\n\n\n\n\n\n\n\nObjective: Determine the power of a study with a sample size of 40 per group, an effect size of 0.5, and a significance level of 0.05.\nCode:\n\nresult &lt;- pwr.t.test(n = 40, d = 0.5, sig.level = 0.05, type = \"two.sample\")\nprint(result)\n\n\n     Two-sample t test power calculation \n\n              n = 40\n              d = 0.5\n      sig.level = 0.05\n          power = 0.5981469\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nOutput Interpretation: The output provides the calculated power for the test.\n\n\n\nObjective: Calculate the required sample size to detect a correlation of 0.4 with 80% power at a 5% significance level.\nCode:\n\nresult &lt;- pwr.r.test(r = 0.4, power = 0.8, sig.level = 0.05)\nprint(result)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 45.91614\n              r = 0.4\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nOutput Interpretation: The result specifies the required sample size.\n\n\n\n\n\n\nThe pwr package allows you to create custom plots of power curves:\n\nlibrary(ggplot2)\n\neffect_sizes &lt;- seq(0.1, 0.5, 0.01)\npowers &lt;- sapply(effect_sizes, function(d) {\n    pwr.t.test(d = d, n = 30, sig.level = 0.05, type = \"two.sample\")$power\n})\n\ndata &lt;- data.frame(effect_sizes, powers)\n\nggplot(data, aes(x = effect_sizes, y = powers)) +\n    geom_line() +\n    labs(title = \"Power Curve\", x = \"Effect Size\", y = \"Power\") +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\n\nThe pwr package can work seamlessly with simulation packages to validate power calculations.\n\n\n\n\n\nCommon Error: “Error in pwr.t.test(): Not enough parameters specified.” Fix: Ensure you provide at least three of the four parameters: n, d, power, or sig.level.\nHow to choose effect size? Use guidelines such as Cohen’s benchmarks: small (0.2), medium (0.5), and large (0.8).\n\n\n\n\n\nAlways use realistic estimates for effect size based on prior studies or pilot data.\nValidate your power calculations through simulations if possible.\n\n\n\n\n\n\nThe pwr package is a versatile and user-friendly tool for power analysis in R, covering various statistical tests and scenarios.\n\n\n\nExplore the official documentation or combine pwr with simulation-based methods for complex experimental designs.\n\n\n\nStart applying power analysis in your projects to optimize experimental designs and improve the validity of your results.\n\n\n\n\n\npwr Package Documentation\nR Power Analysis Tutorial\nComprehensive R Archive Network (CRAN)"
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#introduction",
+    "href": "appendix/r-packages/pwr.html#introduction",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "The pwr package in R is a powerful tool for conducting power analysis. Power analysis is essential in determining the sample size needed to detect an effect of a given size with a certain level of confidence. It is widely used in experimental design and statistical hypothesis testing.\n\n\n\n\nDetermining the required sample size for an experiment.\nCalculating the power of a test given sample size and effect size.\nComparing the sensitivity of different statistical tests.\n\n\n\n\n\nSimplifies power analysis for various statistical tests.\nProvides built-in functions for common tests such as t-tests, ANOVA, and correlation.\nEasy integration with R workflows for reproducibility."
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#getting-started",
+    "href": "appendix/r-packages/pwr.html#getting-started",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "pacman::p_load(pwr)\n\n\n\n\nHere is a simple example of using pwr.t.test to calculate the sample size needed for a one-sample t-test:\n\n# Calculate required sample size for a one-sample t-test\nresult &lt;- pwr.t.test(d = 0.5, power = 0.8, sig.level = 0.05, type = \"one.sample\")\nprint(result)\n\n\n     One-sample t test power calculation \n\n              n = 33.36713\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nThis calculates the required sample size to achieve a power of 0.8 for detecting an effect size of 0.5 at a significance level of 0.05."
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#key-functions-and-features",
+    "href": "appendix/r-packages/pwr.html#key-functions-and-features",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "Calculates power, effect size, or sample size for t-tests.\n\n\n\npwr.t.test(n = NULL, d = NULL, sig.level = NULL, power = NULL, type = \"two.sample\", alternative = \"two.sided\")\n\nn: Sample size.\nd: Effect size.\nsig.level: Significance level (default is 0.05).\npower: Desired power (1 - Type II error probability).\ntype: Type of t-test (\"one.sample\", \"two.sample\", or \"paired\").\nalternative: Specifies whether the test is \"two.sided\" or \"greater\"/\"less\".\n\n\n\n\n\n# Power analysis for a two-sample t-test\npwr.t.test(n = 30, d = 0.5, sig.level = 0.05, type = \"two.sample\")\n\n\n     Two-sample t test power calculation \n\n              n = 30\n              d = 0.5\n      sig.level = 0.05\n          power = 0.4778965\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\n\n\n\n\nPerforms power analysis for balanced one-way ANOVA.\n\n\n\npwr.anova.test(k = NULL, n = NULL, f = NULL, sig.level = NULL, power = NULL)\n\nk: Number of groups.\nn: Sample size per group.\nf: Effect size.\nsig.level: Significance level.\npower: Desired power.\n\n\n\n\n\n# Power analysis for a one-way ANOVA\npwr.anova.test(k = 4, f = 0.25, sig.level = 0.05, power = 0.8)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 4\n              n = 44.59927\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\n\n\n\n\n\n\nCalculates power for correlation tests.\n\n\n\npwr.r.test(n = NULL, r = NULL, sig.level = NULL, power = NULL, alternative = \"two.sided\")\n\nr: Correlation coefficient.\n\n\n\n\n\n# Power analysis for correlation\npwr.r.test(r = 0.3, sig.level = 0.05, power = 0.8)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 84.07364\n              r = 0.3\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided"
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#in-depth-examples",
+    "href": "appendix/r-packages/pwr.html#in-depth-examples",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "Objective: Determine the power of a study with a sample size of 40 per group, an effect size of 0.5, and a significance level of 0.05.\nCode:\n\nresult &lt;- pwr.t.test(n = 40, d = 0.5, sig.level = 0.05, type = \"two.sample\")\nprint(result)\n\n\n     Two-sample t test power calculation \n\n              n = 40\n              d = 0.5\n      sig.level = 0.05\n          power = 0.5981469\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nOutput Interpretation: The output provides the calculated power for the test.\n\n\n\nObjective: Calculate the required sample size to detect a correlation of 0.4 with 80% power at a 5% significance level.\nCode:\n\nresult &lt;- pwr.r.test(r = 0.4, power = 0.8, sig.level = 0.05)\nprint(result)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 45.91614\n              r = 0.4\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nOutput Interpretation: The result specifies the required sample size."
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#advanced-features",
+    "href": "appendix/r-packages/pwr.html#advanced-features",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "The pwr package allows you to create custom plots of power curves:\n\nlibrary(ggplot2)\n\neffect_sizes &lt;- seq(0.1, 0.5, 0.01)\npowers &lt;- sapply(effect_sizes, function(d) {\n    pwr.t.test(d = d, n = 30, sig.level = 0.05, type = \"two.sample\")$power\n})\n\ndata &lt;- data.frame(effect_sizes, powers)\n\nggplot(data, aes(x = effect_sizes, y = powers)) +\n    geom_line() +\n    labs(title = \"Power Curve\", x = \"Effect Size\", y = \"Power\") +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\n\nThe pwr package can work seamlessly with simulation packages to validate power calculations."
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#troubleshooting-and-faqs",
+    "href": "appendix/r-packages/pwr.html#troubleshooting-and-faqs",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "Common Error: “Error in pwr.t.test(): Not enough parameters specified.” Fix: Ensure you provide at least three of the four parameters: n, d, power, or sig.level.\nHow to choose effect size? Use guidelines such as Cohen’s benchmarks: small (0.2), medium (0.5), and large (0.8)."
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#best-practices",
+    "href": "appendix/r-packages/pwr.html#best-practices",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "Always use realistic estimates for effect size based on prior studies or pilot data.\nValidate your power calculations through simulations if possible."
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#conclusion",
+    "href": "appendix/r-packages/pwr.html#conclusion",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "The pwr package is a versatile and user-friendly tool for power analysis in R, covering various statistical tests and scenarios.\n\n\n\nExplore the official documentation or combine pwr with simulation-based methods for complex experimental designs.\n\n\n\nStart applying power analysis in your projects to optimize experimental designs and improve the validity of your results."
+  },
+  {
+    "objectID": "appendix/r-packages/pwr.html#references-and-resources",
+    "href": "appendix/r-packages/pwr.html#references-and-resources",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "pwr Package Documentation\nR Power Analysis Tutorial\nComprehensive R Archive Network (CRAN)"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html",
+    "href": "appendix/r-base/r-rep-basics.html",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.\n\n\n\nThe rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2\n\n\n\n\n\n\nCombining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1\n\n\n\n\n\nBasic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3\n\n\n\n\n\nNegative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#function-overview",
+    "href": "appendix/r-base/r-rep-basics.html#function-overview",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation."
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "href": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "href": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Combining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#examples",
+    "href": "appendix/r-base/r-rep-basics.html#examples",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Basic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "href": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html",
+    "href": "appendix/r-base/r-sample-basic.html",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
+    "href": "appendix/r-base/r-sample-basic.html#function-description",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
+    "href": "appendix/r-base/r-sample-basic.html#key-features",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Key Features",
+    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#examples",
+    "href": "appendix/r-base/r-sample-basic.html#examples",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Examples",
+    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
+    "href": "appendix/r-base/r-sample-basic.html#best-practices",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Best Practices",
+    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
+  },
+  {
     "objectID": "appendix/r-packages/emmeans.html",
     "href": "appendix/r-packages/emmeans.html",
     "title": "Tutorial: Using the emmeans R Package",
@@ -747,83 +908,6 @@
     "title": "Tutorial: Using the emmeans R Package",
     "section": "9. References and Resources",
     "text": "9. References and Resources\n\nemmeans CRAN Page\nVignettes: Estimated Marginal Means\nGitHub Repository"
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html",
-    "href": "appendix/r-base/r-sample-basic.html",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
-    "href": "appendix/r-base/r-sample-basic.html#function-description",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
-    "href": "appendix/r-base/r-sample-basic.html#key-features",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Key Features",
-    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#examples",
-    "href": "appendix/r-base/r-sample-basic.html#examples",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Examples",
-    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
-    "href": "appendix/r-base/r-sample-basic.html#best-practices",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Best Practices",
-    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html",
-    "href": "appendix/r-base/r-rep-basics.html",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.\n\n\n\nThe rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2\n\n\n\n\n\n\nCombining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1\n\n\n\n\n\nBasic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3\n\n\n\n\n\nNegative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#function-overview",
-    "href": "appendix/r-base/r-rep-basics.html#function-overview",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation."
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#arguments-explanation",
-    "href": "appendix/r-base/r-rep-basics.html#arguments-explanation",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "The rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
-    "href": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "Combining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#examples",
-    "href": "appendix/r-base/r-rep-basics.html#examples",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "Basic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
-    "href": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
   },
   {
     "objectID": "assignments/assignment2_completely_randomized_design.html",
