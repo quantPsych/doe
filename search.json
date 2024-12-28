@@ -375,7 +375,7 @@
     "href": "lectures/week-04_comparisons-contrasts.html#example-2-testing-a-specific-contrast",
     "title": "Comparisons and Contrasts",
     "section": "Example 2: Testing a Specific Contrast",
-    "text": "Example 2: Testing a Specific Contrast\nDefining a Contrast:\n\nlibrary(emmeans)\n\n# Suppose we want to test (A,B) vs (C,D)\ncontrast_vec &lt;- c(0.5, 0.5, -0.5, -0.5)\n\nemm &lt;- emmeans(fit, ~Treatment)\ncontrast(emm, method = list(\"AB_vs_CD\" = contrast_vec))\n\n contrast estimate    SE df t.ratio p.value\n AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001\n\n\n\n\nFor more detail on the emmeans package, see the tutorial page emmeans in the appendix.\n\nInterpretation\nThe output gives an estimate, standard error, t-value, and p-value. If p &lt; alpha, we conclude there is evidence that (A,B) differ from (C,D)."
+    "text": "Example 2: Testing a Specific Contrast\nDefining a Contrast:\n\n# Suppose we want to test (A,B) vs (C,D)\ncontrast_vec &lt;- c(0.5, 0.5, -0.5, -0.5)\n\nemm &lt;- emmeans(fit, ~Treatment)\ncontrast(emm, method = list(\"AB_vs_CD\" = contrast_vec))\n\n contrast estimate    SE df t.ratio p.value\n AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001\n\n\n\n\nFor more detail on the emmeans package, see the tutorial page emmeans in the appendix.\n\nInterpretation\nThe output gives an estimate, standard error, t-value, and p-value. If p &lt; alpha, we conclude there is evidence that (A,B) differ from (C,D)."
   },
   {
     "objectID": "lectures/week-04_comparisons-contrasts.html#medium-difficulty",
@@ -518,116 +518,270 @@
     "text": "Course Schedule, Assignment Deadlines, and Exam Dates\nThe course schedule, including assignment due dates and the midterm exam date, is subject to change based on the progress of the class, unforeseen circumstances, or instructor discretion. Students are responsible for regularly checking Canvas and announcements on the course GitHub page for the most up-to-date information regarding deadlines and schedule adjustments.\nHowever, the final exam date is not subject to change, as it is determined and scheduled by the university. Please plan accordingly based on the final exam schedule provided by UNM:\n\nFinal Exam Date: Tuesday, May 13, 2025, 10:00 a.m.–12:00 p.m.\nLocation: Classroom (as specified in the syllabus)\n\nStudents are strongly encouraged to stay proactive, monitor changes, and ensure they meet all revised deadlines and expectations as announced.\n\nTentative Course Schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopics\nReadings & Homework Assignments\n\n\n\n\n1\nJan. 21 & 23, 2025\nIntroduction to Experimental Design\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nJan. 28 & 30, 2025\nCompletely Randomized Designs (CRD)\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nFeb. 4 & 6, 2025\nBlocking & RCBD\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nFeb. 11 & 13, 2025\nMultiple Comparisons\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nFeb. 18 & 20, 2025\nChecking Model Assumptions\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFeb. 25 & 27, 2025\nTwo-Way Factorial Designs\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMar. 4 & 6, 2025\nMidterm Exam\nReview all chapters and notes.\n\n\n8\nMar. 11 & 13, 2025\nHigher-Order Factorial Designs\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nMar. 16–20, 2025\n==Spring Break==\nNo classes.\n\n\n10\nMar. 25 & 27, 2025\nAnalysis of Covariance (ANCOVA)\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nApr. 1 & 3, 2025\nComplete Block Designs\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nApr. 8 & 10, 2025\nRow–Column (Latin square) Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nApr. 15 & 17, 2025\nRandom & Mixed Models\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nApr. 22 & 24, 2025\nNested Models\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nApr. 29 & May 1, 2025\nSplit-Plot Designs\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nMay 6 & 8, 2025\nCatching Up and Review\nComprehensive review and Q&A.\n\n\n17\nMay 13\nFinal Exam\nComprehensive (Weeks 1–15)."
   },
   {
-    "objectID": "home_lectures.html",
-    "href": "home_lectures.html",
-    "title": "Lecture Notes - STAT 454/545",
+    "objectID": "contents.html",
+    "href": "contents.html",
+    "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "Welcome to the Lecture Notes page for STAT 454/545: Analysis of Variance and Experimental Design. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.\n\n\n\n\n\nWeek\nTopic\nLecture Notes Link\nSupplemental Resources\nReadings & Homework Assignments\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 1\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 2\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes\nChapter 3 Examples\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nBlocking and RCBD\nWeek 3 Notes\nBlocking Efficiency Examples\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nMultiple Comparisons and Contrasts\nWeek 4 Notes\nTukey, Bonferroni Methods\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nChecking Model Assumptions\nWeek 5 Notes\nResidual Analysis Resources\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFactorial Designs\nWeek 6 Notes\nTwo-Way ANOVA Examples\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMidterm Review & Exam\nWeek 7 Notes\nReview Notes & Practice Exams\nNo Class\n\n\n8\nHigher-Order Factorial Designs\nWeek 8 Notes\nInteraction Plots\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nSpring Break\nNo Class This Week\nRelax & Review\nNone\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes\nANCOVA Step-by-Step Example\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nComplete Block Designs\nWeek 11 Notes\nFactorial Treatments in Blocks\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nRow–Column Designs\nWeek 12 Notes\nLatin Square Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nRandom and Mixed Effects\nWeek 13 Notes\nVariance Component Analysis\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nNested Models\nWeek 14 Notes\nNested Designs Case Study\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nSplit-Plot Designs\nWeek 15 Notes\nSplit-Split-Plot Extensions\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nCatch-Up Week\nWeek 16 Notes\nExtra Practice Problems\nComprehensive review and Q&A.\n\n\n17\nFinal Review and Exam\nFinal Review Notes\nFinal Exam Practice Set\nComprehensive (Weeks 1–15).\n\n\n\n\n\n\nIn addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links.\n\n\n\n\n\nPre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.\n\n\n\n\nIf you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance.\n\n\n\n\nInstructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
+    "text": "This page organizes the key course materials, including lecture notes, assignments, supplemental readings, and important resources.\n\n\nThe course syllabus contains all essential details about the course structure, policies, assignments, and exam dates.\n\n📄 Download Full Course Syllabus (PDF)\nImportant: You must read the syllabus carefully, as it contains critical information not available elsewhere.\n\n\n\n\nLecture notes and slides will be posted on the Course GitHub Page in HTML format.\n\n📚 Access Lecture Notes\n\nNote: GitHub Pages may cache content. Refresh your browser if the notes appear outdated.\n\nTo refresh, use:\n\nCtrl + Shift + R (Windows/Linux)\n\nCmd + Shift + R (Mac)\n\n\n\n\n\n\n\nThe course schedule provides a week-by-week breakdown of topics, reading assignments, and due dates.\n\n📅 View Course Schedule\n\n\n\n\nAssignments will be posted on Canvas and must be submitted via Canvas. All assignments require the use of the Quarto template provided.\n\n🔗 Quarto Template\n\n\n\n\n\nSupplemental readings will be provided as needed. Public domain readings will be posted on the Contents page.\n\n🔗 Access Supplemental Readings on Canvas\n\nNote: Some readings may not be shared due to copyright restrictions.\n\n\n\nTo complete assignments and analyses, you will need access to R and related tools.\n\nR Installation: Download R\n\nRStudio IDE: Download RStudio\n\nVS Code IDE: Download VS Code\n\n\n\n\nQuarto Documentation: Learn Quarto\n\nR Tutorials: R Basics for Beginners"
   },
   {
-    "objectID": "home_lectures.html#weekly-lecture-notes",
-    "href": "home_lectures.html#weekly-lecture-notes",
-    "title": "Lecture Notes - STAT 454/545",
+    "objectID": "contents.html#course-syllabus",
+    "href": "contents.html#course-syllabus",
+    "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "Week\nTopic\nLecture Notes Link\nSupplemental Resources\nReadings & Homework Assignments\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 1\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 2\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes\nChapter 3 Examples\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nBlocking and RCBD\nWeek 3 Notes\nBlocking Efficiency Examples\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nMultiple Comparisons and Contrasts\nWeek 4 Notes\nTukey, Bonferroni Methods\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nChecking Model Assumptions\nWeek 5 Notes\nResidual Analysis Resources\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFactorial Designs\nWeek 6 Notes\nTwo-Way ANOVA Examples\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMidterm Review & Exam\nWeek 7 Notes\nReview Notes & Practice Exams\nNo Class\n\n\n8\nHigher-Order Factorial Designs\nWeek 8 Notes\nInteraction Plots\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nSpring Break\nNo Class This Week\nRelax & Review\nNone\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes\nANCOVA Step-by-Step Example\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nComplete Block Designs\nWeek 11 Notes\nFactorial Treatments in Blocks\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nRow–Column Designs\nWeek 12 Notes\nLatin Square Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nRandom and Mixed Effects\nWeek 13 Notes\nVariance Component Analysis\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nNested Models\nWeek 14 Notes\nNested Designs Case Study\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nSplit-Plot Designs\nWeek 15 Notes\nSplit-Split-Plot Extensions\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nCatch-Up Week\nWeek 16 Notes\nExtra Practice Problems\nComprehensive review and Q&A.\n\n\n17\nFinal Review and Exam\nFinal Review Notes\nFinal Exam Practice Set\nComprehensive (Weeks 1–15)."
+    "text": "The course syllabus contains all essential details about the course structure, policies, assignments, and exam dates.\n\n📄 Download Full Course Syllabus (PDF)\nImportant: You must read the syllabus carefully, as it contains critical information not available elsewhere."
   },
   {
-    "objectID": "home_lectures.html#supplemental-resources",
-    "href": "home_lectures.html#supplemental-resources",
-    "title": "Lecture Notes - STAT 454/545",
+    "objectID": "contents.html#lecture-notes",
+    "href": "contents.html#lecture-notes",
+    "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "In addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links."
+    "text": "Lecture notes and slides will be posted on the Course GitHub Page in HTML format.\n\n📚 Access Lecture Notes\n\nNote: GitHub Pages may cache content. Refresh your browser if the notes appear outdated.\n\nTo refresh, use:\n\nCtrl + Shift + R (Windows/Linux)\n\nCmd + Shift + R (Mac)"
   },
   {
-    "objectID": "home_lectures.html#how-to-use-lecture-notes",
-    "href": "home_lectures.html#how-to-use-lecture-notes",
-    "title": "Lecture Notes - STAT 454/545",
+    "objectID": "contents.html#course-schedule",
+    "href": "contents.html#course-schedule",
+    "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "Pre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation."
+    "text": "The course schedule provides a week-by-week breakdown of topics, reading assignments, and due dates.\n\n📅 View Course Schedule"
   },
   {
-    "objectID": "home_lectures.html#troubleshooting-github-pages",
-    "href": "home_lectures.html#troubleshooting-github-pages",
-    "title": "Lecture Notes - STAT 454/545",
+    "objectID": "contents.html#assignments",
+    "href": "contents.html#assignments",
+    "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "If you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance."
+    "text": "Assignments will be posted on Canvas and must be submitted via Canvas. All assignments require the use of the Quarto template provided.\n\n🔗 Quarto Template"
   },
   {
-    "objectID": "home_lectures.html#contact-information",
-    "href": "home_lectures.html#contact-information",
-    "title": "Lecture Notes - STAT 454/545",
+    "objectID": "contents.html#supplemental-readings",
+    "href": "contents.html#supplemental-readings",
+    "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "Instructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
+    "text": "Supplemental readings will be provided as needed. Public domain readings will be posted on the Contents page.\n\n🔗 Access Supplemental Readings on Canvas\n\nNote: Some readings may not be shared due to copyright restrictions."
   },
   {
-    "objectID": "appendix/r-packages/pwr.html",
-    "href": "appendix/r-packages/pwr.html",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "objectID": "contents.html#software-tools-and-resources",
+    "href": "contents.html#software-tools-and-resources",
+    "title": "Course Content - STAT 454/545",
     "section": "",
-    "text": "The pwr package in R is a powerful tool for conducting power analysis. Power analysis is essential in determining the sample size needed to detect an effect of a given size with a certain level of confidence. It is widely used in experimental design and statistical hypothesis testing.\n\n\n\n\nDetermining the required sample size for an experiment.\nCalculating the power of a test given sample size and effect size.\nComparing the sensitivity of different statistical tests.\n\n\n\n\n\nSimplifies power analysis for various statistical tests.\nProvides built-in functions for common tests such as t-tests, ANOVA, and correlation.\nEasy integration with R workflows for reproducibility.\n\n\n\n\n\n\n\n\npacman::p_load(pwr)\n\n\n\n\nHere is a simple example of using pwr.t.test to calculate the sample size needed for a one-sample t-test:\n\n# Calculate required sample size for a one-sample t-test\nresult &lt;- pwr.t.test(d = 0.5, power = 0.8, sig.level = 0.05, type = \"one.sample\")\nprint(result)\n\n\n     One-sample t test power calculation \n\n              n = 33.36713\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nThis calculates the required sample size to achieve a power of 0.8 for detecting an effect size of 0.5 at a significance level of 0.05.\n\n\n\n\n\n\n\n\nCalculates power, effect size, or sample size for t-tests.\n\n\n\npwr.t.test(n = NULL, d = NULL, sig.level = NULL, power = NULL, type = \"two.sample\", alternative = \"two.sided\")\n\nn: Sample size.\nd: Effect size.\nsig.level: Significance level (default is 0.05).\npower: Desired power (1 - Type II error probability).\ntype: Type of t-test (\"one.sample\", \"two.sample\", or \"paired\").\nalternative: Specifies whether the test is \"two.sided\" or \"greater\"/\"less\".\n\n\n\n\n\n# Power analysis for a two-sample t-test\npwr.t.test(n = 30, d = 0.5, sig.level = 0.05, type = \"two.sample\")\n\n\n     Two-sample t test power calculation \n\n              n = 30\n              d = 0.5\n      sig.level = 0.05\n          power = 0.4778965\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\n\n\n\n\nPerforms power analysis for balanced one-way ANOVA.\n\n\n\npwr.anova.test(k = NULL, n = NULL, f = NULL, sig.level = NULL, power = NULL)\n\nk: Number of groups.\nn: Sample size per group.\nf: Effect size.\nsig.level: Significance level.\npower: Desired power.\n\n\n\n\n\n# Power analysis for a one-way ANOVA\npwr.anova.test(k = 4, f = 0.25, sig.level = 0.05, power = 0.8)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 4\n              n = 44.59927\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\n\n\n\n\n\n\nCalculates power for correlation tests.\n\n\n\npwr.r.test(n = NULL, r = NULL, sig.level = NULL, power = NULL, alternative = \"two.sided\")\n\nr: Correlation coefficient.\n\n\n\n\n\n# Power analysis for correlation\npwr.r.test(r = 0.3, sig.level = 0.05, power = 0.8)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 84.07364\n              r = 0.3\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\n\n\n\n\n\n\n\nObjective: Determine the power of a study with a sample size of 40 per group, an effect size of 0.5, and a significance level of 0.05.\nCode:\n\nresult &lt;- pwr.t.test(n = 40, d = 0.5, sig.level = 0.05, type = \"two.sample\")\nprint(result)\n\n\n     Two-sample t test power calculation \n\n              n = 40\n              d = 0.5\n      sig.level = 0.05\n          power = 0.5981469\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nOutput Interpretation: The output provides the calculated power for the test.\n\n\n\nObjective: Calculate the required sample size to detect a correlation of 0.4 with 80% power at a 5% significance level.\nCode:\n\nresult &lt;- pwr.r.test(r = 0.4, power = 0.8, sig.level = 0.05)\nprint(result)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 45.91614\n              r = 0.4\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nOutput Interpretation: The result specifies the required sample size.\n\n\n\n\n\n\nThe pwr package allows you to create custom plots of power curves:\n\nlibrary(ggplot2)\n\neffect_sizes &lt;- seq(0.1, 0.5, 0.01)\npowers &lt;- sapply(effect_sizes, function(d) {\n    pwr.t.test(d = d, n = 30, sig.level = 0.05, type = \"two.sample\")$power\n})\n\ndata &lt;- data.frame(effect_sizes, powers)\n\nggplot(data, aes(x = effect_sizes, y = powers)) +\n    geom_line() +\n    labs(title = \"Power Curve\", x = \"Effect Size\", y = \"Power\") +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\n\nThe pwr package can work seamlessly with simulation packages to validate power calculations.\n\n\n\n\n\nCommon Error: “Error in pwr.t.test(): Not enough parameters specified.” Fix: Ensure you provide at least three of the four parameters: n, d, power, or sig.level.\nHow to choose effect size? Use guidelines such as Cohen’s benchmarks: small (0.2), medium (0.5), and large (0.8).\n\n\n\n\n\nAlways use realistic estimates for effect size based on prior studies or pilot data.\nValidate your power calculations through simulations if possible.\n\n\n\n\n\n\nThe pwr package is a versatile and user-friendly tool for power analysis in R, covering various statistical tests and scenarios.\n\n\n\nExplore the official documentation or combine pwr with simulation-based methods for complex experimental designs.\n\n\n\nStart applying power analysis in your projects to optimize experimental designs and improve the validity of your results.\n\n\n\n\n\npwr Package Documentation\nR Power Analysis Tutorial\nComprehensive R Archive Network (CRAN)"
+    "text": "To complete assignments and analyses, you will need access to R and related tools.\n\nR Installation: Download R\n\nRStudio IDE: Download RStudio\n\nVS Code IDE: Download VS Code\n\n\n\n\nQuarto Documentation: Learn Quarto\n\nR Tutorials: R Basics for Beginners"
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#introduction",
-    "href": "appendix/r-packages/pwr.html#introduction",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html",
+    "href": "assignments/assignment1_basics_of_experimental_design.html",
+    "title": "Assignment 1: Introduction to Experimental Design",
     "section": "",
-    "text": "The pwr package in R is a powerful tool for conducting power analysis. Power analysis is essential in determining the sample size needed to detect an effect of a given size with a certain level of confidence. It is widely used in experimental design and statistical hypothesis testing.\n\n\n\n\nDetermining the required sample size for an experiment.\nCalculating the power of a test given sample size and effect size.\nComparing the sensitivity of different statistical tests.\n\n\n\n\n\nSimplifies power analysis for various statistical tests.\nProvides built-in functions for common tests such as t-tests, ANOVA, and correlation.\nEasy integration with R workflows for reproducibility."
+    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nDue Date: February 13, 2025"
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#getting-started",
-    "href": "appendix/r-packages/pwr.html#getting-started",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#assignment-1-introduction-to-experimental-design",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#assignment-1-introduction-to-experimental-design",
+    "title": "Assignment 1: Introduction to Experimental Design",
     "section": "",
-    "text": "pacman::p_load(pwr)\n\n\n\n\nHere is a simple example of using pwr.t.test to calculate the sample size needed for a one-sample t-test:\n\n# Calculate required sample size for a one-sample t-test\nresult &lt;- pwr.t.test(d = 0.5, power = 0.8, sig.level = 0.05, type = \"one.sample\")\nprint(result)\n\n\n     One-sample t test power calculation \n\n              n = 33.36713\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nThis calculates the required sample size to achieve a power of 0.8 for detecting an effect size of 0.5 at a significance level of 0.05."
+    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nDue Date: February 13, 2025"
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#key-functions-and-features",
-    "href": "appendix/r-packages/pwr.html#key-functions-and-features",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
-    "section": "",
-    "text": "Calculates power, effect size, or sample size for t-tests.\n\n\n\npwr.t.test(n = NULL, d = NULL, sig.level = NULL, power = NULL, type = \"two.sample\", alternative = \"two.sided\")\n\nn: Sample size.\nd: Effect size.\nsig.level: Significance level (default is 0.05).\npower: Desired power (1 - Type II error probability).\ntype: Type of t-test (\"one.sample\", \"two.sample\", or \"paired\").\nalternative: Specifies whether the test is \"two.sided\" or \"greater\"/\"less\".\n\n\n\n\n\n# Power analysis for a two-sample t-test\npwr.t.test(n = 30, d = 0.5, sig.level = 0.05, type = \"two.sample\")\n\n\n     Two-sample t test power calculation \n\n              n = 30\n              d = 0.5\n      sig.level = 0.05\n          power = 0.4778965\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\n\n\n\n\nPerforms power analysis for balanced one-way ANOVA.\n\n\n\npwr.anova.test(k = NULL, n = NULL, f = NULL, sig.level = NULL, power = NULL)\n\nk: Number of groups.\nn: Sample size per group.\nf: Effect size.\nsig.level: Significance level.\npower: Desired power.\n\n\n\n\n\n# Power analysis for a one-way ANOVA\npwr.anova.test(k = 4, f = 0.25, sig.level = 0.05, power = 0.8)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 4\n              n = 44.59927\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\n\n\n\n\n\n\nCalculates power for correlation tests.\n\n\n\npwr.r.test(n = NULL, r = NULL, sig.level = NULL, power = NULL, alternative = \"two.sided\")\n\nr: Correlation coefficient.\n\n\n\n\n\n# Power analysis for correlation\npwr.r.test(r = 0.3, sig.level = 0.05, power = 0.8)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 84.07364\n              r = 0.3\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided"
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-1-key-concepts-of-experimental-design",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#part-1-key-concepts-of-experimental-design",
+    "title": "Assignment 1: Introduction to Experimental Design",
+    "section": "Part 1: Key Concepts of Experimental Design",
+    "text": "Part 1: Key Concepts of Experimental Design\n\nDefining Objectives:\n\nWhat are the primary reasons for conducting experiments as outlined in Chapter 1? Provide an example for each purpose.\n\nExperimental vs. Observational Studies:\n\nExplain the differences between experimental and observational studies, emphasizing their strengths and limitations in establishing causality. Use the factory machine quality example in Chapter 1 for illustration.\n\nBasic Techniques:\n\nDescribe replication, blocking, and randomization. For each technique, provide an example that demonstrates how it improves the validity or precision of an experiment."
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#in-depth-examples",
-    "href": "appendix/r-packages/pwr.html#in-depth-examples",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
-    "section": "",
-    "text": "Objective: Determine the power of a study with a sample size of 40 per group, an effect size of 0.5, and a significance level of 0.05.\nCode:\n\nresult &lt;- pwr.t.test(n = 40, d = 0.5, sig.level = 0.05, type = \"two.sample\")\nprint(result)\n\n\n     Two-sample t test power calculation \n\n              n = 40\n              d = 0.5\n      sig.level = 0.05\n          power = 0.5981469\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nOutput Interpretation: The output provides the calculated power for the test.\n\n\n\nObjective: Calculate the required sample size to detect a correlation of 0.4 with 80% power at a 5% significance level.\nCode:\n\nresult &lt;- pwr.r.test(r = 0.4, power = 0.8, sig.level = 0.05)\nprint(result)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 45.91614\n              r = 0.4\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nOutput Interpretation: The result specifies the required sample size."
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-2-checklist-for-planning-experiments",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#part-2-checklist-for-planning-experiments",
+    "title": "Assignment 1: Introduction to Experimental Design",
+    "section": "Part 2: Checklist for Planning Experiments",
+    "text": "Part 2: Checklist for Planning Experiments\n\nDefining Objectives:\n\nList and briefly describe the steps from Chapter 2’s checklist for planning experiments. Emphasize why defining objectives and identifying sources of variation are critical.\n\nPilot Experiments:\n\nDescribe the purpose of running a pilot experiment and how it aids in refining the experimental design.\n\nHypothetical Scenario:\n\nImagine you are designing an experiment to test the effects of different fertilizers (F1, F2, F3) on plant growth. Outline your approach to:\n\nDefine objectives.\nIdentify sources of variation.\nChoose an assignment rule for treatments."
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#advanced-features",
-    "href": "appendix/r-packages/pwr.html#advanced-features",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
-    "section": "",
-    "text": "The pwr package allows you to create custom plots of power curves:\n\nlibrary(ggplot2)\n\neffect_sizes &lt;- seq(0.1, 0.5, 0.01)\npowers &lt;- sapply(effect_sizes, function(d) {\n    pwr.t.test(d = d, n = 30, sig.level = 0.05, type = \"two.sample\")$power\n})\n\ndata &lt;- data.frame(effect_sizes, powers)\n\nggplot(data, aes(x = effect_sizes, y = powers)) +\n    geom_line() +\n    labs(title = \"Power Curve\", x = \"Effect Size\", y = \"Power\") +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\n\nThe pwr package can work seamlessly with simulation packages to validate power calculations."
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-3-real-world-applications",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#part-3-real-world-applications",
+    "title": "Assignment 1: Introduction to Experimental Design",
+    "section": "Part 3: Real-World Applications",
+    "text": "Part 3: Real-World Applications\n\nCotton-Spinning Experiment (Chapter 2):\n\nSummarize the objectives and the experimental design used in the cotton-spinning experiment.\nExplain how blocking was used to account for variability and improve precision.\n\nImprovements:\n\nPropose one way to improve the cotton-spinning experiment for broader applicability or reduced cost."
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#troubleshooting-and-faqs",
-    "href": "appendix/r-packages/pwr.html#troubleshooting-and-faqs",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
-    "section": "",
-    "text": "Common Error: “Error in pwr.t.test(): Not enough parameters specified.” Fix: Ensure you provide at least three of the four parameters: n, d, power, or sig.level.\nHow to choose effect size? Use guidelines such as Cohen’s benchmarks: small (0.2), medium (0.5), and large (0.8)."
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-4-numerical-application",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#part-4-numerical-application",
+    "title": "Assignment 1: Introduction to Experimental Design",
+    "section": "Part 4: Numerical Application",
+    "text": "Part 4: Numerical Application\nYou are tasked with analyzing a hypothetical dataset to practice experimental design concepts. Use the following dataset where three treatments (A, B, C) are applied to five blocks (1–5). The response variable represents a numerical outcome.\n\n\n\nBlock\nTreatment A\nTreatment B\nTreatment C\n\n\n\n\n1\n10.1\n9.8\n10.2\n\n\n2\n10.5\n9.7\n10.3\n\n\n3\n10.3\n10.1\n10.4\n\n\n4\n10.4\n9.9\n10.0\n\n\n5\n10.2\n10.0\n10.1\n\n\n\n\nStatistical Model:\n\nWrite the model equation that represents the relationship between treatment and response while accounting for blocks.\n\nAnalysis:\n\nConduct a one-way ANOVA using R to test for treatment differences. Include R code and output.\n\nInterpretation:\n\nState the null and alternative hypotheses.\nSummarize the ANOVA results, including whether to reject the null hypothesis.\n\nDiagnostics:\n\nPerform residual analysis to evaluate the assumptions of ANOVA."
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#best-practices",
-    "href": "appendix/r-packages/pwr.html#best-practices",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
-    "section": "",
-    "text": "Always use realistic estimates for effect size based on prior studies or pilot data.\nValidate your power calculations through simulations if possible."
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#submission-guidelines",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#submission-guidelines",
+    "title": "Assignment 1: Introduction to Experimental Design",
+    "section": "Submission Guidelines",
+    "text": "Submission Guidelines\n\nUse the Quarto template provided.\nInclude all R code, outputs, and graphs in your submission.\nSubmit the rendered PDF through Canvas by the due date."
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#conclusion",
-    "href": "appendix/r-packages/pwr.html#conclusion",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
-    "section": "",
-    "text": "The pwr package is a versatile and user-friendly tool for power analysis in R, covering various statistical tests and scenarios.\n\n\n\nExplore the official documentation or combine pwr with simulation-based methods for complex experimental designs.\n\n\n\nStart applying power analysis in your projects to optimize experimental designs and improve the validity of your results."
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#grading-criteria",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#grading-criteria",
+    "title": "Assignment 1: Introduction to Experimental Design",
+    "section": "Grading Criteria",
+    "text": "Grading Criteria\n\nConceptual Understanding (30%): Accuracy and clarity in explaining experimental design concepts.\nApplication (30%): Correct application of experimental design principles to the real-world scenario and hypothetical data.\nStatistical Analysis (30%): Accuracy and completeness of ANOVA and diagnostics.\nPresentation (10%): Organization, formatting, and clarity of submission.\n\nGood luck!"
   },
   {
-    "objectID": "appendix/r-packages/pwr.html#references-and-resources",
-    "href": "appendix/r-packages/pwr.html#references-and-resources",
-    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "objectID": "assignments/assignment3_blocking_and_rcbd.html",
+    "href": "assignments/assignment3_blocking_and_rcbd.html",
+    "title": "Assignment 3: Randomized Block Design and Analysis",
     "section": "",
-    "text": "pwr Package Documentation\nR Power Analysis Tutorial\nComprehensive R Archive Network (CRAN)"
+    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R or a similar tool to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+  },
+  {
+    "objectID": "assignments/assignment3_blocking_and_rcbd.html#instructions",
+    "href": "assignments/assignment3_blocking_and_rcbd.html#instructions",
+    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "section": "",
+    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R or a similar tool to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+  },
+  {
+    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-1-randomized-complete-block-design",
+    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-1-randomized-complete-block-design",
+    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "section": "Exercise 1: Randomized Complete Block Design",
+    "text": "Exercise 1: Randomized Complete Block Design\nData Source: Dean et al. (2017), Chapter 10, Exercise 1\nTask: Conduct a randomization for a randomized complete block design with:\n\n\\(v = 4\\) treatments,\n\\(b = 5\\) blocks,\nEach treatment is observed \\(s = 1\\) time in each block.\n\nDeliverables:\n\nShow the randomized treatment allocation within each block.\nProvide the final design in tabular format, with rows representing blocks and columns representing treatment allocations."
+  },
+  {
+    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-2-general-complete-block-design-ex.-10.2",
+    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-2-general-complete-block-design-ex.-10.2",
+    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "section": "Exercise 2: General Complete Block Design (Ex. 10.2)",
+    "text": "Exercise 2: General Complete Block Design (Ex. 10.2)\nData Source: Dean et al. (2017), Chapter 10, Exercise 2\nTask: Conduct a randomization for a general complete block design with:\n\n\\(v = 3\\) treatments,\n\\(b = 4\\) blocks,\nEach treatment is observed \\(s = 2\\) times in each block.\n\nDeliverables:\n\nDescribe the randomization process for the treatments.\nPresent the final design in a table showing the randomized treatment allocation in each block."
+  },
+  {
+    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-3-dcis-experiment-randomization-ex.-10.3",
+    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-3-dcis-experiment-randomization-ex.-10.3",
+    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "section": "Exercise 3: DCIS Experiment Randomization (Ex. 10.3)",
+    "text": "Exercise 3: DCIS Experiment Randomization (Ex. 10.3)\nData Source: Dean et al. (2017), Chapter 10, Exercise 3\nScenario: Suppose the DCIS experiment from Example 10.3.2 (p. 309) was designed as a randomized complete block design with:\n\n\\(b = 4\\) blocks,\n\\(k = v = 6\\) treatments per block,\nEach treatment is observed \\(s = 1\\) time per block.\n\nTask:\n\nPerform a randomization of the six treatments (\\(A, B, C, D, E, F\\)) within each block.\nPresent the final randomized design for all four blocks.\n\nDeliverables:\n\nDetail the randomization steps used to allocate treatments within blocks.\nProvide a table showing the randomized treatment assignments within each block."
+  },
+  {
+    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-4-respiratory-exchange-ratio-experiment-ex.-10.4",
+    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-4-respiratory-exchange-ratio-experiment-ex.-10.4",
+    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "section": "Exercise 4: Respiratory Exchange Ratio Experiment (Ex. 10.4)",
+    "text": "Exercise 4: Respiratory Exchange Ratio Experiment (Ex. 10.4)\nData Source: Dean et al. (2017), Chapter 10, Exercise 4\nScenario: In the resting metabolic rate experiment introduced in Example 10.4.1 (p. 311), the experimenters also measured the respiratory exchange ratio, another measure of energy expenditure. The data for the second 30 minutes of testing are provided below.\n\nThe data are from Example 10.4.1, but the respiratory exchange ratio data are used here.\n\n\nSubject\nProtocol 1\nProtocol 2\nProtocol 3\n\n\n\n\n1\n0.79\n0.80\n0.83\n\n\n2\n0.84\n0.84\n0.81\n\n\n3\n0.84\n0.93\n0.88\n\n\n4\n0.83\n0.85\n0.79\n\n\n5\n0.84\n0.78\n0.88\n\n\n6\n0.83\n0.75\n0.86\n\n\n7\n0.77\n0.76\n0.71\n\n\n8\n0.83\n0.85\n0.78\n\n\n9\n0.81\n0.77\n0.72\n\n\n\nTasks:\n\nEvaluate Assumptions:\n\nEvaluate the assumptions of the block-treatment model (Equation 10.4.1) for these data.\n\nANOVA Analysis:\n\nConstruct an analysis of variance (ANOVA) table.\nTest for equality of the effects of the protocols on the respiratory exchange ratio. Report your conclusions.\n\nEvaluate the usefulness of blocking.\n\nDeliverables:\n\nDiscuss the assumptions of the block-treatment model for the respiratory exchange ratio data.\nPresent the ANOVA table and results for the respiratory exchange ratio data.\nEvaluate the usefulness of blocking in this experiment.\nInclude any R code used for the analysis.\nProvide a clear explanation of the process and results."
+  },
+  {
+    "objectID": "assignments/assignment3_blocking_and_rcbd.html#grading-rubric",
+    "href": "assignments/assignment3_blocking_and_rcbd.html#grading-rubric",
+    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\n\n\n\n\n\nExercise\nCriteria\nPoints\n\n\n\n\nExercise 1\nCorrect randomized design and explanation\n20\n\n\nExercise 2\nAccurate general block design and steps\n20\n\n\nExercise 3\nProper randomization and final table\n20\n\n\nExercise 4\nAssumption evaluation and ANOVA results\n30\n\n\nClarity and R Code\nClearly explained process and R code used\n10"
+  },
+  {
+    "objectID": "assignments/assignment2_completely_randomized_design.html",
+    "href": "assignments/assignment2_completely_randomized_design.html",
+    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "section": "",
+    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks."
+  },
+  {
+    "objectID": "assignments/assignment2_completely_randomized_design.html#instructions",
+    "href": "assignments/assignment2_completely_randomized_design.html#instructions",
+    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "section": "",
+    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks."
+  },
+  {
+    "objectID": "assignments/assignment2_completely_randomized_design.html#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students",
+    "href": "assignments/assignment2_completely_randomized_design.html#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students",
+    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "section": "Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)",
+    "text": "Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)\n\n1.1 Balloon Experiment\nData Source: Dean et al. (2017), Chapter 3, Exercise 12\nData Overview: The data for this experiment is provided below:\n\nBalloon inflation times for different colors\n\n\nTime Order\nCoded Color\nInflation Time (seconds)\n\n\n\n\n1\n1\n22.0\n\n\n2\n3\n24.6\n\n\n3\n1\n20.3\n\n\n4\n4\n19.8\n\n\n5\n3\n24.3\n\n\n6\n2\n22.2\n\n\n7\n2\n28.5\n\n\n8\n2\n25.7\n\n\n9\n3\n20.2\n\n\n10\n1\n19.6\n\n\n11\n2\n28.8\n\n\n12\n4\n24.0\n\n\n13\n4\n17.1\n\n\n14\n4\n19.3\n\n\n15\n3\n24.2\n\n\n16\n1\n15.8\n\n\n17\n2\n18.3\n\n\n18\n1\n17.5\n\n\n19\n4\n18.7\n\n\n20\n3\n22.9\n\n\n21\n1\n16.3\n\n\n22\n4\n14.0\n\n\n23\n4\n16.6\n\n\n24\n2\n18.1\n\n\n25\n2\n18.9\n\n\n26\n4\n16.0\n\n\n27\n2\n20.1\n\n\n28\n3\n22.5\n\n\n29\n3\n16.0\n\n\n30\n1\n19.3\n\n\n31\n1\n15.9\n\n\n32\n3\n20.3\n\n\n\nThe codes for balloon colors are as follows:\n\n1 = Pink\n2 = Yellow\n3 = Orange\n4 = Blue\n\nTasks:\n\n\nPlot inflation time versus balloon color and comment on the results.\n\n\nEstimate the mean inflation time for each balloon color and add these estimates to the plot from part (a).\n\n\nConstruct an analysis of variance (ANOVA) table and test the hypothesis that balloon color has no effect on inflation time (\\(\\alpha = 0.05\\)).\n\n\nPlot the data for each color in the order it was collected. Discuss whether the assumptions of the ANOVA model (e.g., normality, independence) appear satisfied.\n\n\nEvaluate whether the analysis in part (c) is adequate. If not, suggest improvements.\n\n\n\n\n1.2 Conceptual Question\n\nDiscuss how increasing the number of replicates affects the power of a one-way ANOVA test.\n\n\n\n1.3 Graphical Analysis\n\nCreate a boxplot of inflation times for each balloon color. Based on the plot, comment on visual evidence of differences among the treatments."
+  },
+  {
+    "objectID": "assignments/assignment2_completely_randomized_design.html#set-2-advanced-computational-and-proof-based-questions-graduate-level",
+    "href": "assignments/assignment2_completely_randomized_design.html#set-2-advanced-computational-and-proof-based-questions-graduate-level",
+    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "section": "Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)",
+    "text": "Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)\n\n2.1 Derivation of \\(t\\)-Statistic for Contrasts in ANOVA\nData Source: Christensen (2018)., Exercise 12.7.12\nIn a one-way ANOVA, the sum of squares for error (\\(SSE\\)) divided by the population variance (\\(\\sigma^2\\)) follows a chi-squared distribution with degrees of freedom equal to \\(df_E\\):\n\\[\n\\frac{SSE}{\\sigma^2} \\sim \\chi^2(df_E),\n\\]\nand the mean square error (\\(MSE\\)) is independent of all sample means (\\(\\bar{y}_i\\)). Show that the following expression follows a \\(t\\)-distribution with \\(df_E\\) degrees of freedom:\n\\[\n\\frac{\\sum_{i=1}^a \\lambda_i \\bar{y}_i - \\sum_{i=1}^a \\lambda_i \\mu_i}{\\sqrt{MSE \\sum_{i=1}^a \\frac{\\lambda_i^2}{N_i}}} \\sim t(df_E).\n\\]\nTasks:\n\nDerive the above expression step-by-step, starting with the variance of the contrast \\(\\sum_{i=1}^a \\lambda_i \\bar{y}_i\\).\nExplain why \\(MSE\\) serves as an unbiased estimate of \\(\\sigma^2\\).\nUsing the result, construct a hypothesis test for a contrast in a one-way ANOVA and provide a practical interpretation of the result.\n\n\n\n2.2 Implications of Assumption Violations\n\nDiscuss the implications of violating the assumption of homogeneity of variances in a one-way ANOVA. Suggest two methods to address such violations.\n\n\n\n2.3 Power Analysis\n\nCalculate the sample size required for a one-way ANOVA with four groups to detect a medium effect size (\\(f = 0.25\\)) at a significance level of \\(\\alpha = 0.05\\) and a power of \\(1 - \\beta = 0.8\\)."
+  },
+  {
+    "objectID": "assignments/assignment2_completely_randomized_design.html#points-distribution",
+    "href": "assignments/assignment2_completely_randomized_design.html#points-distribution",
+    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "section": "Points Distribution",
+    "text": "Points Distribution\n\n\n\nTask\nPoints\n\n\n\n\nSet 1: Foundational Questions\n50\n\n\n1.1 Balloon Experiment\n30\n\n\n1.2 Conceptual Question\n10\n\n\n1.3 Graphical Analysis\n10\n\n\nSet 2: Advanced Questions\n50\n\n\n2.1 Derivation of \\(t\\)-Statistic\n20\n\n\n2.2 Implications of Assumption Violations\n10\n\n\n2.3 Power Analysis\n20\n\n\nTotal\n100"
+  },
+  {
+    "objectID": "assignments/assignment2_completely_randomized_design.html#submission-guidelines",
+    "href": "assignments/assignment2_completely_randomized_design.html#submission-guidelines",
+    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "section": "Submission Guidelines:",
+    "text": "Submission Guidelines:\n\nSubmit your assignment as a Quarto document, rendered to PDF, via the course submission portal.\nInclude all R code and outputs for computational tasks.\nEnsure clarity and precision in your explanations."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html",
+    "href": "appendix/r-packages/multcomp.html",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "",
+    "text": "The multcomp package in R is designed for simultaneous inference in linear models, specifically focused on multiple comparisons. It provides tools to test hypotheses about multiple parameters in a model while controlling for family-wise error rates.\n\n\n\n\nComparing group means in ANOVA.\nSimultaneous confidence intervals.\nAdjusting p-values for multiple testing.\n\n\n\n\n\nHandles a variety of multiple comparison tests.\nProvides flexibility with user-defined contrasts.\nSupports many types of linear models, including generalized linear models and mixed-effects models."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#introduction",
+    "href": "appendix/r-packages/multcomp.html#introduction",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "",
+    "text": "The multcomp package in R is designed for simultaneous inference in linear models, specifically focused on multiple comparisons. It provides tools to test hypotheses about multiple parameters in a model while controlling for family-wise error rates.\n\n\n\n\nComparing group means in ANOVA.\nSimultaneous confidence intervals.\nAdjusting p-values for multiple testing.\n\n\n\n\n\nHandles a variety of multiple comparison tests.\nProvides flexibility with user-defined contrasts.\nSupports many types of linear models, including generalized linear models and mixed-effects models."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#getting-started",
+    "href": "appendix/r-packages/multcomp.html#getting-started",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "2. Getting Started",
+    "text": "2. Getting Started\n\nLoading the Package\n\n# Load the multcomp package\npacman::p_load(multcomp)\n\n\n\nBasic Usage\nLet’s start with a simple example:\n\n# Example dataset\ndata(warpbreaks)\n\n# Fit a linear model\nmodel &lt;- lm(breaks ~ wool + tension, data = warpbreaks)\n\n# Perform multiple comparisons\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\n\n# Summarize the results\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lm(formula = breaks ~ wool + tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.872  -2.582  0.03352 * \nH - L == 0  -14.722      3.872  -3.802  0.00109 **\nH - M == 0   -4.722      3.872  -1.219  0.44742   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\nExplanation\n\nmcp: Specifies the type of multiple comparisons (e.g., Tukey’s test).\nglht: General linear hypothesis testing function.\nsummary: Displays adjusted p-values and confidence intervals."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#key-functions-and-features",
+    "href": "appendix/r-packages/multcomp.html#key-functions-and-features",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "3. Key Functions and Features",
+    "text": "3. Key Functions and Features\n\nglht()\nDescription: Performs multiple comparisons or general linear hypothesis tests.\nSyntax:\nmultcomp::glht(model, linfct = mcp(\"factor\"=\"method\"))\nArguments:\n\nmodel: A fitted linear model object.\nlinfct: Defines the hypotheses to test (e.g., Tukey or user-defined contrasts).\n\nExample:\n\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lm(formula = breaks ~ wool + tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.872  -2.582   0.0336 * \nH - L == 0  -14.722      3.872  -3.802   0.0011 **\nH - M == 0   -4.722      3.872  -1.219   0.4474   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\n\nmcp()\nDescription: Creates predefined contrasts for a factor.\nSyntax:\nmcp(factor = \"method\")\nExample:\nlinfct = mcp(tension = \"Tukey\")"
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#in-depth-examples",
+    "href": "appendix/r-packages/multcomp.html#in-depth-examples",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "4. In-Depth Examples",
+    "text": "4. In-Depth Examples\n\nExample 1: ANOVA Multiple Comparisons\nObjective: Compare tension levels in warpbreaks dataset.\nSteps:\n\nFit the model:\n\n\nmodel &lt;- aov(breaks ~ tension, data = warpbreaks)\n\n\nPerform Tukey’s test:\n\n\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: aov(formula = breaks ~ tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.960  -2.525  0.03851 * \nH - L == 0  -14.722      3.960  -3.718  0.00145 **\nH - M == 0   -4.722      3.960  -1.192  0.46306   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\nVisualize the results:\n\n\nplot(comparison)\n\n\n\n\n\n\n\n\nOutput: Provides adjusted p-values and confidence intervals."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#advanced-features",
+    "href": "appendix/r-packages/multcomp.html#advanced-features",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "5. Advanced Features",
+    "text": "5. Advanced Features\n\nCustom Contrasts\nCreate user-defined contrasts:\n\ncontrast_matrix &lt;- rbind(\n    \"M - L\" = c(-1, 1, 0),\n    \"H - L\" = c(-1, 0, 1),\n    \"H - M\" = c(0, -1, 1)\n)\ncomparison &lt;- glht(model, linfct = contrast_matrix)\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nFit: aov(formula = breaks ~ tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)    \nM - L == 0  -46.389      6.262  -7.408   &lt;1e-04 ***\nH - L == 0  -51.111      6.262  -8.163   &lt;1e-04 ***\nH - M == 0   -4.722      3.960  -1.192    0.456    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\n\nIntegration with Mixed-Effects Models\nSupports models from lme4:\n\nlibrary(lme4)\nmodel &lt;- lmer(breaks ~ tension + (1 | wool), data = warpbreaks)\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lmer(formula = breaks ~ tension + (1 | wool), data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error z value Pr(&gt;|z|)    \nM - L == 0  -10.000      3.872  -2.582   0.0266 *  \nH - L == 0  -14.722      3.872  -3.802   &lt;0.001 ***\nH - M == 0   -4.722      3.872  -1.219   0.4416    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)"
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#troubleshooting-and-faqs",
+    "href": "appendix/r-packages/multcomp.html#troubleshooting-and-faqs",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "6. Troubleshooting and FAQs",
+    "text": "6. Troubleshooting and FAQs\n\nCommon Issues\n\nError: Non-conformable arguments\n\nEnsure the linfct matches the model’s factor levels.\n\nConfusion with model types\n\nUse glht with models that support linear hypotheses (e.g., lm, lmer).\n\n\n\n\nFAQs\n\nCan multcomp handle unbalanced data? Yes, but ensure your model accounts for this."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#best-practices",
+    "href": "appendix/r-packages/multcomp.html#best-practices",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "7. Best Practices",
+    "text": "7. Best Practices\n\nAlways check model diagnostics before multiple comparisons.\nUse visualizations like plot() to complement numerical results.\nFor large datasets, consider summarizing key results to avoid overloading the output."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#conclusion",
+    "href": "appendix/r-packages/multcomp.html#conclusion",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "8. Conclusion",
+    "text": "8. Conclusion\n\nSummary\nThe multcomp package is a robust tool for conducting multiple comparisons in R, providing flexibility and accuracy.\n\n\nNext Steps\nExplore interactions in models and extend functionality with packages like emmeans.\n\n\nEncouragement\nExperiment with different datasets to build confidence in interpreting outputs!"
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#references-and-resources",
+    "href": "appendix/r-packages/multcomp.html#references-and-resources",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "9. References and Resources",
+    "text": "9. References and Resources\n\nPackage Documentation\nExamples on CRAN"
   },
   {
     "objectID": "appendix/r-base/r-rep-basics.html",
@@ -910,151 +1064,158 @@
     "text": "9. References and Resources\n\nemmeans CRAN Page\nVignettes: Estimated Marginal Means\nGitHub Repository"
   },
   {
-    "objectID": "assignments/assignment2_completely_randomized_design.html",
-    "href": "assignments/assignment2_completely_randomized_design.html",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "objectID": "appendix/r-packages/pwr.html",
+    "href": "appendix/r-packages/pwr.html",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
     "section": "",
-    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks."
+    "text": "The pwr package in R is a powerful tool for conducting power analysis. Power analysis is essential in determining the sample size needed to detect an effect of a given size with a certain level of confidence. It is widely used in experimental design and statistical hypothesis testing.\n\n\n\n\nDetermining the required sample size for an experiment.\nCalculating the power of a test given sample size and effect size.\nComparing the sensitivity of different statistical tests.\n\n\n\n\n\nSimplifies power analysis for various statistical tests.\nProvides built-in functions for common tests such as t-tests, ANOVA, and correlation.\nEasy integration with R workflows for reproducibility.\n\n\n\n\n\n\n\n\npacman::p_load(pwr)\n\n\n\n\nHere is a simple example of using pwr.t.test to calculate the sample size needed for a one-sample t-test:\n\n# Calculate required sample size for a one-sample t-test\nresult &lt;- pwr.t.test(d = 0.5, power = 0.8, sig.level = 0.05, type = \"one.sample\")\nprint(result)\n\n\n     One-sample t test power calculation \n\n              n = 33.36713\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nThis calculates the required sample size to achieve a power of 0.8 for detecting an effect size of 0.5 at a significance level of 0.05.\n\n\n\n\n\n\n\n\nCalculates power, effect size, or sample size for t-tests.\n\n\n\npwr.t.test(n = NULL, d = NULL, sig.level = NULL, power = NULL, type = \"two.sample\", alternative = \"two.sided\")\n\nn: Sample size.\nd: Effect size.\nsig.level: Significance level (default is 0.05).\npower: Desired power (1 - Type II error probability).\ntype: Type of t-test (\"one.sample\", \"two.sample\", or \"paired\").\nalternative: Specifies whether the test is \"two.sided\" or \"greater\"/\"less\".\n\n\n\n\n\n# Power analysis for a two-sample t-test\npwr.t.test(n = 30, d = 0.5, sig.level = 0.05, type = \"two.sample\")\n\n\n     Two-sample t test power calculation \n\n              n = 30\n              d = 0.5\n      sig.level = 0.05\n          power = 0.4778965\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\n\n\n\n\nPerforms power analysis for balanced one-way ANOVA.\n\n\n\npwr.anova.test(k = NULL, n = NULL, f = NULL, sig.level = NULL, power = NULL)\n\nk: Number of groups.\nn: Sample size per group.\nf: Effect size.\nsig.level: Significance level.\npower: Desired power.\n\n\n\n\n\n# Power analysis for a one-way ANOVA\npwr.anova.test(k = 4, f = 0.25, sig.level = 0.05, power = 0.8)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 4\n              n = 44.59927\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\n\n\n\n\n\n\nCalculates power for correlation tests.\n\n\n\npwr.r.test(n = NULL, r = NULL, sig.level = NULL, power = NULL, alternative = \"two.sided\")\n\nr: Correlation coefficient.\n\n\n\n\n\n# Power analysis for correlation\npwr.r.test(r = 0.3, sig.level = 0.05, power = 0.8)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 84.07364\n              r = 0.3\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\n\n\n\n\n\n\n\nObjective: Determine the power of a study with a sample size of 40 per group, an effect size of 0.5, and a significance level of 0.05.\nCode:\n\nresult &lt;- pwr.t.test(n = 40, d = 0.5, sig.level = 0.05, type = \"two.sample\")\nprint(result)\n\n\n     Two-sample t test power calculation \n\n              n = 40\n              d = 0.5\n      sig.level = 0.05\n          power = 0.5981469\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nOutput Interpretation: The output provides the calculated power for the test.\n\n\n\nObjective: Calculate the required sample size to detect a correlation of 0.4 with 80% power at a 5% significance level.\nCode:\n\nresult &lt;- pwr.r.test(r = 0.4, power = 0.8, sig.level = 0.05)\nprint(result)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 45.91614\n              r = 0.4\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nOutput Interpretation: The result specifies the required sample size.\n\n\n\n\n\n\nThe pwr package allows you to create custom plots of power curves:\n\nlibrary(ggplot2)\n\neffect_sizes &lt;- seq(0.1, 0.5, 0.01)\npowers &lt;- sapply(effect_sizes, function(d) {\n    pwr.t.test(d = d, n = 30, sig.level = 0.05, type = \"two.sample\")$power\n})\n\ndata &lt;- data.frame(effect_sizes, powers)\n\nggplot(data, aes(x = effect_sizes, y = powers)) +\n    geom_line() +\n    labs(title = \"Power Curve\", x = \"Effect Size\", y = \"Power\") +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\n\nThe pwr package can work seamlessly with simulation packages to validate power calculations.\n\n\n\n\n\nCommon Error: “Error in pwr.t.test(): Not enough parameters specified.” Fix: Ensure you provide at least three of the four parameters: n, d, power, or sig.level.\nHow to choose effect size? Use guidelines such as Cohen’s benchmarks: small (0.2), medium (0.5), and large (0.8).\n\n\n\n\n\nAlways use realistic estimates for effect size based on prior studies or pilot data.\nValidate your power calculations through simulations if possible.\n\n\n\n\n\n\nThe pwr package is a versatile and user-friendly tool for power analysis in R, covering various statistical tests and scenarios.\n\n\n\nExplore the official documentation or combine pwr with simulation-based methods for complex experimental designs.\n\n\n\nStart applying power analysis in your projects to optimize experimental designs and improve the validity of your results.\n\n\n\n\n\npwr Package Documentation\nR Power Analysis Tutorial\nComprehensive R Archive Network (CRAN)"
   },
   {
-    "objectID": "assignments/assignment2_completely_randomized_design.html#instructions",
-    "href": "assignments/assignment2_completely_randomized_design.html#instructions",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "objectID": "appendix/r-packages/pwr.html#introduction",
+    "href": "appendix/r-packages/pwr.html#introduction",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
     "section": "",
-    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks."
+    "text": "The pwr package in R is a powerful tool for conducting power analysis. Power analysis is essential in determining the sample size needed to detect an effect of a given size with a certain level of confidence. It is widely used in experimental design and statistical hypothesis testing.\n\n\n\n\nDetermining the required sample size for an experiment.\nCalculating the power of a test given sample size and effect size.\nComparing the sensitivity of different statistical tests.\n\n\n\n\n\nSimplifies power analysis for various statistical tests.\nProvides built-in functions for common tests such as t-tests, ANOVA, and correlation.\nEasy integration with R workflows for reproducibility."
   },
   {
-    "objectID": "assignments/assignment2_completely_randomized_design.html#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students",
-    "href": "assignments/assignment2_completely_randomized_design.html#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
-    "section": "Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)",
-    "text": "Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)\n\n1.1 Balloon Experiment\nData Source: Dean et al. (2017), Chapter 3, Exercise 12\nData Overview: The data for this experiment is provided below:\n\nBalloon inflation times for different colors\n\n\nTime Order\nCoded Color\nInflation Time (seconds)\n\n\n\n\n1\n1\n22.0\n\n\n2\n3\n24.6\n\n\n3\n1\n20.3\n\n\n4\n4\n19.8\n\n\n5\n3\n24.3\n\n\n6\n2\n22.2\n\n\n7\n2\n28.5\n\n\n8\n2\n25.7\n\n\n9\n3\n20.2\n\n\n10\n1\n19.6\n\n\n11\n2\n28.8\n\n\n12\n4\n24.0\n\n\n13\n4\n17.1\n\n\n14\n4\n19.3\n\n\n15\n3\n24.2\n\n\n16\n1\n15.8\n\n\n17\n2\n18.3\n\n\n18\n1\n17.5\n\n\n19\n4\n18.7\n\n\n20\n3\n22.9\n\n\n21\n1\n16.3\n\n\n22\n4\n14.0\n\n\n23\n4\n16.6\n\n\n24\n2\n18.1\n\n\n25\n2\n18.9\n\n\n26\n4\n16.0\n\n\n27\n2\n20.1\n\n\n28\n3\n22.5\n\n\n29\n3\n16.0\n\n\n30\n1\n19.3\n\n\n31\n1\n15.9\n\n\n32\n3\n20.3\n\n\n\nThe codes for balloon colors are as follows:\n\n1 = Pink\n2 = Yellow\n3 = Orange\n4 = Blue\n\nTasks:\n\n\nPlot inflation time versus balloon color and comment on the results.\n\n\nEstimate the mean inflation time for each balloon color and add these estimates to the plot from part (a).\n\n\nConstruct an analysis of variance (ANOVA) table and test the hypothesis that balloon color has no effect on inflation time (\\(\\alpha = 0.05\\)).\n\n\nPlot the data for each color in the order it was collected. Discuss whether the assumptions of the ANOVA model (e.g., normality, independence) appear satisfied.\n\n\nEvaluate whether the analysis in part (c) is adequate. If not, suggest improvements.\n\n\n\n\n1.2 Conceptual Question\n\nDiscuss how increasing the number of replicates affects the power of a one-way ANOVA test.\n\n\n\n1.3 Graphical Analysis\n\nCreate a boxplot of inflation times for each balloon color. Based on the plot, comment on visual evidence of differences among the treatments."
-  },
-  {
-    "objectID": "assignments/assignment2_completely_randomized_design.html#set-2-advanced-computational-and-proof-based-questions-graduate-level",
-    "href": "assignments/assignment2_completely_randomized_design.html#set-2-advanced-computational-and-proof-based-questions-graduate-level",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
-    "section": "Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)",
-    "text": "Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)\n\n2.1 Derivation of \\(t\\)-Statistic for Contrasts in ANOVA\nData Source: Christensen (2018)., Exercise 12.7.12\nIn a one-way ANOVA, the sum of squares for error (\\(SSE\\)) divided by the population variance (\\(\\sigma^2\\)) follows a chi-squared distribution with degrees of freedom equal to \\(df_E\\):\n\\[\n\\frac{SSE}{\\sigma^2} \\sim \\chi^2(df_E),\n\\]\nand the mean square error (\\(MSE\\)) is independent of all sample means (\\(\\bar{y}_i\\)). Show that the following expression follows a \\(t\\)-distribution with \\(df_E\\) degrees of freedom:\n\\[\n\\frac{\\sum_{i=1}^a \\lambda_i \\bar{y}_i - \\sum_{i=1}^a \\lambda_i \\mu_i}{\\sqrt{MSE \\sum_{i=1}^a \\frac{\\lambda_i^2}{N_i}}} \\sim t(df_E).\n\\]\nTasks:\n\nDerive the above expression step-by-step, starting with the variance of the contrast \\(\\sum_{i=1}^a \\lambda_i \\bar{y}_i\\).\nExplain why \\(MSE\\) serves as an unbiased estimate of \\(\\sigma^2\\).\nUsing the result, construct a hypothesis test for a contrast in a one-way ANOVA and provide a practical interpretation of the result.\n\n\n\n2.2 Implications of Assumption Violations\n\nDiscuss the implications of violating the assumption of homogeneity of variances in a one-way ANOVA. Suggest two methods to address such violations.\n\n\n\n2.3 Power Analysis\n\nCalculate the sample size required for a one-way ANOVA with four groups to detect a medium effect size (\\(f = 0.25\\)) at a significance level of \\(\\alpha = 0.05\\) and a power of \\(1 - \\beta = 0.8\\)."
-  },
-  {
-    "objectID": "assignments/assignment2_completely_randomized_design.html#points-distribution",
-    "href": "assignments/assignment2_completely_randomized_design.html#points-distribution",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
-    "section": "Points Distribution",
-    "text": "Points Distribution\n\n\n\nTask\nPoints\n\n\n\n\nSet 1: Foundational Questions\n50\n\n\n1.1 Balloon Experiment\n30\n\n\n1.2 Conceptual Question\n10\n\n\n1.3 Graphical Analysis\n10\n\n\nSet 2: Advanced Questions\n50\n\n\n2.1 Derivation of \\(t\\)-Statistic\n20\n\n\n2.2 Implications of Assumption Violations\n10\n\n\n2.3 Power Analysis\n20\n\n\nTotal\n100"
-  },
-  {
-    "objectID": "assignments/assignment2_completely_randomized_design.html#submission-guidelines",
-    "href": "assignments/assignment2_completely_randomized_design.html#submission-guidelines",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
-    "section": "Submission Guidelines:",
-    "text": "Submission Guidelines:\n\nSubmit your assignment as a Quarto document, rendered to PDF, via the course submission portal.\nInclude all R code and outputs for computational tasks.\nEnsure clarity and precision in your explanations."
-  },
-  {
-    "objectID": "assignments/assignment3_blocking_and_rcbd.html",
-    "href": "assignments/assignment3_blocking_and_rcbd.html",
-    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "objectID": "appendix/r-packages/pwr.html#getting-started",
+    "href": "appendix/r-packages/pwr.html#getting-started",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
     "section": "",
-    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R or a similar tool to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+    "text": "pacman::p_load(pwr)\n\n\n\n\nHere is a simple example of using pwr.t.test to calculate the sample size needed for a one-sample t-test:\n\n# Calculate required sample size for a one-sample t-test\nresult &lt;- pwr.t.test(d = 0.5, power = 0.8, sig.level = 0.05, type = \"one.sample\")\nprint(result)\n\n\n     One-sample t test power calculation \n\n              n = 33.36713\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nThis calculates the required sample size to achieve a power of 0.8 for detecting an effect size of 0.5 at a significance level of 0.05."
   },
   {
-    "objectID": "assignments/assignment3_blocking_and_rcbd.html#instructions",
-    "href": "assignments/assignment3_blocking_and_rcbd.html#instructions",
-    "title": "Assignment 3: Randomized Block Design and Analysis",
+    "objectID": "appendix/r-packages/pwr.html#key-functions-and-features",
+    "href": "appendix/r-packages/pwr.html#key-functions-and-features",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
     "section": "",
-    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R or a similar tool to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+    "text": "Calculates power, effect size, or sample size for t-tests.\n\n\n\npwr.t.test(n = NULL, d = NULL, sig.level = NULL, power = NULL, type = \"two.sample\", alternative = \"two.sided\")\n\nn: Sample size.\nd: Effect size.\nsig.level: Significance level (default is 0.05).\npower: Desired power (1 - Type II error probability).\ntype: Type of t-test (\"one.sample\", \"two.sample\", or \"paired\").\nalternative: Specifies whether the test is \"two.sided\" or \"greater\"/\"less\".\n\n\n\n\n\n# Power analysis for a two-sample t-test\npwr.t.test(n = 30, d = 0.5, sig.level = 0.05, type = \"two.sample\")\n\n\n     Two-sample t test power calculation \n\n              n = 30\n              d = 0.5\n      sig.level = 0.05\n          power = 0.4778965\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\n\n\n\n\nPerforms power analysis for balanced one-way ANOVA.\n\n\n\npwr.anova.test(k = NULL, n = NULL, f = NULL, sig.level = NULL, power = NULL)\n\nk: Number of groups.\nn: Sample size per group.\nf: Effect size.\nsig.level: Significance level.\npower: Desired power.\n\n\n\n\n\n# Power analysis for a one-way ANOVA\npwr.anova.test(k = 4, f = 0.25, sig.level = 0.05, power = 0.8)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 4\n              n = 44.59927\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\n\n\n\n\n\n\nCalculates power for correlation tests.\n\n\n\npwr.r.test(n = NULL, r = NULL, sig.level = NULL, power = NULL, alternative = \"two.sided\")\n\nr: Correlation coefficient.\n\n\n\n\n\n# Power analysis for correlation\npwr.r.test(r = 0.3, sig.level = 0.05, power = 0.8)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 84.07364\n              r = 0.3\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided"
   },
   {
-    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-1-randomized-complete-block-design",
-    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-1-randomized-complete-block-design",
-    "title": "Assignment 3: Randomized Block Design and Analysis",
-    "section": "Exercise 1: Randomized Complete Block Design",
-    "text": "Exercise 1: Randomized Complete Block Design\nData Source: Dean et al. (2017), Chapter 10, Exercise 1\nTask: Conduct a randomization for a randomized complete block design with:\n\n\\(v = 4\\) treatments,\n\\(b = 5\\) blocks,\nEach treatment is observed \\(s = 1\\) time in each block.\n\nDeliverables:\n\nShow the randomized treatment allocation within each block.\nProvide the final design in tabular format, with rows representing blocks and columns representing treatment allocations."
-  },
-  {
-    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-2-general-complete-block-design-ex.-10.2",
-    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-2-general-complete-block-design-ex.-10.2",
-    "title": "Assignment 3: Randomized Block Design and Analysis",
-    "section": "Exercise 2: General Complete Block Design (Ex. 10.2)",
-    "text": "Exercise 2: General Complete Block Design (Ex. 10.2)\nData Source: Dean et al. (2017), Chapter 10, Exercise 2\nTask: Conduct a randomization for a general complete block design with:\n\n\\(v = 3\\) treatments,\n\\(b = 4\\) blocks,\nEach treatment is observed \\(s = 2\\) times in each block.\n\nDeliverables:\n\nDescribe the randomization process for the treatments.\nPresent the final design in a table showing the randomized treatment allocation in each block."
-  },
-  {
-    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-3-dcis-experiment-randomization-ex.-10.3",
-    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-3-dcis-experiment-randomization-ex.-10.3",
-    "title": "Assignment 3: Randomized Block Design and Analysis",
-    "section": "Exercise 3: DCIS Experiment Randomization (Ex. 10.3)",
-    "text": "Exercise 3: DCIS Experiment Randomization (Ex. 10.3)\nData Source: Dean et al. (2017), Chapter 10, Exercise 3\nScenario: Suppose the DCIS experiment from Example 10.3.2 (p. 309) was designed as a randomized complete block design with:\n\n\\(b = 4\\) blocks,\n\\(k = v = 6\\) treatments per block,\nEach treatment is observed \\(s = 1\\) time per block.\n\nTask:\n\nPerform a randomization of the six treatments (\\(A, B, C, D, E, F\\)) within each block.\nPresent the final randomized design for all four blocks.\n\nDeliverables:\n\nDetail the randomization steps used to allocate treatments within blocks.\nProvide a table showing the randomized treatment assignments within each block."
-  },
-  {
-    "objectID": "assignments/assignment3_blocking_and_rcbd.html#exercise-4-respiratory-exchange-ratio-experiment-ex.-10.4",
-    "href": "assignments/assignment3_blocking_and_rcbd.html#exercise-4-respiratory-exchange-ratio-experiment-ex.-10.4",
-    "title": "Assignment 3: Randomized Block Design and Analysis",
-    "section": "Exercise 4: Respiratory Exchange Ratio Experiment (Ex. 10.4)",
-    "text": "Exercise 4: Respiratory Exchange Ratio Experiment (Ex. 10.4)\nData Source: Dean et al. (2017), Chapter 10, Exercise 4\nScenario: In the resting metabolic rate experiment introduced in Example 10.4.1 (p. 311), the experimenters also measured the respiratory exchange ratio, another measure of energy expenditure. The data for the second 30 minutes of testing are provided below.\n\nThe data are from Example 10.4.1, but the respiratory exchange ratio data are used here.\n\n\nSubject\nProtocol 1\nProtocol 2\nProtocol 3\n\n\n\n\n1\n0.79\n0.80\n0.83\n\n\n2\n0.84\n0.84\n0.81\n\n\n3\n0.84\n0.93\n0.88\n\n\n4\n0.83\n0.85\n0.79\n\n\n5\n0.84\n0.78\n0.88\n\n\n6\n0.83\n0.75\n0.86\n\n\n7\n0.77\n0.76\n0.71\n\n\n8\n0.83\n0.85\n0.78\n\n\n9\n0.81\n0.77\n0.72\n\n\n\nTasks:\n\nEvaluate Assumptions:\n\nEvaluate the assumptions of the block-treatment model (Equation 10.4.1) for these data.\n\nANOVA Analysis:\n\nConstruct an analysis of variance (ANOVA) table.\nTest for equality of the effects of the protocols on the respiratory exchange ratio. Report your conclusions.\n\nEvaluate the usefulness of blocking.\n\nDeliverables:\n\nDiscuss the assumptions of the block-treatment model for the respiratory exchange ratio data.\nPresent the ANOVA table and results for the respiratory exchange ratio data.\nEvaluate the usefulness of blocking in this experiment.\nInclude any R code used for the analysis.\nProvide a clear explanation of the process and results."
-  },
-  {
-    "objectID": "assignments/assignment3_blocking_and_rcbd.html#grading-rubric",
-    "href": "assignments/assignment3_blocking_and_rcbd.html#grading-rubric",
-    "title": "Assignment 3: Randomized Block Design and Analysis",
-    "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\n\n\n\n\n\nExercise\nCriteria\nPoints\n\n\n\n\nExercise 1\nCorrect randomized design and explanation\n20\n\n\nExercise 2\nAccurate general block design and steps\n20\n\n\nExercise 3\nProper randomization and final table\n20\n\n\nExercise 4\nAssumption evaluation and ANOVA results\n30\n\n\nClarity and R Code\nClearly explained process and R code used\n10"
-  },
-  {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html",
-    "href": "assignments/assignment1_basics_of_experimental_design.html",
-    "title": "Assignment 1: Introduction to Experimental Design",
+    "objectID": "appendix/r-packages/pwr.html#in-depth-examples",
+    "href": "appendix/r-packages/pwr.html#in-depth-examples",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
     "section": "",
-    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nDue Date: February 13, 2025"
+    "text": "Objective: Determine the power of a study with a sample size of 40 per group, an effect size of 0.5, and a significance level of 0.05.\nCode:\n\nresult &lt;- pwr.t.test(n = 40, d = 0.5, sig.level = 0.05, type = \"two.sample\")\nprint(result)\n\n\n     Two-sample t test power calculation \n\n              n = 40\n              d = 0.5\n      sig.level = 0.05\n          power = 0.5981469\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nOutput Interpretation: The output provides the calculated power for the test.\n\n\n\nObjective: Calculate the required sample size to detect a correlation of 0.4 with 80% power at a 5% significance level.\nCode:\n\nresult &lt;- pwr.r.test(r = 0.4, power = 0.8, sig.level = 0.05)\nprint(result)\n\n\n     approximate correlation power calculation (arctangh transformation) \n\n              n = 45.91614\n              r = 0.4\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\nOutput Interpretation: The result specifies the required sample size."
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#assignment-1-introduction-to-experimental-design",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#assignment-1-introduction-to-experimental-design",
-    "title": "Assignment 1: Introduction to Experimental Design",
+    "objectID": "appendix/r-packages/pwr.html#advanced-features",
+    "href": "appendix/r-packages/pwr.html#advanced-features",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
     "section": "",
-    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nDue Date: February 13, 2025"
+    "text": "The pwr package allows you to create custom plots of power curves:\n\nlibrary(ggplot2)\n\neffect_sizes &lt;- seq(0.1, 0.5, 0.01)\npowers &lt;- sapply(effect_sizes, function(d) {\n    pwr.t.test(d = d, n = 30, sig.level = 0.05, type = \"two.sample\")$power\n})\n\ndata &lt;- data.frame(effect_sizes, powers)\n\nggplot(data, aes(x = effect_sizes, y = powers)) +\n    geom_line() +\n    labs(title = \"Power Curve\", x = \"Effect Size\", y = \"Power\") +\n    theme_bw()\n\n\n\n\n\n\n\n\n\n\n\nThe pwr package can work seamlessly with simulation packages to validate power calculations."
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-1-key-concepts-of-experimental-design",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#part-1-key-concepts-of-experimental-design",
-    "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Part 1: Key Concepts of Experimental Design",
-    "text": "Part 1: Key Concepts of Experimental Design\n\nDefining Objectives:\n\nWhat are the primary reasons for conducting experiments as outlined in Chapter 1? Provide an example for each purpose.\n\nExperimental vs. Observational Studies:\n\nExplain the differences between experimental and observational studies, emphasizing their strengths and limitations in establishing causality. Use the factory machine quality example in Chapter 1 for illustration.\n\nBasic Techniques:\n\nDescribe replication, blocking, and randomization. For each technique, provide an example that demonstrates how it improves the validity or precision of an experiment."
+    "objectID": "appendix/r-packages/pwr.html#troubleshooting-and-faqs",
+    "href": "appendix/r-packages/pwr.html#troubleshooting-and-faqs",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "Common Error: “Error in pwr.t.test(): Not enough parameters specified.” Fix: Ensure you provide at least three of the four parameters: n, d, power, or sig.level.\nHow to choose effect size? Use guidelines such as Cohen’s benchmarks: small (0.2), medium (0.5), and large (0.8)."
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-2-checklist-for-planning-experiments",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#part-2-checklist-for-planning-experiments",
-    "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Part 2: Checklist for Planning Experiments",
-    "text": "Part 2: Checklist for Planning Experiments\n\nDefining Objectives:\n\nList and briefly describe the steps from Chapter 2’s checklist for planning experiments. Emphasize why defining objectives and identifying sources of variation are critical.\n\nPilot Experiments:\n\nDescribe the purpose of running a pilot experiment and how it aids in refining the experimental design.\n\nHypothetical Scenario:\n\nImagine you are designing an experiment to test the effects of different fertilizers (F1, F2, F3) on plant growth. Outline your approach to:\n\nDefine objectives.\nIdentify sources of variation.\nChoose an assignment rule for treatments."
+    "objectID": "appendix/r-packages/pwr.html#best-practices",
+    "href": "appendix/r-packages/pwr.html#best-practices",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "Always use realistic estimates for effect size based on prior studies or pilot data.\nValidate your power calculations through simulations if possible."
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-3-real-world-applications",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#part-3-real-world-applications",
-    "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Part 3: Real-World Applications",
-    "text": "Part 3: Real-World Applications\n\nCotton-Spinning Experiment (Chapter 2):\n\nSummarize the objectives and the experimental design used in the cotton-spinning experiment.\nExplain how blocking was used to account for variability and improve precision.\n\nImprovements:\n\nPropose one way to improve the cotton-spinning experiment for broader applicability or reduced cost."
+    "objectID": "appendix/r-packages/pwr.html#conclusion",
+    "href": "appendix/r-packages/pwr.html#conclusion",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "The pwr package is a versatile and user-friendly tool for power analysis in R, covering various statistical tests and scenarios.\n\n\n\nExplore the official documentation or combine pwr with simulation-based methods for complex experimental designs.\n\n\n\nStart applying power analysis in your projects to optimize experimental designs and improve the validity of your results."
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-4-numerical-application",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#part-4-numerical-application",
-    "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Part 4: Numerical Application",
-    "text": "Part 4: Numerical Application\nYou are tasked with analyzing a hypothetical dataset to practice experimental design concepts. Use the following dataset where three treatments (A, B, C) are applied to five blocks (1–5). The response variable represents a numerical outcome.\n\n\n\nBlock\nTreatment A\nTreatment B\nTreatment C\n\n\n\n\n1\n10.1\n9.8\n10.2\n\n\n2\n10.5\n9.7\n10.3\n\n\n3\n10.3\n10.1\n10.4\n\n\n4\n10.4\n9.9\n10.0\n\n\n5\n10.2\n10.0\n10.1\n\n\n\n\nStatistical Model:\n\nWrite the model equation that represents the relationship between treatment and response while accounting for blocks.\n\nAnalysis:\n\nConduct a one-way ANOVA using R to test for treatment differences. Include R code and output.\n\nInterpretation:\n\nState the null and alternative hypotheses.\nSummarize the ANOVA results, including whether to reject the null hypothesis.\n\nDiagnostics:\n\nPerform residual analysis to evaluate the assumptions of ANOVA."
+    "objectID": "appendix/r-packages/pwr.html#references-and-resources",
+    "href": "appendix/r-packages/pwr.html#references-and-resources",
+    "title": "Tutorial: Power Analysis with the pwr Package in R",
+    "section": "",
+    "text": "pwr Package Documentation\nR Power Analysis Tutorial\nComprehensive R Archive Network (CRAN)"
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#submission-guidelines",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#submission-guidelines",
-    "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Submission Guidelines",
-    "text": "Submission Guidelines\n\nUse the Quarto template provided.\nInclude all R code, outputs, and graphs in your submission.\nSubmit the rendered PDF through Canvas by the due date."
+    "objectID": "assignments/assignment4_multiple_comparisons_and_contrasts.html",
+    "href": "assignments/assignment4_multiple_comparisons_and_contrasts.html",
+    "title": "Assignment 4: Multiple Comparisons and Contrasts",
+    "section": "",
+    "text": "Objective: Perform multiple comparisons and contrasts for experimental data, including Scheffé’s method and simultaneous confidence intervals.\nUse R or a similar tool to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\nTotal Points: 100"
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#grading-criteria",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#grading-criteria",
-    "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Grading Criteria",
-    "text": "Grading Criteria\n\nConceptual Understanding (30%): Accuracy and clarity in explaining experimental design concepts.\nApplication (30%): Correct application of experimental design principles to the real-world scenario and hypothetical data.\nStatistical Analysis (30%): Accuracy and completeness of ANOVA and diagnostics.\nPresentation (10%): Organization, formatting, and clarity of submission.\n\nGood luck!"
+    "objectID": "assignments/assignment4_multiple_comparisons_and_contrasts.html#instructions",
+    "href": "assignments/assignment4_multiple_comparisons_and_contrasts.html#instructions",
+    "title": "Assignment 4: Multiple Comparisons and Contrasts",
+    "section": "",
+    "text": "Objective: Perform multiple comparisons and contrasts for experimental data, including Scheffé’s method and simultaneous confidence intervals.\nUse R or a similar tool to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\nTotal Points: 100"
+  },
+  {
+    "objectID": "assignments/assignment4_multiple_comparisons_and_contrasts.html#buoyancy-experiment",
+    "href": "assignments/assignment4_multiple_comparisons_and_contrasts.html#buoyancy-experiment",
+    "title": "Assignment 4: Multiple Comparisons and Contrasts",
+    "section": "1. Buoyancy Experiment",
+    "text": "1. Buoyancy Experiment\nInvestigate the question: “Is the buoyancy of an object in water affected by different concentrations of salt in the water?”\nTasks: (a) Address steps (a)–(d) from the experimental planning checklist in detail:\n\nDefine the objectives of the experiment.\nIdentify sources of variation, including treatment factors, experimental units, and nuisance factors.\nChoose an assignment rule for the experimental units.\nSpecify measurements, procedures, and any anticipated difficulties.\nSpecify preplanned contrasts or functions to estimate. Justify your choices.\nDetermine which multiple comparison methods, if any, are appropriate and explain why.\n\n\nConduct a small pilot experiment to estimate the preliminary variance (\\(\\sigma^2\\)). Use R to simulate data if needed and summarize findings.\nRevisit and complete the checklist by evaluating findings from the pilot study and revising experimental decisions if necessary."
+  },
+  {
+    "objectID": "assignments/assignment4_multiple_comparisons_and_contrasts.html#cotton-spinning-experiment-continuation-from-section-2.3-p.-13",
+    "href": "assignments/assignment4_multiple_comparisons_and_contrasts.html#cotton-spinning-experiment-continuation-from-section-2.3-p.-13",
+    "title": "Assignment 4: Multiple Comparisons and Contrasts",
+    "section": "2. Cotton-Spinning Experiment (Continuation from Section 2.3, P. 13)",
+    "text": "2. Cotton-Spinning Experiment (Continuation from Section 2.3, P. 13)\nFor the cotton-spinning experiment:\n\nIdentify and define contrasts or functions of interest. Specify which effects or comparisons will provide insight into the experimental objectives.\nProvide contrast coefficients for your selected contrasts."
+  },
+  {
+    "objectID": "assignments/assignment4_multiple_comparisons_and_contrasts.html#meat-cooking-experiment-continuation-from-exercise-14-chapter-3",
+    "href": "assignments/assignment4_multiple_comparisons_and_contrasts.html#meat-cooking-experiment-continuation-from-exercise-14-chapter-3",
+    "title": "Assignment 4: Multiple Comparisons and Contrasts",
+    "section": "3. Meat Cooking Experiment (Continuation from Exercise 14, Chapter 3)",
+    "text": "3. Meat Cooking Experiment (Continuation from Exercise 14, Chapter 3)\nThis experiment involved six treatments with data in Table 3.14, p. 68. Address the following:\n\nConduct pairwise comparisons for the six treatments using Scheffé’s method with a 95% overall confidence level. Present your results with appropriate statistical summaries and visualizations.\nAnalyze the expressions \\(\\mu + \\frac{(\\tau_1 + \\tau_4)}{2}\\), \\(\\mu + \\frac{(\\tau_2 + \\tau_5)}{2}\\), and \\(\\mu + \\frac{(\\tau_3 + \\tau_6)}{2}\\):\n\n\nInterpret what these expressions represent in the context of the experimental setup.\nPerform pairwise comparisons among these three treatment averages using Scheffé’s method with a 95% confidence level.\nSummarize and interpret the findings in terms of practical significance and experimental insights."
+  },
+  {
+    "objectID": "assignments/assignment4_multiple_comparisons_and_contrasts.html#reaction-time-experiment",
+    "href": "assignments/assignment4_multiple_comparisons_and_contrasts.html#reaction-time-experiment",
+    "title": "Assignment 4: Multiple Comparisons and Contrasts",
+    "section": "4. Reaction Time Experiment",
+    "text": "4. Reaction Time Experiment\nSource: (L. Cai, T. Li, Nishant, and A. van der Kouwe, 1996)\nThis experiment investigates the effects of auditory and visual cues on the speed of response of a human subject. A personal computer presents a stimulus to the subject, and the reaction time required to press a key is monitored. The subject is warned of the forthcoming stimulus through auditory or visual cues. The study also considers different elapsed times between cue and stimulus as a factor.\nFactors and Levels:\n\nCue Stimulus: Auditory or Visual\nElapsed Time: 5, 10, or 15 seconds\n\nTreatment Combinations and Codes:\n\n1 = Auditory, 5 seconds\n2 = Auditory, 10 seconds\n3 = Auditory, 15 seconds\n4 = Visual, 5 seconds\n5 = Visual, 10 seconds\n6 = Visual, 15 seconds\n\nThe pilot experiment data, involving one subject, are shown in Table 4.4.\nHere is the recreated Table 4.4 in a structured format:\nTable 4.4: Reaction times, in seconds, for the reaction time experiment (order of collection in parentheses).\n\n\n\n\n\n\n\n\n\nTreatment Combination\nReaction Time 1 (s) (Order)\nReaction Time 2 (s) (Order)\nReaction Time 3 (s) (Order)\n\n\n\n\n1\n0.181 (18)\n0.204 (9)\n0.170 (10)\n\n\n2\n0.187 (12)\n0.167 (3)\n0.182 (5)\n\n\n3\n0.236 (17)\n0.202 (13)\n0.198 (16)\n\n\n4\n0.269 (15)\n0.257 (7)\n0.279 (14)\n\n\n5\n0.260 (11)\n0.283 (6)\n0.235 (8)\n\n\n6\n0.258 (4)\n0.256 (1)\n0.281 (2)\n\n\n\nTasks: (a) Identify Preplanned Contrasts:\n\nDetermine contrasts of interest, such as comparing auditory versus visual treatments. Specify the contrasts mathematically, including coefficients for the comparisons.\n\n\nPlot the Data:\n\n\nVisualize the reaction times using an appropriate plot (e.g., bar or line plot). Summarize what the plot reveals about the treatment effects.\n\n\nHypothesis Testing:\n\n\nTest the null hypothesis \\(H_0\\): The treatments have no effect on reaction time against the alternative \\(H_1\\): The treatments have an effect on reaction time. Include a detailed explanation of the statistical test used and the results obtained.\n\n\nSimultaneous Confidence Intervals:\n\n\nCompute simultaneous 90% confidence intervals for the preplanned contrasts using a chosen method (e.g., Tukey’s or Scheffé’s method). Interpret these intervals and state your conclusions about the treatment effects."
+  },
+  {
+    "objectID": "home_lectures.html",
+    "href": "home_lectures.html",
+    "title": "Lecture Notes - STAT 454/545",
+    "section": "",
+    "text": "Welcome to the Lecture Notes page for STAT 454/545: Analysis of Variance and Experimental Design. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.\n\n\n\n\n\nWeek\nTopic\nLecture Notes Link\nSupplemental Resources\nReadings & Homework Assignments\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 1\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 2\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes\nChapter 3 Examples\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nBlocking and RCBD\nWeek 3 Notes\nBlocking Efficiency Examples\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nMultiple Comparisons and Contrasts\nWeek 4 Notes\nTukey, Bonferroni Methods\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nChecking Model Assumptions\nWeek 5 Notes\nResidual Analysis Resources\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFactorial Designs\nWeek 6 Notes\nTwo-Way ANOVA Examples\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMidterm Review & Exam\nWeek 7 Notes\nReview Notes & Practice Exams\nNo Class\n\n\n8\nHigher-Order Factorial Designs\nWeek 8 Notes\nInteraction Plots\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nSpring Break\nNo Class This Week\nRelax & Review\nNone\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes\nANCOVA Step-by-Step Example\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nComplete Block Designs\nWeek 11 Notes\nFactorial Treatments in Blocks\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nRow–Column Designs\nWeek 12 Notes\nLatin Square Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nRandom and Mixed Effects\nWeek 13 Notes\nVariance Component Analysis\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nNested Models\nWeek 14 Notes\nNested Designs Case Study\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nSplit-Plot Designs\nWeek 15 Notes\nSplit-Split-Plot Extensions\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nCatch-Up Week\nWeek 16 Notes\nExtra Practice Problems\nComprehensive review and Q&A.\n\n\n17\nFinal Review and Exam\nFinal Review Notes\nFinal Exam Practice Set\nComprehensive (Weeks 1–15).\n\n\n\n\n\n\nIn addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links.\n\n\n\n\n\nPre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.\n\n\n\n\nIf you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance.\n\n\n\n\nInstructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
+  },
+  {
+    "objectID": "home_lectures.html#weekly-lecture-notes",
+    "href": "home_lectures.html#weekly-lecture-notes",
+    "title": "Lecture Notes - STAT 454/545",
+    "section": "",
+    "text": "Week\nTopic\nLecture Notes Link\nSupplemental Resources\nReadings & Homework Assignments\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 1\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Part 2\nNone\nCh. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes\nChapter 3 Examples\nCh. 3 (Sections 3.1–3.5); Homework 1 (due Feb. 6).\n\n\n3\nBlocking and RCBD\nWeek 3 Notes\nBlocking Efficiency Examples\nCh. 10 (Sections 10.1–10.4); Homework 2 (due Feb. 13).\n\n\n4\nMultiple Comparisons and Contrasts\nWeek 4 Notes\nTukey, Bonferroni Methods\nCh. 4 (Sections 4.1–4.4); Homework 3 (due Feb. 20).\n\n\n5\nChecking Model Assumptions\nWeek 5 Notes\nResidual Analysis Resources\nCh. 5 (Sections 5.1–5.3); Homework 4 (due Feb. 27).\n\n\n6\nFactorial Designs\nWeek 6 Notes\nTwo-Way ANOVA Examples\nCh. 6 (Sections 6.1–6.5); Homework 5 (due Mar. 6).\n\n\n7\nMidterm Review & Exam\nWeek 7 Notes\nReview Notes & Practice Exams\nNo Class\n\n\n8\nHigher-Order Factorial Designs\nWeek 8 Notes\nInteraction Plots\nCh. 7 (Sections 7.1–7.6); Homework 6 (due Mar. 25).\n\n\n9\nSpring Break\nNo Class This Week\nRelax & Review\nNone\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes\nANCOVA Step-by-Step Example\nCh. 9 (Sections 9.1–9.4); Homework 7 (due Apr. 3).\n\n\n11\nComplete Block Designs\nWeek 11 Notes\nFactorial Treatments in Blocks\nCh. 10 (Sections 10.6–10.8); Homework 8 (due Apr. 10).\n\n\n12\nRow–Column Designs\nWeek 12 Notes\nLatin Square Designs\nCh. 12 (Sections 12.1–12.4); Homework 9 (due Apr. 17).\n\n\n13\nRandom and Mixed Effects\nWeek 13 Notes\nVariance Component Analysis\nCh. 17 (Sections 17.1–17.8); Homework 10 (due Apr. 24).\n\n\n14\nNested Models\nWeek 14 Notes\nNested Designs Case Study\nCh. 18 (Sections 18.1–18.4); Homework 11 (due May 1).\n\n\n15\nSplit-Plot Designs\nWeek 15 Notes\nSplit-Split-Plot Extensions\nCh. 19 (Sections 19.1–19.5); Homework 12 (due May 6).\n\n\n16\nCatch-Up Week\nWeek 16 Notes\nExtra Practice Problems\nComprehensive review and Q&A.\n\n\n17\nFinal Review and Exam\nFinal Review Notes\nFinal Exam Practice Set\nComprehensive (Weeks 1–15)."
+  },
+  {
+    "objectID": "home_lectures.html#supplemental-resources",
+    "href": "home_lectures.html#supplemental-resources",
+    "title": "Lecture Notes - STAT 454/545",
+    "section": "",
+    "text": "In addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links."
+  },
+  {
+    "objectID": "home_lectures.html#how-to-use-lecture-notes",
+    "href": "home_lectures.html#how-to-use-lecture-notes",
+    "title": "Lecture Notes - STAT 454/545",
+    "section": "",
+    "text": "Pre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation."
+  },
+  {
+    "objectID": "home_lectures.html#troubleshooting-github-pages",
+    "href": "home_lectures.html#troubleshooting-github-pages",
+    "title": "Lecture Notes - STAT 454/545",
+    "section": "",
+    "text": "If you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance."
+  },
+  {
+    "objectID": "home_lectures.html#contact-information",
+    "href": "home_lectures.html#contact-information",
+    "title": "Lecture Notes - STAT 454/545",
+    "section": "",
+    "text": "Instructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
   },
   {
     "objectID": "index.html",
@@ -1153,6 +1314,13 @@
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
     "section": "Objectives",
     "text": "Objectives\n\nDefine and distinguish between complete and incomplete block designs.\nExplore the structure and application of Randomized Complete Block Designs (RCBDs).\nPerform Analysis of Variance (ANOVA) for RCBDs and assess the efficiency of blocking.\nUnderstand general complete block designs and their applications.\nImplement complete block designs in R and interpret the results.\nReinforce concepts with exercises covering numerical examples, conceptual understanding, and mathematical proofs.\nExplore advanced mathematical derivations and proofs in the Appendix."
+  },
+  {
+    "objectID": "lectures/week-03_rcbd-blocking.html#r-packages",
+    "href": "lectures/week-03_rcbd-blocking.html#r-packages",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "R Packages",
+    "text": "R Packages\nTo facilitate the analysis of Randomized Complete Block Designs (RCBDs) and contrasts, we will utilize the following R packages:\n\n# Required R Packages\npacman::p_load(dplyr, ggplot2, emmeans)\n\n\nemmeans: For estimating marginal means and conducting pairwise comparisons.\nggplot2: For creating visualizations and diagnostic plots.\ndplyr: For data manipulation and summarization.\n\nEnsure that these packages are installed in your R environment to follow along with the examples and exercises."
   },
   {
     "objectID": "lectures/week-03_rcbd-blocking.html#what-are-complete-block-designs",
@@ -1474,7 +1642,7 @@
     "href": "lectures/week-02_crd-overview.html",
     "title": "Planning Experiments",
     "section": "",
-    "text": "In mathematical statistics, well-structured experimental designs and robust analytical methods are essential for drawing valid conclusions about treatment effects. One of the simplest yet fundamental designs is the completely randomized design (CRD). Under a CRD, each experimental unit is randomly assigned to one of several treatment conditions without any blocking factors. This approach ensures that all treatments have an equal chance of being applied to each unit, thereby mitigating systematic biases and facilitating straightforward inference.\nA key tool for analyzing CRDs is the one-way analysis of variance (ANOVA). The one-way ANOVA tests whether at least two of several treatment means differ significantly. Building upon principles of linear models, least squares estimation, and classical hypothesis testing, the one-way ANOVA provides a comprehensive framework to quantify uncertainty and make decisions about treatments based on observed data.\n\n\n\nUnderstand the structure and rationale behind the completely randomized design.\nLearn the randomization procedure and the role of coding treatments.\nFormulate the one-way ANOVA model and understand its assumptions.\nExplore concepts of estimability, least squares estimation, and the distribution of estimators.\nApply the ANOVA test to decide whether treatments differ significantly.\nCalculate sample size and power, and incorporate these insights when planning experiments.\nDemonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables."
+    "text": "In mathematical statistics, well-structured experimental designs and robust analytical methods are essential for drawing valid conclusions about treatment effects. One of the simplest yet fundamental designs is the completely randomized design (CRD). Under a CRD, each experimental unit is randomly assigned to one of several treatment conditions without any blocking factors. This approach ensures that all treatments have an equal chance of being applied to each unit, thereby mitigating systematic biases and facilitating straightforward inference.\nA key tool for analyzing CRDs is the one-way analysis of variance (ANOVA). The one-way ANOVA tests whether at least two of several treatment means differ significantly. Building upon principles of linear models, least squares estimation, and classical hypothesis testing, the one-way ANOVA provides a comprehensive framework to quantify uncertainty and make decisions about treatments based on observed data.\n\n\n\nUnderstand the structure and rationale behind the completely randomized design.\nLearn the randomization procedure and the role of coding treatments.\nFormulate the one-way ANOVA model and understand its assumptions.\nExplore concepts of estimability, least squares estimation, and the distribution of estimators.\nApply the ANOVA test to decide whether treatments differ significantly.\nCalculate sample size and power, and incorporate these insights when planning experiments.\nDemonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables.\n\n\n\n\nThis lecture uses several R packages for data manipulation, analysis, and plotting:\n\npacman::p_load(emmeans, pwr, here)\n\n\npacman: A package management tool for installing and loading packages.\nemmeans: For estimating treatment means and testing contrasts.\npwr: For power calculations in hypothesis testing.\nhere: For managing file paths in R projects."
   },
   {
     "objectID": "lectures/week-02_crd-overview.html#objectives",
@@ -1482,6 +1650,13 @@
     "title": "Planning Experiments",
     "section": "",
     "text": "Understand the structure and rationale behind the completely randomized design.\nLearn the randomization procedure and the role of coding treatments.\nFormulate the one-way ANOVA model and understand its assumptions.\nExplore concepts of estimability, least squares estimation, and the distribution of estimators.\nApply the ANOVA test to decide whether treatments differ significantly.\nCalculate sample size and power, and incorporate these insights when planning experiments.\nDemonstrate procedures using R, including randomization, data input, fitting models, and producing ANOVA tables."
+  },
+  {
+    "objectID": "lectures/week-02_crd-overview.html#r-packages",
+    "href": "lectures/week-02_crd-overview.html#r-packages",
+    "title": "Planning Experiments",
+    "section": "",
+    "text": "This lecture uses several R packages for data manipulation, analysis, and plotting:\n\npacman::p_load(emmeans, pwr, here)\n\n\npacman: A package management tool for installing and loading packages.\nemmeans: For estimating treatment means and testing contrasts.\npwr: For power calculations in hypothesis testing.\nhere: For managing file paths in R projects."
   },
   {
     "objectID": "lectures/week-02_crd-overview.html#defining-experimental-design",

@@ -174,15 +174,11 @@ window.Quarto = {
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../home_assignments.html"> 
-<span class="menu-text">Assignments</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../home_contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -224,7 +220,67 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
+  <li><a href="#motivation-and-context" id="toc-motivation-and-context" class="nav-link" data-scroll-target="#motivation-and-context">Motivation and Context</a>
+  <ul class="collapse">
+  <li><a href="#analogies" id="toc-analogies" class="nav-link" data-scroll-target="#analogies">Analogies</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#contrasts-definition-and-properties" id="toc-contrasts-definition-and-properties" class="nav-link" data-scroll-target="#contrasts-definition-and-properties">Contrasts: Definition and Properties</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-contrast" id="toc-what-is-a-contrast" class="nav-link" data-scroll-target="#what-is-a-contrast">What is a Contrast?</a></li>
+  <li><a href="#variance-of-a-contrast" id="toc-variance-of-a-contrast" class="nav-link" data-scroll-target="#variance-of-a-contrast">Variance of a Contrast</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#multiple-comparison-procedures-mcps" id="toc-multiple-comparison-procedures-mcps" class="nav-link" data-scroll-target="#multiple-comparison-procedures-mcps">Multiple Comparison Procedures (MCPs)</a>
+  <ul class="collapse">
+  <li><a href="#fishers-least-significant-difference-lsd" id="toc-fishers-least-significant-difference-lsd" class="nav-link" data-scroll-target="#fishers-least-significant-difference-lsd">Fisher’s Least Significant Difference (LSD)</a></li>
+  <li><a href="#tukeys-honest-significant-difference-hsd" id="toc-tukeys-honest-significant-difference-hsd" class="nav-link" data-scroll-target="#tukeys-honest-significant-difference-hsd">Tukey’s Honest Significant Difference (HSD)</a></li>
+  <li><a href="#bonferroni-method" id="toc-bonferroni-method" class="nav-link" data-scroll-target="#bonferroni-method">Bonferroni Method</a></li>
+  <li><a href="#scheffés-method" id="toc-scheffés-method" class="nav-link" data-scroll-target="#scheffés-method">Scheffé’s Method</a></li>
+  </ul></li>
+  <li><a href="#balancing-type-i-error-and-power" id="toc-balancing-type-i-error-and-power" class="nav-link" data-scroll-target="#balancing-type-i-error-and-power">Balancing Type I Error and Power</a></li>
+  <li><a href="#practical-applications-in-r" id="toc-practical-applications-in-r" class="nav-link" data-scroll-target="#practical-applications-in-r">Practical Applications in R</a>
+  <ul class="collapse">
+  <li><a href="#example-1-pairwise-comparisons-with-tukeys-hsd" id="toc-example-1-pairwise-comparisons-with-tukeys-hsd" class="nav-link" data-scroll-target="#example-1-pairwise-comparisons-with-tukeys-hsd">Example 1: Pairwise Comparisons with Tukey’s HSD</a>
+  <ul class="collapse">
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul></li>
+  <li><a href="#example-2-testing-a-specific-contrast" id="toc-example-2-testing-a-specific-contrast" class="nav-link" data-scroll-target="#example-2-testing-a-specific-contrast">Example 2: Testing a Specific Contrast</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
+  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-details" id="toc-appendix-advanced-mathematical-details" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-details">Appendix: Advanced Mathematical Details</a>
+  <ul class="collapse">
+  <li><a href="#proofs-and-derivations" id="toc-proofs-and-derivations" class="nav-link" data-scroll-target="#proofs-and-derivations">Proofs and Derivations</a>
+  <ul class="collapse">
+  <li><a href="#variance-of-a-contrast-1" id="toc-variance-of-a-contrast-1" class="nav-link" data-scroll-target="#variance-of-a-contrast-1">Variance of a Contrast</a></li>
+  <li><a href="#derivation-of-tukeys-hsd" id="toc-derivation-of-tukeys-hsd" class="nav-link" data-scroll-target="#derivation-of-tukeys-hsd">Derivation of Tukey’s HSD</a></li>
+  <li><a href="#scheffés-method-1" id="toc-scheffés-method-1" class="nav-link" data-scroll-target="#scheffés-method-1">Scheffé’s Method</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
@@ -420,13 +476,11 @@ D-C  4.602881  0.8023889  8.403373 0.0151748</code></pre>
 <h2 class="anchored" data-anchor-id="example-2-testing-a-specific-contrast">Example 2: Testing a Specific Contrast</h2>
 <p><strong>Defining a Contrast:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppose we want to test (A,B) vs (C,D)</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>contrast_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit, <span class="sc">~</span>Treatment)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="fu">list</span>(<span class="st">"AB_vs_CD"</span> <span class="ot">=</span> contrast_vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppose we want to test (A,B) vs (C,D)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>contrast_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit, <span class="sc">~</span>Treatment)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="fu">list</span>(<span class="st">"AB_vs_CD"</span> <span class="ot">=</span> contrast_vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast estimate    SE df t.ratio p.value
  AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001</code></pre>

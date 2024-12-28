@@ -149,15 +149,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../home_assignments.html"> 
-<span class="menu-text">Assignments</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../home_contents.html"> 
+    <a class="nav-link" href="../../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -170,13 +166,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Tutorial: Power Analysis with the <code>pwr</code> Package in R</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -199,9 +195,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#power-analysis-with-the-pwr-package-in-r" id="toc-power-analysis-with-the-pwr-package-in-r" class="nav-link active" data-scroll-target="#power-analysis-with-the-pwr-package-in-r">Power Analysis with the <code>pwr</code> Package in R</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits</a></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  </ul></li>
+  <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
+  <ul class="collapse">
+  <li><a href="#pwr.t.test" id="toc-pwr.t.test" class="nav-link" data-scroll-target="#pwr.t.test">1. <code>pwr.t.test</code></a></li>
+  <li><a href="#pwr.anova.test" id="toc-pwr.anova.test" class="nav-link" data-scroll-target="#pwr.anova.test">2. <code>pwr.anova.test</code></a></li>
+  <li><a href="#pwr.r.test" id="toc-pwr.r.test" class="nav-link" data-scroll-target="#pwr.r.test">3. <code>pwr.r.test</code></a></li>
+  </ul></li>
+  <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
+  <ul class="collapse">
+  <li><a href="#example-1-power-analysis-for-a-two-sample-t-test" id="toc-example-1-power-analysis-for-a-two-sample-t-test" class="nav-link" data-scroll-target="#example-1-power-analysis-for-a-two-sample-t-test">Example 1: Power Analysis for a Two-Sample T-Test</a></li>
+  <li><a href="#example-2-determining-sample-size-for-a-correlation-test" id="toc-example-2-determining-sample-size-for-a-correlation-test" class="nav-link" data-scroll-target="#example-2-determining-sample-size-for-a-correlation-test">Example 2: Determining Sample Size for a Correlation Test</a></li>
+  </ul></li>
+  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
+  <ul class="collapse">
+  <li><a href="#customizing-outputs" id="toc-customizing-outputs" class="nav-link" data-scroll-target="#customizing-outputs">Customizing Outputs</a></li>
+  <li><a href="#integration-with-other-packages" id="toc-integration-with-other-packages" class="nav-link" data-scroll-target="#integration-with-other-packages">Integration with Other Packages</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  <li><a href="#encouragement" id="toc-encouragement" class="nav-link" data-scroll-target="#encouragement">Encouragement</a></li>
+  </ul></li>
+  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 

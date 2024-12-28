@@ -150,15 +150,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../home_assignments.html"> 
-<span class="menu-text">Assignments</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../home_contents.html"> 
+    <a class="nav-link" href="../../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -171,13 +167,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Tutorial: Using the <code>emmeans</code> R Package</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -189,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">22-Dec-2024</p>
+        <p class="date">25-Dec-2024</p>
       </div>
     </div>
     
@@ -200,9 +196,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#what-are-marginal-means" id="toc-what-are-marginal-means" class="nav-link" data-scroll-target="#what-are-marginal-means">What Are Marginal Means?</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a></li>
+  <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
+  <li><a href="#example-dataset" id="toc-example-dataset" class="nav-link" data-scroll-target="#example-dataset">Example Dataset</a></li>
+  <li><a href="#basic-model" id="toc-basic-model" class="nav-link" data-scroll-target="#basic-model">Basic Model</a></li>
+  <li><a href="#basic-marginal-means" id="toc-basic-marginal-means" class="nav-link" data-scroll-target="#basic-marginal-means">Basic Marginal Means</a></li>
+  <li><a href="#key-functions-in-emmeans" id="toc-key-functions-in-emmeans" class="nav-link" data-scroll-target="#key-functions-in-emmeans">3. Key Functions in <code>emmeans</code></a></li>
+  <li><a href="#emmeans" id="toc-emmeans" class="nav-link" data-scroll-target="#emmeans">3.1 <code>emmeans()</code></a></li>
+  <li><a href="#contrast" id="toc-contrast" class="nav-link" data-scroll-target="#contrast">3.2 <code>contrast()</code></a></li>
+  <li><a href="#pairs" id="toc-pairs" class="nav-link" data-scroll-target="#pairs">3.3 <code>pairs()</code></a></li>
+  <li><a href="#advanced-functionality" id="toc-advanced-functionality" class="nav-link" data-scroll-target="#advanced-functionality">4. Advanced Functionality</a></li>
+  <li><a href="#interaction-contrasts" id="toc-interaction-contrasts" class="nav-link" data-scroll-target="#interaction-contrasts">4.1 Interaction Contrasts</a></li>
+  <li><a href="#scaling-and-offsetting" id="toc-scaling-and-offsetting" class="nav-link" data-scroll-target="#scaling-and-offsetting">4.2 Scaling and Offsetting</a></li>
+  <li><a href="#adjusting-for-multiple-comparisons" id="toc-adjusting-for-multiple-comparisons" class="nav-link" data-scroll-target="#adjusting-for-multiple-comparisons">4.3 Adjusting for Multiple Comparisons</a></li>
+  <li><a href="#visualizing-results" id="toc-visualizing-results" class="nav-link" data-scroll-target="#visualizing-results">5. Visualizing Results</a></li>
+  <li><a href="#interaction-plots" id="toc-interaction-plots" class="nav-link" data-scroll-target="#interaction-plots">Interaction Plots</a></li>
+  <li><a href="#pairwise-comparisons-plot" id="toc-pairwise-comparisons-plot" class="nav-link" data-scroll-target="#pairwise-comparisons-plot">Pairwise Comparisons Plot</a></li>
+  <li><a href="#common-issues-and-troubleshooting" id="toc-common-issues-and-troubleshooting" class="nav-link" data-scroll-target="#common-issues-and-troubleshooting">6. Common Issues and Troubleshooting</a></li>
+  <li><a href="#common-issues" id="toc-common-issues" class="nav-link" data-scroll-target="#common-issues">Common Issues</a></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#detailed-argument-reference" id="toc-detailed-argument-reference" class="nav-link" data-scroll-target="#detailed-argument-reference">7. Detailed Argument Reference</a></li>
+  <li><a href="#emmeans-specific-arguments" id="toc-emmeans-specific-arguments" class="nav-link" data-scroll-target="#emmeans-specific-arguments"><code>emmeans()</code> Specific Arguments</a></li>
+  <li><a href="#contrast-specific-arguments" id="toc-contrast-specific-arguments" class="nav-link" data-scroll-target="#contrast-specific-arguments"><code>contrast()</code> Specific Arguments</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">8. Conclusion</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">9. References and Resources</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 

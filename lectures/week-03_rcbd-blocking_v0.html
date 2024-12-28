@@ -174,15 +174,11 @@ window.Quarto = {
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../home_assignments.html"> 
-<span class="menu-text">Assignments</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../home_contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -195,13 +191,13 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Randomized Complete Block Design (RCBD) with Blocking</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -224,9 +220,155 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#complete-block-designs-theory-and-structure" id="toc-complete-block-designs-theory-and-structure" class="nav-link" data-scroll-target="#complete-block-designs-theory-and-structure">Complete Block Designs: Theory and Structure</a>
+  <ul class="collapse">
+  <li><a href="#what-are-complete-block-designs" id="toc-what-are-complete-block-designs" class="nav-link" data-scroll-target="#what-are-complete-block-designs">What Are Complete Block Designs?</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  </ul></li>
+  <li><a href="#randomized-complete-block-designs-rcbds" id="toc-randomized-complete-block-designs-rcbds" class="nav-link" data-scroll-target="#randomized-complete-block-designs-rcbds">Randomized Complete Block Designs (RCBDs)</a></li>
+  <li><a href="#general-complete-block-designs" id="toc-general-complete-block-designs" class="nav-link" data-scroll-target="#general-complete-block-designs">General Complete Block Designs</a></li>
+  </ul></li>
+  <li><a href="#analysis-of-rcbds" id="toc-analysis-of-rcbds" class="nav-link" data-scroll-target="#analysis-of-rcbds">Analysis of RCBDs</a>
+  <ul class="collapse">
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and Assumptions</a></li>
+  <li><a href="#key-assumptions" id="toc-key-assumptions" class="nav-link" data-scroll-target="#key-assumptions">Key Assumptions</a></li>
+  <li><a href="#anova-for-rcbds" id="toc-anova-for-rcbds" class="nav-link" data-scroll-target="#anova-for-rcbds">ANOVA for RCBDs</a>
+  <ul class="collapse">
+  <li><a href="#variance-decomposition" id="toc-variance-decomposition" class="nav-link" data-scroll-target="#variance-decomposition">Variance Decomposition</a></li>
+  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#implementation-in-r" id="toc-implementation-in-r" class="nav-link" data-scroll-target="#implementation-in-r">Implementation in R</a>
+  <ul class="collapse">
+  <li><a href="#example-bread-baking-experiment" id="toc-example-bread-baking-experiment" class="nav-link" data-scroll-target="#example-bread-baking-experiment">Example: Bread-Baking Experiment</a>
+  <ul class="collapse">
+  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
+  <li><a href="#step-by-step-r-code" id="toc-step-by-step-r-code" class="nav-link" data-scroll-target="#step-by-step-r-code">Step-by-Step R Code</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <ul class="collapse">
+  <li><a href="#general-complete-block-designs-1" id="toc-general-complete-block-designs-1" class="nav-link" data-scroll-target="#general-complete-block-designs-1">General Complete Block Designs</a>
+  <ul class="collapse">
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
+  <li><a href="#sample-size-calculations" id="toc-sample-size-calculations" class="nav-link" data-scroll-target="#sample-size-calculations">Sample Size Calculations</a></li>
+  </ul></li>
+  <li><a href="#handling-block-treatment-interactions" id="toc-handling-block-treatment-interactions" class="nav-link" data-scroll-target="#handling-block-treatment-interactions">Handling Block-Treatment Interactions</a>
+  <ul class="collapse">
+  <li><a href="#model-with-interaction" id="toc-model-with-interaction" class="nav-link" data-scroll-target="#model-with-interaction">Model with Interaction</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#practical-applications" id="toc-practical-applications" class="nav-link" data-scroll-target="#practical-applications">Practical Applications</a>
+  <ul class="collapse">
+  <li><a href="#example-resting-metabolic-rate" id="toc-example-resting-metabolic-rate" class="nav-link" data-scroll-target="#example-resting-metabolic-rate">Example: Resting Metabolic Rate</a>
+  <ul class="collapse">
+  <li><a href="#scenario-1" id="toc-scenario-1" class="nav-link" data-scroll-target="#scenario-1">Scenario</a></li>
+  <li><a href="#step-by-step-r-code-1" id="toc-step-by-step-r-code-1" class="nav-link" data-scroll-target="#step-by-step-r-code-1">Step-by-Step R Code</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#proof-of-rcbd-model-assumptions" id="toc-proof-of-rcbd-model-assumptions" class="nav-link" data-scroll-target="#proof-of-rcbd-model-assumptions">Proof of RCBD Model Assumptions</a>
+  <ul class="collapse">
+  <li><a href="#variance-decomposition-1" id="toc-variance-decomposition-1" class="nav-link" data-scroll-target="#variance-decomposition-1">1. Variance Decomposition</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#variance-decomposition-2" id="toc-variance-decomposition-2" class="nav-link" data-scroll-target="#variance-decomposition-2">Variance Decomposition</a></li>
+  <li><a href="#derivation" id="toc-derivation" class="nav-link" data-scroll-target="#derivation">Derivation</a></li>
+  </ul></li>
+  <li><a href="#effects-of-ignoring-block-treatment-interaction" id="toc-effects-of-ignoring-block-treatment-interaction" class="nav-link" data-scroll-target="#effects-of-ignoring-block-treatment-interaction">Effects of Ignoring Block-Treatment Interaction</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-illustration" id="toc-mathematical-illustration" class="nav-link" data-scroll-target="#mathematical-illustration">Mathematical Illustration</a></li>
+  <li><a href="#proof-outline" id="toc-proof-outline" class="nav-link" data-scroll-target="#proof-outline">Proof Outline</a></li>
+  </ul></li>
+  <li><a href="#sample-size-calculations-for-rcbds" id="toc-sample-size-calculations-for-rcbds" class="nav-link" data-scroll-target="#sample-size-calculations-for-rcbds">Sample Size Calculations for RCBDs</a>
+  <ul class="collapse">
+  <li><a href="#formula" id="toc-formula" class="nav-link" data-scroll-target="#formula">Formula</a></li>
+  <li><a href="#derivation-1" id="toc-derivation-1" class="nav-link" data-scroll-target="#derivation-1">Derivation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
+  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  <li><a href="#discussion-points" id="toc-discussion-points" class="nav-link" data-scroll-target="#discussion-points">Discussion Points</a></li>
+  <li><a href="#r-code-example" id="toc-r-code-example" class="nav-link" data-scroll-target="#r-code-example">R Code Example</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#proof-outline-1" id="toc-proof-outline-1" class="nav-link" data-scroll-target="#proof-outline-1">Proof Outline</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations-1" id="toc-appendix-advanced-mathematical-derivations-1" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations-1">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#proof-of-rcbd-model-assumptions-1" id="toc-proof-of-rcbd-model-assumptions-1" class="nav-link" data-scroll-target="#proof-of-rcbd-model-assumptions-1">Proof of RCBD Model Assumptions</a>
+  <ul class="collapse">
+  <li><a href="#variance-decomposition-3" id="toc-variance-decomposition-3" class="nav-link" data-scroll-target="#variance-decomposition-3">1. Variance Decomposition</a></li>
+  <li><a href="#effects-of-ignoring-block-treatment-interaction-1" id="toc-effects-of-ignoring-block-treatment-interaction-1" class="nav-link" data-scroll-target="#effects-of-ignoring-block-treatment-interaction-1">2. Effects of Ignoring Block-Treatment Interaction</a></li>
+  </ul></li>
+  <li><a href="#sample-size-calculations-for-rcbds-1" id="toc-sample-size-calculations-for-rcbds-1" class="nav-link" data-scroll-target="#sample-size-calculations-for-rcbds-1">Sample Size Calculations for RCBDs</a>
+  <ul class="collapse">
+  <li><a href="#formula-1" id="toc-formula-1" class="nav-link" data-scroll-target="#formula-1">Formula</a></li>
+  <li><a href="#derivation-2" id="toc-derivation-2" class="nav-link" data-scroll-target="#derivation-2">Derivation</a></li>
+  </ul></li>
+  <li><a href="#handling-block-treatment-interactions-1" id="toc-handling-block-treatment-interactions-1" class="nav-link" data-scroll-target="#handling-block-treatment-interactions-1">Handling Block-Treatment Interactions</a>
+  <ul class="collapse">
+  <li><a href="#model-with-interaction-1" id="toc-model-with-interaction-1" class="nav-link" data-scroll-target="#model-with-interaction-1">Model with Interaction</a></li>
+  </ul></li>
+  <li><a href="#sample-size-calculation-example-in-r" id="toc-sample-size-calculation-example-in-r" class="nav-link" data-scroll-target="#sample-size-calculation-example-in-r">Sample Size Calculation Example in R</a></li>
+  </ul></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty-1" id="toc-medium-difficulty-1" class="nav-link" data-scroll-target="#medium-difficulty-1">Medium Difficulty</a>
+  <ul class="collapse">
+  <li><a href="#r-code-example-1" id="toc-r-code-example-1" class="nav-link" data-scroll-target="#r-code-example-1">R Code Example</a></li>
+  </ul></li>
+  <li><a href="#challenging-problems-1" id="toc-challenging-problems-1" class="nav-link" data-scroll-target="#challenging-problems-1">Challenging Problems</a>
+  <ul class="collapse">
+  <li><a href="#r-code-example-2" id="toc-r-code-example-2" class="nav-link" data-scroll-target="#r-code-example-2">R Code Example</a></li>
+  </ul></li>
+  <li><a href="#discussion-points-1" id="toc-discussion-points-1" class="nav-link" data-scroll-target="#discussion-points-1">Discussion Points:</a>
+  <ul class="collapse">
+  <li><a href="#r-code-example-3" id="toc-r-code-example-3" class="nav-link" data-scroll-target="#r-code-example-3">R Code Example:</a></li>
+  </ul></li>
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation</a></li>
+  <li><a href="#proof-outline-2" id="toc-proof-outline-2" class="nav-link" data-scroll-target="#proof-outline-2">Proof Outline:</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations-2" id="toc-appendix-advanced-mathematical-derivations-2" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations-2">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#adjusted-treatment-means" id="toc-adjusted-treatment-means" class="nav-link" data-scroll-target="#adjusted-treatment-means">Adjusted Treatment Means</a></li>
+  <li><a href="#derivation-3" id="toc-derivation-3" class="nav-link" data-scroll-target="#derivation-3">Derivation</a>
+  <ul class="collapse">
+  <li><a href="#f-test-for-homogeneity-of-slopes" id="toc-f-test-for-homogeneity-of-slopes" class="nav-link" data-scroll-target="#f-test-for-homogeneity-of-slopes">F-Test for Homogeneity of Slopes</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing">Hypothesis Testing</a></li>
+  <li><a href="#test-statistic" id="toc-test-statistic" class="nav-link" data-scroll-target="#test-statistic">Test Statistic</a></li>
+  </ul></li>
+  <li><a href="#confidence-intervals-for-higher-order-contrasts" id="toc-confidence-intervals-for-higher-order-contrasts" class="nav-link" data-scroll-target="#confidence-intervals-for-higher-order-contrasts">Confidence Intervals for Higher-Order Contrasts</a>
+  <ul class="collapse">
+  <li><a href="#formula-2" id="toc-formula-2" class="nav-link" data-scroll-target="#formula-2">Formula</a></li>
+  <li><a href="#steps-in-r" id="toc-steps-in-r" class="nav-link" data-scroll-target="#steps-in-r">Steps in R</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example:</a></li>
+  <li><a href="#interpretation-2" id="toc-interpretation-2" class="nav-link" data-scroll-target="#interpretation-2">Interpretation:</a></li>
+  </ul></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
+  <li><a href="#key-takeaways-1" id="toc-key-takeaways-1" class="nav-link" data-scroll-target="#key-takeaways-1">Key Takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
