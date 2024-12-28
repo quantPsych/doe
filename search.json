@@ -672,6 +672,41 @@
     "text": "Grading Rubric\n\n\n\n\n\n\n\n\nExercise\nCriteria\nPoints\n\n\n\n\nExercise 1\nCorrect randomized design and explanation\n20\n\n\nExercise 2\nAccurate general block design and steps\n20\n\n\nExercise 3\nProper randomization and final table\n20\n\n\nExercise 4\nAssumption evaluation and ANOVA results\n30\n\n\nClarity and R Code\nClearly explained process and R code used\n10"
   },
   {
+    "objectID": "assignments/assignment5_residual_analysis.html",
+    "href": "assignments/assignment5_residual_analysis.html",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "",
+    "text": "In this assignment, you will apply residual analysis to evaluate the assumptions of the one-way ANOVA model. You will also explore transformations to address violations of the equal-variance assumption. The exercises are based on data from the textbook by Dean Voss, Draguljic, and Voss (2019).\nTotal points: 135"
+  },
+  {
+    "objectID": "assignments/assignment5_residual_analysis.html#instructions",
+    "href": "assignments/assignment5_residual_analysis.html#instructions",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Instructions",
+    "text": "Instructions\n\nReview the exercises below and select two to complete.\nDownload the Quarto template provided and complete the exercises.\nSubmit your completed assignment on Canvas by the due date.\nEnsure your submission includes all required components and is formatted correctly.\nReview the Grading Rubric for details on how the assignment will be evaluated.\nPost your questions on Canvas or attend office hours for assistance."
+  },
+  {
+    "objectID": "assignments/assignment5_residual_analysis.html#exercise-3-margarine-experiment-amy-l.-phelps-1987",
+    "href": "assignments/assignment5_residual_analysis.html#exercise-3-margarine-experiment-amy-l.-phelps-1987",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Exercise 3: Margarine Experiment (Amy L. Phelps, 1987)",
+    "text": "Exercise 3: Margarine Experiment (Amy L. Phelps, 1987)\nThe data in Table 5.16 show the melting times in seconds for three different brands of margarine (coded 1–3) and one brand of butter (coded 4). The butter was included for comparison purposes. The initial sizes and shapes of the margarine/butter pats were as similar as possible, and they were melted individually in a clean frying pan under constant heat.\nTasks:\n\nCheck the Equal-Variance Assumption\n\n\nEvaluate the equal-variance assumption for the model (3.3.1) using these data.\nIf the assumption is violated, choose the best transformation of the form: \\(y' = y^\\lambda\\) to stabilize the variances.\nRecheck the assumptions using the transformed data.\n\n\nCompute a Confidence Interval with Transformed Data\n\n\nUsing the transformed data from part (a), compute a 95% confidence interval comparing the average melting times for the margarines with the average melting time for the butter.\n\n\nRepeat Confidence Interval with Untransformed Data\n\n\nRepeat part (b) using the untransformed data and Satterthwaite’s approximation for unequal variances.\nCompare the results with those obtained in part (b).\n\n\nPreferred Analysis\n\n\nBased on the results from parts (b) and (c), determine which analysis you prefer and explain your reasoning."
+  },
+  {
+    "objectID": "assignments/assignment5_residual_analysis.html#exercise-6-bicycle-experiment-debra-schomer-1987",
+    "href": "assignments/assignment5_residual_analysis.html#exercise-6-bicycle-experiment-debra-schomer-1987",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Exercise 6: Bicycle Experiment (Debra Schomer, 1987)",
+    "text": "Exercise 6: Bicycle Experiment (Debra Schomer, 1987)\nThe bicycle experiment investigated the crank rates required to maintain specific speeds while riding a bicycle in twelfth gear on flat ground. The chosen speeds were 5, 10, 15, 20, and 25 mph (coded 1–5). The data are provided in Table 5.19. The experimenter fitted the one-way ANOVA model (3.3.1) and plotted the standardized residuals. She noted:\n“The larger spread of data at lower speeds is due to the difficulty of maintaining such low speeds consistently in such a high gear. This also causes additional strain on the bicycle.”\nAs a result, the experimenter observed differences in variances of the error variables across treatment levels.\nTasks:\n\nEvaluate Error Variances\n\n\nPlot the standardized residuals against the fitted values (\\(\\hat{y}_i\\)).\nCompare the sample variances and evaluate the equality of error variances across treatments.\n\n\nApply a Transformation\n\n\nSelect the best transformation of the data of the form: \\(y' = y^\\lambda\\)\nUsing the transformed data, test the hypotheses that the linear and quadratic trends in crank rates due to the different speeds are negligible.\nUse an overall significance level of \\(\\alpha = 0.01\\).\n\n\nTest Trends with Untransformed Data\n\n\nRepeat part (b) using the untransformed data and Satterthwaite’s approximation for unequal variances.\n\n\nDiscuss Methods\n\n\nCompare the results obtained in parts (b) and (c).\nDiscuss the relative merits of the methods applied and provide a recommendation based on your findings.\n\n\nTable 5.19 for Exercise 6: Data for the Bicycle Experiment\n\nData for the bicycle experiment investigating crank rates at different speeds.\n\n\n\n\n\n\n\n\n\nCode\nTreatment (Speed, mph)\nCrank Rates\nCrank Rates\nCrank Rates\n\n\n\n\n1\n5\n15\n19\n22\n\n\n2\n10\n32\n34\n27\n\n\n3\n15\n44\n47\n44\n\n\n4\n20\n59\n61\n61\n\n\n5\n25\n75\n73\n75"
+  },
+  {
+    "objectID": "assignments/assignment5_residual_analysis.html#grading-rubric",
+    "href": "assignments/assignment5_residual_analysis.html#grading-rubric",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\n\n\n\n\n\n\n\nExercise\nTask\nPoints Allocated\nTotal Points\nKey Learning Objective\n\n\n\n\n3\n(a) Check Equal-Variance Assumption\n15\n65\nAssess variance assumptions, identify violations, and apply suitable data transformation.\n\n\n\n(b) Confidence Interval with Transformed Data\n20\n\nCompute and interpret confidence intervals with transformed data.\n\n\n\n(c) Confidence Interval with Untransformed Data\n20\n\nUse Satterthwaite’s approximation to address unequal variances.\n\n\n\n(d) Preferred Analysis\n10\n\nEvaluate methods and justify a preferred analysis.\n\n\n6\n(a) Evaluate Error Variances\n15\n70\nAnalyze residuals and assess variance equality.\n\n\n\n(b) Transformation and Hypothesis Testing\n25\n\nApply data transformations and test for trends with appropriate significance levels.\n\n\n\n(c) Untransformed Data Hypothesis Testing\n20\n\nConduct hypothesis testing using untransformed data with unequal variance adjustments.\n\n\n\n(d) Compare Methods\n10\n\nCompare merits of different analytical approaches.\n\n\n\n\nTotal Points Available: 135"
+  },
+  {
     "objectID": "assignments/assignment2_completely_randomized_design.html",
     "href": "assignments/assignment2_completely_randomized_design.html",
     "title": "Assignment 2: One-Way ANOVA Analysis",
