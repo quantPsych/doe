@@ -8,7 +8,7 @@
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>Comparisons and Contrasts – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Factorial ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,9 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<meta property="og:title" content="Comparisons and Contrasts – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Factorial ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
@@ -196,7 +194,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Comparisons and Contrasts</h1>
+      <h1 class="title">Factorial ANOVA</h1>
                       </div>
   </div>
     
@@ -213,7 +211,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">30-Dec-2024</p>
+        <p class="date">29-Dec-2024</p>
       </div>
     </div>
     
@@ -232,39 +230,25 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
-  <li><a href="#motivation-and-context" id="toc-motivation-and-context" class="nav-link" data-scroll-target="#motivation-and-context">Motivation and Context</a>
+  </ul></li>
+  <li><a href="#two-factor-factorial-designs" id="toc-two-factor-factorial-designs" class="nav-link" data-scroll-target="#two-factor-factorial-designs">Two-Factor Factorial Designs</a>
   <ul class="collapse">
-  <li><a href="#analogies" id="toc-analogies" class="nav-link" data-scroll-target="#analogies">Analogies</a></li>
+  <li><a href="#structure-and-terminology" id="toc-structure-and-terminology" class="nav-link" data-scroll-target="#structure-and-terminology">Structure and Terminology</a></li>
+  <li><a href="#main-effects-vs.-interaction" id="toc-main-effects-vs.-interaction" class="nav-link" data-scroll-target="#main-effects-vs.-interaction">Main Effects vs.&nbsp;Interaction</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#contrasts-definition-and-properties" id="toc-contrasts-definition-and-properties" class="nav-link" data-scroll-target="#contrasts-definition-and-properties">Contrasts: Definition and Properties</a>
+  <li><a href="#statistical-modeling-two-way-anova-models" id="toc-statistical-modeling-two-way-anova-models" class="nav-link" data-scroll-target="#statistical-modeling-two-way-anova-models">Statistical Modeling: Two-Way ANOVA Models</a>
   <ul class="collapse">
-  <li><a href="#what-is-a-contrast" id="toc-what-is-a-contrast" class="nav-link" data-scroll-target="#what-is-a-contrast">What is a Contrast?</a></li>
-  <li><a href="#variance-of-a-contrast" id="toc-variance-of-a-contrast" class="nav-link" data-scroll-target="#variance-of-a-contrast">Variance of a Contrast</a>
+  <li><a href="#the-full-model-with-interaction" id="toc-the-full-model-with-interaction" class="nav-link" data-scroll-target="#the-full-model-with-interaction">The Full Model with Interaction</a></li>
+  <li><a href="#reduced-models" id="toc-reduced-models" class="nav-link" data-scroll-target="#reduced-models">Reduced Models</a></li>
+  </ul></li>
+  <li><a href="#hypothesis-testing-in-two-way-anova" id="toc-hypothesis-testing-in-two-way-anova" class="nav-link" data-scroll-target="#hypothesis-testing-in-two-way-anova">Hypothesis Testing in Two-Way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses">Hypotheses</a></li>
+  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#multiple-comparison-procedures-mcps" id="toc-multiple-comparison-procedures-mcps" class="nav-link" data-scroll-target="#multiple-comparison-procedures-mcps">Multiple Comparison Procedures (MCPs)</a>
-  <ul class="collapse">
-  <li><a href="#fishers-least-significant-difference-lsd" id="toc-fishers-least-significant-difference-lsd" class="nav-link" data-scroll-target="#fishers-least-significant-difference-lsd">Fisher’s Least Significant Difference (LSD)</a></li>
-  <li><a href="#tukeys-honest-significant-difference-hsd" id="toc-tukeys-honest-significant-difference-hsd" class="nav-link" data-scroll-target="#tukeys-honest-significant-difference-hsd">Tukey’s Honest Significant Difference (HSD)</a></li>
-  <li><a href="#bonferroni-method" id="toc-bonferroni-method" class="nav-link" data-scroll-target="#bonferroni-method">Bonferroni Method</a></li>
-  <li><a href="#scheffés-method" id="toc-scheffés-method" class="nav-link" data-scroll-target="#scheffés-method">Scheffé’s Method</a></li>
-  </ul></li>
-  <li><a href="#balancing-type-i-error-and-power" id="toc-balancing-type-i-error-and-power" class="nav-link" data-scroll-target="#balancing-type-i-error-and-power">Balancing Type I Error and Power</a></li>
-  <li><a href="#practical-applications-in-r" id="toc-practical-applications-in-r" class="nav-link" data-scroll-target="#practical-applications-in-r">Practical Applications in R</a>
-  <ul class="collapse">
-  <li><a href="#example-1-pairwise-comparisons-with-tukeys-hsd" id="toc-example-1-pairwise-comparisons-with-tukeys-hsd" class="nav-link" data-scroll-target="#example-1-pairwise-comparisons-with-tukeys-hsd">Example 1: Pairwise Comparisons with Tukey’s HSD</a>
-  <ul class="collapse">
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
-  </ul></li>
-  <li><a href="#example-2-testing-a-specific-contrast" id="toc-example-2-testing-a-specific-contrast" class="nav-link" data-scroll-target="#example-2-testing-a-specific-contrast">Example 2: Testing a Specific Contrast</a>
-  <ul class="collapse">
-  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#example-in-r-two-way-anova-with-interaction" id="toc-example-in-r-two-way-anova-with-interaction" class="nav-link" data-scroll-target="#example-in-r-two-way-anova-with-interaction">Example (In R): Two-Way ANOVA with Interaction</a></li>
+  <li><a href="#unbalanced-designs-and-advanced-techniques" id="toc-unbalanced-designs-and-advanced-techniques" class="nav-link" data-scroll-target="#unbalanced-designs-and-advanced-techniques">Unbalanced Designs and Advanced Techniques</a></li>
+  <li><a href="#visualizing-and-understanding-interactions" id="toc-visualizing-and-understanding-interactions" class="nav-link" data-scroll-target="#visualizing-and-understanding-interactions">Visualizing and Understanding Interactions</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
   <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
@@ -274,20 +258,17 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
-  <li><a href="#appendix-advanced-mathematical-details" id="toc-appendix-advanced-mathematical-details" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-details">Appendix: Advanced Mathematical Details</a>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
   <ul class="collapse">
-  <li><a href="#proofs-and-derivations" id="toc-proofs-and-derivations" class="nav-link" data-scroll-target="#proofs-and-derivations">Proofs and Derivations</a>
-  <ul class="collapse">
-  <li><a href="#variance-of-a-contrast-1" id="toc-variance-of-a-contrast-1" class="nav-link" data-scroll-target="#variance-of-a-contrast-1">Variance of a Contrast</a></li>
-  <li><a href="#derivation-of-tukeys-hsd" id="toc-derivation-of-tukeys-hsd" class="nav-link" data-scroll-target="#derivation-of-tukeys-hsd">Derivation of Tukey’s HSD</a></li>
-  <li><a href="#scheffés-method-1" id="toc-scheffés-method-1" class="nav-link" data-scroll-target="#scheffés-method-1">Scheffé’s Method</a></li>
-  </ul></li>
+  <li><a href="#interaction-contrasts" id="toc-interaction-contrasts" class="nav-link" data-scroll-target="#interaction-contrasts">Interaction Contrasts</a></li>
+  <li><a href="#additivity-condition" id="toc-additivity-condition" class="nav-link" data-scroll-target="#additivity-condition">Additivity Condition</a></li>
+  <li><a href="#proofs-for-sums-of-squares" id="toc-proofs-for-sums-of-squares" class="nav-link" data-scroll-target="#proofs-for-sums-of-squares">Proofs for Sums of Squares</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
@@ -295,277 +276,250 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>In many experiments, researchers compare multiple treatments or conditions to understand their effects on a response variable. For example, consider a horticulturalist testing various fertilizers on plant growth or a biologist examining different drugs on patient outcomes. After performing an ANOVA and finding evidence that not all treatment means are equal, the next step is to determine which treatments differ, and by how much.</p>
-<p><strong>Multiple Comparison Procedures (MCPs)</strong> and <strong>contrasts</strong> address this challenge:</p>
-<ul>
-<li><strong>MCPs</strong> control the overall probability of false positives (Type I errors) when making many comparisons.</li>
-<li><strong>Contrasts</strong> focus on specific, pre-defined linear combinations of treatment means, often reflecting scientific questions.</li>
-</ul>
-<p>The combination of MCPs and contrasts ensures valid inferences, mitigating the risk of drawing erroneous conclusions from multiple tests while retaining interpretability and power.</p>
+<p>Many real-world experiments involve multiple factors that may jointly influence a response. <strong>Factorial designs</strong>, especially two-factor designs, allow us to study each factor’s main effect and their interaction. Understanding interactions is crucial: sometimes one factor’s effect depends on the level of another, and ignoring these relationships can lead to misguided conclusions.</p>
+<p><strong>Intuition:</strong> Think of baking a cake (response): Factor A = Oven Temperature (low, medium, high), Factor B = Baking Time (short, medium, long). The sweetness or fluffiness of the cake (response) depends on both temperature and time. If at a high temperature, an extra-long baking time burns the cake, whereas at a low temperature, you might need longer time to get it fully baked. This interplay is the <strong>interaction</strong> effect—neither factor alone explains the outcome fully without considering the other.</p>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ol type="1">
-<li>Understand the rationale for performing multiple comparisons after ANOVA.</li>
-<li>Explore common MCPs: Fisher’s LSD, Tukey’s HSD, Bonferroni, and Scheffé methods.</li>
-<li>Learn how to construct orthogonal and non-orthogonal contrasts and interpret their results.</li>
-<li>Utilize R to perform multiple comparisons and test contrasts on real or simulated data.</li>
-<li>Discuss Type I error control, power considerations, and the trade-offs in choosing different procedures.</li>
-<li>Develop deeper theoretical insights (in the Appendix) and practice through exercises of medium and challenging difficulty.</li>
+<li>Understand how two-factor factorial designs are structured and why they’re important.</li>
+<li>Distinguish between main effects and interaction effects in a two-way ANOVA.</li>
+<li>Conduct a two-way ANOVA, interpret results, and create interaction plots in R.</li>
+<li>Handle complexities such as unbalanced designs and understand different types of sums of squares.</li>
+<li>Explore both conceptual understanding (through analogies) and rigorous formulation (through mathematics and proofs in the Appendix).</li>
 </ol>
 </section>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
-<p>To implement MCPs and contrasts in R, we will use the following packages:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans, pwr, multcomp, agricolae, lsmeans, car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
+<section id="two-factor-factorial-designs" class="level1">
+<h1>Two-Factor Factorial Designs</h1>
+<section id="structure-and-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="structure-and-terminology">Structure and Terminology</h2>
+<p>A <strong>two-factor design</strong> has two treatment factors, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> levels each. Every combination of levels is tested, resulting in <span class="math inline">\(ab\)</span> treatment combinations (sometimes called “cells”):</p>
 <ul>
-<li><strong><code>emmeans</code></strong>: For computing contrasts and post-hoc tests.</li>
-<li><strong><code>pwr</code></strong>: For power analysis and sample size calculations.</li>
-<li><strong><code>multcomp</code></strong>: For multiple comparison procedures.</li>
-<li><strong><code>agricolae</code></strong>: For conducting multiple comparisons and post-hoc tests.</li>
-<li><strong><code>lsmeans</code></strong>: For computing least-squares means and contrasts.</li>
-<li><strong><code>car</code></strong>: For linear contrasts and hypothesis testing.</li>
+<li>Factor <span class="math inline">\(A\)</span>: <span class="math inline">\(a\)</span> levels <span class="math inline">\(A_1, A_2, \dots, A_a\)</span></li>
+<li>Factor <span class="math inline">\(B\)</span>: <span class="math inline">\(b\)</span> levels <span class="math inline">\(B_1, B_2, \dots, B_b\)</span></li>
 </ul>
+<p><strong>Example:</strong> In a crop yield experiment: - Factor A = Fertilizer type (3 levels) - Factor B = Irrigation method (2 levels) Total treatment combos = 3 × 2 = 6.</p>
+<p>Each cell can have one or more observations (replicates).</p>
 </section>
-<section id="motivation-and-context" class="level2">
-<h2 class="anchored" data-anchor-id="motivation-and-context">Motivation and Context</h2>
-<p>Imagine testing four battery types (A, B, C, D) to see which lasts longest. After ANOVA suggests at least one mean differs, you want to pinpoint where differences lie:</p>
+<section id="main-effects-vs.-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="main-effects-vs.-interaction">Main Effects vs.&nbsp;Interaction</h2>
 <ul>
-<li>Are A and B different?</li>
-<li>Is C worse than the average of A and B?</li>
-<li>Does D stand apart?</li>
+<li><strong>Main Effect (of A):</strong> The average change in response when we move across levels of A, ignoring B.</li>
+<li><strong>Main Effect (of B):</strong> The average change in response when we move across levels of B, ignoring A.</li>
 </ul>
-<p>Without controlling for multiple testing, repeated pairwise comparisons inflate the risk of false positives. MCPs handle this by adjusting significance criteria, while contrasts let you test targeted hypotheses, such as comparing the average performance of two treatments against another group’s mean.</p>
-<section id="analogies" class="level3">
-<h3 class="anchored" data-anchor-id="analogies">Analogies</h3>
-<ul>
-<li><strong>Mail Sorting Analogy:</strong> Consider sorting through a large pile of mail (treatment comparisons). Without rules (MCPs), you might mistakenly pick “important” letters (differences) that are actually junk (Type I errors). MCPs act like filters, reducing the chance you misclassify too many letters as important.</li>
-<li><strong>Magnifying Glass for Specific Questions (Contrasts):</strong> Instead of looking at all letters at once, a contrast is like using a magnifying glass to focus on a subset of letters (treatment means) to answer a specific question.</li>
-</ul>
+<p><strong>Interaction:</strong> Occurs if the effect of one factor on the response changes depending on the level of the other factor. If lines connecting treatment means in an interaction plot are not parallel, we have evidence of interaction.</p>
+<p><strong>Analogy:</strong> Think of wearing sunglasses (Factor A) and a hat (Factor B) on a sunny day. The effect of wearing sunglasses on how well you see (response) might differ depending on whether you’re also wearing a hat that shades your eyes. If sunglasses alone help a bit and the hat alone helps a bit, but together they help a lot more than expected by adding their individual effects, that’s an interaction.</p>
 </section>
 </section>
-</section>
-<section id="contrasts-definition-and-properties" class="level1">
-<h1>Contrasts: Definition and Properties</h1>
-<section id="what-is-a-contrast" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-contrast">What is a Contrast?</h2>
-<p>A <strong>contrast</strong> is a linear combination of treatment means that sums to zero:</p>
+<section id="statistical-modeling-two-way-anova-models" class="level1">
+<h1>Statistical Modeling: Two-Way ANOVA Models</h1>
+<section id="the-full-model-with-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="the-full-model-with-interaction">The Full Model with Interaction</h2>
 <p><span class="math display">\[
-L = \sum_{i=1}^{v} c_i \mu_i, \quad \text{with } \sum_{i=1}^{v} c_i = 0.
+Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk},
 \]</span></p>
-<p>This ensures we’re measuring relative differences. Examples:</p>
+<p>where:</p>
 <ul>
-<li><strong>Pairwise difference:</strong> <span class="math inline">\(\mu_1 - \mu_2\)</span>.</li>
-<li><strong>Comparison of groups:</strong> <span class="math inline">\(\frac{\mu_1 + \mu_2}{2} - \frac{\mu_3 + \mu_4}{2}\)</span>.</li>
+<li><span class="math inline">\(\mu\)</span>: Overall mean</li>
+<li><span class="math inline">\(\alpha_i\)</span>: Effect of the <span class="math inline">\(i\)</span>-th level of Factor A (with <span class="math inline">\(\sum \alpha_i=0\)</span>)</li>
+<li><span class="math inline">\(\beta_j\)</span>: Effect of the <span class="math inline">\(j\)</span>-th level of Factor B (with <span class="math inline">\(\sum \beta_j=0\)</span>)</li>
+<li><span class="math inline">\((\alpha\beta)_{ij}\)</span>: Interaction effect (with constraints <span class="math inline">\(\sum_i (\alpha\beta)_{ij}=0\)</span> and <span class="math inline">\(\sum_j (\alpha\beta)_{ij}=0\)</span>)</li>
+<li><span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>: Random error</li>
 </ul>
+<p>If replicates per treatment combination are <span class="math inline">\(n\)</span>, total observations <span class="math inline">\(N = abn\)</span>.</p>
 </section>
-<section id="variance-of-a-contrast" class="level2">
-<h2 class="anchored" data-anchor-id="variance-of-a-contrast">Variance of a Contrast</h2>
-<p>If each treatment <span class="math inline">\(i\)</span> has <span class="math inline">\(n_i\)</span> observations and errors are <span class="math inline">\(N(0,\sigma^2)\)</span>, then:</p>
-<p><span class="math display">\[
-\text{Var}(L) = \sigma^2 \sum_{i=1}^v \frac{c_i^2}{n_i}.
-\]</span></p>
-<p>This variance helps form confidence intervals and tests for the contrast.</p>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
-<p>In a battery life study with treatments A, B, C, D, suppose we suspect that (A and B) as a group differ from (C and D). We might form a contrast:</p>
-<p><span class="math display">\[
-L = \frac{\mu_A + \mu_B}{2} - \frac{\mu_C + \mu_D}{2}.
-\]</span></p>
-<p>This contrast directly tests a scientific hypothesis: Do the top two battery types outperform the bottom two on average?</p>
-</section>
-</section>
-</section>
-<section id="multiple-comparison-procedures-mcps" class="level1">
-<h1>Multiple Comparison Procedures (MCPs)</h1>
-<p>After ANOVA, MCPs help identify which treatments differ while controlling the Type I error rate across all comparisons:</p>
-<section id="fishers-least-significant-difference-lsd" class="level2">
-<h2 class="anchored" data-anchor-id="fishers-least-significant-difference-lsd">Fisher’s Least Significant Difference (LSD)</h2>
+<section id="reduced-models" class="level2">
+<h2 class="anchored" data-anchor-id="reduced-models">Reduced Models</h2>
 <ul>
-<li>Conduct an ANOVA test first. If significant, proceed.</li>
-<li>Compare pairwise means using the standard t-test but do not adjust alpha for multiple tests.</li>
-<li><strong>Pros:</strong> Simple, more powerful.</li>
-<li><strong>Cons:</strong> Higher chance of Type I errors when many comparisons are made.</li>
-</ul>
-</section>
-<section id="tukeys-honest-significant-difference-hsd" class="level2">
-<h2 class="anchored" data-anchor-id="tukeys-honest-significant-difference-hsd">Tukey’s Honest Significant Difference (HSD)</h2>
-<ul>
-<li>Designed for pairwise comparisons.</li>
-<li>Controls the family-wise error rate (FWER).</li>
-<li>For equal sample sizes:</li>
+<li><strong>No Interaction Model:</strong> If <span class="math inline">\((\alpha\beta)_{ij}=0\)</span> for all <span class="math inline">\(i,j\)</span>, the model reduces to:</li>
 </ul>
 <p><span class="math display">\[
-\text{HSD} = q_{\alpha,v,n-v} \sqrt{\frac{\text{MSE}}{n}},
+Y_{ijk} = \mu + \alpha_i + \beta_j + \epsilon_{ijk}.
 \]</span></p>
-<p>where <span class="math inline">\(q\)</span> is from the studentized range distribution.</p>
-</section>
-<section id="bonferroni-method" class="level2">
-<h2 class="anchored" data-anchor-id="bonferroni-method">Bonferroni Method</h2>
 <ul>
-<li>Divide <span class="math inline">\(\alpha\)</span> by the number of comparisons <span class="math inline">\(m\)</span>.</li>
-<li>Very conservative for large <span class="math inline">\(m\)</span>.</li>
-<li>Ensures strong control of FWER.</li>
-</ul>
-</section>
-<section id="scheffés-method" class="level2">
-<h2 class="anchored" data-anchor-id="scheffés-method">Scheffé’s Method</h2>
-<ul>
-<li>Applies to any linear contrast, not just pairwise differences.</li>
-<li>More general but often more conservative (wide confidence intervals).</li>
-<li>Scheffé’s method is useful when the final set of contrasts is not fully decided a priori.</li>
+<li><strong>Additivity:</strong> Without interaction, the effects of A and B simply add up.</li>
 </ul>
 </section>
 </section>
-<section id="balancing-type-i-error-and-power" class="level1">
-<h1>Balancing Type I Error and Power</h1>
-<p><strong>Type I Error Control:</strong> MCPs reduce the chance of making at least one false claim when testing many hypotheses.</p>
-<p><strong>Power Considerations:</strong> Strict error control may lower the power to detect real differences. Practitioners must balance the risk of false positives against the risk of missing true effects.</p>
+<section id="hypothesis-testing-in-two-way-anova" class="level1">
+<h1>Hypothesis Testing in Two-Way ANOVA</h1>
+<section id="hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="hypotheses">Hypotheses</h2>
+<ol type="1">
+<li><strong>Interaction Test</strong>:
 <ul>
-<li><strong>Fisher’s LSD:</strong> More power, less Type I control.</li>
-<li><strong>Bonferroni:</strong> Strong Type I control, potentially very low power.</li>
-<li><strong>Tukey’s HSD:</strong> Good balance for pairwise comparisons.</li>
-<li><strong>Scheffé:</strong> Very flexible, but can be conservative.</li>
-</ul>
-</section>
-<section id="practical-applications-in-r" class="level1 page-columns page-full">
-<h1>Practical Applications in R</h1>
-<section id="example-1-pairwise-comparisons-with-tukeys-hsd" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-pairwise-comparisons-with-tukeys-hsd">Example 1: Pairwise Comparisons with Tukey’s HSD</h2>
-<p><strong>Data Setup (Simulated):</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Response =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">25</span>, <span class="dv">2</span>))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Treatment, <span class="at">data =</span> data)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-Treatment    3  631.3  210.43    47.7 3.33e-08 ***
-Residuals   16   70.6    4.41                     
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Tukey’s HSD if ANOVA is significant</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    95% family-wise confidence level
-
-Fit: aov(formula = Response ~ Treatment, data = data)
-
-$Treatment
-         diff        lwr       upr     p adj
-B-A  4.524222  0.7237295  8.324714 0.0170952
-C-A 10.228663  6.4281709 14.029155 0.0000050
-D-A 14.831544 11.0310518 18.632036 0.0000000
-C-B  5.704441  1.9039494  9.504933 0.0028150
-D-B 10.307322  6.5068303 14.107814 0.0000045
-D-C  4.602881  0.8023889  8.403373 0.0151748</code></pre>
-</div>
-</div>
-<section id="interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<li><span class="math inline">\(H_0:\)</span> No interaction (<span class="math inline">\((\alpha\beta)_{ij}=0\)</span>)</li>
+<li><span class="math inline">\(H_a:\)</span> Interaction present</li>
+</ul></li>
+<li><strong>Main Effect of A</strong>:
 <ul>
-<li>Look at the output: intervals that do not include zero indicate significant differences.</li>
-<li>Tukey is effective for all pairs while maintaining the overall confidence level.</li>
+<li><span class="math inline">\(H_0:\alpha_1=\alpha_2=\cdots=\alpha_a=0\)</span></li>
+<li><span class="math inline">\(H_a:\)</span> At least one <span class="math inline">\(\alpha_i \neq 0\)</span></li>
+</ul></li>
+<li><strong>Main Effect of B</strong>:
+<ul>
+<li><span class="math inline">\(H_0:\beta_1=\beta_2=\cdots=\beta_b=0\)</span></li>
+<li><span class="math inline">\(H_a:\)</span> At least one <span class="math inline">\(\beta_j \neq 0\)</span></li>
+</ul></li>
+</ol>
+<p><strong>Testing Order:</strong> Generally, check interaction first. If significant, main effects need careful interpretation.</p>
+</section>
+<section id="anova-table" class="level2">
+<h2 class="anchored" data-anchor-id="anova-table">ANOVA Table</h2>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 20%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>DF</th>
+<th>SS</th>
+<th>MS</th>
+<th>F-test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td><span class="math inline">\(a-1\)</span></td>
+<td><span class="math inline">\(SS_A\)</span></td>
+<td><span class="math inline">\(MS_A\)</span></td>
+<td><span class="math inline">\(F_A = MS_A/MS_E\)</span></td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td><span class="math inline">\(b-1\)</span></td>
+<td><span class="math inline">\(SS_B\)</span></td>
+<td><span class="math inline">\(MS_B\)</span></td>
+<td><span class="math inline">\(F_B = MS_B/MS_E\)</span></td>
+</tr>
+<tr class="odd">
+<td>A×B</td>
+<td><span class="math inline">\((a-1)(b-1)\)</span></td>
+<td><span class="math inline">\(SS_{AB}\)</span></td>
+<td><span class="math inline">\(MS_{AB}\)</span></td>
+<td><span class="math inline">\(F_{AB} = MS_{AB}/MS_E\)</span></td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><span class="math inline">\(N - ab\)</span></td>
+<td><span class="math inline">\(SS_E\)</span></td>
+<td><span class="math inline">\(MS_E\)</span></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(SS_T\)</span></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> If data are unbalanced, different sum of squares types (Type I, II, III) might be considered. See Christensen (2018) for details.</p>
+</section>
+</section>
+<section id="example-in-r-two-way-anova-with-interaction" class="level1">
+<h1>Example (In R): Two-Way ANOVA with Interaction</h1>
+<p><strong>Step-by-Step:</strong></p>
+<ol type="1">
+<li><p><strong>Data Setup</strong> Suppose <code>data</code> has columns: <code>Response</code>, <code>FactorA</code>, and <code>FactorB</code>.</p></li>
+<li><p><strong>Fit Model and ANOVA</strong>:</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit two-way ANOVA with interaction</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB, <span class="at">data =</span> data)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Interpret the ANOVA table. Check if interaction is significant.</p>
+<ol type="1">
+<li><strong>Interaction Plot</strong>:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(data<span class="sc">$</span>FactorA, data<span class="sc">$</span>FactorB, data<span class="sc">$</span>Response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Non-parallel lines indicate interaction.</p>
+<ol type="1">
+<li><strong>Interpretation</strong>: If interaction is significant:
+<ul>
+<li>The effect of one factor changes depending on the level of the other. If interaction is not significant:</li>
+<li>Consider main effects separately.</li>
+</ul></li>
+</ol>
+</section>
+<section id="unbalanced-designs-and-advanced-techniques" class="level1">
+<h1>Unbalanced Designs and Advanced Techniques</h1>
+<p>When sample sizes differ across cells, traditional ANOVA is complicated by the unequal representation of treatments. Approaches:</p>
+<ul>
+<li><strong>Type II SS</strong>: Marginal means ignoring higher-order terms.</li>
+<li><strong>Type III SS</strong>: Adjusted means considering all other factors.</li>
 </ul>
+<p>R Implementation:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model, <span class="at">type=</span><span class="st">"II"</span>)  <span class="co"># Type II sums of squares</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model, <span class="at">type=</span><span class="st">"III"</span>) <span class="co"># Type III sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For deeper insights, see Dean et al.&nbsp;(2017) and Christensen (2018).</p>
 </section>
-</section>
-<section id="example-2-testing-a-specific-contrast" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="example-2-testing-a-specific-contrast">Example 2: Testing a Specific Contrast</h2>
-<p><strong>Defining a Contrast:</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppose we want to test (A,B) vs (C,D)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>contrast_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit, <span class="sc">~</span>Treatment)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="fu">list</span>(<span class="st">"AB_vs_CD"</span> <span class="ot">=</span> contrast_vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> contrast estimate    SE df t.ratio p.value
- AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001</code></pre>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="margin-aside">
-<p>For more detail on the <code>emmeans</code> package, see the tutorial page <a href="../appendix/r-packages/emmeans.html">emmeans</a> in the appendix.</p>
-</div></div><section id="interpretation-1" class="level3">
-<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
-<p>The output gives an estimate, standard error, t-value, and p-value. If p &lt; alpha, we conclude there is evidence that (A,B) differ from (C,D).</p>
-</section>
-</section>
+<section id="visualizing-and-understanding-interactions" class="level1">
+<h1>Visualizing and Understanding Interactions</h1>
+<p><strong>Analogy:</strong> If you imagine factor A on the x-axis and the response on the y-axis, plotting a separate line for each level of factor B: - Parallel lines → No interaction (effects are additive). - Converging or crossing lines → Significant interaction (the effect of A depends on B).</p>
+<p><strong>Complex Example:</strong> Consider a pharmacological study: - Factor A = Drug Dosage (Low, Medium, High) - Factor B = Diet Type (Normal, High-Fat) Interaction plot might show that at Low dosage, both diets yield similar outcomes, but at High dosage, the High-Fat diet drastically reduces drug effectiveness, indicating a strong interaction.</p>
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
 <section id="medium-difficulty" class="level2">
 <h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
 <ol type="1">
-<li><strong>Pairwise Comparisons:</strong> Given four treatments, run a simulation in R, fit an ANOVA, and use Tukey’s HSD. Interpret at least one pairwise comparison.</li>
-<li><strong>Constructing Contrasts:</strong> For three treatments (X, Y, Z), form a contrast comparing X with the average of Y and Z. Compute its variance using a known MSE and sample sizes.</li>
+<li><p><strong>Basic Analysis</strong>: Simulate a balanced two-factor design (e.g., <span class="math inline">\(a=3\)</span>, <span class="math inline">\(b=2\)</span>, <span class="math inline">\(n=5\)</span>). Perform a two-way ANOVA, check for interaction, and create an interaction plot in R. Interpret the results.</p></li>
+<li><p><strong>Interpretation Without Interaction</strong>: Given data where no interaction is found, interpret main effects. Use confidence intervals for factor level means and explain the practical meaning.</p></li>
 </ol>
 </section>
 <section id="challenging-problems" class="level2">
 <h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
 <ol type="1">
-<li><strong>Scheffé’s Method for Arbitrary Contrasts:</strong> Generate data from five treatments and test a complex contrast (e.g., <span class="math inline">\((\mu_1+\mu_2)-(\mu_4+\mu_5)\)</span>). Implement Scheffé’s method and interpret the wide confidence interval.</li>
-<li><strong>Power Analysis for MCPs:</strong> Using the <code>pwr</code> package in R, simulate a scenario with four treatments and known variance. Determine sample size needed to achieve 80% power under Tukey’s HSD for detecting a specified difference.</li>
+<li><p><strong>Unbalanced Two-Factor Design</strong>: Work with a dataset where one cell has fewer observations. Fit the model and compare Type I, II, and III sums of squares using <code>car::Anova(model, type=…)</code>. Discuss how the choice of sum of squares affects conclusions about main and interaction effects.</p></li>
+<li><p><strong>Complex Interaction Interpretation</strong>: Use a real or simulated dataset with a significant interaction. Implement <code>emmeans</code> in R to estimate marginal means and pairwise comparisons. Write a short report explaining how the interaction modifies the main effects. Include plots of estimated means and confidence intervals.</p></li>
+<li><p><strong>Mathematical Proof of Interaction Contrasts (Appendix)</strong>: Derive formulas for interaction contrasts and show how they measure the deviation from additivity. Prove that if all interaction contrasts are zero, the model is additive.</p></li>
 </ol>
 </section>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>MCPs and contrasts extend the basic ANOVA framework to address realistic experimental questions:</p>
-<ul>
-<li>MCPs control the “false alarm” rate across multiple inferences.</li>
-<li>Contrasts provide targeted insight into predetermined scientific hypotheses.</li>
-<li>Modern statistical software facilitates these procedures, ensuring robust, interpretable results.</li>
-</ul>
-<p>By understanding these methods, researchers can design more informative experiments and draw conclusions that stand on rigorous statistical ground.</p>
+<p>Two-factor factorial designs expand our analytical horizons, enabling the study of multi-dimensional treatment structures. Understanding and detecting interaction effects is critical—they can dramatically change conclusions about how factors influence a response. By mastering two-way ANOVA, sums of squares types, and interaction plots, graduate students gain a key skillset for robust, nuanced experimental analysis.</p>
+<hr>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
 <li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
-<li>Montgomery, D. C. (2020). <em>Design and Analysis of Experiments</em>. Wiley.</li>
+<li>Montgomery, D. C., &amp; Runger, G. C. (2010). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
 <li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
 </ul>
 </section>
 </section>
-<section id="appendix-advanced-mathematical-details" class="level1">
-<h1>Appendix: Advanced Mathematical Details</h1>
-<section id="proofs-and-derivations" class="level2">
-<h2 class="anchored" data-anchor-id="proofs-and-derivations">Proofs and Derivations</h2>
-<section id="variance-of-a-contrast-1" class="level3">
-<h3 class="anchored" data-anchor-id="variance-of-a-contrast-1">Variance of a Contrast</h3>
-<p>For a contrast <span class="math inline">\(L = \sum c_i \mu_i\)</span>, assuming independent samples of size <span class="math inline">\(n_i\)</span> and variance <span class="math inline">\(\sigma^2\)</span>:</p>
+<section id="appendix-advanced-mathematical-derivations" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="interaction-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-contrasts">Interaction Contrasts</h2>
+<p>An interaction can be represented by contrasts that compare how factor A’s differences vary across levels of factor B. For example, consider a simple 2×2 case (<span class="math inline">\(a=2,b=2\)</span>):</p>
 <p><span class="math display">\[
-\hat{L} = \sum c_i \bar{Y}_i, \quad \text{Var}(\hat{L}) = \sigma^2 \sum \frac{c_i^2}{n_i}.
+(\alpha\beta)_{11} - (\alpha\beta)_{12} - (\alpha\beta)_{21} + (\alpha\beta)_{22}
 \]</span></p>
-<p>Proof involves linearity of expectation and variance properties under independence and homoscedasticity (Dean et al., 2017).</p>
+<p>measures the extent to which effects deviate from additivity.</p>
 </section>
-<section id="derivation-of-tukeys-hsd" class="level3">
-<h3 class="anchored" data-anchor-id="derivation-of-tukeys-hsd">Derivation of Tukey’s HSD</h3>
-<p>Tukey’s HSD critical value is derived from the studentized range distribution <span class="math inline">\(q\)</span>:</p>
-<ol type="1">
-<li>Let <span class="math inline">\(\text{max diff} = \max_i(\bar{Y}_i) - \min_i(\bar{Y}_i)\)</span>.</li>
-<li>Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\frac{\text{max diff}}{\sqrt{\text{MSE}/n}}\)</span> follows a studentized range distribution.</li>
-<li>Invert this to find the critical range <span class="math inline">\(q_{\alpha,v,n-v}\)</span>.</li>
-</ol>
-<p>(Montgomery, 2020)</p>
-</section>
-<section id="scheffés-method-1" class="level3">
-<h3 class="anchored" data-anchor-id="scheffés-method-1">Scheffé’s Method</h3>
-<p>Scheffé’s intervals are based on the fact that any linear contrast of treatment means can be bounded using a <span class="math inline">\((v-1)F\)</span>-distribution multiplier:</p>
+<section id="additivity-condition" class="level2">
+<h2 class="anchored" data-anchor-id="additivity-condition">Additivity Condition</h2>
+<p>For no interaction:</p>
 <p><span class="math display">\[
-L \in \hat{L} \pm \sqrt{(v-1)F_{v-1, n-v,\alpha}}\cdot \text{SE}(\hat{L}).
+(\alpha\beta)_{ij} = 0 \implies \tau_{ij} = \alpha_i + \beta_j.
 \]</span></p>
-<p>The proof uses the union-intersection principle and geometry of the parameter space (Christensen, 2018).</p>
+<p>This forms a linear decomposition of cell means into separate contributions of factors A and B.</p>
+</section>
+<section id="proofs-for-sums-of-squares" class="level2">
+<h2 class="anchored" data-anchor-id="proofs-for-sums-of-squares">Proofs for Sums of Squares</h2>
+<p>Following Dean et al.&nbsp;(2017), sums of squares for main and interaction effects can be constructed from orthogonal contrasts. Derive the form of <span class="math inline">\(SS_A, SS_B, SS_{AB}\)</span> from cell means <span class="math inline">\(\bar{Y}_{ij}\)</span> and show their orthogonality in balanced designs.</p>
 
 
-</section>
 </section>
 </section>
 

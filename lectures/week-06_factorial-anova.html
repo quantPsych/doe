@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <meta property="og:title" content="Factorial ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/home.png">
@@ -211,7 +213,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">29-Dec-2024</p>
+        <p class="date">30-Dec-2024</p>
       </div>
     </div>
     
@@ -227,297 +229,715 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
+  <li><a href="#checking-the-assumptions-on-the-model" id="toc-checking-the-assumptions-on-the-model" class="nav-link" data-scroll-target="#checking-the-assumptions-on-the-model">Checking the Assumptions on the Model</a>
   <ul class="collapse">
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#standardized-residuals" id="toc-standardized-residuals" class="nav-link" data-scroll-target="#standardized-residuals">Standardized Residuals</a></li>
   </ul></li>
-  <li><a href="#two-factor-factorial-designs" id="toc-two-factor-factorial-designs" class="nav-link" data-scroll-target="#two-factor-factorial-designs">Two-Factor Factorial Designs</a>
+  <li><a href="#contrasts" id="toc-contrasts" class="nav-link" data-scroll-target="#contrasts">Contrasts</a>
   <ul class="collapse">
-  <li><a href="#structure-and-terminology" id="toc-structure-and-terminology" class="nav-link" data-scroll-target="#structure-and-terminology">Structure and Terminology</a></li>
-  <li><a href="#main-effects-vs.-interaction" id="toc-main-effects-vs.-interaction" class="nav-link" data-scroll-target="#main-effects-vs.-interaction">Main Effects vs.&nbsp;Interaction</a></li>
+  <li><a href="#contrasts-for-main-effects-and-interactions" id="toc-contrasts-for-main-effects-and-interactions" class="nav-link" data-scroll-target="#contrasts-for-main-effects-and-interactions">Contrasts for Main Effects and Interactions</a></li>
+  <li><a href="#writing-contrasts-as-coefficient-lists" id="toc-writing-contrasts-as-coefficient-lists" class="nav-link" data-scroll-target="#writing-contrasts-as-coefficient-lists">Writing Contrasts as Coefficient Lists</a></li>
   </ul></li>
-  <li><a href="#statistical-modeling-two-way-anova-models" id="toc-statistical-modeling-two-way-anova-models" class="nav-link" data-scroll-target="#statistical-modeling-two-way-anova-models">Statistical Modeling: Two-Way ANOVA Models</a>
+  <li><a href="#analysis-of-the-two-way-complete-model" id="toc-analysis-of-the-two-way-complete-model" class="nav-link" data-scroll-target="#analysis-of-the-two-way-complete-model">Analysis of the Two-Way Complete Model</a>
   <ul class="collapse">
-  <li><a href="#the-full-model-with-interaction" id="toc-the-full-model-with-interaction" class="nav-link" data-scroll-target="#the-full-model-with-interaction">The Full Model with Interaction</a></li>
-  <li><a href="#reduced-models" id="toc-reduced-models" class="nav-link" data-scroll-target="#reduced-models">Reduced Models</a></li>
+  <li><a href="#least-squares-estimators" id="toc-least-squares-estimators" class="nav-link" data-scroll-target="#least-squares-estimators">Least Squares Estimators</a></li>
+  <li><a href="#estimation-of-sigma2" id="toc-estimation-of-sigma2" class="nav-link" data-scroll-target="#estimation-of-sigma2">Estimation of <span class="math inline">\(\sigma^2\)</span></a>
+  <ul class="collapse">
+  <li><a href="#multiple-comparisons-with-unequal-variances" id="toc-multiple-comparisons-with-unequal-variances" class="nav-link" data-scroll-target="#multiple-comparisons-with-unequal-variances">Multiple Comparisons with Unequal Variances</a></li>
   </ul></li>
-  <li><a href="#hypothesis-testing-in-two-way-anova" id="toc-hypothesis-testing-in-two-way-anova" class="nav-link" data-scroll-target="#hypothesis-testing-in-two-way-anova">Hypothesis Testing in Two-Way ANOVA</a>
-  <ul class="collapse">
-  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses">Hypotheses</a></li>
-  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a></li>
+  <li><a href="#analysis-of-variance-for-the-complete-model" id="toc-analysis-of-variance-for-the-complete-model" class="nav-link" data-scroll-target="#analysis-of-variance-for-the-complete-model">Analysis of Variance for the Complete Model</a></li>
   </ul></li>
-  <li><a href="#example-in-r-two-way-anova-with-interaction" id="toc-example-in-r-two-way-anova-with-interaction" class="nav-link" data-scroll-target="#example-in-r-two-way-anova-with-interaction">Example (In R): Two-Way ANOVA with Interaction</a></li>
-  <li><a href="#unbalanced-designs-and-advanced-techniques" id="toc-unbalanced-designs-and-advanced-techniques" class="nav-link" data-scroll-target="#unbalanced-designs-and-advanced-techniques">Unbalanced Designs and Advanced Techniques</a></li>
-  <li><a href="#visualizing-and-understanding-interactions" id="toc-visualizing-and-understanding-interactions" class="nav-link" data-scroll-target="#visualizing-and-understanding-interactions">Visualizing and Understanding Interactions</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <li><a href="#analysis-of-the-two-way-main-effects-model" id="toc-analysis-of-the-two-way-main-effects-model" class="nav-link" data-scroll-target="#analysis-of-the-two-way-main-effects-model">Analysis of the Two-Way Main-Effects Model</a>
   <ul class="collapse">
-  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
-  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  <li><a href="#least-squares-estimators-equal-r" id="toc-least-squares-estimators-equal-r" class="nav-link" data-scroll-target="#least-squares-estimators-equal-r">Least Squares Estimators (Equal <span class="math inline">\(r\)</span>)</a></li>
+  <li><a href="#estimation-of-sigma2-main-effects-model" id="toc-estimation-of-sigma2-main-effects-model" class="nav-link" data-scroll-target="#estimation-of-sigma2-main-effects-model">Estimation of <span class="math inline">\(\sigma^2\)</span> (Main-Effects Model)</a></li>
+  <li><a href="#multiple-comparisons-in-the-main-effects-model" id="toc-multiple-comparisons-in-the-main-effects-model" class="nav-link" data-scroll-target="#multiple-comparisons-in-the-main-effects-model">Multiple Comparisons in the Main-Effects Model</a></li>
+  <li><a href="#analysis-of-variance-for-equal-sample-sizes" id="toc-analysis-of-variance-for-equal-sample-sizes" class="nav-link" data-scroll-target="#analysis-of-variance-for-equal-sample-sizes">Analysis of Variance for Equal Sample Sizes</a></li>
+  <li><a href="#calculating-sample-sizes" id="toc-calculating-sample-sizes" class="nav-link" data-scroll-target="#calculating-sample-sizes">Calculating Sample Sizes</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <li><a href="#small-experiments" id="toc-small-experiments" class="nav-link" data-scroll-target="#small-experiments">Small Experiments</a>
   <ul class="collapse">
+  <li><a href="#one-observation-per-cell" id="toc-one-observation-per-cell" class="nav-link" data-scroll-target="#one-observation-per-cell">One Observation Per Cell</a></li>
+  <li><a href="#analysis-based-on-orthogonal-contrasts" id="toc-analysis-based-on-orthogonal-contrasts" class="nav-link" data-scroll-target="#analysis-based-on-orthogonal-contrasts">Analysis Based on Orthogonal Contrasts</a></li>
+  <li><a href="#tukeys-test-for-additivity" id="toc-tukeys-test-for-additivity" class="nav-link" data-scroll-target="#tukeys-test-for-additivity">Tukey’s Test for Additivity</a></li>
+  <li><a href="#a-real-experimentair-velocity-experiment" id="toc-a-real-experimentair-velocity-experiment" class="nav-link" data-scroll-target="#a-real-experimentair-velocity-experiment">A Real Experiment—Air Velocity Experiment</a></li>
+  </ul></li>
+  <li><a href="#r-examples" id="toc-r-examples" class="nav-link" data-scroll-target="#r-examples">R Examples</a>
+  <ul class="collapse">
+  <li><a href="#model-checking-and-residual-diagnostics" id="toc-model-checking-and-residual-diagnostics" class="nav-link" data-scroll-target="#model-checking-and-residual-diagnostics">Model Checking and Residual Diagnostics</a></li>
+  </ul></li>
+  <li><a href="#two-way-anova-models-in-r" id="toc-two-way-anova-models-in-r" class="nav-link" data-scroll-target="#two-way-anova-models-in-r">Two-Way ANOVA Models in R</a>
+  <ul class="collapse">
+  <li><a href="#fitting-the-two-way-complete-model" id="toc-fitting-the-two-way-complete-model" class="nav-link" data-scroll-target="#fitting-the-two-way-complete-model">Fitting the Two-Way Complete Model</a></li>
+  <li><a href="#type-i-vs.-type-iii-sums-of-squares" id="toc-type-i-vs.-type-iii-sums-of-squares" class="nav-link" data-scroll-target="#type-i-vs.-type-iii-sums-of-squares">Type I vs.&nbsp;Type III Sums of Squares</a></li>
+  <li><a href="#fitting-the-cell-means-model" id="toc-fitting-the-cell-means-model" class="nav-link" data-scroll-target="#fitting-the-cell-means-model">Fitting the Cell-Means Model</a></li>
+  <li><a href="#example-reaction-time-experiment" id="toc-example-reaction-time-experiment" class="nav-link" data-scroll-target="#example-reaction-time-experiment">Example: Reaction Time Experiment</a></li>
+  </ul></li>
+  <li><a href="#contrasts-and-multiple-comparisons" id="toc-contrasts-and-multiple-comparisons" class="nav-link" data-scroll-target="#contrasts-and-multiple-comparisons">Contrasts and Multiple Comparisons</a>
+  <ul class="collapse">
+  <li><a href="#main-effect-contrasts" id="toc-main-effect-contrasts" class="nav-link" data-scroll-target="#main-effect-contrasts">Main-Effect Contrasts</a></li>
+  <li><a href="#multiple-comparison-procedures" id="toc-multiple-comparison-procedures" class="nav-link" data-scroll-target="#multiple-comparison-procedures">Multiple Comparison Procedures</a>
+  <ul class="collapse">
+  <li><a href="#tukey-example" id="toc-tukey-example" class="nav-link" data-scroll-target="#tukey-example">Tukey Example</a></li>
+  </ul></li>
+  <li><a href="#dunnett-example" id="toc-dunnett-example" class="nav-link" data-scroll-target="#dunnett-example">Dunnett Example</a></li>
+  <li><a href="#handling-unequal-sample-sizes" id="toc-handling-unequal-sample-sizes" class="nav-link" data-scroll-target="#handling-unequal-sample-sizes">Handling Unequal Sample Sizes</a></li>
+  <li><a href="#one-observation-per-cell-small-experiments" id="toc-one-observation-per-cell-small-experiments" class="nav-link" data-scroll-target="#one-observation-per-cell-small-experiments">One Observation per Cell (Small Experiments)</a></li>
+  </ul></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <ul class="collapse">
+  <li><a href="#orthogonal-contrasts" id="toc-orthogonal-contrasts" class="nav-link" data-scroll-target="#orthogonal-contrasts">Orthogonal Contrasts</a></li>
+  <li><a href="#model-building-and-type-i-ss" id="toc-model-building-and-type-i-ss" class="nav-link" data-scroll-target="#model-building-and-type-i-ss">Model Building and Type I SS</a></li>
+  <li><a href="#r-code-examples-for-plotting" id="toc-r-code-examples-for-plotting" class="nav-link" data-scroll-target="#r-code-examples-for-plotting">R Code Examples for Plotting</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a></li>
+  <li><a href="#exams" id="toc-exams" class="nav-link" data-scroll-target="#exams">Exams</a></li>
+  <li><a href="#visual-aids" id="toc-visual-aids" class="nav-link" data-scroll-target="#visual-aids">Visual Aids</a></li>
+  <li><a href="#appendix-advanced-proofs-and-derivations" id="toc-appendix-advanced-proofs-and-derivations" class="nav-link" data-scroll-target="#appendix-advanced-proofs-and-derivations">Appendix: Advanced Proofs and Derivations</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
-  <ul class="collapse">
-  <li><a href="#interaction-contrasts" id="toc-interaction-contrasts" class="nav-link" data-scroll-target="#interaction-contrasts">Interaction Contrasts</a></li>
-  <li><a href="#additivity-condition" id="toc-additivity-condition" class="nav-link" data-scroll-target="#additivity-condition">Additivity Condition</a></li>
-  <li><a href="#proofs-for-sums-of-squares" id="toc-proofs-for-sums-of-squares" class="nav-link" data-scroll-target="#proofs-for-sums-of-squares">Proofs for Sums of Squares</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
 
 
 
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>Many real-world experiments involve multiple factors that may jointly influence a response. <strong>Factorial designs</strong>, especially two-factor designs, allow us to study each factor’s main effect and their interaction. Understanding interactions is crucial: sometimes one factor’s effect depends on the level of another, and ignoring these relationships can lead to misguided conclusions.</p>
-<p><strong>Intuition:</strong> Think of baking a cake (response): Factor A = Oven Temperature (low, medium, high), Factor B = Baking Time (short, medium, long). The sweetness or fluffiness of the cake (response) depends on both temperature and time. If at a high temperature, an extra-long baking time burns the cake, whereas at a low temperature, you might need longer time to get it fully baked. This interplay is the <strong>interaction</strong> effect—neither factor alone explains the outcome fully without considering the other.</p>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ol type="1">
-<li>Understand how two-factor factorial designs are structured and why they’re important.</li>
+<li>Understand the structure and terminology of two-factor factorial designs.</li>
 <li>Distinguish between main effects and interaction effects in a two-way ANOVA.</li>
 <li>Conduct a two-way ANOVA, interpret results, and create interaction plots in R.</li>
 <li>Handle complexities such as unbalanced designs and understand different types of sums of squares.</li>
-<li>Explore both conceptual understanding (through analogies) and rigorous formulation (through mathematics and proofs in the Appendix).</li>
 </ol>
 </section>
-</section>
-<section id="two-factor-factorial-designs" class="level1">
-<h1>Two-Factor Factorial Designs</h1>
-<section id="structure-and-terminology" class="level2">
-<h2 class="anchored" data-anchor-id="structure-and-terminology">Structure and Terminology</h2>
-<p>A <strong>two-factor design</strong> has two treatment factors, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> levels each. Every combination of levels is tested, resulting in <span class="math inline">\(ab\)</span> treatment combinations (sometimes called “cells”):</p>
+<section id="r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
+<p>To run the R code examples in these notes, we recommend installing the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Required R Packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, lsmeans, emmeans, here, readr)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li>Factor <span class="math inline">\(A\)</span>: <span class="math inline">\(a\)</span> levels <span class="math inline">\(A_1, A_2, \dots, A_a\)</span></li>
-<li>Factor <span class="math inline">\(B\)</span>: <span class="math inline">\(b\)</span> levels <span class="math inline">\(B_1, B_2, \dots, B_b\)</span></li>
+<li><strong><code>dplyr</code></strong>: Data manipulation and summarization.</li>
+<li><strong><code>ggplot2</code></strong>: Data visualization.</li>
+<li><strong><code>lsmeans</code></strong> and <strong><code>emmeans</code></strong>: Post hoc comparisons and multiple comparisons.</li>
+<li><strong><code>pacman</code></strong>: Package management.</li>
+<li><strong><code>here</code></strong>: File path management.</li>
+<li><strong><code>readr</code></strong>: Reading data files.</li>
 </ul>
-<p><strong>Example:</strong> In a crop yield experiment: - Factor A = Fertilizer type (3 levels) - Factor B = Irrigation method (2 levels) Total treatment combos = 3 × 2 = 6.</p>
-<p>Each cell can have one or more observations (replicates).</p>
 </section>
-<section id="main-effects-vs.-interaction" class="level2">
-<h2 class="anchored" data-anchor-id="main-effects-vs.-interaction">Main Effects vs.&nbsp;Interaction</h2>
-<ul>
-<li><strong>Main Effect (of A):</strong> The average change in response when we move across levels of A, ignoring B.</li>
-<li><strong>Main Effect (of B):</strong> The average change in response when we move across levels of B, ignoring A.</li>
-</ul>
-<p><strong>Interaction:</strong> Occurs if the effect of one factor on the response changes depending on the level of the other factor. If lines connecting treatment means in an interaction plot are not parallel, we have evidence of interaction.</p>
-<p><strong>Analogy:</strong> Think of wearing sunglasses (Factor A) and a hat (Factor B) on a sunny day. The effect of wearing sunglasses on how well you see (response) might differ depending on whether you’re also wearing a hat that shades your eyes. If sunglasses alone help a bit and the hat alone helps a bit, but together they help a lot more than expected by adding their individual effects, that’s an interaction.</p>
-</section>
-</section>
-<section id="statistical-modeling-two-way-anova-models" class="level1">
-<h1>Statistical Modeling: Two-Way ANOVA Models</h1>
-<section id="the-full-model-with-interaction" class="level2">
-<h2 class="anchored" data-anchor-id="the-full-model-with-interaction">The Full Model with Interaction</h2>
+<section id="checking-the-assumptions-on-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="checking-the-assumptions-on-the-model">Checking the Assumptions on the Model</h2>
+<p>The assumptions for both the two-way complete model and the two-way main-effects model are that the error random variables have equal variances, are mutually independent, and are normally distributed. The strategy for checking these assumptions follows the procedures outlined in Chapter 5 (see Dean et al.&nbsp;2017).</p>
+<section id="standardized-residuals" class="level3">
+<h3 class="anchored" data-anchor-id="standardized-residuals">Standardized Residuals</h3>
+<p>The standardized residuals are computed as</p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk},
+z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{SS_{Error}/(n - 1)}},
 \]</span></p>
-<p>where:</p>
+<p>where</p>
 <ul>
-<li><span class="math inline">\(\mu\)</span>: Overall mean</li>
-<li><span class="math inline">\(\alpha_i\)</span>: Effect of the <span class="math inline">\(i\)</span>-th level of Factor A (with <span class="math inline">\(\sum \alpha_i=0\)</span>)</li>
-<li><span class="math inline">\(\beta_j\)</span>: Effect of the <span class="math inline">\(j\)</span>-th level of Factor B (with <span class="math inline">\(\sum \beta_j=0\)</span>)</li>
-<li><span class="math inline">\((\alpha\beta)_{ij}\)</span>: Interaction effect (with constraints <span class="math inline">\(\sum_i (\alpha\beta)_{ij}=0\)</span> and <span class="math inline">\(\sum_j (\alpha\beta)_{ij}=0\)</span>)</li>
-<li><span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>: Random error</li>
+<li><span class="math inline">\(\hat{y}_{ijt} = \hat{\tau}_{ij} = \hat{\alpha}_i + \hat{\beta}_j + (\alpha\beta)_{ij}\)</span> (two-way complete model), or</li>
+<li><span class="math inline">\(\hat{y}_{ijt} = \hat{\tau}_{ij} = \hat{\alpha}_i + \hat{\beta}_j\)</span> (two-way main-effects model),</li>
 </ul>
-<p>If replicates per treatment combination are <span class="math inline">\(n\)</span>, total observations <span class="math inline">\(N = abn\)</span>.</p>
-</section>
-<section id="reduced-models" class="level2">
-<h2 class="anchored" data-anchor-id="reduced-models">Reduced Models</h2>
+<p>depending on which model is used. A “hat” denotes a least squares estimate.</p>
+<p>Typical residual plots to check:</p>
 <ul>
-<li><strong>No Interaction Model:</strong> If <span class="math inline">\((\alpha\beta)_{ij}=0\)</span> for all <span class="math inline">\(i,j\)</span>, the model reduces to:</li>
+<li><strong>Observation Order vs.&nbsp;Residuals</strong> to assess independence.</li>
+<li><strong>Levels of Each Factor (and possibly <span class="math inline">\(\hat{y}_{ijt}\)</span>) vs.&nbsp;Residuals</strong> to detect outliers and variance inhomogeneity.</li>
+<li><strong>Normal Q-Q Plot (Normal Scores)</strong> to assess normality.</li>
+</ul>
+<p>When using the main-effects model, interaction plots (e.g., Figures 6.1, 6.2 in reference texts) help visualize any potential interaction. Another method is to plot standardized residuals against one factor’s levels while labeling or grouping by the second factor’s levels.</p>
+</section>
+</section>
+<section id="contrasts" class="level1">
+<h1>Contrasts</h1>
+<section id="contrasts-for-main-effects-and-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="contrasts-for-main-effects-and-interactions">Contrasts for Main Effects and Interactions</h2>
+<p>Recalling the cell-means model</p>
+<p><span class="math display">\[
+y_{ijt} = \mu + \tau_{ij} + \varepsilon_{ijt},
+\]</span></p>
+<p>equivalent to a one-way ANOVA model with <span class="math inline">\(ab\)</span> treatments, we have that all contrasts in <span class="math inline">\(\tau_{ij}\)</span> are estimable. In two-way layouts, common contrasts include:</p>
+<ol type="1">
+<li><strong>Treatment Contrasts</strong> <span class="math inline">\(\sum_{i,j} d_{ij}\,\tau_{ij}\)</span>.</li>
+<li><strong>Interaction Contrasts</strong> measure non-parallelism in interaction plots. For instance,</li>
+</ol>
+<p><span class="math display">\[
+(\tau_{sh} - \tau_{(s+1)h}) - (\tau_{sq} - \tau_{(s+1)q}).
+\]</span></p>
+<p>Using the two-way complete model <span class="math inline">\(\tau_{ij} = \alpha_i + \beta_j + (\alpha\beta)_{ij}\)</span>, an interaction contrast zeroes out if <span class="math inline">\((\alpha\beta)_{ij}=0\)</span> for all <span class="math inline">\(i,j\)</span>.</p>
+</section>
+<section id="writing-contrasts-as-coefficient-lists" class="level2">
+<h2 class="anchored" data-anchor-id="writing-contrasts-as-coefficient-lists">Writing Contrasts as Coefficient Lists</h2>
+<p>When working in the two-way complete model, we can express contrasts in two ways:</p>
+<ul>
+<li>As a list of coefficients of <span class="math inline">\(\alpha_i^*\)</span>, <span class="math inline">\(\beta_j^*\)</span>, and <span class="math inline">\((\alpha\beta)_{ij}\)</span>.</li>
+<li>As a list of coefficients of the <span class="math inline">\(\tau_{ij}\)</span> theMS_{Error}lves.</li>
+</ul>
+<p><strong>Example 6.3.1 (Battery Experiment)</strong> A two-factor experiment with two levels each: “duty” (1 = alkaline, 2 = heavy duty) and “brand” (1 = name brand, 2 = store brand). Treatment combinations are <span class="math inline">\((1,1)\)</span>, <span class="math inline">\((1,2)\)</span>, <span class="math inline">\((2,1)\)</span>, and <span class="math inline">\((2,2)\)</span>, each with <span class="math inline">\(r=4\)</span> observations. An interaction contrast might be</p>
+<p><span class="math display">\[
+\tau_{11} - \tau_{12} - \tau_{21} + \tau_{22}
+\;=\; (\alpha\beta)_{11} - (\alpha\beta)_{12} - (\alpha\beta)_{21} + (\alpha\beta)_{22}.
+\]</span></p>
+</section>
+</section>
+<section id="analysis-of-the-two-way-complete-model" class="level1">
+<h1>Analysis of the Two-Way Complete Model</h1>
+<p>When two factors may interact, we often begin with:</p>
+<ol type="1">
+<li><strong>Two-Way Complete Model</strong> (also called the full cell-means model),</li>
+</ol>
+<p><span class="math display">\[
+y_{ijt} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijt}, \quad \varepsilon_{ijt}\sim \text{N}(0,\sigma^2).
+\]</span></p>
+<ol type="1">
+<li><strong>Hypothesis Test for No Interaction</strong>. If there is insufficient evidence of interaction, we proceed to examine main effects under the same complete model. If interaction is significant, we return to the cell-means perspective to compare treatment combinations directly.</li>
+</ol>
+<section id="least-squares-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="least-squares-estimators">Least Squares Estimators</h2>
+<p>From standard ANOVA theory,</p>
+<ul>
+<li><span class="math inline">\(\hat{\mu} + \hat{\tau}_{ij} = \hat{\mu} + \hat{\alpha}_i + \hat{\beta}_j + \widehat{(\alpha\beta)}_{ij} = \bar{Y}_{ij\cdot}\)</span>,</li>
+<li><span class="math inline">\(\text{Var}(\bar{Y}_{ij\cdot}) = \sigma^2 / r_{ij}\)</span>.</li>
+</ul>
+<p>An interaction contrast <span class="math inline">\(\sum_{i,j} d_{ij}\,\tau_{ij}\)</span> has LSE <span class="math inline">\(\sum_{i,j} d_{ij}\,\bar{Y}_{ij\cdot}\)</span> with variance <span class="math inline">\(\sigma^2 \sum d_{ij}^2/r_{ij}\)</span>.</p>
+</section>
+<section id="estimation-of-sigma2" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-of-sigma2">Estimation of <span class="math inline">\(\sigma^2\)</span></h2>
+<p>Because the two-way complete model is equivalent to a one-way ANOVA with <span class="math inline">\(ab\)</span> cells, an unbiased estimate of <span class="math inline">\(\sigma^2\)</span> is obtained via the error sum of squares:</p>
+<p><span class="math display">\[
+SS_{Error} = \sum_{i,j,t} (y_{ijt} - \bar{Y}_{ij\cdot})^2,
+\]</span></p>
+<p>with <span class="math inline">\(v = ab\)</span> levels and <span class="math inline">\(n = \sum_{i,j} r_{ij}\)</span> total observations. The corresponding mean square error is</p>
+<p><span class="math display">\[
+MS_{Error} = \frac{SS_{Error}}{n - v}.
+\]</span></p>
+<p><strong>Example 6.4.2 (Reaction Time Experiment)</strong> A pilot experiment with <span class="math inline">\(a=2\)</span> levels of “Cue Stimulus” and <span class="math inline">\(b=3\)</span> levels of “Cue Time,” each having <span class="math inline">\(r=3\)</span> replications, yields data in Table 6.2. The sum of squares for error is computed as</p>
+<p><span class="math display">\[
+SS_{Error} = \sum_{i,j,t} y_{ijt}^2 \;-\; \sum_{i,j} \frac{r_{ij}\,\bar{Y}_{ij\cdot}^2}{\cdot} \;=\; 0.00347,
+\]</span></p>
+<p>and hence <span class="math inline">\(MS_{Error} = SS_{Error}/(n-ab)\)</span>.</p>
+<section id="multiple-comparisons-with-unequal-variances" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-comparisons-with-unequal-variances">Multiple Comparisons with Unequal Variances</h3>
+<p>If variance heterogeneity persists and cannot be corrected by transformations, one can use Satterthwaite’s approximation (Christensen 2018).</p>
+</section>
+</section>
+<section id="analysis-of-variance-for-the-complete-model" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-of-variance-for-the-complete-model">Analysis of Variance for the Complete Model</h2>
+<p>We commonly examine three hypotheses:</p>
+<ol type="1">
+<li><strong>Interaction</strong> <span class="math inline">\(H_{0}^{AB}\)</span>: <span class="math inline">\((\alpha\beta)_{ij} = 0\)</span> for all <span class="math inline">\(i,j\)</span>.</li>
+<li><strong>Main Effect of A</strong> <span class="math inline">\(H_{0}^{A}\)</span>: <span class="math inline">\(\alpha_1^* = \alpha_2^* = \cdots = \alpha_a^*\)</span>.</li>
+<li><strong>Main Effect of B</strong> <span class="math inline">\(H_{0}^{B}\)</span>: <span class="math inline">\(\beta_1^* = \beta_2^* = \cdots = \beta_b^*\)</span>.</li>
+</ol>
+<p>If <span class="math inline">\(H_{0}^{AB}\)</span> is not rejected, we then focus on main effects. Otherwise, the cell-means model is typically used to compare all <span class="math inline">\(ab\)</span> treatment combinations.</p>
+<p><strong>Example 6.4.5 (Reaction Time Experiment, continued)</strong> An ANOVA table yields:</p>
+<ul>
+<li><span class="math inline">\(MS_{AB}/MS_{Error} = 1.46 &lt; F_{2,12,0.01} = 6.93\)</span> (Fail to reject interaction)</li>
+<li><span class="math inline">\(MS_{A}/MS_{Error} = 81.38 &gt; 9.33\)</span> (Reject <span class="math inline">\(H_{0}^{A}\)</span>)</li>
+<li><span class="math inline">\(MS_{B}/MS_{Error} = 2.00 &lt; 6.93\)</span> (Fail to reject <span class="math inline">\(H_{0}^{B}\)</span>)</li>
+</ul>
+</section>
+</section>
+<section id="analysis-of-the-two-way-main-effects-model" class="level1">
+<h1>Analysis of the Two-Way Main-Effects Model</h1>
+<p>When the interaction is deemed negligible (or theoretically disallowed), the <strong>two-way main-effects model</strong> is:</p>
+<p><span class="math display">\[
+y_{ijt} = \mu + \alpha_i + \beta_j + \varepsilon_{ijt},
+\quad \varepsilon_{ijt} \sim \text{N}(0,\sigma^2).
+\]</span></p>
+<section id="least-squares-estimators-equal-r" class="level2">
+<h2 class="anchored" data-anchor-id="least-squares-estimators-equal-r">Least Squares Estimators (Equal <span class="math inline">\(r\)</span>)</h2>
+<p>If <span class="math inline">\(r\)</span> is constant across all <span class="math inline">\(ab\)</span> cells, the LSE of <span class="math inline">\(E[y_{ijt}] = \mu + \alpha_i + \beta_j\)</span> is</p>
+<p><span class="math display">\[
+\hat{\mu} + \hat{\alpha}_i + \hat{\beta}_j = \bar{Y}_{i\cdot\cdot} + \bar{Y}_{\cdot j \cdot} - \bar{Y}_{\cdot\cdot\cdot}.
+\]</span></p>
+<p>Pairwise comparisons (e.g., <span class="math inline">\(\alpha_p - \alpha_s\)</span>) become <span class="math inline">\(\bar{Y}_{p\cdot\cdot} - \bar{Y}_{s\cdot\cdot}\)</span>.</p>
+<p><strong>Example 6.5.1 (Nail Varnish Experiment)</strong> Two solvents (<span class="math inline">\(A\)</span>) and three brands of varnish (<span class="math inline">\(B\)</span>), each with <span class="math inline">\(r=5\)</span>. From the data, the difference in solvents is estimated as</p>
+<p><span class="math display">\[
+\hat{\alpha}_1 - \hat{\alpha}_2 = \bar{Y}_{1\cdot\cdot} - \bar{Y}_{2\cdot\cdot} \approx -3.6040.
+\]</span></p>
+</section>
+<section id="estimation-of-sigma2-main-effects-model" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-of-sigma2-main-effects-model">Estimation of <span class="math inline">\(\sigma^2\)</span> (Main-Effects Model)</h2>
+<p>With <span class="math inline">\(n = abr\)</span>, the sum of squares of errors is</p>
+<p><span class="math display">\[
+SS_{Error} = \sum_{i=1}^a \sum_{j=1}^b \sum_{t=1}^{r}
+\left( y_{ijt} - \bar{Y}_{i\cdot\cdot} - \bar{Y}_{\cdot j \cdot} + \bar{Y}_{\cdot\cdot\cdot}\right)^2.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+MS_{Error} = \frac{SS_{Error}}{n - a - b + 1}.
+\]</span></p>
+<p><strong>Example 6.5.2 (Nail Varnish Experiment, continued)</strong> With <span class="math inline">\(a=2\)</span>, <span class="math inline">\(b=3\)</span>, <span class="math inline">\(r=5\)</span>, the sum of squares <span class="math inline">\(SS_{Error}=216.7762\)</span> and <span class="math inline">\(MS_{Error} = 216.7762/(30-2-3+1) \approx 8.3375\)</span>.</p>
+</section>
+<section id="multiple-comparisons-in-the-main-effects-model" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-comparisons-in-the-main-effects-model">Multiple Comparisons in the Main-Effects Model</h2>
+<p>For equal sample sizes, Tukey, Bonferroni, and Scheffé methods still apply to main-effect contrasts. For example, a set of 100<span class="math inline">\((1-\alpha)\%\)</span> simultaneous CIs for factor-A contrasts has the form:</p>
+<p><span class="math display">\[
+\sum_i c_i \alpha_i \;\in\; \sum_i c_i \bar{Y}_{i\cdot\cdot}
+\;\pm\; w \; \sqrt{MS_{Error} \,\sum_i \frac{c_i^2}{br}},
+\]</span></p>
+<p>where <span class="math inline">\(w\)</span> depends on the chosen procedure (Dean et al.&nbsp;2017).</p>
+<p><strong>Example 6.5.3 (Nail Varnish Experiment, continued)</strong> Simultaneous confidence intervals for differences among three varnishes can be constructed via Tukey’s HSD with <span class="math inline">\(q_{3,26,0.01} = 4.54\)</span>.</p>
+</section>
+<section id="analysis-of-variance-for-equal-sample-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-of-variance-for-equal-sample-sizes">Analysis of Variance for Equal Sample Sizes</h2>
+<p>When <span class="math inline">\(r\)</span> is constant:</p>
+<ul>
+<li><span class="math inline">\(H_{0}^B: \{\beta_1 = \beta_2 = \dots = \beta_b\}\)</span> is tested via</li>
 </ul>
 <p><span class="math display">\[
-Y_{ijk} = \mu + \alpha_i + \beta_j + \epsilon_{ijk}.
+\text{reject if}\;\; \frac{MS_{B}}{MS_{Error}} &gt; F_{b-1,\,n-a-b+1,\,\alpha}.
 \]</span></p>
 <ul>
-<li><strong>Additivity:</strong> Without interaction, the effects of A and B simply add up.</li>
+<li><span class="math inline">\(H_{0}^A: \{\alpha_1 = \alpha_2 = \dots = \alpha_a\}\)</span> analogously.</li>
+</ul>
+<p><strong>Example 6.5.4 (Nail Varnish Experiment)</strong> An ANOVA table yields <span class="math inline">\(F\)</span>-ratios for factor <span class="math inline">\(A\)</span> (solvent) and factor <span class="math inline">\(B\)</span> (varnish). Solvent is significant while varnish is not.</p>
+</section>
+<section id="calculating-sample-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-sample-sizes">Calculating Sample Sizes</h2>
+<p>Both the power-based approach (Sections 3.6) and confidence-interval-width approach (Sections 4.5) can be extended to two-way designs (Montgomery 2020). For main-effect differences of size <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>, formulas such as</p>
+<p><span class="math display">\[
+r = \frac{2a\,\sigma^2\,\phi^2}{b\,A^2}, \quad
+r = \frac{2b\,\sigma^2\,\phi^2}{a\,B^2}
+\]</span></p>
+<p>may be used to assure adequate power, where <span class="math inline">\(\phi\)</span> is a function of the noncentral <span class="math inline">\(F\)</span>-distribution (see also Christensen 2018).</p>
+</section>
+</section>
+<section id="small-experiments" class="level1">
+<h1>Small Experiments</h1>
+<section id="one-observation-per-cell" class="level2">
+<h2 class="anchored" data-anchor-id="one-observation-per-cell">One Observation Per Cell</h2>
+<p>When <span class="math inline">\(r=1\)</span> per cell, if an interaction is possible, we cannot estimate <span class="math inline">\(\sigma^2\)</span> directly (because <span class="math inline">\(\text{df for error} = ab(r-1) = 0\)</span>). The study design must:</p>
+<ul>
+<li>Assume interaction is negligible (use main-effects model), <strong>or</strong></li>
+<li>Have <span class="math inline">\(\sigma^2\)</span> known in advance, <strong>or</strong></li>
+<li>Model only a reduced set of contrasts (sparsity of effects).</li>
+</ul>
+</section>
+<section id="analysis-based-on-orthogonal-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-based-on-orthogonal-contrasts">Analysis Based on Orthogonal Contrasts</h2>
+<p>Two contrasts <span class="math inline">\(c_i\tau_i\)</span> and <span class="math inline">\(k_i\tau_i\)</span> are <strong>orthogonal</strong> if</p>
+<p><span class="math display">\[
+\sum_i \frac{c_i\,k_i}{r_i} = 0.
+\]</span></p>
+<p>A <strong>complete set</strong> of <span class="math inline">\(v-1\)</span> orthogonal contrasts partitions the treatment sum of squares:</p>
+<p><span class="math display">\[
+SS_{Total} = \sum_{q=1}^{v-1} SS_{c_q}.
+\]</span></p>
+<p><strong>Example 6.7.1 (Battery Experiment, continued)</strong> Duty, brand, and interaction contrasts form a complete set of <span class="math inline">\(3\)</span> orthogonal contrasts for <span class="math inline">\(4\)</span> total treatments, and their sums of squares add to the total.</p>
+</section>
+<section id="tukeys-test-for-additivity" class="level2">
+<h2 class="anchored" data-anchor-id="tukeys-test-for-additivity">Tukey’s Test for Additivity</h2>
+<p>When the interaction is thought to be of the form <span class="math inline">\((\alpha\beta)_{ij} = \gamma\,\alpha_i\,\beta_j\)</span>, Tukey’s test uses only 1 df. The decision rule is</p>
+<p><span class="math display">\[
+\text{reject } H_0^\gamma \text{ if }
+\frac{ss_{AB}^*}{SS_{Error}/e} &gt; F_{1,e,\alpha},
+\]</span></p>
+<p>where <span class="math inline">\(ss_{AB}^*\)</span> is a computed sum of squares specifically for that parametric form of interaction.</p>
+</section>
+<section id="a-real-experimentair-velocity-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="a-real-experimentair-velocity-experiment">A Real Experiment—Air Velocity Experiment</h2>
+<p>Table 6.11 shows data on air velocity for three rib heights (<span class="math inline">\(A\)</span>) and six Reynolds numbers (<span class="math inline">\(B\)</span>) with <span class="math inline">\(r=1\)</span> per cell. Investigators suspected some interaction but believed certain higher-order trends would be negligible. They pooled those negligible interaction contrasts for an error estimate with 3 df, then tested the remaining contrasts individually. See Table 6.12 for the resulting ANOVA.</p>
+</section>
+</section>
+<section id="r-examples" class="level1 page-columns page-full">
+<h1>R Examples</h1>
+<p>Below are some step-by-step R code fragments illustrating how to fit these two-way ANOVA models and check assumptions.</p>
+<div id="tbl-react-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-react-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Reaction Time Experiment</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppose 'df' is a Data Frame with Columns: CueStim, CueTime, ReactionTime</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CueStim Has 2 Levels (Auditory, Visual); CueTime Has 3 Levels (5s, 10s, 15s).</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>react_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"reaction.time.txt"</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create trtmt combo vbl TC and factors fTC, fA, and fB within data set</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>react_df <span class="ot">&lt;-</span> <span class="fu">within</span>(react_df, {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    TC <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> A <span class="sc">+</span> B</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    fTC <span class="ot">&lt;-</span> <span class="fu">factor</span>(TC)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    fA <span class="ot">&lt;-</span> <span class="fu">factor</span>(A)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    fB <span class="ot">&lt;-</span> <span class="fu">factor</span>(B)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(react_df[, <span class="fu">c</span>(<span class="st">"fA"</span>, <span class="st">"fB"</span>, <span class="st">"fTC"</span>, <span class="st">"y"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> fA    fB    fTC          y         
+ 1:9   1:6   11:3   Min.   :0.1670  
+ 2:9   2:6   12:3   1st Qu.:0.1898  
+       3:6   13:3   Median :0.2355  
+             21:3   Mean   :0.2281  
+             22:3   3rd Qu.:0.2595  
+             23:3   Max.   :0.2830  </code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-react-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Reaction Time Experiment
+</figcaption>
+</figure>
+</div>
+<div class="cell" data-tbl-cap="Reaction Time Example">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Fit the Two-way ANOVA (full model)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>modelAB <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> fA <span class="sc">+</span> fB <span class="sc">+</span> fA<span class="sc">:</span>fB, <span class="at">data =</span> react_df)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelAB) <span class="co"># Type I ANOVA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0.0235445000","3":"0.0235445000","4":"81.375000","5":"1.077481e-06","_rn_":"fA"},{"1":"2","2":"0.0011581111","3":"0.0005790556","4":"2.001344","5":"1.777992e-01","_rn_":"fB"},{"1":"2","2":"0.0008463333","3":"0.0004231667","4":"1.462558","5":"2.701353e-01","_rn_":"fA:fB"},{"1":"12","2":"0.0034720000","3":"0.0002893333","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(modelAB, <span class="sc">~</span>., <span class="at">test =</span> <span class="st">"F"</span>) <span class="co"># Type III ANOVA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sum of Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["RSS"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"NA","2":"NA","3":"0.003472000","4":"-141.9611","5":"NA","6":"NA","_rn_":"<none>"},{"1":"1","2":"0.0104166667","3":"0.013888667","4":"-119.0070","5":"36.002304","6":"6.214908e-05","_rn_":"fA"},{"1":"2","2":"0.0018802222","3":"0.005352222","4":"-138.1711","5":"3.249232","6":"7.452011e-02","_rn_":"fB"},{"1":"2","2":"0.0008463333","3":"0.004318333","4":"-142.0346","5":"1.462558","6":"2.701353e-01","_rn_":"fA:fB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>modelTC <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> fTC, <span class="at">data =</span> react_df)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelTC) <span class="co"># Model F-test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"0.02554894","3":"0.0051097889","4":"17.66056","5":"3.655918e-05","_rn_":"fTC"},{"1":"12","2":"0.00347200","3":"0.0002893333","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<p>Reaction Time Example</p>
+</div>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Post-hoc Contrasts</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Main-effect-of-B contrast: B1-B2</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lsmB <span class="ot">&lt;-</span> lsmeans<span class="sc">::</span><span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span>fB)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmB, <span class="fu">list</span>(<span class="at">B12 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>))), <span class="at">infer =</span> <span class="fu">c</span>(T, T))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># AB-interaction contrast: AB11-AB13-AB21+AB23</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="ot">&lt;-</span> <span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span> fB<span class="sc">:</span>fA) <span class="co"># Using "fB:fA" yields AB lex order</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="co"># Display to see order of AB combos for contrast coefficients</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> fB fA lsmean      SE df lower.CL upper.CL
+ 1  1   0.185 0.00982 12    0.164    0.206
+ 2  1   0.179 0.00982 12    0.157    0.200
+ 3  1   0.212 0.00982 12    0.191    0.233
+ 1  2   0.268 0.00982 12    0.247    0.290
+ 2  2   0.259 0.00982 12    0.238    0.281
+ 3  2   0.265 0.00982 12    0.244    0.286
+
+Confidence level used: 0.95 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmAB, <span class="fu">list</span>(<span class="at">AB =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))), <span class="at">infer =</span> <span class="fu">c</span>(T, T))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple comparisons: B</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lsmB, <span class="at">level =</span> <span class="fl">0.99</span>) <span class="co"># lsmeans for B and 99% CIs</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tukey’s method</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmB, <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"tukey"</span>), <span class="at">infer =</span> <span class="fu">c</span>(T, T), <span class="at">level =</span> <span class="fl">0.99</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Dunnett’s method</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmB, <span class="at">method =</span> <span class="st">"trt.vs.ctrl"</span>, <span class="at">adj =</span> <span class="st">"mvt"</span>, <span class="at">ref =</span> <span class="dv">1</span>), <span class="at">infer =</span> <span class="fu">c</span>(T, T), <span class="at">level =</span> <span class="fl">0.99</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># # 3. Extract Residuals and Fitted Values</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># res &lt;- residuals(model_full)</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># fits &lt;- fitted(model_full)</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># # 4. Diagnostic Plots</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(res ~ fits, main = "Residuals vs. Fitted")</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># qqnorm(res)</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># qqline(res)</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># # 5. If Interaction is Negligible, Refit Main-effects Model</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># model_main &lt;- aov(ReactionTime ~ CueStim + CueTime, data = df)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(model_main)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># # 6. Multiple Comparisons for CueStim or CueTime if Needed</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># # (Tukey's HSD example)</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># TukeyHSD(model_main, "CueStim")</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># TukeyHSD(model_main, "CueTime")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-contrast-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-contrast-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"B12","2":"0.007666667","3":"0.009820613","4":"12","5":"-0.01373061","6":"0.02906394","7":"0.7806709","8":"0.4501222","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"AB","2":"-0.03033333","3":"0.01964123","4":"12","5":"-0.07312789","6":"0.01246122","7":"-1.544371","8":"0.1484504","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["fB"],"name":[1],"type":["fct"],"align":["left"]},{"label":["lsmean"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0.2266667","3":"0.006944222","4":"12","5":"0.2054553","6":"0.2478781","_rn_":"1"},{"1":"2","2":"0.2190000","3":"0.006944222","4":"12","5":"0.1977886","6":"0.2402114","_rn_":"2"},{"1":"3","2":"0.2385000","3":"0.006944222","4":"12","5":"0.2172886","6":"0.2597114","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"fB1 - fB2","2":"0.007666667","3":"0.009820613","4":"12","5":"-0.02737342","6":"0.04270676","7":"0.7806709","8":"0.7214544","_rn_":"1"},{"1":"fB1 - fB3","2":"-0.011833333","3":"0.009820613","4":"12","5":"-0.04687342","6":"0.02320676","7":"-1.2049485","8":"0.4727382","_rn_":"2"},{"1":"fB2 - fB3","2":"-0.019500000","3":"0.009820613","4":"12","5":"-0.05454009","6":"0.01554009","7":"-1.9856194","8":"0.1581646","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"fB2 - fB1","2":"-0.007666667","3":"0.009820613","4":"12","5":"-0.04093482","6":"0.02560148","7":"-0.7806709","8":"0.6611256","_rn_":"1"},{"1":"fB3 - fB1","2":"0.011833333","3":"0.009820613","4":"12","5":"-0.02143482","6":"0.04510148","7":"1.2049485","8":"0.4032893","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-contrast-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Reaction Time Example
+</figcaption>
+</figure>
+</div>
+</div>
+<section id="model-checking-and-residual-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="model-checking-and-residual-diagnostics">Model Checking and Residual Diagnostics</h2>
+<p>Before finalizing an ANOVA conclusion, we must check:</p>
+<ul>
+<li><strong>Independence</strong>: Plot residuals vs.&nbsp;observation order.</li>
+<li><strong>Constant Variance</strong>: Plot residuals (or standardized residuals) vs.&nbsp;fitted values, factor levels, or treatment combos.</li>
+<li><strong>Normality</strong>: Use a Normal Q-Q plot of residuals.</li>
+</ul>
+<p>The <strong>standardized residual</strong> often used is:</p>
+<p><span class="math display">\[
+z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
+\]</span></p>
+<p>Depending on whether we assume a complete or main-effects model, <span class="math inline">\(\hat{y}_{ijt}\)</span> includes:</p>
+<ul>
+<li><span class="math inline">\(\hat{\tau}_{ij} = \hat{\alpha}_i + \hat{\beta}_j + \widehat{(\alpha\beta)}_{ij}\)</span> (complete model), or</li>
+<li><span class="math inline">\(\hat{\tau}_{ij} = \hat{\alpha}_i + \hat{\beta}_j\)</span> (main-effects model).</li>
 </ul>
 </section>
 </section>
-<section id="hypothesis-testing-in-two-way-anova" class="level1">
-<h1>Hypothesis Testing in Two-Way ANOVA</h1>
-<section id="hypotheses" class="level2">
-<h2 class="anchored" data-anchor-id="hypotheses">Hypotheses</h2>
-<ol type="1">
-<li><strong>Interaction Test</strong>:
+<section id="two-way-anova-models-in-r" class="level1">
+<h1>Two-Way ANOVA Models in R</h1>
+<p>This section demonstrates how to fit and interpret two-way ANOVA models in R, focusing on attached code examples. We assume a data frame such as <code>react.data</code> containing:</p>
 <ul>
-<li><span class="math inline">\(H_0:\)</span> No interaction (<span class="math inline">\((\alpha\beta)_{ij}=0\)</span>)</li>
-<li><span class="math inline">\(H_a:\)</span> Interaction present</li>
-</ul></li>
-<li><strong>Main Effect of A</strong>:
-<ul>
-<li><span class="math inline">\(H_0:\alpha_1=\alpha_2=\cdots=\alpha_a=0\)</span></li>
-<li><span class="math inline">\(H_a:\)</span> At least one <span class="math inline">\(\alpha_i \neq 0\)</span></li>
-</ul></li>
-<li><strong>Main Effect of B</strong>:
-<ul>
-<li><span class="math inline">\(H_0:\beta_1=\beta_2=\cdots=\beta_b=0\)</span></li>
-<li><span class="math inline">\(H_a:\)</span> At least one <span class="math inline">\(\beta_j \neq 0\)</span></li>
-</ul></li>
-</ol>
-<p><strong>Testing Order:</strong> Generally, check interaction first. If significant, main effects need careful interpretation.</p>
-</section>
-<section id="anova-table" class="level2">
-<h2 class="anchored" data-anchor-id="anova-table">ANOVA Table</h2>
-<table class="table">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 20%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 38%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Source</th>
-<th>DF</th>
-<th>SS</th>
-<th>MS</th>
-<th>F-test</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td><span class="math inline">\(a-1\)</span></td>
-<td><span class="math inline">\(SS_A\)</span></td>
-<td><span class="math inline">\(MS_A\)</span></td>
-<td><span class="math inline">\(F_A = MS_A/MS_E\)</span></td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td><span class="math inline">\(b-1\)</span></td>
-<td><span class="math inline">\(SS_B\)</span></td>
-<td><span class="math inline">\(MS_B\)</span></td>
-<td><span class="math inline">\(F_B = MS_B/MS_E\)</span></td>
-</tr>
-<tr class="odd">
-<td>A×B</td>
-<td><span class="math inline">\((a-1)(b-1)\)</span></td>
-<td><span class="math inline">\(SS_{AB}\)</span></td>
-<td><span class="math inline">\(MS_{AB}\)</span></td>
-<td><span class="math inline">\(F_{AB} = MS_{AB}/MS_E\)</span></td>
-</tr>
-<tr class="even">
-<td>Error</td>
-<td><span class="math inline">\(N - ab\)</span></td>
-<td><span class="math inline">\(SS_E\)</span></td>
-<td><span class="math inline">\(MS_E\)</span></td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td><span class="math inline">\(N-1\)</span></td>
-<td><span class="math inline">\(SS_T\)</span></td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Note:</strong> If data are unbalanced, different sum of squares types (Type I, II, III) might be considered. See Christensen (2018) for details.</p>
-</section>
-</section>
-<section id="example-in-r-two-way-anova-with-interaction" class="level1">
-<h1>Example (In R): Two-Way ANOVA with Interaction</h1>
-<p><strong>Step-by-Step:</strong></p>
-<ol type="1">
-<li><p><strong>Data Setup</strong> Suppose <code>data</code> has columns: <code>Response</code>, <code>FactorA</code>, and <code>FactorB</code>.</p></li>
-<li><p><strong>Fit Model and ANOVA</strong>:</p></li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit two-way ANOVA with interaction</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB, <span class="at">data =</span> data)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Interpret the ANOVA table. Check if interaction is significant.</p>
-<ol type="1">
-<li><strong>Interaction Plot</strong>:</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(data<span class="sc">$</span>FactorA, data<span class="sc">$</span>FactorB, data<span class="sc">$</span>Response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Non-parallel lines indicate interaction.</p>
-<ol type="1">
-<li><strong>Interpretation</strong>: If interaction is significant:
-<ul>
-<li>The effect of one factor changes depending on the level of the other. If interaction is not significant:</li>
-<li>Consider main effects separately.</li>
-</ul></li>
-</ol>
-</section>
-<section id="unbalanced-designs-and-advanced-techniques" class="level1">
-<h1>Unbalanced Designs and Advanced Techniques</h1>
-<p>When sample sizes differ across cells, traditional ANOVA is complicated by the unequal representation of treatments. Approaches:</p>
-<ul>
-<li><strong>Type II SS</strong>: Marginal means ignoring higher-order terms.</li>
-<li><strong>Type III SS</strong>: Adjusted means considering all other factors.</li>
+<li><code>A</code>, <code>B</code>: numerical or factor-coded levels of Factors A and B,</li>
+<li><code>y</code>: the response,</li>
+<li>potentially additional identifying information (observation order, treatment codes, etc.).</li>
 </ul>
-<p>R Implementation:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model, <span class="at">type=</span><span class="st">"II"</span>)  <span class="co"># Type II sums of squares</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model, <span class="at">type=</span><span class="st">"III"</span>) <span class="co"># Type III sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For deeper insights, see Dean et al.&nbsp;(2017) and Christensen (2018).</p>
+<section id="fitting-the-two-way-complete-model" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-the-two-way-complete-model">Fitting the Two-Way Complete Model</h2>
+<p>A typical R formula for the two-way complete model is:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>modelAB <span class="ot">=</span> <span class="fu">aov</span>(y <span class="sc">~</span> fA <span class="sc">+</span> fB <span class="sc">+</span> fA<span class="sc">:</span>fB, <span class="at">data =</span> react_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or equivalently:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>modelAB <span class="ot">=</span> <span class="fu">aov</span>(y <span class="sc">~</span> fA <span class="sc">*</span> fB, <span class="at">data =</span> react_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, <code>fA</code> and <code>fB</code> are <strong>factor variables</strong> in R. The operator <code>*</code> adds both main effects and the interaction term. We often check:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelAB)        <span class="co"># "Type I" sums of squares</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(modelAB, <span class="sc">~</span>., <span class="at">test =</span> <span class="st">"F"</span>)  <span class="co"># "Type III" sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="visualizing-and-understanding-interactions" class="level1">
-<h1>Visualizing and Understanding Interactions</h1>
-<p><strong>Analogy:</strong> If you imagine factor A on the x-axis and the response on the y-axis, plotting a separate line for each level of factor B: - Parallel lines → No interaction (effects are additive). - Converging or crossing lines → Significant interaction (the effect of A depends on B).</p>
-<p><strong>Complex Example:</strong> Consider a pharmacological study: - Factor A = Drug Dosage (Low, Medium, High) - Factor B = Diet Type (Normal, High-Fat) Interaction plot might show that at Low dosage, both diets yield similar outcomes, but at High dosage, the High-Fat diet drastically reduces drug effectiveness, indicating a strong interaction.</p>
+<section id="type-i-vs.-type-iii-sums-of-squares" class="level2">
+<h2 class="anchored" data-anchor-id="type-i-vs.-type-iii-sums-of-squares">Type I vs.&nbsp;Type III Sums of Squares</h2>
+<ul>
+<li><strong>Type I</strong> (Sequential) sums of squares: Variation explained by adding each term in sequence.</li>
+<li><strong>Type III</strong> sums of squares: Variation explained by each term after adjusting for all other terms in the model.
+<ul>
+<li>Requires <code>options(contrasts = c("contr.sum", "contr.poly"))</code> for balanced constraints.</li>
+</ul></li>
+</ul>
 </section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<section id="medium-difficulty" class="level2">
-<h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
+<section id="fitting-the-cell-means-model" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-the-cell-means-model">Fitting the Cell-Means Model</h2>
+<p>An alternative is the <strong>cell-means model</strong>, which estimates each τij_{ij} directly:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>modelTC <span class="ot">=</span> <span class="fu">aov</span>(y <span class="sc">~</span> fTC, <span class="at">data =</span> react_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where <code>fTC</code> is a factor that indicates each treatment combination (i,j)(i,j). This approach is ideal for more direct comparisons of the individual cell means.</p>
+</section>
+<section id="example-reaction-time-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="example-reaction-time-experiment">Example: Reaction Time Experiment</h2>
+<p>In the pasted notes, an experiment with Factor A = “Cue Stimulus” (a=2a=2 levels), Factor B = “Cue Time” (b=3b=3 levels), and unequal replicates is demonstrated. Output from <code>anova(modelAB)</code>, <code>drop1(modelAB, ~., test="F")</code>, and <code>anova(modelTC)</code>:</p>
+<ul>
+<li><strong>Interaction</strong> not significant,</li>
+<li><strong>Factor A</strong> is significant,</li>
+<li><strong>Factor B</strong> is not significant.</li>
+</ul>
+</section>
+</section>
+<section id="contrasts-and-multiple-comparisons" class="level1">
+<h1>Contrasts and Multiple Comparisons</h1>
+<p>Once we fit the model, we often need <strong>post hoc</strong> comparisons among factor levels or interactions. R packages like <strong><code>lsmeans</code></strong> (or <code>emmeans</code> in newer versions) facilitate this.</p>
+<section id="main-effect-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="main-effect-contrasts">Main-Effect Contrasts</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lsmB <span class="ot">=</span> <span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span> fB)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmB, <span class="fu">list</span>(<span class="at">B12 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>))), <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This obtains the contrast β1−β2_1 - _2 for Factor B. We can similarly construct more complex contrasts or even interaction contrasts:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="ot">=</span> <span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span> fB<span class="sc">:</span>fA)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmAB, <span class="fu">list</span>(<span class="at">AB =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))), <span class="at">infer=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="multiple-comparison-procedures" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-comparison-procedures">Multiple Comparison Procedures</h2>
+<p>Several methods adjust for <strong>familywise error</strong>:</p>
+<ul>
+<li><strong>Tukey’s HSD</strong></li>
+<li><strong>Bonferroni</strong></li>
+<li><strong>Scheffé</strong></li>
+<li><strong>Dunnett</strong> (comparing all treatments to a control)</li>
+</ul>
+<section id="tukey-example" class="level3">
+<h3 class="anchored" data-anchor-id="tukey-example">Tukey Example</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(lsmB, <span class="at">method=</span><span class="st">"pairwise"</span>, <span class="at">adjust=</span><span class="st">"tukey"</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.99</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Generates pairwise comparisons among the levels of B with Tukey’s adjustment at 99% confidence.</p>
+</section>
+</section>
+<section id="dunnett-example" class="level2">
+<h2 class="anchored" data-anchor-id="dunnett-example">Dunnett Example</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(lsmB, <span class="at">method=</span><span class="st">"trt.vs.ctrl"</span>, <span class="at">adj=</span><span class="st">"mvt"</span>, <span class="at">ref=</span><span class="dv">1</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.99</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Compares each level of B to the control (the first factor level by default).</p>
+</section>
+<section id="handling-unequal-sample-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="handling-unequal-sample-sizes">Handling Unequal Sample Sizes</h2>
+<p>When the sample sizes rijr_{ij} differ, Type I and Type III sums of squares can produce different inferences. <strong>Type III</strong> is standard for “unbalanced” data when we interpret each effect adjusted for the others. The same code is used:</p>
+<ul>
+<li><code>aov(y ~ fA + fB + fA:fB, data=…)</code></li>
+<li><code>drop1(model, ~., test="F")</code></li>
+</ul>
+<p>but we must ensure <code>contrasts</code> are set to impose consistent constraints.</p>
+</section>
+<section id="one-observation-per-cell-small-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="one-observation-per-cell-small-experiments">One Observation per Cell (Small Experiments)</h2>
+<p>When r=1r=1 per cell, there is no direct error estimate under the full <strong>two-way complete model</strong>—the error df is zero. One can:</p>
 <ol type="1">
-<li><p><strong>Basic Analysis</strong>: Simulate a balanced two-factor design (e.g., <span class="math inline">\(a=3\)</span>, <span class="math inline">\(b=2\)</span>, <span class="math inline">\(n=5\)</span>). Perform a two-way ANOVA, check for interaction, and create an interaction plot in R. Interpret the results.</p></li>
-<li><p><strong>Interpretation Without Interaction</strong>: Given data where no interaction is found, interpret main effects. Use confidence intervals for factor level means and explain the practical meaning.</p></li>
+<li>Assume interaction is negligible (use main-effects model only),</li>
+<li>Know <span class="math inline">\(\sigma^2\)</span> a priori,</li>
+<li>Use <strong>orthogonal contrasts</strong> to identify “negligible” components of the interaction, thereby pooling them to form an error estimate.</li>
 </ol>
 </section>
-<section id="challenging-problems" class="level2">
-<h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
+</section>
+<section id="advanced-topics" class="level1">
+<h1>Advanced Topics</h1>
+<section id="orthogonal-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="orthogonal-contrasts">Orthogonal Contrasts</h2>
+<p>Two contrasts are <strong>orthogonal</strong> if their corresponding sums of squares are uncorrelated. Equivalently, for equal rij=rr_{ij}=r, the sum of products of coefficients must be zero.</p>
+</section>
+<section id="model-building-and-type-i-ss" class="level2">
+<h2 class="anchored" data-anchor-id="model-building-and-type-i-ss">Model Building and Type I SS</h2>
+<p>For building or refining a model, <strong>Type I</strong> SS can be used to see how adding each effect in sequence explains residual variation.</p>
+</section>
+<section id="r-code-examples-for-plotting" class="level2">
+<h2 class="anchored" data-anchor-id="r-code-examples-for-plotting">R Code Examples for Plotting</h2>
+<ul>
+<li><strong>Residual plots</strong>:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelAB)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">fitted</span>(modelAB)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res <span class="sc">~</span> fits)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(res); <span class="fu">qqline</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Interaction plots</strong>:</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> react.data<span class="sc">$</span>fA, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.factor =</span> react.data<span class="sc">$</span>fB,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">response =</span> react.data<span class="sc">$</span>y, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type=</span><span class="st">"b"</span>, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab=</span><span class="st">"A"</span>, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.label=</span><span class="st">"B"</span>, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab=</span><span class="st">"Mean of y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In these lecture notes, we have explored:</p>
 <ol type="1">
-<li><p><strong>Unbalanced Two-Factor Design</strong>: Work with a dataset where one cell has fewer observations. Fit the model and compare Type I, II, and III sums of squares using <code>car::Anova(model, type=…)</code>. Discuss how the choice of sum of squares affects conclusions about main and interaction effects.</p></li>
-<li><p><strong>Complex Interaction Interpretation</strong>: Use a real or simulated dataset with a significant interaction. Implement <code>emmeans</code> in R to estimate marginal means and pairwise comparisons. Write a short report explaining how the interaction modifies the main effects. Include plots of estimated means and confidence intervals.</p></li>
-<li><p><strong>Mathematical Proof of Interaction Contrasts (Appendix)</strong>: Derive formulas for interaction contrasts and show how they measure the deviation from additivity. Prove that if all interaction contrasts are zero, the model is additive.</p></li>
+<li><strong>Two-way ANOVA models</strong> (complete, main-effects) and their key assumptions.</li>
+<li><strong>Model checking</strong> via residual diagnostics to confirm normality, equal variances, and independence.</li>
+<li><strong>Contrasts and multiple comparisons</strong> in R using <code>lsmeans</code> (or <code>emmeans</code>), including Type I vs.&nbsp;Type III sums of squares for unbalanced designs.</li>
+<li><strong>Handling special cases</strong>, such as one observation per cell, by leveraging orthogonal contrasts or known variance assumptions.</li>
+</ol>
+<p>These methods allow us to make rigorous inferences about factor main effects and interactions in a two-factor experimental setup. In practice, thorough model checking (especially when cell counts are unequal) ensures valid scientific conclusions and properly calibrated multiple comparisons.</p>
+</section>
+<section id="assignments" class="level2">
+<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
+<ol type="1">
+<li><p><strong>Residual Diagnostics</strong></p>
+<ul>
+<li>Simulate a two-way ANOVA dataset in R, fit the complete model, and produce diagnostic plots for normality, equal variances, and independence.</li>
+</ul></li>
+<li><p><strong>Interaction Plot Interpretation</strong></p>
+<ul>
+<li>Provide a small dataset with potential interaction. Plot the interaction and propose how you would test the no-interaction hypothesis.</li>
+</ul></li>
+<li><p><strong>Orthogonal Contrasts</strong></p>
+<ul>
+<li>For a <span class="math inline">\(2\times 3\)</span> experiment, list a complete set of orthogonal contrasts for the interaction. Verify their orthogonality.</li>
+</ul></li>
+<li><p><strong>Power Calculation</strong></p>
+<ul>
+<li>Assume a <span class="math inline">\(2\times 2\)</span> design with equal sample size <span class="math inline">\(r\)</span> per cell and desired power 0.80 to detect a main-effect difference of 2 (with <span class="math inline">\(\sigma^2\)</span> estimated at 3). Use the power-based formula to find <span class="math inline">\(r\)</span>.</li>
+</ul></li>
 </ol>
 </section>
+<section id="exams" class="level2">
+<h2 class="anchored" data-anchor-id="exams">Exams</h2>
+<p>Consider an exam scenario with both conceptual and computational questions:</p>
+<ol type="1">
+<li><p><strong>Conceptual</strong></p>
+<ul>
+<li>Define the assumptions of the two-way complete model. How do you test them?</li>
+<li>Explain why we typically test interaction first before examining main effects.</li>
+</ul></li>
+<li><p><strong>Computational</strong></p>
+<ul>
+<li>Given raw data for a <span class="math inline">\(3 \times 4\)</span> design, compute and fill in an ANOVA table. Perform an <span class="math inline">\(F\)</span>-test for interaction at <span class="math inline">\(\alpha=0.05\)</span>.</li>
+</ul></li>
+<li><p><strong>Short Essay</strong></p>
+<ul>
+<li>Compare and contrast the two-way complete model and the two-way main-effects model. Include real-world examples.</li>
+</ul></li>
+</ol>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>Two-factor factorial designs expand our analytical horizons, enabling the study of multi-dimensional treatment structures. Understanding and detecting interaction effects is critical—they can dramatically change conclusions about how factors influence a response. By mastering two-way ANOVA, sums of squares types, and interaction plots, graduate students gain a key skillset for robust, nuanced experimental analysis.</p>
-<hr>
+<section id="visual-aids" class="level2">
+<h2 class="anchored" data-anchor-id="visual-aids">Visual Aids</h2>
+<ul>
+<li><strong>Figure: Interaction Plots</strong> for typical data sets showing:
+<ul>
+<li>Parallel lines (no interaction).</li>
+<li>Clearly crossing lines (significant interaction).</li>
+</ul></li>
+<li><strong>Figure: Residual Plots</strong> illustrating typical patterns (equal vs.&nbsp;unequal variances, outliers).</li>
+<li><strong>Table Templates</strong> for summarizing sample means, sum of squares, and mean squares.</li>
+</ul>
+</section>
+<section id="appendix-advanced-proofs-and-derivations" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-advanced-proofs-and-derivations">Appendix: Advanced Proofs and Derivations</h2>
+<ol type="1">
+<li><strong>Proof of Orthogonality Condition</strong>
+<ul>
+<li>Show that two contrasts are uncorrelated <span class="math inline">\(\iff \sum (d_{ij} , h_{ij} / r_{ij}) = 0\)</span>.</li>
+</ul></li>
+<li><strong>Derivation of LSE under Main-Effects Model (Unequal <span class="math inline">\(r\)</span>)</strong>
+<ul>
+<li>Solve the normal equations for <span class="math inline">\(\hat{\alpha}_i, \hat{\beta}_j\)</span> when <span class="math inline">\(r_{ij}\)</span> differ.</li>
+</ul></li>
+</ol>
+</section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<ul>
-<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
-<li>Montgomery, D. C., &amp; Runger, G. C. (2010). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
-<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
-</ul>
-</section>
-</section>
-<section id="appendix-advanced-mathematical-derivations" class="level1">
-<h1>Appendix: Advanced Mathematical Derivations</h1>
-<section id="interaction-contrasts" class="level2">
-<h2 class="anchored" data-anchor-id="interaction-contrasts">Interaction Contrasts</h2>
-<p>An interaction can be represented by contrasts that compare how factor A’s differences vary across levels of factor B. For example, consider a simple 2×2 case (<span class="math inline">\(a=2,b=2\)</span>):</p>
-<p><span class="math display">\[
-(\alpha\beta)_{11} - (\alpha\beta)_{12} - (\alpha\beta)_{21} + (\alpha\beta)_{22}
-\]</span></p>
-<p>measures the extent to which effects deviate from additivity.</p>
-</section>
-<section id="additivity-condition" class="level2">
-<h2 class="anchored" data-anchor-id="additivity-condition">Additivity Condition</h2>
-<p>For no interaction:</p>
-<p><span class="math display">\[
-(\alpha\beta)_{ij} = 0 \implies \tau_{ij} = \alpha_i + \beta_j.
-\]</span></p>
-<p>This forms a linear decomposition of cell means into separate contributions of factors A and B.</p>
-</section>
-<section id="proofs-for-sums-of-squares" class="level2">
-<h2 class="anchored" data-anchor-id="proofs-for-sums-of-squares">Proofs for Sums of Squares</h2>
-<p>Following Dean et al.&nbsp;(2017), sums of squares for main and interaction effects can be constructed from orthogonal contrasts. Derive the form of <span class="math inline">\(SS_A, SS_B, SS_{AB}\)</span> from cell means <span class="math inline">\(\bar{Y}_{ij}\)</span> and show their orthogonality in balanced designs.</p>
+<ol type="1">
+<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a></li>
+<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression: Linear Modeling for Unbalanced Data</em> (Second Edition). Chapman and Hall/CRC, imprint of Taylor &amp; Francis.</li>
+<li>Montgomery, D. C. (2020). <em>Design and Analysis of Experiments</em> (10th ed.). Wiley.</li>
+</ol>
 
 
 </section>

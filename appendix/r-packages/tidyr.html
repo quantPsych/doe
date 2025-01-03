@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Using the tidyr Package in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-41fbfa16b5e39347becdc9f3c4e28729.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-aff2639e191a0a8d05f4f3608923e904.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<meta property="og:title" content="Using the tidyr Package in R – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-packages/tidyr_files/figure-html/unnamed-chunk-10-1.png">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+</head><body class="nav-fixed"><img src="../../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../assets/styles/css/home.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">STAT 454/545 - Analysis of Variance and Experimental Design</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Using the tidyr Package in R</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">02-Jan-2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#tutorial-using-the-tidyr-package-in-r" id="toc-tutorial-using-the-tidyr-package-in-r" class="nav-link active" data-scroll-target="#tutorial-using-the-tidyr-package-in-r">Tutorial: Using the tidyr Package in R</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits</a></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  </ul></li>
+  <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
+  <ul class="collapse">
+  <li><a href="#tidyrpivot_longer" id="toc-tidyrpivot_longer" class="nav-link" data-scroll-target="#tidyrpivot_longer">tidyr::pivot_longer()</a></li>
+  <li><a href="#tidyrpivot_wider" id="toc-tidyrpivot_wider" class="nav-link" data-scroll-target="#tidyrpivot_wider">tidyr::pivot_wider()</a></li>
+  <li><a href="#tidyrseparate" id="toc-tidyrseparate" class="nav-link" data-scroll-target="#tidyrseparate">tidyr::separate()</a></li>
+  <li><a href="#tidyrunite" id="toc-tidyrunite" class="nav-link" data-scroll-target="#tidyrunite">tidyr::unite()</a></li>
+  </ul></li>
+  <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
+  <ul class="collapse">
+  <li><a href="#example-1-reshaping-and-summarizing" id="toc-example-1-reshaping-and-summarizing" class="nav-link" data-scroll-target="#example-1-reshaping-and-summarizing">Example 1: Reshaping and Summarizing</a></li>
+  <li><a href="#example-2-combining-and-cleaning-columns" id="toc-example-2-combining-and-cleaning-columns" class="nav-link" data-scroll-target="#example-2-combining-and-cleaning-columns">Example 2: Combining and Cleaning Columns</a></li>
+  </ul></li>
+  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
+  <ul class="collapse">
+  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
+  <li><a href="#optimization-tips" id="toc-optimization-tips" class="nav-link" data-scroll-target="#optimization-tips">Optimization Tips</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
+  <ul class="collapse">
+  <li><a href="#common-issues" id="toc-common-issues" class="nav-link" data-scroll-target="#common-issues">Common Issues</a></li>
+  <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul></li>
+  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="tutorial-using-the-tidyr-package-in-r" class="level1">
+<h1>Tutorial: Using the tidyr Package in R</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>The <code>tidyr</code> package, part of the <code>tidyverse</code>, is designed for data tidying—reshaping data into a tidy format where each variable is a column, each observation is a row, and each value is a single cell.</p>
+<p>Key functions include: - <code>tidyr::pivot_longer()</code>: Reshape wide data into long format. - <code>tidyr::pivot_wider()</code>: Reshape long data into wide format. - <code>tidyr::separate()</code>: Split a column into multiple columns. - <code>tidyr::unite()</code>: Combine multiple columns into one. - <code>tidyr::drop_na()</code>: Remove rows with missing values. - <code>tidyr::replace_na()</code>: Replace missing values.</p>
+</section>
+<section id="use-cases" class="level3">
+<h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
+<ul>
+<li>Reshaping data for analysis or visualization.</li>
+<li>Cleaning and preparing raw datasets.</li>
+<li>Combining or splitting columns for better data structure.</li>
+</ul>
+</section>
+<section id="benefits" class="level3">
+<h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
+<ul>
+<li>Simplifies handling of messy or untidy data.</li>
+<li>Ensures compatibility with other <code>tidyverse</code> tools.</li>
+<li>Offers a consistent and intuitive syntax.</li>
+</ul>
+</section>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="loading-the-package" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
+<p>Load <code>tidyr</code> using <code>pacman::p_load()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<p>Reshape a simple dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gender =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_2022 =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_2023 =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">31</span>, <span class="dv">36</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot longer</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"Age"</span>), <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Gender"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Year"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"M","3":"Age_2022","4":"25"},{"1":"1","2":"M","3":"Age_2023","4":"26"},{"1":"2","2":"F","3":"Age_2022","4":"30"},{"1":"2","2":"F","3":"Age_2023","4":"31"},{"1":"3","2":"M","3":"Age_2022","4":"35"},{"1":"3","2":"M","3":"Age_2023","4":"36"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="key-functions-and-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
+<section id="tidyrpivot_longer" class="level3">
+<h3 class="anchored" data-anchor-id="tidyrpivot_longer">tidyr::pivot_longer()</h3>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description</h4>
+<p>Converts wide data into long format, making columns into rows.</p>
+</section>
+<section id="syntax" class="level4">
+<h4 class="anchored" data-anchor-id="syntax">Syntax</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(data, cols, names_to, values_to, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>data</code>: A data frame.</li>
+<li><code>cols</code>: Columns to pivot.</li>
+<li><code>names_to</code>: Name of the new column for column names.</li>
+<li><code>values_to</code>: Name of the new column for values.</li>
+</ul>
+</section>
+<section id="example" class="level4">
+<h4 class="anchored" data-anchor-id="example">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(Age_2022, Age_2023), <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Gender"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Year"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"M","3":"Age_2022","4":"25"},{"1":"1","2":"M","3":"Age_2023","4":"26"},{"1":"2","2":"F","3":"Age_2022","4":"30"},{"1":"2","2":"F","3":"Age_2023","4":"31"},{"1":"3","2":"M","3":"Age_2022","4":"35"},{"1":"3","2":"M","3":"Age_2023","4":"36"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="tidyrpivot_wider" class="level3">
+<h3 class="anchored" data-anchor-id="tidyrpivot_wider">tidyr::pivot_wider()</h3>
+<section id="description-1" class="level4">
+<h4 class="anchored" data-anchor-id="description-1">Description</h4>
+<p>Converts long data into wide format, making rows into columns.</p>
+</section>
+<section id="syntax-1" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-1">Syntax</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(data, names_from, values_from, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>data</code>: A data frame.</li>
+<li><code>names_from</code>: Column containing names for new columns.</li>
+<li><code>values_from</code>: Column containing values for new columns.</li>
+</ul>
+</section>
+<section id="example-1" class="level4">
+<h4 class="anchored" data-anchor-id="example-1">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"Age"</span>), <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Age"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>long_data <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Year, <span class="at">values_from =</span> Age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Gender"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Age_2022"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Age_2023"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"M","3":"25","4":"26"},{"1":"2","2":"F","3":"30","4":"31"},{"1":"3","2":"M","3":"35","4":"36"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="tidyrseparate" class="level3">
+<h3 class="anchored" data-anchor-id="tidyrseparate">tidyr::separate()</h3>
+<section id="description-2" class="level4">
+<h4 class="anchored" data-anchor-id="description-2">Description</h4>
+<p>Splits a single column into multiple columns.</p>
+</section>
+<section id="syntax-2" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-2">Syntax</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">separate</span>(data, col, into, <span class="at">sep =</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>data</code>: A data frame.</li>
+<li><code>col</code>: Column to split.</li>
+<li><code>into</code>: Vector of new column names.</li>
+<li><code>sep</code>: Separator to split on.</li>
+</ul>
+</section>
+<section id="example-2" class="level4">
+<h4 class="anchored" data-anchor-id="example-2">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice_2022"</span>, <span class="st">"Bob_2023"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">separate</span>(Name, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Name"</span>, <span class="st">"Year"</span>), <span class="at">sep =</span> <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Year"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Alice","2":"2022"},{"1":"Bob","2":"2023"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="tidyrunite" class="level3">
+<h3 class="anchored" data-anchor-id="tidyrunite">tidyr::unite()</h3>
+<section id="description-3" class="level4">
+<h4 class="anchored" data-anchor-id="description-3">Description</h4>
+<p>Combines multiple columns into one.</p>
+</section>
+<section id="syntax-3" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-3">Syntax</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">unite</span>(data, col, ..., <span class="at">sep =</span> <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>data</code>: A data frame.</li>
+<li><code>col</code>: Name of the new column.</li>
+<li><code>...</code>: Columns to combine.</li>
+<li><code>sep</code>: Separator between combined values.</li>
+</ul>
+</section>
+<section id="example-3" class="level4">
+<h4 class="anchored" data-anchor-id="example-3">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>), <span class="at">Year =</span> <span class="fu">c</span>(<span class="dv">2022</span>, <span class="dv">2023</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">unite</span>(<span class="st">"Name_Year"</span>, Name, Year, <span class="at">sep =</span> <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Name_Year"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Alice_2022"},{"1":"Bob_2023"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="in-depth-examples" class="level2">
+<h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
+<section id="example-1-reshaping-and-summarizing" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-reshaping-and-summarizing">Example 1: Reshaping and Summarizing</h3>
+<section id="objective" class="level4">
+<h4 class="anchored" data-anchor-id="objective">Objective</h4>
+<p>Summarize the mean age by gender and year.</p>
+</section>
+<section id="steps" class="level4">
+<h4 class="anchored" data-anchor-id="steps">Steps</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gender =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_2022 =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">27</span>, <span class="dv">35</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_2023 =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">31</span>, <span class="dv">28</span>, <span class="dv">36</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"Age"</span>), <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Age"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>summary <span class="ot">&lt;-</span> data_long <span class="sc">|&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(Gender, Year) <span class="sc">|&gt;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">MeanAge =</span> <span class="fu">mean</span>(Age), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Gender"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Year"],"name":[2],"type":["chr"],"align":["left"]},{"label":["MeanAge"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"F","2":"Age_2022","3":"28.5"},{"1":"F","2":"Age_2023","3":"29.5"},{"1":"M","2":"Age_2022","3":"30.0"},{"1":"M","2":"Age_2023","3":"31.0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="output" class="level4">
+<h4 class="anchored" data-anchor-id="output">Output</h4>
+<p>A summary table of mean ages by gender and year.</p>
+</section>
+</section>
+<section id="example-2-combining-and-cleaning-columns" class="level3">
+<h3 class="anchored" data-anchor-id="example-2-combining-and-cleaning-columns">Example 2: Combining and Cleaning Columns</h3>
+<section id="objective-1" class="level4">
+<h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
+<p>Combine year and ID into a unique identifier.</p>
+</section>
+<section id="steps-1" class="level4">
+<h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unite</span>(<span class="st">"UniqueID"</span>, ID, <span class="fu">starts_with</span>(<span class="st">"Age"</span>), <span class="at">sep =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["UniqueID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Gender"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"1-25-26","2":"M"},{"1":"2-30-31","2":"F"},{"1":"3-27-28","2":"F"},{"1":"4-35-36","2":"M"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="output-1" class="level4">
+<h4 class="anchored" data-anchor-id="output-1">Output</h4>
+<p>A new column <code>UniqueID</code> combines values.</p>
+</section>
+</section>
+</section>
+<section id="advanced-features" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
+<section id="customization" class="level3">
+<h3 class="anchored" data-anchor-id="customization">Customization</h3>
+<section id="add-prefixes-or-suffixes" class="level4">
+<h4 class="anchored" data-anchor-id="add-prefixes-or-suffixes">Add Prefixes or Suffixes</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">paste0</span>(<span class="st">"Year_"</span>, Year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Gender"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Year"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"M","3":"Year_Age_2022","4":"25"},{"1":"1","2":"M","3":"Year_Age_2023","4":"26"},{"1":"2","2":"F","3":"Year_Age_2022","4":"30"},{"1":"2","2":"F","3":"Year_Age_2023","4":"31"},{"1":"3","2":"F","3":"Year_Age_2022","4":"27"},{"1":"3","2":"F","3":"Year_Age_2023","4":"28"},{"1":"4","2":"M","3":"Year_Age_2022","4":"35"},{"1":"4","2":"M","3":"Year_Age_2023","4":"36"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="integration" class="level3">
+<h3 class="anchored" data-anchor-id="integration">Integration</h3>
+<p>Combine with <code>ggplot2</code> for visualization:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Age, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age Distribution by Year"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Age"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="tidyr_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="tidyr_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="optimization-tips" class="level3">
+<h3 class="anchored" data-anchor-id="optimization-tips">Optimization Tips</h3>
+<ul>
+<li>Use <code>select()</code> before pivoting to limit unnecessary columns.</li>
+<li>Avoid excessive pivoting by designing data collection appropriately.</li>
+</ul>
+</section>
+</section>
+<section id="troubleshooting-and-faqs" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-and-faqs">Troubleshooting and FAQs</h2>
+<section id="common-issues" class="level3">
+<h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
+<section id="error-columns-must-be-unique" class="level4">
+<h4 class="anchored" data-anchor-id="error-columns-must-be-unique">Error: Columns Must Be Unique</h4>
+<p>Ensure column names are unique before pivoting.</p>
+</section>
+<section id="warning-na-introduced" class="level4">
+<h4 class="anchored" data-anchor-id="warning-na-introduced">Warning: NA Introduced</h4>
+<p>Check the data for inconsistencies or missing values.</p>
+</section>
+</section>
+<section id="faqs" class="level3">
+<h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
+<ul>
+<li><p><strong>Can <code>tidyr</code> handle large datasets?</strong> Yes, but consider chunking with <code>data.table</code> for very large data.</p></li>
+<li><p><strong>How do I preserve column types?</strong> Use <code>tidyr::pivot_longer()</code> or <code>pivot_wider()</code> with <code>values_transform</code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<ul>
+<li>Start with well-structured raw data.</li>
+<li>Use descriptive column names and standard formats.</li>
+<li>Avoid overusing <code>pivot_longer()</code> or <code>pivot_wider()</code> for reversible tasks.</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p><code>tidyr</code> simplifies reshaping and tidying data with a cohesive set of functions.</p>
+</section>
+<section id="next-steps" class="level3">
+<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
+<p>Explore advanced tidying tasks with <code>tidyr</code> or integrate with other <code>tidyverse</code> tools like <code>ggplot2</code> and <code>dplyr</code>.</p>
+</section>
+</section>
+<section id="references-and-resources" class="level2">
+<h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
+<ul>
+<li><a href="https://tidyr.tidyverse.org/">tidyr Documentation</a></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a href="https://github.com/tidyverse/tidyr">Tidyverse GitHub</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
+<footer class="site-footer">
+    <div class="container text-center">
+        <hr> 
+        © <span id="current-year"></span> Dr. Davood Tofighi |
+        <a href="https://canvasinfo.unm.edu/">UNM Canvas</a> |
+        <a href="https://data-wise.github.io/doe">Course GitHub Page</a> |
+    </div>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Data-Wise\.github\.io\/doe\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

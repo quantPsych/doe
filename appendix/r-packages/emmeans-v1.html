@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Tutorial: Using the emmeans R Package – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-41fbfa16b5e39347becdc9f3c4e28729.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-aff2639e191a0a8d05f4f3608923e904.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<meta name="mermaid-theme" content="neutral">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<meta property="og:title" content="Tutorial: Using the emmeans R Package – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-packages/emmeans-v1_files/figure-html/unnamed-chunk-7-1.png">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+</head><body class="nav-fixed"><img src="../../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../assets/styles/css/home.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">STAT 454/545 - Analysis of Variance and Experimental Design</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Tutorial: Using the <code>emmeans</code> R Package</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">02-Jan-2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#emmeans-tutorial" id="toc-emmeans-tutorial" class="nav-link active" data-scroll-target="#emmeans-tutorial">Emmeans Tutorial</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits</a></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  </ul></li>
+  <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">3. Key Functions and Features</a>
+  <ul class="collapse">
+  <li><a href="#emmeans" id="toc-emmeans" class="nav-link" data-scroll-target="#emmeans"><code>emmeans()</code></a></li>
+  <li><a href="#pairs" id="toc-pairs" class="nav-link" data-scroll-target="#pairs"><code>pairs()</code></a></li>
+  </ul></li>
+  <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">4. In-Depth Examples</a>
+  <ul class="collapse">
+  <li><a href="#title-comparing-mpg-across-cylinder-counts" id="toc-title-comparing-mpg-across-cylinder-counts" class="nav-link" data-scroll-target="#title-comparing-mpg-across-cylinder-counts">Title: Comparing MPG Across Cylinder Counts</a></li>
+  </ul></li>
+  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">5. Advanced Features</a>
+  <ul class="collapse">
+  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">6. Troubleshooting and FAQs</a>
+  <ul class="collapse">
+  <li><a href="#common-issues" id="toc-common-issues" class="nav-link" data-scroll-target="#common-issues">Common Issues</a></li>
+  <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">7. Best Practices</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">8. Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  <li><a href="#encouragement" id="toc-encouragement" class="nav-link" data-scroll-target="#encouragement">Encouragement</a></li>
+  </ul></li>
+  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">9. References and Resources</a></li>
+  </ul></li>
+  <li><a href="#handling-interactions-with-emmeans" id="toc-handling-interactions-with-emmeans" class="nav-link" data-scroll-target="#handling-interactions-with-emmeans">Handling Interactions with <code>emmeans</code></a>
+  <ul class="collapse">
+  <li><a href="#understanding-interactions" id="toc-understanding-interactions" class="nav-link" data-scroll-target="#understanding-interactions">1. Understanding Interactions</a></li>
+  <li><a href="#fitting-a-model-with-interactions" id="toc-fitting-a-model-with-interactions" class="nav-link" data-scroll-target="#fitting-a-model-with-interactions">2. Fitting a Model with Interactions</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#using-emmeans-for-interactions" id="toc-using-emmeans-for-interactions" class="nav-link" data-scroll-target="#using-emmeans-for-interactions">3. Using <code>emmeans</code> for Interactions</a>
+  <ul class="collapse">
+  <li><a href="#compute-estimated-marginal-means" id="toc-compute-estimated-marginal-means" class="nav-link" data-scroll-target="#compute-estimated-marginal-means">Compute Estimated Marginal Means</a></li>
+  <li><a href="#interpret-the-output" id="toc-interpret-the-output" class="nav-link" data-scroll-target="#interpret-the-output">Interpret the Output</a></li>
+  </ul></li>
+  <li><a href="#visualizing-interactions" id="toc-visualizing-interactions" class="nav-link" data-scroll-target="#visualizing-interactions">4. Visualizing Interactions</a>
+  <ul class="collapse">
+  <li><a href="#customizing-the-plot" id="toc-customizing-the-plot" class="nav-link" data-scroll-target="#customizing-the-plot">Customizing the Plot</a></li>
+  </ul></li>
+  <li><a href="#pairwise-comparisons" id="toc-pairwise-comparisons" class="nav-link" data-scroll-target="#pairwise-comparisons">5. Pairwise Comparisons</a></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
+  </ul></li>
+  <li><a href="#handling-interactions-with-more-than-two-factors-in-emmeans" id="toc-handling-interactions-with-more-than-two-factors-in-emmeans" class="nav-link" data-scroll-target="#handling-interactions-with-more-than-two-factors-in-emmeans">Handling Interactions with More Than Two Factors in <code>emmeans</code></a>
+  <ul class="collapse">
+  <li><a href="#understanding-multi-factor-interactions" id="toc-understanding-multi-factor-interactions" class="nav-link" data-scroll-target="#understanding-multi-factor-interactions">1. Understanding Multi-Factor Interactions</a></li>
+  <li><a href="#fitting-a-model-with-multiple-interactions" id="toc-fitting-a-model-with-multiple-interactions" class="nav-link" data-scroll-target="#fitting-a-model-with-multiple-interactions">2. Fitting a Model with Multiple Interactions</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  </ul></li>
+  <li><a href="#using-emmeans-for-multi-factor-interactions" id="toc-using-emmeans-for-multi-factor-interactions" class="nav-link" data-scroll-target="#using-emmeans-for-multi-factor-interactions">3. Using <code>emmeans</code> for Multi-Factor Interactions</a>
+  <ul class="collapse">
+  <li><a href="#compute-estimated-marginal-means-1" id="toc-compute-estimated-marginal-means-1" class="nav-link" data-scroll-target="#compute-estimated-marginal-means-1">Compute Estimated Marginal Means</a></li>
+  <li><a href="#interpret-the-output-1" id="toc-interpret-the-output-1" class="nav-link" data-scroll-target="#interpret-the-output-1">Interpret the Output</a></li>
+  </ul></li>
+  <li><a href="#visualizing-multi-factor-interactions" id="toc-visualizing-multi-factor-interactions" class="nav-link" data-scroll-target="#visualizing-multi-factor-interactions">4. Visualizing Multi-Factor Interactions</a>
+  <ul class="collapse">
+  <li><a href="#customizing-the-plot-1" id="toc-customizing-the-plot-1" class="nav-link" data-scroll-target="#customizing-the-plot-1">Customizing the Plot</a></li>
+  </ul></li>
+  <li><a href="#pairwise-comparisons-1" id="toc-pairwise-comparisons-1" class="nav-link" data-scroll-target="#pairwise-comparisons-1">5. Pairwise Comparisons</a></li>
+  <li><a href="#conclusion-2" id="toc-conclusion-2" class="nav-link" data-scroll-target="#conclusion-2">Conclusion</a></li>
+  </ul></li>
+  <li><a href="#handling-interactions-with-more-than-two-factors-in-emmeans-1" id="toc-handling-interactions-with-more-than-two-factors-in-emmeans-1" class="nav-link" data-scroll-target="#handling-interactions-with-more-than-two-factors-in-emmeans-1">Handling Interactions with More Than Two Factors in <code>emmeans</code></a>
+  <ul class="collapse">
+  <li><a href="#understanding-multi-factor-interactions-1" id="toc-understanding-multi-factor-interactions-1" class="nav-link" data-scroll-target="#understanding-multi-factor-interactions-1">1. Understanding Multi-Factor Interactions</a></li>
+  <li><a href="#fitting-a-model-with-multiple-interactions-1" id="toc-fitting-a-model-with-multiple-interactions-1" class="nav-link" data-scroll-target="#fitting-a-model-with-multiple-interactions-1">2. Fitting a Model with Multiple Interactions</a>
+  <ul class="collapse">
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
+  </ul></li>
+  <li><a href="#using-emmeans-for-multi-factor-interactions-1" id="toc-using-emmeans-for-multi-factor-interactions-1" class="nav-link" data-scroll-target="#using-emmeans-for-multi-factor-interactions-1">3. Using <code>emmeans</code> for Multi-Factor Interactions</a>
+  <ul class="collapse">
+  <li><a href="#compute-estimated-marginal-means-2" id="toc-compute-estimated-marginal-means-2" class="nav-link" data-scroll-target="#compute-estimated-marginal-means-2">Compute Estimated Marginal Means</a></li>
+  <li><a href="#interpret-the-output-2" id="toc-interpret-the-output-2" class="nav-link" data-scroll-target="#interpret-the-output-2">Interpret the Output</a></li>
+  </ul></li>
+  <li><a href="#visualizing-multi-factor-interactions-1" id="toc-visualizing-multi-factor-interactions-1" class="nav-link" data-scroll-target="#visualizing-multi-factor-interactions-1">4. Visualizing Multi-Factor Interactions</a>
+  <ul class="collapse">
+  <li><a href="#customizing-the-plot-2" id="toc-customizing-the-plot-2" class="nav-link" data-scroll-target="#customizing-the-plot-2">Customizing the Plot</a></li>
+  </ul></li>
+  <li><a href="#pairwise-comparisons-2" id="toc-pairwise-comparisons-2" class="nav-link" data-scroll-target="#pairwise-comparisons-2">5. Pairwise Comparisons</a></li>
+  <li><a href="#conclusion-3" id="toc-conclusion-3" class="nav-link" data-scroll-target="#conclusion-3">Conclusion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="emmeans-tutorial" class="level1">
+<h1>Emmeans Tutorial</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p><code>emmeans</code> (Estimated Marginal Means) is an R package designed for the analysis of linear models. It provides tools for obtaining and visualizing adjusted means for factors in statistical models, allowing users to interpret complex model outputs more easily.</p>
+</section>
+<section id="use-cases" class="level3">
+<h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
+<ul>
+<li><strong>Post-hoc Comparisons:</strong> Evaluating differences between group means after fitting a model.</li>
+<li><strong>Visualization:</strong> Creating clear and informative plots of marginal means.</li>
+<li><strong>Model Checking:</strong> Assessing the fit and assumptions of linear models.</li>
+</ul>
+</section>
+<section id="benefits" class="level3">
+<h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
+<ul>
+<li>Simplifies the interpretation of model outputs.</li>
+<li>Facilitates the comparison of means across different factors.</li>
+<li>Integrates seamlessly with various types of models in R.</li>
+</ul>
+</section>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">2. Getting Started</h2>
+<section id="loading-the-package" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
+<p>First, load the <code>emmeans</code> package into your R session:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<p>Here’s a simple example using a linear model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> <span class="fu">factor</span>(cyl), <span class="at">data =</span> mtcars)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain estimated marginal means</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span>cyl)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["cyl"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["emmean"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"4","2":"26.66364","3":"0.9718008","4":"29","5":"24.67608","6":"28.65119","_rn_":"1"},{"1":"6","2":"19.74286","3":"1.2182168","4":"29","5":"17.25132","6":"22.23439","_rn_":"2"},{"1":"8","2":"15.10000","3":"0.8614094","4":"29","5":"13.33822","6":"16.86178","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>cyl, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       4        6        8 
+26.66364 19.74286 15.10000 </code></pre>
+</div>
+</div>
+<p><em>Annotation:</em> This will provide the estimated marginal means of miles per gallon (mpg) adjusted for the number of cylinders (cyl).</p>
+</section>
+</section>
+<section id="key-functions-and-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-functions-and-features">3. Key Functions and Features</h2>
+<section id="emmeans" class="level3">
+<h3 class="anchored" data-anchor-id="emmeans"><code>emmeans()</code></h3>
+<ul>
+<li><strong>Description:</strong> Computes estimated marginal means for specified factors in a model.</li>
+<li><strong>Syntax:</strong></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(object, specs, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>object</code>: A fitted model object.</li>
+<li><code>specs</code>: Terms for which to compute marginal means.</li>
+<li><strong>Example:</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of emmeans</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>emm_cyl <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span>cyl)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(emm_cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> cyl emmean    SE df lower.CL upper.CL
+   4   26.7 0.972 29     24.7     28.7
+   6   19.7 1.220 29     17.3     22.2
+   8   15.1 0.861 29     13.3     16.9
+
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+<p><em>This will display the estimated marginal means for each cylinder category.</em></p>
+</section>
+<section id="pairs" class="level3">
+<h3 class="anchored" data-anchor-id="pairs"><code>pairs()</code></h3>
+<ul>
+<li><p><strong>Description:</strong> Computes pairwise comparisons among estimated marginal means.</p></li>
+<li><p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(x, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>x</code>: An object of class <code>emmeans</code>.</li>
+</ul></li>
+<li><p><strong>Example:</strong></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast    estimate   SE df t.ratio p.value
+ cyl4 - cyl6     6.92 1.56 29   4.441  0.0003
+ cyl4 - cyl8    11.56 1.30 29   8.905  &lt;.0001
+ cyl6 - cyl8     4.64 1.49 29   3.112  0.0112
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+<p><em>This gives pairwise comparisons between the cylinder levels.</em></p>
+</section>
+</section>
+<section id="in-depth-examples" class="level2">
+<h2 class="anchored" data-anchor-id="in-depth-examples">4. In-Depth Examples</h2>
+<section id="title-comparing-mpg-across-cylinder-counts" class="level3">
+<h3 class="anchored" data-anchor-id="title-comparing-mpg-across-cylinder-counts">Title: Comparing MPG Across Cylinder Counts</h3>
+<section id="objective" class="level4">
+<h4 class="anchored" data-anchor-id="objective">Objective</h4>
+<p>To evaluate how the number of cylinders affects the miles per gallon (mpg) in cars.</p>
+</section>
+<section id="steps" class="level4">
+<h4 class="anchored" data-anchor-id="steps">Steps</h4>
+<ol type="1">
+<li><strong>Data Preparation:</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> <span class="fu">factor</span>(cyl), <span class="at">data =</span> mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Function Application:</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>emm_cyl <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span>cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Visualization:</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(emm_cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="emmeans-v1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li><strong>Output:</strong> The plot will show the estimated marginal means of mpg for each cylinder group, allowing for quick visual comparisons.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="advanced-features" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-features">5. Advanced Features</h2>
+<section id="customization" class="level3">
+<h3 class="anchored" data-anchor-id="customization">Customization</h3>
+<p>You can customize the output of <code>emmeans</code> using additional arguments:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>emm_cyl <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span>cyl, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">cyl =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="integration" class="level3">
+<h3 class="anchored" data-anchor-id="integration">Integration</h3>
+<p><code>emmeans</code> can be used with packages like <code>ggplot2</code> for enhanced visualizations:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>emm_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(emm_cyl)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emm_df, <span class="fu">aes</span>(<span class="at">x =</span> cyl, <span class="at">y =</span> emmean)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="emmeans-v1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="troubleshooting-and-faqs" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-and-faqs">6. Troubleshooting and FAQs</h2>
+<section id="common-issues" class="level3">
+<h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
+<ul>
+<li><strong>Error: Object not found</strong>: Ensure the model object exists and is correctly specified.</li>
+<li><strong>Warnings about convergence</strong>: Check the model fitting process for issues related to data or model complexity.</li>
+</ul>
+</section>
+<section id="faqs" class="level3">
+<h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
+<ul>
+<li><strong>Q:</strong> Can <code>emmeans</code> be used with non-linear models?
+<ul>
+<li><strong>A:</strong> Yes, <code>emmeans</code> supports various model types, including generalized linear models.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">7. Best Practices</h2>
+<ul>
+<li>Use clear and descriptive variable names when fitting models.</li>
+<li>Regularly check model diagnostics to ensure assumptions are met.</li>
+<li>Document your analysis steps for reproducibility.</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">8. Conclusion</h2>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>In this tutorial, we explored the <code>emmeans</code> package, covering its key functions, in-depth examples, and advanced features.</p>
+</section>
+<section id="next-steps" class="level3">
+<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
+<p>Try applying <code>emmeans</code> to your own datasets or explore more advanced statistical models.</p>
+</section>
+<section id="encouragement" class="level3">
+<h3 class="anchored" data-anchor-id="encouragement">Encouragement</h3>
+<p>Dive into your data analysis projects with confidence, utilizing the power of <code>emmeans</code>!</p>
+</section>
+</section>
+<section id="references-and-resources" class="level2">
+<h2 class="anchored" data-anchor-id="references-and-resources">9. References and Resources</h2>
+<ul>
+<li><strong>Documentation:</strong> <a href="https://cran.r-project.org/web/packages/emmeans/emmeans.pdf">emmeans Documentation</a></li>
+<li><strong>Learning Materials:</strong> <a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><strong>Support Channels:</strong> <a href="https://github.com/rvlenth/emmeans/issues">GitHub Issues</a>, <a href="https://stackoverflow.com/questions/tagged/emmeans">Stack Overflow</a></li>
+</ul>
+<div class="cell" data-layout-align="left">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>graph TD;</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    A[Start] --&gt; B[Load Package];</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    B --&gt; C[Fit Model];</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    C --&gt; D[Compute EMM];</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    D --&gt; E[Visualize Results];</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    E --&gt; F[Interpret Output];</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    F --&gt; G[Explore Further];</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    G --&gt; H[End];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD;
+    A[Start] --&gt; B[Load Package];
+    B --&gt; C[Fit Model];
+    C --&gt; D[Compute EMM];
+    D --&gt; E[Visualize Results];
+    E --&gt; F[Interpret Output];
+    F --&gt; G[Explore Further];
+    G --&gt; H[End];
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="handling-interactions-with-emmeans" class="level1">
+<h1>Handling Interactions with <code>emmeans</code></h1>
+<p>When working with linear models that include interaction terms, <code>emmeans</code> allows you to explore and visualize these interactions effectively. Here’s how to manage interactions using the <code>emmeans</code> package.</p>
+<section id="understanding-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-interactions">1. Understanding Interactions</h2>
+<p>Interactions occur when the effect of one predictor variable on the response variable depends on the level of another predictor. For example, the relationship between treatment and outcome may vary depending on gender.</p>
+</section>
+<section id="fitting-a-model-with-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-a-model-with-interactions">2. Fitting a Model with Interactions</h2>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>Let’s create a model with an interaction between two factors, <code>treatment</code> and <code>gender</code>, on the response variable <code>outcome</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a categorical variable for the example</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">factor</span>(mtcars<span class="sc">$</span>am, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Automatic"</span>, <span class="st">"Manual"</span>))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model with interaction</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> am <span class="sc">*</span> cyl, <span class="at">data =</span> mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="using-emmeans-for-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="using-emmeans-for-interactions">3. Using <code>emmeans</code> for Interactions</h2>
+<section id="compute-estimated-marginal-means" class="level3">
+<h3 class="anchored" data-anchor-id="compute-estimated-marginal-means">Compute Estimated Marginal Means</h3>
+<p>To compute estimated marginal means for the interaction, use the <code>emmeans()</code> function with the interaction term specified.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain estimated marginal means for the interaction</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>emm_interaction <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> am <span class="sc">*</span> cyl)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emm_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["am"],"name":[1],"type":["fct"],"align":["left"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["emmean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"Automatic","2":"6.1875","3":"18.64867","4":"0.755581","5":"28","6":"17.10093","7":"20.19640","_rn_":"1"},{"1":"Manual","2":"6.1875","3":"20.74867","4":"1.016399","5":"28","6":"18.66667","7":"22.83067","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="interpret-the-output" class="level3">
+<h3 class="anchored" data-anchor-id="interpret-the-output">Interpret the Output</h3>
+<p>The output will give you the estimated marginal means for each combination of the levels of <code>am</code> and <code>cyl</code>. This allows for examining how the means differ based on the interaction.</p>
+</section>
+</section>
+<section id="visualizing-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-interactions">4. Visualizing Interactions</h2>
+<p>Visualizing interactions can help in understanding how the effects vary. Use the <code>plot()</code> function to create interaction plots.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(emm_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="emmeans-v1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="customizing-the-plot" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-the-plot">Customizing the Plot</h3>
+<p>You can further customize the plot using <code>ggplot2</code> for enhanced visual representation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert emmeans object to a data frame</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>emm_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(emm_interaction)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ggplot</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emm_df, <span class="fu">aes</span>(<span class="at">x =</span> cyl, <span class="at">y =</span> emmean, <span class="at">color =</span> am)) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Interaction between Treatment and Cylinder"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Number of Cylinders"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Estimated Marginal Mean MPG"</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="emmeans-v1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pairwise-comparisons" class="level2">
+<h2 class="anchored" data-anchor-id="pairwise-comparisons">5. Pairwise Comparisons</h2>
+<p>You can also perform pairwise comparisons for the interaction effects:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons for the interaction</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast                               estimate   SE df t.ratio p.value
+ Automatic cyl6.1875 - Manual cyl6.1875     -2.1 1.27 28  -1.658  0.1085</code></pre>
+</div>
+</div>
+<p>This will give you insights into which combinations of <code>am</code> and <code>cyl</code> are significantly different from one another.</p>
+</section>
+<section id="conclusion-1" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-1">Conclusion</h2>
+<p>Handling interactions in <code>emmeans</code> is straightforward and provides valuable insights into how different factors influence the response variable. By fitting models that include interactions, computing estimated marginal means, and visualizing the results, you can effectively interpret complex relationships in your data.</p>
+<hr>
+</section>
+</section>
+<section id="handling-interactions-with-more-than-two-factors-in-emmeans" class="level1">
+<h1>Handling Interactions with More Than Two Factors in <code>emmeans</code></h1>
+<p>When dealing with interactions involving multiple factors, <code>emmeans</code> can help you explore and visualize these complex relationships. Here’s a guide on how to manage interactions with more than two factors using the <code>emmeans</code> package.</p>
+<section id="understanding-multi-factor-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-multi-factor-interactions">1. Understanding Multi-Factor Interactions</h2>
+<p>Multi-factor interactions occur when the effect of one factor on the response variable depends on the levels of two or more other factors. For example, you may want to investigate how the effect of treatment varies across different levels of gender and age group.</p>
+</section>
+<section id="fitting-a-model-with-multiple-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-a-model-with-multiple-interactions">2. Fitting a Model with Multiple Interactions</h2>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<p>Let’s create a hypothetical dataset and fit a model that includes interactions among three factors: <code>treatment</code>, <code>gender</code>, and <code>age_group</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary library</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated dataset</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">30</span>)),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>), <span class="at">times =</span> <span class="dv">30</span>)),</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Young"</span>, <span class="st">"Old"</span>), <span class="at">each =</span> <span class="dv">15</span>, <span class="at">times =</span> <span class="dv">2</span>)),</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">rnorm</span>(<span class="dv">60</span>, <span class="dv">50</span>, <span class="dv">10</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model with interactions</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> treatment <span class="sc">*</span> gender <span class="sc">*</span> age_group, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="using-emmeans-for-multi-factor-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="using-emmeans-for-multi-factor-interactions">3. Using <code>emmeans</code> for Multi-Factor Interactions</h2>
+<section id="compute-estimated-marginal-means-1" class="level3">
+<h3 class="anchored" data-anchor-id="compute-estimated-marginal-means-1">Compute Estimated Marginal Means</h3>
+<p>To compute estimated marginal means for the interaction among the three factors, specify the interaction in the <code>emmeans()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain estimated marginal means for the interaction</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>emm_multi <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> treatment <span class="sc">*</span> gender <span class="sc">*</span> age_group)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emm_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["treatment"],"name":[1],"type":["fct"],"align":["left"]},{"label":["gender"],"name":[2],"type":["fct"],"align":["left"]},{"label":["age_group"],"name":[3],"type":["fct"],"align":["left"]},{"label":["emmean"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"Female","3":"Old","4":"47.65142","5":"3.312310","6":"52","7":"41.00478","8":"54.29805","_rn_":"1"},{"1":"B","2":"Female","3":"Old","4":"52.47994","5":"3.312310","6":"52","7":"45.83330","8":"59.12657","_rn_":"2"},{"1":"A","2":"Male","3":"Old","4":"47.39998","5":"3.541008","6":"52","7":"40.29443","8":"54.50554","_rn_":"3"},{"1":"B","2":"Male","3":"Old","4":"48.48123","5":"3.541008","6":"52","7":"41.37567","8":"55.58678","_rn_":"4"},{"1":"A","2":"Female","3":"Young","4":"50.45024","5":"3.541008","6":"52","7":"43.34469","8":"57.55579","_rn_":"5"},{"1":"B","2":"Female","3":"Young","4":"53.98623","5":"3.541008","6":"52","7":"46.88067","8":"61.09178","_rn_":"6"},{"1":"A","2":"Male","3":"Young","4":"52.46324","5":"3.312310","6":"52","7":"45.81661","8":"59.10988","_rn_":"7"},{"1":"B","2":"Male","3":"Young","4":"52.04873","5":"3.312310","6":"52","7":"45.40209","8":"58.69537","_rn_":"8"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="interpret-the-output-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpret-the-output-1">Interpret the Output</h3>
+<p>The output will display the estimated marginal means for each combination of the levels of <code>treatment</code>, <code>gender</code>, and <code>age_group</code>. This helps you understand how the outcome varies across these groups.</p>
+</section>
+</section>
+<section id="visualizing-multi-factor-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-multi-factor-interactions">4. Visualizing Multi-Factor Interactions</h2>
+<p>Visualizing interactions with multiple factors can be complex, but it can be done effectively using <code>ggplot2</code>. Here’s how to create a plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert emmeans object to a data frame</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>emm_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(emm_multi)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ggplot</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emm_df, <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> emmean, <span class="at">group =</span> <span class="fu">interaction</span>(gender, age_group), <span class="at">color =</span> <span class="fu">interaction</span>(gender, age_group))) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Multi-Factor Interaction"</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Estimated Marginal Mean Outcome"</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="emmeans-v1_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="customizing-the-plot-1" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-the-plot-1">Customizing the Plot</h3>
+<p>You can adjust the aesthetics of the plot to improve clarity, such as adding <code>facet_wrap()</code> to separate plots by one of the factors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emm_df, <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> emmean, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="fu">aes</span>(<span class="at">group =</span> age_group)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>age_group) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Multi-Factor Interaction by Age Group"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Estimated Marginal Mean Outcome"</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="emmeans-v1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pairwise-comparisons-1" class="level2">
+<h2 class="anchored" data-anchor-id="pairwise-comparisons-1">5. Pairwise Comparisons</h2>
+<p>You can perform pairwise comparisons for the multi-factor interactions as well:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons for the multi-factor interaction</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast                        estimate   SE df t.ratio p.value
+ A Female Old - B Female Old      -4.8285 4.68 52  -1.031  0.9674
+ A Female Old - A Male Old         0.2514 4.85 52   0.052  1.0000
+ A Female Old - B Male Old        -0.8298 4.85 52  -0.171  1.0000
+ A Female Old - A Female Young    -2.7988 4.85 52  -0.577  0.9990
+ A Female Old - B Female Young    -6.3348 4.85 52  -1.306  0.8923
+ A Female Old - A Male Young      -4.8118 4.68 52  -1.027  0.9681
+ A Female Old - B Male Young      -4.3973 4.68 52  -0.939  0.9806
+ B Female Old - A Male Old         5.0800 4.85 52   1.048  0.9645
+ B Female Old - B Male Old         3.9987 4.85 52   0.825  0.9909
+ B Female Old - A Female Young     2.0297 4.85 52   0.419  0.9999
+ B Female Old - B Female Young    -1.5063 4.85 52  -0.311  1.0000
+ B Female Old - A Male Young       0.0167 4.68 52   0.004  1.0000
+ B Female Old - B Male Young       0.4312 4.68 52   0.092  1.0000
+ A Male Old - B Male Old          -1.0812 5.01 52  -0.216  1.0000
+ A Male Old - A Female Young      -3.0503 5.01 52  -0.609  0.9986
+ A Male Old - B Female Young      -6.5862 5.01 52  -1.315  0.8889
+ A Male Old - A Male Young        -5.0633 4.85 52  -1.044  0.9651
+ A Male Old - B Male Young        -4.6487 4.85 52  -0.959  0.9782
+ B Male Old - A Female Young      -1.9690 5.01 52  -0.393  0.9999
+ B Male Old - B Female Young      -5.5050 5.01 52  -1.099  0.9541
+ B Male Old - A Male Young        -3.9820 4.85 52  -0.821  0.9911
+ B Male Old - B Male Young        -3.5675 4.85 52  -0.736  0.9954
+ A Female Young - B Female Young  -3.5360 5.01 52  -0.706  0.9965
+ A Female Young - A Male Young    -2.0130 4.85 52  -0.415  0.9999
+ A Female Young - B Male Young    -1.5985 4.85 52  -0.330  1.0000
+ B Female Young - A Male Young     1.5230 4.85 52   0.314  1.0000
+ B Female Young - B Male Young     1.9375 4.85 52   0.400  0.9999
+ A Male Young - B Male Young       0.4145 4.68 52   0.088  1.0000
+
+P value adjustment: tukey method for comparing a family of 8 estimates </code></pre>
+</div>
+</div>
+<p>This will provide insights into significant differences among the combinations of the three factors.</p>
+</section>
+<section id="conclusion-2" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-2">Conclusion</h2>
+<p>Handling interactions with more than two factors in <code>emmeans</code> allows you to explore complex relationships in your data effectively. By fitting models that include multiple interactions, computing estimated marginal means, and visualizing the results, you can gain a deeper understanding of how different factors influence the response variable.</p>
+<hr>
+</section>
+</section>
+<section id="handling-interactions-with-more-than-two-factors-in-emmeans-1" class="level1">
+<h1>Handling Interactions with More Than Two Factors in <code>emmeans</code></h1>
+<p>When dealing with interactions involving multiple factors, <code>emmeans</code> can help you explore and visualize these complex relationships. Here’s a guide on how to manage interactions with more than two factors using the <code>emmeans</code> package.</p>
+<section id="understanding-multi-factor-interactions-1" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-multi-factor-interactions-1">1. Understanding Multi-Factor Interactions</h2>
+<p>Multi-factor interactions occur when the effect of one factor on the response variable depends on the levels of two or more other factors. For example, you may want to investigate how the effect of treatment varies across different levels of gender and age group.</p>
+</section>
+<section id="fitting-a-model-with-multiple-interactions-1" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-a-model-with-multiple-interactions-1">2. Fitting a Model with Multiple Interactions</h2>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">Example</h3>
+<p>Let’s create a hypothetical dataset and fit a model that includes interactions among three factors: <code>treatment</code>, <code>gender</code>, and <code>age_group</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary library</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated dataset</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">30</span>)),</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>), <span class="at">times =</span> <span class="dv">30</span>)),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Young"</span>, <span class="st">"Old"</span>), <span class="at">each =</span> <span class="dv">15</span>, <span class="at">times =</span> <span class="dv">2</span>)),</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">rnorm</span>(<span class="dv">60</span>, <span class="dv">50</span>, <span class="dv">10</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model with interactions</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> treatment <span class="sc">*</span> gender <span class="sc">*</span> age_group, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="using-emmeans-for-multi-factor-interactions-1" class="level2">
+<h2 class="anchored" data-anchor-id="using-emmeans-for-multi-factor-interactions-1">3. Using <code>emmeans</code> for Multi-Factor Interactions</h2>
+<section id="compute-estimated-marginal-means-2" class="level3">
+<h3 class="anchored" data-anchor-id="compute-estimated-marginal-means-2">Compute Estimated Marginal Means</h3>
+<p>To compute estimated marginal means for the interaction among the three factors, specify the interaction in the <code>emmeans()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain estimated marginal means for the interaction</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>emm_multi <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> treatment <span class="sc">*</span> gender <span class="sc">*</span> age_group)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emm_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["treatment"],"name":[1],"type":["fct"],"align":["left"]},{"label":["gender"],"name":[2],"type":["fct"],"align":["left"]},{"label":["age_group"],"name":[3],"type":["fct"],"align":["left"]},{"label":["emmean"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"Female","3":"Old","4":"47.65142","5":"3.312310","6":"52","7":"41.00478","8":"54.29805","_rn_":"1"},{"1":"B","2":"Female","3":"Old","4":"52.47994","5":"3.312310","6":"52","7":"45.83330","8":"59.12657","_rn_":"2"},{"1":"A","2":"Male","3":"Old","4":"47.39998","5":"3.541008","6":"52","7":"40.29443","8":"54.50554","_rn_":"3"},{"1":"B","2":"Male","3":"Old","4":"48.48123","5":"3.541008","6":"52","7":"41.37567","8":"55.58678","_rn_":"4"},{"1":"A","2":"Female","3":"Young","4":"50.45024","5":"3.541008","6":"52","7":"43.34469","8":"57.55579","_rn_":"5"},{"1":"B","2":"Female","3":"Young","4":"53.98623","5":"3.541008","6":"52","7":"46.88067","8":"61.09178","_rn_":"6"},{"1":"A","2":"Male","3":"Young","4":"52.46324","5":"3.312310","6":"52","7":"45.81661","8":"59.10988","_rn_":"7"},{"1":"B","2":"Male","3":"Young","4":"52.04873","5":"3.312310","6":"52","7":"45.40209","8":"58.69537","_rn_":"8"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="interpret-the-output-2" class="level3">
+<h3 class="anchored" data-anchor-id="interpret-the-output-2">Interpret the Output</h3>
+<p>The output will display the estimated marginal means for each combination of the levels of <code>treatment</code>, <code>gender</code>, and <code>age_group</code>. This helps you understand how the outcome varies across these groups.</p>
+</section>
+</section>
+<section id="visualizing-multi-factor-interactions-1" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-multi-factor-interactions-1">4. Visualizing Multi-Factor Interactions</h2>
+<p>Visualizing interactions with multiple factors can be complex, but it can be done effectively using <code>ggplot2</code>. Here’s how to create a plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert emmeans object to a data frame</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>emm_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(emm_multi)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ggplot</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emm_df, <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> emmean, <span class="at">group =</span> <span class="fu">interaction</span>(gender, age_group), <span class="at">color =</span> <span class="fu">interaction</span>(gender, age_group))) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Multi-Factor Interaction"</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Estimated Marginal Mean Outcome"</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="emmeans-v1_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="customizing-the-plot-2" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-the-plot-2">Customizing the Plot</h3>
+<p>You can adjust the aesthetics of the plot to improve clarity, such as adding <code>facet_wrap()</code> to separate plots by one of the factors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emm_df, <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> emmean, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="fu">aes</span>(<span class="at">group =</span> age_group)) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>age_group) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Multi-Factor Interaction by Age Group"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Estimated Marginal Mean Outcome"</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="emmeans-v1_files/figure-html/unnamed-chunk-24-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="emmeans-v1_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pairwise-comparisons-2" class="level2">
+<h2 class="anchored" data-anchor-id="pairwise-comparisons-2">5. Pairwise Comparisons</h2>
+<p>You can perform pairwise comparisons for the multi-factor interactions as well:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons for the multi-factor interaction</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast                        estimate   SE df t.ratio p.value
+ A Female Old - B Female Old      -4.8285 4.68 52  -1.031  0.9674
+ A Female Old - A Male Old         0.2514 4.85 52   0.052  1.0000
+ A Female Old - B Male Old        -0.8298 4.85 52  -0.171  1.0000
+ A Female Old - A Female Young    -2.7988 4.85 52  -0.577  0.9990
+ A Female Old - B Female Young    -6.3348 4.85 52  -1.306  0.8923
+ A Female Old - A Male Young      -4.8118 4.68 52  -1.027  0.9681
+ A Female Old - B Male Young      -4.3973 4.68 52  -0.939  0.9806
+ B Female Old - A Male Old         5.0800 4.85 52   1.048  0.9645
+ B Female Old - B Male Old         3.9987 4.85 52   0.825  0.9909
+ B Female Old - A Female Young     2.0297 4.85 52   0.419  0.9999
+ B Female Old - B Female Young    -1.5063 4.85 52  -0.311  1.0000
+ B Female Old - A Male Young       0.0167 4.68 52   0.004  1.0000
+ B Female Old - B Male Young       0.4312 4.68 52   0.092  1.0000
+ A Male Old - B Male Old          -1.0812 5.01 52  -0.216  1.0000
+ A Male Old - A Female Young      -3.0503 5.01 52  -0.609  0.9986
+ A Male Old - B Female Young      -6.5862 5.01 52  -1.315  0.8889
+ A Male Old - A Male Young        -5.0633 4.85 52  -1.044  0.9651
+ A Male Old - B Male Young        -4.6487 4.85 52  -0.959  0.9782
+ B Male Old - A Female Young      -1.9690 5.01 52  -0.393  0.9999
+ B Male Old - B Female Young      -5.5050 5.01 52  -1.099  0.9541
+ B Male Old - A Male Young        -3.9820 4.85 52  -0.821  0.9911
+ B Male Old - B Male Young        -3.5675 4.85 52  -0.736  0.9954
+ A Female Young - B Female Young  -3.5360 5.01 52  -0.706  0.9965
+ A Female Young - A Male Young    -2.0130 4.85 52  -0.415  0.9999
+ A Female Young - B Male Young    -1.5985 4.85 52  -0.330  1.0000
+ B Female Young - A Male Young     1.5230 4.85 52   0.314  1.0000
+ B Female Young - B Male Young     1.9375 4.85 52   0.400  0.9999
+ A Male Young - B Male Young       0.4145 4.68 52   0.088  1.0000
+
+P value adjustment: tukey method for comparing a family of 8 estimates </code></pre>
+</div>
+</div>
+<p>This will provide insights into significant differences among the combinations of the three factors.</p>
+</section>
+<section id="conclusion-3" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-3">Conclusion</h2>
+<p>Handling interactions with more than two factors in <code>emmeans</code> allows you to explore complex relationships in your data effectively. By fitting models that include multiple interactions, computing estimated marginal means, and visualizing the results, you can gain a deeper understanding of how different factors influence the response variable.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
+<footer class="site-footer">
+    <div class="container text-center">
+        <hr> 
+        © <span id="current-year"></span> Dr. Davood Tofighi |
+        <a href="https://canvasinfo.unm.edu/">UNM Canvas</a> |
+        <a href="https://data-wise.github.io/doe">Course GitHub Page</a> |
+    </div>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Data-Wise\.github\.io\/doe\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
