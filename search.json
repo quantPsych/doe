@@ -1260,6 +1260,433 @@
     "text": "Conclusion\nHandling interactions with more than two factors in emmeans allows you to explore complex relationships in your data effectively. By fitting models that include multiple interactions, computing estimated marginal means, and visualizing the results, you can gain a deeper understanding of how different factors influence the response variable."
   },
   {
+    "objectID": "appendix/r-packages/ggplot2.html",
+    "href": "appendix/r-packages/ggplot2.html",
+    "title": "ggplot2: A Comprehensive Guide",
+    "section": "",
+    "text": "Introduction\nOverview The ggplot2 package (part of the Tidyverse) provides a powerful system for creating graphics in R by implementing the Grammar of Graphics. It uses layers to gradually build complex visualizations from simple components. Packages and Key Functions:\n\nggplot2 (key functions include ggplot(), aes(), geom_point(), geom_bar(), geom_line(), geom_histogram(), facet_wrap(), theme(), etc.)\n\nUse Cases\n\nExploratory data analysis: Quick visualization of relationships in data.\nPublication-ready plots: Highly customizable appearance and layout.\nInteractive or iterative workflows: Build complex visuals step-by-step.\n\nBenefits\n\nLayered approach allows modular building of plots.\nConsistent grammar for different plot types.\nPowerful customizations (labels, scales, themes, etc.).\n\nggplot2::ggplot(data, aes(x, y)) + geom_*()\n(The skeleton structure above demonstrates how layers are added; it is not meant to run by itself.)\nBelow is a schematic (using Mermaid) illustrating the layered approach in ggplot2:\n\ngraph LR\n    A[\"Begin with ggplot()\"] --&gt; B[\"Add aes() layer\"]\n    B --&gt; C[\"Add geom_*() layer\"]\n    C --&gt; D[\"Optional: Add facet or theme layers\"]\n\n\n\n\ngraph LR\n    A[\"Begin with ggplot()\"] --&gt; B[\"Add aes() layer\"]\n    B --&gt; C[\"Add geom_*() layer\"]\n    C --&gt; D[\"Optional: Add facet or theme layers\"]\n\n\n\n\n\n\n\n\nGetting Started\nLoading the Package You can load ggplot2 with pacman::p_load():\n\npacman::p_load(ggplot2)\n\nBasic Usage Below is a simple example to illustrate the core functionality of ggplot2. We will use the built-in mtcars dataset to create a scatter plot of mpg (miles per gallon) vs. hp (horsepower).\n\n# Scatter plot of mpg vs. hp\nmtcars |&gt;\n    ggplot2::ggplot(ggplot2::aes(x = hp, y = mpg)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(\n        title = \"Basic Scatter Plot\",\n        x = \"Horsepower\",\n        y = \"Miles Per Gallon\"\n    )\n\n\n\n\n\n\n\n\nIn this code:\n\nmtcars is piped into ggplot2::ggplot().\nggplot2::aes() maps hp to the x-axis and mpg to the y-axis.\nggplot2::geom_point() adds the point geometry to create a scatter plot.\nggplot2::labs() customizes labels.\n\n\n\nKey Functions and Features\nggplot2::ggplot() Description\n\nThe main function to initialize a ggplot object, where you specify the dataset and general aesthetic mappings.\n\nSyntax\nggplot2::ggplot(data, ggplot2::aes(...))\n\ndata: A data frame.\nggplot2::aes(…): Aesthetic mappings for x, y, color, size, etc.\n\nExample\n\n# Basic template (with mpg dataset from ggplot2)\nggplot2::ggplot(data = ggplot2::mpg, ggplot2::aes(x = displ, y = hwy)) +\n    ggplot2::geom_point()\n\n\n\n\n\n\n\n\nggplot2::aes() Description\n\nDefines the mapping of variables to visual properties (aesthetics) such as x, y, color, fill, size, shape, and more.\n\nSyntax\nggplot2::aes(x, y, color = ..., fill = ..., shape = ...)\nExample\n\nggplot2::ggplot(ggplot2::mpg, ggplot2::aes(x = cyl, y = hwy, color = drv)) +\n    ggplot2::geom_point()\n\n\n\n\n\n\n\n\n\nHere, drv is mapped to color, creating different point colors by drive type.\n\nggplot2::geom_*() Description\n\nA family of geometric functions to specify how data points are represented (points, lines, bars, etc.).\n\nSyntax\nggplot2::geom_point(...)\nggplot2::geom_line(...)\nggplot2::geom_bar(...)\nggplot2::geom_histogram(...)\nArguments often include statistical transformations, bin widths, position adjustments, etc.\nExample: Bar Plot\n\nggplot2::ggplot(ggplot2::mpg, ggplot2::aes(x = class)) +\n    ggplot2::geom_bar()\n\n\n\n\n\n\n\n\n\nDisplays the count of each vehicle class in the mpg dataset.\n\nggplot2::facet_wrap() Description\n\nSplits data into subplots (facets) based on one or more categorical variables.\n\nSyntax\nggplot2::facet_wrap(~ variable, ncol = ...)\nExample\n\nggplot2::ggplot(ggplot2::mpg, ggplot2::aes(x = displ, y = hwy)) +\n    ggplot2::geom_point() +\n    ggplot2::facet_wrap(~drv)\n\n\n\n\n\n\n\n\n\nCreates separate panels for each drive type (drv).\n\nggplot2::theme() Description\n\nAdjusts non-data components (text size, legend placement, background, etc.).\n\nSyntax\nggplot2::theme(\n  panel.background = element_rect(...),\n  axis.text.x = element_text(...),\n  ...\n)\nExample\n\nggplot2::ggplot(ggplot2::mpg, ggplot2::aes(x = displ, y = hwy)) +\n    ggplot2::geom_point() +\n    ggplot2::theme_minimal()\n\n\n\n\n\n\n\n\n\nApplies a minimal theme to reduce chart ink and highlight data.\n\n\n\nIn-Depth Examples\nTitle: Comparing Engine Displacement and Fuel Efficiency Objective\n\nVisualize relationships between engine displacement (displ) and highway fuel efficiency (hwy) for different car classes.\n\nSteps\n\nData Preparation We will use the built-in mpg dataset and select relevant columns: displ, hwy, class.\nFunction Application\n\nInitialize the plot with ggplot2::ggplot().\nMap displ and hwy using ggplot2::aes().\nAdd geom_point().\nFacet the plot by car class using ggplot2::facet_wrap().\nAdd a custom theme.\n\nVisualization\n\n\n# Step-by-step example\nfiltered_mpg &lt;- ggplot2::mpg\n\nfiltered_mpg |&gt;\n    ggplot2::ggplot(ggplot2::aes(x = displ, y = hwy, color = class)) +\n    ggplot2::geom_point(size = 3) +\n    ggplot2::facet_wrap(~class) +\n    ggplot2::theme_bw() +\n    ggplot2::labs(\n        title = \"Engine Displacement vs. Highway MPG by Class\",\n        subtitle = \"Faceted by Vehicle Class\",\n        x = \"Engine Displacement (Liters)\",\n        y = \"Highway Miles per Gallon\",\n        color = \"Vehicle Class\"\n    )\n\n\n\n\n\n\n\n\nOutput\n\nYou will see a facetted scatter plot showing how different classes compare in the displ-hwy relationship. The color indicates each class, and each facet displays data for one class.\n\n\n\nAdvanced Features\nCustomization\n\nModify legends, labels, and scales with functions like ggplot2::labs(), ggplot2::scale_color_manual(), or ggplot2::theme().\nAdjust axis transformations (e.g., log scale) with ggplot2::scale_x_log10() or ggplot2::scale_y_log10().\n\nIntegration\n\nCombine ggplot2 with dplyr for data wrangling:\n\n\nlibrary(dplyr)\n\nggplot2::mpg |&gt;\n    dplyr::filter(displ &lt; 5) |&gt;\n    ggplot2::ggplot(ggplot2::aes(x = displ, y = cty)) +\n    ggplot2::geom_point() +\n    ggplot2::geom_smooth(method = \"lm\") +\n    ggplot2::theme_minimal()\n\n\n\n\n\n\n\n\n\nThis uses dplyr::filter() to remove rows with displacement &gt;= 5, then plots with ggplot2.\n\nOptimization\n\nFor large datasets, consider sampling or binning (geom_bin2d, geom_hex from other packages).\nUse efficient data handling (data.table or arrow) before feeding data to ggplot2 for plotting.\nLimit layering of overly detailed geoms when performance is a concern.\n\n\n\nTroubleshooting and FAQs\nCommon Issues\n\n“Error in ggplot(…): object not found”: Ensure the dataset or column name matches correctly and is in scope.\n“Discrete value supplied to continuous scale”: A variable mapped to x or y might be character instead of numeric; convert if necessary.\nMissing + sign between layers: Each layer is added with the + operator; forgetting it can break the chain of commands.\n\nFAQs\n\nHow do I rotate x-axis labels?\n\nUse ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)).\n\nCan I save my plots?\n\nYes, with ggplot2::ggsave(“plot.png”, width = …, height = …).\n\nHow do I create interactive plots?\n\nUse packages like plotly or ggiraph that build on ggplot2.\n\n\n\n\nBest Practices\n\nKeep code modular: Prepare and clean data first, then pipe into ggplot2 functions.\nUse meaningful variable and aesthetic mappings for readability.\nWrite reproducible scripts by incorporating set.seed() for sampling or random processes.\nWhen presenting results (including power analysis in broader data workflows), ensure the data, code, and figure output are clearly documented.\n\n\n\nConclusion\nSummary We have explored the ggplot2 package’s layered approach to building plots, introduced key functions, and provided examples for customizing, faceting, and integrating with other data pipelines.\nNext Steps\n\nExperiment with specialized geoms (e.g., boxplots, violin plots).\nExplore advanced theming options (e.g., ggthemes package).\nInvestigate extension packages like gganimate for animated graphics or patchwork for arranging multiple ggplots.\n\n\n\nReferences and Resources\nDocumentation\n\nggplot2 Official Documentation\n\nLearning Materials\n\nR for Data Science by Hadley Wickham and Garrett Grolemund\nOnline tutorials on the RStudio Community\n\nSupport Channels\n\nGitHub Issues for ggplot2\nStack Overflow (r + ggplot2 tag)\nLocal R User Groups or R-Ladies meetups for community support"
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html",
+    "href": "appendix/r-topics/r-factors-basics.html",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Factors in R are data structures used to handle categorical data effectively. Factors allow you to store, manipulate, and analyze data with distinct levels, making them essential for statistical modeling and visualization. This tutorial covers functions from the base R package and the forcats package.\n\n\n\n\nBase R Functions: factor(), levels(), nlevels(), as.factor(), is.factor(), relevel()\nForcats Functions: forcats::fct_relevel(), forcats::fct_infreq(), forcats::fct_collapse()\n\n\n\n\n\nRepresenting categorical variables (e.g., gender, regions).\nEncoding ordinal variables (e.g., education levels, survey responses).\nSimplifying group-wise statistical analysis.\nReordering levels for meaningful visualization.\n\n\n\n\n\nEfficient storage of categorical data.\nSeamless integration with statistical models in R.\nImproved clarity and readability of data.\n\n\n\n\n\n\n\nUse pacman::p_load() to load necessary packages:\n\npacman::p_load(forcats, dplyr)\n\n\n\n\nCreate a basic factor and explore its properties:\n\n# Creating a factor\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\n\n# Display the factor\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n# Check the levels\nlevels(colors)\n\n[1] \"blue\"  \"green\" \"red\"  \n\n\n\n\n\n\n\n\n\n\nCreates a factor from a vector of values.\n\n\n\nfactor(x, levels = NULL, labels = NULL, ordered = FALSE)\n\nx: Input vector.\nlevels: Custom levels.\nlabels: Labels for levels.\nordered: Logical flag for ordinal factors.\n\n\n\n\n\ngrades &lt;- factor(c(\"A\", \"B\", \"C\", \"A\", \"B\"), levels = c(\"A\", \"B\", \"C\"), ordered = TRUE)\ngrades\n\n[1] A B C A B\nLevels: A &lt; B &lt; C\n\n\n\n\n\n\n\n\nReorders the levels of a factor to make a specific level the reference level.\n\n\n\nrelevel(factor_variable, ref)\n\nfactor_variable: The factor to be modified.\nref: The new reference level.\n\n\n\n\n\n# Releveling to make \"blue\" the reference level\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\ncolors &lt;- relevel(colors, ref = \"blue\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n\n\n\n\n\n\n\nReorders factor levels.\n\n\n\nforcats::fct_relevel(factor_variable, new_order)\n\n\n\n\neducation &lt;- factor(c(\"High School\", \"Masters\", \"Bachelors\", \"PhD\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] High School Masters     Bachelors   PhD        \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\n\n\n\nReordering education levels for a survey dataset.\n\n\n\nRearrange education levels from lowest to highest for meaningful analysis.\n\n\n\n\neducation &lt;- factor(c(\"Masters\", \"PhD\", \"High School\", \"Bachelors\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nChange the reference level of a factor for a statistical model.\n\n\n\n\n# Relevel \"High School\" as the reference level\neducation &lt;- relevel(education, ref = \"High School\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nSimplify factor levels by collapsing related categories.\n\n\n\n\nfruit &lt;- factor(c(\"apple\", \"banana\", \"pear\", \"apple\", \"orange\", \"pear\"))\nfruit &lt;- forcats::fct_collapse(fruit, Citrus = c(\"orange\"), Other = c(\"apple\", \"banana\", \"pear\"))\nfruit\n\n[1] Other  Other  Other  Other  Citrus Other \nLevels: Other Citrus\n\n\n\n\n\n\n\n\n\nAdjust levels dynamically:\n\nlevels(colors) &lt;- c(levels(colors), \"yellow\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red yellow\n\n\n\n\n\nCombine factors with other R packages:\n\ndata &lt;- tibble(category = factor(c(\"A\", \"B\", \"A\")), value = c(10, 20, 30))\ndata |&gt; group_by(category) |&gt; summarize(mean_value = mean(value))\n\n\n  \n\n\n\n\n\n\n\n\n\n\nUnused Levels: Use droplevels() to remove unused levels.\nIncorrect Order: Use forcats::fct_relevel() to reorder.\n\n\n\n\n\nQ: How to convert a factor back to a character vector?\nA: Use as.character(factor_variable).\nQ: How to check if a variable is a factor?\nA: Use is.factor(variable).\n\n\n\n\n\n\nAlways specify levels for consistency.\nUse ordered factors for ordinal data.\nUse forcats functions for enhanced factor manipulation.\n\n\n\n\n\n\nFactors are powerful tools for handling categorical data in R. They are versatile and integrate well with R’s modeling and visualization ecosystem.\n\n\n\nExplore advanced functionalities in the forcats package, such as forcats::fct_infreq().\n\n\n\n\n\nR Factor Documentation\nForcats Documentation\nTidyverse Guide to Factors"
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#introduction",
+    "href": "appendix/r-topics/r-factors-basics.html#introduction",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Factors in R are data structures used to handle categorical data effectively. Factors allow you to store, manipulate, and analyze data with distinct levels, making them essential for statistical modeling and visualization. This tutorial covers functions from the base R package and the forcats package.\n\n\n\n\nBase R Functions: factor(), levels(), nlevels(), as.factor(), is.factor(), relevel()\nForcats Functions: forcats::fct_relevel(), forcats::fct_infreq(), forcats::fct_collapse()\n\n\n\n\n\nRepresenting categorical variables (e.g., gender, regions).\nEncoding ordinal variables (e.g., education levels, survey responses).\nSimplifying group-wise statistical analysis.\nReordering levels for meaningful visualization.\n\n\n\n\n\nEfficient storage of categorical data.\nSeamless integration with statistical models in R.\nImproved clarity and readability of data."
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#getting-started",
+    "href": "appendix/r-topics/r-factors-basics.html#getting-started",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Use pacman::p_load() to load necessary packages:\n\npacman::p_load(forcats, dplyr)\n\n\n\n\nCreate a basic factor and explore its properties:\n\n# Creating a factor\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\n\n# Display the factor\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n# Check the levels\nlevels(colors)\n\n[1] \"blue\"  \"green\" \"red\""
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-factors-basics.html#key-functions-and-features",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Creates a factor from a vector of values.\n\n\n\nfactor(x, levels = NULL, labels = NULL, ordered = FALSE)\n\nx: Input vector.\nlevels: Custom levels.\nlabels: Labels for levels.\nordered: Logical flag for ordinal factors.\n\n\n\n\n\ngrades &lt;- factor(c(\"A\", \"B\", \"C\", \"A\", \"B\"), levels = c(\"A\", \"B\", \"C\"), ordered = TRUE)\ngrades\n\n[1] A B C A B\nLevels: A &lt; B &lt; C\n\n\n\n\n\n\n\n\nReorders the levels of a factor to make a specific level the reference level.\n\n\n\nrelevel(factor_variable, ref)\n\nfactor_variable: The factor to be modified.\nref: The new reference level.\n\n\n\n\n\n# Releveling to make \"blue\" the reference level\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\ncolors &lt;- relevel(colors, ref = \"blue\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n\n\n\n\n\n\n\nReorders factor levels.\n\n\n\nforcats::fct_relevel(factor_variable, new_order)\n\n\n\n\neducation &lt;- factor(c(\"High School\", \"Masters\", \"Bachelors\", \"PhD\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] High School Masters     Bachelors   PhD        \nLevels: High School Bachelors Masters PhD"
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#in-depth-examples",
+    "href": "appendix/r-topics/r-factors-basics.html#in-depth-examples",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Reordering education levels for a survey dataset.\n\n\n\nRearrange education levels from lowest to highest for meaningful analysis.\n\n\n\n\neducation &lt;- factor(c(\"Masters\", \"PhD\", \"High School\", \"Bachelors\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nChange the reference level of a factor for a statistical model.\n\n\n\n\n# Relevel \"High School\" as the reference level\neducation &lt;- relevel(education, ref = \"High School\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nSimplify factor levels by collapsing related categories.\n\n\n\n\nfruit &lt;- factor(c(\"apple\", \"banana\", \"pear\", \"apple\", \"orange\", \"pear\"))\nfruit &lt;- forcats::fct_collapse(fruit, Citrus = c(\"orange\"), Other = c(\"apple\", \"banana\", \"pear\"))\nfruit\n\n[1] Other  Other  Other  Other  Citrus Other \nLevels: Other Citrus"
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#advanced-features",
+    "href": "appendix/r-topics/r-factors-basics.html#advanced-features",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Adjust levels dynamically:\n\nlevels(colors) &lt;- c(levels(colors), \"yellow\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red yellow\n\n\n\n\n\nCombine factors with other R packages:\n\ndata &lt;- tibble(category = factor(c(\"A\", \"B\", \"A\")), value = c(10, 20, 30))\ndata |&gt; group_by(category) |&gt; summarize(mean_value = mean(value))"
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-factors-basics.html#troubleshooting-and-faqs",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Unused Levels: Use droplevels() to remove unused levels.\nIncorrect Order: Use forcats::fct_relevel() to reorder.\n\n\n\n\n\nQ: How to convert a factor back to a character vector?\nA: Use as.character(factor_variable).\nQ: How to check if a variable is a factor?\nA: Use is.factor(variable)."
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#best-practices",
+    "href": "appendix/r-topics/r-factors-basics.html#best-practices",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Always specify levels for consistency.\nUse ordered factors for ordinal data.\nUse forcats functions for enhanced factor manipulation."
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#conclusion",
+    "href": "appendix/r-topics/r-factors-basics.html#conclusion",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "Factors are powerful tools for handling categorical data in R. They are versatile and integrate well with R’s modeling and visualization ecosystem.\n\n\n\nExplore advanced functionalities in the forcats package, such as forcats::fct_infreq()."
+  },
+  {
+    "objectID": "appendix/r-topics/r-factors-basics.html#references-and-resources",
+    "href": "appendix/r-topics/r-factors-basics.html#references-and-resources",
+    "title": "Factors and Categorical Variables in R",
+    "section": "",
+    "text": "R Factor Documentation\nForcats Documentation\nTidyverse Guide to Factors"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html",
+    "href": "appendix/r-topics/r-data-frames-basics.html",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing.\n\n\n\n\n\n\n\n\n# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\ndata.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\nCombine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\ncolnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage.\n\n\n\n\n\n\n\n\nData Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types.\n\n\n\n\n\n\nUse consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability.\n\n\n\n\n\n\n\nBase R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations.\n\n\n\n\n\nBase R Documentation\nTidyverse Guide\nR for Data Science"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#introduction",
+    "href": "appendix/r-topics/r-data-frames-basics.html#introduction",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#getting-started",
+    "href": "appendix/r-topics/r-data-frames-basics.html#getting-started",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "data.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
+    "href": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Combine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
+    "href": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "colnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Data Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#best-practices",
+    "href": "appendix/r-topics/r-data-frames-basics.html#best-practices",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Use consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#conclusion",
+    "href": "appendix/r-topics/r-data-frames-basics.html#conclusion",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Base R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
+    "href": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Base R Documentation\nTidyverse Guide\nR for Data Science"
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html",
+    "href": "appendix/r-base/r-interaction-basics.html",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "The interaction function in R is used to combine two or more factors into a single factor. It is particularly useful in ANOVA or linear modeling when you need to analyze interactions between factors.\n\n\n\n\nExploring interaction effects between multiple factors in ANOVA.\nCreating unique combinations of factor levels.\nPreparing datasets for hierarchical or nested analyses.\n\n\n\n\n\nSimplifies the analysis of interactions between factors.\nEnsures unique identification of factor level combinations.\nSeamlessly integrates with ANOVA and modeling workflows in R.\n\n\n\n\n\n\n\nThe interaction function is part of base R, so no additional packages are required.\n\n\n\n\n# Define two factors\nfactor1 &lt;- gl(2, 3, labels = c(\"Low\", \"High\"))\nfactor2 &lt;- gl(3, 1, 6, labels = c(\"A\", \"B\", \"C\"))\n\n# Combine factors using interaction\ncombined &lt;- interaction(factor1, factor2)\nprint(combined)\n\n[1] Low.A  Low.B  Low.C  High.A High.B High.C\nLevels: Low.A High.A Low.B High.B Low.C High.C\n\n\nAnnotations:\n\ngl: Generates factors with specified levels and repetitions.\ninteraction: Combines multiple factors into a single factor.\n\n\n\n\n\n\n\n\n\nCreates a single factor by combining multiple factors. Each level of the new factor corresponds to a unique combination of levels from the input factors.\n\n\n\ninteraction(..., sep = \":\", lex.order = FALSE)\n\n…: Factors to be combined.\nsep: Separator for combined levels (default is \":\").\nlex.order: Logical; determines if levels should be ordered lexicographically.\n\n\n\n\n\n# Example with custom separator\ncombined &lt;- interaction(factor1, factor2, sep = \"-\")\nprint(combined)\n\n[1] Low-A  Low-B  Low-C  High-A High-B High-C\nLevels: Low-A High-A Low-B High-B Low-C High-C\n\n\n\n\n\n\n\n\n\n\n\nAnalyze the interaction between treatment and dose in an experiment.\n\n\n\n\nCreate a dataset with two factors and a response variable.\nUse interaction to generate a combined factor.\nPerform two-way ANOVA.\n\n\n\n\n\n# Create factors and response\nset.seed(42)\ntreatment &lt;- gl(2, 6, labels = c(\"Control\", \"Treatment\"))\ndose &lt;- gl(3, 2, 12, labels = c(\"Low\", \"Medium\", \"High\"))\nresponse &lt;- c(rnorm(6, 5), rnorm(6, 6))\n\n# Combine factors\ninteraction_factor &lt;- interaction(treatment, dose)\n\n# Perform ANOVA\nanova_model &lt;- aov(response ~ treatment * dose)\nsummary(anova_model)\n\n               Df Sum Sq Mean Sq F value Pr(&gt;F)  \ntreatment       1  9.835   9.835   9.872  0.020 *\ndose            2  0.349   0.174   0.175  0.843  \ntreatment:dose  2  1.064   0.532   0.534  0.612  \nResiduals       6  5.977   0.996                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\nVisualize interaction effects using interaction and ggplot2.\n\n\n\n\nGenerate a dataset with interaction factors.\nCreate a plot of means by interaction levels.\n\n\n\n\n\nlibrary(ggplot2)\n\n# Create dataset\ndata &lt;- data.frame(\n    Treatment = treatment,\n    Dose = dose,\n    Response = response,\n    Interaction = interaction(treatment, dose)\n)\n\n# Plot\nggplot(data, aes(x = Interaction, y = Response, fill = Treatment)) +\n    geom_boxplot() +\n    theme_minimal() +\n    labs(title = \"Interaction Effects\", x = \"Interaction\", y = \"Response\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCustomize interaction labels using the sep argument.\n\ninteraction_factor &lt;- interaction(treatment, dose, sep = \"_\")\nprint(interaction_factor)\n\n [1] Control_Low      Control_Low      Control_Medium   Control_Medium  \n [5] Control_High     Control_High     Treatment_Low    Treatment_Low   \n [9] Treatment_Medium Treatment_Medium Treatment_High   Treatment_High  \n6 Levels: Control_Low Treatment_Low Control_Medium ... Treatment_High\n\n\n\n\n\nUse interaction directly in model formulas.\n\nanova_model &lt;- aov(response ~ interaction(treatment, dose))\nsummary(anova_model)\n\n                             Df Sum Sq Mean Sq F value Pr(&gt;F)\ninteraction(treatment, dose)  5 11.248  2.2495   2.258  0.175\nResiduals                     6  5.977  0.9962               \n\n\n\n\n\nFor large datasets, ensure factors are properly ordered to reduce computational overhead.\n\n\n\n\n\n\n\nMismatch in factor lengths:\n\nEnsure all input factors have the same length.\n\nUnexpected level combinations:\n\nUse lex.order = TRUE to enforce lexicographic ordering.\n\n\n\n\n\n\n\nUse descriptive factor labels for clarity.\nApply interaction within model formulas for cleaner workflows.\nVisualize interaction effects to better understand relationships between factors.\n\n\n\n\n\n\n\nThe interaction function is essential for analyzing and visualizing factor interactions.\nIt integrates seamlessly with ANOVA and modeling workflows.\n\n\n\n\n\nExplore interactions with more than two factors.\nCombine interaction with advanced visualization tools like ggplot2.\n\n\n\n\n\n\nR Documentation on interaction\nANOVA in R Tutorial"
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#introduction",
+    "href": "appendix/r-base/r-interaction-basics.html#introduction",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "The interaction function in R is used to combine two or more factors into a single factor. It is particularly useful in ANOVA or linear modeling when you need to analyze interactions between factors.\n\n\n\n\nExploring interaction effects between multiple factors in ANOVA.\nCreating unique combinations of factor levels.\nPreparing datasets for hierarchical or nested analyses.\n\n\n\n\n\nSimplifies the analysis of interactions between factors.\nEnsures unique identification of factor level combinations.\nSeamlessly integrates with ANOVA and modeling workflows in R."
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#getting-started",
+    "href": "appendix/r-base/r-interaction-basics.html#getting-started",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "The interaction function is part of base R, so no additional packages are required.\n\n\n\n\n# Define two factors\nfactor1 &lt;- gl(2, 3, labels = c(\"Low\", \"High\"))\nfactor2 &lt;- gl(3, 1, 6, labels = c(\"A\", \"B\", \"C\"))\n\n# Combine factors using interaction\ncombined &lt;- interaction(factor1, factor2)\nprint(combined)\n\n[1] Low.A  Low.B  Low.C  High.A High.B High.C\nLevels: Low.A High.A Low.B High.B Low.C High.C\n\n\nAnnotations:\n\ngl: Generates factors with specified levels and repetitions.\ninteraction: Combines multiple factors into a single factor."
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#key-functions-and-features",
+    "href": "appendix/r-base/r-interaction-basics.html#key-functions-and-features",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "Creates a single factor by combining multiple factors. Each level of the new factor corresponds to a unique combination of levels from the input factors.\n\n\n\ninteraction(..., sep = \":\", lex.order = FALSE)\n\n…: Factors to be combined.\nsep: Separator for combined levels (default is \":\").\nlex.order: Logical; determines if levels should be ordered lexicographically.\n\n\n\n\n\n# Example with custom separator\ncombined &lt;- interaction(factor1, factor2, sep = \"-\")\nprint(combined)\n\n[1] Low-A  Low-B  Low-C  High-A High-B High-C\nLevels: Low-A High-A Low-B High-B Low-C High-C"
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#in-depth-examples",
+    "href": "appendix/r-base/r-interaction-basics.html#in-depth-examples",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "Analyze the interaction between treatment and dose in an experiment.\n\n\n\n\nCreate a dataset with two factors and a response variable.\nUse interaction to generate a combined factor.\nPerform two-way ANOVA.\n\n\n\n\n\n# Create factors and response\nset.seed(42)\ntreatment &lt;- gl(2, 6, labels = c(\"Control\", \"Treatment\"))\ndose &lt;- gl(3, 2, 12, labels = c(\"Low\", \"Medium\", \"High\"))\nresponse &lt;- c(rnorm(6, 5), rnorm(6, 6))\n\n# Combine factors\ninteraction_factor &lt;- interaction(treatment, dose)\n\n# Perform ANOVA\nanova_model &lt;- aov(response ~ treatment * dose)\nsummary(anova_model)\n\n               Df Sum Sq Mean Sq F value Pr(&gt;F)  \ntreatment       1  9.835   9.835   9.872  0.020 *\ndose            2  0.349   0.174   0.175  0.843  \ntreatment:dose  2  1.064   0.532   0.534  0.612  \nResiduals       6  5.977   0.996                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\nVisualize interaction effects using interaction and ggplot2.\n\n\n\n\nGenerate a dataset with interaction factors.\nCreate a plot of means by interaction levels.\n\n\n\n\n\nlibrary(ggplot2)\n\n# Create dataset\ndata &lt;- data.frame(\n    Treatment = treatment,\n    Dose = dose,\n    Response = response,\n    Interaction = interaction(treatment, dose)\n)\n\n# Plot\nggplot(data, aes(x = Interaction, y = Response, fill = Treatment)) +\n    geom_boxplot() +\n    theme_minimal() +\n    labs(title = \"Interaction Effects\", x = \"Interaction\", y = \"Response\")"
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#advanced-features",
+    "href": "appendix/r-base/r-interaction-basics.html#advanced-features",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "Customize interaction labels using the sep argument.\n\ninteraction_factor &lt;- interaction(treatment, dose, sep = \"_\")\nprint(interaction_factor)\n\n [1] Control_Low      Control_Low      Control_Medium   Control_Medium  \n [5] Control_High     Control_High     Treatment_Low    Treatment_Low   \n [9] Treatment_Medium Treatment_Medium Treatment_High   Treatment_High  \n6 Levels: Control_Low Treatment_Low Control_Medium ... Treatment_High\n\n\n\n\n\nUse interaction directly in model formulas.\n\nanova_model &lt;- aov(response ~ interaction(treatment, dose))\nsummary(anova_model)\n\n                             Df Sum Sq Mean Sq F value Pr(&gt;F)\ninteraction(treatment, dose)  5 11.248  2.2495   2.258  0.175\nResiduals                     6  5.977  0.9962               \n\n\n\n\n\nFor large datasets, ensure factors are properly ordered to reduce computational overhead."
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-base/r-interaction-basics.html#troubleshooting-and-faqs",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "Mismatch in factor lengths:\n\nEnsure all input factors have the same length.\n\nUnexpected level combinations:\n\nUse lex.order = TRUE to enforce lexicographic ordering."
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#best-practices",
+    "href": "appendix/r-base/r-interaction-basics.html#best-practices",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "Use descriptive factor labels for clarity.\nApply interaction within model formulas for cleaner workflows.\nVisualize interaction effects to better understand relationships between factors."
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#conclusion",
+    "href": "appendix/r-base/r-interaction-basics.html#conclusion",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "The interaction function is essential for analyzing and visualizing factor interactions.\nIt integrates seamlessly with ANOVA and modeling workflows.\n\n\n\n\n\nExplore interactions with more than two factors.\nCombine interaction with advanced visualization tools like ggplot2."
+  },
+  {
+    "objectID": "appendix/r-base/r-interaction-basics.html#references-and-resources",
+    "href": "appendix/r-base/r-interaction-basics.html#references-and-resources",
+    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
+    "section": "",
+    "text": "R Documentation on interaction\nANOVA in R Tutorial"
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html",
+    "href": "appendix/r-base/r-gl-basics.html",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R.\n\n\n\n\n\n\n\nThe gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor.\n\n\n\n\n\n\n\n\n\nCreates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment\n\n\n\n\n\n\n\n\n\n\n\nCreate factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\n\n\ncustom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High\n\n\n\n\n\n\n\n\n\nMismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n.\n\n\n\n\n\n\nAlways use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str().\n\n\n\n\n\n\n\nThe gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments.\n\n\n\n\n\n\nR Documentation on gl\nANOVA in R Tutorial"
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#introduction",
+    "href": "appendix/r-base/r-gl-basics.html#introduction",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R."
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#getting-started",
+    "href": "appendix/r-base/r-gl-basics.html#getting-started",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "The gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor."
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
+    "href": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "Creates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment"
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#in-depth-examples",
+    "href": "appendix/r-base/r-gl-basics.html#in-depth-examples",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "Create factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#advanced-features",
+    "href": "appendix/r-base/r-gl-basics.html#advanced-features",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "custom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High"
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "Mismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n."
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#best-practices",
+    "href": "appendix/r-base/r-gl-basics.html#best-practices",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "Always use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str()."
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#conclusion",
+    "href": "appendix/r-base/r-gl-basics.html#conclusion",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "The gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments."
+  },
+  {
+    "objectID": "appendix/r-base/r-gl-basics.html#references-and-resources",
+    "href": "appendix/r-base/r-gl-basics.html#references-and-resources",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "section": "",
+    "text": "R Documentation on gl\nANOVA in R Tutorial"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html",
+    "href": "appendix/r-base/r-sample-basic.html",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
+    "href": "appendix/r-base/r-sample-basic.html#function-description",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
+    "href": "appendix/r-base/r-sample-basic.html#key-features",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Key Features",
+    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#examples",
+    "href": "appendix/r-base/r-sample-basic.html#examples",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Examples",
+    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
+    "href": "appendix/r-base/r-sample-basic.html#best-practices",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Best Practices",
+    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html",
+    "href": "appendix/r-base/r-rep-basics.html",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.\n\n\n\nThe rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2\n\n\n\n\n\n\nCombining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1\n\n\n\n\n\nBasic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3\n\n\n\n\n\nNegative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#function-overview",
+    "href": "appendix/r-base/r-rep-basics.html#function-overview",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation."
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "href": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "href": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Combining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#examples",
+    "href": "appendix/r-base/r-rep-basics.html#examples",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Basic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "href": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html",
+    "href": "appendix/r-topics/r-subsetting-basics.html",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "",
+    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#introduction",
+    "href": "appendix/r-topics/r-subsetting-basics.html#introduction",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "",
+    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#getting-started",
+    "href": "appendix/r-topics/r-subsetting-basics.html#getting-started",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Getting Started",
+    "text": "Getting Started\nLoading the Package:\n\npacman::p_load(dplyr)  # Loads or installs the dplyr package\n\nBasic Usage: Select rows where mpg &gt; 20 using both approaches:\nBase R:\n\ndata(mtcars)\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\nTidyverse:\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Key Functions and Features",
+    "text": "Key Functions and Features\n\nBase R: Subsetting with []\nDescription: The simplest and most versatile method for subsetting in R. Use [] to extract rows, columns, or individual elements from data frames or matrices.\nSyntax:\ndata[rows, columns]\nExamples:\n\nSelect rows where mpg &gt; 20:\n\n\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\n\nSelect specific columns:\n\n\nmtcars[, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\n\nCombine row and column conditions:\n\n\nmtcars[mtcars$mpg &gt; 20, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\nNuances:\n\nOmitting rows or columns selects all:\n\n\nmtcars[mtcars$mpg &gt; 20, ]  # All columns selected\n\n\n  \n\n\nmtcars[, c(\"mpg\", \"cyl\")]  # All rows selected\n\n\n  \n\n\n\n\nNegative indexing excludes rows or columns:\n\n\nmtcars[-c(1, 2), ]  # Exclude first two rows\n\n\n  \n\n\n\n\n\nBase R: subset()\nDescription: Provides a more human-readable syntax for subsetting.\nSyntax:\nsubset(data, subset, select)\nExamples:\n\nSubset rows where mpg &gt; 20 and select mpg and cyl columns:\n\n\nsubset(mtcars, mpg &gt; 20, select = c(mpg, cyl))\n\n\n  \n\n\n\n\nSubset using multiple conditions:\n\n\nsubset(mtcars, mpg &gt; 20 & cyl == 6, select = c(mpg, cyl))\n\n\n  \n\n\n\nNuances:\n\nNon-standard evaluation allows simpler syntax but can lead to ambiguities. Use column names explicitly when necessary.\n\n\n\nTidyverse: dplyr::filter()\nDescription: Filters rows based on logical conditions.\nSyntax:\ndplyr::filter(data, condition)\nExamples:\n\nFilter rows with mpg &gt; 20:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\n  \n\n\n\n\nFilter with multiple conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 & cyl == 6)\n\n\n  \n\n\n\n\nUse dynamic variables in filtering:\n\n\nthreshold &lt;- 20\nmtcars |&gt;\n    dplyr::filter(mpg &gt; threshold)\n\n\n  \n\n\n\nNuances:\n\nUse | for “or” conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 | cyl == 6)\n\n\n  \n\n\n\n\nFilter with is.na() to handle missing values:\n\n\nmtcars |&gt;\n    dplyr::filter(!is.na(mpg))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::select()\nDescription: Selects specific columns from a data frame.\nSyntax:\ndplyr::select(data, columns)\nExamples:\n\nSelect specific columns:\n\n\nmtcars |&gt;\n    dplyr::select(mpg, cyl)\n\n\n  \n\n\n\n\nUse helpers for dynamic selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"))\n\n\n  \n\n\n\nNuances:\n\nCombine helpers for advanced selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"), ends_with(\"t\"))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::slice()\nDescription: Selects rows by position.\nSyntax:\ndplyr::slice(data, row_numbers)\nExamples:\n\nSelect the first five rows:\n\n\nmtcars |&gt;\n    dplyr::slice(1:5)\n\n\n  \n\n\n\n\nRandom sampling:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(n = 5)\n\n\n  \n\n\n\n\nSelect rows by percentages:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(prop = .1)  # 10% of rows\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::pull()\nDescription: Extracts a single column as a vector.\nSyntax:\ndplyr::pull(data, column)\nExamples:\n\nPull the mpg column:\n\n\nmtcars |&gt;\n    dplyr::pull(mpg)\n\n [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4\n[16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7\n[31] 15.0 21.4\n\n\n\nCombine with filtering:\n\n\nmtcars |&gt;\n    dplyr::filter(cyl == 6) |&gt;\n    dplyr::pull(mpg)\n\n[1] 21.0 21.0 21.4 18.1 19.2 17.8 19.7\n\n\nNuances:\n\nUseful for extracting data for external functions:\n\n\nmean(mtcars |&gt; dplyr::pull(mpg))\n\n[1] 20.09062"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
+    "href": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "In-Depth Examples",
+    "text": "In-Depth Examples\n\nExample 1: Dynamic Filtering with External Variables\nObjective: Filter rows based on user-defined thresholds for mpg and hp.\nSteps:\n\nDefine thresholds:\n\n\nmpg_threshold &lt;- 20\nhp_threshold &lt;- 100\n\n\nBase R:\n\n\nmtcars[mtcars$mpg &gt; mpg_threshold & mtcars$hp &gt; hp_threshold, ]\n\n\n  \n\n\n\n\nTidyverse:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; mpg_threshold & hp &gt; hp_threshold)\n\n\n  \n\n\n\n\n\nExample 2: Visualizing Subsets\nObjective: Visualize cars with mpg &gt; 20.\nSteps:\n\nSubset data:\n\n\nfiltered_data &lt;- mtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\nPlot:\n\n\nlibrary(ggplot2)\nggplot(filtered_data, aes(x = wt, y = mpg)) +\n    geom_point()"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
+    "href": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Advanced Features",
+    "text": "Advanced Features\nCustomization:\n\nCreate reusable functions for subsetting:\n\n\nfilter_cars &lt;- function(data, mpg_threshold, cyl_threshold) {\n    data |&gt;\n        dplyr::filter(mpg &gt; mpg_threshold, cyl == cyl_threshold)\n}\n\nfilter_cars(mtcars, 20, 6)\n\n\n  \n\n\n\nIntegration:\n\nCombine tidyr for reshaping with subsetting:\n\n\nlibrary(tidyr)\nmtcars |&gt;\n    pivot_longer(cols = everything()) |&gt;\n    dplyr::filter(value &gt; 20)"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Troubleshooting and FAQs",
+    "text": "Troubleshooting and FAQs\n\nIssue: “undefined columns selected” Fix: Double-check column names.\nIssue: Subsetting returns no rows. Fix: Ensure logical conditions are met.\n\nFAQs:\n\nHow to subset with regex? Use grepl() in Base R or matches() in dplyr::select():\n\n\nmtcars |&gt;\n    dplyr::select(matches(\"^m\"))"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#best-practices",
+    "href": "appendix/r-topics/r-subsetting-basics.html#best-practices",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Best Practices",
+    "text": "Best Practices\n\nPreview data before subsetting using head() or glimpse().\nChain operations for clarity in tidyverse.\nAvoid hard-coding indices; use dynamic variables."
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#conclusion",
+    "href": "appendix/r-topics/r-subsetting-basics.html#conclusion",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Conclusion",
+    "text": "Conclusion\nRecap: Subsetting is a powerful tool for extracting specific data. Base R provides flexibility, while tidyverse offers an elegant syntax for modern workflows."
+  },
+  {
     "objectID": "appendix/r-packages/emmeans.html",
     "href": "appendix/r-packages/emmeans.html",
     "title": "Tutorial: Using the emmeans R Package",
@@ -1461,426 +1888,6 @@
     "title": "Tutorial: Using the emmeans R Package",
     "section": "9. References and Resources",
     "text": "9. References and Resources\n\nemmeans CRAN Page\nVignettes: Estimated Marginal Means\nGitHub Repository"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html",
-    "href": "appendix/r-topics/r-subsetting-basics.html",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "",
-    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#introduction",
-    "href": "appendix/r-topics/r-subsetting-basics.html#introduction",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "",
-    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#getting-started",
-    "href": "appendix/r-topics/r-subsetting-basics.html#getting-started",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Getting Started",
-    "text": "Getting Started\nLoading the Package:\n\npacman::p_load(dplyr)  # Loads or installs the dplyr package\n\nBasic Usage: Select rows where mpg &gt; 20 using both approaches:\nBase R:\n\ndata(mtcars)\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\nTidyverse:\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Key Functions and Features",
-    "text": "Key Functions and Features\n\nBase R: Subsetting with []\nDescription: The simplest and most versatile method for subsetting in R. Use [] to extract rows, columns, or individual elements from data frames or matrices.\nSyntax:\ndata[rows, columns]\nExamples:\n\nSelect rows where mpg &gt; 20:\n\n\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\n\nSelect specific columns:\n\n\nmtcars[, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\n\nCombine row and column conditions:\n\n\nmtcars[mtcars$mpg &gt; 20, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\nNuances:\n\nOmitting rows or columns selects all:\n\n\nmtcars[mtcars$mpg &gt; 20, ]  # All columns selected\n\n\n  \n\n\nmtcars[, c(\"mpg\", \"cyl\")]  # All rows selected\n\n\n  \n\n\n\n\nNegative indexing excludes rows or columns:\n\n\nmtcars[-c(1, 2), ]  # Exclude first two rows\n\n\n  \n\n\n\n\n\nBase R: subset()\nDescription: Provides a more human-readable syntax for subsetting.\nSyntax:\nsubset(data, subset, select)\nExamples:\n\nSubset rows where mpg &gt; 20 and select mpg and cyl columns:\n\n\nsubset(mtcars, mpg &gt; 20, select = c(mpg, cyl))\n\n\n  \n\n\n\n\nSubset using multiple conditions:\n\n\nsubset(mtcars, mpg &gt; 20 & cyl == 6, select = c(mpg, cyl))\n\n\n  \n\n\n\nNuances:\n\nNon-standard evaluation allows simpler syntax but can lead to ambiguities. Use column names explicitly when necessary.\n\n\n\nTidyverse: dplyr::filter()\nDescription: Filters rows based on logical conditions.\nSyntax:\ndplyr::filter(data, condition)\nExamples:\n\nFilter rows with mpg &gt; 20:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\n  \n\n\n\n\nFilter with multiple conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 & cyl == 6)\n\n\n  \n\n\n\n\nUse dynamic variables in filtering:\n\n\nthreshold &lt;- 20\nmtcars |&gt;\n    dplyr::filter(mpg &gt; threshold)\n\n\n  \n\n\n\nNuances:\n\nUse | for “or” conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 | cyl == 6)\n\n\n  \n\n\n\n\nFilter with is.na() to handle missing values:\n\n\nmtcars |&gt;\n    dplyr::filter(!is.na(mpg))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::select()\nDescription: Selects specific columns from a data frame.\nSyntax:\ndplyr::select(data, columns)\nExamples:\n\nSelect specific columns:\n\n\nmtcars |&gt;\n    dplyr::select(mpg, cyl)\n\n\n  \n\n\n\n\nUse helpers for dynamic selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"))\n\n\n  \n\n\n\nNuances:\n\nCombine helpers for advanced selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"), ends_with(\"t\"))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::slice()\nDescription: Selects rows by position.\nSyntax:\ndplyr::slice(data, row_numbers)\nExamples:\n\nSelect the first five rows:\n\n\nmtcars |&gt;\n    dplyr::slice(1:5)\n\n\n  \n\n\n\n\nRandom sampling:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(n = 5)\n\n\n  \n\n\n\n\nSelect rows by percentages:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(prop = .1)  # 10% of rows\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::pull()\nDescription: Extracts a single column as a vector.\nSyntax:\ndplyr::pull(data, column)\nExamples:\n\nPull the mpg column:\n\n\nmtcars |&gt;\n    dplyr::pull(mpg)\n\n [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4\n[16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7\n[31] 15.0 21.4\n\n\n\nCombine with filtering:\n\n\nmtcars |&gt;\n    dplyr::filter(cyl == 6) |&gt;\n    dplyr::pull(mpg)\n\n[1] 21.0 21.0 21.4 18.1 19.2 17.8 19.7\n\n\nNuances:\n\nUseful for extracting data for external functions:\n\n\nmean(mtcars |&gt; dplyr::pull(mpg))\n\n[1] 20.09062"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
-    "href": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "In-Depth Examples",
-    "text": "In-Depth Examples\n\nExample 1: Dynamic Filtering with External Variables\nObjective: Filter rows based on user-defined thresholds for mpg and hp.\nSteps:\n\nDefine thresholds:\n\n\nmpg_threshold &lt;- 20\nhp_threshold &lt;- 100\n\n\nBase R:\n\n\nmtcars[mtcars$mpg &gt; mpg_threshold & mtcars$hp &gt; hp_threshold, ]\n\n\n  \n\n\n\n\nTidyverse:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; mpg_threshold & hp &gt; hp_threshold)\n\n\n  \n\n\n\n\n\nExample 2: Visualizing Subsets\nObjective: Visualize cars with mpg &gt; 20.\nSteps:\n\nSubset data:\n\n\nfiltered_data &lt;- mtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\nPlot:\n\n\nlibrary(ggplot2)\nggplot(filtered_data, aes(x = wt, y = mpg)) +\n    geom_point()"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
-    "href": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Advanced Features",
-    "text": "Advanced Features\nCustomization:\n\nCreate reusable functions for subsetting:\n\n\nfilter_cars &lt;- function(data, mpg_threshold, cyl_threshold) {\n    data |&gt;\n        dplyr::filter(mpg &gt; mpg_threshold, cyl == cyl_threshold)\n}\n\nfilter_cars(mtcars, 20, 6)\n\n\n  \n\n\n\nIntegration:\n\nCombine tidyr for reshaping with subsetting:\n\n\nlibrary(tidyr)\nmtcars |&gt;\n    pivot_longer(cols = everything()) |&gt;\n    dplyr::filter(value &gt; 20)"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Troubleshooting and FAQs",
-    "text": "Troubleshooting and FAQs\n\nIssue: “undefined columns selected” Fix: Double-check column names.\nIssue: Subsetting returns no rows. Fix: Ensure logical conditions are met.\n\nFAQs:\n\nHow to subset with regex? Use grepl() in Base R or matches() in dplyr::select():\n\n\nmtcars |&gt;\n    dplyr::select(matches(\"^m\"))"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#best-practices",
-    "href": "appendix/r-topics/r-subsetting-basics.html#best-practices",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Best Practices",
-    "text": "Best Practices\n\nPreview data before subsetting using head() or glimpse().\nChain operations for clarity in tidyverse.\nAvoid hard-coding indices; use dynamic variables."
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#conclusion",
-    "href": "appendix/r-topics/r-subsetting-basics.html#conclusion",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Conclusion",
-    "text": "Conclusion\nRecap: Subsetting is a powerful tool for extracting specific data. Base R provides flexibility, while tidyverse offers an elegant syntax for modern workflows."
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html",
-    "href": "appendix/r-base/r-rep-basics.html",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.\n\n\n\nThe rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2\n\n\n\n\n\n\nCombining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1\n\n\n\n\n\nBasic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3\n\n\n\n\n\nNegative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#function-overview",
-    "href": "appendix/r-base/r-rep-basics.html#function-overview",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation."
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#arguments-explanation",
-    "href": "appendix/r-base/r-rep-basics.html#arguments-explanation",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "The rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
-    "href": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "Combining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#examples",
-    "href": "appendix/r-base/r-rep-basics.html#examples",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "Basic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3"
-  },
-  {
-    "objectID": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
-    "href": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
-    "title": "Tutorial on rep function in R",
-    "section": "",
-    "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html",
-    "href": "appendix/r-base/r-sample-basic.html",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
-    "href": "appendix/r-base/r-sample-basic.html#function-description",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
-    "href": "appendix/r-base/r-sample-basic.html#key-features",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Key Features",
-    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#examples",
-    "href": "appendix/r-base/r-sample-basic.html#examples",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Examples",
-    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
-    "href": "appendix/r-base/r-sample-basic.html#best-practices",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Best Practices",
-    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html",
-    "href": "appendix/r-base/r-gl-basics.html",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R.\n\n\n\n\n\n\n\nThe gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor.\n\n\n\n\n\n\n\n\n\nCreates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment\n\n\n\n\n\n\n\n\n\n\n\nCreate factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\n\n\ncustom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High\n\n\n\n\n\n\n\n\n\nMismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n.\n\n\n\n\n\n\nAlways use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str().\n\n\n\n\n\n\n\nThe gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments.\n\n\n\n\n\n\nR Documentation on gl\nANOVA in R Tutorial"
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#introduction",
-    "href": "appendix/r-base/r-gl-basics.html#introduction",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#getting-started",
-    "href": "appendix/r-base/r-gl-basics.html#getting-started",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "The gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
-    "href": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Creates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment"
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#in-depth-examples",
-    "href": "appendix/r-base/r-gl-basics.html#in-depth-examples",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Create factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#advanced-features",
-    "href": "appendix/r-base/r-gl-basics.html#advanced-features",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "custom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High"
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Mismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#best-practices",
-    "href": "appendix/r-base/r-gl-basics.html#best-practices",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Always use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str()."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#conclusion",
-    "href": "appendix/r-base/r-gl-basics.html#conclusion",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "The gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#references-and-resources",
-    "href": "appendix/r-base/r-gl-basics.html#references-and-resources",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "R Documentation on gl\nANOVA in R Tutorial"
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html",
-    "href": "appendix/r-base/r-interaction-basics.html",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "The interaction function in R is used to combine two or more factors into a single factor. It is particularly useful in ANOVA or linear modeling when you need to analyze interactions between factors.\n\n\n\n\nExploring interaction effects between multiple factors in ANOVA.\nCreating unique combinations of factor levels.\nPreparing datasets for hierarchical or nested analyses.\n\n\n\n\n\nSimplifies the analysis of interactions between factors.\nEnsures unique identification of factor level combinations.\nSeamlessly integrates with ANOVA and modeling workflows in R.\n\n\n\n\n\n\n\nThe interaction function is part of base R, so no additional packages are required.\n\n\n\n\n# Define two factors\nfactor1 &lt;- gl(2, 3, labels = c(\"Low\", \"High\"))\nfactor2 &lt;- gl(3, 1, 6, labels = c(\"A\", \"B\", \"C\"))\n\n# Combine factors using interaction\ncombined &lt;- interaction(factor1, factor2)\nprint(combined)\n\n[1] Low.A  Low.B  Low.C  High.A High.B High.C\nLevels: Low.A High.A Low.B High.B Low.C High.C\n\n\nAnnotations:\n\ngl: Generates factors with specified levels and repetitions.\ninteraction: Combines multiple factors into a single factor.\n\n\n\n\n\n\n\n\n\nCreates a single factor by combining multiple factors. Each level of the new factor corresponds to a unique combination of levels from the input factors.\n\n\n\ninteraction(..., sep = \":\", lex.order = FALSE)\n\n…: Factors to be combined.\nsep: Separator for combined levels (default is \":\").\nlex.order: Logical; determines if levels should be ordered lexicographically.\n\n\n\n\n\n# Example with custom separator\ncombined &lt;- interaction(factor1, factor2, sep = \"-\")\nprint(combined)\n\n[1] Low-A  Low-B  Low-C  High-A High-B High-C\nLevels: Low-A High-A Low-B High-B Low-C High-C\n\n\n\n\n\n\n\n\n\n\n\nAnalyze the interaction between treatment and dose in an experiment.\n\n\n\n\nCreate a dataset with two factors and a response variable.\nUse interaction to generate a combined factor.\nPerform two-way ANOVA.\n\n\n\n\n\n# Create factors and response\nset.seed(42)\ntreatment &lt;- gl(2, 6, labels = c(\"Control\", \"Treatment\"))\ndose &lt;- gl(3, 2, 12, labels = c(\"Low\", \"Medium\", \"High\"))\nresponse &lt;- c(rnorm(6, 5), rnorm(6, 6))\n\n# Combine factors\ninteraction_factor &lt;- interaction(treatment, dose)\n\n# Perform ANOVA\nanova_model &lt;- aov(response ~ treatment * dose)\nsummary(anova_model)\n\n               Df Sum Sq Mean Sq F value Pr(&gt;F)  \ntreatment       1  9.835   9.835   9.872  0.020 *\ndose            2  0.349   0.174   0.175  0.843  \ntreatment:dose  2  1.064   0.532   0.534  0.612  \nResiduals       6  5.977   0.996                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\nVisualize interaction effects using interaction and ggplot2.\n\n\n\n\nGenerate a dataset with interaction factors.\nCreate a plot of means by interaction levels.\n\n\n\n\n\nlibrary(ggplot2)\n\n# Create dataset\ndata &lt;- data.frame(\n    Treatment = treatment,\n    Dose = dose,\n    Response = response,\n    Interaction = interaction(treatment, dose)\n)\n\n# Plot\nggplot(data, aes(x = Interaction, y = Response, fill = Treatment)) +\n    geom_boxplot() +\n    theme_minimal() +\n    labs(title = \"Interaction Effects\", x = \"Interaction\", y = \"Response\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCustomize interaction labels using the sep argument.\n\ninteraction_factor &lt;- interaction(treatment, dose, sep = \"_\")\nprint(interaction_factor)\n\n [1] Control_Low      Control_Low      Control_Medium   Control_Medium  \n [5] Control_High     Control_High     Treatment_Low    Treatment_Low   \n [9] Treatment_Medium Treatment_Medium Treatment_High   Treatment_High  \n6 Levels: Control_Low Treatment_Low Control_Medium ... Treatment_High\n\n\n\n\n\nUse interaction directly in model formulas.\n\nanova_model &lt;- aov(response ~ interaction(treatment, dose))\nsummary(anova_model)\n\n                             Df Sum Sq Mean Sq F value Pr(&gt;F)\ninteraction(treatment, dose)  5 11.248  2.2495   2.258  0.175\nResiduals                     6  5.977  0.9962               \n\n\n\n\n\nFor large datasets, ensure factors are properly ordered to reduce computational overhead.\n\n\n\n\n\n\n\nMismatch in factor lengths:\n\nEnsure all input factors have the same length.\n\nUnexpected level combinations:\n\nUse lex.order = TRUE to enforce lexicographic ordering.\n\n\n\n\n\n\n\nUse descriptive factor labels for clarity.\nApply interaction within model formulas for cleaner workflows.\nVisualize interaction effects to better understand relationships between factors.\n\n\n\n\n\n\n\nThe interaction function is essential for analyzing and visualizing factor interactions.\nIt integrates seamlessly with ANOVA and modeling workflows.\n\n\n\n\n\nExplore interactions with more than two factors.\nCombine interaction with advanced visualization tools like ggplot2.\n\n\n\n\n\n\nR Documentation on interaction\nANOVA in R Tutorial"
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#introduction",
-    "href": "appendix/r-base/r-interaction-basics.html#introduction",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "The interaction function in R is used to combine two or more factors into a single factor. It is particularly useful in ANOVA or linear modeling when you need to analyze interactions between factors.\n\n\n\n\nExploring interaction effects between multiple factors in ANOVA.\nCreating unique combinations of factor levels.\nPreparing datasets for hierarchical or nested analyses.\n\n\n\n\n\nSimplifies the analysis of interactions between factors.\nEnsures unique identification of factor level combinations.\nSeamlessly integrates with ANOVA and modeling workflows in R."
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#getting-started",
-    "href": "appendix/r-base/r-interaction-basics.html#getting-started",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "The interaction function is part of base R, so no additional packages are required.\n\n\n\n\n# Define two factors\nfactor1 &lt;- gl(2, 3, labels = c(\"Low\", \"High\"))\nfactor2 &lt;- gl(3, 1, 6, labels = c(\"A\", \"B\", \"C\"))\n\n# Combine factors using interaction\ncombined &lt;- interaction(factor1, factor2)\nprint(combined)\n\n[1] Low.A  Low.B  Low.C  High.A High.B High.C\nLevels: Low.A High.A Low.B High.B Low.C High.C\n\n\nAnnotations:\n\ngl: Generates factors with specified levels and repetitions.\ninteraction: Combines multiple factors into a single factor."
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#key-functions-and-features",
-    "href": "appendix/r-base/r-interaction-basics.html#key-functions-and-features",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "Creates a single factor by combining multiple factors. Each level of the new factor corresponds to a unique combination of levels from the input factors.\n\n\n\ninteraction(..., sep = \":\", lex.order = FALSE)\n\n…: Factors to be combined.\nsep: Separator for combined levels (default is \":\").\nlex.order: Logical; determines if levels should be ordered lexicographically.\n\n\n\n\n\n# Example with custom separator\ncombined &lt;- interaction(factor1, factor2, sep = \"-\")\nprint(combined)\n\n[1] Low-A  Low-B  Low-C  High-A High-B High-C\nLevels: Low-A High-A Low-B High-B Low-C High-C"
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#in-depth-examples",
-    "href": "appendix/r-base/r-interaction-basics.html#in-depth-examples",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "Analyze the interaction between treatment and dose in an experiment.\n\n\n\n\nCreate a dataset with two factors and a response variable.\nUse interaction to generate a combined factor.\nPerform two-way ANOVA.\n\n\n\n\n\n# Create factors and response\nset.seed(42)\ntreatment &lt;- gl(2, 6, labels = c(\"Control\", \"Treatment\"))\ndose &lt;- gl(3, 2, 12, labels = c(\"Low\", \"Medium\", \"High\"))\nresponse &lt;- c(rnorm(6, 5), rnorm(6, 6))\n\n# Combine factors\ninteraction_factor &lt;- interaction(treatment, dose)\n\n# Perform ANOVA\nanova_model &lt;- aov(response ~ treatment * dose)\nsummary(anova_model)\n\n               Df Sum Sq Mean Sq F value Pr(&gt;F)  \ntreatment       1  9.835   9.835   9.872  0.020 *\ndose            2  0.349   0.174   0.175  0.843  \ntreatment:dose  2  1.064   0.532   0.534  0.612  \nResiduals       6  5.977   0.996                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\nVisualize interaction effects using interaction and ggplot2.\n\n\n\n\nGenerate a dataset with interaction factors.\nCreate a plot of means by interaction levels.\n\n\n\n\n\nlibrary(ggplot2)\n\n# Create dataset\ndata &lt;- data.frame(\n    Treatment = treatment,\n    Dose = dose,\n    Response = response,\n    Interaction = interaction(treatment, dose)\n)\n\n# Plot\nggplot(data, aes(x = Interaction, y = Response, fill = Treatment)) +\n    geom_boxplot() +\n    theme_minimal() +\n    labs(title = \"Interaction Effects\", x = \"Interaction\", y = \"Response\")"
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#advanced-features",
-    "href": "appendix/r-base/r-interaction-basics.html#advanced-features",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "Customize interaction labels using the sep argument.\n\ninteraction_factor &lt;- interaction(treatment, dose, sep = \"_\")\nprint(interaction_factor)\n\n [1] Control_Low      Control_Low      Control_Medium   Control_Medium  \n [5] Control_High     Control_High     Treatment_Low    Treatment_Low   \n [9] Treatment_Medium Treatment_Medium Treatment_High   Treatment_High  \n6 Levels: Control_Low Treatment_Low Control_Medium ... Treatment_High\n\n\n\n\n\nUse interaction directly in model formulas.\n\nanova_model &lt;- aov(response ~ interaction(treatment, dose))\nsummary(anova_model)\n\n                             Df Sum Sq Mean Sq F value Pr(&gt;F)\ninteraction(treatment, dose)  5 11.248  2.2495   2.258  0.175\nResiduals                     6  5.977  0.9962               \n\n\n\n\n\nFor large datasets, ensure factors are properly ordered to reduce computational overhead."
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-base/r-interaction-basics.html#troubleshooting-and-faqs",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "Mismatch in factor lengths:\n\nEnsure all input factors have the same length.\n\nUnexpected level combinations:\n\nUse lex.order = TRUE to enforce lexicographic ordering."
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#best-practices",
-    "href": "appendix/r-base/r-interaction-basics.html#best-practices",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "Use descriptive factor labels for clarity.\nApply interaction within model formulas for cleaner workflows.\nVisualize interaction effects to better understand relationships between factors."
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#conclusion",
-    "href": "appendix/r-base/r-interaction-basics.html#conclusion",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "The interaction function is essential for analyzing and visualizing factor interactions.\nIt integrates seamlessly with ANOVA and modeling workflows.\n\n\n\n\n\nExplore interactions with more than two factors.\nCombine interaction with advanced visualization tools like ggplot2."
-  },
-  {
-    "objectID": "appendix/r-base/r-interaction-basics.html#references-and-resources",
-    "href": "appendix/r-base/r-interaction-basics.html#references-and-resources",
-    "title": "R Tutorial: Using interaction and Related ANOVA Functions",
-    "section": "",
-    "text": "R Documentation on interaction\nANOVA in R Tutorial"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html",
-    "href": "appendix/r-topics/r-data-frames-basics.html",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing.\n\n\n\n\n\n\n\n\n# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\ndata.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\nCombine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\ncolnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage.\n\n\n\n\n\n\n\n\nData Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types.\n\n\n\n\n\n\nUse consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability.\n\n\n\n\n\n\n\nBase R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations.\n\n\n\n\n\nBase R Documentation\nTidyverse Guide\nR for Data Science"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#introduction",
-    "href": "appendix/r-topics/r-data-frames-basics.html#introduction",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#getting-started",
-    "href": "appendix/r-topics/r-data-frames-basics.html#getting-started",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "data.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
-    "href": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "Combine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
-    "href": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "colnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "Data Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#best-practices",
-    "href": "appendix/r-topics/r-data-frames-basics.html#best-practices",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "Use consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#conclusion",
-    "href": "appendix/r-topics/r-data-frames-basics.html#conclusion",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "Base R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
-    "href": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
-    "title": "Creating Data Frames in R",
-    "section": "",
-    "text": "Base R Documentation\nTidyverse Guide\nR for Data Science"
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html",
-    "href": "appendix/r-topics/r-factors-basics.html",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Factors in R are data structures used to handle categorical data effectively. Factors allow you to store, manipulate, and analyze data with distinct levels, making them essential for statistical modeling and visualization. This tutorial covers functions from the base R package and the forcats package.\n\n\n\n\nBase R Functions: factor(), levels(), nlevels(), as.factor(), is.factor(), relevel()\nForcats Functions: forcats::fct_relevel(), forcats::fct_infreq(), forcats::fct_collapse()\n\n\n\n\n\nRepresenting categorical variables (e.g., gender, regions).\nEncoding ordinal variables (e.g., education levels, survey responses).\nSimplifying group-wise statistical analysis.\nReordering levels for meaningful visualization.\n\n\n\n\n\nEfficient storage of categorical data.\nSeamless integration with statistical models in R.\nImproved clarity and readability of data.\n\n\n\n\n\n\n\nUse pacman::p_load() to load necessary packages:\n\npacman::p_load(forcats, dplyr)\n\n\n\n\nCreate a basic factor and explore its properties:\n\n# Creating a factor\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\n\n# Display the factor\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n# Check the levels\nlevels(colors)\n\n[1] \"blue\"  \"green\" \"red\"  \n\n\n\n\n\n\n\n\n\n\nCreates a factor from a vector of values.\n\n\n\nfactor(x, levels = NULL, labels = NULL, ordered = FALSE)\n\nx: Input vector.\nlevels: Custom levels.\nlabels: Labels for levels.\nordered: Logical flag for ordinal factors.\n\n\n\n\n\ngrades &lt;- factor(c(\"A\", \"B\", \"C\", \"A\", \"B\"), levels = c(\"A\", \"B\", \"C\"), ordered = TRUE)\ngrades\n\n[1] A B C A B\nLevels: A &lt; B &lt; C\n\n\n\n\n\n\n\n\nReorders the levels of a factor to make a specific level the reference level.\n\n\n\nrelevel(factor_variable, ref)\n\nfactor_variable: The factor to be modified.\nref: The new reference level.\n\n\n\n\n\n# Releveling to make \"blue\" the reference level\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\ncolors &lt;- relevel(colors, ref = \"blue\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n\n\n\n\n\n\n\nReorders factor levels.\n\n\n\nforcats::fct_relevel(factor_variable, new_order)\n\n\n\n\neducation &lt;- factor(c(\"High School\", \"Masters\", \"Bachelors\", \"PhD\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] High School Masters     Bachelors   PhD        \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\n\n\n\nReordering education levels for a survey dataset.\n\n\n\nRearrange education levels from lowest to highest for meaningful analysis.\n\n\n\n\neducation &lt;- factor(c(\"Masters\", \"PhD\", \"High School\", \"Bachelors\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nChange the reference level of a factor for a statistical model.\n\n\n\n\n# Relevel \"High School\" as the reference level\neducation &lt;- relevel(education, ref = \"High School\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nSimplify factor levels by collapsing related categories.\n\n\n\n\nfruit &lt;- factor(c(\"apple\", \"banana\", \"pear\", \"apple\", \"orange\", \"pear\"))\nfruit &lt;- forcats::fct_collapse(fruit, Citrus = c(\"orange\"), Other = c(\"apple\", \"banana\", \"pear\"))\nfruit\n\n[1] Other  Other  Other  Other  Citrus Other \nLevels: Other Citrus\n\n\n\n\n\n\n\n\n\nAdjust levels dynamically:\n\nlevels(colors) &lt;- c(levels(colors), \"yellow\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red yellow\n\n\n\n\n\nCombine factors with other R packages:\n\ndata &lt;- tibble(category = factor(c(\"A\", \"B\", \"A\")), value = c(10, 20, 30))\ndata |&gt; group_by(category) |&gt; summarize(mean_value = mean(value))\n\n\n  \n\n\n\n\n\n\n\n\n\n\nUnused Levels: Use droplevels() to remove unused levels.\nIncorrect Order: Use forcats::fct_relevel() to reorder.\n\n\n\n\n\nQ: How to convert a factor back to a character vector?\nA: Use as.character(factor_variable).\nQ: How to check if a variable is a factor?\nA: Use is.factor(variable).\n\n\n\n\n\n\nAlways specify levels for consistency.\nUse ordered factors for ordinal data.\nUse forcats functions for enhanced factor manipulation.\n\n\n\n\n\n\nFactors are powerful tools for handling categorical data in R. They are versatile and integrate well with R’s modeling and visualization ecosystem.\n\n\n\nExplore advanced functionalities in the forcats package, such as forcats::fct_infreq().\n\n\n\n\n\nR Factor Documentation\nForcats Documentation\nTidyverse Guide to Factors"
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#introduction",
-    "href": "appendix/r-topics/r-factors-basics.html#introduction",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Factors in R are data structures used to handle categorical data effectively. Factors allow you to store, manipulate, and analyze data with distinct levels, making them essential for statistical modeling and visualization. This tutorial covers functions from the base R package and the forcats package.\n\n\n\n\nBase R Functions: factor(), levels(), nlevels(), as.factor(), is.factor(), relevel()\nForcats Functions: forcats::fct_relevel(), forcats::fct_infreq(), forcats::fct_collapse()\n\n\n\n\n\nRepresenting categorical variables (e.g., gender, regions).\nEncoding ordinal variables (e.g., education levels, survey responses).\nSimplifying group-wise statistical analysis.\nReordering levels for meaningful visualization.\n\n\n\n\n\nEfficient storage of categorical data.\nSeamless integration with statistical models in R.\nImproved clarity and readability of data."
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#getting-started",
-    "href": "appendix/r-topics/r-factors-basics.html#getting-started",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Use pacman::p_load() to load necessary packages:\n\npacman::p_load(forcats, dplyr)\n\n\n\n\nCreate a basic factor and explore its properties:\n\n# Creating a factor\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\n\n# Display the factor\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n# Check the levels\nlevels(colors)\n\n[1] \"blue\"  \"green\" \"red\""
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-factors-basics.html#key-functions-and-features",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Creates a factor from a vector of values.\n\n\n\nfactor(x, levels = NULL, labels = NULL, ordered = FALSE)\n\nx: Input vector.\nlevels: Custom levels.\nlabels: Labels for levels.\nordered: Logical flag for ordinal factors.\n\n\n\n\n\ngrades &lt;- factor(c(\"A\", \"B\", \"C\", \"A\", \"B\"), levels = c(\"A\", \"B\", \"C\"), ordered = TRUE)\ngrades\n\n[1] A B C A B\nLevels: A &lt; B &lt; C\n\n\n\n\n\n\n\n\nReorders the levels of a factor to make a specific level the reference level.\n\n\n\nrelevel(factor_variable, ref)\n\nfactor_variable: The factor to be modified.\nref: The new reference level.\n\n\n\n\n\n# Releveling to make \"blue\" the reference level\ncolors &lt;- factor(c(\"red\", \"blue\", \"green\", \"red\", \"blue\"))\ncolors &lt;- relevel(colors, ref = \"blue\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red\n\n\n\n\n\n\n\n\nReorders factor levels.\n\n\n\nforcats::fct_relevel(factor_variable, new_order)\n\n\n\n\neducation &lt;- factor(c(\"High School\", \"Masters\", \"Bachelors\", \"PhD\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] High School Masters     Bachelors   PhD        \nLevels: High School Bachelors Masters PhD"
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#in-depth-examples",
-    "href": "appendix/r-topics/r-factors-basics.html#in-depth-examples",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Reordering education levels for a survey dataset.\n\n\n\nRearrange education levels from lowest to highest for meaningful analysis.\n\n\n\n\neducation &lt;- factor(c(\"Masters\", \"PhD\", \"High School\", \"Bachelors\"))\neducation &lt;- forcats::fct_relevel(education, \"High School\", \"Bachelors\", \"Masters\", \"PhD\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nChange the reference level of a factor for a statistical model.\n\n\n\n\n# Relevel \"High School\" as the reference level\neducation &lt;- relevel(education, ref = \"High School\")\neducation\n\n[1] Masters     PhD         High School Bachelors  \nLevels: High School Bachelors Masters PhD\n\n\n\n\n\n\n\n\nSimplify factor levels by collapsing related categories.\n\n\n\n\nfruit &lt;- factor(c(\"apple\", \"banana\", \"pear\", \"apple\", \"orange\", \"pear\"))\nfruit &lt;- forcats::fct_collapse(fruit, Citrus = c(\"orange\"), Other = c(\"apple\", \"banana\", \"pear\"))\nfruit\n\n[1] Other  Other  Other  Other  Citrus Other \nLevels: Other Citrus"
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#advanced-features",
-    "href": "appendix/r-topics/r-factors-basics.html#advanced-features",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Adjust levels dynamically:\n\nlevels(colors) &lt;- c(levels(colors), \"yellow\")\ncolors\n\n[1] red   blue  green red   blue \nLevels: blue green red yellow\n\n\n\n\n\nCombine factors with other R packages:\n\ndata &lt;- tibble(category = factor(c(\"A\", \"B\", \"A\")), value = c(10, 20, 30))\ndata |&gt; group_by(category) |&gt; summarize(mean_value = mean(value))"
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-factors-basics.html#troubleshooting-and-faqs",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Unused Levels: Use droplevels() to remove unused levels.\nIncorrect Order: Use forcats::fct_relevel() to reorder.\n\n\n\n\n\nQ: How to convert a factor back to a character vector?\nA: Use as.character(factor_variable).\nQ: How to check if a variable is a factor?\nA: Use is.factor(variable)."
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#best-practices",
-    "href": "appendix/r-topics/r-factors-basics.html#best-practices",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Always specify levels for consistency.\nUse ordered factors for ordinal data.\nUse forcats functions for enhanced factor manipulation."
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#conclusion",
-    "href": "appendix/r-topics/r-factors-basics.html#conclusion",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "Factors are powerful tools for handling categorical data in R. They are versatile and integrate well with R’s modeling and visualization ecosystem.\n\n\n\nExplore advanced functionalities in the forcats package, such as forcats::fct_infreq()."
-  },
-  {
-    "objectID": "appendix/r-topics/r-factors-basics.html#references-and-resources",
-    "href": "appendix/r-topics/r-factors-basics.html#references-and-resources",
-    "title": "Factors and Categorical Variables in R",
-    "section": "",
-    "text": "R Factor Documentation\nForcats Documentation\nTidyverse Guide to Factors"
   },
   {
     "objectID": "appendix/r-packages/dplyr.html",
@@ -2139,14 +2146,14 @@
     "href": "assignments/assignment8_ancova_analysis.html",
     "title": "Assignment 8 - ANCOVA Analysis",
     "section": "",
-    "text": "In this assignment, you will explore the analysis of covariance (ANCOVA) and its applications in experimental designs. You will analyze the effects of covariates on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al. (2019), Chapter 8.\nTotal points: 155\n\n\nThis exercise examines the effects of spray parameters on the thermal spray coating properties of alumina (\\(\\text{Al}_2\\text{O}_3\\)). The experimental factors and levels are as follows:\n\nFuel ratio (A): 1:2.8 and 1:2.0\nCarrier gas flow rate (B): 1.33 and 3.21 \\(\\text{L/s}^{-1}\\)\nFrequency of detonations (C): 2 and 4 Hz\nSpray distance (D): 180 and 220 mm\n\nThe response variable is porosity (vol. %). Data are shown in Table 7.19.\nQuestions:\n\nDesign an Analysis\n\nAssuming negligible threeand four-factor interactions, outline the steps required to analyze the data (refer to Step (g) of the checklist in Chapter 2).\n\nCheck Model Assumptions\n\nEvaluate whether the assumptions underlying the model are valid.\n\nPerform the Analysis\n\nConduct the analysis you outlined in part (1), including interaction plots if appropriate. Clearly state your conclusions.\nTable 7.19: Data for the Coating Experiment\n\n\n\nA\nB\nC\nD\n\\(y_{ijkl}\\)\n\n\n\n\n2\n2\n2\n2\n5.95\n\n\n2\n2\n2\n1\n4.57\n\n\n2\n2\n1\n2\n4.03\n\n\n2\n2\n1\n1\n2.17\n\n\n2\n1\n2\n2\n3.43\n\n\n2\n1\n2\n1\n1.02\n\n\n2\n1\n1\n2\n4.25\n\n\n2\n1\n1\n1\n2.13\n\n\n1\n2\n2\n2\n12.28\n\n\n1\n2\n2\n1\n9.57\n\n\n…\n…\n…\n…\n…\n\n\n\nSource: Adapted from Saravanan et al. (2001), Journal of Physics D: Applied Physics.\n\n\n\n\nThis exercise investigates the effects of incubation conditions on the yield of an antifungal antibiotic.\n\nFactors and Levels:\nIncubation temperature (A): 25, 30, and 37 \\(^\\circ \\text{C}\\)\nCarbon concentration (B): 2%, 5%, and 7.5%\nNitrogen concentration (C): 0.5%, 1%, and 3%\n\nThe response variable is the antifungal yield (measured in activity against Candida albicans). Data are shown in Table 7.23.\nQuestions:\n\nAssess Main Effects\n\nConstruct plots to assess the significance of main effects of \\(A\\), \\(B\\), and \\(C\\) on the response. What are your conclusions?\n\nInteraction Assumptions\n\nState the assumptions you made regarding interactions while analyzing main effects in part (1).\n\nTwo-Way Interactions\n\nConstruct plots to assess the significance of two-way interactions. Do they alter your conclusions from part (1)?\n\nFit a Model\n\nAssuming no three-way interaction, fit a model with all main effects and two-way interactions. Discuss the significance of the effects and compare with your conclusions from part (3).\n\nModel Diagnostics\n\nEvaluate whether the assumptions of normality and equal error variances are satisfied. Identify potential outliers.\nTable 7.23: Data for Antifungal Antibiotic Experiment\n\n\n\nA\nB\nC\n\\(y_{ijk}\\)\n\n\n\n\n25\n2\n0.5\n25.84\n\n\n25\n2\n1\n51.86\n\n\n25\n2\n3\n32.59\n\n\n30\n5\n1\n41.11\n\n\n37\n7.5\n0.5\n51.86\n\n\n…\n…\n…\n…\n\n\n\nSource: Gupte and Kulkarni (2003), Journal of Chemical Technology and Biotechnology.\n\n\n\nFor this exercise, consider the data from Table 7.23 but assume no negligible three-factor interaction. Modify levels of \\(A\\) and \\(B\\) so their third levels are 35 and 8, respectively, to ensure equal spacing.\nQuestions:\n\nTrend Contrasts\n\nCreate a table listing the 27 treatment combinations. Include contrast coefficients for:\n\nLinear and quadratic trends in \\(A\\) and \\(B\\)\nInteraction trends (\\(A \\times B\\): Linear-Linear, Linear-Quadratic, etc.)\n\n\nNormalize Contrasts\n\nIdentify divisors to normalize each contrast and manually compute least squares estimates for normalized Linear \\(A\\) and Quadratic \\(A\\) contrasts.\n\nOrthogonal Contrasts for \\(C\\)\n\nPropose two orthogonal contrasts for \\(C\\) to address its uneven spacing and add them to the table in part (1).\n\nOrthogonal Contrasts Analysis\n\nUse software to calculate least squares estimates for all 26 orthogonal contrasts. Generate a half-normal probability plot and interpret the results.\n\nAlternative Analysis\n\nApply the Voss and Wang method to analyze the orthogonal contrasts. Compare these findings to part (4).\n\n\n\n\n\n\n\n\n\n\n\nExercise\nCriteria\nMax Points\nDescription\n\n\n\n\nExercise 7.7\nPart (a): Analysis Design\n10\nOutline the analysis steps, assumptions, and appropriate statistical methods (e.g., ANOVA, interaction plots).\n\n\n\nPart (b): Model Assumptions\n10\nAssess normality, homoscedasticity, and independence of residuals using statistical tests and plots.\n\n\n\nPart (c): Analysis and Plots\n20\nConduct ANOVA, interpret significant effects, create interaction plots, and draw meaningful conclusions.\n\n\nTotal for Exercise 7.7\n\n40\n\n\n\nExercise 7.11\nPart (a): Main Effects\n10\nConstruct main effects plots and evaluate their significance.\n\n\n\nPart (b): Interaction Assumptions\n5\nClearly state and justify interaction assumptions.\n\n\n\nPart (c): Two-Way Interactions\n15\nConstruct interaction plots, interpret results, and update conclusions from main effects analysis.\n\n\n\nPart (d): Model Fitting\n15\nFit a model including all main effects and two-way interactions, interpret significant effects.\n\n\n\nPart (e): Diagnostics\n10\nEvaluate residual diagnostics for normality, homoscedasticity, and outliers.\n\n\nTotal for Exercise 7.11\n\n55\n\n\n\nExercise 7.12\nPart (a): Trend Contrasts\n15\nCreate a table with contrast coefficients for linear, quadratic, and interaction terms.\n\n\n\nPart (b): Normalization\n10\nCompute normalization divisors and least squares estimates.\n\n\n\nPart (c): Orthogonal Contrasts\n10\nPropose and justify two orthogonal contrasts for CC.\n\n\n\nPart (d): Computer Analysis\n15\nCompute estimates, create a half-normal probability plot, and interpret results.\n\n\n\nPart (e): Voss and Wang Method\n10\nApply the method to examine orthogonal contrasts and compare with results from the half-normal plot.\n\n\nTotal for Exercise 7.12\n\n60\n\n\n\n\n\n\n\n\n\n\n\nExercise\nMax Points\nEarned Points\nComments\n\n\n\n\nExercise 7.7\n40\n\n\n\n\nExercise 7.11\n55\n\n\n\n\nExercise 7.12\n60\n\n\n\n\nOverall Total\n155"
+    "text": "In this assignment, you will explore the analysis of covariance (ANCOVA) and its applications in experimental designs. You will analyze the effects of covariates on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al. (2019), Chapter 8.\nTotal points: 155\n\n\nThis exercise examines the effects of spray parameters on the thermal spray coating properties of alumina (\\(\\text{Al}_2\\text{O}_3\\)). The experimental factors and levels are as follows:\n\nFuel ratio (A): 1:2.8 and 1:2.0\nCarrier gas flow rate (B): 1.33 and 3.21 \\(\\text{L/s}^{-1}\\)\nFrequency of detonations (C): 2 and 4 Hz\nSpray distance (D): 180 and 220 mm\n\nThe response variable is porosity (vol. %). Data are shown in Table 7.19.\nQuestions:\n\nDesign an Analysis\n\nAssuming negligible threeand four-factor interactions, outline the steps required to analyze the data (refer to Step (g) of the checklist in Chapter 2).\n\nCheck Model Assumptions\n\nEvaluate whether the assumptions underlying the model are valid.\n\nPerform the Analysis\n\nConduct the analysis you outlined in part (1), including interaction plots if appropriate. Clearly state your conclusions.\nTable 7.19: Data for the Coating Experiment\n\n\n\nA\nB\nC\nD\n\\(y_{ijkl}\\)\n\n\n\n\n2\n2\n2\n2\n5.95\n\n\n2\n2\n2\n1\n4.57\n\n\n2\n2\n1\n2\n4.03\n\n\n2\n2\n1\n1\n2.17\n\n\n2\n1\n2\n2\n3.43\n\n\n…\n…\n…\n…\n…\n\n\n\nSource: Adapted from Saravanan et al. (2001), Journal of Physics D: Applied Physics.\n\n\n\nThis exercise investigates the effects of incubation conditions on the yield of an antifungal antibiotic.\n\nFactors and Levels:\nIncubation temperature (A): 25, 30, and 37 \\(^\\circ \\text{C}\\)\nCarbon concentration (B): 2%, 5%, and 7.5%\nNitrogen concentration (C): 0.5%, 1%, and 3%\n\nThe response variable is the antifungal yield (measured in activity against Candida albicans). Data are shown in Table 7.23.\nQuestions:\n\nAssess Main Effects\n\nConstruct plots to assess the significance of main effects of \\(A\\), \\(B\\), and \\(C\\) on the response. What are your conclusions?\n\nInteraction Assumptions\n\nState the assumptions you made regarding interactions while analyzing main effects in part (1).\n\nTwo-Way Interactions\n\nConstruct plots to assess the significance of two-way interactions. Do they alter your conclusions from part (1)?\n\nFit a Model\n\nAssuming no three-way interaction, fit a model with all main effects and two-way interactions. Discuss the significance of the effects and compare with your conclusions from part (3).\n\nModel Diagnostics\n\nEvaluate whether the assumptions of normality and equal error variances are satisfied. Identify potential outliers.\nTable 7.23: Data for Antifungal Antibiotic Experiment\n\n\n\nA\nB\nC\n\\(y_{ijk}\\)\n\n\n\n\n25\n2\n0.5\n25.84\n\n\n25\n2\n1\n51.86\n\n\n25\n2\n3\n32.59\n\n\n30\n5\n1\n41.11\n\n\n37\n7.5\n0.5\n51.86\n\n\n…\n…\n…\n…\n\n\n\nSource: Gupte and Kulkarni (2003), Journal of Chemical Technology and Biotechnology.\n\n\n\nFor this exercise, consider the data from Table 7.23 but assume no negligible three-factor interaction. Modify levels of \\(A\\) and \\(B\\) so their third levels are 35 and 8, respectively, to ensure equal spacing.\nQuestions:\n\nTrend Contrasts\n\nCreate a table listing the 27 treatment combinations. Include contrast coefficients for:\n\nLinear and quadratic trends in \\(A\\) and \\(B\\)\nInteraction trends (\\(A \\times B\\): Linear-Linear, Linear-Quadratic, etc.)\n\n\nNormalize Contrasts\n\nIdentify divisors to normalize each contrast and manually compute least squares estimates for normalized Linear \\(A\\) and Quadratic \\(A\\) contrasts.\n\nOrthogonal Contrasts for \\(C\\)\n\nPropose two orthogonal contrasts for \\(C\\) to address its uneven spacing and add them to the table in part (1).\n\nOrthogonal Contrasts Analysis\n\nUse software to calculate least squares estimates for all 26 orthogonal contrasts. Generate a half-normal probability plot and interpret the results.\n\nAlternative Analysis\n\nApply the Voss and Wang method to analyze the orthogonal contrasts. Compare these findings to part (4).\n\n\n\n\n\n\n\n\n\n\n\nExercise\nCriteria\nMax Points\nDescription\n\n\n\n\nExercise 7.7\nPart (a): Analysis Design\n10\nOutline the analysis steps, assumptions, and appropriate statistical methods (e.g., ANOVA, interaction plots).\n\n\n\nPart (b): Model Assumptions\n10\nAssess normality, homoscedasticity, and independence of residuals using statistical tests and plots.\n\n\n\nPart (c): Analysis and Plots\n20\nConduct ANOVA, interpret significant effects, create interaction plots, and draw meaningful conclusions.\n\n\nTotal for Exercise 7.7\n\n40\n\n\n\nExercise 7.11\nPart (a): Main Effects\n10\nConstruct main effects plots and evaluate their significance.\n\n\n\nPart (b): Interaction Assumptions\n5\nClearly state and justify interaction assumptions.\n\n\n\nPart (c): Two-Way Interactions\n15\nConstruct interaction plots, interpret results, and update conclusions from main effects analysis.\n\n\n\nPart (d): Model Fitting\n15\nFit a model including all main effects and two-way interactions, interpret significant effects.\n\n\n\nPart (e): Diagnostics\n10\nEvaluate residual diagnostics for normality, homoscedasticity, and outliers.\n\n\nTotal for Exercise 7.11\n\n55\n\n\n\nExercise 7.12\nPart (a): Trend Contrasts\n15\nCreate a table with contrast coefficients for linear, quadratic, and interaction terms.\n\n\n\nPart (b): Normalization\n10\nCompute normalization divisors and least squares estimates.\n\n\n\nPart (c): Orthogonal Contrasts\n10\nPropose and justify two orthogonal contrasts for CC.\n\n\n\nPart (d): Computer Analysis\n15\nCompute estimates, create a half-normal probability plot, and interpret results.\n\n\n\nPart (e): Voss and Wang Method\n10\nApply the method to examine orthogonal contrasts and compare with results from the half-normal plot.\n\n\nTotal for Exercise 7.12\n\n60\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise\nMax Points\nEarned Points\nComments\n\n\n\n\nExercise 7.7\n40\n\n\n\n\nExercise 7.11\n55\n\n\n\n\nExercise 7.12\n60\n\n\n\n\nOverall Total\n155"
   },
   {
     "objectID": "assignments/assignment8_ancova_analysis.html#exercise-7.7-coating-experiment",
     "href": "assignments/assignment8_ancova_analysis.html#exercise-7.7-coating-experiment",
     "title": "Assignment 8 - ANCOVA Analysis",
     "section": "",
-    "text": "This exercise examines the effects of spray parameters on the thermal spray coating properties of alumina (\\(\\text{Al}_2\\text{O}_3\\)). The experimental factors and levels are as follows:\n\nFuel ratio (A): 1:2.8 and 1:2.0\nCarrier gas flow rate (B): 1.33 and 3.21 \\(\\text{L/s}^{-1}\\)\nFrequency of detonations (C): 2 and 4 Hz\nSpray distance (D): 180 and 220 mm\n\nThe response variable is porosity (vol. %). Data are shown in Table 7.19.\nQuestions:\n\nDesign an Analysis\n\nAssuming negligible threeand four-factor interactions, outline the steps required to analyze the data (refer to Step (g) of the checklist in Chapter 2).\n\nCheck Model Assumptions\n\nEvaluate whether the assumptions underlying the model are valid.\n\nPerform the Analysis\n\nConduct the analysis you outlined in part (1), including interaction plots if appropriate. Clearly state your conclusions.\nTable 7.19: Data for the Coating Experiment\n\n\n\nA\nB\nC\nD\n\\(y_{ijkl}\\)\n\n\n\n\n2\n2\n2\n2\n5.95\n\n\n2\n2\n2\n1\n4.57\n\n\n2\n2\n1\n2\n4.03\n\n\n2\n2\n1\n1\n2.17\n\n\n2\n1\n2\n2\n3.43\n\n\n2\n1\n2\n1\n1.02\n\n\n2\n1\n1\n2\n4.25\n\n\n2\n1\n1\n1\n2.13\n\n\n1\n2\n2\n2\n12.28\n\n\n1\n2\n2\n1\n9.57\n\n\n…\n…\n…\n…\n…\n\n\n\nSource: Adapted from Saravanan et al. (2001), Journal of Physics D: Applied Physics."
+    "text": "This exercise examines the effects of spray parameters on the thermal spray coating properties of alumina (\\(\\text{Al}_2\\text{O}_3\\)). The experimental factors and levels are as follows:\n\nFuel ratio (A): 1:2.8 and 1:2.0\nCarrier gas flow rate (B): 1.33 and 3.21 \\(\\text{L/s}^{-1}\\)\nFrequency of detonations (C): 2 and 4 Hz\nSpray distance (D): 180 and 220 mm\n\nThe response variable is porosity (vol. %). Data are shown in Table 7.19.\nQuestions:\n\nDesign an Analysis\n\nAssuming negligible threeand four-factor interactions, outline the steps required to analyze the data (refer to Step (g) of the checklist in Chapter 2).\n\nCheck Model Assumptions\n\nEvaluate whether the assumptions underlying the model are valid.\n\nPerform the Analysis\n\nConduct the analysis you outlined in part (1), including interaction plots if appropriate. Clearly state your conclusions.\nTable 7.19: Data for the Coating Experiment\n\n\n\nA\nB\nC\nD\n\\(y_{ijkl}\\)\n\n\n\n\n2\n2\n2\n2\n5.95\n\n\n2\n2\n2\n1\n4.57\n\n\n2\n2\n1\n2\n4.03\n\n\n2\n2\n1\n1\n2.17\n\n\n2\n1\n2\n2\n3.43\n\n\n…\n…\n…\n…\n…\n\n\n\nSource: Adapted from Saravanan et al. (2001), Journal of Physics D: Applied Physics."
   },
   {
     "objectID": "assignments/assignment8_ancova_analysis.html#exercise-7.11-antifungal-antibiotic-experiment",
@@ -2160,7 +2167,7 @@
     "href": "assignments/assignment8_ancova_analysis.html#exercise-7.12-antifungal-antibiotic-experiment-extended",
     "title": "Assignment 8 - ANCOVA Analysis",
     "section": "",
-    "text": "For this exercise, consider the data from Table 7.23 but assume no negligible three-factor interaction. Modify levels of \\(A\\) and \\(B\\) so their third levels are 35 and 8, respectively, to ensure equal spacing.\nQuestions:\n\nTrend Contrasts\n\nCreate a table listing the 27 treatment combinations. Include contrast coefficients for:\n\nLinear and quadratic trends in \\(A\\) and \\(B\\)\nInteraction trends (\\(A \\times B\\): Linear-Linear, Linear-Quadratic, etc.)\n\n\nNormalize Contrasts\n\nIdentify divisors to normalize each contrast and manually compute least squares estimates for normalized Linear \\(A\\) and Quadratic \\(A\\) contrasts.\n\nOrthogonal Contrasts for \\(C\\)\n\nPropose two orthogonal contrasts for \\(C\\) to address its uneven spacing and add them to the table in part (1).\n\nOrthogonal Contrasts Analysis\n\nUse software to calculate least squares estimates for all 26 orthogonal contrasts. Generate a half-normal probability plot and interpret the results.\n\nAlternative Analysis\n\nApply the Voss and Wang method to analyze the orthogonal contrasts. Compare these findings to part (4).\n\n\n\n\n\n\n\n\n\n\n\nExercise\nCriteria\nMax Points\nDescription\n\n\n\n\nExercise 7.7\nPart (a): Analysis Design\n10\nOutline the analysis steps, assumptions, and appropriate statistical methods (e.g., ANOVA, interaction plots).\n\n\n\nPart (b): Model Assumptions\n10\nAssess normality, homoscedasticity, and independence of residuals using statistical tests and plots.\n\n\n\nPart (c): Analysis and Plots\n20\nConduct ANOVA, interpret significant effects, create interaction plots, and draw meaningful conclusions.\n\n\nTotal for Exercise 7.7\n\n40\n\n\n\nExercise 7.11\nPart (a): Main Effects\n10\nConstruct main effects plots and evaluate their significance.\n\n\n\nPart (b): Interaction Assumptions\n5\nClearly state and justify interaction assumptions.\n\n\n\nPart (c): Two-Way Interactions\n15\nConstruct interaction plots, interpret results, and update conclusions from main effects analysis.\n\n\n\nPart (d): Model Fitting\n15\nFit a model including all main effects and two-way interactions, interpret significant effects.\n\n\n\nPart (e): Diagnostics\n10\nEvaluate residual diagnostics for normality, homoscedasticity, and outliers.\n\n\nTotal for Exercise 7.11\n\n55\n\n\n\nExercise 7.12\nPart (a): Trend Contrasts\n15\nCreate a table with contrast coefficients for linear, quadratic, and interaction terms.\n\n\n\nPart (b): Normalization\n10\nCompute normalization divisors and least squares estimates.\n\n\n\nPart (c): Orthogonal Contrasts\n10\nPropose and justify two orthogonal contrasts for CC.\n\n\n\nPart (d): Computer Analysis\n15\nCompute estimates, create a half-normal probability plot, and interpret results.\n\n\n\nPart (e): Voss and Wang Method\n10\nApply the method to examine orthogonal contrasts and compare with results from the half-normal plot.\n\n\nTotal for Exercise 7.12\n\n60\n\n\n\n\n\n\n\n\n\n\n\nExercise\nMax Points\nEarned Points\nComments\n\n\n\n\nExercise 7.7\n40\n\n\n\n\nExercise 7.11\n55\n\n\n\n\nExercise 7.12\n60\n\n\n\n\nOverall Total\n155"
+    "text": "For this exercise, consider the data from Table 7.23 but assume no negligible three-factor interaction. Modify levels of \\(A\\) and \\(B\\) so their third levels are 35 and 8, respectively, to ensure equal spacing.\nQuestions:\n\nTrend Contrasts\n\nCreate a table listing the 27 treatment combinations. Include contrast coefficients for:\n\nLinear and quadratic trends in \\(A\\) and \\(B\\)\nInteraction trends (\\(A \\times B\\): Linear-Linear, Linear-Quadratic, etc.)\n\n\nNormalize Contrasts\n\nIdentify divisors to normalize each contrast and manually compute least squares estimates for normalized Linear \\(A\\) and Quadratic \\(A\\) contrasts.\n\nOrthogonal Contrasts for \\(C\\)\n\nPropose two orthogonal contrasts for \\(C\\) to address its uneven spacing and add them to the table in part (1).\n\nOrthogonal Contrasts Analysis\n\nUse software to calculate least squares estimates for all 26 orthogonal contrasts. Generate a half-normal probability plot and interpret the results.\n\nAlternative Analysis\n\nApply the Voss and Wang method to analyze the orthogonal contrasts. Compare these findings to part (4).\n\n\n\n\n\n\n\n\n\n\n\nExercise\nCriteria\nMax Points\nDescription\n\n\n\n\nExercise 7.7\nPart (a): Analysis Design\n10\nOutline the analysis steps, assumptions, and appropriate statistical methods (e.g., ANOVA, interaction plots).\n\n\n\nPart (b): Model Assumptions\n10\nAssess normality, homoscedasticity, and independence of residuals using statistical tests and plots.\n\n\n\nPart (c): Analysis and Plots\n20\nConduct ANOVA, interpret significant effects, create interaction plots, and draw meaningful conclusions.\n\n\nTotal for Exercise 7.7\n\n40\n\n\n\nExercise 7.11\nPart (a): Main Effects\n10\nConstruct main effects plots and evaluate their significance.\n\n\n\nPart (b): Interaction Assumptions\n5\nClearly state and justify interaction assumptions.\n\n\n\nPart (c): Two-Way Interactions\n15\nConstruct interaction plots, interpret results, and update conclusions from main effects analysis.\n\n\n\nPart (d): Model Fitting\n15\nFit a model including all main effects and two-way interactions, interpret significant effects.\n\n\n\nPart (e): Diagnostics\n10\nEvaluate residual diagnostics for normality, homoscedasticity, and outliers.\n\n\nTotal for Exercise 7.11\n\n55\n\n\n\nExercise 7.12\nPart (a): Trend Contrasts\n15\nCreate a table with contrast coefficients for linear, quadratic, and interaction terms.\n\n\n\nPart (b): Normalization\n10\nCompute normalization divisors and least squares estimates.\n\n\n\nPart (c): Orthogonal Contrasts\n10\nPropose and justify two orthogonal contrasts for CC.\n\n\n\nPart (d): Computer Analysis\n15\nCompute estimates, create a half-normal probability plot, and interpret results.\n\n\n\nPart (e): Voss and Wang Method\n10\nApply the method to examine orthogonal contrasts and compare with results from the half-normal plot.\n\n\nTotal for Exercise 7.12\n\n60\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise\nMax Points\nEarned Points\nComments\n\n\n\n\nExercise 7.7\n40\n\n\n\n\nExercise 7.11\n55\n\n\n\n\nExercise 7.12\n60\n\n\n\n\nOverall Total\n155"
   },
   {
     "objectID": "home_lectures.html",
