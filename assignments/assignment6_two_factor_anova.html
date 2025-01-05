@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>assignment6_two_factor_anova – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 6: Two-Factor ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,12 +67,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 6: Two-Factor ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -132,19 +162,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Assignment 6: Two-Factor ANOVA</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">20-Dec-2024</p>
+        <p class="date">04-Jan-2025</p>
       </div>
     </div>
     
@@ -155,18 +185,299 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#assignment-two-way-complete-model-and-experimental-designs" id="toc-assignment-two-way-complete-model-and-experimental-designs" class="nav-link active" data-scroll-target="#assignment-two-way-complete-model-and-experimental-designs">Assignment: Two-Way Complete Model and Experimental Designs</a>
+  <ul class="collapse">
+  <li><a href="#exercise-6.2-interaction-contrast" id="toc-exercise-6.2-interaction-contrast" class="nav-link" data-scroll-target="#exercise-6.2-interaction-contrast">Exercise 6.2: Interaction Contrast</a></li>
+  <li><a href="#exercise-6.3-functions-of-parameters" id="toc-exercise-6.3-functions-of-parameters" class="nav-link" data-scroll-target="#exercise-6.3-functions-of-parameters">Exercise 6.3: Functions of Parameters</a>
+  <ul class="collapse">
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.7-weld-strength-experiment" id="toc-exercise-6.7-weld-strength-experiment" class="nav-link" data-scroll-target="#exercise-6.7-weld-strength-experiment">Exercise 6.7: Weld Strength Experiment</a>
+  <ul class="collapse">
+  <li><a href="#tasks-1" id="toc-tasks-1" class="nav-link" data-scroll-target="#tasks-1">Tasks</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.12-memory-experiment" id="toc-exercise-6.12-memory-experiment" class="nav-link" data-scroll-target="#exercise-6.12-memory-experiment">Exercise 6.12: Memory Experiment</a>
+  <ul class="collapse">
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task">Task</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.16-survival-experiment" id="toc-exercise-6.16-survival-experiment" class="nav-link" data-scroll-target="#exercise-6.16-survival-experiment">Exercise 6.16: Survival Experiment</a>
+  <ul class="collapse">
+  <li><a href="#tasks-2" id="toc-tasks-2" class="nav-link" data-scroll-target="#tasks-2">Tasks</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.19-main-effects-model-verification" id="toc-exercise-6.19-main-effects-model-verification" class="nav-link" data-scroll-target="#exercise-6.19-main-effects-model-verification">Exercise 6.19: Main-Effects Model Verification</a></li>
+  <li><a href="#summary-of-the-grades-and-rubric" id="toc-summary-of-the-grades-and-rubric" class="nav-link" data-scroll-target="#summary-of-the-grades-and-rubric">Summary of the Grades and Rubric</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="assignment-two-way-complete-model-and-experimental-designs" class="level1">
+<h1>Assignment: Two-Way Complete Model and Experimental Designs</h1>
+<p>In this assignment, you will explore the two-way complete model and its applications in experimental designs. You will analyze the effects of two factors on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al.&nbsp;(2019), Chapter 6.</p>
+<p><strong>Total points</strong>: 95</p>
+<section id="exercise-6.2-interaction-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.2-interaction-contrast">Exercise 6.2: Interaction Contrast</h2>
+<p>Verify that the expression</p>
+<p><span class="math display">\[
+\tau_{ij} - \tau_{i.} - \tau_{.j} + \tau_{..}
+\]</span></p>
+<p>is an interaction contrast for the two-way complete model.</p>
+<ol type="1">
+<li>Write the list of contrast coefficients in terms of the <span class="math inline">\(\tau_{ij}\)</span>’s under the following conditions:
+<ul>
+<li>Factor <span class="math inline">\(A\)</span> has <span class="math inline">\(a = 3\)</span> levels.</li>
+<li>Factor <span class="math inline">\(B\)</span> has <span class="math inline">\(b = 4\)</span> levels.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercise-6.3-functions-of-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.3-functions-of-parameters">Exercise 6.3: Functions of Parameters</h2>
+<p>Consider the following functions under the two-way complete model:</p>
+<ol type="1">
+<li><span class="math inline">\(\{\alpha^{*}_{1} - \alpha^{*}_{2}\}\)</span>.</li>
+<li><span class="math inline">\(\{(\alpha \beta)_{11} - (\alpha \beta)_{21} - (\alpha \beta)_{12} + (\alpha \beta)_{22}\}\)</span>.</li>
+</ol>
+<section id="tasks" class="level3">
+<h3 class="anchored" data-anchor-id="tasks">Tasks</h3>
+<ol type="a">
+<li><p>Verify that these functions are estimable contrasts.</p></li>
+<li><p>Discuss the meaning of each contrast for:</p></li>
+</ol>
+<ul>
+<li>Plot (d) from Figure 6.1 on page 140.</li>
+<li>Plot (g) from Figure 6.2 on page 141.</li>
+</ul>
+<ol start="3" type="a">
+<li>For <span class="math inline">\(a = b = 3\)</span>, provide:</li>
+</ol>
+<ul>
+<li>The list of contrast coefficients for the parameters involved in the contrast.</li>
+<li>The equivalent list of contrast coefficients in terms of the <span class="math inline">\(\tau_{ij}\)</span> parameters of the cell-means model.</li>
+</ul>
+</section>
+</section>
+<section id="exercise-6.7-weld-strength-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.7-weld-strength-experiment">Exercise 6.7: Weld Strength Experiment</h2>
+<p>The data in Table 6.22, obtained from Anderson and McLean (1974), show the weld strength of a steel bar under varying conditions of two factors:</p>
+<ul>
+<li><strong>Gage bar setting</strong>: The distance traveled by the weld die during the automatic weld cycle.</li>
+<li><strong>Time of welding</strong>: The total time of the automatic weld cycle.</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Time of Welding (j)</strong></th>
+<th><strong>1</strong></th>
+<th><strong>2</strong></th>
+<th><strong>3</strong></th>
+<th><strong>4</strong></th>
+<th><strong>5</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Gage Bar 1</strong></td>
+<td>10, 12</td>
+<td>13, 17</td>
+<td>21, 30</td>
+<td>18, 16</td>
+<td>17, 21</td>
+</tr>
+<tr class="even">
+<td><strong>Gage Bar 2</strong></td>
+<td>15, 19</td>
+<td>14, 12</td>
+<td>30, 38</td>
+<td>15, 11</td>
+<td>14, 12</td>
+</tr>
+<tr class="odd">
+<td><strong>Gage Bar 3</strong></td>
+<td>10, 8</td>
+<td>12, 9</td>
+<td>10, 5</td>
+<td>14, 15</td>
+<td>19, 11</td>
+</tr>
+</tbody>
+</table>
+<section id="tasks-1" class="level3">
+<h3 class="anchored" data-anchor-id="tasks-1">Tasks</h3>
+<ol type="a">
+<li><p>Using the cell-means model, test the hypothesis that there is no difference in the effects of the treatment combinations on weld strength.</p></li>
+<li><p>Write contrasts in terms of <span class="math inline">\(\tau_{ij}\)</span> for:</p></li>
+</ol>
+<ol type="1">
+<li>All pairwise comparisons.</li>
+<li>The difference between gage bar setting 3 and the average of the other two.</li>
+</ol>
+<ul>
+<li>Suggest a strategy to calculate all intervals at an overall confidence level of at least 98%.</li>
+</ul>
+<ol start="3" type="a">
+<li>Compute confidence intervals for:</li>
+</ol>
+<ul>
+<li><span class="math inline">\(\tau_{13} - \tau_{15}\)</span>: The difference in true mean strengths at the 3rd and 5th welding times for the first gage bar setting.</li>
+<li>The difference between gage bar setting 3 and the average of the other two gage bar settings.</li>
+</ul>
+<ol start="4" type="a">
+<li><p>Calculate an upper 90% confidence limit for <span class="math inline">\(\sigma^2\)</span>.</p></li>
+<li><p>Determine the total number of observations needed if the pairwise comparison intervals in part (b) must have a maximum width of 8.</p></li>
+</ol>
+</section>
+</section>
+<section id="exercise-6.12-memory-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.12-memory-experiment">Exercise 6.12: Memory Experiment</h2>
+<p>The memory experiment investigates the effects of two factors:</p>
+<ul>
+<li><strong>Word type</strong>: Fruits, nouns, and mixed types.</li>
+<li><strong>Type of distraction</strong>: No distraction, constant distraction, or changing distraction.</li>
+</ul>
+<p>The response variable is the number of words remembered, with variance approximated by <span class="math inline">\(30p(1-p)\)</span>.</p>
+<section id="task" class="level3">
+<h3 class="anchored" data-anchor-id="task">Task</h3>
+<p>Determine the number of subjects required to reject the following hypotheses with a power of 0.9 at <span class="math inline">\(\alpha = 0.05\)</span>:</p>
+<ul>
+<li><span class="math inline">\(H_A\)</span>: The memorization rate is identical for the three word types.</li>
+<li><span class="math inline">\(H_B\)</span>: The distraction types have no effect on memorization.</li>
+</ul>
+<p>Assume the minimum difference of interest in memorization rates is 4 words.</p>
+</section>
+</section>
+<section id="exercise-6.16-survival-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.16-survival-experiment">Exercise 6.16: Survival Experiment</h2>
+<p>The following table provides survival times (in units of 10 hours) for animals exposed to three poisons and four treatments.</p>
+<table class="table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Poison/Treatment</strong></th>
+<th><strong>1</strong></th>
+<th><strong>2</strong></th>
+<th><strong>3</strong></th>
+<th><strong>4</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>I</strong></td>
+<td>0.31, 0.45, 0.46, 0.43</td>
+<td>0.82, 1.10, 0.88, 0.72</td>
+<td>0.43, 0.45, 0.63, 0.76</td>
+<td>0.45, 0.71, 0.66, 0.62</td>
+</tr>
+<tr class="even">
+<td><strong>II</strong></td>
+<td>0.36, 0.29, 0.40, 0.23</td>
+<td>0.92, 0.61, 0.49, 1.24</td>
+<td>0.44, 0.35, 0.31, 0.40</td>
+<td>0.56, 1.02, 0.71, 0.38</td>
+</tr>
+<tr class="odd">
+<td><strong>III</strong></td>
+<td>0.22, 0.21, 0.18, 0.23</td>
+<td>0.30, 0.37, 0.38, 0.29</td>
+<td>0.23, 0.25, 0.24, 0.22</td>
+<td>0.30, 0.36, 0.31, 0.33</td>
+</tr>
+</tbody>
+</table>
+<section id="tasks-2" class="level3">
+<h3 class="anchored" data-anchor-id="tasks-2">Tasks</h3>
+<ol type="a">
+<li><p>Verify assumptions of the two-way complete model using the original data. Analyze the data if the assumptions are satisfied.</p></li>
+<li><p>Transform the data using <span class="math inline">\(y^{-1}\)</span> (reciprocal). Reassess model assumptions and reanalyze the transformed data.</p></li>
+<li><p>Create interaction plots for the original and transformed data. Discuss how the interaction between poison and treatment varies with each scale.</p></li>
+</ol>
+</section>
+</section>
+<section id="exercise-6.19-main-effects-model-verification" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.19-main-effects-model-verification">Exercise 6.19: Main-Effects Model Verification</h2>
+<p>For the two-way main-effects model with equal sample sizes, perform the following:</p>
+<ol type="a">
+<li><p>Verify the computational formula for <span class="math inline">\(SS_E\)</span> as given in equation (6.5.38).</p></li>
+<li><p>Demonstrate that <span class="math inline">\(E[SSE] = (n - a - b + 1)\sigma^2\)</span>.</p></li>
+</ol>
+<p><strong>Hint:</strong> Use the formula <span class="math inline">\(E[X^2] = \text{Var}(X) + E[X]^2\)</span>.</p>
+</section>
+<section id="summary-of-the-grades-and-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-the-grades-and-rubric">Summary of the Grades and Rubric</h2>
+<table class="table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 27%">
+<col style="width: 3%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Exercise</strong></th>
+<th><strong>Task</strong></th>
+<th><strong>Points</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Exercise 6.2</strong></td>
+<td>Derive contrast coefficients and verify interaction contrast property.</td>
+<td><strong>10</strong></td>
+<td>- 4 points for correct derivation of coefficients. - 3 points for verifying the interaction contrast property. - 3 points for clarity and completeness.</td>
+</tr>
+<tr class="even">
+<td><strong>Exercise 6.3</strong></td>
+<td>Verify estimability, interpret contrasts, and compute coefficients.</td>
+<td><strong>15</strong></td>
+<td>- 5 points for verifying estimability. - 5 points for interpreting contrasts in provided plots. - 5 points for accurate and clear computation of coefficients.</td>
+</tr>
+<tr class="odd">
+<td><strong>Exercise 6.7</strong></td>
+<td>Perform hypothesis testing, compute contrasts, intervals, and variance limits.</td>
+<td><strong>25</strong></td>
+<td>- 5 points each for parts (a) to (e), including hypothesis testing, contrast definitions, confidence interval computations, upper confidence limits for <span class="math inline">\(\sigma^2\)</span>, and sample size needs.</td>
+</tr>
+<tr class="even">
+<td><strong>Exercise 6.12</strong></td>
+<td>Compute sample size for given power and significance level.</td>
+<td><strong>15</strong></td>
+<td>- 8 points for accurate computation of sample size. - 7 points for interpretation and justification of the calculations.</td>
+</tr>
+<tr class="odd">
+<td><strong>Exercise 6.16</strong></td>
+<td>Verify model assumptions, perform transformation, and create interaction plots.</td>
+<td><strong>20</strong></td>
+<td>- 7 points for verifying assumptions. - 7 points for transformation analysis. - 6 points for interaction plots and interpretation.</td>
+</tr>
+<tr class="even">
+<td><strong>Exercise 6.19</strong></td>
+<td>Verify <span class="math inline">\(SS_E\)</span> formula and derive expected value of <span class="math inline">\(SSE\)</span>.</td>
+<td><strong>10</strong></td>
+<td>- 5 points for verifying <span class="math inline">\(SS_E\)</span> computational formula. - 5 points for deriving <span class="math inline">\(E[SSE] = (n - a - b + 1)\sigma^2\)</span>.</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
