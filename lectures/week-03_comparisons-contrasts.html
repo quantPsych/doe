@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Davood Tofighi, Ph.D.">
+
+<title>Comparisons and Contrasts – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-aff2639e191a0a8d05f4f3608923e904.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<meta property="og:title" content="Comparisons and Contrasts – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/home.png">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+</head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/styles/css/home.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 454/545 - Analysis of Variance and Experimental Design</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_appendix.html"> 
+<span class="menu-text">Appendix</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Comparisons and Contrasts</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Davood Tofighi, Ph.D. </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">30-Dec-2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
+  <li><a href="#motivation-and-context" id="toc-motivation-and-context" class="nav-link" data-scroll-target="#motivation-and-context">Motivation and Context</a>
+  <ul class="collapse">
+  <li><a href="#analogies" id="toc-analogies" class="nav-link" data-scroll-target="#analogies">Analogies</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#contrasts-definition-and-properties" id="toc-contrasts-definition-and-properties" class="nav-link" data-scroll-target="#contrasts-definition-and-properties">Contrasts: Definition and Properties</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-contrast" id="toc-what-is-a-contrast" class="nav-link" data-scroll-target="#what-is-a-contrast">What is a Contrast?</a></li>
+  <li><a href="#variance-of-a-contrast" id="toc-variance-of-a-contrast" class="nav-link" data-scroll-target="#variance-of-a-contrast">Variance of a Contrast</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#multiple-comparison-procedures-mcps" id="toc-multiple-comparison-procedures-mcps" class="nav-link" data-scroll-target="#multiple-comparison-procedures-mcps">Multiple Comparison Procedures (MCPs)</a>
+  <ul class="collapse">
+  <li><a href="#fishers-least-significant-difference-lsd" id="toc-fishers-least-significant-difference-lsd" class="nav-link" data-scroll-target="#fishers-least-significant-difference-lsd">Fisher’s Least Significant Difference (LSD)</a></li>
+  <li><a href="#tukeys-honest-significant-difference-hsd" id="toc-tukeys-honest-significant-difference-hsd" class="nav-link" data-scroll-target="#tukeys-honest-significant-difference-hsd">Tukey’s Honest Significant Difference (HSD)</a></li>
+  <li><a href="#bonferroni-method" id="toc-bonferroni-method" class="nav-link" data-scroll-target="#bonferroni-method">Bonferroni Method</a></li>
+  <li><a href="#scheffés-method" id="toc-scheffés-method" class="nav-link" data-scroll-target="#scheffés-method">Scheffé’s Method</a></li>
+  </ul></li>
+  <li><a href="#balancing-type-i-error-and-power" id="toc-balancing-type-i-error-and-power" class="nav-link" data-scroll-target="#balancing-type-i-error-and-power">Balancing Type I Error and Power</a></li>
+  <li><a href="#practical-applications-in-r" id="toc-practical-applications-in-r" class="nav-link" data-scroll-target="#practical-applications-in-r">Practical Applications in R</a>
+  <ul class="collapse">
+  <li><a href="#example-1-pairwise-comparisons-with-tukeys-hsd" id="toc-example-1-pairwise-comparisons-with-tukeys-hsd" class="nav-link" data-scroll-target="#example-1-pairwise-comparisons-with-tukeys-hsd">Example 1: Pairwise Comparisons with Tukey’s HSD</a>
+  <ul class="collapse">
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul></li>
+  <li><a href="#example-2-testing-a-specific-contrast" id="toc-example-2-testing-a-specific-contrast" class="nav-link" data-scroll-target="#example-2-testing-a-specific-contrast">Example 2: Testing a Specific Contrast</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
+  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-details" id="toc-appendix-advanced-mathematical-details" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-details">Appendix: Advanced Mathematical Details</a>
+  <ul class="collapse">
+  <li><a href="#proofs-and-derivations" id="toc-proofs-and-derivations" class="nav-link" data-scroll-target="#proofs-and-derivations">Proofs and Derivations</a>
+  <ul class="collapse">
+  <li><a href="#variance-of-a-contrast-1" id="toc-variance-of-a-contrast-1" class="nav-link" data-scroll-target="#variance-of-a-contrast-1">Variance of a Contrast</a></li>
+  <li><a href="#derivation-of-tukeys-hsd" id="toc-derivation-of-tukeys-hsd" class="nav-link" data-scroll-target="#derivation-of-tukeys-hsd">Derivation of Tukey’s HSD</a></li>
+  <li><a href="#scheffés-method-1" id="toc-scheffés-method-1" class="nav-link" data-scroll-target="#scheffés-method-1">Scheffé’s Method</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In many experiments, researchers compare multiple treatments or conditions to understand their effects on a response variable. For example, consider a horticulturalist testing various fertilizers on plant growth or a biologist examining different drugs on patient outcomes. After performing an ANOVA and finding evidence that not all treatment means are equal, the next step is to determine which treatments differ, and by how much.</p>
+<p><strong>Multiple Comparison Procedures (MCPs)</strong> and <strong>contrasts</strong> address this challenge:</p>
+<ul>
+<li><strong>MCPs</strong> control the overall probability of false positives (Type I errors) when making many comparisons.</li>
+<li><strong>Contrasts</strong> focus on specific, pre-defined linear combinations of treatment means, often reflecting scientific questions.</li>
+</ul>
+<p>The combination of MCPs and contrasts ensures valid inferences, mitigating the risk of drawing erroneous conclusions from multiple tests while retaining interpretability and power.</p>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ol type="1">
+<li>Understand the rationale for performing multiple comparisons after ANOVA.</li>
+<li>Explore common MCPs: Fisher’s LSD, Tukey’s HSD, Bonferroni, and Scheffé methods.</li>
+<li>Learn how to construct orthogonal and non-orthogonal contrasts and interpret their results.</li>
+<li>Utilize R to perform multiple comparisons and test contrasts on real or simulated data.</li>
+<li>Discuss Type I error control, power considerations, and the trade-offs in choosing different procedures.</li>
+<li>Develop deeper theoretical insights (in the Appendix) and practice through exercises of medium and challenging difficulty.</li>
+</ol>
+</section>
+<section id="r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
+<p>To implement MCPs and contrasts in R, we will use the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans, pwr, multcomp, agricolae, lsmeans, car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong><code>emmeans</code></strong>: For computing contrasts and post-hoc tests.</li>
+<li><strong><code>pwr</code></strong>: For power analysis and sample size calculations.</li>
+<li><strong><code>multcomp</code></strong>: For multiple comparison procedures.</li>
+<li><strong><code>agricolae</code></strong>: For conducting multiple comparisons and post-hoc tests.</li>
+<li><strong><code>lsmeans</code></strong>: For computing least-squares means and contrasts.</li>
+<li><strong><code>car</code></strong>: For linear contrasts and hypothesis testing.</li>
+</ul>
+</section>
+<section id="motivation-and-context" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-and-context">Motivation and Context</h2>
+<p>Imagine testing four battery types (A, B, C, D) to see which lasts longest. After ANOVA suggests at least one mean differs, you want to pinpoint where differences lie:</p>
+<ul>
+<li>Are A and B different?</li>
+<li>Is C worse than the average of A and B?</li>
+<li>Does D stand apart?</li>
+</ul>
+<p>Without controlling for multiple testing, repeated pairwise comparisons inflate the risk of false positives. MCPs handle this by adjusting significance criteria, while contrasts let you test targeted hypotheses, such as comparing the average performance of two treatments against another group’s mean.</p>
+<section id="analogies" class="level3">
+<h3 class="anchored" data-anchor-id="analogies">Analogies</h3>
+<ul>
+<li><strong>Mail Sorting Analogy:</strong> Consider sorting through a large pile of mail (treatment comparisons). Without rules (MCPs), you might mistakenly pick “important” letters (differences) that are actually junk (Type I errors). MCPs act like filters, reducing the chance you misclassify too many letters as important.</li>
+<li><strong>Magnifying Glass for Specific Questions (Contrasts):</strong> Instead of looking at all letters at once, a contrast is like using a magnifying glass to focus on a subset of letters (treatment means) to answer a specific question.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="contrasts-definition-and-properties" class="level1">
+<h1>Contrasts: Definition and Properties</h1>
+<section id="what-is-a-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-contrast">What is a Contrast?</h2>
+<p>A <strong>contrast</strong> is a linear combination of treatment means that sums to zero:</p>
+<p><span class="math display">\[
+L = \sum_{i=1}^{v} c_i \mu_i, \quad \text{with } \sum_{i=1}^{v} c_i = 0.
+\]</span></p>
+<p>This ensures we’re measuring relative differences. Examples:</p>
+<ul>
+<li><strong>Pairwise difference:</strong> <span class="math inline">\(\mu_1 - \mu_2\)</span>.</li>
+<li><strong>Comparison of groups:</strong> <span class="math inline">\(\frac{\mu_1 + \mu_2}{2} - \frac{\mu_3 + \mu_4}{2}\)</span>.</li>
+</ul>
+</section>
+<section id="variance-of-a-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="variance-of-a-contrast">Variance of a Contrast</h2>
+<p>If each treatment <span class="math inline">\(i\)</span> has <span class="math inline">\(n_i\)</span> observations and errors are <span class="math inline">\(N(0,\sigma^2)\)</span>, then:</p>
+<p><span class="math display">\[
+\text{Var}(L) = \sigma^2 \sum_{i=1}^v \frac{c_i^2}{n_i}.
+\]</span></p>
+<p>This variance helps form confidence intervals and tests for the contrast.</p>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>In a battery life study with treatments A, B, C, D, suppose we suspect that (A and B) as a group differ from (C and D). We might form a contrast:</p>
+<p><span class="math display">\[
+L = \frac{\mu_A + \mu_B}{2} - \frac{\mu_C + \mu_D}{2}.
+\]</span></p>
+<p>This contrast directly tests a scientific hypothesis: Do the top two battery types outperform the bottom two on average?</p>
+</section>
+</section>
+</section>
+<section id="multiple-comparison-procedures-mcps" class="level1">
+<h1>Multiple Comparison Procedures (MCPs)</h1>
+<p>After ANOVA, MCPs help identify which treatments differ while controlling the Type I error rate across all comparisons:</p>
+<section id="fishers-least-significant-difference-lsd" class="level2">
+<h2 class="anchored" data-anchor-id="fishers-least-significant-difference-lsd">Fisher’s Least Significant Difference (LSD)</h2>
+<ul>
+<li>Conduct an ANOVA test first. If significant, proceed.</li>
+<li>Compare pairwise means using the standard t-test but do not adjust alpha for multiple tests.</li>
+<li><strong>Pros:</strong> Simple, more powerful.</li>
+<li><strong>Cons:</strong> Higher chance of Type I errors when many comparisons are made.</li>
+</ul>
+</section>
+<section id="tukeys-honest-significant-difference-hsd" class="level2">
+<h2 class="anchored" data-anchor-id="tukeys-honest-significant-difference-hsd">Tukey’s Honest Significant Difference (HSD)</h2>
+<ul>
+<li>Designed for pairwise comparisons.</li>
+<li>Controls the family-wise error rate (FWER).</li>
+<li>For equal sample sizes:</li>
+</ul>
+<p><span class="math display">\[
+\text{HSD} = q_{\alpha,v,n-v} \sqrt{\frac{\text{MSE}}{n}},
+\]</span></p>
+<p>where <span class="math inline">\(q\)</span> is from the studentized range distribution.</p>
+</section>
+<section id="bonferroni-method" class="level2">
+<h2 class="anchored" data-anchor-id="bonferroni-method">Bonferroni Method</h2>
+<ul>
+<li>Divide <span class="math inline">\(\alpha\)</span> by the number of comparisons <span class="math inline">\(m\)</span>.</li>
+<li>Very conservative for large <span class="math inline">\(m\)</span>.</li>
+<li>Ensures strong control of FWER.</li>
+</ul>
+</section>
+<section id="scheffés-method" class="level2">
+<h2 class="anchored" data-anchor-id="scheffés-method">Scheffé’s Method</h2>
+<ul>
+<li>Applies to any linear contrast, not just pairwise differences.</li>
+<li>More general but often more conservative (wide confidence intervals).</li>
+<li>Scheffé’s method is useful when the final set of contrasts is not fully decided a priori.</li>
+</ul>
+</section>
+</section>
+<section id="balancing-type-i-error-and-power" class="level1">
+<h1>Balancing Type I Error and Power</h1>
+<p><strong>Type I Error Control:</strong> MCPs reduce the chance of making at least one false claim when testing many hypotheses.</p>
+<p><strong>Power Considerations:</strong> Strict error control may lower the power to detect real differences. Practitioners must balance the risk of false positives against the risk of missing true effects.</p>
+<ul>
+<li><strong>Fisher’s LSD:</strong> More power, less Type I control.</li>
+<li><strong>Bonferroni:</strong> Strong Type I control, potentially very low power.</li>
+<li><strong>Tukey’s HSD:</strong> Good balance for pairwise comparisons.</li>
+<li><strong>Scheffé:</strong> Very flexible, but can be conservative.</li>
+</ul>
+</section>
+<section id="practical-applications-in-r" class="level1 page-columns page-full">
+<h1>Practical Applications in R</h1>
+<section id="example-1-pairwise-comparisons-with-tukeys-hsd" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-pairwise-comparisons-with-tukeys-hsd">Example 1: Pairwise Comparisons with Tukey’s HSD</h2>
+<p><strong>Data Setup (Simulated):</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Response =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">25</span>, <span class="dv">2</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Treatment, <span class="at">data =</span> data)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Treatment    3  631.3  210.43    47.7 3.33e-08 ***
+Residuals   16   70.6    4.41                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Tukey’s HSD if ANOVA is significant</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = Response ~ Treatment, data = data)
+
+$Treatment
+         diff        lwr       upr     p adj
+B-A  4.524222  0.7237295  8.324714 0.0170952
+C-A 10.228663  6.4281709 14.029155 0.0000050
+D-A 14.831544 11.0310518 18.632036 0.0000000
+C-B  5.704441  1.9039494  9.504933 0.0028150
+D-B 10.307322  6.5068303 14.107814 0.0000045
+D-C  4.602881  0.8023889  8.403373 0.0151748</code></pre>
+</div>
+</div>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<ul>
+<li>Look at the output: intervals that do not include zero indicate significant differences.</li>
+<li>Tukey is effective for all pairs while maintaining the overall confidence level.</li>
+</ul>
+</section>
+</section>
+<section id="example-2-testing-a-specific-contrast" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="example-2-testing-a-specific-contrast">Example 2: Testing a Specific Contrast</h2>
+<p><strong>Defining a Contrast:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppose we want to test (A,B) vs (C,D)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>contrast_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit, <span class="sc">~</span>Treatment)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="fu">list</span>(<span class="st">"AB_vs_CD"</span> <span class="ot">=</span> contrast_vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast estimate    SE df t.ratio p.value
+ AB_vs_CD    -10.3 0.939 16 -10.932  &lt;.0001</code></pre>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>For more detail on the <code>emmeans</code> package, see the tutorial page <a href="../appendix/r-packages/emmeans.html">emmeans</a> in the appendix.</p>
+</div></div><section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
+<p>The output gives an estimate, standard error, t-value, and p-value. If p &lt; alpha, we conclude there is evidence that (A,B) differ from (C,D).</p>
+</section>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="medium-difficulty" class="level2">
+<h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
+<ol type="1">
+<li><strong>Pairwise Comparisons:</strong> Given four treatments, run a simulation in R, fit an ANOVA, and use Tukey’s HSD. Interpret at least one pairwise comparison.</li>
+<li><strong>Constructing Contrasts:</strong> For three treatments (X, Y, Z), form a contrast comparing X with the average of Y and Z. Compute its variance using a known MSE and sample sizes.</li>
+</ol>
+</section>
+<section id="challenging-problems" class="level2">
+<h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
+<ol type="1">
+<li><strong>Scheffé’s Method for Arbitrary Contrasts:</strong> Generate data from five treatments and test a complex contrast (e.g., <span class="math inline">\((\mu_1+\mu_2)-(\mu_4+\mu_5)\)</span>). Implement Scheffé’s method and interpret the wide confidence interval.</li>
+<li><strong>Power Analysis for MCPs:</strong> Using the <code>pwr</code> package in R, simulate a scenario with four treatments and known variance. Determine sample size needed to achieve 80% power under Tukey’s HSD for detecting a specified difference.</li>
+</ol>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>MCPs and contrasts extend the basic ANOVA framework to address realistic experimental questions:</p>
+<ul>
+<li>MCPs control the “false alarm” rate across multiple inferences.</li>
+<li>Contrasts provide targeted insight into predetermined scientific hypotheses.</li>
+<li>Modern statistical software facilitates these procedures, ensuring robust, interpretable results.</li>
+</ul>
+<p>By understanding these methods, researchers can design more informative experiments and draw conclusions that stand on rigorous statistical ground.</p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
+<li>Montgomery, D. C. (2020). <em>Design and Analysis of Experiments</em>. Wiley.</li>
+<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
+</ul>
+</section>
+</section>
+<section id="appendix-advanced-mathematical-details" class="level1">
+<h1>Appendix: Advanced Mathematical Details</h1>
+<section id="proofs-and-derivations" class="level2">
+<h2 class="anchored" data-anchor-id="proofs-and-derivations">Proofs and Derivations</h2>
+<section id="variance-of-a-contrast-1" class="level3">
+<h3 class="anchored" data-anchor-id="variance-of-a-contrast-1">Variance of a Contrast</h3>
+<p>For a contrast <span class="math inline">\(L = \sum c_i \mu_i\)</span>, assuming independent samples of size <span class="math inline">\(n_i\)</span> and variance <span class="math inline">\(\sigma^2\)</span>:</p>
+<p><span class="math display">\[
+\hat{L} = \sum c_i \bar{Y}_i, \quad \text{Var}(\hat{L}) = \sigma^2 \sum \frac{c_i^2}{n_i}.
+\]</span></p>
+<p>Proof involves linearity of expectation and variance properties under independence and homoscedasticity (Dean et al., 2017).</p>
+</section>
+<section id="derivation-of-tukeys-hsd" class="level3">
+<h3 class="anchored" data-anchor-id="derivation-of-tukeys-hsd">Derivation of Tukey’s HSD</h3>
+<p>Tukey’s HSD critical value is derived from the studentized range distribution <span class="math inline">\(q\)</span>:</p>
+<ol type="1">
+<li>Let <span class="math inline">\(\text{max diff} = \max_i(\bar{Y}_i) - \min_i(\bar{Y}_i)\)</span>.</li>
+<li>Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\frac{\text{max diff}}{\sqrt{\text{MSE}/n}}\)</span> follows a studentized range distribution.</li>
+<li>Invert this to find the critical range <span class="math inline">\(q_{\alpha,v,n-v}\)</span>.</li>
+</ol>
+<p>(Montgomery, 2020)</p>
+</section>
+<section id="scheffés-method-1" class="level3">
+<h3 class="anchored" data-anchor-id="scheffés-method-1">Scheffé’s Method</h3>
+<p>Scheffé’s intervals are based on the fact that any linear contrast of treatment means can be bounded using a <span class="math inline">\((v-1)F\)</span>-distribution multiplier:</p>
+<p><span class="math display">\[
+L \in \hat{L} \pm \sqrt{(v-1)F_{v-1, n-v,\alpha}}\cdot \text{SE}(\hat{L}).
+\]</span></p>
+<p>The proof uses the union-intersection principle and geometry of the parameter space (Christensen, 2018).</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
+<footer class="site-footer">
+    <div class="container text-center">
+        <hr> 
+        © <span id="current-year"></span> Dr. Davood Tofighi |
+        <a href="https://canvasinfo.unm.edu/">UNM Canvas</a> |
+        <a href="https://data-wise.github.io/doe">Course GitHub Page</a> |
+    </div>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Data-Wise\.github\.io\/doe\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

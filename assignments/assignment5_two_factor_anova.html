@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>STAT 454/545 - Course Schedule – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 5: Two-Way Complete Model and Experimental Designs – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,13 +67,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="STAT 454/545 - Course Schedule – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 5: Two-Way Complete Model and Experimental Designs – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/syllabus/assets/images/home.png">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -108,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../syllabus/schedule.html" aria-current="page"> 
+    <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
@@ -133,13 +162,13 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title">STAT 454/545 - Course Schedule</h1>
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Assignment 5: Two-Way Complete Model and Experimental Designs</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       
       <div>
@@ -156,167 +185,292 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercise-6.2-interaction-contrast" id="toc-exercise-6.2-interaction-contrast" class="nav-link active" data-scroll-target="#exercise-6.2-interaction-contrast">Exercise 6.2: Interaction Contrast</a></li>
+  <li><a href="#exercise-6.3-functions-of-parameters" id="toc-exercise-6.3-functions-of-parameters" class="nav-link" data-scroll-target="#exercise-6.3-functions-of-parameters">Exercise 6.3: Functions of Parameters</a>
+  <ul class="collapse">
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.7-weld-strength-experiment" id="toc-exercise-6.7-weld-strength-experiment" class="nav-link" data-scroll-target="#exercise-6.7-weld-strength-experiment">Exercise 6.7: Weld Strength Experiment</a>
+  <ul class="collapse">
+  <li><a href="#tasks-1" id="toc-tasks-1" class="nav-link" data-scroll-target="#tasks-1">Tasks</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.12-memory-experiment" id="toc-exercise-6.12-memory-experiment" class="nav-link" data-scroll-target="#exercise-6.12-memory-experiment">Exercise 6.12: Memory Experiment</a>
+  <ul class="collapse">
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task">Task</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.16-survival-experiment" id="toc-exercise-6.16-survival-experiment" class="nav-link" data-scroll-target="#exercise-6.16-survival-experiment">Exercise 6.16: Survival Experiment</a>
+  <ul class="collapse">
+  <li><a href="#tasks-2" id="toc-tasks-2" class="nav-link" data-scroll-target="#tasks-2">Tasks</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.19-main-effects-model-verification" id="toc-exercise-6.19-main-effects-model-verification" class="nav-link" data-scroll-target="#exercise-6.19-main-effects-model-verification">Exercise 6.19: Main-Effects Model Verification</a></li>
+  <li><a href="#summary-of-the-grades-and-rubric" id="toc-summary-of-the-grades-and-rubric" class="nav-link" data-scroll-target="#summary-of-the-grades-and-rubric">Summary of the Grades and Rubric</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
-<section id="course-schedule-assignment-deadlines-and-exam-dates" class="level1">
-<h1>Course Schedule, Assignment Deadlines, and Exam Dates</h1>
-<p>The following is a <strong>tentative schedule</strong> for the course, outlining the topics covered each week, the corresponding reading assignments, and the due dates for assignments and assessments. This schedule is subject to change, and students should refer to the <strong>Canvas Assignments</strong> and <strong>announcements</strong> for the most up-to-date information.</p>
-<p>However, <strong>the final exam date is not subject to change</strong>, as it is determined and scheduled by the university. Please plan accordingly based on the <strong>final exam schedule provided by UNM</strong>:</p>
+<p>In this assignment, you will explore the two-way complete model and its applications in experimental designs. You will analyze the effects of two factors on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al.&nbsp;(2019), Chapter 6.</p>
+<p><strong>Total points</strong>: 95</p>
+<section id="exercise-6.2-interaction-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.2-interaction-contrast">Exercise 6.2: Interaction Contrast</h2>
+<p>Verify that the expression</p>
+<p><span class="math display">\[
+\tau_{ij} - \tau_{i.} - \tau_{.j} + \tau_{..}
+\]</span></p>
+<p>is an interaction contrast for the two-way complete model.</p>
+<ol type="1">
+<li>Write the list of contrast coefficients in terms of the <span class="math inline">\(\tau_{ij}\)</span>’s under the following conditions:
 <ul>
-<li><strong>Final Exam Date:</strong> <strong>Tuesday, May 13, 2025, 10:00 a.m.–12:00 p.m.</strong></li>
-<li><strong>Location:</strong> Classroom (as specified in the syllabus)</li>
+<li>Factor <span class="math inline">\(A\)</span> has <span class="math inline">\(a = 3\)</span> levels.</li>
+<li>Factor <span class="math inline">\(B\)</span> has <span class="math inline">\(b = 4\)</span> levels.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercise-6.3-functions-of-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.3-functions-of-parameters">Exercise 6.3: Functions of Parameters</h2>
+<p>Consider the following functions under the two-way complete model:</p>
+<ol type="1">
+<li><span class="math inline">\(\{\alpha^{*}_{1} - \alpha^{*}_{2}\}\)</span>.</li>
+<li><span class="math inline">\(\{(\alpha \beta)_{11} - (\alpha \beta)_{21} - (\alpha \beta)_{12} + (\alpha \beta)_{22}\}\)</span>.</li>
+</ol>
+<section id="tasks" class="level3">
+<h3 class="anchored" data-anchor-id="tasks">Tasks</h3>
+<ol type="a">
+<li><p>Verify that these functions are estimable contrasts.</p></li>
+<li><p>Discuss the meaning of each contrast for:</p></li>
+</ol>
+<ul>
+<li>Plot (d) from Figure 6.1 on page 140.</li>
+<li>Plot (g) from Figure 6.2 on page 141.</li>
 </ul>
-<p>Students are strongly encouraged to stay proactive, monitor changes, and ensure they meet all revised deadlines and expectations as announced.</p>
-<section id="tentative-course-schedule" class="level2">
-<h2 class="anchored" data-anchor-id="tentative-course-schedule">Tentative Course Schedule</h2>
+<ol start="3" type="a">
+<li>For <span class="math inline">\(a = b = 3\)</span>, provide:</li>
+</ol>
+<ul>
+<li>The list of contrast coefficients for the parameters involved in the contrast.</li>
+<li>The equivalent list of contrast coefficients in terms of the <span class="math inline">\(\tau_{ij}\)</span> parameters of the cell-means model.</li>
+</ul>
+</section>
+</section>
+<section id="exercise-6.7-weld-strength-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.7-weld-strength-experiment">Exercise 6.7: Weld Strength Experiment</h2>
+<p>The data in Table 6.22, obtained from Anderson and McLean (1974), show the weld strength of a steel bar under varying conditions of two factors:</p>
+<ul>
+<li><strong>Gage bar setting</strong>: The distance traveled by the weld die during the automatic weld cycle.</li>
+<li><strong>Time of welding</strong>: The total time of the automatic weld cycle.</li>
+</ul>
 <table class="table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Week</th>
-<th>Date</th>
-<th>Topics</th>
-<th>Readings &amp; Homework Assignments</th>
+<th><strong>Time of Welding (j)</strong></th>
+<th><strong>1</strong></th>
+<th><strong>2</strong></th>
+<th><strong>3</strong></th>
+<th><strong>4</strong></th>
+<th><strong>5</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>1</strong></td>
-<td>Jan.&nbsp;21 &amp; 23, 2025</td>
-<td>Introduction to Experimental Design</td>
-<td>Ch. 1 (Sections 1.1–1.1.1), Ch. 2 (Sections 2.1–2.2).</td>
+<td><strong>Gage Bar 1</strong></td>
+<td>10, 12</td>
+<td>13, 17</td>
+<td>21, 30</td>
+<td>18, 16</td>
+<td>17, 21</td>
 </tr>
 <tr class="even">
-<td><strong>2</strong></td>
-<td>Jan.&nbsp;28 &amp; 30, 2025</td>
-<td>Completely Randomized Designs (CRD)</td>
-<td>Ch. 3 (Sections 3.1–3.5); Homework 1 (due Feb.&nbsp;6).</td>
+<td><strong>Gage Bar 2</strong></td>
+<td>15, 19</td>
+<td>14, 12</td>
+<td>30, 38</td>
+<td>15, 11</td>
+<td>14, 12</td>
 </tr>
 <tr class="odd">
-<td><strong>3</strong></td>
-<td>Feb.&nbsp;4 &amp; 6, 2025</td>
-<td>Multiple Comparisons</td>
-<td>Ch. 4 (Sections 4.1–4.4); Homework 2 (due Feb.&nbsp;13).</td>
-</tr>
-<tr class="even">
-<td><strong>4</strong></td>
-<td>Feb.&nbsp;11 &amp; 13, 2025</td>
-<td>Checking Model Assumptions</td>
-<td>Ch. 5 (Sections 5.1–5.3); Homework 3 (due Feb.&nbsp;20).</td>
-</tr>
-<tr class="odd">
-<td><strong>5</strong></td>
-<td>Feb.&nbsp;18 &amp; 20, 2025</td>
-<td>Two-Way Factorial Designs</td>
-<td>Ch. 6 (Sections 6.1–6.5); Homework 4 (due Feb.&nbsp;27).</td>
-</tr>
-<tr class="even">
-<td><strong>6</strong></td>
-<td>Feb.&nbsp;25 &amp; 27, 2025</td>
-<td>Higher-Order Factorial Designs</td>
-<td>Ch. 7 (Sections 7.1–7.6); Homework 5 (due Mar.&nbsp;6).</td>
-</tr>
-<tr class="odd">
-<td><strong>7</strong></td>
-<td>Mar.&nbsp;4 &amp; 6, 2025</td>
-<td><strong>Midterm Exam</strong></td>
-<td>Review all chapters and notes.</td>
-</tr>
-<tr class="even">
-<td><strong>8</strong></td>
-<td>Mar.&nbsp;11 &amp; 13, 2025</td>
-<td>Blocking &amp; RCBD</td>
-<td>Ch. 10 (Sections 10.1–10.4); Homework 6 (due Mar.&nbsp;25).</td>
-</tr>
-<tr class="odd">
-<td><strong>9</strong></td>
-<td>Mar.&nbsp;16–20, 2025</td>
-<td>==Spring Break==</td>
-<td>No classes.</td>
-</tr>
-<tr class="even">
-<td><strong>10</strong></td>
-<td>Mar.&nbsp;25 &amp; 27, 2025</td>
-<td>Complete Block Designs</td>
-<td>Ch. 10 (Sections 10.6–10.8); Homework 7 (due Apr.&nbsp;3).</td>
-</tr>
-<tr class="odd">
-<td><strong>11</strong></td>
-<td>Apr.&nbsp;1 &amp; 3, 2025</td>
-<td>Analysis of Covariance (ANCOVA)</td>
-<td>Ch. 9 (Sections 9.1–9.4); Homework 8 (due Apr.&nbsp;10).</td>
-</tr>
-<tr class="even">
-<td><strong>12</strong></td>
-<td>Apr.&nbsp;8 &amp; 10, 2025</td>
-<td>Row–Column (Latin square) Designs</td>
-<td>Ch. 12 (Sections 12.1–12.4); Homework 9 (due Apr.&nbsp;17).</td>
-</tr>
-<tr class="odd">
-<td><strong>13</strong></td>
-<td>Apr.&nbsp;15 &amp; 17, 2025</td>
-<td>Random &amp; Mixed Models</td>
-<td>Ch. 17 (Sections 17.1–17.8); Homework 10 (due Apr.&nbsp;24).</td>
-</tr>
-<tr class="even">
-<td><strong>14</strong></td>
-<td>Apr.&nbsp;22 &amp; 24, 2025</td>
-<td>Nested Models</td>
-<td>Ch. 18 (Sections 18.1–18.4); Homework 11 (due May 1).</td>
-</tr>
-<tr class="odd">
-<td><strong>15</strong></td>
-<td>Apr.&nbsp;29 &amp; May 1, 2025</td>
-<td>Split-Plot Designs</td>
-<td>Ch. 19 (Sections 19.1–19.5); Homework 12 (due May 6).</td>
-</tr>
-<tr class="even">
-<td><strong>16</strong></td>
-<td>May 6 &amp; 8, 2025</td>
-<td>Catching Up and Review</td>
-<td>Comprehensive review and Q&amp;A.</td>
-</tr>
-<tr class="odd">
-<td><strong>17</strong></td>
-<td>May 13</td>
-<td><strong>Final Exam</strong></td>
-<td>Comprehensive (Weeks 1–15).</td>
+<td><strong>Gage Bar 3</strong></td>
+<td>10, 8</td>
+<td>12, 9</td>
+<td>10, 5</td>
+<td>14, 15</td>
+<td>19, 11</td>
 </tr>
 </tbody>
 </table>
-<!-- | Week | Date                      | Title                                 | Topics Covered                                                                                                           | Reading Assignments                                        | Assignments/Assessments                                  |
-| ---- | ------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
-| 1    | Tue, Jan 21 - Thu, Jan 23 | Introduction to Experimental Design   | Purpose of experimentation, observational studies vs. experiments, key principles (randomization, replication, control). | Dean et al., Ch. 1 (Sec. 1.1, 1.1.1); Ch. 2 (Sec. 2.1–2.2) | Assignment 1: Basics of Experimental Design (due Week 2) |
-| 2    | Tue, Jan 28 - Thu, Jan 30 | Completely Randomized Designs (CRD)   | Randomization procedures, CRD structure, one-way ANOVA model, assumptions, conducting ANOVA in R.                        | Dean et al., Ch. 3 (Sec. 3.1–3.3, 3.4–3.5)                 | Assignment 2: CRD Analysis (due Week 3)                  |
-| 3    | Tue, Feb 4 - Thu, Feb 6   | Multiple Comparisons & Contrasts      | Post-hoc tests (Tukey, Bonferroni, Scheffé), linear contrasts, orthogonal vs. non-orthogonal comparisons.                | Dean et al., Ch. 4 (Sec. 4.1–4.4)                          | Assignment 3: Multiple Comparisons (due Week 4)          |
-| 4    | Tue, Feb 11 - Thu, Feb 13 | Checking Model Assumptions            | Residual analysis, detecting non-normality, transformations, addressing heteroscedasticity, outliers.                    | Dean et al., Ch. 5 (Sec. 5.1–5.3)                          | Assignment 4: Residual Analysis (due Week 5)             |
-| 5    | Tue, Feb 18 - Thu, Feb 20 | Factorial Designs                     | Two-factor factorial designs, main effects, interactions, graphical representation, two-way ANOVA.                       | Dean et al., Ch. 6 (Sec. 6.1–6.5)                          | Assignment 5: Two-Factor ANOVA (due Week 6)              |
-| 6    | Tue, Feb 25 - Thu, Feb 27 | Higher-Order Factorial Designs        | Three-way factorial designs, higher-order interactions, dealing with unbalanced designs.                                 | Dean et al., Ch. 7 (Sec. 7.1–7.6)                          | Assignment 6: Three-Way Factorial Analysis (due Week 7)  |
-| 7    | Tue, Mar 4 - Thu, Mar 6   | Midterm Exam & Review                 | Review of foundational concepts from Weeks 1–6; midterm exam covering CRD, RCBD, contrasts, factorial designs.           | Review all previous chapters and notes.                    | Midterm Exam (Week 7)                                    |
-| 8    | Tue, Mar 11 - Thu, Mar 13 | Analysis of Covariance (ANCOVA)       | Adjusting for covariates, reducing error variance, hypothesis testing, adjusting treatment means.                        | Dean et al., Ch. 9 (Sec. 9.1–9.4)                          | Assignment 7: ANCOVA Analysis (due Week 8)               |
-|      | Tue, Mar 18 - Thu, Mar 20 | **Spring Break**                      | No class                                                                                                                 |                                                            |                                                          |
-| 9    | Tue, Mar 25 - Thu, Mar 27 | Blocking & RCBD                       | Concept of blocking, RCBD setup, statistical models, ANOVA for RCBD, assessing blocking efficiency.                      | Dean et al., Ch. 10 (Sec. 10.1–10.4, Sec. 10.6–10.8)       | Assignment 8: RCBD Analysis (due Week 10)                |
-| 10   | Tue, Apr 1 - Thu, Apr 3   | Complete Block Designs                | Extension of RCBD, factorial treatments in blocks, variance components analysis.                                         | Dean et al., Ch. 10 (Sec. 10.6–10.8)                       | Assignment 9: Complete Block Designs (due Week 11)       |
-| 11   | Tue, Apr 8 - Thu, Apr 10  | Row–Column Designs                    | Designs with two blocking factors (Latin squares, Youden designs), randomization procedures, ANOVA.                      | Dean et al., Ch. 12 (Sec. 12.1–12.4)                       | Assignment 10: Row–Column Analysis (due Week 12)         |
-| 12   | Tue, Apr 15 - Thu, Apr 17 | Random-Effects & Mixed-Effects Models | Fixed vs. random effects, single random-effect models, variance component estimation, REML estimation.                   | Dean et al., Ch. 17 (Sec. 17.1–17.8)                       | Assignment 11: Random and Mixed Models (due Week 13)     |
-| 13   | Tue, Apr 22 - Thu, Apr 24 | Nested Models                         | Nested models, random-effects nested models, variance components for nested factors, analysis in R.                      | Dean et al., Ch. 18 (Sec. 18.1–18.4)                       | Assignment 12: Nested Models (due Week 14)               |
-| 14   | Tue, Apr 29 - Thu, May 1  | Split-Plot Designs                    | Split-plot designs, whole plots and split plots, statistical models, ANOVA, split-split-plot designs.                    | Dean et al., Ch. 19 (Sec. 19.1–19.5)                       | Assignment 13: Split-Plot Analysis (due Week 15)         |
-| 15   | Tue, May 6 - Thu, May 8   | Catching Up & Adjustments             | Reviewing and covering additional materials as needed.                                                                   |                                                            |                                                          |
-| 16   | Tue, May 13 - Thu, May 15 | Review & Final Exam                   | Comprehensive review and final exam preparation; administering final exam.                                               | Review all chapters and notes.                             | Final Exam (Week 15)                                     | -->
-
-
+<section id="tasks-1" class="level3">
+<h3 class="anchored" data-anchor-id="tasks-1">Tasks</h3>
+<ol type="a">
+<li><p>Using the cell-means model, test the hypothesis that there is no difference in the effects of the treatment combinations on weld strength.</p></li>
+<li><p>Write contrasts in terms of <span class="math inline">\(\tau_{ij}\)</span> for:</p></li>
+</ol>
+<ol type="1">
+<li>All pairwise comparisons.</li>
+<li>The difference between gage bar setting 3 and the average of the other two.</li>
+</ol>
+<ul>
+<li>Suggest a strategy to calculate all intervals at an overall confidence level of at least 98%.</li>
+</ul>
+<ol start="3" type="a">
+<li>Compute confidence intervals for:</li>
+</ol>
+<ul>
+<li><span class="math inline">\(\tau_{13} - \tau_{15}\)</span>: The difference in true mean strengths at the 3rd and 5th welding times for the first gage bar setting.</li>
+<li>The difference between gage bar setting 3 and the average of the other two gage bar settings.</li>
+</ul>
+<ol start="4" type="a">
+<li><p>Calculate an upper 90% confidence limit for <span class="math inline">\(\sigma^2\)</span>.</p></li>
+<li><p>Determine the total number of observations needed if the pairwise comparison intervals in part (b) must have a maximum width of 8.</p></li>
+</ol>
 </section>
+</section>
+<section id="exercise-6.12-memory-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.12-memory-experiment">Exercise 6.12: Memory Experiment</h2>
+<p>The memory experiment investigates the effects of two factors:</p>
+<ul>
+<li><strong>Word type</strong>: Fruits, nouns, and mixed types.</li>
+<li><strong>Type of distraction</strong>: No distraction, constant distraction, or changing distraction.</li>
+</ul>
+<p>The response variable is the number of words remembered, with variance approximated by <span class="math inline">\(30p(1-p)\)</span>.</p>
+<section id="task" class="level3">
+<h3 class="anchored" data-anchor-id="task">Task</h3>
+<p>Determine the number of subjects required to reject the following hypotheses with a power of 0.9 at <span class="math inline">\(\alpha = 0.05\)</span>:</p>
+<ul>
+<li><span class="math inline">\(H_A\)</span>: The memorization rate is identical for the three word types.</li>
+<li><span class="math inline">\(H_B\)</span>: The distraction types have no effect on memorization.</li>
+</ul>
+<p>Assume the minimum difference of interest in memorization rates is 4 words.</p>
+</section>
+</section>
+<section id="exercise-6.16-survival-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.16-survival-experiment">Exercise 6.16: Survival Experiment</h2>
+<p>The following table provides survival times (in units of 10 hours) for animals exposed to three poisons and four treatments.</p>
+<table class="table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Poison/Treatment</strong></th>
+<th><strong>1</strong></th>
+<th><strong>2</strong></th>
+<th><strong>3</strong></th>
+<th><strong>4</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>I</strong></td>
+<td>0.31, 0.45, 0.46, 0.43</td>
+<td>0.82, 1.10, 0.88, 0.72</td>
+<td>0.43, 0.45, 0.63, 0.76</td>
+<td>0.45, 0.71, 0.66, 0.62</td>
+</tr>
+<tr class="even">
+<td><strong>II</strong></td>
+<td>0.36, 0.29, 0.40, 0.23</td>
+<td>0.92, 0.61, 0.49, 1.24</td>
+<td>0.44, 0.35, 0.31, 0.40</td>
+<td>0.56, 1.02, 0.71, 0.38</td>
+</tr>
+<tr class="odd">
+<td><strong>III</strong></td>
+<td>0.22, 0.21, 0.18, 0.23</td>
+<td>0.30, 0.37, 0.38, 0.29</td>
+<td>0.23, 0.25, 0.24, 0.22</td>
+<td>0.30, 0.36, 0.31, 0.33</td>
+</tr>
+</tbody>
+</table>
+<section id="tasks-2" class="level3">
+<h3 class="anchored" data-anchor-id="tasks-2">Tasks</h3>
+<ol type="a">
+<li><p>Verify assumptions of the two-way complete model using the original data. Analyze the data if the assumptions are satisfied.</p></li>
+<li><p>Transform the data using <span class="math inline">\(y^{-1}\)</span> (reciprocal). Reassess model assumptions and reanalyze the transformed data.</p></li>
+<li><p>Create interaction plots for the original and transformed data. Discuss how the interaction between poison and treatment varies with each scale.</p></li>
+</ol>
+</section>
+</section>
+<section id="exercise-6.19-main-effects-model-verification" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.19-main-effects-model-verification">Exercise 6.19: Main-Effects Model Verification</h2>
+<p>For the two-way main-effects model with equal sample sizes, perform the following:</p>
+<ol type="a">
+<li><p>Verify the computational formula for <span class="math inline">\(SS_E\)</span> as given in equation (6.5.38).</p></li>
+<li><p>Demonstrate that <span class="math inline">\(E[SSE] = (n - a - b + 1)\sigma^2\)</span>.</p></li>
+</ol>
+<p><strong>Hint:</strong> Use the formula <span class="math inline">\(E[X^2] = \text{Var}(X) + E[X]^2\)</span>.</p>
+</section>
+<section id="summary-of-the-grades-and-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-the-grades-and-rubric">Summary of the Grades and Rubric</h2>
+<table class="table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 27%">
+<col style="width: 3%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Exercise</strong></th>
+<th><strong>Task</strong></th>
+<th><strong>Points</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Exercise 6.2</strong></td>
+<td>Derive contrast coefficients and verify interaction contrast property.</td>
+<td><strong>10</strong></td>
+<td>- 4 points for correct derivation of coefficients. - 3 points for verifying the interaction contrast property. - 3 points for clarity and completeness.</td>
+</tr>
+<tr class="even">
+<td><strong>Exercise 6.3</strong></td>
+<td>Verify estimability, interpret contrasts, and compute coefficients.</td>
+<td><strong>15</strong></td>
+<td>- 5 points for verifying estimability. - 5 points for interpreting contrasts in provided plots. - 5 points for accurate and clear computation of coefficients.</td>
+</tr>
+<tr class="odd">
+<td><strong>Exercise 6.7</strong></td>
+<td>Perform hypothesis testing, compute contrasts, intervals, and variance limits.</td>
+<td><strong>25</strong></td>
+<td>- 5 points each for parts (a) to (e), including hypothesis testing, contrast definitions, confidence interval computations, upper confidence limits for <span class="math inline">\(\sigma^2\)</span>, and sample size needs.</td>
+</tr>
+<tr class="even">
+<td><strong>Exercise 6.12</strong></td>
+<td>Compute sample size for given power and significance level.</td>
+<td><strong>15</strong></td>
+<td>- 8 points for accurate computation of sample size. - 7 points for interpretation and justification of the calculations.</td>
+</tr>
+<tr class="odd">
+<td><strong>Exercise 6.16</strong></td>
+<td>Verify model assumptions, perform transformation, and create interaction plots.</td>
+<td><strong>20</strong></td>
+<td>- 7 points for verifying assumptions. - 7 points for transformation analysis. - 6 points for interaction plots and interpretation.</td>
+</tr>
+<tr class="even">
+<td><strong>Exercise 6.19</strong></td>
+<td>Verify <span class="math inline">\(SS_E\)</span> formula and derive expected value of <span class="math inline">\(SSE\)</span>.</td>
+<td><strong>10</strong></td>
+<td>- 5 points for verifying <span class="math inline">\(SS_E\)</span> computational formula. - 5 points for deriving <span class="math inline">\(E[SSE] = (n - a - b + 1)\sigma^2\)</span>.</td>
+</tr>
+</tbody>
+</table>
+
+
 </section>
 
 </main> <!-- /main -->

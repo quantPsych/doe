@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>Assignment 2: One-Way ANOVA Analysis – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Factorial ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,8 +102,9 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="Assignment 2: One-Way ANOVA Analysis – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
+<meta property="og:title" content="Factorial ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -162,18 +198,24 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Assignment 2: One-Way ANOVA Analysis</h1>
+      <h1 class="title">Factorial ANOVA</h1>
                       </div>
   </div>
     
   
   <div class="quarto-title-meta column-page-left">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Davood Tofighi, Ph.D. </p>
+            </div>
+    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">05-Jan-2025</p>
+        <p class="date">29-Dec-2024</p>
       </div>
     </div>
     
@@ -189,21 +231,43 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions:</a></li>
-  <li><a href="#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students" id="toc-set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students" class="nav-link" data-scroll-target="#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students">Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#balloon-experiment" id="toc-balloon-experiment" class="nav-link" data-scroll-target="#balloon-experiment">1.1 Balloon Experiment</a></li>
-  <li><a href="#conceptual-question" id="toc-conceptual-question" class="nav-link" data-scroll-target="#conceptual-question">1.2 Conceptual Question</a></li>
-  <li><a href="#graphical-analysis" id="toc-graphical-analysis" class="nav-link" data-scroll-target="#graphical-analysis">1.3 Graphical Analysis</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
   </ul></li>
-  <li><a href="#set-2-advanced-computational-and-proof-based-questions-graduate-level" id="toc-set-2-advanced-computational-and-proof-based-questions-graduate-level" class="nav-link" data-scroll-target="#set-2-advanced-computational-and-proof-based-questions-graduate-level">Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)</a>
+  <li><a href="#two-factor-factorial-designs" id="toc-two-factor-factorial-designs" class="nav-link" data-scroll-target="#two-factor-factorial-designs">Two-Factor Factorial Designs</a>
   <ul class="collapse">
-  <li><a href="#derivation-of-t-statistic-for-contrasts-in-anova" id="toc-derivation-of-t-statistic-for-contrasts-in-anova" class="nav-link" data-scroll-target="#derivation-of-t-statistic-for-contrasts-in-anova">2.1 Derivation of <span class="math inline">\(t\)</span>-Statistic for Contrasts in ANOVA</a></li>
-  <li><a href="#implications-of-assumption-violations" id="toc-implications-of-assumption-violations" class="nav-link" data-scroll-target="#implications-of-assumption-violations">2.2 Implications of Assumption Violations</a></li>
-  <li><a href="#power-analysis" id="toc-power-analysis" class="nav-link" data-scroll-target="#power-analysis">2.3 Power Analysis</a></li>
+  <li><a href="#structure-and-terminology" id="toc-structure-and-terminology" class="nav-link" data-scroll-target="#structure-and-terminology">Structure and Terminology</a></li>
+  <li><a href="#main-effects-vs.-interaction" id="toc-main-effects-vs.-interaction" class="nav-link" data-scroll-target="#main-effects-vs.-interaction">Main Effects vs.&nbsp;Interaction</a></li>
   </ul></li>
-  <li><a href="#points-distribution" id="toc-points-distribution" class="nav-link" data-scroll-target="#points-distribution">Points Distribution</a></li>
-  <li><a href="#submission-guidelines" id="toc-submission-guidelines" class="nav-link" data-scroll-target="#submission-guidelines">Submission Guidelines:</a></li>
+  <li><a href="#statistical-modeling-two-way-anova-models" id="toc-statistical-modeling-two-way-anova-models" class="nav-link" data-scroll-target="#statistical-modeling-two-way-anova-models">Statistical Modeling: Two-Way ANOVA Models</a>
+  <ul class="collapse">
+  <li><a href="#the-full-model-with-interaction" id="toc-the-full-model-with-interaction" class="nav-link" data-scroll-target="#the-full-model-with-interaction">The Full Model with Interaction</a></li>
+  <li><a href="#reduced-models" id="toc-reduced-models" class="nav-link" data-scroll-target="#reduced-models">Reduced Models</a></li>
+  </ul></li>
+  <li><a href="#hypothesis-testing-in-two-way-anova" id="toc-hypothesis-testing-in-two-way-anova" class="nav-link" data-scroll-target="#hypothesis-testing-in-two-way-anova">Hypothesis Testing in Two-Way ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses">Hypotheses</a></li>
+  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a></li>
+  </ul></li>
+  <li><a href="#example-in-r-two-way-anova-with-interaction" id="toc-example-in-r-two-way-anova-with-interaction" class="nav-link" data-scroll-target="#example-in-r-two-way-anova-with-interaction">Example (In R): Two-Way ANOVA with Interaction</a></li>
+  <li><a href="#unbalanced-designs-and-advanced-techniques" id="toc-unbalanced-designs-and-advanced-techniques" class="nav-link" data-scroll-target="#unbalanced-designs-and-advanced-techniques">Unbalanced Designs and Advanced Techniques</a></li>
+  <li><a href="#visualizing-and-understanding-interactions" id="toc-visualizing-and-understanding-interactions" class="nav-link" data-scroll-target="#visualizing-and-understanding-interactions">Visualizing and Understanding Interactions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
+  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#interaction-contrasts" id="toc-interaction-contrasts" class="nav-link" data-scroll-target="#interaction-contrasts">Interaction Contrasts</a></li>
+  <li><a href="#additivity-condition" id="toc-additivity-condition" class="nav-link" data-scroll-target="#additivity-condition">Additivity Condition</a></li>
+  <li><a href="#proofs-for-sums-of-squares" id="toc-proofs-for-sums-of-squares" class="nav-link" data-scroll-target="#proofs-for-sums-of-squares">Proofs for Sums of Squares</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -214,322 +278,253 @@ window.Quarto = {
 
 
 
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions:</h2>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Many real-world experiments involve multiple factors that may jointly influence a response. <strong>Factorial designs</strong>, especially two-factor designs, allow us to study each factor’s main effect and their interaction. Understanding interactions is crucial: sometimes one factor’s effect depends on the level of another, and ignoring these relationships can lead to misguided conclusions.</p>
+<p><strong>Intuition:</strong> Think of baking a cake (response): Factor A = Oven Temperature (low, medium, high), Factor B = Baking Time (short, medium, long). The sweetness or fluffiness of the cake (response) depends on both temperature and time. If at a high temperature, an extra-long baking time burns the cake, whereas at a low temperature, you might need longer time to get it fully baked. This interplay is the <strong>interaction</strong> effect—neither factor alone explains the outcome fully without considering the other.</p>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ol type="1">
+<li>Understand how two-factor factorial designs are structured and why they’re important.</li>
+<li>Distinguish between main effects and interaction effects in a two-way ANOVA.</li>
+<li>Conduct a two-way ANOVA, interpret results, and create interaction plots in R.</li>
+<li>Handle complexities such as unbalanced designs and understand different types of sums of squares.</li>
+<li>Explore both conceptual understanding (through analogies) and rigorous formulation (through mathematics and proofs in the Appendix).</li>
+</ol>
+</section>
+</section>
+<section id="two-factor-factorial-designs" class="level1">
+<h1>Two-Factor Factorial Designs</h1>
+<section id="structure-and-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="structure-and-terminology">Structure and Terminology</h2>
+<p>A <strong>two-factor design</strong> has two treatment factors, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> levels each. Every combination of levels is tested, resulting in <span class="math inline">\(ab\)</span> treatment combinations (sometimes called “cells”):</p>
 <ul>
-<li>Complete all questions below.</li>
-<li>Use the R programming language for computational problems. Include annotated R code and relevant output.</li>
-<li>Provide clear and concise explanations and interpretations for all tasks.</li>
+<li>Factor <span class="math inline">\(A\)</span>: <span class="math inline">\(a\)</span> levels <span class="math inline">\(A_1, A_2, \dots, A_a\)</span></li>
+<li>Factor <span class="math inline">\(B\)</span>: <span class="math inline">\(b\)</span> levels <span class="math inline">\(B_1, B_2, \dots, B_b\)</span></li>
+</ul>
+<p><strong>Example:</strong> In a crop yield experiment: - Factor A = Fertilizer type (3 levels) - Factor B = Irrigation method (2 levels) Total treatment combos = 3 × 2 = 6.</p>
+<p>Each cell can have one or more observations (replicates).</p>
+</section>
+<section id="main-effects-vs.-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="main-effects-vs.-interaction">Main Effects vs.&nbsp;Interaction</h2>
+<ul>
+<li><strong>Main Effect (of A):</strong> The average change in response when we move across levels of A, ignoring B.</li>
+<li><strong>Main Effect (of B):</strong> The average change in response when we move across levels of B, ignoring A.</li>
+</ul>
+<p><strong>Interaction:</strong> Occurs if the effect of one factor on the response changes depending on the level of the other factor. If lines connecting treatment means in an interaction plot are not parallel, we have evidence of interaction.</p>
+<p><strong>Analogy:</strong> Think of wearing sunglasses (Factor A) and a hat (Factor B) on a sunny day. The effect of wearing sunglasses on how well you see (response) might differ depending on whether you’re also wearing a hat that shades your eyes. If sunglasses alone help a bit and the hat alone helps a bit, but together they help a lot more than expected by adding their individual effects, that’s an interaction.</p>
+</section>
+</section>
+<section id="statistical-modeling-two-way-anova-models" class="level1">
+<h1>Statistical Modeling: Two-Way ANOVA Models</h1>
+<section id="the-full-model-with-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="the-full-model-with-interaction">The Full Model with Interaction</h2>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk},
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span>: Overall mean</li>
+<li><span class="math inline">\(\alpha_i\)</span>: Effect of the <span class="math inline">\(i\)</span>-th level of Factor A (with <span class="math inline">\(\sum \alpha_i=0\)</span>)</li>
+<li><span class="math inline">\(\beta_j\)</span>: Effect of the <span class="math inline">\(j\)</span>-th level of Factor B (with <span class="math inline">\(\sum \beta_j=0\)</span>)</li>
+<li><span class="math inline">\((\alpha\beta)_{ij}\)</span>: Interaction effect (with constraints <span class="math inline">\(\sum_i (\alpha\beta)_{ij}=0\)</span> and <span class="math inline">\(\sum_j (\alpha\beta)_{ij}=0\)</span>)</li>
+<li><span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>: Random error</li>
+</ul>
+<p>If replicates per treatment combination are <span class="math inline">\(n\)</span>, total observations <span class="math inline">\(N = abn\)</span>.</p>
+</section>
+<section id="reduced-models" class="level2">
+<h2 class="anchored" data-anchor-id="reduced-models">Reduced Models</h2>
+<ul>
+<li><strong>No Interaction Model:</strong> If <span class="math inline">\((\alpha\beta)_{ij}=0\)</span> for all <span class="math inline">\(i,j\)</span>, the model reduces to:</li>
+</ul>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \epsilon_{ijk}.
+\]</span></p>
+<ul>
+<li><strong>Additivity:</strong> Without interaction, the effects of A and B simply add up.</li>
 </ul>
 </section>
-<section id="set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students" class="level2">
-<h2 class="anchored" data-anchor-id="set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students">Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)</h2>
-<section id="balloon-experiment" class="level3">
-<h3 class="anchored" data-anchor-id="balloon-experiment">1.1 Balloon Experiment</h3>
-<p><em>Data Source: Dean et al.&nbsp;(2017), Chapter 3, Exercise 12</em></p>
-<p><strong>Data Overview</strong>: The data for this experiment is provided below:</p>
+</section>
+<section id="hypothesis-testing-in-two-way-anova" class="level1">
+<h1>Hypothesis Testing in Two-Way ANOVA</h1>
+<section id="hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="hypotheses">Hypotheses</h2>
+<ol type="1">
+<li><strong>Interaction Test</strong>:
+<ul>
+<li><span class="math inline">\(H_0:\)</span> No interaction (<span class="math inline">\((\alpha\beta)_{ij}=0\)</span>)</li>
+<li><span class="math inline">\(H_a:\)</span> Interaction present</li>
+</ul></li>
+<li><strong>Main Effect of A</strong>:
+<ul>
+<li><span class="math inline">\(H_0:\alpha_1=\alpha_2=\cdots=\alpha_a=0\)</span></li>
+<li><span class="math inline">\(H_a:\)</span> At least one <span class="math inline">\(\alpha_i \neq 0\)</span></li>
+</ul></li>
+<li><strong>Main Effect of B</strong>:
+<ul>
+<li><span class="math inline">\(H_0:\beta_1=\beta_2=\cdots=\beta_b=0\)</span></li>
+<li><span class="math inline">\(H_a:\)</span> At least one <span class="math inline">\(\beta_j \neq 0\)</span></li>
+</ul></li>
+</ol>
+<p><strong>Testing Order:</strong> Generally, check interaction first. If significant, main effects need careful interpretation.</p>
+</section>
+<section id="anova-table" class="level2">
+<h2 class="anchored" data-anchor-id="anova-table">ANOVA Table</h2>
 <table class="table">
-<caption>Balloon inflation times for different colors</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 20%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 38%">
+</colgroup>
 <thead>
 <tr class="header">
-<th><strong>Time Order</strong></th>
-<th><strong>Coded Color</strong></th>
-<th><strong>Inflation Time (seconds)</strong></th>
+<th>Source</th>
+<th>DF</th>
+<th>SS</th>
+<th>MS</th>
+<th>F-test</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>1</td>
-<td>22.0</td>
+<td>A</td>
+<td><span class="math inline">\(a-1\)</span></td>
+<td><span class="math inline">\(SS_A\)</span></td>
+<td><span class="math inline">\(MS_A\)</span></td>
+<td><span class="math inline">\(F_A = MS_A/MS_E\)</span></td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>3</td>
-<td>24.6</td>
+<td>B</td>
+<td><span class="math inline">\(b-1\)</span></td>
+<td><span class="math inline">\(SS_B\)</span></td>
+<td><span class="math inline">\(MS_B\)</span></td>
+<td><span class="math inline">\(F_B = MS_B/MS_E\)</span></td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td>1</td>
-<td>20.3</td>
+<td>A×B</td>
+<td><span class="math inline">\((a-1)(b-1)\)</span></td>
+<td><span class="math inline">\(SS_{AB}\)</span></td>
+<td><span class="math inline">\(MS_{AB}\)</span></td>
+<td><span class="math inline">\(F_{AB} = MS_{AB}/MS_E\)</span></td>
 </tr>
 <tr class="even">
-<td>4</td>
-<td>4</td>
-<td>19.8</td>
+<td>Error</td>
+<td><span class="math inline">\(N - ab\)</span></td>
+<td><span class="math inline">\(SS_E\)</span></td>
+<td><span class="math inline">\(MS_E\)</span></td>
+<td>-</td>
 </tr>
 <tr class="odd">
-<td>5</td>
-<td>3</td>
-<td>24.3</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>2</td>
-<td>22.2</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>2</td>
-<td>28.5</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>2</td>
-<td>25.7</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>3</td>
-<td>20.2</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>1</td>
-<td>19.6</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>2</td>
-<td>28.8</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>4</td>
-<td>24.0</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>4</td>
-<td>17.1</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>4</td>
-<td>19.3</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>3</td>
-<td>24.2</td>
-</tr>
-<tr class="even">
-<td>16</td>
-<td>1</td>
-<td>15.8</td>
-</tr>
-<tr class="odd">
-<td>17</td>
-<td>2</td>
-<td>18.3</td>
-</tr>
-<tr class="even">
-<td>18</td>
-<td>1</td>
-<td>17.5</td>
-</tr>
-<tr class="odd">
-<td>19</td>
-<td>4</td>
-<td>18.7</td>
-</tr>
-<tr class="even">
-<td>20</td>
-<td>3</td>
-<td>22.9</td>
-</tr>
-<tr class="odd">
-<td>21</td>
-<td>1</td>
-<td>16.3</td>
-</tr>
-<tr class="even">
-<td>22</td>
-<td>4</td>
-<td>14.0</td>
-</tr>
-<tr class="odd">
-<td>23</td>
-<td>4</td>
-<td>16.6</td>
-</tr>
-<tr class="even">
-<td>24</td>
-<td>2</td>
-<td>18.1</td>
-</tr>
-<tr class="odd">
-<td>25</td>
-<td>2</td>
-<td>18.9</td>
-</tr>
-<tr class="even">
-<td>26</td>
-<td>4</td>
-<td>16.0</td>
-</tr>
-<tr class="odd">
-<td>27</td>
-<td>2</td>
-<td>20.1</td>
-</tr>
-<tr class="even">
-<td>28</td>
-<td>3</td>
-<td>22.5</td>
-</tr>
-<tr class="odd">
-<td>29</td>
-<td>3</td>
-<td>16.0</td>
-</tr>
-<tr class="even">
-<td>30</td>
-<td>1</td>
-<td>19.3</td>
-</tr>
-<tr class="odd">
-<td>31</td>
-<td>1</td>
-<td>15.9</td>
-</tr>
-<tr class="even">
-<td>32</td>
-<td>3</td>
-<td>20.3</td>
+<td>Total</td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(SS_T\)</span></td>
+<td>-</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
-<p>The codes for balloon colors are as follows:</p>
-<ul>
-<li>1 = Pink</li>
-<li>2 = Yellow</li>
-<li>3 = Orange</li>
-<li>4 = Blue</li>
-</ul>
-<p><strong>Tasks</strong>:</p>
+<p><strong>Note:</strong> If data are unbalanced, different sum of squares types (Type I, II, III) might be considered. See Christensen (2018) for details.</p>
+</section>
+</section>
+<section id="example-in-r-two-way-anova-with-interaction" class="level1">
+<h1>Example (In R): Two-Way ANOVA with Interaction</h1>
+<p><strong>Step-by-Step:</strong></p>
 <ol type="1">
-<li><ol type="a">
-<li>Plot inflation time versus balloon color and comment on the results.</li>
-</ol></li>
-<li><ol start="2" type="a">
-<li>Estimate the mean inflation time for each balloon color and add these estimates to the plot from part (a).</li>
-</ol></li>
-<li><ol start="3" type="a">
-<li>Construct an analysis of variance (ANOVA) table and test the hypothesis that balloon color has no effect on inflation time (<span class="math inline">\(\alpha = 0.05\)</span>).</li>
-</ol></li>
-<li><ol start="4" type="a">
-<li>Plot the data for each color in the order it was collected. Discuss whether the assumptions of the ANOVA model (e.g., normality, independence) appear satisfied.</li>
-</ol></li>
-<li><ol start="5" type="a">
-<li>Evaluate whether the analysis in part (c) is adequate. If not, suggest improvements.</li>
-</ol></li>
+<li><p><strong>Data Setup</strong> Suppose <code>data</code> has columns: <code>Response</code>, <code>FactorA</code>, and <code>FactorB</code>.</p></li>
+<li><p><strong>Fit Model and ANOVA</strong>:</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit two-way ANOVA with interaction</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB, <span class="at">data =</span> data)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Interpret the ANOVA table. Check if interaction is significant.</p>
+<ol type="1">
+<li><strong>Interaction Plot</strong>:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(data<span class="sc">$</span>FactorA, data<span class="sc">$</span>FactorB, data<span class="sc">$</span>Response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Non-parallel lines indicate interaction.</p>
+<ol type="1">
+<li><strong>Interpretation</strong>: If interaction is significant:
+<ul>
+<li>The effect of one factor changes depending on the level of the other. If interaction is not significant:</li>
+<li>Consider main effects separately.</li>
+</ul></li>
 </ol>
 </section>
-<section id="conceptual-question" class="level3">
-<h3 class="anchored" data-anchor-id="conceptual-question">1.2 Conceptual Question</h3>
+<section id="unbalanced-designs-and-advanced-techniques" class="level1">
+<h1>Unbalanced Designs and Advanced Techniques</h1>
+<p>When sample sizes differ across cells, traditional ANOVA is complicated by the unequal representation of treatments. Approaches:</p>
 <ul>
-<li>Discuss how increasing the number of replicates affects the power of a one-way ANOVA test.</li>
+<li><strong>Type II SS</strong>: Marginal means ignoring higher-order terms.</li>
+<li><strong>Type III SS</strong>: Adjusted means considering all other factors.</li>
 </ul>
+<p>R Implementation:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model, <span class="at">type=</span><span class="st">"II"</span>)  <span class="co"># Type II sums of squares</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model, <span class="at">type=</span><span class="st">"III"</span>) <span class="co"># Type III sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For deeper insights, see Dean et al.&nbsp;(2017) and Christensen (2018).</p>
 </section>
-<section id="graphical-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="graphical-analysis">1.3 Graphical Analysis</h3>
-<ul>
-<li>Create a boxplot of inflation times for each balloon color. Based on the plot, comment on visual evidence of differences among the treatments.</li>
-</ul>
+<section id="visualizing-and-understanding-interactions" class="level1">
+<h1>Visualizing and Understanding Interactions</h1>
+<p><strong>Analogy:</strong> If you imagine factor A on the x-axis and the response on the y-axis, plotting a separate line for each level of factor B: - Parallel lines → No interaction (effects are additive). - Converging or crossing lines → Significant interaction (the effect of A depends on B).</p>
+<p><strong>Complex Example:</strong> Consider a pharmacological study: - Factor A = Drug Dosage (Low, Medium, High) - Factor B = Diet Type (Normal, High-Fat) Interaction plot might show that at Low dosage, both diets yield similar outcomes, but at High dosage, the High-Fat diet drastically reduces drug effectiveness, indicating a strong interaction.</p>
 </section>
-</section>
-<section id="set-2-advanced-computational-and-proof-based-questions-graduate-level" class="level2">
-<h2 class="anchored" data-anchor-id="set-2-advanced-computational-and-proof-based-questions-graduate-level">Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)</h2>
-<section id="derivation-of-t-statistic-for-contrasts-in-anova" class="level3">
-<h3 class="anchored" data-anchor-id="derivation-of-t-statistic-for-contrasts-in-anova">2.1 Derivation of <span class="math inline">\(t\)</span>-Statistic for Contrasts in ANOVA</h3>
-<p><em>Data Source: Christensen (2018)., Exercise 12.7.12</em></p>
-<p>In a one-way ANOVA, the sum of squares for error (<span class="math inline">\(SSE\)</span>) divided by the population variance (<span class="math inline">\(\sigma^2\)</span>) follows a chi-squared distribution with degrees of freedom equal to <span class="math inline">\(df_E\)</span>:</p>
-<p><span class="math display">\[
-\frac{SSE}{\sigma^2} \sim \chi^2(df_E),
-\]</span></p>
-<p>and the mean square error (<span class="math inline">\(MSE\)</span>) is independent of all sample means (<span class="math inline">\(\bar{y}_i\)</span>). Show that the following expression follows a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(df_E\)</span> degrees of freedom:</p>
-<p><span class="math display">\[
-\frac{\sum_{i=1}^a \lambda_i \bar{y}_i - \sum_{i=1}^a \lambda_i \mu_i}{\sqrt{MSE \sum_{i=1}^a \frac{\lambda_i^2}{N_i}}} \sim t(df_E).
-\]</span></p>
-<p><strong>Tasks</strong>:</p>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="medium-difficulty" class="level2">
+<h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
 <ol type="1">
-<li>Derive the above expression step-by-step, starting with the variance of the contrast <span class="math inline">\(\sum_{i=1}^a \lambda_i \bar{y}_i\)</span>.</li>
-<li>Explain why <span class="math inline">\(MSE\)</span> serves as an unbiased estimate of <span class="math inline">\(\sigma^2\)</span>.</li>
-<li>Using the result, construct a hypothesis test for a contrast in a one-way ANOVA and provide a practical interpretation of the result.</li>
+<li><p><strong>Basic Analysis</strong>: Simulate a balanced two-factor design (e.g., <span class="math inline">\(a=3\)</span>, <span class="math inline">\(b=2\)</span>, <span class="math inline">\(n=5\)</span>). Perform a two-way ANOVA, check for interaction, and create an interaction plot in R. Interpret the results.</p></li>
+<li><p><strong>Interpretation Without Interaction</strong>: Given data where no interaction is found, interpret main effects. Use confidence intervals for factor level means and explain the practical meaning.</p></li>
 </ol>
 </section>
-<section id="implications-of-assumption-violations" class="level3">
-<h3 class="anchored" data-anchor-id="implications-of-assumption-violations">2.2 Implications of Assumption Violations</h3>
+<section id="challenging-problems" class="level2">
+<h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
+<ol type="1">
+<li><p><strong>Unbalanced Two-Factor Design</strong>: Work with a dataset where one cell has fewer observations. Fit the model and compare Type I, II, and III sums of squares using <code>car::Anova(model, type=…)</code>. Discuss how the choice of sum of squares affects conclusions about main and interaction effects.</p></li>
+<li><p><strong>Complex Interaction Interpretation</strong>: Use a real or simulated dataset with a significant interaction. Implement <code>emmeans</code> in R to estimate marginal means and pairwise comparisons. Write a short report explaining how the interaction modifies the main effects. Include plots of estimated means and confidence intervals.</p></li>
+<li><p><strong>Mathematical Proof of Interaction Contrasts (Appendix)</strong>: Derive formulas for interaction contrasts and show how they measure the deviation from additivity. Prove that if all interaction contrasts are zero, the model is additive.</p></li>
+</ol>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Two-factor factorial designs expand our analytical horizons, enabling the study of multi-dimensional treatment structures. Understanding and detecting interaction effects is critical—they can dramatically change conclusions about how factors influence a response. By mastering two-way ANOVA, sums of squares types, and interaction plots, graduate students gain a key skillset for robust, nuanced experimental analysis.</p>
+<hr>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>Discuss the implications of violating the assumption of homogeneity of variances in a one-way ANOVA. Suggest two methods to address such violations.</li>
+<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
+<li>Montgomery, D. C., &amp; Runger, G. C. (2010). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
+<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
 </ul>
 </section>
-<section id="power-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="power-analysis">2.3 Power Analysis</h3>
-<ul>
-<li>Calculate the sample size required for a one-way ANOVA with four groups to detect a medium effect size (<span class="math inline">\(f = 0.25\)</span>) at a significance level of <span class="math inline">\(\alpha = 0.05\)</span> and a power of <span class="math inline">\(1 - \beta = 0.8\)</span>.</li>
-</ul>
 </section>
+<section id="appendix-advanced-mathematical-derivations" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="interaction-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-contrasts">Interaction Contrasts</h2>
+<p>An interaction can be represented by contrasts that compare how factor A’s differences vary across levels of factor B. For example, consider a simple 2×2 case (<span class="math inline">\(a=2,b=2\)</span>):</p>
+<p><span class="math display">\[
+(\alpha\beta)_{11} - (\alpha\beta)_{12} - (\alpha\beta)_{21} + (\alpha\beta)_{22}
+\]</span></p>
+<p>measures the extent to which effects deviate from additivity.</p>
 </section>
-<section id="points-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="points-distribution">Points Distribution</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th><strong>Task</strong></th>
-<th><strong>Points</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Set 1: Foundational Questions</strong></td>
-<td><strong>50</strong></td>
-</tr>
-<tr class="even">
-<td>1.1 Balloon Experiment</td>
-<td>30</td>
-</tr>
-<tr class="odd">
-<td>1.2 Conceptual Question</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td>1.3 Graphical Analysis</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td><strong>Set 2: Advanced Questions</strong></td>
-<td><strong>50</strong></td>
-</tr>
-<tr class="even">
-<td>2.1 Derivation of <span class="math inline">\(t\)</span>-Statistic</td>
-<td>20</td>
-</tr>
-<tr class="odd">
-<td>2.2 Implications of Assumption Violations</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td>2.3 Power Analysis</td>
-<td>20</td>
-</tr>
-<tr class="odd">
-<td><strong>Total</strong></td>
-<td><strong>100</strong></td>
-</tr>
-</tbody>
-</table>
+<section id="additivity-condition" class="level2">
+<h2 class="anchored" data-anchor-id="additivity-condition">Additivity Condition</h2>
+<p>For no interaction:</p>
+<p><span class="math display">\[
+(\alpha\beta)_{ij} = 0 \implies \tau_{ij} = \alpha_i + \beta_j.
+\]</span></p>
+<p>This forms a linear decomposition of cell means into separate contributions of factors A and B.</p>
 </section>
-<section id="submission-guidelines" class="level2">
-<h2 class="anchored" data-anchor-id="submission-guidelines">Submission Guidelines:</h2>
-<ul>
-<li>Submit your assignment as a Quarto document, rendered to PDF, via the course submission portal.</li>
-<li>Include all R code and outputs for computational tasks.</li>
-<li>Ensure clarity and precision in your explanations.</li>
-</ul>
+<section id="proofs-for-sums-of-squares" class="level2">
+<h2 class="anchored" data-anchor-id="proofs-for-sums-of-squares">Proofs for Sums of Squares</h2>
+<p>Following Dean et al.&nbsp;(2017), sums of squares for main and interaction effects can be constructed from orthogonal contrasts. Derive the form of <span class="math inline">\(SS_A, SS_B, SS_{AB}\)</span> from cell means <span class="math inline">\(\bar{Y}_{ij}\)</span> and show their orthogonality in balanced designs.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
