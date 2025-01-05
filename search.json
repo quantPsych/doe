@@ -534,35 +534,35 @@
   {
     "objectID": "assignments/assignment4_checking_model_assumptions.html",
     "href": "assignments/assignment4_checking_model_assumptions.html",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "title": "Assignment 4: Checking Model Assumptions",
     "section": "",
     "text": "In this assignment, you will apply residual analysis to evaluate the assumptions of the one-way ANOVA model. You will also explore transformations to address violations of the equal-variance assumption. The exercises are based on data from the textbook by Dean et. al. (2019), Chapter 5.\nTotal points: 135"
   },
   {
     "objectID": "assignments/assignment4_checking_model_assumptions.html#instructions",
     "href": "assignments/assignment4_checking_model_assumptions.html#instructions",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "title": "Assignment 4: Checking Model Assumptions",
     "section": "Instructions",
     "text": "Instructions\n\nReview the exercises below and select two to complete.\nDownload the Quarto template provided and complete the exercises.\nSubmit your completed assignment on Canvas by the due date.\nEnsure your submission includes all required components and is formatted correctly.\nReview the Grading Rubric for details on how the assignment will be evaluated.\nPost your questions on Canvas or attend office hours for assistance."
   },
   {
     "objectID": "assignments/assignment4_checking_model_assumptions.html#exercise-3-margarine-experiment-amy-l.-phelps-1987",
     "href": "assignments/assignment4_checking_model_assumptions.html#exercise-3-margarine-experiment-amy-l.-phelps-1987",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "title": "Assignment 4: Checking Model Assumptions",
     "section": "Exercise 3: Margarine Experiment (Amy L. Phelps, 1987)",
     "text": "Exercise 3: Margarine Experiment (Amy L. Phelps, 1987)\nThe data in Table 5.16 show the melting times in seconds for three different brands of margarine (coded 1–3) and one brand of butter (coded 4). The butter was included for comparison purposes. The initial sizes and shapes of the margarine/butter pats were as similar as possible, and they were melted individually in a clean frying pan under constant heat.\nTasks:\n\nCheck the Equal-Variance Assumption\n\n\nEvaluate the equal-variance assumption for the model (3.3.1) using these data.\nIf the assumption is violated, choose the best transformation of the form: \\(y' = y^\\lambda\\) to stabilize the variances.\nRecheck the assumptions using the transformed data.\n\n\nCompute a Confidence Interval with Transformed Data\n\n\nUsing the transformed data from part (a), compute a 95% confidence interval comparing the average melting times for the margarines with the average melting time for the butter.\n\n\nRepeat Confidence Interval with Untransformed Data\n\n\nRepeat part (b) using the untransformed data and Satterthwaite’s approximation for unequal variances.\nCompare the results with those obtained in part (b).\n\n\nPreferred Analysis\n\n\nBased on the results from parts (b) and (c), determine which analysis you prefer and explain your reasoning."
   },
   {
     "objectID": "assignments/assignment4_checking_model_assumptions.html#exercise-6-bicycle-experiment-debra-schomer-1987",
     "href": "assignments/assignment4_checking_model_assumptions.html#exercise-6-bicycle-experiment-debra-schomer-1987",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "title": "Assignment 4: Checking Model Assumptions",
     "section": "Exercise 6: Bicycle Experiment (Debra Schomer, 1987)",
     "text": "Exercise 6: Bicycle Experiment (Debra Schomer, 1987)\nThe bicycle experiment investigated the crank rates required to maintain specific speeds while riding a bicycle in twelfth gear on flat ground. The chosen speeds were 5, 10, 15, 20, and 25 mph (coded 1–5). The data are provided in Table 5.19. The experimenter fitted the one-way ANOVA model (3.3.1) and plotted the standardized residuals. She noted:\n“The larger spread of data at lower speeds is due to the difficulty of maintaining such low speeds consistently in such a high gear. This also causes additional strain on the bicycle.”\nAs a result, the experimenter observed differences in variances of the error variables across treatment levels.\nTasks:\n\nEvaluate Error Variances\n\n\nPlot the standardized residuals against the fitted values (\\(\\hat{y}_i\\)).\nCompare the sample variances and evaluate the equality of error variances across treatments.\n\n\nApply a Transformation\n\n\nSelect the best transformation of the data of the form: \\(y' = y^\\lambda\\)\nUsing the transformed data, test the hypotheses that the linear and quadratic trends in crank rates due to the different speeds are negligible.\nUse an overall significance level of \\(\\alpha = 0.01\\).\n\n\nTest Trends with Untransformed Data\n\n\nRepeat part (b) using the untransformed data and Satterthwaite’s approximation for unequal variances.\n\n\nDiscuss Methods\n\n\nCompare the results obtained in parts (b) and (c).\nDiscuss the relative merits of the methods applied and provide a recommendation based on your findings.\n\n\nTable 5.19 for Exercise 6: Data for the Bicycle Experiment\n\nData for the bicycle experiment investigating crank rates at different speeds.\n\n\n\n\n\n\n\n\n\nCode\nTreatment (Speed, mph)\nCrank Rates\nCrank Rates\nCrank Rates\n\n\n\n\n1\n5\n15\n19\n22\n\n\n2\n10\n32\n34\n27\n\n\n3\n15\n44\n47\n44\n\n\n4\n20\n59\n61\n61\n\n\n5\n25\n75\n73\n75"
   },
   {
     "objectID": "assignments/assignment4_checking_model_assumptions.html#grading-rubric",
     "href": "assignments/assignment4_checking_model_assumptions.html#grading-rubric",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "title": "Assignment 4: Checking Model Assumptions",
     "section": "Grading Rubric",
     "text": "Grading Rubric\n\n\n\n\n\n\n\n\n\n\nExercise\nTask\nPoints Allocated\nTotal Points\nKey Learning Objective\n\n\n\n\n3\n(a) Check Equal-Variance Assumption\n15\n65\nAssess variance assumptions, identify violations, and apply suitable data transformation.\n\n\n\n(b) Confidence Interval with Transformed Data\n20\n\nCompute and interpret confidence intervals with transformed data.\n\n\n\n(c) Confidence Interval with Untransformed Data\n20\n\nUse Satterthwaite’s approximation to address unequal variances.\n\n\n\n(d) Preferred Analysis\n10\n\nEvaluate methods and justify a preferred analysis.\n\n\n6\n(a) Evaluate Error Variances\n15\n70\nAnalyze residuals and assess variance equality.\n\n\n\n(b) Transformation and Hypothesis Testing\n25\n\nApply data transformations and test for trends with appropriate significance levels.\n\n\n\n(c) Untransformed Data Hypothesis Testing\n20\n\nConduct hypothesis testing using untransformed data with unequal variance adjustments.\n\n\n\n(d) Compare Methods\n10\n\nCompare merits of different analytical approaches.\n\n\n\n\nTotal Points Available: 135"
   },
@@ -1787,56 +1787,56 @@
   {
     "objectID": "assignments/assignment5_two_factor_anova.html",
     "href": "assignments/assignment5_two_factor_anova.html",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "",
     "text": "In this assignment, you will explore the two-way complete model and its applications in experimental designs. You will analyze the effects of two factors on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al. (2019), Chapter 6.\nTotal points: 95"
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#exercise-6.2-interaction-contrast",
     "href": "assignments/assignment5_two_factor_anova.html#exercise-6.2-interaction-contrast",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "Exercise 6.2: Interaction Contrast",
     "text": "Exercise 6.2: Interaction Contrast\nVerify that the expression\n\\[\n\\tau_{ij} - \\tau_{i.} - \\tau_{.j} + \\tau_{..}\n\\]\nis an interaction contrast for the two-way complete model.\n\nWrite the list of contrast coefficients in terms of the \\(\\tau_{ij}\\)’s under the following conditions:\n\nFactor \\(A\\) has \\(a = 3\\) levels.\nFactor \\(B\\) has \\(b = 4\\) levels."
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#exercise-6.3-functions-of-parameters",
     "href": "assignments/assignment5_two_factor_anova.html#exercise-6.3-functions-of-parameters",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "Exercise 6.3: Functions of Parameters",
     "text": "Exercise 6.3: Functions of Parameters\nConsider the following functions under the two-way complete model:\n\n\\(\\{\\alpha^{*}_{1} - \\alpha^{*}_{2}\\}\\).\n\\(\\{(\\alpha \\beta)_{11} - (\\alpha \\beta)_{21} - (\\alpha \\beta)_{12} + (\\alpha \\beta)_{22}\\}\\).\n\n\nTasks\n\nVerify that these functions are estimable contrasts.\nDiscuss the meaning of each contrast for:\n\n\nPlot (d) from Figure 6.1 on page 140.\nPlot (g) from Figure 6.2 on page 141.\n\n\nFor \\(a = b = 3\\), provide:\n\n\nThe list of contrast coefficients for the parameters involved in the contrast.\nThe equivalent list of contrast coefficients in terms of the \\(\\tau_{ij}\\) parameters of the cell-means model."
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#exercise-6.7-weld-strength-experiment",
     "href": "assignments/assignment5_two_factor_anova.html#exercise-6.7-weld-strength-experiment",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "Exercise 6.7: Weld Strength Experiment",
     "text": "Exercise 6.7: Weld Strength Experiment\nThe data in Table 6.22, obtained from Anderson and McLean (1974), show the weld strength of a steel bar under varying conditions of two factors:\n\nGage bar setting: The distance traveled by the weld die during the automatic weld cycle.\nTime of welding: The total time of the automatic weld cycle.\n\n\n\n\nTime of Welding (j)\n1\n2\n3\n4\n5\n\n\n\n\nGage Bar 1\n10, 12\n13, 17\n21, 30\n18, 16\n17, 21\n\n\nGage Bar 2\n15, 19\n14, 12\n30, 38\n15, 11\n14, 12\n\n\nGage Bar 3\n10, 8\n12, 9\n10, 5\n14, 15\n19, 11\n\n\n\n\nTasks\n\nUsing the cell-means model, test the hypothesis that there is no difference in the effects of the treatment combinations on weld strength.\nWrite contrasts in terms of \\(\\tau_{ij}\\) for:\n\n\nAll pairwise comparisons.\nThe difference between gage bar setting 3 and the average of the other two.\n\n\nSuggest a strategy to calculate all intervals at an overall confidence level of at least 98%.\n\n\nCompute confidence intervals for:\n\n\n\\(\\tau_{13} - \\tau_{15}\\): The difference in true mean strengths at the 3rd and 5th welding times for the first gage bar setting.\nThe difference between gage bar setting 3 and the average of the other two gage bar settings.\n\n\nCalculate an upper 90% confidence limit for \\(\\sigma^2\\).\nDetermine the total number of observations needed if the pairwise comparison intervals in part (b) must have a maximum width of 8."
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#exercise-6.12-memory-experiment",
     "href": "assignments/assignment5_two_factor_anova.html#exercise-6.12-memory-experiment",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "Exercise 6.12: Memory Experiment",
     "text": "Exercise 6.12: Memory Experiment\nThe memory experiment investigates the effects of two factors:\n\nWord type: Fruits, nouns, and mixed types.\nType of distraction: No distraction, constant distraction, or changing distraction.\n\nThe response variable is the number of words remembered, with variance approximated by \\(30p(1-p)\\).\n\nTask\nDetermine the number of subjects required to reject the following hypotheses with a power of 0.9 at \\(\\alpha = 0.05\\):\n\n\\(H_A\\): The memorization rate is identical for the three word types.\n\\(H_B\\): The distraction types have no effect on memorization.\n\nAssume the minimum difference of interest in memorization rates is 4 words."
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#exercise-6.16-survival-experiment",
     "href": "assignments/assignment5_two_factor_anova.html#exercise-6.16-survival-experiment",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "Exercise 6.16: Survival Experiment",
     "text": "Exercise 6.16: Survival Experiment\nThe following table provides survival times (in units of 10 hours) for animals exposed to three poisons and four treatments.\n\n\n\n\n\n\n\n\n\n\nPoison/Treatment\n1\n2\n3\n4\n\n\n\n\nI\n0.31, 0.45, 0.46, 0.43\n0.82, 1.10, 0.88, 0.72\n0.43, 0.45, 0.63, 0.76\n0.45, 0.71, 0.66, 0.62\n\n\nII\n0.36, 0.29, 0.40, 0.23\n0.92, 0.61, 0.49, 1.24\n0.44, 0.35, 0.31, 0.40\n0.56, 1.02, 0.71, 0.38\n\n\nIII\n0.22, 0.21, 0.18, 0.23\n0.30, 0.37, 0.38, 0.29\n0.23, 0.25, 0.24, 0.22\n0.30, 0.36, 0.31, 0.33\n\n\n\n\nTasks\n\nVerify assumptions of the two-way complete model using the original data. Analyze the data if the assumptions are satisfied.\nTransform the data using \\(y^{-1}\\) (reciprocal). Reassess model assumptions and reanalyze the transformed data.\nCreate interaction plots for the original and transformed data. Discuss how the interaction between poison and treatment varies with each scale."
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#exercise-6.19-main-effects-model-verification",
     "href": "assignments/assignment5_two_factor_anova.html#exercise-6.19-main-effects-model-verification",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "Exercise 6.19: Main-Effects Model Verification",
     "text": "Exercise 6.19: Main-Effects Model Verification\nFor the two-way main-effects model with equal sample sizes, perform the following:\n\nVerify the computational formula for \\(SS_E\\) as given in equation (6.5.38).\nDemonstrate that \\(E[SSE] = (n - a - b + 1)\\sigma^2\\).\n\nHint: Use the formula \\(E[X^2] = \\text{Var}(X) + E[X]^2\\)."
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#summary-of-the-grades-and-rubric",
     "href": "assignments/assignment5_two_factor_anova.html#summary-of-the-grades-and-rubric",
-    "title": "Assignment 5: Two-Way Complete Model and Experimental Designs",
+    "title": "Assignment 5: Two-Factor ANOVA",
     "section": "Summary of the Grades and Rubric",
     "text": "Summary of the Grades and Rubric\n\n\n\n\n\n\n\n\n\nExercise\nTask\nPoints\nDescription\n\n\n\n\nExercise 6.2\nDerive contrast coefficients and verify interaction contrast property.\n10\n- 4 points for correct derivation of coefficients. - 3 points for verifying the interaction contrast property. - 3 points for clarity and completeness.\n\n\nExercise 6.3\nVerify estimability, interpret contrasts, and compute coefficients.\n15\n- 5 points for verifying estimability. - 5 points for interpreting contrasts in provided plots. - 5 points for accurate and clear computation of coefficients.\n\n\nExercise 6.7\nPerform hypothesis testing, compute contrasts, intervals, and variance limits.\n25\n- 5 points each for parts (a) to (e), including hypothesis testing, contrast definitions, confidence interval computations, upper confidence limits for \\(\\sigma^2\\), and sample size needs.\n\n\nExercise 6.12\nCompute sample size for given power and significance level.\n15\n- 8 points for accurate computation of sample size. - 7 points for interpretation and justification of the calculations.\n\n\nExercise 6.16\nVerify model assumptions, perform transformation, and create interaction plots.\n20\n- 7 points for verifying assumptions. - 7 points for transformation analysis. - 6 points for interaction plots and interpretation.\n\n\nExercise 6.19\nVerify \\(SS_E\\) formula and derive expected value of \\(SSE\\).\n10\n- 5 points for verifying \\(SS_E\\) computational formula. - 5 points for deriving \\(E[SSE] = (n - a - b + 1)\\sigma^2\\)."
   },
@@ -1883,60 +1883,60 @@
     "text": "4. Reaction Time Experiment\nSource: (L. Cai, T. Li, Nishant, and A. van der Kouwe, 1996)\nThis experiment investigates the effects of auditory and visual cues on the speed of response of a human subject. A personal computer presents a stimulus to the subject, and the reaction time required to press a key is monitored. The subject is warned of the forthcoming stimulus through auditory or visual cues. The study also considers different elapsed times between cue and stimulus as a factor.\nFactors and Levels:\n\nCue Stimulus: Auditory or Visual\nElapsed Time: 5, 10, or 15 seconds\n\nTreatment Combinations and Codes:\n\n1 = Auditory, 5 seconds\n2 = Auditory, 10 seconds\n3 = Auditory, 15 seconds\n4 = Visual, 5 seconds\n5 = Visual, 10 seconds\n6 = Visual, 15 seconds\n\nThe pilot experiment data, involving one subject, are shown in Table 4.4.\nHere is the recreated Table 4.4 in a structured format:\nTable 4.4: Reaction times, in seconds, for the reaction time experiment (order of collection in parentheses).\n\n\n\n\n\n\n\n\n\nTreatment Combination\nReaction Time 1 (s) (Order)\nReaction Time 2 (s) (Order)\nReaction Time 3 (s) (Order)\n\n\n\n\n1\n0.181 (18)\n0.204 (9)\n0.170 (10)\n\n\n2\n0.187 (12)\n0.167 (3)\n0.182 (5)\n\n\n3\n0.236 (17)\n0.202 (13)\n0.198 (16)\n\n\n4\n0.269 (15)\n0.257 (7)\n0.279 (14)\n\n\n5\n0.260 (11)\n0.283 (6)\n0.235 (8)\n\n\n6\n0.258 (4)\n0.256 (1)\n0.281 (2)\n\n\n\nTasks: (a) Identify Preplanned Contrasts:\n\nDetermine contrasts of interest, such as comparing auditory versus visual treatments. Specify the contrasts mathematically, including coefficients for the comparisons.\n\n\nPlot the Data:\n\n\nVisualize the reaction times using an appropriate plot (e.g., bar or line plot). Summarize what the plot reveals about the treatment effects.\n\n\nHypothesis Testing:\n\n\nTest the null hypothesis \\(H_0\\): The treatments have no effect on reaction time against the alternative \\(H_1\\): The treatments have an effect on reaction time. Include a detailed explanation of the statistical test used and the results obtained.\n\n\nSimultaneous Confidence Intervals:\n\n\nCompute simultaneous 90% confidence intervals for the preplanned contrasts using a chosen method (e.g., Tukey’s or Scheffé’s method). Interpret these intervals and state your conclusions about the treatment effects."
   },
   {
+    "objectID": "assignments/assignment3_multiple_comparisons_and_contrasts.html#grading-rubric-for-the-assignment",
+    "href": "assignments/assignment3_multiple_comparisons_and_contrasts.html#grading-rubric-for-the-assignment",
+    "title": "Assignment 3: Multiple Comparisons and Contrasts",
+    "section": "Grading Rubric for the Assignment",
+    "text": "Grading Rubric for the Assignment\n\n\n\n\n\n\n\n\n\n\nTask\nExcellent (100%)\nGood (85%)\nSatisfactory (70%)\nNeeds Improvement (50%)\n\n\n\n\n1. Buoyancy Experiment\nComplete and detailed checklist, well-justified preplanned contrasts, proper simulation and analysis in R.\nDetailed checklist but minor omissions in preplanned contrasts or R simulation.\nChecklist addressed but lacks sufficient detail or justification. Simulation and analysis incomplete.\nMajor gaps in checklist completion, no simulation, or preplanned contrasts missing.\n\n\n2. Cotton-Spinning Experiment\nAll contrasts identified clearly, and coefficients are mathematically accurate and fully explained.\nMost contrasts identified, and coefficients mostly correct. Explanation somewhat unclear.\nContrasts partially correct; coefficients missing or inaccurate. Explanation lacks detail or clarity.\nIncorrect or missing contrasts; coefficients absent or mathematically incorrect.\n\n\n3. Meat Cooking Experiment\nAll pairwise comparisons and interpretations are correct and well-presented with visualizations and context.\nMost pairwise comparisons correct, with minor errors in calculations or interpretations.\nComparisons incomplete or partially correct. Visualizations or interpretations are unclear.\nIncorrect or missing pairwise comparisons, no visualizations, or failure to interpret findings.\n\n\n4. Reaction Time Experiment\nAccurate contrasts with coefficients, clear plots, correct hypothesis testing, and well-justified confidence intervals.\nCorrect contrasts and coefficients, minor issues with plots or hypothesis testing, intervals partially correct.\nPartial contrasts or coefficients; plots unclear, hypothesis testing or intervals incomplete.\nContrasts missing or incorrect, no plots, hypothesis testing or intervals omitted or inaccurate.\n\n\n\n\nGrading Allocation\nEach question is worth 25 points, distributed as follows:\n\nCompleteness (10 points): Address all aspects of the question.\nAccuracy (10 points): Provide correct methods, calculations, and R code.\nClarity (5 points): Present results in a clear, logical, and concise manner."
+  },
+  {
     "objectID": "assignments/assignment2_completely_randomized_design.html",
     "href": "assignments/assignment2_completely_randomized_design.html",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "title": "Assignment 2: Completely Randomized Design",
     "section": "",
-    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks."
+    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks.\n\nTotal points: 100"
   },
   {
     "objectID": "assignments/assignment2_completely_randomized_design.html#instructions",
     "href": "assignments/assignment2_completely_randomized_design.html#instructions",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "title": "Assignment 2: Completely Randomized Design",
     "section": "",
-    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks."
+    "text": "Complete all questions below.\nUse the R programming language for computational problems. Include annotated R code and relevant output.\nProvide clear and concise explanations and interpretations for all tasks.\n\nTotal points: 100"
   },
   {
     "objectID": "assignments/assignment2_completely_randomized_design.html#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students",
     "href": "assignments/assignment2_completely_randomized_design.html#set-1-foundational-questions-suitable-for-undergraduate-and-graduate-students",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "title": "Assignment 2: Completely Randomized Design",
     "section": "Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)",
     "text": "Set 1: Foundational Questions (Suitable for Undergraduate and Graduate Students)\n\n1.1 Balloon Experiment\nData Source: Dean et al. (2017), Chapter 3, Exercise 12\nData Overview: The data for this experiment is provided below:\n\nBalloon inflation times for different colors\n\n\nTime Order\nCoded Color\nInflation Time (seconds)\n\n\n\n\n1\n1\n22.0\n\n\n2\n3\n24.6\n\n\n3\n1\n20.3\n\n\n4\n4\n19.8\n\n\n5\n3\n24.3\n\n\n6\n2\n22.2\n\n\n7\n2\n28.5\n\n\n8\n2\n25.7\n\n\n9\n3\n20.2\n\n\n10\n1\n19.6\n\n\n11\n2\n28.8\n\n\n12\n4\n24.0\n\n\n13\n4\n17.1\n\n\n14\n4\n19.3\n\n\n15\n3\n24.2\n\n\n16\n1\n15.8\n\n\n17\n2\n18.3\n\n\n18\n1\n17.5\n\n\n19\n4\n18.7\n\n\n20\n3\n22.9\n\n\n21\n1\n16.3\n\n\n22\n4\n14.0\n\n\n23\n4\n16.6\n\n\n24\n2\n18.1\n\n\n25\n2\n18.9\n\n\n26\n4\n16.0\n\n\n27\n2\n20.1\n\n\n28\n3\n22.5\n\n\n29\n3\n16.0\n\n\n30\n1\n19.3\n\n\n31\n1\n15.9\n\n\n32\n3\n20.3\n\n\n\nThe codes for balloon colors are as follows:\n\n1 = Pink\n2 = Yellow\n3 = Orange\n4 = Blue\n\nTasks:\n\n\nPlot inflation time versus balloon color and comment on the results.\n\n\nEstimate the mean inflation time for each balloon color and add these estimates to the plot from part (a).\n\n\nConstruct an analysis of variance (ANOVA) table and test the hypothesis that balloon color has no effect on inflation time (\\(\\alpha = 0.05\\)).\n\n\nPlot the data for each color in the order it was collected. Discuss whether the assumptions of the ANOVA model (e.g., normality, independence) appear satisfied.\n\n\nEvaluate whether the analysis in part (c) is adequate. If not, suggest improvements.\n\n\n\n\n1.2 Conceptual Question\n\nDiscuss how increasing the number of replicates affects the power of a one-way ANOVA test.\n\n\n\n1.3 Graphical Analysis\n\nCreate a boxplot of inflation times for each balloon color. Based on the plot, comment on visual evidence of differences among the treatments."
   },
   {
     "objectID": "assignments/assignment2_completely_randomized_design.html#set-2-advanced-computational-and-proof-based-questions-graduate-level",
     "href": "assignments/assignment2_completely_randomized_design.html#set-2-advanced-computational-and-proof-based-questions-graduate-level",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
+    "title": "Assignment 2: Completely Randomized Design",
     "section": "Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)",
     "text": "Set 2: Advanced Computational and Proof-Based Questions (Graduate Level)\n\n2.1 Derivation of \\(t\\)-Statistic for Contrasts in ANOVA\nData Source: Christensen (2018)., Exercise 12.7.12\nIn a one-way ANOVA, the sum of squares for error (\\(SSE\\)) divided by the population variance (\\(\\sigma^2\\)) follows a chi-squared distribution with degrees of freedom equal to \\(df_E\\):\n\\[\n\\frac{SSE}{\\sigma^2} \\sim \\chi^2(df_E),\n\\]\nand the mean square error (\\(MSE\\)) is independent of all sample means (\\(\\bar{y}_i\\)). Show that the following expression follows a \\(t\\)-distribution with \\(df_E\\) degrees of freedom:\n\\[\n\\frac{\\sum_{i=1}^a \\lambda_i \\bar{y}_i - \\sum_{i=1}^a \\lambda_i \\mu_i}{\\sqrt{MSE \\sum_{i=1}^a \\frac{\\lambda_i^2}{N_i}}} \\sim t(df_E).\n\\]\nTasks:\n\nDerive the above expression step-by-step, starting with the variance of the contrast \\(\\sum_{i=1}^a \\lambda_i \\bar{y}_i\\).\nExplain why \\(MSE\\) serves as an unbiased estimate of \\(\\sigma^2\\).\nUsing the result, construct a hypothesis test for a contrast in a one-way ANOVA and provide a practical interpretation of the result.\n\n\n\n2.2 Implications of Assumption Violations\n\nDiscuss the implications of violating the assumption of homogeneity of variances in a one-way ANOVA. Suggest two methods to address such violations.\n\n\n\n2.3 Power Analysis\n\nCalculate the sample size required for a one-way ANOVA with four groups to detect a medium effect size (\\(f = 0.25\\)) at a significance level of \\(\\alpha = 0.05\\) and a power of \\(1 - \\beta = 0.8\\)."
   },
   {
-    "objectID": "assignments/assignment2_completely_randomized_design.html#points-distribution",
-    "href": "assignments/assignment2_completely_randomized_design.html#points-distribution",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
-    "section": "Points Distribution",
-    "text": "Points Distribution\n\n\n\nTask\nPoints\n\n\n\n\nSet 1: Foundational Questions\n50\n\n\n1.1 Balloon Experiment\n30\n\n\n1.2 Conceptual Question\n10\n\n\n1.3 Graphical Analysis\n10\n\n\nSet 2: Advanced Questions\n50\n\n\n2.1 Derivation of \\(t\\)-Statistic\n20\n\n\n2.2 Implications of Assumption Violations\n10\n\n\n2.3 Power Analysis\n20\n\n\nTotal\n100"
-  },
-  {
-    "objectID": "assignments/assignment2_completely_randomized_design.html#submission-guidelines",
-    "href": "assignments/assignment2_completely_randomized_design.html#submission-guidelines",
-    "title": "Assignment 2: One-Way ANOVA Analysis",
-    "section": "Submission Guidelines:",
-    "text": "Submission Guidelines:\n\nSubmit your assignment as a Quarto document, rendered to PDF, via the course submission portal.\nInclude all R code and outputs for computational tasks.\nEnsure clarity and precision in your explanations."
+    "objectID": "assignments/assignment2_completely_randomized_design.html#grading-rubric",
+    "href": "assignments/assignment2_completely_randomized_design.html#grading-rubric",
+    "title": "Assignment 2: Completely Randomized Design",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\nSet 1: Foundational Questions\n50\n\n\n1.1 Balloon Experiment\n30\n\n\n1.2 Conceptual Question\n10\n\n\n1.3 Graphical Analysis\n10\n\n\nSet 2: Advanced Questions\n50\n\n\n2.1 Derivation of \\(t\\)-Statistic\n20\n\n\n2.2 Implications of Assumption Violations\n10\n\n\n2.3 Power Analysis\n20\n\n\nTotal\n100"
   },
   {
     "objectID": "assignments/assignment1_basics_of_experimental_design.html",
     "href": "assignments/assignment1_basics_of_experimental_design.html",
     "title": "Assignment 1: Introduction to Experimental Design",
     "section": "",
-    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nDue Date: February 13, 2025"
+    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nTotal points: 100"
   },
   {
     "objectID": "assignments/assignment1_basics_of_experimental_design.html#instructions",
     "href": "assignments/assignment1_basics_of_experimental_design.html#instructions",
     "title": "Assignment 1: Introduction to Experimental Design",
     "section": "",
-    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nDue Date: February 13, 2025"
+    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nTotal points: 100"
   },
   {
     "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-1-key-concepts-of-experimental-design",
@@ -1967,18 +1967,11 @@
     "text": "Part 4: Numerical Application\nYou are tasked with analyzing a hypothetical dataset to practice experimental design concepts. Use the following dataset where three treatments (A, B, C) are applied to five blocks (1–5). The response variable represents a numerical outcome.\n\n\n\nBlock\nTreatment A\nTreatment B\nTreatment C\n\n\n\n\n1\n10.1\n9.8\n10.2\n\n\n2\n10.5\n9.7\n10.3\n\n\n3\n10.3\n10.1\n10.4\n\n\n4\n10.4\n9.9\n10.0\n\n\n5\n10.2\n10.0\n10.1\n\n\n\n\nStatistical Model:\n\nWrite the model equation that represents the relationship between treatment and response while accounting for blocks.\n\nAnalysis:\n\nConduct a one-way ANOVA using R to test for treatment differences. Include R code and output.\n\nInterpretation:\n\nState the null and alternative hypotheses.\nSummarize the ANOVA results, including whether to reject the null hypothesis.\n\nDiagnostics:\n\nPerform residual analysis to evaluate the assumptions of ANOVA."
   },
   {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#submission-guidelines",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#submission-guidelines",
+    "objectID": "assignments/assignment1_basics_of_experimental_design.html#grading-rubric",
+    "href": "assignments/assignment1_basics_of_experimental_design.html#grading-rubric",
     "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Submission Guidelines",
-    "text": "Submission Guidelines\n\nUse the Quarto template provided.\nInclude all R code, outputs, and graphs in your submission.\nSubmit the rendered PDF through Canvas by the due date."
-  },
-  {
-    "objectID": "assignments/assignment1_basics_of_experimental_design.html#grading-criteria",
-    "href": "assignments/assignment1_basics_of_experimental_design.html#grading-criteria",
-    "title": "Assignment 1: Introduction to Experimental Design",
-    "section": "Grading Criteria",
-    "text": "Grading Criteria\n\nConceptual Understanding (30%): Accuracy and clarity in explaining experimental design concepts.\nApplication (30%): Correct application of experimental design principles to the real-world scenario and hypothetical data.\nStatistical Analysis (30%): Accuracy and completeness of ANOVA and diagnostics.\nPresentation (10%): Organization, formatting, and clarity of submission.\n\nGood luck!"
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\n\n\n\n\n\nSection\nPoints\nCriteria\n\n\n\n\nExperiment Objectives\n10\n5 points for accurately listing two objectives, 5 points for providing correct examples.\n\n\nObservational Studies vs. Experiments\n15\n8 points for correctly explaining differences, 7 points for a clear and relevant example.\n\n\nDesign Your Own Experiment\n30\n10 points each for objectives, sources of variation, and assignment rule. Clear reasoning required.\n\n\nExperiments 1 and 7\n20\n10 points per experiment: 5 for objectives, 5 for sources of variation and treatment factors.\n\n\nExperiment 4\n25\n10 points for listing sources of variation, 10 for categorization and controllability, 5 for blocking.\n\n\nTotal\n100"
   },
   {
     "objectID": "contents.html",
