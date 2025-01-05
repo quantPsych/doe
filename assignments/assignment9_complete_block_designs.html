@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>assignment9_complete_block_designs – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 9: Complete Block Designs – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,7 +67,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 9: Complete Block Designs – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
@@ -132,19 +133,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Assignment 9: Complete Block Designs</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">20-Dec-2024</p>
+        <p class="date">05-Jan-2025</p>
       </div>
     </div>
     
@@ -155,18 +156,480 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#effervescent-experiment" id="toc-effervescent-experiment" class="nav-link" data-scroll-target="#effervescent-experiment">Effervescent Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  </ul></li>
+  <li><a href="#insole-cushion-experiment" id="toc-insole-cushion-experiment" class="nav-link" data-scroll-target="#insole-cushion-experiment">Insole Cushion Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1">Questions</a></li>
+  </ul></li>
+  <li><a href="#yeast-experiment" id="toc-yeast-experiment" class="nav-link" data-scroll-target="#yeast-experiment">Yeast Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2">Questions</a></li>
+  </ul></li>
+  <li><a href="#grading-allocation" id="toc-grading-allocation" class="nav-link" data-scroll-target="#grading-allocation">Grading Allocation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ol type="1">
+<li><strong>Objective</strong>: Analyze complete block designs, including block-treatment interactions, post-hoc tests, and trend analyses.</li>
+<li>Use R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.</li>
+<li>Clearly explain your analysis process for full credit.</li>
+<li>Submit your assignment as a single PDF file.</li>
+<li><strong>Total Points</strong>: 100</li>
+</ol>
+</section>
+<section id="effervescent-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="effervescent-experiment">Effervescent Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 10, Exercise 13</strong></p>
+<p>The effervescent experiment, conducted by B. Bailey, J. Lewis, J. Speiser, Z. Thomas, and S. White (2011), aimed to compare the dissolving times of two brands of cold medicine tablets in different water temperatures.</p>
+<ul>
+<li><strong>Factors and Levels</strong>:
+<ul>
+<li>Brand: 1 (Name Brand), 2 (Store Brand)</li>
+<li>Water Temperature: 1 (6°C), 2 (23°C), 3 (40°C)</li>
+</ul></li>
+<li><strong>Design</strong>: A complete block design with:
+<ul>
+<li>Blocks:
+<ul>
+<li>Block I: Stirred liquid at 350 RPM using a magnetic stirring plate.</li>
+<li>Block II: Unstirred liquid.</li>
+</ul></li>
+<li>Observations: Four per treatment combination, with a total of six treatment combinations.</li>
+<li>Each observation represents an average of times measured by four experimenters.</li>
+</ul></li>
+<li><strong>Response Variable</strong>: Dissolving time in seconds.</li>
+</ul>
+<p>The data is provided in Table 10.26.</p>
+<table class="table">
+<caption>Dissolving time for the effervescent experiment (Order of observation in parentheses)</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Treatment Combination</strong></th>
+<th><strong>Block I (Stirred)</strong></th>
+<th><strong>Block II (Unstirred)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>75.525 (8), 70.325 (9), 69.925 (17), 69.800 (23)</td>
+<td>83.475 (34), 86.800 (41), 83.750 (44), 79.575 (46)</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>68.125 (3), 47.525 (4), 61.475 (6), 58.625 (14)</td>
+<td>71.759 (36), 70.825 (37), 73.925 (42), 71.550 (48)</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>44.825 (7), 36.200 (10), 39.350 (11), 37.425 (13)</td>
+<td>51.975 (28), 50.100 (29), 51.225 (33), 53.700 (47)</td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td>78.350 (1), 76.050 (12), 78.425 (15), 71.525 (16)</td>
+<td>92.725 (31), 77.957 (35), 85.425 (39), 87.333 (45)</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>40.575 (2), 40.000 (5), 39.500 (20), 40.400 (22)</td>
+<td>42.275 (30), 44.425 (32), 42.475 (38), 44.300 (42)</td>
+</tr>
+<tr class="even">
+<td>23</td>
+<td>27.450 (18), 26.600 (19), 24.950 (21), 26.325 (24)</td>
+<td>25.400 (25), 26.333 (26), 25.875 (27), 26.650 (40)</td>
+</tr>
+</tbody>
+</table>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<ol type="a">
+<li><p><strong>Plot and Explore the Data</strong>: Create appropriate plots to visualize the dissolving time for each treatment combination, such as interaction plots, boxplots, or scatterplots. Comment on any patterns, anomalies, or interesting features observed in the data.</p></li>
+<li><p><strong>Fit a Block-Treatment Model</strong>:</p></li>
+</ol>
+<ul>
+<li>Fit a linear model with block and treatment factors.</li>
+<li>Examine residuals to check assumptions, including outlier detection, variance equality, and normality of residuals.</li>
+<li>Report and interpret results.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Analyze Temperature Effects</strong>:</li>
+</ol>
+<ul>
+<li>Perform pairwise comparisons between the three temperature levels using appropriate post-hoc tests.</li>
+<li>Test for linear and quadratic trends in temperature effects on dissolving time, assuming these trends were pre-planned in the experimental design.</li>
+</ul>
+</section>
+</section>
+<section id="insole-cushion-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="insole-cushion-experiment">Insole Cushion Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 10, Exercise 15</strong></p>
+<p>This experiment, conducted in 1995 by V. Agresti, S. Decker, T. Karakostas, E. Patterson, and S. Schwartz, investigated how different insole cushions and brands affect the vertical ground reaction force.</p>
+<ul>
+<li><strong>Factors and Levels</strong>:
+<ul>
+<li>Cushion Type (C): 1 (Regular), 2 (Heel)</li>
+<li>Brand (D): 1 (Name Brand), 2 (Store Brand)</li>
+</ul></li>
+<li><strong>Design</strong>:
+<ul>
+<li>Single participant, alternating between dominant (right) and non-dominant (left) legs over two blocks (days).</li>
+<li>Each of the four treatment combinations measured five times in randomized order per block.</li>
+</ul></li>
+<li><strong>Response Variable</strong>: Maximum deceleration of the vertical ground reaction force (in Newtons).</li>
+</ul>
+<p>The data is provided in Table 10.28.</p>
+<table class="table">
+<caption>Data for the insole cushion experiment (Order of observation in parentheses)</caption>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>C</strong></th>
+<th><strong>D</strong></th>
+<th><strong>Response in Newtons (Order)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><strong>Block I (Right Leg)</strong></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+<td>899.99 (3), 910.81 (5), 927.79 (10), 888.77 (11), 911.93 (16)</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>924.92 (2), 900.10 (6), 923.55 (12), 891.56 (17), 885.73 (20)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>888.09 (4), 954.11 (7), 937.41 (9), 911.85 (14), 908.41 (18)</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+<td>884.01 (1), 918.36 (8), 880.23 (13), 891.16 (15), 917.16 (19)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><strong>Block II (Left Leg)</strong></td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>852.94 (22), 866.28 (27), 886.65 (28), 851.14 (33), 869.80 (34)</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>2</td>
+<td>882.95 (21), 865.58 (24), 868.15 (25), 893.82 (37), 875.98 (38)</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1</td>
+<td>920.93 (26), 880.26 (31), 897.10 (35), 893.78 (39), 885.80 (40)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>872.50 (23), 892.76 (29), 895.93 (30), 899.44 (32), 912.00 (36)</td>
+</tr>
+</tbody>
+</table>
+<section id="questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="questions-1">Questions</h3>
+<ol type="a">
+<li><strong>Fit a Model with Interaction</strong>:</li>
+</ol>
+<ul>
+<li>Include block-treatment interactions in the ANOVA model.</li>
+<li>Create and interpret an analysis of variance (ANOVA) table.</li>
+</ul>
+<ol start="2" type="a">
+<li><strong>Generate Interaction Plots</strong>:</li>
+</ol>
+<ul>
+<li>Create plots for:
+<ul>
+<li>Cushion (C) × Brand (D) interaction.</li>
+<li>Cushion (C) × Block interaction.</li>
+<li>Brand (D) × Block interaction.</li>
+<li>Treatment combination × Block interaction.</li>
+</ul></li>
+<li>Identify and describe contrasts of interest for further analysis.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Confidence Intervals</strong>:</li>
+</ol>
+<ul>
+<li>Compute confidence intervals for means and contrasts identified in (b). Use these intervals to validate observed differences or interactions.</li>
+</ul>
+<ol start="4" type="a">
+<li><strong>Re-examine the Data</strong>:</li>
+</ol>
+<ul>
+<li>Check assumptions, focusing on the two potential outliers.</li>
+<li>Re-analyze the data excluding one or both outliers.</li>
+<li>Discuss whether the conclusions differ between analyses and justify which analysis should be reported.</li>
+</ul>
+</section>
+</section>
+<section id="yeast-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="yeast-experiment">Yeast Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 10, Exercise 16</strong></p>
+<p>This experiment explored the effects of yeast type, initial temperature, and water bath temperature on the rate of yeast rising.</p>
+<ul>
+<li><strong>Factors and Levels</strong>:
+<ul>
+<li>Initial Water Temperature (C): 100°F, 115°F, 130°F</li>
+<li>Yeast Type (D): 1 (Rapid Rise), 2 (Regular)</li>
+<li>Bath Temperature (E): 70°F, 85°F</li>
+</ul></li>
+<li><strong>Design</strong>:
+<ul>
+<li>Three blocks, with each experimenter-team forming a block.</li>
+<li>Each treatment combination observed twice per block.</li>
+</ul></li>
+<li><strong>Response Variable</strong>: Percentage gain in height after 15 minutes.</li>
+</ul>
+<p>The data is provided in Table 10.29.</p>
+<table class="table">
+<caption>Data for the yeast experiment (percentage rise). Treatment combinations are the levels of (water temperature, yeast, bath temperature)</caption>
+<thead>
+<tr class="header">
+<th><strong>Treatment Combination</strong></th>
+<th><strong>Block 1</strong></th>
+<th><strong>Block 2</strong></th>
+<th><strong>Block 3</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>111</td>
+<td>8.2, 2.7</td>
+<td>10.9, 1.8</td>
+<td>11.4, 4.8</td>
+</tr>
+<tr class="even">
+<td>112</td>
+<td>30.0, 39.8</td>
+<td>31.8, 36.0</td>
+<td>42.4, 20.0</td>
+</tr>
+<tr class="odd">
+<td>121</td>
+<td>12.6, 17.7</td>
+<td>3.5, 3.4</td>
+<td>3.4, 8.5</td>
+</tr>
+<tr class="even">
+<td>122</td>
+<td>64.7, 73.9</td>
+<td>42.0, 32.6</td>
+<td>34.5, 30.0</td>
+</tr>
+<tr class="odd">
+<td>211</td>
+<td>18.1, 5.4</td>
+<td>12.3, 18.3</td>
+<td>8.5, 8.0</td>
+</tr>
+<tr class="even">
+<td>212</td>
+<td>63.5, 66.3</td>
+<td>23.7, 57.5</td>
+<td>30.6, 45.3</td>
+</tr>
+<tr class="odd">
+<td>221</td>
+<td>4.2, 12.2</td>
+<td>7.7, 8.3</td>
+<td>6.0, 8.2</td>
+</tr>
+<tr class="even">
+<td>222</td>
+<td>96.8, 71.1</td>
+<td>34.1, 40.9</td>
+<td>49.3, 46.0</td>
+</tr>
+<tr class="odd">
+<td>311</td>
+<td>44.4, 16.4</td>
+<td>5.0, 4.8</td>
+<td>8.5, 3.3</td>
+</tr>
+<tr class="even">
+<td>312</td>
+<td>58.2, 63.3</td>
+<td>29.2, 27.8</td>
+<td>37.5, 18.2</td>
+</tr>
+<tr class="odd">
+<td>321</td>
+<td>19.8, 9.4</td>
+<td>4.8, 6.7</td>
+<td>6.4, 12.9</td>
+</tr>
+<tr class="even">
+<td>322</td>
+<td>99.7, 92.3</td>
+<td>53.2, 58.9</td>
+<td>43.9, 73.7</td>
+</tr>
+</tbody>
+</table>
+<section id="questions-2" class="level3">
+<h3 class="anchored" data-anchor-id="questions-2">Questions</h3>
+<ol type="a">
+<li><p><strong>Randomization Justification</strong>: Explain why treatment combinations should be randomized within each block before measurements.</p></li>
+<li><p><strong>Residual Normality</strong>:</p></li>
+</ol>
+<ul>
+<li>Discuss the general importance of checking residual normality.</li>
+<li>Explain its relevance to this experiment’s context.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Sample Size for Precision</strong>:</li>
+</ol>
+<ul>
+<li>Calculate the minimum number of observations per treatment combination required to achieve a 99% confidence interval with a half-width of ≤5%. Use an error variance estimate of 9 percent².</li>
+</ul>
+<ol start="4" type="a">
+<li><strong>ANOVA Table</strong>:</li>
+</ol>
+<ul>
+<li>Construct an ANOVA table for the data.</li>
+<li>Discuss the significance of main effects, interactions, and their implications.</li>
+</ul>
+<ol start="5" type="a">
+<li><strong>Visualize Treatment Effects</strong>:</li>
+</ol>
+<ul>
+<li>Create two plots to illustrate the main points about treatment effects. Justify the choice of these plots.</li>
+</ul>
+<ol start="6" type="a">
+<li><strong>Trend Analysis</strong>:</li>
+</ol>
+<ul>
+<li>Test for a significant linear trend in percentage height gain as initial water temperature increases. Use a significance level of 0.01 and state conclusions.</li>
+</ul>
+</section>
+</section>
+<section id="grading-allocation" class="level2">
+<h2 class="anchored" data-anchor-id="grading-allocation">Grading Allocation</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Exercise Title</strong></th>
+<th><strong>Part</strong></th>
+<th><strong>Grade Weight (%)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Effervescent Experiment</td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(b)</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(c)</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>Insole Cushion Experiment</td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(b)</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(c)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(d)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Yeast Experiment</td>
+<td>(a)</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(b)</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(c)</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(d)</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(e)</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(f)</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
