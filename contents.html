@@ -154,7 +154,30 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
+  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a>
+  <ul class="collapse">
+  <li><a href="#r-data-files-for-design-and-analysis-of-experiments" id="toc-r-data-files-for-design-and-analysis-of-experiments" class="nav-link" data-scroll-target="#r-data-files-for-design-and-analysis-of-experiments">R Data Files for <em>Design and Analysis of Experiments</em></a></li>
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a">A</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b">B</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c">C</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d">D</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e">E</a></li>
+  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f">F</a></li>
+  <li><a href="#g" id="toc-g" class="nav-link" data-scroll-target="#g">G</a></li>
+  <li><a href="#h" id="toc-h" class="nav-link" data-scroll-target="#h">H</a></li>
+  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i">I</a></li>
+  <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l">L</a></li>
+  <li><a href="#m" id="toc-m" class="nav-link" data-scroll-target="#m">M</a></li>
+  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n">N</a></li>
+  <li><a href="#o" id="toc-o" class="nav-link" data-scroll-target="#o">O</a></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p">P</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
+  <li><a href="#s" id="toc-s" class="nav-link" data-scroll-target="#s">S</a></li>
+  <li><a href="#t" id="toc-t" class="nav-link" data-scroll-target="#t">T</a></li>
+  <li><a href="#u" id="toc-u" class="nav-link" data-scroll-target="#u">U</a></li>
+  <li><a href="#v" id="toc-v" class="nav-link" data-scroll-target="#v">V</a></li>
+  <li><a href="#w" id="toc-w" class="nav-link" data-scroll-target="#w">W</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -238,178 +261,445 @@ ul.task-list li input[type="checkbox"] {
 <section id="r-code-and-data-files-from-the-textbook" class="level1">
 <h1>R Code and Data Files from the Textbook</h1>
 <p>The following table lists the R program files used in the textbook, along with the corresponding data files. Here is a link to the <a href="http://www.wright.edu/~dan.voss/DeanVossDraguljic.html">textbook website</a> for more information.</p>
-<p><strong>R program files</strong></p>
+<!-- **R program files**
+
+| Chapter  | Experiment                  | [R Code File](#r-code-file)                          | [Data File](#data-file)                                    | Data Set Description                     | Table/Details     | Page(s)     | Section             |
+| -------- | --------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------- | ----------------- | ----------- | ------------------- |
+| Chap. 3  | Randomization Procedure     | [randomize.r](code/dean2017/randomize.r)             | -                                                          | Randomization demonstration data         | (in text)         | pp. 59-60   | Sect. 3.9.1         |
+|          | Soap                        | [soap.r](code/dean2017/soap.r)                       | [soap.txt](data/dean2017/soap.txt)                         | Soap-making process data                 | Tables 3.10, 3.11 | pp. 60, 63  | Sects. 3.9.2, 3.9.3 |
+| Chap. 4  | Battery Experiment          | [battery.r](code/dean2017/battery.r)                 | [battery.txt](data/dean2017/battery.txt)                   | Battery life experiment data             | Table 4.2         | p. 97       | Sect. 4.7           |
+| Chap. 5  | Mung Bean Experiment        | [mungbean.r](code/dean2017/mungbean.r)               | [mungbean.txt](data/dean2017/mungbean.txt)                 | Mung bean growth experiment data         | Table 5.11        | p. 126      | Sect. 5.9.1         |
+|          |                             | [mungbean2.r](code/dean2017/mungbean2.r)             | [mungbean.txt](data/dean2017/mungbean.txt)                 | Mung bean growth experiment (extended)   | Table 5.12        | p. 128      | Sect. 5.9.2         |
+| Chap. 6  | Reaction Time               | [reactiontime.r](code/dean2017/reactiontime.r)       | [reaction.time.txt](data/dean2017/reaction.time.txt)       | Human reaction time data                 | Table 6.15        | p. 185      | Sect. 6.9           |
+| Chap. 7  | Drill Advance               | [drilladvance.r](code/dean2017/drilladvance.r)       | [drill.advance.txt](data/dean2017/drill.advance.txt)       | Drill efficiency data                    | Table 7.12        | p. 232      | Sect. 7.7.1         |
+| Chap. 8  | Bean Soaking                | [beansoaking.r](code/dean2017/beansoaking.r)         | [bean.txt](data/dean2017/bean.txt)                         | Bean soaking time and weight data        | Table 8.10        | p. 278      | Sect. 8.10          |
+| Chap. 9  | Balloon Experiment          | [balloon.r](code/dean2017/balloon.r)                 | [balloon.txt](data/dean2017/balloon.txt)                   | Balloon pressure and volume data         | Table 9.6         | p. 300      | Sect. 9.7           |
+| Chap. 10 | Cotton Spinning             | [cottonspinning.r](code/dean2017/cottonspinning.r)   | [cotton.spinning.txt](data/dean2017/cotton.spinning.txt)   | Cotton spinning machine performance data | Tables 10.14-17   | pp. 332-336 | Sect. 10.10         |
+| Chap. 12 | Exercise Bicycle            | [exercisebicycle.r](code/dean2017/exercisebicycle.r) | [exercise.bicycle.txt](data/dean2017/exercise.bicycle.txt) | Exercise bicycle performance data        | Table 12.12       | p. 420      | Sect. 12.9          |
+| Chap. 13 | Coil                        | [coil.r](code/dean2017/coil.r)                       | [coil.txt](data/dean2017/coil.txt)                         | Electrical coil properties data          | Table 13.21       | p. 463      | Sect. 13.12         |
+| Chap. 14 | Dye Experiment              | [dye.r](code/dean2017/dye.r)                         | [dye2.txt](data/dean2017/dye2.txt)                         | Dye color intensity experiment data      | Table 14.17       | p. 490      | Sect. 14.6          |
+| Chap. 15 | Sludge                      | [sludge.r](code/dean2017/sludge.r)                   | [sludge.txt](data/dean2017/sludge.txt)                     | Sludge sample chemical analysis data     | Tables 15.45-46   | pp. 544-545 | Sect. 15.10.1       |
+| Chap. 16 | Acid Copper Pattern Plating | [copper.r](code/dean2017/copper.r)                   | [copper.txt](data/dean2017/copper.txt)                     | Copper plating pattern performance data  | Tables 16.17-18   | pp. 602-603 | Sect. 16.8.1        |
+| Chap. 17 | Clean Wool                  | [cleanwool.r](code/dean2017/cleanwool.r)             | [clean.wool.txt](data/dean2017/clean.wool.txt)             | Wool cleaning efficiency data            | Table 17.15       | p. 661      | Sect. 17.11.1       |
+| Chap. 18 | Voltage                     | [voltage.r](code/dean2017/voltage.r)                 | [voltage.txt](data/dean2017/voltage.txt)                   | Voltage readings from electrical systems | Table 18.8        | p. 693      | Sect. 18.6.2        |
+| Chap. 19 | Oats                        | [oats.r](code/dean2017/oats.r)                       | [oats.txt](data/dean2017/oats.txt)                         | Oats growth under varying conditions     | Tables 19.22-23   | pp. 746-747 | Sect. 19.9.1        |
+ -->
 <table class="table">
 <thead>
 <tr class="header">
-<th>Chapter</th>
-<th>Experiment</th>
-<th>Program</th>
-<th>Table</th>
-<th>Page(s)</th>
-<th>Location</th>
-<th>Data File</th>
+<th><strong>R Code</strong></th>
+<th><strong>Data File</strong></th>
+<th><strong>Chapter and Problems</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Chap. 3</strong></td>
-<td>Startup Code</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/startup.r">startup.r</a></td>
-<td>(In text)</td>
-<td>p.&nbsp;58</td>
-<td>Sect. 3.9</td>
+<td><a href="code/dean2017/startup.r">startup.r</a></td>
 <td></td>
+<td>Chapter 3: Sect. 3.9, starting R code for basic setup</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>Randomizing</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/randomize.r">randomize.r</a></td>
-<td>(In text)</td>
-<td>pp.&nbsp;59–60</td>
-<td>Sect. 3.9.1</td>
-<td></td>
+<td><a href="code/dean2017/soap.r">soap.r</a></td>
+<td><a href="data/dean2017/soap.txt">soap.txt</a></td>
+<td>Chapter 3: Sect. 3.9.2, soap randomization study</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>Soap Example</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/soap.r">soap.r</a></td>
-<td>Table 3.10, Table 3.11</td>
-<td>pp.&nbsp;60, 63</td>
-<td>Sect. 3.9.2, Sect. 3.9.3</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/soap.txt">soap.txt</a></td>
+<td><a href="code/dean2017/soap2.r">soap2.r</a></td>
+<td><a href="data/dean2017/soap.txt">soap.txt</a></td>
+<td>Chapter 3: Sect. 3.9.4, follow-up soap analysis</td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/soap2.r">soap2.r</a></td>
-<td>Table 3.12</td>
-<td>p.&nbsp;64</td>
-<td>Sect. 3.9.4</td>
-<td></td>
+<td><a href="code/dean2017/battery.r">battery.r</a></td>
+<td><a href="data/dean2017/battery.txt">battery.txt</a></td>
+<td>Chapter 4: Sect. 4.7, battery example for confidence intervals</td>
 </tr>
 <tr class="odd">
-<td><strong>Chap. 4</strong></td>
-<td>Battery Test</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/battery.r">battery.r</a></td>
-<td>Table 4.2</td>
-<td>p.&nbsp;97</td>
-<td>Sect. 4.7</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/battery.txt">battery.txt</a></td>
+<td><a href="code/dean2017/mungbean.r">mungbean.r</a></td>
+<td><a href="data/dean2017/mungbean.txt">mungbean.txt</a></td>
+<td>Chapter 5: Sect. 5.9.1, mung bean experiment</td>
 </tr>
 <tr class="even">
-<td><strong>Chap. 5</strong></td>
-<td>Mung Bean Example</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/mungbean.r">mungbean.r</a></td>
-<td>Table 5.11</td>
-<td>p.&nbsp;126</td>
-<td>Sect. 5.9.1</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/mungbean.txt">mungbean.txt</a></td>
+<td><a href="code/dean2017/mungbean2.r">mungbean2.r</a></td>
+<td><a href="data/dean2017/mungbean.txt">mungbean.txt</a></td>
+<td>Chapter 5: Sect. 5.9.2, continuation of mung bean analysis</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/mungbean2.r">mungbean2.r</a></td>
-<td>Table 5.12</td>
-<td>p.&nbsp;128</td>
-<td>Sect. 5.9.2</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/mungbean.txt">mungbean.txt</a></td>
+<td><a href="code/dean2017/trout.r">trout.r</a></td>
+<td><a href="data/dean2017/trout.txt">trout.txt</a></td>
+<td>Chapter 5: Sect. 5.9.3, trout multiple comparisons</td>
 </tr>
 <tr class="even">
+<td><a href="code/dean2017/GamesHowell.r">GamesHowell.r</a></td>
 <td></td>
-<td>Trout Example</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/trout.r">trout.r</a></td>
-<td>Table 5.13</td>
-<td>p.&nbsp;130</td>
-<td>Sect. 5.9.3</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/trout.txt">trout.txt</a></td>
+<td>Chapter 5: Sect. 5.9.3.1, related to multiple comparisons</td>
 </tr>
 <tr class="odd">
+<td><a href="code/dean2017/reactiontime.r">reactiontime.r</a></td>
+<td><a href="data/dean2017/reaction.time.txt">reaction.time.txt</a></td>
+<td>Chapter 6: Sect. 6.9, reaction time contrasts</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/reactiontime2.r">reactiontime2.r</a></td>
+<td><a href="data/dean2017/reaction.time.txt">reaction.time.txt</a></td>
+<td>Chapter 6: Sect. 6.9.3, further reaction time analysis</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/airvelocity.r">airvelocity.r</a></td>
+<td><a href="data/dean2017/air.velocity.txt">air.velocity.txt</a></td>
+<td>Chapter 6: Sect. 6.9.4, air velocity contrasts example</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/drilladvance.r">drilladvance.r</a></td>
+<td><a href="data/dean2017/drill.advance.txt">drill.advance.txt</a></td>
+<td>Chapter 7: Sect. 7.7.1, drill advance example</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/drilladvance2.r">drilladvance2.r</a></td>
+<td><a href="data/dean2017/drill.advance.txt">drill.advance.txt</a></td>
+<td>Chapter 7: Sect. 7.7.2, follow-up to drill advance study</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/railweld.r">railweld.r</a></td>
+<td><a href="data/dean2017/rail.weld.txt">rail.weld.txt</a></td>
+<td>Chapter 7: Sect. 7.7.3, rail weld strength study</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/beansoaking.r">beansoaking.r</a></td>
+<td><a href="data/dean2017/bean.txt">bean.txt</a></td>
+<td>Chapter 8: Sect. 8.10, bean soaking experiment</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/balloon.r">balloon.r</a></td>
+<td><a href="data/dean2017/balloon.txt">balloon.txt</a></td>
+<td>Chapter 9: Sect. 9.7, balloon experiment to illustrate analysis of covariance</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/cottonspinning.r">cottonspinning.r</a></td>
+<td><a href="data/dean2017/cotton.spinning.txt">cotton.spinning.txt</a></td>
+<td>Chapter 10: Sect. 10.10, cotton spinning example for randomized block designs</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/plasma-day1.r">plasma-day1.r</a></td>
+<td><a href="data/dean2017/plasma.txt">plasma.txt</a></td>
+<td>Chapter 11: Sect. 11.9.2–3, plasma study for block designs</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/detergent.r">detergent.r</a></td>
+<td><a href="data/dean2017/detergent.txt">detergent.txt</a></td>
+<td>Chapter 11: Sect. 11.9.2, detergent optimization experiment</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/exercisebicycle.r">exercisebicycle.r</a></td>
+<td><a href="data/dean2017/exercise.bicycle.txt">exercise.bicycle.txt</a></td>
+<td>Chapter 12: Sect. 12.9, exercise bicycle example for row–column designs</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/exercisebicycle2.r">exercisebicycle2.r</a></td>
+<td><a href="data/dean2017/exercise.bicycle.txt">exercise.bicycle.txt</a></td>
+<td>Chapter 12: Sect. 12.9.2, advanced row–column design example</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/coil.r">coil.r</a></td>
+<td><a href="data/dean2017/coil.txt">coil.txt</a></td>
+<td>Chapter 13: Sect. 13.12, coil example</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/dye.r">dye.r</a></td>
+<td><a href="data/dean2017/dye2.txt">dye2.txt</a></td>
+<td>Chapter 14: Sect. 14.6, dye application study</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/sludge.r">sludge.r</a></td>
+<td><a href="data/dean2017/sludge.txt">sludge.txt</a></td>
+<td>Chapter 15: Sect. 15.10.1, sludge experiment</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/inclinometer.r">inclinometer.r</a></td>
+<td><a href="data/dean2017/inclinometer.product.txt">inclinometer.product.txt</a></td>
+<td>Chapter 15: Sect. 15.10.2, inclinometer product experiment</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/copper.r">copper.r</a></td>
+<td><a href="data/dean2017/copper.txt">copper.txt</a></td>
+<td>Chapter 16: Sect. 16.8.1, acid copper pattern plating study</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/PAH.r">PAH.r</a></td>
+<td><a href="data/dean2017/pah.txt">pah.txt</a></td>
+<td>Chapter 16: Sect. 16.8.2, PAH recovery example</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/RSMdesigns.r">RSMdesigns.r</a></td>
 <td></td>
-<td>Games-Howell</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/GamesHowell.r">GamesHowell.r</a></td>
-<td>Table 5.14</td>
-<td>p.&nbsp;132</td>
-<td>Sect. 5.9.3.1</td>
+<td>Chapter 16: Sect. 16.8.3, generating response surface designs</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/cleanwool.r">cleanwool.r</a></td>
+<td><a href="data/dean2017/clean.wool.txt">clean.wool.txt</a></td>
+<td>Chapter 17: Sect. 17.11.1, clean wool study</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/tempr.r">tempr.r</a></td>
+<td><a href="data/dean2017/temperature.txt">temperature.txt</a></td>
+<td>Chapter 17: Sect. 17.11.2, temperature effects study</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/icecream.r">icecream.r</a></td>
+<td><a href="data/dean2017/ice.cream.txt">ice.cream.txt</a></td>
+<td>Chapter 17: Sect. 17.11.3, ice cream study</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/voltage.r">voltage.r</a></td>
+<td><a href="data/dean2017/voltage.txt">voltage.txt</a></td>
+<td>Chapter 18: Sect. 18.6.2, voltage nested effects</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/voltage2.r">voltage2.r</a></td>
+<td><a href="data/dean2017/voltage.txt">voltage.txt</a></td>
+<td>Chapter 18: Sect. 18.6.3, further analysis of voltage nested effects</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/oats.r">oats.r</a></td>
+<td><a href="data/dean2017/oats.txt">oats.txt</a></td>
+<td>Chapter 19: Sect. 19.9.1, oats experiment</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/UAV.r">UAV.r</a></td>
+<td><a href="data/dean2017/uav.txt">uav.txt</a></td>
+<td>Chapter 19: Sect. 19.9.2, unmanned aerial vehicle study</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/UAV3.r">UAV3.r</a></td>
+<td><a href="data/dean2017/uav3.txt">uav3.txt</a></td>
+<td>Chapter 19: Sect. 19.9.3, UAV switch study</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/oats2.r">oats2.r</a></td>
+<td><a href="data/dean2017/oats.txt">oats.txt</a></td>
+<td>Chapter 19: Sect. 19.9.4, follow-up oats analysis</td>
+</tr>
+<tr class="even">
+<td><a href="code/dean2017/MCFS71.r">MCFS71.r</a></td>
+<td><a href="data/dean2017/MCFS71.txt">MCFS71.txt</a></td>
+<td>Chapter 19: Sect. 19.9.5, mobile computing field study</td>
+</tr>
+<tr class="odd">
+<td><a href="code/dean2017/maximinLHD.r">maximinLHD.r</a></td>
 <td></td>
+<td>Chapter 20: Sect. 20.7.1, finding approximate maximin Latin hypercube designs</td>
 </tr>
 <tr class="even">
-<td><strong>Chap. 6</strong></td>
-<td>Reaction Time</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/reactiontime.r">reactiontime.r</a></td>
-<td>Table 6.15</td>
-<td>p.&nbsp;185</td>
-<td>Sect. 6.9</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/reaction.time.txt">reaction.time.txt</a></td>
-</tr>
-<tr class="odd">
-<td><strong>Chap. 7</strong></td>
-<td>Drill Advance</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/drilladvance.r">drilladvance.r</a></td>
-<td>Table 7.12</td>
-<td>p.&nbsp;232</td>
-<td>Sect. 7.7.1</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/drill.advance.txt">drill.advance.txt</a></td>
-</tr>
-<tr class="even">
-<td><strong>Chap. 9</strong></td>
-<td>Balloon</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/balloon.r">balloon.r</a></td>
-<td>Table 9.6</td>
-<td>p.&nbsp;300</td>
-<td>Sect. 9.7</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/heartlungpump.txt">balloon.txt</a></td>
-</tr>
-<tr class="odd">
-<td><strong>Chap. 10</strong></td>
-<td>Cotton Spinning</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/cottonspinning.r">cottonspinning.r</a></td>
-<td>Tbls 10.14–17</td>
-<td>pp.&nbsp;332–336</td>
-<td>Sect. 10.10</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/cotton.spinning.txt">cotton.spinning.txt</a></td>
-</tr>
-<tr class="even">
-<td><strong>Chap. 12</strong></td>
-<td>Exercise Bicycle</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/exercisebicycle.r">exercisebicycle.r</a></td>
-<td>Table 12.12</td>
-<td>p.&nbsp;420</td>
-<td>Sect. 12.9</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/exercise.bicycle.txt">exercise.bicycle.txt</a></td>
-</tr>
-<tr class="odd">
-<td><strong>Chap. 14</strong></td>
-<td>Dye</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/dye.r">dye.r</a></td>
-<td>Table 14.17</td>
-<td>p.&nbsp;490</td>
-<td>Sect. 14.6</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/dye2.txt">dye2.txt</a></td>
-</tr>
-<tr class="even">
-<td><strong>Chap. 16</strong></td>
-<td>Acid Copper Plating</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/copper.r">copper.r</a></td>
-<td>Tbls 16.17–18</td>
-<td>pp.&nbsp;602–603</td>
-<td>Sect. 16.8.1</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/copper.txt">copper.txt</a></td>
-</tr>
-<tr class="odd">
-<td><strong>Chap. 18</strong></td>
-<td>Voltage</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/voltage.r">voltage.r</a></td>
-<td>Table 18.8</td>
-<td>p.&nbsp;693</td>
-<td>Sect. 18.6.2</td>
-<td><a href="http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/voltage.txt">voltage.txt</a></td>
+<td><a href="code/dean2017/neuron.r">neuron.r</a></td>
+<td><a href="data/dean2017/neuron.txt">neuron.txt</a></td>
+<td>Chapter 20: Sect. 20.7.2, neuron experiment</td>
 </tr>
 </tbody>
 </table>
-<p>© 2025 Dr.&nbsp;Davood Tofighi | <strong>STAT 454/545</strong> | University of New Mexico</p>
+<section id="r-data-files-for-design-and-analysis-of-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="r-data-files-for-design-and-analysis-of-experiments">R Data Files for <em>Design and Analysis of Experiments</em></h2>
+<p>These data files correspond to the book <em>Design and Analysis of Experiments</em> by Angela Dean, Dan Voss, and Daniel Draguljic (Springer-Verlag, 2017).</p>
+<p>Click on the links below to download the files.</p>
+</section>
+<section id="a" class="level2">
+<h2 class="anchored" data-anchor-id="a">A</h2>
+<ul>
+<li><a href="data/dean2017/abrasive.wear.txt">abrasive.wear.txt</a></li>
+<li><a href="data/dean2017/acid copper.txt">acid copper.txt</a></li>
+<li><a href="data/dean2017/air.freshener.txt">air.freshener.txt</a></li>
+<li><a href="data/dean2017/air.rifle.txt">air.rifle.txt</a></li>
+<li><a href="data/dean2017/air.velocity.txt">air.velocity.txt</a></li>
+<li><a href="data/dean2017/air.velocity.contrasts.txt">air.velocity.contrasts.txt</a></li>
+<li><a href="data/dean2017/alcohol.txt">alcohol.txt</a></li>
+<li><a href="data/dean2017/ammunition.txt">ammunition.txt</a></li>
+<li><a href="data/dean2017/anatase.txt">anatase.txt</a></li>
+<li><a href="data/dean2017/antifungal.txt">antifungal.txt</a></li>
+</ul>
+</section>
+<section id="b" class="level2">
+<h2 class="anchored" data-anchor-id="b">B</h2>
+<ul>
+<li><a href="data/dean2017/balloon.txt">balloon.txt</a></li>
+<li><a href="data/dean2017/banana.txt">banana.txt</a></li>
+<li><a href="data/dean2017/battery.txt">battery.txt</a></li>
+<li><a href="data/dean2017/bean.txt">bean.txt</a></li>
+<li><a href="data/dean2017/beef.txt">beef.txt</a></li>
+<li><a href="data/dean2017/bicycle.txt">bicycle.txt</a></li>
+<li><a href="data/dean2017/biscuit.txt">biscuit.txt</a></li>
+<li><a href="data/dean2017/bleach.txt">bleach.txt</a></li>
+<li><a href="data/dean2017/buttermilk.txt">buttermilk.txt</a></li>
+</ul>
+</section>
+<section id="c" class="level2">
+<h2 class="anchored" data-anchor-id="c">C</h2>
+<ul>
+<li><a href="data/dean2017/caffeine.txt">caffeine.txt</a></li>
+<li><a href="data/dean2017/candle.txt">candle.txt</a></li>
+<li><a href="data/dean2017/catalyst.txt">catalyst.txt</a></li>
+<li><a href="data/dean2017/catalytic.reaction.txt">catalytic.reaction.txt</a></li>
+<li><a href="data/dean2017/chemical.txt">chemical.txt</a></li>
+<li><a href="data/dean2017/cigarette.txt">cigarette.txt</a></li>
+<li><a href="data/dean2017/clean.wool.txt">clean.wool.txt</a></li>
+<li><a href="data/dean2017/coating.txt">coating.txt</a></li>
+<li><a href="data/dean2017/coil.txt">coil.txt</a></li>
+<li><a href="data/dean2017/colorfastness.txt">colorfastness.txt</a></li>
+</ul>
+</section>
+<section id="d" class="level2">
+<h2 class="anchored" data-anchor-id="d">D</h2>
+<ul>
+<li><a href="data/dean2017/dairy.cow.txt">dairy.cow.txt</a></li>
+<li><a href="data/dean2017/DCIS.txt">DCIS.txt</a></li>
+<li><a href="data/dean2017/decon.alpha.txt">decon.alpha.txt</a></li>
+<li><a href="data/dean2017/decon.beta1.txt">decon.beta1.txt</a></li>
+<li><a href="data/dean2017/decon.beta2.txt">decon.beta2.txt</a></li>
+<li><a href="data/dean2017/dessert.txt">dessert.txt</a></li>
+<li><a href="data/dean2017/detergent.txt">detergent.txt</a></li>
+<li><a href="data/dean2017/drill.advance.txt">drill.advance.txt</a></li>
+<li><a href="data/dean2017/drug.txt">drug.txt</a></li>
+<li><a href="data/dean2017/dye.txt">dye.txt</a></li>
+</ul>
+</section>
+<section id="e" class="level2">
+<h2 class="anchored" data-anchor-id="e">E</h2>
+<ul>
+<li><a href="data/dean2017/effervescent.txt">effervescent.txt</a></li>
+<li><a href="data/dean2017/exercise.bicycle.txt">exercise.bicycle.txt</a></li>
+</ul>
+</section>
+<section id="f" class="level2">
+<h2 class="anchored" data-anchor-id="f">F</h2>
+<ul>
+<li><a href="data/dean2017/fabric.stain.txt">fabric.stain.txt</a></li>
+<li><a href="data/dean2017/field.txt">field.txt</a></li>
+<li><a href="data/dean2017/field2.txt">field2.txt</a></li>
+<li><a href="data/dean2017/film.viscosity.txt">film.viscosity.txt</a></li>
+<li><a href="data/dean2017/fishing.line.txt">fishing.line.txt</a></li>
+<li><a href="data/dean2017/flour.txt">flour.txt</a></li>
+<li><a href="data/dean2017/flour.early.txt">flour.early.txt</a></li>
+<li><a href="data/dean2017/flour.production.txt">flour.production.txt</a></li>
+<li><a href="data/dean2017/fractionation.PCE.txt">fractionation.PCE.txt</a></li>
+<li><a href="data/dean2017/fractionation.yield.txt">fractionation.yield.txt</a></li>
+</ul>
+</section>
+<section id="g" class="level2">
+<h2 class="anchored" data-anchor-id="g">G</h2>
+<ul>
+<li><a href="data/dean2017/glass.txt">glass.txt</a></li>
+<li><a href="data/dean2017/golf.txt">golf.txt</a></li>
+</ul>
+</section>
+<section id="h" class="level2">
+<h2 class="anchored" data-anchor-id="h">H</h2>
+<ul>
+<li><a href="data/dean2017/heat.txt">heat.txt</a></li>
+<li><a href="data/dean2017/helicopter.txt">helicopter.txt</a></li>
+</ul>
+</section>
+<section id="i" class="level2">
+<h2 class="anchored" data-anchor-id="i">I</h2>
+<ul>
+<li><a href="data/dean2017/ice.cream.txt">ice.cream.txt</a></li>
+<li><a href="data/dean2017/inclinometer.product.txt">inclinometer.product.txt</a></li>
+<li><a href="data/dean2017/ink.txt">ink.txt</a></li>
+</ul>
+</section>
+<section id="l" class="level2">
+<h2 class="anchored" data-anchor-id="l">L</h2>
+<ul>
+<li><a href="data/dean2017/Leatherette.txt">Leatherette.txt</a></li>
+</ul>
+</section>
+<section id="m" class="level2">
+<h2 class="anchored" data-anchor-id="m">M</h2>
+<ul>
+<li><a href="data/dean2017/MCFS71.txt">MCFS71.txt</a></li>
+<li><a href="data/dean2017/meatball.txt">meatball.txt</a></li>
+<li><a href="data/dean2017/metal.txt">metal.txt</a></li>
+<li><a href="data/dean2017/metal.powder.txt">metal.powder.txt</a></li>
+<li><a href="data/dean2017/mungbean.txt">mungbean.txt</a></li>
+</ul>
+</section>
+<section id="n" class="level2">
+<h2 class="anchored" data-anchor-id="n">N</h2>
+<ul>
+<li><a href="data/dean2017/neuron.txt">neuron.txt</a></li>
+</ul>
+</section>
+<section id="o" class="level2">
+<h2 class="anchored" data-anchor-id="o">O</h2>
+<ul>
+<li><a href="data/dean2017/oats.txt">oats.txt</a></li>
+<li><a href="data/dean2017/oxidation.txt">oxidation.txt</a></li>
+</ul>
+</section>
+<section id="p" class="level2">
+<h2 class="anchored" data-anchor-id="p">P</h2>
+<ul>
+<li><a href="data/dean2017/pah.txt">pah.txt</a></li>
+<li><a href="data/dean2017/paper.txt">paper.txt</a></li>
+<li><a href="data/dean2017/paper.strength.txt">paper.strength.txt</a></li>
+<li><a href="data/dean2017/plasma.txt">plasma.txt</a></li>
+<li><a href="data/dean2017/polymer.txt">polymer.txt</a></li>
+<li><a href="data/dean2017/protein.txt">protein.txt</a></li>
+</ul>
+</section>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">R</h2>
+<ul>
+<li><a href="data/dean2017/rail.weld.txt">rail.weld.txt</a></li>
+<li><a href="data/dean2017/reaction.time.txt">reaction.time.txt</a></li>
+<li><a href="data/dean2017/rice.txt">rice.txt</a></li>
+</ul>
+</section>
+<section id="s" class="level2">
+<h2 class="anchored" data-anchor-id="s">S</h2>
+<ul>
+<li><a href="data/dean2017/sensor.txt">sensor.txt</a></li>
+<li><a href="data/dean2017/shrinkage.txt">shrinkage.txt</a></li>
+<li><a href="data/dean2017/sludge.txt">sludge.txt</a></li>
+<li><a href="data/dean2017/soap.txt">soap.txt</a></li>
+<li><a href="data/dean2017/softdrink.txt">softdrink.txt</a></li>
+<li><a href="data/dean2017/solder.txt">solder.txt</a></li>
+<li><a href="data/dean2017/spinning.txt">spinning.txt</a></li>
+<li><a href="data/dean2017/starch.txt">starch.txt</a></li>
+<li><a href="data/dean2017/steam.txt">steam.txt</a></li>
+</ul>
+</section>
+<section id="t" class="level2">
+<h2 class="anchored" data-anchor-id="t">T</h2>
+<ul>
+<li><a href="data/dean2017/temperature.txt">temperature.txt</a></li>
+<li><a href="data/dean2017/tire.txt">tire.txt</a></li>
+<li><a href="data/dean2017/tomato.txt">tomato.txt</a></li>
+<li><a href="data/dean2017/trout.txt">trout.txt</a></li>
+</ul>
+</section>
+<section id="u" class="level2">
+<h2 class="anchored" data-anchor-id="u">U</h2>
+<ul>
+<li><a href="data/dean2017/uav.txt">uav.txt</a></li>
+<li><a href="data/dean2017/uav3.txt">uav3.txt</a></li>
+</ul>
+</section>
+<section id="v" class="level2">
+<h2 class="anchored" data-anchor-id="v">V</h2>
+<ul>
+<li><a href="data/dean2017/valve.txt">valve.txt</a></li>
+<li><a href="data/dean2017/voltage.txt">voltage.txt</a></li>
+</ul>
+</section>
+<section id="w" class="level2">
+<h2 class="anchored" data-anchor-id="w">W</h2>
+<ul>
+<li><a href="data/dean2017/wafer.txt">wafer.txt</a></li>
+<li><a href="data/dean2017/water.txt">water.txt</a></li>
+<li><a href="data/dean2017/welding.txt">welding.txt</a></li>
+<li><a href="data/dean2017/wheel.txt">wheel.txt</a></li>
+<li><a href="data/dean2017/windshield.txt">windshield.txt</a></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
