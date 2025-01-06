@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>assignment11_random_and_mixed_effects_models – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 11: Random and Mixed Effects Models – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,12 +67,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 11: Random and Mixed Effects Models – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -132,19 +162,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Assignment 11: Random and Mixed Effects Models</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">20-Dec-2024</p>
+        <p class="date">05-Jan-2025</p>
       </div>
     </div>
     
@@ -155,18 +185,326 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#random-effects-model" id="toc-random-effects-model" class="nav-link" data-scroll-target="#random-effects-model">17.3 Random Effects Model</a>
+  <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  </ul></li>
+  <li><a href="#buttermilk-biscuit-experiment" id="toc-buttermilk-biscuit-experiment" class="nav-link" data-scroll-target="#buttermilk-biscuit-experiment">12.4 Buttermilk Biscuit Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1">Questions</a></li>
+  </ul></li>
+  <li><a href="#golf-ball-experiment" id="toc-golf-ball-experiment" class="nav-link" data-scroll-target="#golf-ball-experiment">12.6 Golf Ball Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2">Questions</a></li>
+  </ul></li>
+  <li><a href="#grading-allocation" id="toc-grading-allocation" class="nav-link" data-scroll-target="#grading-allocation">Grading Allocation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ol type="1">
+<li><strong>Objective</strong>: Analyze random and mixed effects models, including random effects, interactions, and post-hoc tests.</li>
+<li>Use R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.</li>
+<li>Clearly explain your analysis process for full credit.</li>
+<li>Submit your assignment as a single PDF file.</li>
+</ol>
+<p><strong>Total Points</strong>: 130</p>
+</section>
+<section id="random-effects-model" class="level2">
+<h2 class="anchored" data-anchor-id="random-effects-model">17.3 Random Effects Model</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 17, Exercise 3</strong></p>
+<p>Consider the following random-effects model:</p>
+<p><span class="math display">\[
+Y_{ijkmt} = \mu + A_i + B_j + C_k + D_m + (AB)_{ij} + (BC)_{jk} + (BD)_{jm} + \epsilon_{ijkmt}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(i = 1, \dots, a\)</span>, <span class="math inline">\(j = 1, \dots, b\)</span>, <span class="math inline">\(k = 1, \dots, c\)</span>, <span class="math inline">\(m = 1, \dots, d\)</span>, <span class="math inline">\(t = 1, \dots, r\)</span>.</li>
+<li><span class="math inline">\(A_i \sim N(0, \sigma^2_A)\)</span>, <span class="math inline">\(B_j \sim N(0, \sigma^2_B)\)</span>, <span class="math inline">\(C_k \sim N(0, \sigma^2_C)\)</span>, <span class="math inline">\(D_m \sim N(0, \sigma^2_D)\)</span>.</li>
+<li><span class="math inline">\((AB)_{ij} \sim N(0, \sigma^2_{AB})\)</span>, <span class="math inline">\((BC)_{jk} \sim N(0, \sigma^2_{BC})\)</span>, <span class="math inline">\((BD)_{jm} \sim N(0, \sigma^2_{BD})\)</span>.</li>
+<li><span class="math inline">\(\epsilon_{ijkmt} \sim N(0, \sigma^2)\)</span>.</li>
+</ul>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<ol type="a">
+<li><p>Write out the expected mean squares for all main effects and interactions in the model.</p></li>
+<li><p>How would you test the null hypothesis <span class="math inline">\(H_0^A: \sigma^2_A = 0\)</span> against the alternative <span class="math inline">\(H_A^A: \sigma^2_A &gt; 0\)</span>?</p></li>
+<li><p>How would you test the null hypothesis <span class="math inline">\(H_0^B: \sigma^2_B = 0\)</span> against the alternative <span class="math inline">\(H_A^B: \sigma^2_B &gt; 0\)</span>?</p></li>
+<li><p>Give formulae for unbiased estimates of <span class="math inline">\(\sigma^2_{BD}\)</span> and <span class="math inline">\(\sigma^2_B\)</span>.</p></li>
+<li><p>Provide formulae for individual 95% confidence intervals for <span class="math inline">\(\sigma^2_{BD}\)</span> and <span class="math inline">\(\sigma^2_B\)</span>. What is the overall confidence level?</p></li>
+</ol>
+</section>
+</section>
+<section id="buttermilk-biscuit-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="buttermilk-biscuit-experiment">12.4 Buttermilk Biscuit Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 12, Exercise 4</strong></p>
+<p>The buttermilk biscuit experiment was conducted by Stacie Taylor in 1995 to compare three brands of refrigerated buttermilk biscuits (Factor <span class="math inline">\(A\)</span>, 3 levels, fixed effect) on their fluffiness. The biscuits were baked on a tray for 7 minutes at 425°F, with 6 biscuits baked at a time. The experiment was run as a general complete block design with blocks of size <span class="math inline">\(k = 6\)</span>.</p>
+<section id="questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="questions-1">Questions</h3>
+<ol type="a">
+<li><p>Use a mixed model with interaction to represent the data, where the random effect represents the block (run of the oven) and the fixed effect represents the biscuit brand. Write out the model including all assumptions.</p></li>
+<li><p>Check the assumptions of the model for the data in Table 17.20 as far as possible.</p></li>
+<li><p>Write out the expected mean squares for all terms in the model.</p></li>
+<li><p>Create a block × brand interaction plot for the blocks observed in the experiment.</p></li>
+<li><p>Test the hypothesis that the variance in height due to block × brand interactions is negligible. Interpret your conclusions in terms of the plot in part (d).</p></li>
+<li><p>Calculate a set of 95% simultaneous confidence intervals for the pairwise comparisons between the brands. State your conclusions.</p></li>
+</ol>
+<table class="table">
+<caption>Table 17.20: Biscuit Experiment Data</caption>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2 (150.0)</td>
+<td>1 (188.2)</td>
+<td>2 (177.8)</td>
+<td>3 (166.7)</td>
+<td>3 (187.5)</td>
+<td>1 (182.4)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1 (183.3)</td>
+<td>2 (183.3)</td>
+<td>2 (183.3)</td>
+<td>3 (176.5)</td>
+<td>1 (160.0)</td>
+<td>3 (187.5)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1 (178.9)</td>
+<td>3 (182.4)</td>
+<td>2 (193.8)</td>
+<td>3 (176.5)</td>
+<td>2 (188.9)</td>
+<td>1 (188.9)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2 (177.8)</td>
+<td>1 (145.5)</td>
+<td>3 (155.0)</td>
+<td>1 (173.7)</td>
+<td>3 (200.0)</td>
+<td>2 (187.5)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>1 (205.6)</td>
+<td>3 (188.2)</td>
+<td>3 (142.9)</td>
+<td>2 (161.9)</td>
+<td>2 (177.8)</td>
+<td>1 (159.1)</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="golf-ball-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="golf-ball-experiment">12.6 Golf Ball Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 12, Exercise 6</strong></p>
+<p>An experiment by Tim Kelaghan (1995) examined whether different brands of golf balls travel the same distance when hit by amateur golfers. Three brands (<span class="math inline">\(v = 3\)</span>) were selected, and some number of golfers (<span class="math inline">\(b\)</span>) determined. A pilot study was conducted with two golfers, each hitting <span class="math inline">\(s = 6\)</span> balls per brand in a random order.</p>
+<section id="questions-2" class="level3">
+<h3 class="anchored" data-anchor-id="questions-2">Questions</h3>
+<ol type="a">
+<li><p>Using the pilot data (Table 17.22), calculate a 95% upper bound for the error variance <span class="math inline">\(\sigma^2\)</span>.</p></li>
+<li><p>For the main experiment, determine the number of golfers (<span class="math inline">\(b\)</span>) needed to ensure that simultaneous 95% confidence intervals for the pairwise differences between brands have a width of at most 20 yards.</p></li>
+</ol>
+<table class="table">
+<caption>Table 17.22: Golf Ball Distances (in Yards)</caption>
+<thead>
+<tr class="header">
+<th>Golfer</th>
+<th>Brand</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>209</td>
+<td>204</td>
+<td>179</td>
+<td>230</td>
+<td>233</td>
+<td>245</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2</td>
+<td>188</td>
+<td>211</td>
+<td>242</td>
+<td>222</td>
+<td>187</td>
+<td>233</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3</td>
+<td>219</td>
+<td>204</td>
+<td>247</td>
+<td>215</td>
+<td>197</td>
+<td>161</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>240</td>
+<td>207</td>
+<td>192</td>
+<td>190</td>
+<td>226</td>
+<td>188</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td>216</td>
+<td>195</td>
+<td>240</td>
+<td>215</td>
+<td>219</td>
+<td>238</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3</td>
+<td>195</td>
+<td>221</td>
+<td>205</td>
+<td>192</td>
+<td>183</td>
+<td>230</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="grading-allocation" class="level2">
+<h2 class="anchored" data-anchor-id="grading-allocation">Grading Allocation</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Exercise Title</th>
+<th>Part</th>
+<th>Grade Weight (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Random Effects Model</strong></td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(b)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(c)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(d)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(e)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td><strong>Biscuit Experiment</strong></td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(b)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(c)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(d)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(e)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(f)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td><strong>Golf Ball Experiment</strong></td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(b)</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->

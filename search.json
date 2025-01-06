@@ -693,6 +693,48 @@
     "text": "Table of Grades and Rubric\n\n\n\n\n\n\n\n\n\nExercise\nCriteria\nMax Points\nDescription\n\n\n\n\nExercise 7.7\nPart (a): Analysis Design\n10\nOutline the analysis steps, assumptions, and appropriate statistical methods (e.g., ANOVA, interaction plots).\n\n\n\nPart (b): Model Assumptions\n10\nAssess normality, homoscedasticity, and independence of residuals using statistical tests and plots.\n\n\n\nPart (c): Analysis and Plots\n20\nConduct ANOVA, interpret significant effects, create interaction plots, and draw meaningful conclusions.\n\n\nTotal for Exercise 7.7\n\n40\n\n\n\nExercise 7.11\nPart (a): Main Effects\n10\nConstruct main effects plots and evaluate their significance.\n\n\n\nPart (b): Interaction Assumptions\n5\nClearly state and justify interaction assumptions.\n\n\n\nPart (c): Two-Way Interactions\n15\nConstruct interaction plots, interpret results, and update conclusions from main effects analysis.\n\n\n\nPart (d): Model Fitting\n15\nFit a model including all main effects and two-way interactions, interpret significant effects.\n\n\n\nPart (e): Diagnostics\n10\nEvaluate residual diagnostics for normality, homoscedasticity, and outliers.\n\n\nTotal for Exercise 7.11\n\n55\n\n\n\nExercise 7.12\nPart (a): Trend Contrasts\n15\nCreate a table with contrast coefficients for linear, quadratic, and interaction terms.\n\n\n\nPart (b): Normalization\n10\nCompute normalization divisors and least squares estimates.\n\n\n\nPart (c): Orthogonal Contrasts\n10\nPropose and justify two orthogonal contrasts for CC.\n\n\n\nPart (d): Computer Analysis\n15\nCompute estimates, create a half-normal probability plot, and interpret results.\n\n\n\nPart (e): Voss and Wang Method\n10\nApply the method to examine orthogonal contrasts and compare with results from the half-normal plot.\n\n\nTotal for Exercise 7.12\n\n60"
   },
   {
+    "objectID": "assignments/assignment11_random_and_mixed_effects_models.html",
+    "href": "assignments/assignment11_random_and_mixed_effects_models.html",
+    "title": "Assignment 11: Random and Mixed Effects Models",
+    "section": "",
+    "text": "Objective: Analyze random and mixed effects models, including random effects, interactions, and post-hoc tests.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 130"
+  },
+  {
+    "objectID": "assignments/assignment11_random_and_mixed_effects_models.html#instructions",
+    "href": "assignments/assignment11_random_and_mixed_effects_models.html#instructions",
+    "title": "Assignment 11: Random and Mixed Effects Models",
+    "section": "",
+    "text": "Objective: Analyze random and mixed effects models, including random effects, interactions, and post-hoc tests.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 130"
+  },
+  {
+    "objectID": "assignments/assignment11_random_and_mixed_effects_models.html#random-effects-model",
+    "href": "assignments/assignment11_random_and_mixed_effects_models.html#random-effects-model",
+    "title": "Assignment 11: Random and Mixed Effects Models",
+    "section": "17.3 Random Effects Model",
+    "text": "17.3 Random Effects Model\nData Source: Dean et al. (2017), Chapter 17, Exercise 3\nConsider the following random-effects model:\n\\[\nY_{ijkmt} = \\mu + A_i + B_j + C_k + D_m + (AB)_{ij} + (BC)_{jk} + (BD)_{jm} + \\epsilon_{ijkmt}\n\\]\nWhere:\n\n\\(i = 1, \\dots, a\\), \\(j = 1, \\dots, b\\), \\(k = 1, \\dots, c\\), \\(m = 1, \\dots, d\\), \\(t = 1, \\dots, r\\).\n\\(A_i \\sim N(0, \\sigma^2_A)\\), \\(B_j \\sim N(0, \\sigma^2_B)\\), \\(C_k \\sim N(0, \\sigma^2_C)\\), \\(D_m \\sim N(0, \\sigma^2_D)\\).\n\\((AB)_{ij} \\sim N(0, \\sigma^2_{AB})\\), \\((BC)_{jk} \\sim N(0, \\sigma^2_{BC})\\), \\((BD)_{jm} \\sim N(0, \\sigma^2_{BD})\\).\n\\(\\epsilon_{ijkmt} \\sim N(0, \\sigma^2)\\).\n\n\nQuestions\n\nWrite out the expected mean squares for all main effects and interactions in the model.\nHow would you test the null hypothesis \\(H_0^A: \\sigma^2_A = 0\\) against the alternative \\(H_A^A: \\sigma^2_A &gt; 0\\)?\nHow would you test the null hypothesis \\(H_0^B: \\sigma^2_B = 0\\) against the alternative \\(H_A^B: \\sigma^2_B &gt; 0\\)?\nGive formulae for unbiased estimates of \\(\\sigma^2_{BD}\\) and \\(\\sigma^2_B\\).\nProvide formulae for individual 95% confidence intervals for \\(\\sigma^2_{BD}\\) and \\(\\sigma^2_B\\). What is the overall confidence level?"
+  },
+  {
+    "objectID": "assignments/assignment11_random_and_mixed_effects_models.html#buttermilk-biscuit-experiment",
+    "href": "assignments/assignment11_random_and_mixed_effects_models.html#buttermilk-biscuit-experiment",
+    "title": "Assignment 11: Random and Mixed Effects Models",
+    "section": "12.4 Buttermilk Biscuit Experiment",
+    "text": "12.4 Buttermilk Biscuit Experiment\nData Source: Dean et al. (2017), Chapter 12, Exercise 4\nThe buttermilk biscuit experiment was conducted by Stacie Taylor in 1995 to compare three brands of refrigerated buttermilk biscuits (Factor \\(A\\), 3 levels, fixed effect) on their fluffiness. The biscuits were baked on a tray for 7 minutes at 425°F, with 6 biscuits baked at a time. The experiment was run as a general complete block design with blocks of size \\(k = 6\\).\n\nQuestions\n\nUse a mixed model with interaction to represent the data, where the random effect represents the block (run of the oven) and the fixed effect represents the biscuit brand. Write out the model including all assumptions.\nCheck the assumptions of the model for the data in Table 17.20 as far as possible.\nWrite out the expected mean squares for all terms in the model.\nCreate a block × brand interaction plot for the blocks observed in the experiment.\nTest the hypothesis that the variance in height due to block × brand interactions is negligible. Interpret your conclusions in terms of the plot in part (d).\nCalculate a set of 95% simultaneous confidence intervals for the pairwise comparisons between the brands. State your conclusions.\n\n\nTable 17.20: Biscuit Experiment Data\n\n\n\n\n\n\n\n\n\n\n\nBlock\n1\n2\n3\n4\n5\n6\n\n\n\n\n1\n2 (150.0)\n1 (188.2)\n2 (177.8)\n3 (166.7)\n3 (187.5)\n1 (182.4)\n\n\n2\n1 (183.3)\n2 (183.3)\n2 (183.3)\n3 (176.5)\n1 (160.0)\n3 (187.5)\n\n\n3\n1 (178.9)\n3 (182.4)\n2 (193.8)\n3 (176.5)\n2 (188.9)\n1 (188.9)\n\n\n4\n2 (177.8)\n1 (145.5)\n3 (155.0)\n1 (173.7)\n3 (200.0)\n2 (187.5)\n\n\n5\n1 (205.6)\n3 (188.2)\n3 (142.9)\n2 (161.9)\n2 (177.8)\n1 (159.1)"
+  },
+  {
+    "objectID": "assignments/assignment11_random_and_mixed_effects_models.html#golf-ball-experiment",
+    "href": "assignments/assignment11_random_and_mixed_effects_models.html#golf-ball-experiment",
+    "title": "Assignment 11: Random and Mixed Effects Models",
+    "section": "12.6 Golf Ball Experiment",
+    "text": "12.6 Golf Ball Experiment\nData Source: Dean et al. (2017), Chapter 12, Exercise 6\nAn experiment by Tim Kelaghan (1995) examined whether different brands of golf balls travel the same distance when hit by amateur golfers. Three brands (\\(v = 3\\)) were selected, and some number of golfers (\\(b\\)) determined. A pilot study was conducted with two golfers, each hitting \\(s = 6\\) balls per brand in a random order.\n\nQuestions\n\nUsing the pilot data (Table 17.22), calculate a 95% upper bound for the error variance \\(\\sigma^2\\).\nFor the main experiment, determine the number of golfers (\\(b\\)) needed to ensure that simultaneous 95% confidence intervals for the pairwise differences between brands have a width of at most 20 yards.\n\n\nTable 17.22: Golf Ball Distances (in Yards)\n\n\nGolfer\nBrand\n1\n2\n3\n4\n5\n6\n\n\n\n\n1\n1\n209\n204\n179\n230\n233\n245\n\n\n\n2\n188\n211\n242\n222\n187\n233\n\n\n\n3\n219\n204\n247\n215\n197\n161\n\n\n2\n1\n240\n207\n192\n190\n226\n188\n\n\n\n2\n216\n195\n240\n215\n219\n238\n\n\n\n3\n195\n221\n205\n192\n183\n230"
+  },
+  {
+    "objectID": "assignments/assignment11_random_and_mixed_effects_models.html#grading-allocation",
+    "href": "assignments/assignment11_random_and_mixed_effects_models.html#grading-allocation",
+    "title": "Assignment 11: Random and Mixed Effects Models",
+    "section": "Grading Allocation",
+    "text": "Grading Allocation\n\n\n\nExercise Title\nPart\nGrade Weight (%)\n\n\n\n\nRandom Effects Model\n(a)\n10\n\n\n\n(b)\n10\n\n\n\n(c)\n10\n\n\n\n(d)\n10\n\n\n\n(e)\n10\n\n\nBiscuit Experiment\n(a)\n10\n\n\n\n(b)\n10\n\n\n\n(c)\n10\n\n\n\n(d)\n10\n\n\n\n(e)\n10\n\n\n\n(f)\n10\n\n\nGolf Ball Experiment\n(a)\n10\n\n\n\n(b)\n10"
+  },
+  {
     "objectID": "appendix/r-packages/tidyr.html",
     "href": "appendix/r-packages/tidyr.html",
     "title": "Using the tidyr Package in R",
@@ -1965,6 +2007,48 @@
     "title": "Assignment 2: Completely Randomized Design",
     "section": "Grading Rubric",
     "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\nSet 1: Foundational Questions\n50\n\n\n1.1 Balloon Experiment\n30\n\n\n1.2 Conceptual Question\n10\n\n\n1.3 Graphical Analysis\n10\n\n\nSet 2: Advanced Questions\n50\n\n\n2.1 Derivation of \\(t\\)-Statistic\n20\n\n\n2.2 Implications of Assumption Violations\n10\n\n\n2.3 Power Analysis\n20\n\n\nTotal\n100"
+  },
+  {
+    "objectID": "assignments/assignment10_row_column_designs.html",
+    "href": "assignments/assignment10_row_column_designs.html",
+    "title": "Assignment 10: Row and Column Designs",
+    "section": "",
+    "text": "Objective: Analyze row and column designs, including row-column interactions, post-hoc tests, and trend analyses.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 150"
+  },
+  {
+    "objectID": "assignments/assignment10_row_column_designs.html#instructions",
+    "href": "assignments/assignment10_row_column_designs.html#instructions",
+    "title": "Assignment 10: Row and Column Designs",
+    "section": "",
+    "text": "Objective: Analyze row and column designs, including row-column interactions, post-hoc tests, and trend analyses.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 150"
+  },
+  {
+    "objectID": "assignments/assignment10_row_column_designs.html#latin-squares",
+    "href": "assignments/assignment10_row_column_designs.html#latin-squares",
+    "title": "Assignment 10: Row and Column Designs",
+    "section": "12.2 Latin Squares",
+    "text": "12.2 Latin Squares\nData Source: Dean et al. (2017), Chapter 12, Exercise 2\n\nShow that there is only one standard \\(3 \\times 3\\) Latin square.\n\n(Hint: Given the letters in the first row and the first column, show that there is only one way to complete the Latin square.)\n\nShow that there are exactly four standard \\(4 \\times 4\\) Latin squares."
+  },
+  {
+    "objectID": "assignments/assignment10_row_column_designs.html#video-game-experiment",
+    "href": "assignments/assignment10_row_column_designs.html#video-game-experiment",
+    "title": "Assignment 10: Row and Column Designs",
+    "section": "12.6 Video Game Experiment",
+    "text": "12.6 Video Game Experiment\nData Source: Dean et al. (2017), Chapter 12, Exercise 6\nProfessor Robert Wardrop conducted an experiment in 1991 to evaluate which of five sound modes helped him play a certain video game best. The sound modes included:\n\nModes 1–3: Three different types of background music with game sounds expected to enhance play.\nMode 4: Game sounds only, no background music.\nMode 5: No music or game sounds.\n\nThe experiment used a Latin square design with two blocking factors: day and time order of the game. The response variable was the game score (higher scores indicate better performance). The design and data are provided in Table 12.16.\n\nLatin square design showing treatments and data for the video game experiment\n\n\n\n\n\n\n\n\n\n\nTime Order\nDay 1\nDay 2\nDay 3\nDay 4\nDay 5\n\n\n\n\n1\n1 (94)\n3 (100)\n4 (98)\n2 (101)\n5 (112)\n\n\n2\n3 (103)\n2 (111)\n1 (51)\n5 (110)\n4 (90)\n\n\n3\n4 (114)\n1 (75)\n5 (94)\n3 (85)\n2 (107)\n\n\n4\n5 (100)\n4 (74)\n2 (70)\n1 (93)\n3 (106)\n\n\n5\n2 (106)\n5 (95)\n3 (81)\n4 (90)\n1 (73)\n\n\n\n\nQuestions\n\nWrite down a possible model for the data and check the model assumptions. If the assumptions appear to be approximately satisfied, proceed with parts (b)–(f).\nPlot the adjusted data and discuss the plot.\nComplete an analysis of variance table.\nEvaluate whether blocking (day and time order) was effective.\nConstruct simultaneous 95% confidence intervals for:\n\nAll pairwise comparisons of the five sound modes.\nThe “music versus no music” contrast:\n\n\n\\[\n\\frac{1}{3}(\\tau_1 + \\tau_2 + \\tau_3) - \\frac{1}{2}(\\tau_4 + \\tau_5)\n\\] 3. The “game sound versus no game sound” contrast:\n\\[\n\\frac{1}{4}(\\tau_1 + \\tau_2 + \\tau_3 + \\tau_4) - \\tau_5\n\\]\n\nSummarize the conclusions of the experiment. Which sound mode(s) should Professor Wardrop use for optimal performance?"
+  },
+  {
+    "objectID": "assignments/assignment10_row_column_designs.html#quantity-perception-experiment",
+    "href": "assignments/assignment10_row_column_designs.html#quantity-perception-experiment",
+    "title": "Assignment 10: Row and Column Designs",
+    "section": "12.10 Quantity Perception Experiment",
+    "text": "12.10 Quantity Perception Experiment\nData Source: Dean et al. (2017), Chapter 12, Exercise 10\nAn experiment conducted in 1996 investigated how color influences the perception of quantity. Subjects were asked to guess the number of candies on a tray after viewing it for 3 seconds. The response was the difference between the actual number of candies and the guessed number.\n\nFactors:\n\nNumber of candies (levels): 17, 29, 41\nColor (levels): Yellow, Orange, Brown\n\n\nEach subject viewed all nine treatment combinations based on a \\(9 \\times 9\\) Latin square. The data provided in Table 12.18 represents a 2-replicate Latin square.\n\nTreatment Combinations Coding:\n\n\\(1 = (17, \\text{Yellow})\\), \\(2 = (17, \\text{Orange})\\), \\(3 = (17, \\text{Brown})\\)\n\\(4 = (29, \\text{Yellow})\\), \\(5 = (29, \\text{Orange})\\), \\(6 = (29, \\text{Brown})\\)\n\\(7 = (41, \\text{Yellow})\\), \\(8 = (41, \\text{Orange})\\), \\(9 = (41, \\text{Brown})\\)\n\n\nHere is the correct recreation of Table 12.18 based on the provided text:\n\n2-replicate Latin square design and data in parentheses for the quantity perception experiment—data are ‘true number’ minus ‘guessed number’\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSubject\n1\n2\n3\n4\n5\n6\n7\n8\n9\n\n\n\n\n1\n23 (4)\n22 (−3)\n11 (0)\n12 (−3)\n32 (−1)\n13 (−3)\n31 (−6)\n33 (−9)\n21 (−1)\n\n\n2\n12 (2)\n31 (16)\n32 (21)\n21 (9)\n22 (4)\n33 (16)\n23 (9)\n11 (2)\n13 (2)\n\n\n3\n21 (4)\n23 (−1)\n12 (7)\n13 (−5)\n33 (−1)\n11 (−13)\n32 (−9)\n31 (−19)\n22 (−16)\n\n\n4\n32 (21)\n12 (4)\n22 (3)\n31 (11)\n13 (0)\n21 (4)\n11 (0)\n23 (4)\n33 (11)\n\n\n5\n31 (7)\n11 (−2)\n21 (2)\n33 (3)\n12 (−3)\n23 (3)\n13 (−4)\n22 (−5)\n32 (−7)\n\n\n6\n11 (3)\n33 (7)\n31 (14)\n23 (11)\n21 (12)\n32 (17)\n22 (10)\n13 (5)\n12 (0)\n\n\n7\n22 (11)\n21 (14)\n13 (0)\n11 (1)\n31 (16)\n12 (1)\n33 (13)\n32 (14)\n23 (7)\n\n\n8\n13 (7)\n32 (16)\n33 (16)\n22 (4)\n23 (4)\n31 (16)\n21 (14)\n12 (7)\n11 (2)\n\n\n9\n33 (21)\n13 (2)\n23 (10)\n32 (24)\n11 (6)\n22 (13)\n12 (2)\n21 (8)\n31 (20)\n\n\n10\n33 (16)\n31 (20)\n22 (6)\n21 (6)\n11 (7)\n23 (6)\n12 (2)\n13 (3)\n32 (14)\n\n\n11\n12 (2)\n22 (4)\n32 (11)\n13 (2)\n21 (9)\n33 (1)\n23 (4)\n31 (−4)\n11 (7)\n\n\n12\n13 (−4)\n23 (−11)\n33 (−4)\n11 (−3)\n22 (4)\n31 (11)\n21 (−1)\n32 (1)\n12 (−3)\n\n\n13\n21 (4)\n12 (−1)\n11 (2)\n32 (11)\n31 (11)\n13 (−3)\n33 (1)\n22 (−1)\n23 (11)\n\n\n14\n22 (2)\n13 (−7)\n12 (−9)\n33 (8)\n32 (−2)\n11 (−6)\n31 (−9)\n23 (4)\n21 (2)\n\n\n15\n31 (21)\n32 (21)\n23 (14)\n22 (14)\n12 (4)\n21 (16)\n13 (0)\n11 (5)\n33 (11)\n\n\n16\n11 (2)\n21 (9)\n31 (21)\n12 (6)\n23 (9)\n32 (18)\n22 (9)\n33 (16)\n13 (2)\n\n\n17\n32 (6)\n33 (6)\n21 (−1)\n23 (−1)\n13 (2)\n22 (4)\n11 (−3)\n12 (−1)\n31 (6)\n\n\n18\n23 (4)\n11 (2)\n13 (2)\n31 (11)\n33 (6)\n12 (2)\n32 (6)\n21 (−1)\n22 (4)\n\n\n\n\nQuestions\n\nDiscuss whether the subjects in this study are likely to represent a larger population of interest. Are the conclusions relevant to the general population of noncolorblind individuals?\nFit a model including the effects of:\n\n\nTwo blocking factors (Subject and Time Order)\nThe treatment effect\nThe treatment × time-order interaction.\n\nVerify that the interaction (adjusted for subjects) can be measured with \\((v-1)^2 = 64\\) degrees of freedom.\n\nExamine whether the residuals are approximately normally distributed and whether variances are homogeneous across treatments.\n\nConsider transformations of the response variable, such as:\n\nOriginal response: “Guessed number”\n“Square root of guessed number”\n“(True number − guessed number) / (True number)”\nOther appropriate transformations.\n\n\nPresent an analysis of variance table and test any relevant hypotheses. Summarize your conclusions.\nRewrite the model in terms of main effects and interactions of the two treatment factors (Number and Color). Redo the analysis of variance and interpret the results.\nPropose a plan for a follow-up experiment, including a checklist of key considerations."
+  },
+  {
+    "objectID": "assignments/assignment10_row_column_designs.html#grading-allocation",
+    "href": "assignments/assignment10_row_column_designs.html#grading-allocation",
+    "title": "Assignment 10: Row and Column Designs",
+    "section": "Grading Allocation",
+    "text": "Grading Allocation\n\n\n\nExercise Title\nPart\nGrade Weight (%)\n\n\n\n\nLatin Squares\n(a)\n5\n\n\n\n(b)\n5\n\n\nVideo Game Experiment\n(a)\n10\n\n\n\n(b)\n10\n\n\n\n(c)\n15\n\n\n\n(d)\n10\n\n\n\n(e)\n20\n\n\n\n(f)\n10\n\n\nQuantity Perception\n(a)\n5\n\n\n\n(b)\n10\n\n\n\n(c)\n10\n\n\n\n(d)\n15\n\n\n\n(e)\n15\n\n\n\n(f)\n10"
   },
   {
     "objectID": "assignments/assignment1_basics_of_experimental_design.html",
