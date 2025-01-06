@@ -1502,14 +1502,14 @@
     "href": "r_help.html",
     "title": "R Help",
     "section": "",
-    "text": "Welcome to the R Help Section. This resource organizes R help files into structured categories based on Subjects, Topics, and implementation through R Base and Packages.\n\n\n\nBelow are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression\nANOVA\n\nProgramming with R\n\nControl Structures\nWriting Functions\nDebugging\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndplyr\ntidyr\n\n\n\n\n\nggplot2 \n\n\n\n\n\nemmeans\nmultcomp\npwr\n\n\n\n\n\n\n\n\nExplore Subjects and Topics: Use the Subjects and Topics section to browse R concepts by category.\nR Base Help: Click on the R Base links to learn about core R functions.\nPackages Help: Dive into R packages to explore advanced features and functionalities.\nAppendix Folder Structure:\n\nR Base Functions: appendix/r-base/\nR Packages: appendix/r-packages/\n\n\n\n\n\n\nHave suggestions or found an issue? Reach out to us via GitHub Discussions.\n\n\n\n\n\nHome\nAppendix"
+    "text": "Welcome to the R Help Section. This resource organizes R help files into structured categories based on Subjects, Topics, and implementation through R Base and Packages.\n\n\n\nBelow are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\nData Transformation and Wrangling\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression\nANOVA\n\nProgramming with R\n\nControl Structures\nWriting Functions\nDebugging\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndplyr\ntidyr\n\n\n\n\n\nggplot2 \n\n\n\n\n\nemmeans\nmultcomp\npwr\n\n\n\n\n\n\n\n\nExplore Subjects and Topics: Use the Subjects and Topics section to browse R concepts by category.\nR Base Help: Click on the R Base links to learn about core R functions.\nPackages Help: Dive into R packages to explore advanced features and functionalities.\nAppendix Folder Structure:\n\nR Base Functions: appendix/r-base/\nR Packages: appendix/r-packages/\n\n\n\n\n\n\nHave suggestions or found an issue? Reach out to us via GitHub Discussions.\n\n\n\n\n\nHome\nAppendix"
   },
   {
     "objectID": "r_help.html#r-subjects-topics",
     "href": "r_help.html#r-subjects-topics",
     "title": "R Help",
     "section": "",
-    "text": "Below are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression\nANOVA\n\nProgramming with R\n\nControl Structures\nWriting Functions\nDebugging"
+    "text": "Below are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\nData Transformation and Wrangling\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression\nANOVA\n\nProgramming with R\n\nControl Structures\nWriting Functions\nDebugging"
   },
   {
     "objectID": "r_help.html#r-packages",
@@ -2303,151 +2303,74 @@
     "text": "Conclusion\nRecap: Subsetting is a powerful tool for extracting specific data. Base R provides flexibility, while tidyverse offers an elegant syntax for modern workflows."
   },
   {
-    "objectID": "appendix/r-base/r-rep-basics.html",
-    "href": "appendix/r-base/r-rep-basics.html",
-    "title": "Tutorial on rep function in R",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html",
+    "href": "appendix/r-topics/r-data-frames-basics.html",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.\n\n\n\nThe rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2\n\n\n\n\n\n\nCombining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1\n\n\n\n\n\nBasic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3\n\n\n\n\n\nNegative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing.\n\n\n\n\n\n\n\n\n# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\ndata.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\nCombine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\ncolnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage.\n\n\n\n\n\n\n\n\nData Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types.\n\n\n\n\n\n\nUse consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability.\n\n\n\n\n\n\n\nBase R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations.\n\n\n\n\n\nBase R Documentation\nTidyverse Guide\nR for Data Science"
   },
   {
-    "objectID": "appendix/r-base/r-rep-basics.html#function-overview",
-    "href": "appendix/r-base/r-rep-basics.html#function-overview",
-    "title": "Tutorial on rep function in R",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#introduction",
+    "href": "appendix/r-topics/r-data-frames-basics.html#introduction",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation."
+    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing."
   },
   {
-    "objectID": "appendix/r-base/r-rep-basics.html#arguments-explanation",
-    "href": "appendix/r-base/r-rep-basics.html#arguments-explanation",
-    "title": "Tutorial on rep function in R",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#getting-started",
+    "href": "appendix/r-topics/r-data-frames-basics.html#getting-started",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "The rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2"
+    "text": "# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy"
   },
   {
-    "objectID": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
-    "href": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
-    "title": "Tutorial on rep function in R",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "Combining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1"
+    "text": "data.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example"
   },
   {
-    "objectID": "appendix/r-base/r-rep-basics.html#examples",
-    "href": "appendix/r-base/r-rep-basics.html#examples",
-    "title": "Tutorial on rep function in R",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
+    "href": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "Basic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3"
+    "text": "Combine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered"
   },
   {
-    "objectID": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
-    "href": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
-    "title": "Tutorial on rep function in R",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
+    "href": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+    "text": "colnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage."
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html",
-    "href": "appendix/r-base/r-sample-basic.html",
-    "title": "Randomizing Treatments in R Using sample()",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+    "text": "Data Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types."
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
-    "href": "appendix/r-base/r-sample-basic.html#function-description",
-    "title": "Randomizing Treatments in R Using sample()",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#best-practices",
+    "href": "appendix/r-topics/r-data-frames-basics.html#best-practices",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+    "text": "Use consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability."
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
-    "href": "appendix/r-base/r-sample-basic.html#key-features",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Key Features",
-    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#examples",
-    "href": "appendix/r-base/r-sample-basic.html#examples",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Examples",
-    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
-  },
-  {
-    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
-    "href": "appendix/r-base/r-sample-basic.html#best-practices",
-    "title": "Randomizing Treatments in R Using sample()",
-    "section": "Best Practices",
-    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html",
-    "href": "appendix/r-base/r-gl-basics.html",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#conclusion",
+    "href": "appendix/r-topics/r-data-frames-basics.html#conclusion",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R.\n\n\n\n\n\n\n\nThe gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor.\n\n\n\n\n\n\n\n\n\nCreates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment\n\n\n\n\n\n\n\n\n\n\n\nCreate factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\n\n\ncustom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High\n\n\n\n\n\n\n\n\n\nMismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n.\n\n\n\n\n\n\nAlways use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str().\n\n\n\n\n\n\n\nThe gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments.\n\n\n\n\n\n\nR Documentation on gl\nANOVA in R Tutorial"
+    "text": "Base R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations."
   },
   {
-    "objectID": "appendix/r-base/r-gl-basics.html#introduction",
-    "href": "appendix/r-base/r-gl-basics.html#introduction",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
+    "href": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
+    "title": "Creating Data Frames in R",
     "section": "",
-    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#getting-started",
-    "href": "appendix/r-base/r-gl-basics.html#getting-started",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "The gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
-    "href": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Creates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment"
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#in-depth-examples",
-    "href": "appendix/r-base/r-gl-basics.html#in-depth-examples",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Create factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#advanced-features",
-    "href": "appendix/r-base/r-gl-basics.html#advanced-features",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "custom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High"
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Mismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#best-practices",
-    "href": "appendix/r-base/r-gl-basics.html#best-practices",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "Always use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str()."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#conclusion",
-    "href": "appendix/r-base/r-gl-basics.html#conclusion",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "The gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments."
-  },
-  {
-    "objectID": "appendix/r-base/r-gl-basics.html#references-and-resources",
-    "href": "appendix/r-base/r-gl-basics.html#references-and-resources",
-    "title": "R Tutorial: Using gl and Related ANOVA Functions",
-    "section": "",
-    "text": "R Documentation on gl\nANOVA in R Tutorial"
+    "text": "Base R Documentation\nTidyverse Guide\nR for Data Science"
   },
   {
     "objectID": "appendix/r-base/r-interaction-basics.html",
@@ -2520,74 +2443,221 @@
     "text": "R Documentation on interaction\nANOVA in R Tutorial"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html",
-    "href": "appendix/r-topics/r-data-frames-basics.html",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html",
+    "href": "appendix/r-base/r-gl-basics.html",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing.\n\n\n\n\n\n\n\n\n# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\ndata.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\nCombine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\ncolnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage.\n\n\n\n\n\n\n\n\nData Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types.\n\n\n\n\n\n\nUse consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability.\n\n\n\n\n\n\n\nBase R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations.\n\n\n\n\n\nBase R Documentation\nTidyverse Guide\nR for Data Science"
+    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R.\n\n\n\n\n\n\n\nThe gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor.\n\n\n\n\n\n\n\n\n\nCreates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment\n\n\n\n\n\n\n\n\n\n\n\nCreate factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\n\n\ncustom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High\n\n\n\n\n\n\n\n\n\nMismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n.\n\n\n\n\n\n\nAlways use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str().\n\n\n\n\n\n\n\nThe gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments.\n\n\n\n\n\n\nR Documentation on gl\nANOVA in R Tutorial"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#introduction",
-    "href": "appendix/r-topics/r-data-frames-basics.html#introduction",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#introduction",
+    "href": "appendix/r-base/r-gl-basics.html#introduction",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing."
+    "text": "The gl function in R is used to generate factor levels for balanced designs. It is particularly useful in creating factors for experimental designs, enabling users to set up data for analysis of variance (ANOVA) efficiently.\n\n\n\n\nConstructing balanced datasets for factorial experiments.\nSimplifying the creation of factor levels in simulations.\nPreparing data for linear modeling and ANOVA.\n\n\n\n\n\nStreamlines the creation of balanced datasets.\nReduces errors in data preparation.\nIntegrates seamlessly with ANOVA-related functions in R."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#getting-started",
-    "href": "appendix/r-topics/r-data-frames-basics.html#getting-started",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#getting-started",
+    "href": "appendix/r-base/r-gl-basics.html#getting-started",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy"
+    "text": "The gl function is part of base R, so no additional libraries are required.\n\n\n\n\n# Generate a factor with 3 levels, each repeated 5 times\nfactor_levels &lt;- gl(n = 3, k = 5, length = 15)\nprint(factor_levels)\n\n [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3\nLevels: 1 2 3\n\n\nAnnotations:\n\nn: Number of levels.\nk: Number of repetitions per level.\nlength: Total length of the factor."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
+    "href": "appendix/r-base/r-gl-basics.html#key-functions-and-features",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "data.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example"
+    "text": "Creates balanced factors by specifying the number of levels, repetitions, and total length.\n\n\n\ngl(n, k, length = n*k, labels = NULL)\n\nn: Number of levels.\nk: Repetitions of each level.\nlength: Total length of the factor.\nlabels: Custom labels for the factor levels.\n\n\n\n\n\n# Example with custom labels\nfactor_levels &lt;- gl(n = 2, k = 4, labels = c(\"Control\", \"Treatment\"))\nprint(factor_levels)\n\n[1] Control   Control   Control   Control   Treatment Treatment Treatment\n[8] Treatment\nLevels: Control Treatment"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
-    "href": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#in-depth-examples",
+    "href": "appendix/r-base/r-gl-basics.html#in-depth-examples",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "Combine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered"
+    "text": "Create factors for a 2x3 factorial design.\n\n\n\n\nDefine two factors using gl.\nCombine factors into a dataset.\n\n\n\n\n\n# Factor 1: Treatment with 2 levels\ntreatment &lt;- gl(n = 2, k = 3, labels = c(\"Low\", \"High\"))\n\n# Factor 2: Dose with 3 levels\ndose &lt;- gl(n = 3, k = 1, length = 6, labels = c(\"Low\", \"Medium\", \"High\"))\n\n# Combine into a data frame\ndata &lt;- data.frame(Treatment = treatment, Dose = dose)\nprint(data)\n\n  Treatment   Dose\n1       Low    Low\n2       Low Medium\n3       Low   High\n4      High    Low\n5      High Medium\n6      High   High\n\n\n\n\n\n\n\n\nConduct a one-way ANOVA on a dataset.\n\n\n\n\nSimulate data.\nFit an ANOVA model.\n\n\n\n\n\n# Simulate data\nset.seed(123)\ngroup &lt;- gl(3, 10, labels = c(\"A\", \"B\", \"C\"))\nresponse &lt;- c(rnorm(10, mean = 5), rnorm(10, mean = 6), rnorm(10, mean = 7))\n\n# Create a data frame\ndata &lt;- data.frame(Group = group, Response = response)\n\n# Perform ANOVA\nanova_model &lt;- aov(Response ~ Group, data = data)\nsummary(anova_model)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nGroup        2  12.24   6.122   6.435 0.00518 **\nResiduals   27  25.68   0.951                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
-    "href": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#advanced-features",
+    "href": "appendix/r-base/r-gl-basics.html#advanced-features",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "colnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage."
+    "text": "custom_labels &lt;- gl(n = 3, k = 5, labels = c(\"Group1\", \"Group2\", \"Group3\"))\nprint(custom_labels)\n\n [1] Group1 Group1 Group1 Group1 Group1 Group2 Group2 Group2 Group2 Group2\n[11] Group3 Group3 Group3 Group3 Group3\nLevels: Group1 Group2 Group3\n\n\n\n\n\nCombine factors to create interaction terms.\n\ninteraction_factor &lt;- interaction(treatment, dose)\nprint(interaction_factor)\n\n[1] Low.Low     Low.Medium  Low.High    High.Low    High.Medium High.High  \nLevels: Low.Low High.Low Low.Medium High.Medium Low.High High.High"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-base/r-gl-basics.html#troubleshooting-and-faqs",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "Data Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types."
+    "text": "Mismatch in lengths: Ensure length matches n * k if specified.\nIncorrect labels: Verify the number of labels matches n."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#best-practices",
-    "href": "appendix/r-topics/r-data-frames-basics.html#best-practices",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#best-practices",
+    "href": "appendix/r-base/r-gl-basics.html#best-practices",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "Use consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability."
+    "text": "Always use descriptive labels for factors for clarity.\nUse gl in combination with other functions like expand.grid for complex designs.\nValidate the structure of your factors using table() or str()."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#conclusion",
-    "href": "appendix/r-topics/r-data-frames-basics.html#conclusion",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#conclusion",
+    "href": "appendix/r-base/r-gl-basics.html#conclusion",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "Base R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations."
+    "text": "The gl function is a versatile tool for creating factors in R.\nIt simplifies the setup of balanced designs and integrates seamlessly with ANOVA workflows.\n\n\n\n\n\nExplore interactions between factors.\nApply gl in complex factorial experiments."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
-    "href": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-base/r-gl-basics.html#references-and-resources",
+    "href": "appendix/r-base/r-gl-basics.html#references-and-resources",
+    "title": "R Tutorial: Using gl and Related ANOVA Functions",
     "section": "",
-    "text": "Base R Documentation\nTidyverse Guide\nR for Data Science"
+    "text": "R Documentation on gl\nANOVA in R Tutorial"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html",
+    "href": "appendix/r-base/r-sample-basic.html",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
+    "href": "appendix/r-base/r-sample-basic.html#function-description",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "",
+    "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
+    "href": "appendix/r-base/r-sample-basic.html#key-features",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Key Features",
+    "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#examples",
+    "href": "appendix/r-base/r-sample-basic.html#examples",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Examples",
+    "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
+  },
+  {
+    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
+    "href": "appendix/r-base/r-sample-basic.html#best-practices",
+    "title": "Randomizing Treatments in R Using sample()",
+    "section": "Best Practices",
+    "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html",
+    "href": "appendix/r-base/r-rep-basics.html",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation.\n\n\n\nThe rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2\n\n\n\n\n\n\nCombining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1\n\n\n\n\n\nBasic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3\n\n\n\n\n\nNegative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#function-overview",
+    "href": "appendix/r-base/r-rep-basics.html#function-overview",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function in R replicates the elements of vectors. It is commonly used to:\n\nRepeat single values or sequences.\nExpand data sets with repetitive patterns.\nCreate predictable test cases for analysis or debugging.\n\nIt is a versatile function that supports various ways to replicate elements, making it a fundamental tool in data manipulation."
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "href": "appendix/r-base/r-rep-basics.html#arguments-explanation",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "The rep function has the following arguments:\n\nx:\n\nDescription: The vector to be replicated.\nType: Numeric, character, logical, or any other R object.\nRequired: Yes.\nExamples:\n\n\n\nrep(1:3, times = 2) # Output: 1 2 3 1 2 3\n\n[1] 1 2 3 1 2 3\n\n\n\ntimes:\n\nDescription: Specifies the number of times to repeat each element.\nType: Numeric vector (must be non-negative integers).\nDefault: None; must be explicitly defined if used.\nExamples:\n\n\n\nrep(1:3, times = c(2, 3, 1)) # Output: 1 1 2 2 2 3\n\n[1] 1 1 2 2 2 3\n\n\n\neach:\n\nDescription: Specifies the number of times to repeat each element individually.\nType: Numeric scalar (non-negative integer).\nDefault: 1.\nExamples:\n\n\n\nrep(1:3, each = 2) # Output: 1 1 2 2 3 3\n\n[1] 1 1 2 2 3 3\n\n\n\nlength.out:\n\nDescription: Specifies the total length of the resulting vector.\nType: Numeric scalar.\nDefault: NULL (calculated based on other arguments).\nExamples:\n\n\n\nrep(1:3, length.out = 5) # Output: 1 2 3 1 2\n\n[1] 1 2 3 1 2"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "href": "appendix/r-base/r-rep-basics.html#nuances-and-advanced-features",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Combining each and times:\n\nWhen both each and times are specified, each operates first, followed by times.\n\n\n\nrep(1:2, each = 2, times = 2) # Output: 1 1 2 2 1 1 2 2\n\n[1] 1 1 2 2 1 1 2 2\n\n\n\nNon-integer inputs:\n\nNon-integer times, each, or length.out values are truncated to their integer part.\n\n\n\nrep(1:2, times = 2.7) # Output: 1 1 2 2\n\n[1] 1 2 1 2\n\n\n\nHandling NA values:\n\nWorks seamlessly with vectors containing NA.\n\n\n\nrep(c(NA, 1), each = 2) # Output: NA NA 1 1\n\n[1] NA NA  1  1"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#examples",
+    "href": "appendix/r-base/r-rep-basics.html#examples",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Basic Usage:\n\n# Repeat the sequence twice\nrep(1:3, times = 2)\n\n[1] 1 2 3 1 2 3\n\n# Output: 1 2 3 1 2 3\n\nUsing each:\n\n# Repeat each element twice\nrep(1:3, each = 2)\n\n[1] 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3\n\nCustom Length:\n\n# Truncate the output to a specific length\nrep(1:3, length.out = 4)\n\n[1] 1 2 3 1\n\n# Output: 1 2 3 1\n\nCombining each and times:\n\n# A complex repetition pattern\nrep(1:3, each = 2, times = 3)\n\n [1] 1 1 2 2 3 3 1 1 2 2 3 3 1 1 2 2 3 3\n\n# Output: 1 1 2 2 3 3 1 1 2 2 3 3"
+  },
+  {
+    "objectID": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "href": "appendix/r-base/r-rep-basics.html#common-errors-and-troubleshooting",
+    "title": "Tutorial on rep function in R",
+    "section": "",
+    "text": "Negative values for times or each:\n\nError: Error in rep.int: invalid 'times' argument\nFix: Ensure times and each are non-negative integers.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = -1) # Error\n```\n\n\nMismatched lengths for times:\n\nThe times vector length must match x or be recycled appropriately.\n\n\n\n```{r}\n#| eval: false\n\nrep(1:3, times = c(1, 2)) # Warning: longer object length is not a multiple of shorter object length\n```\n\n\nNon-numeric inputs:\n\nEnsure that all arguments like length.out, each, and times are numeric.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = \"two\") # Error\n```\n\n\nRecycling:\n\nIf times or each is shorter than x, it generates an error.\n\n\n\n```{r}\n#| eval: false\nrep(1:3, times = c(2, 3)) # Output: 1 1 2 2 2 3\n```"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html",
+    "href": "appendix/r-topics/r-data-transformation.html",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Data transformation and wrangling involve cleaning, reshaping, and modifying data to prepare it for analysis. This tutorial introduces:\n\nBase R Functions: subset(), transform(), merge().\ntidyverse Functions: dplyr::filter(), dplyr::mutate(), tidyr::pivot_longer(), and others.\n\n\n\n\n\nFiltering rows based on conditions.\nAdding or modifying columns.\nReshaping data between wide and long formats.\nCombining or joining datasets.\n\n\n\n\n\nBase R: Built into R, no additional installations required.\ntidyverse: Consistent syntax and powerful chaining with the pipe operator |&gt;.\n\n\n\n\n\n\n\n\n# Base R requires no additional loading.\n\n# Load tidyverse package using pacman\npacman::p_load(tidyverse)\n\n\n\n\n\n\n\n\n\nDescription: Extract rows based on a condition.\nSyntax:\nsubset(x, subset, select = NULL)\nArguments:\n\nx: A data frame or similar object.\nsubset: Logical expression indicating rows to keep.\nselect: Columns to retain, or NULL to keep all.\n\nExample:\n\ndata(iris)\n# Filter rows where Species is \"setosa\"\nsubset(iris, Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Add or modify columns in a data frame.\nSyntax:\ntransform(data, ...)\nArguments:\n\ndata: A data frame.\n…: Expressions specifying transformations.\n\nExample:\n\n# Add a new column for Sepal Area\niris &lt;- transform(iris, Sepal.Area = Sepal.Length * Sepal.Width)\nhead(iris)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets based on common columns (keys).\nSyntax:\nmerge(x, y, by, all)\nArguments:\n\nx, y: Data frames to merge.\nby: Column names to use as keys. Defaults to all common columns.\nall: Logical. TRUE for full outer join; FALSE for inner join.\n\nExample:\n\n# Create example datasets\ndf1 &lt;- data.frame(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- data.frame(ID = 2:4, Score = c(15, 25, 35))\n# Merge on ID\nmerge(df1, df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\nDescription: Select rows using conditions with dplyr::filter().\nSyntax:\ndplyr::filter(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Logical conditions. Rows where the condition is TRUE are retained.\n\nExample:\n\n# Filter rows where Species is \"setosa\"\niris |&gt;\n  dplyr::filter(Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Create or modify columns using dplyr::mutate().\nSyntax:\ndplyr::mutate(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Name-value pairs where names are new or existing column names, and values are expressions.\n\nExample:\n\n# Add Sepal.Area column\niris |&gt;\n  dplyr::mutate(Sepal.Area = Sepal.Length * Sepal.Width)\n\n\n  \n\n\n\n\n\n\nDescription: Convert data between wide and long formats with tidyr::pivot_longer().\nSyntax:\ntidyr::pivot_longer(data, cols, names_to, values_to)\nArguments:\n\ndata: A data frame or tibble.\ncols: Columns to pivot into rows.\nnames_to: Name of the new column containing the names of the pivoted variables.\nvalues_to: Name of the new column containing the values of the pivoted variables.\n\nExample:\n\n# Convert iris to long format\niris_long &lt;- iris |&gt;\n  tidyr::pivot_longer(\n    cols = starts_with(\"Sepal\"),\n    names_to = \"Measurement\",\n    values_to = \"Value\"\n  )\nhead(iris_long)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets using dplyr::inner_join().\nSyntax:\ndplyr::inner_join(x, y, by)\nArguments:\n\nx, y: Data frames or tibbles to join.\nby: Column names to join by. Defaults to common column names.\n\nExample:\n\ndf1 &lt;- tibble(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- tibble(ID = 2:4, Score = c(15, 25, 35))\ndf1 |&gt;\n  dplyr::inner_join(df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\n\nObjective: Prepare mtcars for analysis by filtering rows, creating a new column, and summarizing data.\nSteps:\n\nFilter cars with mpg &gt; 20.\nAdd a column Weight_kg converting wt to kilograms.\nSummarize average MPG by the number of cylinders.\n\nCode:\n\n# Using Base R\nmtcars_filtered &lt;- subset(mtcars, mpg &gt; 20)\nmtcars_filtered &lt;- transform(mtcars_filtered, Weight_kg = wt * 453.6)\naggregate(mpg ~ cyl, data = mtcars_filtered, mean)\n\n\n  \n\n\n# Using tidyverse\nmtcars |&gt;\n  dplyr::filter(mpg &gt; 20) |&gt;\n  dplyr::mutate(Weight_kg = wt * 453.6) |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))\n\n\n  \n\n\n\n\n\n\n\n\n\nBase R: Use tapply() for custom aggregations. tidyverse: Leverage dplyr::group_by() for grouped operations.\nExample:\n\n# Base R\ntapply(mtcars$mpg, mtcars$cyl, mean)\n\n       4        6        8 \n26.66364 19.74286 15.10000 \n\n# tidyverse\nmtcars |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))\n\n\n  \n\n\n\n\n\n\n\n\n\n\ntidyr::pivot_longer() errors:\n\nEnsure column names in cols exist.\nUse names_pattern for extracting variable parts.\n\nMerge Mismatches in Base R:\n\nVerify columns in by are consistent between datasets.\n\n\n\n\n\n\n\nUse descriptive column names.\nKeep data in tidy format for easier analysis.\nPrefer tidyverse for a consistent and readable workflow.\n\n\n\n\n\n\n\nBase R: Ideal for simple tasks.\ntidyverse: Superior for complex workflows with a consistent syntax.\n\n\n\n\nExplore additional tidyverse packages like lubridate (dates) or stringr (text manipulation).\n\n\n\n\n\nBase R Documentation\ntidyverse Documentation\nR for Data Science"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#introduction",
+    "href": "appendix/r-topics/r-data-transformation.html#introduction",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Data transformation and wrangling involve cleaning, reshaping, and modifying data to prepare it for analysis. This tutorial introduces:\n\nBase R Functions: subset(), transform(), merge().\ntidyverse Functions: dplyr::filter(), dplyr::mutate(), tidyr::pivot_longer(), and others.\n\n\n\n\n\nFiltering rows based on conditions.\nAdding or modifying columns.\nReshaping data between wide and long formats.\nCombining or joining datasets.\n\n\n\n\n\nBase R: Built into R, no additional installations required.\ntidyverse: Consistent syntax and powerful chaining with the pipe operator |&gt;."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#getting-started",
+    "href": "appendix/r-topics/r-data-transformation.html#getting-started",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "# Base R requires no additional loading.\n\n# Load tidyverse package using pacman\npacman::p_load(tidyverse)"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-data-transformation.html#key-functions-and-features",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Description: Extract rows based on a condition.\nSyntax:\nsubset(x, subset, select = NULL)\nArguments:\n\nx: A data frame or similar object.\nsubset: Logical expression indicating rows to keep.\nselect: Columns to retain, or NULL to keep all.\n\nExample:\n\ndata(iris)\n# Filter rows where Species is \"setosa\"\nsubset(iris, Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Add or modify columns in a data frame.\nSyntax:\ntransform(data, ...)\nArguments:\n\ndata: A data frame.\n…: Expressions specifying transformations.\n\nExample:\n\n# Add a new column for Sepal Area\niris &lt;- transform(iris, Sepal.Area = Sepal.Length * Sepal.Width)\nhead(iris)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets based on common columns (keys).\nSyntax:\nmerge(x, y, by, all)\nArguments:\n\nx, y: Data frames to merge.\nby: Column names to use as keys. Defaults to all common columns.\nall: Logical. TRUE for full outer join; FALSE for inner join.\n\nExample:\n\n# Create example datasets\ndf1 &lt;- data.frame(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- data.frame(ID = 2:4, Score = c(15, 25, 35))\n# Merge on ID\nmerge(df1, df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\nDescription: Select rows using conditions with dplyr::filter().\nSyntax:\ndplyr::filter(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Logical conditions. Rows where the condition is TRUE are retained.\n\nExample:\n\n# Filter rows where Species is \"setosa\"\niris |&gt;\n  dplyr::filter(Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Create or modify columns using dplyr::mutate().\nSyntax:\ndplyr::mutate(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Name-value pairs where names are new or existing column names, and values are expressions.\n\nExample:\n\n# Add Sepal.Area column\niris |&gt;\n  dplyr::mutate(Sepal.Area = Sepal.Length * Sepal.Width)\n\n\n  \n\n\n\n\n\n\nDescription: Convert data between wide and long formats with tidyr::pivot_longer().\nSyntax:\ntidyr::pivot_longer(data, cols, names_to, values_to)\nArguments:\n\ndata: A data frame or tibble.\ncols: Columns to pivot into rows.\nnames_to: Name of the new column containing the names of the pivoted variables.\nvalues_to: Name of the new column containing the values of the pivoted variables.\n\nExample:\n\n# Convert iris to long format\niris_long &lt;- iris |&gt;\n  tidyr::pivot_longer(\n    cols = starts_with(\"Sepal\"),\n    names_to = \"Measurement\",\n    values_to = \"Value\"\n  )\nhead(iris_long)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets using dplyr::inner_join().\nSyntax:\ndplyr::inner_join(x, y, by)\nArguments:\n\nx, y: Data frames or tibbles to join.\nby: Column names to join by. Defaults to common column names.\n\nExample:\n\ndf1 &lt;- tibble(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- tibble(ID = 2:4, Score = c(15, 25, 35))\ndf1 |&gt;\n  dplyr::inner_join(df2, by = \"ID\")"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#in-depth-examples",
+    "href": "appendix/r-topics/r-data-transformation.html#in-depth-examples",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Objective: Prepare mtcars for analysis by filtering rows, creating a new column, and summarizing data.\nSteps:\n\nFilter cars with mpg &gt; 20.\nAdd a column Weight_kg converting wt to kilograms.\nSummarize average MPG by the number of cylinders.\n\nCode:\n\n# Using Base R\nmtcars_filtered &lt;- subset(mtcars, mpg &gt; 20)\nmtcars_filtered &lt;- transform(mtcars_filtered, Weight_kg = wt * 453.6)\naggregate(mpg ~ cyl, data = mtcars_filtered, mean)\n\n\n  \n\n\n# Using tidyverse\nmtcars |&gt;\n  dplyr::filter(mpg &gt; 20) |&gt;\n  dplyr::mutate(Weight_kg = wt * 453.6) |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#advanced-features",
+    "href": "appendix/r-topics/r-data-transformation.html#advanced-features",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Base R: Use tapply() for custom aggregations. tidyverse: Leverage dplyr::group_by() for grouped operations.\nExample:\n\n# Base R\ntapply(mtcars$mpg, mtcars$cyl, mean)\n\n       4        6        8 \n26.66364 19.74286 15.10000 \n\n# tidyverse\nmtcars |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-data-transformation.html#troubleshooting-and-faqs",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "tidyr::pivot_longer() errors:\n\nEnsure column names in cols exist.\nUse names_pattern for extracting variable parts.\n\nMerge Mismatches in Base R:\n\nVerify columns in by are consistent between datasets."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#best-practices",
+    "href": "appendix/r-topics/r-data-transformation.html#best-practices",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Use descriptive column names.\nKeep data in tidy format for easier analysis.\nPrefer tidyverse for a consistent and readable workflow."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#conclusion",
+    "href": "appendix/r-topics/r-data-transformation.html#conclusion",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Base R: Ideal for simple tasks.\ntidyverse: Superior for complex workflows with a consistent syntax.\n\n\n\n\nExplore additional tidyverse packages like lubridate (dates) or stringr (text manipulation)."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#references-and-resources",
+    "href": "appendix/r-topics/r-data-transformation.html#references-and-resources",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Base R Documentation\ntidyverse Documentation\nR for Data Science"
   },
   {
     "objectID": "appendix/r-topics/r-factors-basics.html",
