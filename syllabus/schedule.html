@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Davood Tofighi, Ph.D.">
+<meta name="dcterms.date" content="2025-01-06">
 
 <title>STAT 454/545 - Course Schedule – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
@@ -138,17 +140,36 @@ ul.task-list li input[type="checkbox"] {
                       </div>
   </div>
     
-  
+  <div class="quarto-title-meta-author column-page">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Davood Tofighi, Ph.D. </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
   <div class="quarto-title-meta column-page">
 
-      
+        
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">05-Jan-2025</p>
+        <p class="date">January 6, 2025</p>
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 6, 2025</p>
+      </div>
+    </div>
       
     </div>
     
@@ -295,31 +316,12 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<!-- | Week | Date                      | Title                                 | Topics Covered                                                                                                           | Reading Assignments                                        | Assignments/Assessments                                  |
-| ---- | ------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
-| 1    | Tue, Jan 21 - Thu, Jan 23 | Introduction to Experimental Design   | Purpose of experimentation, observational studies vs. experiments, key principles (randomization, replication, control). | Dean et al., Ch. 1 (Sec. 1.1, 1.1.1); Ch. 2 (Sec. 2.1–2.2) | Assignment 1: Basics of Experimental Design (due Week 2) |
-| 2    | Tue, Jan 28 - Thu, Jan 30 | Completely Randomized Designs (CRD)   | Randomization procedures, CRD structure, one-way ANOVA model, assumptions, conducting ANOVA in R.                        | Dean et al., Ch. 3 (Sec. 3.1–3.3, 3.4–3.5)                 | Assignment 2: CRD Analysis (due Week 3)                  |
-| 3    | Tue, Feb 4 - Thu, Feb 6   | Multiple Comparisons & Contrasts      | Post-hoc tests (Tukey, Bonferroni, Scheffé), linear contrasts, orthogonal vs. non-orthogonal comparisons.                | Dean et al., Ch. 4 (Sec. 4.1–4.4)                          | Assignment 3: Multiple Comparisons (due Week 4)          |
-| 4    | Tue, Feb 11 - Thu, Feb 13 | Checking Model Assumptions            | Residual analysis, detecting non-normality, transformations, addressing heteroscedasticity, outliers.                    | Dean et al., Ch. 5 (Sec. 5.1–5.3)                          | Assignment 4: Residual Analysis (due Week 5)             |
-| 5    | Tue, Feb 18 - Thu, Feb 20 | Factorial Designs                     | Two-factor factorial designs, main effects, interactions, graphical representation, two-way ANOVA.                       | Dean et al., Ch. 6 (Sec. 6.1–6.5)                          | Assignment 5: Two-Factor ANOVA (due Week 6)              |
-| 6    | Tue, Feb 25 - Thu, Feb 27 | Higher-Order Factorial Designs        | Three-way factorial designs, higher-order interactions, dealing with unbalanced designs.                                 | Dean et al., Ch. 7 (Sec. 7.1–7.6)                          | Assignment 6: Three-Way Factorial Analysis (due Week 7)  |
-| 7    | Tue, Mar 4 - Thu, Mar 6   | Midterm Exam & Review                 | Review of foundational concepts from Weeks 1–6; midterm exam covering CRD, RCBD, contrasts, factorial designs.           | Review all previous chapters and notes.                    | Midterm Exam (Week 7)                                    |
-| 8    | Tue, Mar 11 - Thu, Mar 13 | Analysis of Covariance (ANCOVA)       | Adjusting for covariates, reducing error variance, hypothesis testing, adjusting treatment means.                        | Dean et al., Ch. 9 (Sec. 9.1–9.4)                          | Assignment 7: ANCOVA Analysis (due Week 8)               |
-|      | Tue, Mar 18 - Thu, Mar 20 | **Spring Break**                      | No class                                                                                                                 |                                                            |                                                          |
-| 9    | Tue, Mar 25 - Thu, Mar 27 | Blocking & RCBD                       | Concept of blocking, RCBD setup, statistical models, ANOVA for RCBD, assessing blocking efficiency.                      | Dean et al., Ch. 10 (Sec. 10.1–10.4, Sec. 10.6–10.8)       | Assignment 8: RCBD Analysis (due Week 10)                |
-| 10   | Tue, Apr 1 - Thu, Apr 3   | Complete Block Designs                | Extension of RCBD, factorial treatments in blocks, variance components analysis.                                         | Dean et al., Ch. 10 (Sec. 10.6–10.8)                       | Assignment 9: Complete Block Designs (due Week 11)       |
-| 11   | Tue, Apr 8 - Thu, Apr 10  | Row–Column Designs                    | Designs with two blocking factors (Latin squares, Youden designs), randomization procedures, ANOVA.                      | Dean et al., Ch. 12 (Sec. 12.1–12.4)                       | Assignment 10: Row–Column Analysis (due Week 12)         |
-| 12   | Tue, Apr 15 - Thu, Apr 17 | Random-Effects & Mixed-Effects Models | Fixed vs. random effects, single random-effect models, variance component estimation, REML estimation.                   | Dean et al., Ch. 17 (Sec. 17.1–17.8)                       | Assignment 11: Random and Mixed Models (due Week 13)     |
-| 13   | Tue, Apr 22 - Thu, Apr 24 | Nested Models                         | Nested models, random-effects nested models, variance components for nested factors, analysis in R.                      | Dean et al., Ch. 18 (Sec. 18.1–18.4)                       | Assignment 12: Nested Models (due Week 14)               |
-| 14   | Tue, Apr 29 - Thu, May 1  | Split-Plot Designs                    | Split-plot designs, whole plots and split plots, statistical models, ANOVA, split-split-plot designs.                    | Dean et al., Ch. 19 (Sec. 19.1–19.5)                       | Assignment 13: Split-Plot Analysis (due Week 15)         |
-| 15   | Tue, May 6 - Thu, May 8   | Catching Up & Adjustments             | Reviewing and covering additional materials as needed.                                                                   |                                                            |                                                          |
-| 16   | Tue, May 13 - Thu, May 15 | Review & Final Exam                   | Comprehensive review and final exam preparation; administering final exam.                                               | Review all chapters and notes.                             | Final Exam (Week 15)                                     | -->
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Davood Tofighi, Ph.D.</div></div></section></div></main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
 <footer class="site-footer">
     <div class="container text-center">
