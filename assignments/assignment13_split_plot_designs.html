@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>assignment13_split_plot_designs – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 13 - Split Plot Designs – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,12 +67,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 13 - Split Plot Designs – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -132,19 +162,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Assignment 13 - Split Plot Designs</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">20-Dec-2024</p>
+        <p class="date">05-Jan-2025</p>
       </div>
     </div>
     
@@ -155,18 +185,256 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#drug-experiment" id="toc-drug-experiment" class="nav-link" data-scroll-target="#drug-experiment"><strong>19.1 Drug Experiment</strong></a>
+  <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions:</a></li>
+  </ul></li>
+  <li><a href="#fishing-line-experiment" id="toc-fishing-line-experiment" class="nav-link" data-scroll-target="#fishing-line-experiment"><strong>19.2 Fishing Line Experiment</strong></a>
+  <ul class="collapse">
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1">Questions:</a></li>
+  <li><a href="#grading-allocation" id="toc-grading-allocation" class="nav-link" data-scroll-target="#grading-allocation">Grading Allocation</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ul>
+<li><strong>Objective</strong>: Analyze split-plot designs, including whole-plot and split-plot effects, interaction plots, and post-hoc tests.</li>
+<li>Use R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.</li>
+<li>Clearly explain your analysis process for full credit.</li>
+<li>Submit your assignment as a single PDF file.</li>
+</ul>
+<p><strong>total: 100 points</strong></p>
+</section>
+<section id="drug-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="drug-experiment"><strong>19.1 Drug Experiment</strong></h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 19, Exercise 1</strong></p>
+<p>An experiment designed as a <strong>split-plot design</strong> evaluated eight drugs (Factor <span class="math inline">\(A\)</span>) for treating arthritis. The second factor was <strong>dose</strong> (Factor <span class="math inline">\(B\)</span>) at 2 levels, and the third was <strong>time</strong> (Factor <span class="math inline">\(C\)</span>) at 2 levels. The experimental units were 64 rats, and the response was the amount of fluid (in mL) measured in the pleural cavity. The experiment was structured into blocks, whole plots, and split plots:</p>
+<ul>
+<li><strong>Blocks</strong>: Two blocks of size 32, measured on two separate days.</li>
+<li><strong>Whole Plots</strong>: Each block was divided into four whole plots of size 8.</li>
+<li><strong>Split Plots</strong>: Each whole plot was subdivided, with one drug assigned to each rat.</li>
+</ul>
+<p>The logarithms of the response data were used for analysis.</p>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Whole Plot</strong></th>
+<th><strong>Block</strong></th>
+<th><strong>Dose (<span class="math inline">\(B\)</span>)</strong></th>
+<th><strong>Time (<span class="math inline">\(C\)</span>)</strong></th>
+<th><strong>Drug (<span class="math inline">\(A\)</span>)</strong></th>
+<th><strong>Data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Block I</td>
+<td>1</td>
+<td>1</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(5.7, 8.6, 6.9, 6.6, 6.7, 7.4, 5.7, 6.7\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Block I</td>
+<td>1</td>
+<td>2</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(8.4, 9.6, 9.3, 11.1, 12.5, 8.7, 9.3, 9.5\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Block I</td>
+<td>2</td>
+<td>1</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(5.1, 7.2, 6.8, 6.4, 6.6, 8.7, 6.7, 7.0\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Block I</td>
+<td>2</td>
+<td>2</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(7.3, 8.7, 7.9, 6.9, 8.9, 9.5, 8.3, 11.3\)</span></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Block II</td>
+<td>1</td>
+<td>1</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(5.8, 6.8, 7.0, 8.5, 7.8, 7.3, 6.4, 8.5\)</span></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Block II</td>
+<td>1</td>
+<td>2</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(9.1, 10.8, 6.9, 12.2, 9.9, 10.4, 10.6, 10.5\)</span></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Block II</td>
+<td>2</td>
+<td>1</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(5.4, 7.9, 8.0, 6.4, 8.4, 7.1, 6.4, 7.2\)</span></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Block II</td>
+<td>2</td>
+<td>2</td>
+<td>1, 2, 3, 4, 5, 6, 7, 8</td>
+<td><span class="math inline">\(5.3, 10.4, 8.2, 8.1, 10.9, 9.8, 8.4, 14.6\)</span></td>
+</tr>
+</tbody>
+</table>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions:</h3>
+<ol type="a">
+<li><p>Write out a model for this experiment.</p></li>
+<li><p>Calculate an analysis of variance table using the logarithms of the data. Distinguish between the effects measured on the whole plots and those measured on the split plots. Identify the whole-plot error and split-plot error.</p></li>
+<li><p>Test any hypotheses of interest and state your conclusions clearly.</p></li>
+<li><p>Examine interaction plots of any important interactions. Calculate a set of 95% confidence intervals for the differences between pairs of drugs. State your conclusions.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="fishing-line-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="fishing-line-experiment"><strong>19.2 Fishing Line Experiment</strong></h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 19, Exercise 2</strong></p>
+<p>The experiment compared the strengths of two brands of fishing line exposed to two stress levels (stressed, <span class="math inline">\(S\)</span>; non-stressed, <span class="math inline">\(N\)</span>). Each brand corresponded to two reels (whole plots), and each reel provided four sections of fishing line (split plots). The response was the weight (lbs) required to break the line.</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 20%">
+<col style="width: 29%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Whole Plot</strong></th>
+<th><strong>Brand (<span class="math inline">\(A\)</span>)</strong></th>
+<th><strong>Stress Level (<span class="math inline">\(B\)</span>)</strong></th>
+<th><strong>Data (Weight in lbs)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>N, S, S, N</td>
+<td><span class="math inline">\(6.70, 6.40, 7.20, 7.00\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>S, S, N, N</td>
+<td><span class="math inline">\(8.10, 8.90, 8.00, 6.10\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+<td>S, S, N, N</td>
+<td><span class="math inline">\(8.00, 8.00, 8.75, 8.50\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>1</td>
+<td>N, S, N, S</td>
+<td><span class="math inline">\(8.50, 9.50, 9.70, 9.40\)</span></td>
+</tr>
+</tbody>
+</table>
+<section id="questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="questions-1">Questions:</h3>
+<ol type="a">
+<li><p>Write down a model for this experiment.</p></li>
+<li><p>Construct an analysis of variance table and test the hypotheses of interest. State your conclusions.</p></li>
+<li><p>If you were to repeat this experiment, suggest improvements.</p></li>
+</ol>
+<hr>
+</section>
+<section id="grading-allocation" class="level3">
+<h3 class="anchored" data-anchor-id="grading-allocation">Grading Allocation</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Exercise Title</th>
+<th>Part</th>
+<th>Grade Weight (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Drug Experiment</strong></td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(b)</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(c)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(d)</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td><strong>Fishing Line Experiment</strong></td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(b)</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(c)</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total Score: 100%</strong></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->

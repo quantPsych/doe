@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>assignment12_nested_models – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 12: Nested Models – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,12 +67,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 12: Nested Models – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -132,19 +162,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Assignment 12: Nested Models</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">20-Dec-2024</p>
+        <p class="date">05-Jan-2025</p>
       </div>
     </div>
     
@@ -155,18 +185,282 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#general-mixed-model" id="toc-general-mixed-model" class="nav-link" data-scroll-target="#general-mixed-model">12.3 General Mixed Model</a>
+  <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  </ul></li>
+  <li><a href="#operator-experiment" id="toc-operator-experiment" class="nav-link" data-scroll-target="#operator-experiment">18.6 Operator Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1">Questions</a></li>
+  </ul></li>
+  <li><a href="#table-18.11-manganese-concentrations-percentages-for-the-operator-experiment" id="toc-table-18.11-manganese-concentrations-percentages-for-the-operator-experiment" class="nav-link" data-scroll-target="#table-18.11-manganese-concentrations-percentages-for-the-operator-experiment">Table 18.11 Manganese Concentrations (Percentages) for the Operator Experiment</a>
+  <ul class="collapse">
+  <li><a href="#grading-allocation" id="toc-grading-allocation" class="nav-link" data-scroll-target="#grading-allocation"><strong>Grading Allocation</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ol type="1">
+<li><strong>Objective</strong>: Analyze nested models, including nested random effects, interactions, and post-hoc tests.</li>
+<li>Use R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.</li>
+<li>Clearly explain your analysis process for full credit.</li>
+<li>Submit your assignment as a single PDF file.</li>
+</ol>
+<p><strong>Total Points</strong>: 100</p>
+</section>
+<section id="general-mixed-model" class="level2">
+<h2 class="anchored" data-anchor-id="general-mixed-model">12.3 General Mixed Model</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 12, Exercise 3</strong></p>
+<p>Consider the model:</p>
+<p><span class="math display">\[
+Y_{ijkl} = \mu + \alpha_i + B_j(i) + C_k(ji) + \delta_l + (\alpha\delta)_{il} + (B\delta)_{lj}(i) + \epsilon_{ijkl}
+\]</span></p>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<ol type="a">
+<li><p>Calculate the expected mean squares for all effects in the model.</p></li>
+<li><p>Which ratio would you use to test <span class="math inline">\(H_0: \delta_l + (\alpha\delta)_{il} \, \text{are all equal?}\)</span></p></li>
+<li><p>Which ratio would you use to test <span class="math inline">\(H_0: \sigma^2_\alpha = 0\)</span>?</p></li>
+</ol>
+</section>
+</section>
+<section id="operator-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="operator-experiment">18.6 Operator Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 18, Exercise 6</strong></p>
+<p>An experiment aimed to determine how much variation in measured manganese concentration in steel is due to <strong>operator variability</strong>. Ten steel samples were sliced from a billet, and four operators each measured the manganese content twice per sample in a random order.</p>
+<section id="questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="questions-1">Questions</h3>
+<ol type="a">
+<li><p>Write a model for this experiment. Clearly indicate which effects are <strong>fixed</strong>, <strong>random</strong>, <strong>crossed</strong>, and <strong>nested</strong>.</p></li>
+<li><p>Write the <strong>degrees of freedom</strong>, <strong>sums of squares</strong>, and <strong>expected mean squares</strong> for each source of variation.</p></li>
+<li><p>Investigate whether the normal distribution is a reasonable approximation for the error terms (using the data in Table 18.11). Transformation may be necessary.</p></li>
+<li><p>If the normal distribution is reasonable, analyze the experiment. Obtain variance estimates for the random effects and identify the major sources of variation.</p></li>
+</ol>
+</section>
+</section>
+<section id="table-18.11-manganese-concentrations-percentages-for-the-operator-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="table-18.11-manganese-concentrations-percentages-for-the-operator-experiment">Table 18.11 Manganese Concentrations (Percentages) for the Operator Experiment</h2>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 16%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Sample</strong></th>
+<th><strong>Operator 1</strong></th>
+<th></th>
+<th><strong>Operator 2</strong></th>
+<th></th>
+<th><strong>Operator 3</strong></th>
+<th></th>
+<th><strong>Operator 4</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>1</strong></td>
+<td><strong>2</strong></td>
+<td><strong>1</strong></td>
+<td><strong>2</strong></td>
+<td><strong>1</strong></td>
+<td><strong>2</strong></td>
+<td><strong>1</strong></td>
+<td><strong>2</strong></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0.63</td>
+<td>0.60</td>
+<td>0.62</td>
+<td>0.62</td>
+<td>0.60</td>
+<td>0.60</td>
+<td>0.59</td>
+<td>0.61</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0.64</td>
+<td>0.63</td>
+<td>0.63</td>
+<td>0.64</td>
+<td>0.67</td>
+<td>0.65</td>
+<td>0.62</td>
+<td>0.64</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>0.60</td>
+<td>0.58</td>
+<td>0.60</td>
+<td>0.61</td>
+<td>0.60</td>
+<td>0.60</td>
+<td>0.58</td>
+<td>0.60</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0.75</td>
+<td>0.74</td>
+<td>0.74</td>
+<td>0.74</td>
+<td>0.74</td>
+<td>0.73</td>
+<td>0.73</td>
+<td>0.76</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>0.71</td>
+<td>0.68</td>
+<td>0.69</td>
+<td>0.70</td>
+<td>0.69</td>
+<td>0.67</td>
+<td>0.68</td>
+<td>0.71</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>0.65</td>
+<td>0.63</td>
+<td>0.62</td>
+<td>0.65</td>
+<td>0.63</td>
+<td>0.64</td>
+<td>0.62</td>
+<td>0.64</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>0.67</td>
+<td>0.64</td>
+<td>0.66</td>
+<td>0.67</td>
+<td>0.65</td>
+<td>0.65</td>
+<td>0.64</td>
+<td>0.66</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>0.65</td>
+<td>0.63</td>
+<td>0.65</td>
+<td>0.64</td>
+<td>0.62</td>
+<td>0.62</td>
+<td>0.60</td>
+<td>0.62</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>0.68</td>
+<td>0.66</td>
+<td>0.67</td>
+<td>0.68</td>
+<td>0.67</td>
+<td>0.67</td>
+<td>0.65</td>
+<td>0.68</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>0.67</td>
+<td>0.64</td>
+<td>0.66</td>
+<td>0.66</td>
+<td>0.65</td>
+<td>0.64</td>
+<td>0.64</td>
+<td>0.66</td>
+</tr>
+</tbody>
+</table>
+<section id="grading-allocation" class="level3">
+<h3 class="anchored" data-anchor-id="grading-allocation"><strong>Grading Allocation</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Exercise Title</th>
+<th>Part</th>
+<th>Grade Weight (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>General Mixed Model</strong></td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(b)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(c)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td><strong>Operator Experiment</strong></td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(b)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(c)</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(d)</td>
+<td>30</td>
+</tr>
+<tr class="even">
+<td><strong>Total Score</strong></td>
+<td></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->

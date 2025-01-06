@@ -532,18 +532,53 @@
     "text": "Instructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas\n\n© 2025 Dr. Davood Tofighi | University of New Mexico"
   },
   {
+    "objectID": "assignments/assignment12_nested_models.html",
+    "href": "assignments/assignment12_nested_models.html",
+    "title": "Assignment 12: Nested Models",
+    "section": "",
+    "text": "Objective: Analyze nested models, including nested random effects, interactions, and post-hoc tests.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+  },
+  {
+    "objectID": "assignments/assignment12_nested_models.html#instructions",
+    "href": "assignments/assignment12_nested_models.html#instructions",
+    "title": "Assignment 12: Nested Models",
+    "section": "",
+    "text": "Objective: Analyze nested models, including nested random effects, interactions, and post-hoc tests.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+  },
+  {
+    "objectID": "assignments/assignment12_nested_models.html#general-mixed-model",
+    "href": "assignments/assignment12_nested_models.html#general-mixed-model",
+    "title": "Assignment 12: Nested Models",
+    "section": "12.3 General Mixed Model",
+    "text": "12.3 General Mixed Model\nData Source: Dean et al. (2017), Chapter 12, Exercise 3\nConsider the model:\n\\[\nY_{ijkl} = \\mu + \\alpha_i + B_j(i) + C_k(ji) + \\delta_l + (\\alpha\\delta)_{il} + (B\\delta)_{lj}(i) + \\epsilon_{ijkl}\n\\]\n\nQuestions\n\nCalculate the expected mean squares for all effects in the model.\nWhich ratio would you use to test \\(H_0: \\delta_l + (\\alpha\\delta)_{il} \\, \\text{are all equal?}\\)\nWhich ratio would you use to test \\(H_0: \\sigma^2_\\alpha = 0\\)?"
+  },
+  {
+    "objectID": "assignments/assignment12_nested_models.html#operator-experiment",
+    "href": "assignments/assignment12_nested_models.html#operator-experiment",
+    "title": "Assignment 12: Nested Models",
+    "section": "18.6 Operator Experiment",
+    "text": "18.6 Operator Experiment\nData Source: Dean et al. (2017), Chapter 18, Exercise 6\nAn experiment aimed to determine how much variation in measured manganese concentration in steel is due to operator variability. Ten steel samples were sliced from a billet, and four operators each measured the manganese content twice per sample in a random order.\n\nQuestions\n\nWrite a model for this experiment. Clearly indicate which effects are fixed, random, crossed, and nested.\nWrite the degrees of freedom, sums of squares, and expected mean squares for each source of variation.\nInvestigate whether the normal distribution is a reasonable approximation for the error terms (using the data in Table 18.11). Transformation may be necessary.\nIf the normal distribution is reasonable, analyze the experiment. Obtain variance estimates for the random effects and identify the major sources of variation."
+  },
+  {
+    "objectID": "assignments/assignment12_nested_models.html#table-18.11-manganese-concentrations-percentages-for-the-operator-experiment",
+    "href": "assignments/assignment12_nested_models.html#table-18.11-manganese-concentrations-percentages-for-the-operator-experiment",
+    "title": "Assignment 12: Nested Models",
+    "section": "Table 18.11 Manganese Concentrations (Percentages) for the Operator Experiment",
+    "text": "Table 18.11 Manganese Concentrations (Percentages) for the Operator Experiment\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSample\nOperator 1\n\nOperator 2\n\nOperator 3\n\nOperator 4\n\n\n\n\n\n\n1\n2\n1\n2\n1\n2\n1\n2\n\n\n1\n0.63\n0.60\n0.62\n0.62\n0.60\n0.60\n0.59\n0.61\n\n\n2\n0.64\n0.63\n0.63\n0.64\n0.67\n0.65\n0.62\n0.64\n\n\n3\n0.60\n0.58\n0.60\n0.61\n0.60\n0.60\n0.58\n0.60\n\n\n4\n0.75\n0.74\n0.74\n0.74\n0.74\n0.73\n0.73\n0.76\n\n\n5\n0.71\n0.68\n0.69\n0.70\n0.69\n0.67\n0.68\n0.71\n\n\n6\n0.65\n0.63\n0.62\n0.65\n0.63\n0.64\n0.62\n0.64\n\n\n7\n0.67\n0.64\n0.66\n0.67\n0.65\n0.65\n0.64\n0.66\n\n\n8\n0.65\n0.63\n0.65\n0.64\n0.62\n0.62\n0.60\n0.62\n\n\n9\n0.68\n0.66\n0.67\n0.68\n0.67\n0.67\n0.65\n0.68\n\n\n10\n0.67\n0.64\n0.66\n0.66\n0.65\n0.64\n0.64\n0.66\n\n\n\n\nGrading Allocation\n\n\n\nExercise Title\nPart\nGrade Weight (%)\n\n\n\n\nGeneral Mixed Model\n(a)\n10\n\n\n\n(b)\n10\n\n\n\n(c)\n10\n\n\nOperator Experiment\n(a)\n10\n\n\n\n(b)\n10\n\n\n\n(c)\n20\n\n\n\n(d)\n30\n\n\nTotal Score\n\n100%"
+  },
+  {
     "objectID": "assignments/assignment9_complete_block_designs.html",
     "href": "assignments/assignment9_complete_block_designs.html",
     "title": "Assignment 9: Complete Block Designs",
     "section": "",
-    "text": "Objective: Analyze complete block designs, including block-treatment interactions, post-hoc tests, and trend analyses.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\nTotal Points: 100"
+    "text": "Objective: Analyze complete block designs, including block-treatment interactions, post-hoc tests, and trend analyses.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
   },
   {
     "objectID": "assignments/assignment9_complete_block_designs.html#instructions",
     "href": "assignments/assignment9_complete_block_designs.html#instructions",
     "title": "Assignment 9: Complete Block Designs",
     "section": "",
-    "text": "Objective: Analyze complete block designs, including block-treatment interactions, post-hoc tests, and trend analyses.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\nTotal Points: 100"
+    "text": "Objective: Analyze complete block designs, including block-treatment interactions, post-hoc tests, and trend analyses.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
   },
   {
     "objectID": "assignments/assignment9_complete_block_designs.html#effervescent-experiment",
@@ -578,14 +613,14 @@
     "href": "assignments/assignment4_checking_model_assumptions.html",
     "title": "Assignment 4: Checking Model Assumptions",
     "section": "",
-    "text": "In this assignment, you will apply residual analysis to evaluate the assumptions of the one-way ANOVA model. You will also explore transformations to address violations of the equal-variance assumption. The exercises are based on data from the textbook by Dean et. al. (2019), Chapter 5.\nTotal points: 135"
+    "text": "Objective: Evaluate the assumptions of the one-way ANOVA model and apply transformations to address violations.\nSubmit your completed assignment on Canvas by the due date.\nEnsure your submission includes all required components and is formatted correctly.\nPost your questions on Canvas or attend office hours for assistance.\n\nTotal points: 135"
   },
   {
     "objectID": "assignments/assignment4_checking_model_assumptions.html#instructions",
     "href": "assignments/assignment4_checking_model_assumptions.html#instructions",
     "title": "Assignment 4: Checking Model Assumptions",
-    "section": "Instructions",
-    "text": "Instructions\n\nReview the exercises below and select two to complete.\nDownload the Quarto template provided and complete the exercises.\nSubmit your completed assignment on Canvas by the due date.\nEnsure your submission includes all required components and is formatted correctly.\nReview the Grading Rubric for details on how the assignment will be evaluated.\nPost your questions on Canvas or attend office hours for assistance."
+    "section": "",
+    "text": "Objective: Evaluate the assumptions of the one-way ANOVA model and apply transformations to address violations.\nSubmit your completed assignment on Canvas by the due date.\nEnsure your submission includes all required components and is formatted correctly.\nPost your questions on Canvas or attend office hours for assistance.\n\nTotal points: 135"
   },
   {
     "objectID": "assignments/assignment4_checking_model_assumptions.html#exercise-3-margarine-experiment-amy-l.-phelps-1987",
@@ -613,14 +648,14 @@
     "href": "assignments/assignment8_randomized_complete_block_design.html",
     "title": "Assignment 8: Randomized Complete Block Design",
     "section": "",
-    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R or a similar tool to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
   },
   {
     "objectID": "assignments/assignment8_randomized_complete_block_design.html#instructions",
     "href": "assignments/assignment8_randomized_complete_block_design.html#instructions",
     "title": "Assignment 8: Randomized Complete Block Design",
     "section": "",
-    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R or a similar tool to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
+    "text": "Objective: Perform randomization for randomized block designs, evaluate assumptions, and conduct statistical analysis using ANOVA.\nUse R to conduct the randomization and statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your randomization and analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
   },
   {
     "objectID": "assignments/assignment8_randomized_complete_block_design.html#exercise-1-randomized-complete-block-design",
@@ -662,7 +697,14 @@
     "href": "assignments/assignment6_higher_order_factorial_designs.html",
     "title": "Assignment 6: Higher-Order Factorial Designs",
     "section": "",
-    "text": "In this assignment, you will explore higher-order factorial designs and interactions in experimental data. You will analyze the effects of multiple factors on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al. (2019), Chapter 7.\nTotal points: 140"
+    "text": "Objective: Explore higher-order factorial designs and interactions in experimental data.\nUse R to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal points: 140"
+  },
+  {
+    "objectID": "assignments/assignment6_higher_order_factorial_designs.html#instructions",
+    "href": "assignments/assignment6_higher_order_factorial_designs.html#instructions",
+    "title": "Assignment 6: Higher-Order Factorial Designs",
+    "section": "",
+    "text": "Objective: Explore higher-order factorial designs and interactions in experimental data.\nUse R to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal points: 140"
   },
   {
     "objectID": "assignments/assignment6_higher_order_factorial_designs.html#exercise-7.7-coating-experiment",
@@ -697,14 +739,14 @@
     "href": "assignments/assignment11_random_and_mixed_effects_models.html",
     "title": "Assignment 11: Random and Mixed Effects Models",
     "section": "",
-    "text": "Objective: Analyze random and mixed effects models, including random effects, interactions, and post-hoc tests.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 130"
+    "text": "Objective: Analyze random and mixed effects models, including random effects, interactions, and post-hoc tests.\nUse R tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 130"
   },
   {
     "objectID": "assignments/assignment11_random_and_mixed_effects_models.html#instructions",
     "href": "assignments/assignment11_random_and_mixed_effects_models.html#instructions",
     "title": "Assignment 11: Random and Mixed Effects Models",
     "section": "",
-    "text": "Objective: Analyze random and mixed effects models, including random effects, interactions, and post-hoc tests.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 130"
+    "text": "Objective: Analyze random and mixed effects models, including random effects, interactions, and post-hoc tests.\nUse R tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 130"
   },
   {
     "objectID": "assignments/assignment11_random_and_mixed_effects_models.html#random-effects-model",
@@ -1845,7 +1887,14 @@
     "href": "assignments/assignment7_analysis_of_covariance.html",
     "title": "Assignment 7: Analysis of Covariance (ANCOVA)",
     "section": "",
-    "text": "In this assignment, you will explore the analysis of covariance (ANCOVA) and its applications in experimental designs. You will analyze the effects of covariates on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al. (2019), Chapter 8.\nTotal points: 155"
+    "text": "Objective: Explore the analysis of covariance (ANCOVA) and its applications in experimental designs.\nUse R to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal points: 155"
+  },
+  {
+    "objectID": "assignments/assignment7_analysis_of_covariance.html#instructions",
+    "href": "assignments/assignment7_analysis_of_covariance.html#instructions",
+    "title": "Assignment 7: Analysis of Covariance (ANCOVA)",
+    "section": "",
+    "text": "Objective: Explore the analysis of covariance (ANCOVA) and its applications in experimental designs.\nUse R to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal points: 155"
   },
   {
     "objectID": "assignments/assignment7_analysis_of_covariance.html#exercise-7.7-coating-experiment",
@@ -1873,7 +1922,14 @@
     "href": "assignments/assignment5_two_factor_anova.html",
     "title": "Assignment 5: Two-Factor ANOVA",
     "section": "",
-    "text": "In this assignment, you will explore the two-way complete model and its applications in experimental designs. You will analyze the effects of two factors on a response variable and interpret the results. The exercises are based on data from the textbook by Dean et al. (2019), Chapter 6.\nTotal points: 95"
+    "text": "Objective: Explore the two-way complete model and its applications in experimental designs.\nUse R to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal points: 95"
+  },
+  {
+    "objectID": "assignments/assignment5_two_factor_anova.html#instructions",
+    "href": "assignments/assignment5_two_factor_anova.html#instructions",
+    "title": "Assignment 5: Two-Factor ANOVA",
+    "section": "",
+    "text": "Objective: Explore the two-way complete model and its applications in experimental designs.\nUse R to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal points: 95"
   },
   {
     "objectID": "assignments/assignment5_two_factor_anova.html#exercise-6.2-interaction-contrast",
@@ -1929,14 +1985,14 @@
     "href": "assignments/assignment3_multiple_comparisons_and_contrasts.html",
     "title": "Assignment 3: Multiple Comparisons and Contrasts",
     "section": "",
-    "text": "Objective: Perform multiple comparisons and contrasts for experimental data, including Scheffé’s method and simultaneous confidence intervals.\nUse R or a similar tool to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\nTotal Points: 100"
+    "text": "Objective: Perform multiple comparisons and contrasts for experimental data, including Scheffé’s method and simultaneous confidence intervals.\nUse R or a similar tool to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
   },
   {
     "objectID": "assignments/assignment3_multiple_comparisons_and_contrasts.html#instructions",
     "href": "assignments/assignment3_multiple_comparisons_and_contrasts.html#instructions",
     "title": "Assignment 3: Multiple Comparisons and Contrasts",
     "section": "",
-    "text": "Objective: Perform multiple comparisons and contrasts for experimental data, including Scheffé’s method and simultaneous confidence intervals.\nUse R or a similar tool to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\nTotal Points: 100"
+    "text": "Objective: Perform multiple comparisons and contrasts for experimental data, including Scheffé’s method and simultaneous confidence intervals.\nUse R or a similar tool to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 100"
   },
   {
     "objectID": "assignments/assignment3_multiple_comparisons_and_contrasts.html#buoyancy-experiment",
@@ -2009,18 +2065,46 @@
     "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\nSet 1: Foundational Questions\n50\n\n\n1.1 Balloon Experiment\n30\n\n\n1.2 Conceptual Question\n10\n\n\n1.3 Graphical Analysis\n10\n\n\nSet 2: Advanced Questions\n50\n\n\n2.1 Derivation of \\(t\\)-Statistic\n20\n\n\n2.2 Implications of Assumption Violations\n10\n\n\n2.3 Power Analysis\n20\n\n\nTotal\n100"
   },
   {
+    "objectID": "assignments/assignment13_split_plot_designs.html",
+    "href": "assignments/assignment13_split_plot_designs.html",
+    "title": "Assignment 13 - Split Plot Designs",
+    "section": "",
+    "text": "Objective: Analyze split-plot designs, including whole-plot and split-plot effects, interaction plots, and post-hoc tests.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\ntotal: 100 points"
+  },
+  {
+    "objectID": "assignments/assignment13_split_plot_designs.html#instructions",
+    "href": "assignments/assignment13_split_plot_designs.html#instructions",
+    "title": "Assignment 13 - Split Plot Designs",
+    "section": "",
+    "text": "Objective: Analyze split-plot designs, including whole-plot and split-plot effects, interaction plots, and post-hoc tests.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\ntotal: 100 points"
+  },
+  {
+    "objectID": "assignments/assignment13_split_plot_designs.html#drug-experiment",
+    "href": "assignments/assignment13_split_plot_designs.html#drug-experiment",
+    "title": "Assignment 13 - Split Plot Designs",
+    "section": "19.1 Drug Experiment",
+    "text": "19.1 Drug Experiment\nData Source: Dean et al. (2017), Chapter 19, Exercise 1\nAn experiment designed as a split-plot design evaluated eight drugs (Factor \\(A\\)) for treating arthritis. The second factor was dose (Factor \\(B\\)) at 2 levels, and the third was time (Factor \\(C\\)) at 2 levels. The experimental units were 64 rats, and the response was the amount of fluid (in mL) measured in the pleural cavity. The experiment was structured into blocks, whole plots, and split plots:\n\nBlocks: Two blocks of size 32, measured on two separate days.\nWhole Plots: Each block was divided into four whole plots of size 8.\nSplit Plots: Each whole plot was subdivided, with one drug assigned to each rat.\n\nThe logarithms of the response data were used for analysis.\n\n\n\n\n\n\n\n\n\n\n\nWhole Plot\nBlock\nDose (\\(B\\))\nTime (\\(C\\))\nDrug (\\(A\\))\nData\n\n\n\n\n1\nBlock I\n1\n1\n1, 2, 3, 4, 5, 6, 7, 8\n\\(5.7, 8.6, 6.9, 6.6, 6.7, 7.4, 5.7, 6.7\\)\n\n\n2\nBlock I\n1\n2\n1, 2, 3, 4, 5, 6, 7, 8\n\\(8.4, 9.6, 9.3, 11.1, 12.5, 8.7, 9.3, 9.5\\)\n\n\n3\nBlock I\n2\n1\n1, 2, 3, 4, 5, 6, 7, 8\n\\(5.1, 7.2, 6.8, 6.4, 6.6, 8.7, 6.7, 7.0\\)\n\n\n4\nBlock I\n2\n2\n1, 2, 3, 4, 5, 6, 7, 8\n\\(7.3, 8.7, 7.9, 6.9, 8.9, 9.5, 8.3, 11.3\\)\n\n\n5\nBlock II\n1\n1\n1, 2, 3, 4, 5, 6, 7, 8\n\\(5.8, 6.8, 7.0, 8.5, 7.8, 7.3, 6.4, 8.5\\)\n\n\n6\nBlock II\n1\n2\n1, 2, 3, 4, 5, 6, 7, 8\n\\(9.1, 10.8, 6.9, 12.2, 9.9, 10.4, 10.6, 10.5\\)\n\n\n7\nBlock II\n2\n1\n1, 2, 3, 4, 5, 6, 7, 8\n\\(5.4, 7.9, 8.0, 6.4, 8.4, 7.1, 6.4, 7.2\\)\n\n\n8\nBlock II\n2\n2\n1, 2, 3, 4, 5, 6, 7, 8\n\\(5.3, 10.4, 8.2, 8.1, 10.9, 9.8, 8.4, 14.6\\)\n\n\n\n\nQuestions:\n\nWrite out a model for this experiment.\nCalculate an analysis of variance table using the logarithms of the data. Distinguish between the effects measured on the whole plots and those measured on the split plots. Identify the whole-plot error and split-plot error.\nTest any hypotheses of interest and state your conclusions clearly.\nExamine interaction plots of any important interactions. Calculate a set of 95% confidence intervals for the differences between pairs of drugs. State your conclusions."
+  },
+  {
+    "objectID": "assignments/assignment13_split_plot_designs.html#fishing-line-experiment",
+    "href": "assignments/assignment13_split_plot_designs.html#fishing-line-experiment",
+    "title": "Assignment 13 - Split Plot Designs",
+    "section": "19.2 Fishing Line Experiment",
+    "text": "19.2 Fishing Line Experiment\nData Source: Dean et al. (2017), Chapter 19, Exercise 2\nThe experiment compared the strengths of two brands of fishing line exposed to two stress levels (stressed, \\(S\\); non-stressed, \\(N\\)). Each brand corresponded to two reels (whole plots), and each reel provided four sections of fishing line (split plots). The response was the weight (lbs) required to break the line.\n\n\n\n\n\n\n\n\n\nWhole Plot\nBrand (\\(A\\))\nStress Level (\\(B\\))\nData (Weight in lbs)\n\n\n\n\n1\n1\nN, S, S, N\n\\(6.70, 6.40, 7.20, 7.00\\)\n\n\n2\n2\nS, S, N, N\n\\(8.10, 8.90, 8.00, 6.10\\)\n\n\n3\n2\nS, S, N, N\n\\(8.00, 8.00, 8.75, 8.50\\)\n\n\n4\n1\nN, S, N, S\n\\(8.50, 9.50, 9.70, 9.40\\)\n\n\n\n\nQuestions:\n\nWrite down a model for this experiment.\nConstruct an analysis of variance table and test the hypotheses of interest. State your conclusions.\nIf you were to repeat this experiment, suggest improvements.\n\n\n\n\nGrading Allocation\n\n\n\nExercise Title\nPart\nGrade Weight (%)\n\n\n\n\nDrug Experiment\n(a)\n10\n\n\n\n(b)\n15\n\n\n\n(c)\n10\n\n\n\n(d)\n15\n\n\nFishing Line Experiment\n(a)\n10\n\n\n\n(b)\n15\n\n\n\n(c)\n10\n\n\n\nTotal Score: 100%"
+  },
+  {
     "objectID": "assignments/assignment10_row_column_designs.html",
     "href": "assignments/assignment10_row_column_designs.html",
     "title": "Assignment 10: Row and Column Designs",
     "section": "",
-    "text": "Objective: Analyze row and column designs, including row-column interactions, post-hoc tests, and trend analyses.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 150"
+    "text": "Objective: Analyze row and column designs, including row-column interactions, post-hoc tests, and trend analyses.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 150"
   },
   {
     "objectID": "assignments/assignment10_row_column_designs.html#instructions",
     "href": "assignments/assignment10_row_column_designs.html#instructions",
     "title": "Assignment 10: Row and Column Designs",
     "section": "",
-    "text": "Objective: Analyze row and column designs, including row-column interactions, post-hoc tests, and trend analyses.\nUse R or a similar tool to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 150"
+    "text": "Objective: Analyze row and column designs, including row-column interactions, post-hoc tests, and trend analyses.\nUse R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.\nClearly explain your analysis process for full credit.\nSubmit your assignment as a single PDF file.\n\nTotal Points: 150"
   },
   {
     "objectID": "assignments/assignment10_row_column_designs.html#latin-squares",
@@ -2055,14 +2139,14 @@
     "href": "assignments/assignment1_basics_of_experimental_design.html",
     "title": "Assignment 1: Introduction to Experimental Design",
     "section": "",
-    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nTotal points: 100"
+    "text": "Objective: Demonstrate understanding of key concepts in experimental design and apply them to real-world scenarios.\nSubmission: Create a document that addresses the prompts below. Submit your responses as a PDF or Markdown file.\nFormat: Use clear headings and subheadings to organize your responses. Include any code or calculations as needed.\nTotal points: 100"
   },
   {
     "objectID": "assignments/assignment1_basics_of_experimental_design.html#instructions",
     "href": "assignments/assignment1_basics_of_experimental_design.html#instructions",
     "title": "Assignment 1: Introduction to Experimental Design",
     "section": "",
-    "text": "This assignment focuses on key concepts from Chapters 1 and 2 of Dean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Apply principles and methods to answer the questions and include all required calculations and justifications in the Quarto template provided.\nTotal points: 100"
+    "text": "Objective: Demonstrate understanding of key concepts in experimental design and apply them to real-world scenarios.\nSubmission: Create a document that addresses the prompts below. Submit your responses as a PDF or Markdown file.\nFormat: Use clear headings and subheadings to organize your responses. Include any code or calculations as needed.\nTotal points: 100"
   },
   {
     "objectID": "assignments/assignment1_basics_of_experimental_design.html#part-1-key-concepts-of-experimental-design",
