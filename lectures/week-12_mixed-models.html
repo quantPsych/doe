@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -69,11 +103,41 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 <meta property="og:title" content="Mixed Models – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Random-Effects and Mixed-Effects Models">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -133,13 +197,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Mixed Models</h1>
+            <p class="subtitle lead">Random-Effects and Mixed-Effects Models</p>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -151,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">25-Dec-2024</p>
+        <p class="date">05-Jan-2025</p>
       </div>
     </div>
     
@@ -162,18 +227,1715 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  </ul></li>
+  <li><a href="#fixed-vs.-random-effects" id="toc-fixed-vs.-random-effects" class="nav-link" data-scroll-target="#fixed-vs.-random-effects">Fixed vs.&nbsp;Random Effects</a>
+  <ul class="collapse">
+  <li><a href="#fixed-effects" id="toc-fixed-effects" class="nav-link" data-scroll-target="#fixed-effects">Fixed Effects</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#modeling-assumptions" id="toc-modeling-assumptions" class="nav-link" data-scroll-target="#modeling-assumptions">Modeling Assumptions</a></li>
+  </ul></li>
+  <li><a href="#random-effects" id="toc-random-effects" class="nav-link" data-scroll-target="#random-effects">Random Effects</a>
+  <ul class="collapse">
+  <li><a href="#definition-1" id="toc-definition-1" class="nav-link" data-scroll-target="#definition-1">Definition</a></li>
+  <li><a href="#examples-1" id="toc-examples-1" class="nav-link" data-scroll-target="#examples-1">Examples</a></li>
+  <li><a href="#modeling-assumptions-1" id="toc-modeling-assumptions-1" class="nav-link" data-scroll-target="#modeling-assumptions-1">Modeling Assumptions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#single-random-effects-models" id="toc-single-random-effects-models" class="nav-link" data-scroll-target="#single-random-effects-models">Single Random-Effects Models</a>
+  <ul class="collapse">
+  <li><a href="#random-effects-one-way-model" id="toc-random-effects-one-way-model" class="nav-link" data-scroll-target="#random-effects-one-way-model">Random-Effects One-Way Model</a>
+  <ul class="collapse">
+  <li><a href="#model-specification" id="toc-model-specification" class="nav-link" data-scroll-target="#model-specification">Model Specification</a></li>
+  <li><a href="#key-properties" id="toc-key-properties" class="nav-link" data-scroll-target="#key-properties">Key Properties</a></li>
+  <li><a href="#anova-for-random-effects-models" id="toc-anova-for-random-effects-models" class="nav-link" data-scroll-target="#anova-for-random-effects-models">ANOVA for Random-Effects Models</a></li>
+  <li><a href="#estimation-of-variance-components" id="toc-estimation-of-variance-components" class="nav-link" data-scroll-target="#estimation-of-variance-components">Estimation of Variance Components</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#mixed-effects-models" id="toc-mixed-effects-models" class="nav-link" data-scroll-target="#mixed-effects-models">Mixed-Effects Models</a>
+  <ul class="collapse">
+  <li><a href="#model-specification-1" id="toc-model-specification-1" class="nav-link" data-scroll-target="#model-specification-1">Model Specification</a>
+  <ul class="collapse">
+  <li><a href="#example-randomized-block-design-with-random-blocks" id="toc-example-randomized-block-design-with-random-blocks" class="nav-link" data-scroll-target="#example-randomized-block-design-with-random-blocks">Example: Randomized Block Design with Random Blocks</a></li>
+  <li><a href="#r-implementation" id="toc-r-implementation" class="nav-link" data-scroll-target="#r-implementation">R Implementation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#model-assumptions-and-diagnostics" id="toc-model-assumptions-and-diagnostics" class="nav-link" data-scroll-target="#model-assumptions-and-diagnostics">Model Assumptions and Diagnostics</a>
+  <ul class="collapse">
+  <li><a href="#key-assumptions" id="toc-key-assumptions" class="nav-link" data-scroll-target="#key-assumptions">Key Assumptions</a></li>
+  <li><a href="#diagnostic-procedures" id="toc-diagnostic-procedures" class="nav-link" data-scroll-target="#diagnostic-procedures">Diagnostic Procedures</a>
+  <ul class="collapse">
+  <li><a href="#residual-analysis" id="toc-residual-analysis" class="nav-link" data-scroll-target="#residual-analysis">Residual Analysis</a></li>
+  <li><a href="#variance-components-estimation" id="toc-variance-components-estimation" class="nav-link" data-scroll-target="#variance-components-estimation">Variance Components Estimation</a></li>
+  <li><a href="#r-implementation-for-diagnostics" id="toc-r-implementation-for-diagnostics" class="nav-link" data-scroll-target="#r-implementation-for-diagnostics">R Implementation for Diagnostics</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#numerical-examples-in-r" id="toc-numerical-examples-in-r" class="nav-link" data-scroll-target="#numerical-examples-in-r">Numerical Examples in R</a>
+  <ul class="collapse">
+  <li><a href="#fitting-random-effects-models" id="toc-fitting-random-effects-models" class="nav-link" data-scroll-target="#fitting-random-effects-models">Fitting Random-Effects Models</a>
+  <ul class="collapse">
+  <li><a href="#example-single-random-effect" id="toc-example-single-random-effect" class="nav-link" data-scroll-target="#example-single-random-effect">Example: Single Random Effect</a></li>
+  </ul></li>
+  <li><a href="#fitting-mixed-effects-models" id="toc-fitting-mixed-effects-models" class="nav-link" data-scroll-target="#fitting-mixed-effects-models">Fitting Mixed-Effects Models</a>
+  <ul class="collapse">
+  <li><a href="#example-two-way-factorial-with-random-blocks" id="toc-example-two-way-factorial-with-random-blocks" class="nav-link" data-scroll-target="#example-two-way-factorial-with-random-blocks">Example: Two-Way Factorial with Random Blocks</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#practical-applications" id="toc-practical-applications" class="nav-link" data-scroll-target="#practical-applications">Practical Applications</a>
+  <ul class="collapse">
+  <li><a href="#example-resting-metabolic-rate" id="toc-example-resting-metabolic-rate" class="nav-link" data-scroll-target="#example-resting-metabolic-rate">Example: Resting Metabolic Rate</a>
+  <ul class="collapse">
+  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
+  <li><a href="#step-by-step-r-code" id="toc-step-by-step-r-code" class="nav-link" data-scroll-target="#step-by-step-r-code">Step-by-Step R Code</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#variance-component-estimation" id="toc-variance-component-estimation" class="nav-link" data-scroll-target="#variance-component-estimation">Variance Component Estimation</a>
+  <ul class="collapse">
+  <li><a href="#deriving-expected-mean-squares" id="toc-deriving-expected-mean-squares" class="nav-link" data-scroll-target="#deriving-expected-mean-squares">Deriving Expected Mean Squares</a></li>
+  <li><a href="#random-effects-one-way-model-1" id="toc-random-effects-one-way-model-1" class="nav-link" data-scroll-target="#random-effects-one-way-model-1">Random-Effects One-Way Model</a></li>
+  </ul></li>
+  <li><a href="#confidence-intervals-for-variance-components" id="toc-confidence-intervals-for-variance-components" class="nav-link" data-scroll-target="#confidence-intervals-for-variance-components">Confidence Intervals for Variance Components</a>
+  <ul class="collapse">
+  <li><a href="#satterthwaite-approximation" id="toc-satterthwaite-approximation" class="nav-link" data-scroll-target="#satterthwaite-approximation">Satterthwaite Approximation</a></li>
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a>
+  <ul class="collapse">
+  <li><a href="#two-way-ancova-with-interaction" id="toc-two-way-ancova-with-interaction" class="nav-link" data-scroll-target="#two-way-ancova-with-interaction">1. Two-Way ANCOVA with Interaction</a></li>
+  </ul></li>
+  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a>
+  <ul class="collapse">
+  <li><a href="#unbalanced-two-factor-ancova-analysis" id="toc-unbalanced-two-factor-ancova-analysis" class="nav-link" data-scroll-target="#unbalanced-two-factor-ancova-analysis">1. Unbalanced Two-Factor ANCOVA Analysis</a></li>
+  <li><a href="#three-factor-interaction-interpretation" id="toc-three-factor-interaction-interpretation" class="nav-link" data-scroll-target="#three-factor-interaction-interpretation">2. Three-Factor Interaction Interpretation</a></li>
+  <li><a href="#mathematical-proof-of-interaction-contrasts" id="toc-mathematical-proof-of-interaction-contrasts" class="nav-link" data-scroll-target="#mathematical-proof-of-interaction-contrasts">3. Mathematical Proof of Interaction Contrasts</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations-1" id="toc-appendix-advanced-mathematical-derivations-1" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations-1">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#variance-calculations-for-latin-square-designs" id="toc-variance-calculations-for-latin-square-designs" class="nav-link" data-scroll-target="#variance-calculations-for-latin-square-designs">Variance Calculations for Latin Square Designs</a>
+  <ul class="collapse">
+  <li><a href="#formula" id="toc-formula" class="nav-link" data-scroll-target="#formula">Formula</a></li>
+  <li><a href="#derivation" id="toc-derivation" class="nav-link" data-scroll-target="#derivation">Derivation</a></li>
+  </ul></li>
+  <li><a href="#degrees-of-freedom-in-youden-designs" id="toc-degrees-of-freedom-in-youden-designs" class="nav-link" data-scroll-target="#degrees-of-freedom-in-youden-designs">Degrees of Freedom in Youden Designs</a>
+  <ul class="collapse">
+  <li><a href="#formula-1" id="toc-formula-1" class="nav-link" data-scroll-target="#formula-1">Formula</a></li>
+  <li><a href="#calculation" id="toc-calculation" class="nav-link" data-scroll-target="#calculation">Calculation</a></li>
+  </ul></li>
+  <li><a href="#proof-of-interaction-contrasts" id="toc-proof-of-interaction-contrasts" class="nav-link" data-scroll-target="#proof-of-interaction-contrasts">Proof of Interaction Contrasts</a>
+  <ul class="collapse">
+  <li><a href="#interaction-contrasts-measure-deviations-from-additivity" id="toc-interaction-contrasts-measure-deviations-from-additivity" class="nav-link" data-scroll-target="#interaction-contrasts-measure-deviations-from-additivity">Interaction Contrasts Measure Deviations from Additivity</a></li>
+  <li><a href="#proof-steps" id="toc-proof-steps" class="nav-link" data-scroll-target="#proof-steps">Proof Steps</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations-2" id="toc-appendix-advanced-mathematical-derivations-2" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations-2">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#adjusted-treatment-means" id="toc-adjusted-treatment-means" class="nav-link" data-scroll-target="#adjusted-treatment-means">Adjusted Treatment Means</a>
+  <ul class="collapse">
+  <li><a href="#derivation-1" id="toc-derivation-1" class="nav-link" data-scroll-target="#derivation-1">Derivation</a></li>
+  </ul></li>
+  <li><a href="#f-test-for-homogeneity-of-slopes" id="toc-f-test-for-homogeneity-of-slopes" class="nav-link" data-scroll-target="#f-test-for-homogeneity-of-slopes">F-Test for Homogeneity of Slopes</a>
+  <ul class="collapse">
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing">Hypothesis Testing</a></li>
+  <li><a href="#test-procedure" id="toc-test-procedure" class="nav-link" data-scroll-target="#test-procedure">Test Procedure</a></li>
+  </ul></li>
+  <li><a href="#confidence-intervals-for-higher-order-contrasts" id="toc-confidence-intervals-for-higher-order-contrasts" class="nav-link" data-scroll-target="#confidence-intervals-for-higher-order-contrasts">Confidence Intervals for Higher-Order Contrasts</a>
+  <ul class="collapse">
+  <li><a href="#formula-2" id="toc-formula-2" class="nav-link" data-scroll-target="#formula-2">Formula</a></li>
+  <li><a href="#steps-in-r" id="toc-steps-in-r" class="nav-link" data-scroll-target="#steps-in-r">Steps in R</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty-1" id="toc-medium-difficulty-1" class="nav-link" data-scroll-target="#medium-difficulty-1">Medium Difficulty</a>
+  <ul class="collapse">
+  <li><a href="#two-way-ancova-with-interaction-1" id="toc-two-way-ancova-with-interaction-1" class="nav-link" data-scroll-target="#two-way-ancova-with-interaction-1">1. Two-Way ANCOVA with Interaction</a></li>
+  </ul></li>
+  <li><a href="#challenging-problems-1" id="toc-challenging-problems-1" class="nav-link" data-scroll-target="#challenging-problems-1">Challenging Problems</a>
+  <ul class="collapse">
+  <li><a href="#unbalanced-two-factor-ancova-analysis-1" id="toc-unbalanced-two-factor-ancova-analysis-1" class="nav-link" data-scroll-target="#unbalanced-two-factor-ancova-analysis-1">1. Unbalanced Two-Factor ANCOVA Analysis</a></li>
+  <li><a href="#three-factor-interaction-interpretation-1" id="toc-three-factor-interaction-interpretation-1" class="nav-link" data-scroll-target="#three-factor-interaction-interpretation-1">2. Three-Factor Interaction Interpretation</a></li>
+  <li><a href="#mathematical-proof-of-interaction-contrasts-1" id="toc-mathematical-proof-of-interaction-contrasts-1" class="nav-link" data-scroll-target="#mathematical-proof-of-interaction-contrasts-1">3. Mathematical Proof of Interaction Contrasts</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations-3" id="toc-appendix-advanced-mathematical-derivations-3" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations-3">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#adjusted-treatment-means-1" id="toc-adjusted-treatment-means-1" class="nav-link" data-scroll-target="#adjusted-treatment-means-1">Adjusted Treatment Means</a>
+  <ul class="collapse">
+  <li><a href="#derivation-2" id="toc-derivation-2" class="nav-link" data-scroll-target="#derivation-2">Derivation</a></li>
+  </ul></li>
+  <li><a href="#f-test-for-homogeneity-of-slopes-1" id="toc-f-test-for-homogeneity-of-slopes-1" class="nav-link" data-scroll-target="#f-test-for-homogeneity-of-slopes-1">F-Test for Homogeneity of Slopes</a>
+  <ul class="collapse">
+  <li><a href="#model-comparison-1" id="toc-model-comparison-1" class="nav-link" data-scroll-target="#model-comparison-1">Model Comparison</a></li>
+  <li><a href="#hypothesis-testing-1" id="toc-hypothesis-testing-1" class="nav-link" data-scroll-target="#hypothesis-testing-1">Hypothesis Testing</a></li>
+  <li><a href="#test-procedure-1" id="toc-test-procedure-1" class="nav-link" data-scroll-target="#test-procedure-1">Test Procedure</a></li>
+  </ul></li>
+  <li><a href="#confidence-intervals-for-higher-order-contrasts-1" id="toc-confidence-intervals-for-higher-order-contrasts-1" class="nav-link" data-scroll-target="#confidence-intervals-for-higher-order-contrasts-1">Confidence Intervals for Higher-Order Contrasts</a>
+  <ul class="collapse">
+  <li><a href="#formula-3" id="toc-formula-3" class="nav-link" data-scroll-target="#formula-3">Formula</a></li>
+  <li><a href="#steps-in-r-1" id="toc-steps-in-r-1" class="nav-link" data-scroll-target="#steps-in-r-1">Steps in R</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In the landscape of statistical modeling, <strong>Random-Effects</strong> and <strong>Mixed-Effects Models</strong> play a pivotal role in analyzing data that exhibit hierarchical or grouped structures. Unlike fixed-effects models, which assume that the levels of a factor are the only ones of interest, random-effects models consider factors as random samples from a larger population. This distinction allows for the assessment of variability not just within treatments but also across different groups or clusters.</p>
+<p><strong>Intuitive Analogy:</strong> Imagine conducting a study on the effectiveness of a new teaching method across various schools. If we treat schools as fixed effects, we’re only interested in those specific schools. However, if we consider schools as random effects, we acknowledge that these schools are a random sample from a broader population, enabling us to generalize our findings beyond the studied institutions.</p>
+<p>This week’s focus encompasses:</p>
+<ol type="1">
+<li>Differentiating between fixed-effects and random-effects models.</li>
+<li>Delving into single and multiple random-effects models.</li>
+<li>Exploring mixed-effects models that integrate both fixed and random components.</li>
+<li>Implementing these models in R with practical examples.</li>
+<li>Engaging with advanced topics through detailed proofs and mathematical derivations.</li>
+<li>Reinforcing learning through targeted exercises.</li>
+</ol>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>By the end of this lecture, you will be able to:</p>
+<ul>
+<li><strong>Differentiate</strong> between fixed-effects and random-effects models.</li>
+<li><strong>Apply</strong> single random-effects models and interpret their results.</li>
+<li><strong>Analyze</strong> mixed-effects models, combining fixed and random components.</li>
+<li><strong>Evaluate</strong> model assumptions and perform diagnostic checks.</li>
+<li><strong>Compute</strong> confidence intervals and test hypotheses for random effects.</li>
+<li><strong>Engage</strong> with advanced mathematical concepts through proofs and derivations.</li>
+<li><strong>Enhance</strong> your understanding through practical R examples and exercises.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="fixed-vs.-random-effects" class="level1">
+<h1>Fixed vs.&nbsp;Random Effects</h1>
+<section id="fixed-effects" class="level2">
+<h2 class="anchored" data-anchor-id="fixed-effects">Fixed Effects</h2>
+<section id="definition" class="level3">
+<h3 class="anchored" data-anchor-id="definition">Definition</h3>
+<p><strong>Fixed Effects</strong> are factors in a model where the levels are specifically chosen and of primary interest. The goal is to make inferences about these particular levels.</p>
+</section>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<ul>
+<li>Comparing the effectiveness of three specific fertilizers (A, B, C).</li>
+<li>Evaluating the performance of particular teaching methods.</li>
+</ul>
+</section>
+<section id="modeling-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-assumptions">Modeling Assumptions</h3>
+<ul>
+<li>Factor levels are constants and not random.</li>
+<li>Effects are modeled as fixed parameters.</li>
+</ul>
+<p><strong>Intuitive Example:</strong> Assessing the impact of three distinct fertilizers on plant growth where only these three fertilizers are of interest.</p>
+</section>
+</section>
+<section id="random-effects" class="level2">
+<h2 class="anchored" data-anchor-id="random-effects">Random Effects</h2>
+<section id="definition-1" class="level3">
+<h3 class="anchored" data-anchor-id="definition-1">Definition</h3>
+<p><strong>Random Effects</strong> are factors in a model where the levels are randomly sampled from a larger population. The focus is on understanding the variability across these random levels rather than the levels themselves.</p>
+</section>
+<section id="examples-1" class="level3">
+<h3 class="anchored" data-anchor-id="examples-1">Examples</h3>
+<ul>
+<li>Variability among machine operators selected randomly from a factory.</li>
+<li>Batch-to-batch variability in a manufacturing process.</li>
+</ul>
+</section>
+<section id="modeling-assumptions-1" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-assumptions-1">Modeling Assumptions</h3>
+<ul>
+<li>Factor levels are random variables, typically assumed to follow a normal distribution.</li>
+<li>Effects are modeled as random variables with a specified distribution.</li>
+</ul>
+<p><strong>Intuitive Example:</strong> Studying the effect of different classrooms (randomly selected from all classrooms in a district) on student performance, aiming to generalize findings beyond the sampled classrooms.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="single-random-effects-models" class="level1">
+<h1>Single Random-Effects Models</h1>
+<section id="random-effects-one-way-model" class="level2">
+<h2 class="anchored" data-anchor-id="random-effects-one-way-model">Random-Effects One-Way Model</h2>
+<p>The <strong>Random-Effects One-Way Model</strong> is suitable when a single random factor influences the response variable. This model accounts for variability due to the random factor and the inherent experimental error.</p>
+<section id="model-specification" class="level3">
+<h3 class="anchored" data-anchor-id="model-specification">Model Specification</h3>
+<p><span class="math display">\[
+Y_{it} = \mu + T_i + \varepsilon_{it}, \quad T_i \sim N(0, \sigma_T^2), \quad \varepsilon_{it} \sim N(0, \sigma^2)
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Y_{it}\)</span>: Response for the <span class="math inline">\(t\)</span>-th observation in the <span class="math inline">\(i\)</span>-th group.</li>
+<li><span class="math inline">\(\mu\)</span>: Overall mean.</li>
+<li><span class="math inline">\(T_i\)</span>: Random effect for the <span class="math inline">\(i\)</span>-th group.</li>
+<li><span class="math inline">\(\varepsilon_{it}\)</span>: Random error term.</li>
+</ul>
+</section>
+<section id="key-properties" class="level3">
+<h3 class="anchored" data-anchor-id="key-properties">Key Properties</h3>
+<ul>
+<li><strong>Expectation:</strong> <span class="math inline">\(E[Y_{it}] = \mu\)</span></li>
+<li><strong>Variance:</strong> <span class="math inline">\(Var(Y_{it}) = \sigma_T^2 + \sigma^2\)</span></li>
+<li><strong>Covariance:</strong> <span class="math inline">\(Cov(Y_{it}, Y_{is}) = \sigma_T^2\)</span> for <span class="math inline">\(t \neq s\)</span> within the same group.</li>
+</ul>
+</section>
+<section id="anova-for-random-effects-models" class="level3">
+<h3 class="anchored" data-anchor-id="anova-for-random-effects-models">ANOVA for Random-Effects Models</h3>
+<p>Unlike fixed-effects ANOVA, random-effects ANOVA decomposes the total variability into components attributable to random effects and residual error.</p>
+<p><strong>ANOVA Table:</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Degrees of Freedom</th>
+<th>Sum of Squares (SS)</th>
+<th>Mean Square (MS)</th>
+<th>Expected Mean Square</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatments</td>
+<td><span class="math inline">\(a - 1\)</span></td>
+<td><span class="math inline">\(SS_T\)</span></td>
+<td><span class="math inline">\(MS_T = \frac{SS_T}{a - 1}\)</span></td>
+<td><span class="math inline">\(a \sigma_T^2 + \sigma^2\)</span></td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><span class="math inline">\(a(n - 1)\)</span></td>
+<td><span class="math inline">\(SS_E\)</span></td>
+<td><span class="math inline">\(MS_E = \frac{SS_E}{a(n - 1)}\)</span></td>
+<td><span class="math inline">\(\sigma^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><span class="math inline">\(an - 1\)</span></td>
+<td><span class="math inline">\(SS_{Total}\)</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(a\)</span>: Number of groups.</li>
+<li><span class="math inline">\(n\)</span>: Number of observations per group.</li>
+</ul>
+</section>
+<section id="estimation-of-variance-components" class="level3">
+<h3 class="anchored" data-anchor-id="estimation-of-variance-components">Estimation of Variance Components</h3>
+<p>Using <strong>Restricted Maximum Likelihood (REML)</strong>, we estimate:</p>
+<p><span class="math display">\[
+\hat{\sigma}^2_T = \frac{MS_T - MS_E}{n}, \quad \hat{\sigma}^2 = MS_E
+\]</span></p>
+<p><strong>Example in R:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary library</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated Data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_single_random <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">each =</span> <span class="dv">4</span>)),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">4</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">4</span>, <span class="at">mean =</span> <span class="dv">12</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">4</span>, <span class="at">mean =</span> <span class="dv">11</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">4</span>, <span class="at">mean =</span> <span class="dv">13</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">4</span>, <span class="at">mean =</span> <span class="dv">12</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Random-Effects Model</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>model_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(response <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> group), <span class="at">data =</span> data_single_random)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_random)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Variance Components</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(model_random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step-by-Step Interpretation:</strong> 1. <strong>Model Fitting:</strong> The <code>lmer</code> function fits a random-intercept model where <code>group</code> is the random effect. 2. <strong>Summary Output:</strong> Provides estimates of fixed effects (overall mean) and random effects (variance components). 3. <strong>Variance Components:</strong> Extracted using <code>VarCorr</code>, showing the estimated variances for random effects and residuals.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="mixed-effects-models" class="level1">
+<h1>Mixed-Effects Models</h1>
+<p>Mixed-Effects Models integrate both fixed and random effects, allowing for more complex data structures where certain factors are of fixed interest while others are random.</p>
+<section id="model-specification-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-specification-1">Model Specification</h2>
+<p><span class="math display">\[
+Y_{ij} = \mu + \alpha_i + T_j + \varepsilon_{ij}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Y_{ij}\)</span>: Response for the <span class="math inline">\(i\)</span>-th fixed effect level and <span class="math inline">\(j\)</span>-th random effect level.</li>
+<li><span class="math inline">\(\mu\)</span>: Overall mean.</li>
+<li><span class="math inline">\(\alpha_i\)</span>: Fixed effect for the <span class="math inline">\(i\)</span>-th level of a fixed factor.</li>
+<li><span class="math inline">\(T_j \sim N(0, \sigma_T^2)\)</span>: Random effect for the <span class="math inline">\(j\)</span>-th level of a random factor.</li>
+<li><span class="math inline">\(\varepsilon_{ij} \sim N(0, \sigma^2)\)</span>: Random error term.</li>
+</ul>
+<p><strong>Intuitive Example:</strong> Assessing the impact of different teaching methods (fixed effect) across various schools (random effect) on student performance.</p>
+<section id="example-randomized-block-design-with-random-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="example-randomized-block-design-with-random-blocks">Example: Randomized Block Design with Random Blocks</h3>
+<p><span class="math display">\[
+Y_{ij} = \mu + \alpha_i + B_j + \varepsilon_{ij}, \quad B_j \sim N(0, \sigma_B^2)
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><code>alpha_i</code>: Fixed effect of treatment.</li>
+<li><code>B_j</code>: Random effect of block (e.g., different classrooms).</li>
+</ul>
+</section>
+<section id="r-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="r-implementation">R Implementation</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary library</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated Data for Mixed-Effects Model</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>data_mixed <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">times =</span> <span class="dv">10</span>)),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">block =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">each =</span> <span class="dv">3</span>)),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Mixed-Effects Model</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>model_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(response <span class="sc">~</span> treatment <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> block), <span class="at">data =</span> data_mixed)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_mixed)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence Intervals for Fixed Effects</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model_mixed, <span class="at">parm =</span> <span class="st">"treatment"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostics</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_mixed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> - <strong>Fixed Effects (<code>treatment</code>):</strong> Assess the impact of different treatments on the response variable. - <strong>Random Effects (<code>block</code>):</strong> Account for variability across different blocks (e.g., schools, classrooms). - <strong>Confidence Intervals:</strong> Provide a range of plausible values for the fixed effects. - <strong>Diagnostics:</strong> Residual plots help verify model assumptions such as normality and homoscedasticity.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="model-assumptions-and-diagnostics" class="level1">
+<h1>Model Assumptions and Diagnostics</h1>
+<p>Ensuring the validity of model assumptions is crucial for reliable inference in random-effects and mixed-effects models.</p>
+<section id="key-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="key-assumptions">Key Assumptions</h2>
+<ol type="1">
+<li><strong>Normality:</strong> Random effects and residuals are normally distributed.</li>
+<li><strong>Independence:</strong> Observations are independent within and across groups.</li>
+<li><strong>Homogeneity of Variance (Homoscedasticity):</strong> Variance is constant across all levels of fixed and random factors.</li>
+<li><strong>No Correlation:</strong> Random effects are uncorrelated with fixed effects.</li>
+</ol>
+</section>
+<section id="diagnostic-procedures" class="level2">
+<h2 class="anchored" data-anchor-id="diagnostic-procedures">Diagnostic Procedures</h2>
+<section id="residual-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="residual-analysis">Residual Analysis</h3>
+<ul>
+<li><strong>Residuals vs.&nbsp;Fitted Values Plot:</strong> Checks for non-linearity, unequal error variances, and outliers.</li>
+<li><strong>Q-Q Plot of Residuals:</strong> Assesses the normality of residuals.</li>
+<li><strong>Scale-Location Plot:</strong> Evaluates homoscedasticity.</li>
+<li><strong>Residuals vs.&nbsp;Random Effects Plot:</strong> Detects any patterns that suggest violations of independence or homogeneity.</li>
+</ul>
+</section>
+<section id="variance-components-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="variance-components-estimation">Variance Components Estimation</h3>
+<ul>
+<li><strong>REML (Restricted Maximum Likelihood):</strong> Preferred method for estimating variance components as it accounts for the loss of degrees of freedom.</li>
+</ul>
+</section>
+<section id="r-implementation-for-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="r-implementation-for-diagnostics">R Implementation for Diagnostics</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the mixed-effects model</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(response <span class="sc">~</span> treatment <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> block), <span class="at">data =</span> data_mixed)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic Plots</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro-Wilk Test for Normality of Residuals</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">resid</span>(model))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for Homoscedasticity</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(response <span class="sc">~</span> treatment, <span class="at">data =</span> data_mixed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> - <strong>Normality Tests:</strong> Non-significant p-values indicate no evidence against normality. - <strong>Levene’s Test:</strong> Assesses equality of variances across groups; non-significant p-values suggest homoscedasticity. - <strong>Residual Plots:</strong> Should display random scatter without discernible patterns.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="numerical-examples-in-r" class="level1">
+<h1>Numerical Examples in R</h1>
+<section id="fitting-random-effects-models" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-random-effects-models">Fitting Random-Effects Models</h2>
+<p>Random-effects models are essential when dealing with grouped or hierarchical data. Below is a step-by-step example of fitting a random-effects model using R.</p>
+<section id="example-single-random-effect" class="level3">
+<h3 class="anchored" data-anchor-id="example-single-random-effect">Example: Single Random Effect</h3>
+<p><strong>Scenario:</strong> Assessing the effect of different diets on weight loss across various clinics. Clinics are randomly sampled from a larger population.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary library</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated Data</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>data_random <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">clinic =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">each =</span> <span class="dv">5</span>)),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">diet =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Diet1"</span>, <span class="st">"Diet2"</span>, <span class="st">"Diet3"</span>, <span class="st">"Diet4"</span>, <span class="st">"Diet5"</span>), <span class="at">times =</span> <span class="dv">10</span>)),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">weight_loss =</span> <span class="fu">c</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="fl">2.5</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="fl">3.5</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="fl">2.5</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="fl">3.5</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Random-Effects Model</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>model_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(weight_loss <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> clinic), <span class="at">data =</span> data_random)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_random)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Variance Components</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(model_random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step-by-Step Interpretation:</strong> 1. <strong>Data Preparation:</strong> Simulated data includes 10 clinics, each with 5 diet treatments. 2. <strong>Model Fitting:</strong> <code>lmer</code> fits a model with a random intercept for clinics. 3. <strong>Summary Output:</strong> Provides estimates for the overall mean, random effects variance, and residual variance. 4. <strong>Variance Components:</strong> <code>VarCorr</code> displays the estimated variances for the random effects and residuals.</p>
+</section>
+</section>
+<section id="fitting-mixed-effects-models" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-mixed-effects-models">Fitting Mixed-Effects Models</h2>
+<p>Mixed-Effects Models accommodate both fixed and random factors, offering a versatile framework for complex data structures.</p>
+<section id="example-two-way-factorial-with-random-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="example-two-way-factorial-with-random-blocks">Example: Two-Way Factorial with Random Blocks</h3>
+<p><strong>Scenario:</strong> Investigating the effect of two factors (e.g., fertilizer type and watering frequency) on plant growth across randomly selected greenhouses.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary library</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated Data</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data_mixed <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">greenhouse =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">each =</span> <span class="dv">4</span>)),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">fertilizer =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"F1"</span>, <span class="st">"F2"</span>), <span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">15</span>)),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">watering =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"W1"</span>, <span class="st">"W2"</span>), <span class="at">times =</span> <span class="dv">30</span>)),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">growth =</span> <span class="fu">c</span>(</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">60</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">60</span>, <span class="at">mean =</span> <span class="dv">12</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Introduce Interaction Effect</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>data_mixed<span class="sc">$</span>growth <span class="ot">&lt;-</span> <span class="fu">with</span>(data_mixed, growth <span class="sc">+</span> <span class="fu">ifelse</span>(fertilizer <span class="sc">==</span> <span class="st">"F2"</span> <span class="sc">&amp;</span> watering <span class="sc">==</span> <span class="st">"W2"</span>, <span class="dv">2</span>, <span class="dv">0</span>))</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Mixed-Effects Model with Interaction</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>model_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(growth <span class="sc">~</span> fertilizer <span class="sc">*</span> watering <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> greenhouse), <span class="at">data =</span> data_mixed)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_mixed)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated Marginal Means and Pairwise Comparisons</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model_mixed, <span class="sc">~</span> fertilizer <span class="sc">*</span> watering)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> - <strong>Fixed Effects (<code>fertilizer</code>, <code>watering</code>, <code>fertilizer:watering</code>):</strong> Assess the main effects and interaction between fertilizer type and watering frequency. - <strong>Random Effects (<code>greenhouse</code>):</strong> Account for variability across different greenhouses. - <strong>Interaction Effect:</strong> Significant interaction indicates that the effect of one factor depends on the level of the other factor. - <strong>Pairwise Comparisons:</strong> Identify specific group differences after accounting for other factors.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="practical-applications" class="level1">
+<h1>Practical Applications</h1>
+<section id="example-resting-metabolic-rate" class="level2">
+<h2 class="anchored" data-anchor-id="example-resting-metabolic-rate">Example: Resting Metabolic Rate</h2>
+<section id="scenario" class="level3">
+<h3 class="anchored" data-anchor-id="scenario">Scenario</h3>
+<p>A study aims to compare three different exercise protocols (Treatments A, B, C) on subjects’ resting metabolic rates. To control for age-related variability, subjects are grouped into four blocks based on age groups.</p>
+</section>
+<section id="step-by-step-r-code" class="level3">
+<h3 class="anchored" data-anchor-id="step-by-step-r-code">Step-by-Step R Code</h3>
+<section id="load-and-prepare-data" class="level4">
+<h4 class="anchored" data-anchor-id="load-and-prepare-data">1. Load and Prepare Data</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">789</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define blocks and treatments</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">3</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">times =</span> <span class="dv">4</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate response variable (resting metabolic rate in kcal/day)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1500</span>, <span class="at">sd =</span> <span class="dv">50</span>),  <span class="co"># Block 1</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1550</span>, <span class="at">sd =</span> <span class="dv">50</span>),  <span class="co"># Block 2</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1480</span>, <span class="at">sd =</span> <span class="dv">50</span>),  <span class="co"># Block 3</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1520</span>, <span class="at">sd =</span> <span class="dv">50</span>)   <span class="co"># Block 4</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>data_rmr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(blocks, treatments, response)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># View the data</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data_rmr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output Interpretation:</strong> The dataset comprises four blocks (age groups), each containing three treatments (A, B, C). The response variable represents the resting metabolic rate, simulated with slight block-specific means to reflect age-related variability.</p>
+</section>
+<section id="fit-the-rcbd-model" class="level4">
+<h4 class="anchored" data-anchor-id="fit-the-rcbd-model">2. Fit the RCBD Model</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the RCBD model using ANOVA</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model_rcbd <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> blocks <span class="sc">+</span> treatments, <span class="at">data =</span> data_rmr)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_rcbd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> - <strong>Blocks:</strong> Capture variability due to different age groups. - <strong>Treatments:</strong> Assess the effect of exercise protocols after accounting for age-related variability. - <strong>Error:</strong> Represents unexplained variability in resting metabolic rates.</p>
+</section>
+<section id="diagnostic-plots" class="level4">
+<h4 class="anchored" data-anchor-id="diagnostic-plots">3. Diagnostic Plots</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic plots for the ANOVA model</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_rcbd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> Examine residual plots to ensure that assumptions of normality, homoscedasticity, and independence are met. Look for random scatter in Residuals vs Fitted and Q-Q plots to assess normality.</p>
+</section>
+<section id="post-hoc-analysis-multiple-comparisons" class="level4">
+<h4 class="anchored" data-anchor-id="post-hoc-analysis-multiple-comparisons">4. Post-Hoc Analysis (Multiple Comparisons)</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load emmeans package for estimated marginal means</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated marginal means for treatments</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>emm_rmr <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model_rcbd, <span class="sc">~</span> treatments)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>pairwise_comparisons_rmr <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm_rmr, <span class="at">method =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pairwise_comparisons_rmr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> Identify which exercise protocols significantly differ in their effect on resting metabolic rates after adjusting for age-related variability.</p>
+<hr>
+</section>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p><strong>Random-Effects</strong> and <strong>Mixed-Effects Models</strong> are indispensable tools in the arsenal of statisticians dealing with complex data structures. By accounting for variability across random factors, these models provide a nuanced understanding of data, enabling researchers to make robust inferences that extend beyond the observed samples.</p>
+<p><strong>Key Takeaways:</strong> - <strong>Fixed vs.&nbsp;Random Effects:</strong> Distinguishing between these allows for appropriate model specification and inference. - <strong>Single vs.&nbsp;Multiple Random Effects:</strong> Understanding the structure of random factors is crucial for accurate modeling. - <strong>Mixed-Effects Models:</strong> Offer flexibility by integrating both fixed and random components, suitable for hierarchical or nested data. - <strong>Model Diagnostics:</strong> Essential for validating assumptions and ensuring the reliability of inferences. - <strong>R Implementation:</strong> Practical examples demonstrate the application of these models, facilitating hands-on learning. - <strong>Advanced Topics:</strong> Mathematical derivations and proofs deepen theoretical understanding, reinforcing the statistical foundations of these models. - <strong>Exercises:</strong> Reinforce learning through application and critical thinking, ensuring comprehensive mastery of the subject matter.</p>
+<p>Mastery of Random-Effects and Mixed-Effects Models equips graduate students with the methodological rigor necessary for conducting sophisticated analyses in diverse research domains, ensuring that findings are both accurate and generalizable.</p>
+<p><strong>Future Directions:</strong> Exploration into advanced modeling techniques, such as generalized mixed-effects models and Bayesian approaches, will further enhance analytical capabilities and adaptability to a broader range of data structures.</p>
+<hr>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ol type="1">
+<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
+<li>Montgomery, D. C., &amp; Runger, G. C. (2020). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
+<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
+<li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Robert E. Krieger Publishing Company.</li>
+<li>Scheffé, H. (1959). <em>The Analysis of Variance</em>. Wiley.</li>
+</ol>
+<hr>
+</section>
+<section id="appendix-advanced-mathematical-derivations" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="variance-component-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="variance-component-estimation">Variance Component Estimation</h2>
+<section id="deriving-expected-mean-squares" class="level3">
+<h3 class="anchored" data-anchor-id="deriving-expected-mean-squares">Deriving Expected Mean Squares</h3>
+<p>In random-effects models, the <strong>Expected Mean Squares (EMS)</strong> are fundamental for estimating variance components.</p>
+</section>
+<section id="random-effects-one-way-model-1" class="level3">
+<h3 class="anchored" data-anchor-id="random-effects-one-way-model-1">Random-Effects One-Way Model</h3>
+<p><span class="math display">\[
+Y_{it} = \mu + T_i + \varepsilon_{it}, \quad T_i \sim N(0, \sigma_T^2), \quad \varepsilon_{it} \sim N(0, \sigma^2)
+\]</span></p>
+<p><strong>Expected Mean Squares:</strong></p>
+<p><span class="math display">\[
+EMS_T = \sigma_T^2 + \sigma^2
+\]</span></p>
+<p><span class="math display">\[
+EMS_E = \sigma^2
+\]</span></p>
+<p><strong>Derivation:</strong></p>
+<ol type="1">
+<li><strong>For Treatments:</strong></li>
+</ol>
+<p><span class="math display">\[
+EMS_T = Var(T_i) + Var(\varepsilon_{it}) = \sigma_T^2 + \sigma^2
+\]</span></p>
+<ol type="1">
+<li><strong>For Error:</strong></li>
+</ol>
+<p><span class="math display">\[
+EMS_E = Var(\varepsilon_{it}) = \sigma^2
+\]</span></p>
+<p><strong>Estimation:</strong></p>
+<p>Using ANOVA sums of squares, we set up equations based on EMS to solve for variance components.</p>
+<p><span class="math display">\[
+MS_T = \sigma_T^2 + \sigma^2
+\]</span></p>
+<p><span class="math display">\[
+MS_E = \sigma^2
+\]</span></p>
+<p>Solving for <span class="math inline">\(\sigma_T^2\)</span>:</p>
+<p><span class="math display">\[
+\hat{\sigma}_T^2 = MS_T - MS_E
+\]</span></p>
+<p><strong>Conclusion:</strong> This derivation highlights how ANOVA estimates variance components by leveraging the properties of expected mean squares.</p>
+<p><strong>Reference:</strong> Montgomery, D. C., &amp; Runger, G. C. (2020). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</p>
+</section>
+</section>
+<section id="confidence-intervals-for-variance-components" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-for-variance-components">Confidence Intervals for Variance Components</h2>
+<section id="satterthwaite-approximation" class="level3">
+<h3 class="anchored" data-anchor-id="satterthwaite-approximation">Satterthwaite Approximation</h3>
+<p>The <strong>Satterthwaite Approximation</strong> provides a method to estimate the degrees of freedom for variance components, facilitating the construction of confidence intervals.</p>
+</section>
+<section id="steps" class="level3">
+<h3 class="anchored" data-anchor-id="steps">Steps</h3>
+<ol type="1">
+<li><strong>Estimate Variance Components:</strong> Using REML or other estimation methods.</li>
+<li><strong>Calculate Degrees of Freedom:</strong> Approximated based on the variance component estimates.</li>
+<li><strong>Construct Confidence Intervals:</strong></li>
+</ol>
+<p><span class="math display">\[
+CI = \hat{\sigma}^2 \pm t_{\alpha/2, df} \times SE(\hat{\sigma}^2)
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\hat{\sigma}^2\)</span>: Estimated variance component.</li>
+<li><span class="math inline">\(t_{\alpha/2, df}\)</span>: Critical value from the t-distribution.</li>
+<li><span class="math inline">\(SE(\hat{\sigma}^2)\)</span>: Standard error of the variance component estimate.</li>
+</ul>
+<p><strong>Example in R:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(response <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> group), <span class="at">data =</span> data_random)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract variance components</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>var_components <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(model)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>sigma_T_sq <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(var_components<span class="sc">$</span>group)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>sigma_sq <span class="ot">&lt;-</span> <span class="fu">attr</span>(var_components, <span class="st">"sc"</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate standard errors using the lme4 package's built-in functions</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model, <span class="at">parm =</span> <span class="st">"theta_"</span>, <span class="at">method =</span> <span class="st">"Wald"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> The <code>confint</code> function provides confidence intervals for the variance components, allowing for inference about the population variability.</p>
+<p><strong>Reference:</strong> Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="medium-difficulty" class="level2">
+<h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
+<section id="two-way-ancova-with-interaction" class="level3">
+<h3 class="anchored" data-anchor-id="two-way-ancova-with-interaction">1. Two-Way ANCOVA with Interaction</h3>
+<p><strong>Dataset:</strong> Simulate a dataset with three treatments and one covariate.</p>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Generate data for treatments A, B, C with a covariate <span class="math inline">\(X\)</span>.</li>
+<li>Fit an ANCOVA model adjusting for <span class="math inline">\(X\)</span>.</li>
+<li>Test the significance of treatment effects and the covariate.</li>
+<li>Generate diagnostic plots and interpret them.</li>
+</ul>
+<p><strong>R Code Example:</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define factors and covariate</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Treatment <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each=</span><span class="dv">30</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">90</span>, <span class="at">mean=</span><span class="dv">50</span>, <span class="at">sd=</span><span class="dv">10</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with treatment effects and covariate effect</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">"A"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">"B"</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">+</span> </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0.5</span> <span class="sc">*</span> (X <span class="sc">-</span> <span class="fu">mean</span>(X)) <span class="sc">+</span> </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>     <span class="fu">rnorm</span>(<span class="dv">90</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">3</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Treatment, X, Y)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANCOVA model</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>model_sim <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> Treatment <span class="sc">+</span> X, <span class="at">data =</span> data_sim)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_sim)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic plots</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_sim)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated marginal means</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>emm_sim <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model_sim, <span class="sc">~</span> Treatment)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>pairwise_sim <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm_sim, <span class="at">method =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pairwise_sim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><strong>Main Effects:</strong>
+<ul>
+<li><strong>Treatment:</strong> What are the estimated effects of treatments A, B, and C?</li>
+<li><strong>Covariate <span class="math inline">\(X\)</span>:</strong> How does <span class="math inline">\(X\)</span> influence the response variable <span class="math inline">\(Y\)</span>?</li>
+</ul></li>
+<li><strong>Significance Testing:</strong>
+<ul>
+<li>Are the treatment effects statistically significant after adjusting for <span class="math inline">\(X\)</span>?</li>
+<li>Is the covariate <span class="math inline">\(X\)</span> a significant predictor of <span class="math inline">\(Y\)</span>?</li>
+</ul></li>
+<li><strong>Diagnostic Plots:</strong>
+<ul>
+<li>Do the residual plots indicate any violations of ANCOVA assumptions such as non-linearity, heteroscedasticity, or non-normality?</li>
+<li>Are there any influential observations that may affect the model’s validity?</li>
+</ul></li>
+<li><strong>Interpretation of Pairwise Comparisons:</strong>
+<ul>
+<li>Which treatments significantly differ from each other after adjusting for <span class="math inline">\(X\)</span>?</li>
+<li>How do the adjusted means compare across treatments?</li>
+</ul></li>
+</ol>
+<p><strong>Expected Answers:</strong></p>
+<ol type="1">
+<li><strong>Main Effects:</strong>
+<ul>
+<li>Treatments B and C have positive effects relative to Treatment A.</li>
+<li>Covariate <span class="math inline">\(X\)</span> has a positive influence on <span class="math inline">\(Y\)</span>, indicating that as <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> tends to increase.</li>
+</ul></li>
+<li><strong>Significance Testing:</strong>
+<ul>
+<li>If the p-values for Treatment are below the significance level (e.g., 0.05), treatments have significant effects.</li>
+<li>If the p-value for <span class="math inline">\(X\)</span> is below the significance level, <span class="math inline">\(X\)</span> is a significant predictor.</li>
+</ul></li>
+<li><strong>Diagnostic Plots:</strong>
+<ul>
+<li>Random scatter in Residuals vs Fitted suggests homoscedasticity and linearity.</li>
+<li>Q-Q plot close to the diagonal indicates normality of residuals.</li>
+<li>No points with high leverage or large residuals indicate no influential observations.</li>
+</ul></li>
+<li><strong>Interpretation of Pairwise Comparisons:</strong>
+<ul>
+<li>Significant pairwise differences indicate which specific treatments differ after adjusting for <span class="math inline">\(X\)</span>.</li>
+<li>Adjusted means provide a clearer comparison by accounting for the covariate’s effect.</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="challenging-problems" class="level2">
+<h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
+<section id="unbalanced-two-factor-ancova-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="unbalanced-two-factor-ancova-analysis">1. Unbalanced Two-Factor ANCOVA Analysis</h3>
+<p><strong>Dataset:</strong> Utilize a dataset with unequal numbers of replicates across treatment combinations.</p>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Simulate an unbalanced dataset with two factors and one covariate.</li>
+<li>Fit an ANCOVA model using both Type II and Type III sums of squares.</li>
+<li>Compare the results and discuss how imbalance affects the interpretation of main and interaction effects.</li>
+</ul>
+<p><strong>R Code Example:</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate unbalanced data</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">5</span>)))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each =</span> <span class="dv">7</span>, <span class="at">times =</span> <span class="dv">2</span>))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with treatment and covariate effects</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A1"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A2"</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">+</span> </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorB <span class="sc">==</span> <span class="st">"B1"</span>, <span class="dv">0</span>, <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0.5</span> <span class="sc">*</span> (X <span class="sc">-</span> <span class="fu">mean</span>(X)) <span class="sc">+</span> </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">3</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>data_unbalanced <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, X, Y)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANCOVA model</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>fit_unbalanced <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">+</span> X, <span class="at">data =</span> data_unbalanced)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Type II Sum of Squares</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>typeII <span class="ot">&lt;-</span> <span class="fu">Anova</span>(fit_unbalanced, <span class="at">type =</span> <span class="st">"II"</span>)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(typeII)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Type III Sum of Squares</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>typeIII <span class="ot">&lt;-</span> <span class="fu">Anova</span>(fit_unbalanced, <span class="at">type =</span> <span class="st">"III"</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(typeIII)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Discussion Points:</strong></p>
+<ol type="1">
+<li><strong>Type II vs.&nbsp;Type III SS:</strong>
+<ul>
+<li><strong>Type II:</strong> Tests main effects after accounting for other main effects but ignores interactions.</li>
+<li><strong>Type III:</strong> Tests main effects after accounting for all other factors, including interactions.</li>
+</ul></li>
+<li><strong>Impact of Imbalance:</strong>
+<ul>
+<li>Imbalanced designs can lead to different interpretations under Type II and Type III SS.</li>
+<li>Type I SS is not appropriate here as it is sequential and depends on the order of factors.</li>
+</ul></li>
+<li><strong>Significance of Effects:</strong>
+<ul>
+<li>Identify which factors and interactions are significant under each type.</li>
+<li>Discuss how imbalance might inflate or deflate the significance levels of certain effects.</li>
+</ul></li>
+<li><strong>Implications for Experimental Conclusions:</strong>
+<ul>
+<li>Choosing the appropriate type of sums of squares is crucial for accurate inference.</li>
+<li>Misinterpretation can lead to incorrect conclusions about factor effects and interactions.</li>
+</ul></li>
+</ol>
+<p><strong>Expected Insights:</strong></p>
+<ul>
+<li><strong>Type II SS:</strong> Often preferred when interactions are not of primary interest. It provides unbiased estimates of main effects under the assumption of no interaction.</li>
+<li><strong>Type III SS:</strong> Necessary when interactions are present or when the design is unbalanced. It accounts for all factors simultaneously, providing conditional main effects.</li>
+<li><strong>Imbalance Effects:</strong> Can distort the Type I SS results, leading to misleading conclusions. Type II and III SS offer more robust alternatives in unbalanced settings.</li>
+</ul>
+<p><strong>Reference:</strong> Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</p>
+</section>
+<section id="three-factor-interaction-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="three-factor-interaction-interpretation">2. Three-Factor Interaction Interpretation</h3>
+<p><strong>Dataset:</strong> Use a simulated dataset with three factors exhibiting a significant three-way interaction.</p>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Simulate data with three factors and one covariate.</li>
+<li>Fit a three-way ANCOVA model.</li>
+<li>Visualize the three-way interaction.</li>
+<li>Use <code>emmeans</code> to estimate marginal means and perform pairwise comparisons.</li>
+<li>Explain how the three-way interaction affects the interpretation of main and two-way interactions.</li>
+</ul>
+<p><strong>R Code Example:</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">789</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">each =</span> <span class="dv">24</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each =</span> <span class="dv">12</span>, <span class="at">times =</span> <span class="dv">3</span>))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>FactorC <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span>), <span class="at">times =</span> <span class="dv">8</span>))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">72</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with three-way interaction</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A1"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A2"</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">+</span> </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorB <span class="sc">==</span> <span class="st">"B1"</span>, <span class="dv">0</span>, <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorC <span class="sc">==</span> <span class="st">"C1"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(FactorC <span class="sc">==</span> <span class="st">"C2"</span>, <span class="fl">1.5</span>, <span class="dv">3</span>)) <span class="sc">+</span> </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0.5</span> <span class="sc">*</span> (X <span class="sc">-</span> <span class="fu">mean</span>(X)) <span class="sc">+</span> </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A1"</span> <span class="sc">&amp;</span> FactorB <span class="sc">==</span> <span class="st">"B1"</span>, <span class="dv">0</span>, </span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A2"</span> <span class="sc">&amp;</span> FactorB <span class="sc">==</span> <span class="st">"B2"</span>, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>     <span class="fu">rnorm</span>(<span class="dv">72</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">3</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>data_three <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, FactorC, X, Y)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit three-way ANCOVA model</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>fit_three <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC <span class="sc">+</span> X, <span class="at">data =</span> data_three)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_three)</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot three-way interaction</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_three, <span class="fu">aes</span>(<span class="at">x=</span>FactorA, <span class="at">y=</span>Y, <span class="at">color=</span>FactorB, <span class="at">group=</span>FactorB)) <span class="sc">+</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> FactorC) <span class="sc">+</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Three-Way Interaction Plot"</span>, <span class="at">x=</span><span class="st">"Factor A"</span>, <span class="at">y=</span><span class="st">"Response"</span>) <span class="sc">+</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated marginal means</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>emm_three <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_three, <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>contrast_results <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm_three, <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(contrast_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong></p>
+<ol type="1">
+<li><strong>Three-Way Interaction:</strong>
+<ul>
+<li>The interaction plot demonstrates how the interaction between Factor A and Factor B varies across different levels of Factor C.</li>
+<li>Non-parallel lines across facets indicate a significant three-way interaction.</li>
+</ul></li>
+<li><strong>Impact on Main and Two-Way Interactions:</strong>
+<ul>
+<li>Significant higher-order interactions imply that main effects and two-way interactions cannot be interpreted in isolation.</li>
+<li>The effect of one factor depends on the combination of other factors, necessitating a comprehensive analysis.</li>
+</ul></li>
+<li><strong>Practical Implications:</strong>
+<ul>
+<li>Understanding three-way interactions provides nuanced insights into how multiple factors jointly influence the response variable.</li>
+<li>This can inform more sophisticated decision-making and strategy development in experimental settings.</li>
+</ul></li>
+</ol>
+<p><strong>Reference:</strong> Dean, Voss &amp; Draguljić (2017). <em>Design and Analysis of Experiments</em>. Springer.</p>
+</section>
+<section id="mathematical-proof-of-interaction-contrasts" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-proof-of-interaction-contrasts">3. Mathematical Proof of Interaction Contrasts</h3>
+<p><strong>Task:</strong> Derive formulas for interaction contrasts in a three-factor design and prove that they measure deviations from additivity.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Show how to construct interaction contrasts.</li>
+<li>Prove that if all interaction contrasts are zero, the model is additive.</li>
+</ul>
+<p><strong>Hints:</strong></p>
+<ul>
+<li>Utilize the definitions of main effects and interaction terms.</li>
+<li>Employ properties of linear algebra to demonstrate the relationship between interaction contrasts and additivity.</li>
+<li>Reference Dean et al.&nbsp;(2017) and Christensen (2018) for theoretical foundations.</li>
+</ul>
+<p><strong>Proof Outline:</strong></p>
+<ol type="1">
+<li><strong>Define the Three-Factor Model:</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + (\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk} + (\alpha\beta\gamma)_{ijk} + \epsilon_{ijk}
+\]</span></p>
+<p>where <span class="math inline">\(\sum \alpha_i = \sum \beta_j = \sum \gamma_k = 0\)</span>.</p>
+<ol type="1">
+<li><p><strong>Construct Interaction Contrasts:</strong></p>
+<ul>
+<li><strong>Two-Way Interactions:</strong>
+<ul>
+<li><span class="math inline">\((\alpha\beta)_{ij}\)</span>: Measures the interaction between Factors A and B.</li>
+<li>Similarly for <span class="math inline">\((\alpha\gamma)_{ik}\)</span> and <span class="math inline">\((\beta\gamma)_{jk}\)</span>.</li>
+</ul></li>
+<li><strong>Three-Way Interaction:</strong>
+<ul>
+<li><span class="math inline">\((\alpha\beta\gamma)_{ijk}\)</span>: Measures the deviation from additivity among all three factors.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Prove Deviations from Additivity:</strong></p>
+<ul>
+<li><strong>Additive Model:</strong> If all interaction terms are zero (<span class="math inline">\((\alpha\beta)_{ij} = (\alpha\gamma)_{ik} = (\beta\gamma)_{jk} = (\alpha\beta\gamma)_{ijk} = 0\)</span>), the model simplifies to:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}
+\]</span></p>
+<pre><code> This represents a purely additive model where the combined effect of factors is the sum of their individual effects.</code></pre>
+<ul>
+<li><strong>Non-Additive Model:</strong> If any of the interaction terms are non-zero, the model deviates from additivity, indicating that the effect of one factor depends on the levels of other factors.</li>
+</ul>
+<ol type="1">
+<li><p><strong>Conclusion:</strong></p>
+<p>Interaction contrasts (<span class="math inline">\((\alpha\beta)_{ij}\)</span>, <span class="math inline">\((\alpha\gamma)_{ik}\)</span>, <span class="math inline">\((\beta\gamma)_{jk}\)</span>, and <span class="math inline">\((\alpha\beta\gamma)_{ijk}\)</span>) measure the extent to which the observed responses deviate from an additive model. Non-zero contrasts signify the presence of interactions, emphasizing the importance of considering these higher-order effects in experimental analysis.</p></li>
+</ol>
+<p><strong>Reference:</strong> Dean, Voss &amp; Draguljić (2017). <em>Design and Analysis of Experiments</em>. Springer.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="appendix-advanced-mathematical-derivations-1" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="variance-calculations-for-latin-square-designs" class="level2">
+<h2 class="anchored" data-anchor-id="variance-calculations-for-latin-square-designs">Variance Calculations for Latin Square Designs</h2>
+<p>In a <strong>Latin Square Design</strong> with <span class="math inline">\(v\)</span> treatments, the variance of the estimated treatment effects is influenced by the design’s structure.</p>
+<section id="formula" class="level3">
+<h3 class="anchored" data-anchor-id="formula">Formula</h3>
+<p>For a Latin Square with <span class="math inline">\(v\)</span> treatments:</p>
+<p><span class="math display">\[
+Var(\tau_i) = \frac{\sigma^2}{v}
+\]</span></p>
+</section>
+<section id="derivation" class="level3">
+<h3 class="anchored" data-anchor-id="derivation">Derivation</h3>
+<ol type="1">
+<li><p><strong>Model Setup:</strong></p>
+<p>The ANOVA model for a Latin Square is:</p></li>
+</ol>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \tau_k + \epsilon_{ijk},
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_{ijk} \sim N(0, \sigma^2)\)</span>.</p>
+<ol type="1">
+<li><p><strong>Estimator for Treatment Effect (<span class="math inline">\(\tau_k\)</span>):</strong></p>
+<p>The treatment effects are estimated as:</p></li>
+</ol>
+<p><span class="math display">\[
+\hat{\tau}_k = \bar{Y}_{\cdot \cdot k} - \bar{Y}_{\cdot \cdot \cdot},
+\]</span></p>
+<p>where <span class="math inline">\(\bar{Y}_{\cdot \cdot k}\)</span> is the mean response for treatment <span class="math inline">\(k\)</span> and <span class="math inline">\(\bar{Y}_{\cdot \cdot \cdot}\)</span> is the grand mean.</p>
+<ol type="1">
+<li><p><strong>Variance of <span class="math inline">\(\hat{\tau}_k\)</span>:</strong></p>
+<p>Since each treatment is replicated <span class="math inline">\(v\)</span> times (once per row and column):</p></li>
+</ol>
+<p><span class="math display">\[
+Var(\hat{\tau}_k) = \frac{\sigma^2}{v}
+\]</span></p>
+<p><strong>Conclusion:</strong> The variance of the treatment effect estimates decreases with increasing number of treatments in the Latin Square, enhancing the precision of the estimates.</p>
+<p><strong>Reference:</strong> Montgomery, D. C., &amp; Runger, G. C. (2020). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</p>
+<hr>
+</section>
+</section>
+<section id="degrees-of-freedom-in-youden-designs" class="level2">
+<h2 class="anchored" data-anchor-id="degrees-of-freedom-in-youden-designs">Degrees of Freedom in Youden Designs</h2>
+<p>For a <strong>Youden Design</strong> with parameters <span class="math inline">\(v = 4\)</span> treatments, <span class="math inline">\(b = 4\)</span> blocks (rows), and <span class="math inline">\(c = 3\)</span> columns, the degrees of freedom for the error term are calculated as follows:</p>
+<section id="formula-1" class="level3">
+<h3 class="anchored" data-anchor-id="formula-1">Formula</h3>
+<p><span class="math display">\[
+df_{\text{Error}} = bc - b - c - v + 2
+\]</span></p>
+</section>
+<section id="calculation" class="level3">
+<h3 class="anchored" data-anchor-id="calculation">Calculation</h3>
+<p>Given:</p>
+<ul>
+<li><span class="math inline">\(v = 4\)</span></li>
+<li><span class="math inline">\(b = 4\)</span></li>
+<li><span class="math inline">\(c = 3\)</span></li>
+</ul>
+<p>Plugging into the formula:</p>
+<p><span class="math display">\[
+df_{\text{Error}} = (4 \times 3) - 4 - 3 - 4 + 2 = 12 - 4 - 3 - 4 + 2 = 3
+\]</span></p>
+<p><strong>Interpretation:</strong> The error degrees of freedom indicate the number of independent pieces of information available to estimate the error variance. In this case, with 3 error degrees of freedom, the design is sufficiently constrained to estimate treatment effects after accounting for row and column effects.</p>
+<p><strong>Reference:</strong> Dean, Voss &amp; Draguljić (2017). <em>Design and Analysis of Experiments</em>. Springer.</p>
+<hr>
+</section>
+</section>
+<section id="proof-of-interaction-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="proof-of-interaction-contrasts">Proof of Interaction Contrasts</h2>
+<section id="interaction-contrasts-measure-deviations-from-additivity" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-contrasts-measure-deviations-from-additivity">Interaction Contrasts Measure Deviations from Additivity</h3>
+<p><strong>Definition:</strong> In a three-factor design, interaction contrasts quantify how the combined effect of three factors deviates from the additive effects of each factor individually and their two-way interactions.</p>
+</section>
+<section id="proof-steps" class="level3">
+<h3 class="anchored" data-anchor-id="proof-steps">Proof Steps</h3>
+<ol type="1">
+<li><strong>Define the Three-Factor Model:</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + (\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk} + (\alpha\beta\gamma)_{ijk} + \epsilon_{ijk}
+\]</span></p>
+<p>where <span class="math inline">\(\sum \alpha_i = \sum \beta_j = \sum \gamma_k = 0\)</span>.</p>
+<ol type="1">
+<li><p><strong>Construct Interaction Contrasts:</strong></p>
+<ul>
+<li><strong>Two-Way Interactions:</strong>
+<ul>
+<li><span class="math inline">\((\alpha\beta)_{ij}\)</span>: Measures the interaction between Factors A and B.</li>
+<li>Similarly for <span class="math inline">\((\alpha\gamma)_{ik}\)</span> and <span class="math inline">\((\beta\gamma)_{jk}\)</span>.</li>
+</ul></li>
+<li><strong>Three-Way Interaction:</strong>
+<ul>
+<li><span class="math inline">\((\alpha\beta\gamma)_{ijk}\)</span>: Measures the deviation from additivity among all three factors.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Prove Deviations from Additivity:</strong></p>
+<ul>
+<li><strong>Additive Model:</strong> If all interaction terms are zero (<span class="math inline">\((\alpha\beta)_{ij} = (\alpha\gamma)_{ik} = (\beta\gamma)_{jk} = (\alpha\beta\gamma)_{ijk} = 0\)</span>), the model simplifies to:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}
+\]</span></p>
+<pre><code> This represents a purely additive model where the combined effect of factors is the sum of their individual effects.</code></pre>
+<ul>
+<li><strong>Non-Additive Model:</strong> If any of the interaction terms are non-zero, the model deviates from additivity, indicating that the effect of one factor depends on the levels of other factors.</li>
+</ul>
+<ol type="1">
+<li><p><strong>Conclusion:</strong></p>
+<p>Interaction contrasts (<span class="math inline">\((\alpha\beta)_{ij}\)</span>, <span class="math inline">\((\alpha\gamma)_{ik}\)</span>, <span class="math inline">\((\beta\gamma)_{jk}\)</span>, and <span class="math inline">\((\alpha\beta\gamma)_{ijk}\)</span>) measure the extent to which the observed responses deviate from an additive model. Non-zero contrasts signify the presence of interactions, emphasizing the importance of considering these higher-order effects in experimental analysis.</p></li>
+</ol>
+<p><strong>Reference:</strong> Dean, Voss &amp; Draguljić (2017). <em>Design and Analysis of Experiments</em>. Springer.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="appendix-advanced-mathematical-derivations-2" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="adjusted-treatment-means" class="level2">
+<h2 class="anchored" data-anchor-id="adjusted-treatment-means">Adjusted Treatment Means</h2>
+<p>The <strong>Adjusted Mean</strong> for treatment <span class="math inline">\(i\)</span> accounts for the influence of blocking factors, providing a more accurate estimate of the treatment effect.</p>
+<p><span class="math display">\[
+\mu + \tau_i = \bar{Y}_i - \beta (\bar{X}_i - \bar{X})
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span>: Overall mean.</li>
+<li><span class="math inline">\(\tau_i\)</span>: Treatment effect for treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\bar{Y}_i\)</span>: Mean response for treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\beta\)</span>: Regression coefficient for the covariate.</li>
+<li><span class="math inline">\(\bar{X}_i\)</span>: Mean covariate value for treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\bar{X}\)</span>: Overall mean of the covariate.</li>
+</ul>
+<section id="derivation-1" class="level3">
+<h3 class="anchored" data-anchor-id="derivation-1">Derivation</h3>
+<ol type="1">
+<li><strong>Model Equation:</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{ij} = \mu + \tau_i + \beta (X_{ij} - \bar{X}) + \epsilon_{ij}
+\]</span></p>
+<ol type="1">
+<li><strong>Taking the Mean for Treatment <span class="math inline">\(i\)</span>:</strong></li>
+</ol>
+<p><span class="math display">\[
+\bar{Y}_i = \mu + \tau_i + \beta (\bar{X}_i - \bar{X}) + \bar{\epsilon}_i
+\]</span></p>
+<p>Since <span class="math inline">\(\bar{\epsilon}_i = 0\)</span> (assuming errors have mean zero),</p>
+<p><span class="math display">\[
+\bar{Y}_i = \mu + \tau_i + \beta (\bar{X}_i - \bar{X})
+\]</span></p>
+<ol type="1">
+<li><strong>Solving for Adjusted Mean:</strong></li>
+</ol>
+<p><span class="math display">\[
+\mu + \tau_i = \bar{Y}_i - \beta (\bar{X}_i - \bar{X})
+\]</span></p>
+<p>This equation represents the adjusted treatment mean, accounting for differences in the covariate.</p>
+<p><strong>Reference:</strong> Montgomery, D. C., &amp; Runger, G. C. (2020). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</p>
+<hr>
+</section>
+</section>
+<section id="f-test-for-homogeneity-of-slopes" class="level2">
+<h2 class="anchored" data-anchor-id="f-test-for-homogeneity-of-slopes">F-Test for Homogeneity of Slopes</h2>
+<p>Testing the assumption of <strong>homogeneity of regression slopes</strong> ensures that the relationship between the covariate and the response is consistent across all treatment groups.</p>
+<section id="model-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="model-comparison">Model Comparison</h3>
+<ol type="1">
+<li><strong>Model Without Interaction (Assuming Homogeneous Slopes):</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{hi} = \mu + \theta_h + \tau_i + \beta X_{hi} + \epsilon_{hi}
+\]</span></p>
+<ol type="1">
+<li><strong>Model With Interaction (Allowing Slopes to Vary):</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{hi} = \mu + \theta_h + \tau_i + \beta X_{hi} + (\theta \tau)_{hi} + \epsilon_{hi}
+\]</span></p>
+<p>Where <span class="math inline">\((\theta \tau)_{hi}\)</span> allows the slope of the covariate to vary with treatments.</p>
+</section>
+<section id="hypothesis-testing" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing">Hypothesis Testing</h3>
+<ul>
+<li><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>):</strong> Homogeneity of slopes (<span class="math inline">\(\beta\)</span> is the same across treatments).</li>
+<li><strong>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>):</strong> Slopes vary across treatments (<span class="math inline">\(\beta_i \neq \beta_j\)</span> for some <span class="math inline">\(i, j\)</span>).</li>
+</ul>
+</section>
+<section id="test-procedure" class="level3">
+<h3 class="anchored" data-anchor-id="test-procedure">Test Procedure</h3>
+<ol type="1">
+<li><p><strong>Fit Both Models:</strong></p>
+<ul>
+<li><strong>Reduced Model:</strong> Without interaction.</li>
+<li><strong>Full Model:</strong> With interaction.</li>
+</ul></li>
+<li><p><strong>Compare Models Using ANOVA:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model_reduced <span class="ot">&lt;-</span> <span class="fu">lm</span>(Time <span class="sc">~</span> fColor <span class="sc">+</span> x, <span class="at">data =</span> balloon.data)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit full model with interaction</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>model_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(Time <span class="sc">~</span> fColor <span class="sc">*</span> x, <span class="at">data =</span> balloon.data)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare models</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_reduced, model_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Decision Rule:</strong></p>
+<ul>
+<li>If the interaction term is significant (<span class="math inline">\(p &lt; \alpha\)</span>), reject <span class="math inline">\(H_0\)</span> and conclude that slopes are not homogeneous.</li>
+<li>If not significant, accept <span class="math inline">\(H_0\)</span> and proceed with the reduced model.</li>
+</ul></li>
+</ol>
+<p><strong>Conclusion:</strong> A significant interaction term indicates that the effect of the covariate varies across treatments, violating the homogeneity of slopes assumption and necessitating a more complex model.</p>
+<p><strong>Reference:</strong> Scheffé, H. (1959). <em>The Analysis of Variance</em>. Wiley.</p>
+<hr>
+</section>
+</section>
+<section id="confidence-intervals-for-higher-order-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-for-higher-order-contrasts">Confidence Intervals for Higher-Order Contrasts</h2>
+<p>For higher-order interactions involving multiple factors, <strong>confidence intervals for contrasts</strong> provide insights into the magnitude and significance of these interactions.</p>
+<section id="formula-2" class="level3">
+<h3 class="anchored" data-anchor-id="formula-2">Formula</h3>
+<p><span class="math display">\[
+CI = \hat{L} \pm t_{\alpha/2, df} \sqrt{\text{Var}(\hat{L})}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\hat{L}\)</span>: Estimated contrast.</li>
+<li><span class="math inline">\(t_{\alpha/2, df}\)</span>: Critical value from the t-distribution.</li>
+<li><span class="math inline">\(\text{Var}(\hat{L})\)</span>: Variance of the contrast estimate.</li>
+</ul>
+</section>
+<section id="steps-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="steps-in-r">Steps in R</h3>
+<ol type="1">
+<li><p><strong>Estimate the Contrast:</strong></p>
+<p>Using the <code>emmeans</code> package to define and estimate contrasts.</p></li>
+<li><p><strong>Calculate the Confidence Interval:</strong></p>
+<p>The <code>emmeans</code> package automatically provides confidence intervals when performing contrasts.</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the ANCOVA model</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> Treatment <span class="sc">+</span> X, <span class="at">data =</span> data_sim)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define estimated marginal means</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> Treatment)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a contrast (e.g., Treatment B vs. Treatment A)</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>contrast_AB <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(contrast_AB, <span class="at">infer =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> The output provides the estimated difference, standard error, t-value, and confidence interval for the contrast. If the confidence interval does not include zero, the contrast is statistically significant.</p>
+<p><strong>Reference:</strong> Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="exercises-1" class="level1">
+<h1>Exercises</h1>
+<section id="medium-difficulty-1" class="level2">
+<h2 class="anchored" data-anchor-id="medium-difficulty-1">Medium Difficulty</h2>
+<section id="two-way-ancova-with-interaction-1" class="level3">
+<h3 class="anchored" data-anchor-id="two-way-ancova-with-interaction-1">1. Two-Way ANCOVA with Interaction</h3>
+<p><strong>Dataset:</strong> Simulate a dataset with three treatments and one covariate.</p>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Generate data for treatments A, B, C with a covariate <span class="math inline">\(X\)</span>.</li>
+<li>Fit an ANCOVA model adjusting for <span class="math inline">\(X\)</span>.</li>
+<li>Test the significance of treatment effects and the covariate.</li>
+<li>Generate diagnostic plots and interpret them.</li>
+</ul>
+<p><strong>R Code Example:</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define factors and covariate</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>Treatment <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each=</span><span class="dv">30</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">90</span>, <span class="at">mean=</span><span class="dv">50</span>, <span class="at">sd=</span><span class="dv">10</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with treatment effects and covariate effect</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">"A"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">"B"</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">+</span> </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0.5</span> <span class="sc">*</span> (X <span class="sc">-</span> <span class="fu">mean</span>(X)) <span class="sc">+</span> </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>     <span class="fu">rnorm</span>(<span class="dv">90</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">3</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Treatment, X, Y)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANCOVA model</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>model_sim <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> Treatment <span class="sc">+</span> X, <span class="at">data =</span> data_sim)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_sim)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic plots</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_sim)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated marginal means</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>emm_sim <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model_sim, <span class="sc">~</span> Treatment)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>pairwise_sim <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm_sim, <span class="at">method =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pairwise_sim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><strong>Main Effects:</strong>
+<ul>
+<li><strong>Treatment:</strong> What are the estimated effects of treatments A, B, and C?</li>
+<li><strong>Covariate <span class="math inline">\(X\)</span>:</strong> How does <span class="math inline">\(X\)</span> influence the response variable <span class="math inline">\(Y\)</span>?</li>
+</ul></li>
+<li><strong>Significance Testing:</strong>
+<ul>
+<li>Are the treatment effects statistically significant after adjusting for <span class="math inline">\(X\)</span>?</li>
+<li>Is the covariate <span class="math inline">\(X\)</span> a significant predictor of <span class="math inline">\(Y\)</span>?</li>
+</ul></li>
+<li><strong>Diagnostic Plots:</strong>
+<ul>
+<li>Do the residual plots indicate any violations of ANCOVA assumptions such as non-linearity, heteroscedasticity, or non-normality?</li>
+<li>Are there any influential observations that may affect the model’s validity?</li>
+</ul></li>
+<li><strong>Interpretation of Pairwise Comparisons:</strong>
+<ul>
+<li>Which treatments significantly differ from each other after adjusting for <span class="math inline">\(X\)</span>?</li>
+<li>How do the adjusted means compare across treatments?</li>
+</ul></li>
+</ol>
+<p><strong>Expected Answers:</strong></p>
+<ol type="1">
+<li><strong>Main Effects:</strong>
+<ul>
+<li>Treatments B and C have positive effects relative to Treatment A.</li>
+<li>Covariate <span class="math inline">\(X\)</span> has a positive influence on <span class="math inline">\(Y\)</span>, indicating that as <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> tends to increase.</li>
+</ul></li>
+<li><strong>Significance Testing:</strong>
+<ul>
+<li>If the p-values for Treatment are below the significance level (e.g., 0.05), treatments have significant effects.</li>
+<li>If the p-value for <span class="math inline">\(X\)</span> is below the significance level, <span class="math inline">\(X\)</span> is a significant predictor.</li>
+</ul></li>
+<li><strong>Diagnostic Plots:</strong>
+<ul>
+<li>Random scatter in Residuals vs Fitted suggests homoscedasticity and linearity.</li>
+<li>Q-Q plot close to the diagonal indicates normality of residuals.</li>
+<li>No points with high leverage or large residuals indicate no influential observations.</li>
+</ul></li>
+<li><strong>Interpretation of Pairwise Comparisons:</strong>
+<ul>
+<li>Significant pairwise differences indicate which specific treatments differ after adjusting for <span class="math inline">\(X\)</span>.</li>
+<li>Adjusted means provide a clearer comparison by accounting for the covariate’s effect.</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="challenging-problems-1" class="level2">
+<h2 class="anchored" data-anchor-id="challenging-problems-1">Challenging Problems</h2>
+<section id="unbalanced-two-factor-ancova-analysis-1" class="level3">
+<h3 class="anchored" data-anchor-id="unbalanced-two-factor-ancova-analysis-1">1. Unbalanced Two-Factor ANCOVA Analysis</h3>
+<p><strong>Dataset:</strong> Utilize a dataset with unequal numbers of replicates across treatment combinations.</p>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Simulate an unbalanced dataset with two factors and one covariate.</li>
+<li>Fit an ANCOVA model using both Type II and Type III sums of squares.</li>
+<li>Compare the results and discuss how imbalance affects the interpretation of main and interaction effects.</li>
+</ul>
+<p><strong>R Code Example:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate unbalanced data</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">5</span>)))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each =</span> <span class="dv">7</span>, <span class="at">times =</span> <span class="dv">2</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with treatment and covariate effects</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A1"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A2"</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">+</span> </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorB <span class="sc">==</span> <span class="st">"B1"</span>, <span class="dv">0</span>, <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0.5</span> <span class="sc">*</span> (X <span class="sc">-</span> <span class="fu">mean</span>(X)) <span class="sc">+</span> </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">3</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>data_unbalanced <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, X, Y)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANCOVA model</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>fit_unbalanced <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">+</span> X, <span class="at">data =</span> data_unbalanced)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Type II Sum of Squares</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>typeII <span class="ot">&lt;-</span> <span class="fu">Anova</span>(fit_unbalanced, <span class="at">type =</span> <span class="st">"II"</span>)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(typeII)</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Type III Sum of Squares</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>typeIII <span class="ot">&lt;-</span> <span class="fu">Anova</span>(fit_unbalanced, <span class="at">type =</span> <span class="st">"III"</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(typeIII)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Discussion Points:</strong></p>
+<ol type="1">
+<li><strong>Type II vs.&nbsp;Type III SS:</strong>
+<ul>
+<li><strong>Type II:</strong> Tests main effects after accounting for other main effects but ignores interactions.</li>
+<li><strong>Type III:</strong> Tests main effects after accounting for all other factors, including interactions.</li>
+</ul></li>
+<li><strong>Impact of Imbalance:</strong>
+<ul>
+<li>Imbalanced designs can lead to different interpretations under Type II and Type III SS.</li>
+<li>Type I SS is not appropriate here as it is sequential and depends on the order of factors.</li>
+</ul></li>
+<li><strong>Significance of Effects:</strong>
+<ul>
+<li>Identify which factors and interactions are significant under each type.</li>
+<li>Discuss how imbalance might inflate or deflate the significance levels of certain effects.</li>
+</ul></li>
+<li><strong>Implications for Experimental Conclusions:</strong>
+<ul>
+<li>Choosing the appropriate type of sums of squares is crucial for accurate inference.</li>
+<li>Misinterpretation can lead to incorrect conclusions about factor effects and interactions.</li>
+</ul></li>
+</ol>
+<p><strong>Expected Insights:</strong></p>
+<ul>
+<li><strong>Type II SS:</strong> Often preferred when interactions are not of primary interest. It provides unbiased estimates of main effects under the assumption of no interaction.</li>
+<li><strong>Type III SS:</strong> Necessary when interactions are present or when the design is unbalanced. It accounts for all factors simultaneously, providing conditional main effects.</li>
+<li><strong>Imbalance Effects:</strong> Can distort the Type I SS results, leading to misleading conclusions. Type II and III SS offer more robust alternatives in unbalanced settings.</li>
+</ul>
+<p><strong>Reference:</strong> Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</p>
+</section>
+<section id="three-factor-interaction-interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="three-factor-interaction-interpretation-1">2. Three-Factor Interaction Interpretation</h3>
+<p><strong>Dataset:</strong> Use a simulated dataset with three factors exhibiting a significant three-way interaction.</p>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Simulate data with three factors and one covariate.</li>
+<li>Fit a three-way ANCOVA model.</li>
+<li>Visualize the three-way interaction.</li>
+<li>Use <code>emmeans</code> to estimate marginal means and perform pairwise comparisons.</li>
+<li>Explain how the three-way interaction affects the interpretation of main and two-way interactions.</li>
+</ul>
+<p><strong>R Code Example:</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">789</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">each =</span> <span class="dv">24</span>))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each =</span> <span class="dv">12</span>, <span class="at">times =</span> <span class="dv">3</span>))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>FactorC <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span>), <span class="at">times =</span> <span class="dv">8</span>))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">72</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate responses with three-way interaction</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A1"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A2"</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">+</span> </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorB <span class="sc">==</span> <span class="st">"B1"</span>, <span class="dv">0</span>, <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorC <span class="sc">==</span> <span class="st">"C1"</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(FactorC <span class="sc">==</span> <span class="st">"C2"</span>, <span class="fl">1.5</span>, <span class="dv">3</span>)) <span class="sc">+</span> </span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0.5</span> <span class="sc">*</span> (X <span class="sc">-</span> <span class="fu">mean</span>(X)) <span class="sc">+</span> </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A1"</span> <span class="sc">&amp;</span> FactorB <span class="sc">==</span> <span class="st">"B1"</span>, <span class="dv">0</span>, </span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ifelse</span>(FactorA <span class="sc">==</span> <span class="st">"A2"</span> <span class="sc">&amp;</span> FactorB <span class="sc">==</span> <span class="st">"B2"</span>, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>     <span class="fu">rnorm</span>(<span class="dv">72</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">3</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>data_three <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, FactorC, X, Y)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit three-way ANCOVA model</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>fit_three <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC <span class="sc">+</span> X, <span class="at">data =</span> data_three)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_three)</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot three-way interaction</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_three, <span class="fu">aes</span>(<span class="at">x=</span>FactorA, <span class="at">y=</span>Y, <span class="at">color=</span>FactorB, <span class="at">group=</span>FactorB)) <span class="sc">+</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> FactorC) <span class="sc">+</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Three-Way Interaction Plot"</span>, <span class="at">x=</span><span class="st">"Factor A"</span>, <span class="at">y=</span><span class="st">"Response"</span>) <span class="sc">+</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated marginal means</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>emm_three <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_three, <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC)</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>contrast_results <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm_three, <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(contrast_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong></p>
+<ol type="1">
+<li><strong>Three-Way Interaction:</strong>
+<ul>
+<li>The interaction plot demonstrates how the interaction between Factor A and Factor B varies across different levels of Factor C.</li>
+<li>Non-parallel lines across facets indicate a significant three-way interaction.</li>
+</ul></li>
+<li><strong>Impact on Main and Two-Way Interactions:</strong>
+<ul>
+<li>Significant higher-order interactions imply that main effects and two-way interactions cannot be interpreted in isolation.</li>
+<li>The effect of one factor depends on the combination of other factors, necessitating a comprehensive analysis.</li>
+</ul></li>
+<li><strong>Practical Implications:</strong>
+<ul>
+<li>Understanding three-way interactions provides nuanced insights into how multiple factors jointly influence the response variable.</li>
+<li>This can inform more sophisticated decision-making and strategy development in experimental settings.</li>
+</ul></li>
+</ol>
+<p><strong>Reference:</strong> Dean, Voss &amp; Draguljić (2017). <em>Design and Analysis of Experiments</em>. Springer.</p>
+</section>
+<section id="mathematical-proof-of-interaction-contrasts-1" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-proof-of-interaction-contrasts-1">3. Mathematical Proof of Interaction Contrasts</h3>
+<p><strong>Task:</strong> Derive formulas for interaction contrasts in a three-factor design and prove that they measure deviations from additivity.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Show how to construct interaction contrasts.</li>
+<li>Prove that if all interaction contrasts are zero, the model is additive.</li>
+</ul>
+<p><strong>Hints:</strong></p>
+<ul>
+<li>Utilize the definitions of main effects and interaction terms.</li>
+<li>Employ properties of linear algebra to demonstrate the relationship between interaction contrasts and additivity.</li>
+<li>Reference Dean et al.&nbsp;(2017) and Christensen (2018) for theoretical foundations.</li>
+</ul>
+<p><strong>Proof Outline:</strong></p>
+<ol type="1">
+<li><strong>Define the Three-Factor Model:</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + (\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk} + (\alpha\beta\gamma)_{ijk} + \epsilon_{ijk}
+\]</span></p>
+<p>where <span class="math inline">\(\sum \alpha_i = \sum \beta_j = \sum \gamma_k = 0\)</span>.</p>
+<ol type="1">
+<li><p><strong>Construct Interaction Contrasts:</strong></p>
+<ul>
+<li><strong>Two-Way Interactions:</strong>
+<ul>
+<li><span class="math inline">\((\alpha\beta)_{ij}\)</span>: Measures the interaction between Factors A and B.</li>
+<li>Similarly for <span class="math inline">\((\alpha\gamma)_{ik}\)</span> and <span class="math inline">\((\beta\gamma)_{jk}\)</span>.</li>
+</ul></li>
+<li><strong>Three-Way Interaction:</strong>
+<ul>
+<li><span class="math inline">\((\alpha\beta\gamma)_{ijk}\)</span>: Measures the deviation from additivity among all three factors.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Prove Deviations from Additivity:</strong></p>
+<ul>
+<li><strong>Additive Model:</strong> If all interaction terms are zero (<span class="math inline">\((\alpha\beta)_{ij} = (\alpha\gamma)_{ik} = (\beta\gamma)_{jk} = (\alpha\beta\gamma)_{ijk} = 0\)</span>), the model simplifies to:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}
+\]</span></p>
+<pre><code> This represents a purely additive model where the combined effect of factors is the sum of their individual effects.</code></pre>
+<ul>
+<li><strong>Non-Additive Model:</strong> If any of the interaction terms are non-zero, the model deviates from additivity, indicating that the effect of one factor depends on the levels of other factors.</li>
+</ul>
+<ol type="1">
+<li><p><strong>Conclusion:</strong></p>
+<p>Interaction contrasts (<span class="math inline">\((\alpha\beta)_{ij}\)</span>, <span class="math inline">\((\alpha\gamma)_{ik}\)</span>, <span class="math inline">\((\beta\gamma)_{jk}\)</span>, and <span class="math inline">\((\alpha\beta\gamma)_{ijk}\)</span>) measure the extent to which the observed responses deviate from an additive model. Non-zero contrasts signify the presence of interactions, emphasizing the importance of considering these higher-order effects in experimental analysis.</p></li>
+</ol>
+<p><strong>Reference:</strong> Dean, Voss &amp; Draguljić (2017). <em>Design and Analysis of Experiments</em>. Springer.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="appendix-advanced-mathematical-derivations-3" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="adjusted-treatment-means-1" class="level2">
+<h2 class="anchored" data-anchor-id="adjusted-treatment-means-1">Adjusted Treatment Means</h2>
+<p>The <strong>Adjusted Mean</strong> for treatment <span class="math inline">\(i\)</span> accounts for the influence of blocking factors, providing a more accurate estimate of the treatment effect.</p>
+<p><span class="math display">\[
+\mu + \tau_i = \bar{Y}_i - \beta (\bar{X}_i - \bar{X})
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span>: Overall mean.</li>
+<li><span class="math inline">\(\tau_i\)</span>: Treatment effect for treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\bar{Y}_i\)</span>: Mean response for treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\beta\)</span>: Regression coefficient for the covariate.</li>
+<li><span class="math inline">\(\bar{X}_i\)</span>: Mean covariate value for treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\bar{X}\)</span>: Overall mean of the covariate.</li>
+</ul>
+<section id="derivation-2" class="level3">
+<h3 class="anchored" data-anchor-id="derivation-2">Derivation</h3>
+<ol type="1">
+<li><strong>Model Equation:</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{ij} = \mu + \tau_i + \beta (X_{ij} - \bar{X}) + \epsilon_{ij}
+\]</span></p>
+<ol type="1">
+<li><strong>Taking the Mean for Treatment <span class="math inline">\(i\)</span>:</strong></li>
+</ol>
+<p><span class="math display">\[
+\bar{Y}_i = \mu + \tau_i + \beta (\bar{X}_i - \bar{X}) + \bar{\epsilon}_i
+\]</span></p>
+<p>Since <span class="math inline">\(\bar{\epsilon}_i = 0\)</span> (assuming errors have mean zero),</p>
+<p><span class="math display">\[
+\bar{Y}_i = \mu + \tau_i + \beta (\bar{X}_i - \bar{X})
+\]</span></p>
+<ol type="1">
+<li><strong>Solving for Adjusted Mean:</strong></li>
+</ol>
+<p><span class="math display">\[
+\mu + \tau_i = \bar{Y}_i - \beta (\bar{X}_i - \bar{X})
+\]</span></p>
+<p>This equation represents the adjusted treatment mean, accounting for differences in the covariate.</p>
+<p><strong>Reference:</strong> Montgomery, D. C., &amp; Runger, G. C. (2020). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</p>
+<hr>
+</section>
+</section>
+<section id="f-test-for-homogeneity-of-slopes-1" class="level2">
+<h2 class="anchored" data-anchor-id="f-test-for-homogeneity-of-slopes-1">F-Test for Homogeneity of Slopes</h2>
+<p>Testing the assumption of <strong>homogeneity of regression slopes</strong> ensures that the relationship between the covariate and the response is consistent across all treatment groups.</p>
+<section id="model-comparison-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-comparison-1">Model Comparison</h3>
+<ol type="1">
+<li><strong>Model Without Interaction (Assuming Homogeneous Slopes):</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{hi} = \mu + \theta_h + \tau_i + \beta X_{hi} + \epsilon_{hi}
+\]</span></p>
+<ol type="1">
+<li><strong>Model With Interaction (Allowing Slopes to Vary):</strong></li>
+</ol>
+<p><span class="math display">\[
+Y_{hi} = \mu + \theta_h + \tau_i + \beta X_{hi} + (\theta \tau)_{hi} + \epsilon_{hi}
+\]</span></p>
+<p>Where <span class="math inline">\((\theta \tau)_{hi}\)</span> allows the slope of the covariate to vary with treatments.</p>
+</section>
+<section id="hypothesis-testing-1" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing-1">Hypothesis Testing</h3>
+<ul>
+<li><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>):</strong> Homogeneity of slopes (<span class="math inline">\(\beta\)</span> is the same across treatments).</li>
+<li><strong>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>):</strong> Slopes vary across treatments (<span class="math inline">\(\beta_i \neq \beta_j\)</span> for some <span class="math inline">\(i, j\)</span>).</li>
+</ul>
+</section>
+<section id="test-procedure-1" class="level3">
+<h3 class="anchored" data-anchor-id="test-procedure-1">Test Procedure</h3>
+<ol type="1">
+<li><p><strong>Fit Both Models:</strong></p>
+<ul>
+<li><strong>Reduced Model:</strong> Without interaction.</li>
+<li><strong>Full Model:</strong> With interaction.</li>
+</ul></li>
+<li><p><strong>Compare Models Using ANOVA:</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>model_reduced <span class="ot">&lt;-</span> <span class="fu">lm</span>(Time <span class="sc">~</span> fColor <span class="sc">+</span> x, <span class="at">data =</span> balloon.data)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit full model with interaction</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>model_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(Time <span class="sc">~</span> fColor <span class="sc">*</span> x, <span class="at">data =</span> balloon.data)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare models</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_reduced, model_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Decision Rule:</strong></p>
+<ul>
+<li>If the interaction term is significant (<span class="math inline">\(p &lt; \alpha\)</span>), reject <span class="math inline">\(H_0\)</span> and conclude that slopes are not homogeneous.</li>
+<li>If not significant, accept <span class="math inline">\(H_0\)</span> and proceed with the reduced model.</li>
+</ul></li>
+</ol>
+<p><strong>Conclusion:</strong> A significant interaction term indicates that the effect of the covariate varies across treatments, violating the homogeneity of slopes assumption and necessitating a more complex model.</p>
+<p><strong>Reference:</strong> Scheffé, H. (1959). <em>The Analysis of Variance</em>. Wiley.</p>
+<hr>
+</section>
+</section>
+<section id="confidence-intervals-for-higher-order-contrasts-1" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-for-higher-order-contrasts-1">Confidence Intervals for Higher-Order Contrasts</h2>
+<p>For higher-order interactions involving multiple factors, <strong>confidence intervals for contrasts</strong> provide insights into the magnitude and significance of these interactions.</p>
+<section id="formula-3" class="level3">
+<h3 class="anchored" data-anchor-id="formula-3">Formula</h3>
+<p><span class="math display">\[
+CI = \hat{L} \pm t_{\alpha/2, df} \sqrt{\text{Var}(\hat{L})}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\hat{L}\)</span>: Estimated contrast.</li>
+<li><span class="math inline">\(t_{\alpha/2, df}\)</span>: Critical value from the t-distribution.</li>
+<li><span class="math inline">\(\text{Var}(\hat{L})\)</span>: Variance of the contrast estimate.</li>
+</ul>
+</section>
+<section id="steps-in-r-1" class="level3">
+<h3 class="anchored" data-anchor-id="steps-in-r-1">Steps in R</h3>
+<ol type="1">
+<li><p><strong>Estimate the Contrast:</strong></p>
+<p>Using the <code>emmeans</code> package to define and estimate contrasts.</p></li>
+<li><p><strong>Calculate the Confidence Interval:</strong></p>
+<p>The <code>emmeans</code> package automatically provides confidence intervals when performing contrasts.</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the ANCOVA model</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> Treatment <span class="sc">+</span> X, <span class="at">data =</span> data_sim)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define estimated marginal means</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> Treatment)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a contrast (e.g., Treatment B vs. Treatment A)</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>contrast_AB <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(contrast_AB, <span class="at">infer =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Interpretation:</strong> The output provides the estimated difference, standard error, t-value, and confidence interval for the contrast. If the confidence interval does not include zero, the contrast is statistically significant.</p>
+<p><strong>Reference:</strong> Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->

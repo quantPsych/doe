@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -69,11 +103,41 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 <meta property="og:title" content="Model Diagnostics – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/home.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -133,13 +197,13 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Model Diagnostics</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -151,7 +215,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">25-Dec-2024</p>
+        <p class="date">Thursday, December 12th 2024</p>
       </div>
     </div>
     
@@ -162,18 +226,219 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  </ul></li>
+  <li><a href="#motivating-example-and-intuition" id="toc-motivating-example-and-intuition" class="nav-link" data-scroll-target="#motivating-example-and-intuition">Motivating Example and Intuition</a></li>
+  <li><a href="#strategies-for-checking-assumptions" id="toc-strategies-for-checking-assumptions" class="nav-link" data-scroll-target="#strategies-for-checking-assumptions">Strategies for Checking Assumptions</a></li>
+  <li><a href="#detailed-assumption-checks" id="toc-detailed-assumption-checks" class="nav-link" data-scroll-target="#detailed-assumption-checks">Detailed Assumption Checks</a>
+  <ul class="collapse">
+  <li><a href="#checking-independence" id="toc-checking-independence" class="nav-link" data-scroll-target="#checking-independence">Checking Independence</a></li>
+  <li><a href="#checking-equal-variance-homoscedasticity" id="toc-checking-equal-variance-homoscedasticity" class="nav-link" data-scroll-target="#checking-equal-variance-homoscedasticity">Checking Equal Variance (Homoscedasticity)</a></li>
+  <li><a href="#checking-normality" id="toc-checking-normality" class="nav-link" data-scroll-target="#checking-normality">Checking Normality</a></li>
+  </ul></li>
+  <li><a href="#remedies-for-violations" id="toc-remedies-for-violations" class="nav-link" data-scroll-target="#remedies-for-violations">Remedies for Violations</a>
+  <ul class="collapse">
+  <li><a href="#transformations" id="toc-transformations" class="nav-link" data-scroll-target="#transformations">Transformations</a></li>
+  <li><a href="#alternative-models" id="toc-alternative-models" class="nav-link" data-scroll-target="#alternative-models">Alternative Models</a></li>
+  </ul></li>
+  <li><a href="#advanced-examples-and-complex-datasets" id="toc-advanced-examples-and-complex-datasets" class="nav-link" data-scroll-target="#advanced-examples-and-complex-datasets">Advanced Examples and Complex Datasets</a>
+  <ul class="collapse">
+  <li><a href="#example-trout-hemoglobin-experiment" id="toc-example-trout-hemoglobin-experiment" class="nav-link" data-scroll-target="#example-trout-hemoglobin-experiment">Example: Trout Hemoglobin Experiment</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
+  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#derivation-of-standardized-residuals" id="toc-derivation-of-standardized-residuals" class="nav-link" data-scroll-target="#derivation-of-standardized-residuals">Derivation of Standardized Residuals</a></li>
+  <li><a href="#box-cox-transformation" id="toc-box-cox-transformation" class="nav-link" data-scroll-target="#box-cox-transformation">Box-Cox Transformation</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>When using ANOVA or regression models, the reliability and validity of inferences depend on certain assumptions:</p>
+<ol type="1">
+<li><strong>Independence of Errors:</strong> Observations should not be correlated.</li>
+<li><strong>Constant Variance (Homoscedasticity):</strong> The variability of errors should remain constant across treatments or predicted values.</li>
+<li><strong>Normality of Errors:</strong> Residuals should follow a normal distribution.</li>
+</ol>
+<p>If these assumptions fail, confidence intervals and hypothesis tests may yield misleading conclusions. This lecture focuses on systematic ways to verify assumptions, diagnose problems, and apply corrective measures. By conducting proper diagnostic checks, we can maintain rigor and integrity in our statistical analyses.</p>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ol type="1">
+<li>Understand the importance of verifying model assumptions in ANOVA and regression.</li>
+<li>Learn diagnostic tools (residual plots, normal probability plots) to detect assumption violations.</li>
+<li>Explore transformations and alternative modeling strategies to address violations.</li>
+<li>Develop proficiency in R for performing diagnostics and interpreting results.</li>
+<li>Challenge understanding through exercises involving medium to complex scenarios and proofs.</li>
+</ol>
+</section>
+</section>
+<section id="motivating-example-and-intuition" class="level1">
+<h1>Motivating Example and Intuition</h1>
+<p><strong>Analogy:</strong> Imagine you have a pair of binoculars (your model). The assumptions are like cleaning the lenses before use. If the lenses are dirty (violated assumptions), you see distorted images (biased conclusions). Checking assumptions and fixing issues (cleaning lenses) ensures a clear view of the underlying relationships.</p>
+<p><strong>Simple Example:</strong> Suppose you test four treatments for battery life. After ANOVA suggests differences, you examine residuals. If residuals fan out like a megaphone, variance is not constant. Just as uneven ground makes walking difficult, uneven variance complicates inference. You may need transformations to “level the playing field.”</p>
+</section>
+<section id="strategies-for-checking-assumptions" class="level1">
+<h1>Strategies for Checking Assumptions</h1>
+<ol type="1">
+<li><p><strong>Visual Inspection of Residuals:</strong> Residuals, defined as <span class="math inline">\(e_{ij} = Y_{ij} - \hat{Y}_{ij}\)</span>, reflect unexplained variation. By plotting residuals against fitted values or explanatory variables, patterns emerge.</p></li>
+<li><p><strong>Standardized Residuals:</strong> Standardized residuals <span class="math inline">\(z_{ij} = \frac{e_{ij}}{\sqrt{\text{MSE}}}\)</span> help detect outliers and unusual patterns because they are put on a common scale.</p></li>
+<li><p><strong>Normality Checks:</strong> Normal probability plots (QQ-plots) show if residuals deviate from a straight line, indicating potential non-normality.</p></li>
+<li><p><strong>Independence Checks:</strong> Residuals plotted in the order of data collection can reveal time trends or autocorrelation, violating independence.</p></li>
+<li><p><strong>Variance Homogeneity Checks:</strong> Residuals vs.&nbsp;fitted value plots or group-specific standard deviations highlight heteroscedasticity.</p></li>
+</ol>
+</section>
+<section id="detailed-assumption-checks" class="level1">
+<h1>Detailed Assumption Checks</h1>
+<section id="checking-independence" class="level2">
+<h2 class="anchored" data-anchor-id="checking-independence">Checking Independence</h2>
+<p><strong>Context:</strong> Consider a balloon inflation experiment where each time a subject inflates a balloon, they learn and get faster. Residuals vs.&nbsp;observation order might show a trend, indicating non-independence (learning effect).</p>
+<p><strong>R Implementation:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppose 'Time' is order of observation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">resid</span>(model) <span class="sc">~</span> Time, <span class="at">data =</span> dataset)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for random scatter. Patterns suggest non-independence.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If non-independence arises, consider mixed-effects models or time-series methods.</p>
+</section>
+<section id="checking-equal-variance-homoscedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="checking-equal-variance-homoscedasticity">Checking Equal Variance (Homoscedasticity)</h2>
+<p><strong>Visual Clue:</strong> A “megaphone” shape in residuals vs.&nbsp;fitted values suggests variance grows with the mean. <strong>Rule of Thumb:</strong> If ratio of largest to smallest sample variance &gt; 3, consider a transformation.</p>
+<p><strong>R Implementation:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(model), <span class="fu">resid</span>(model))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If variance is not constant, transformations (like log or square-root) can stabilize it. The Box-Cox method in R helps find a suitable lambda for transforming responses.</p>
+</section>
+<section id="checking-normality" class="level2">
+<h2 class="anchored" data-anchor-id="checking-normality">Checking Normality</h2>
+<p><strong>QQ-Plot:</strong> If residuals follow a normal distribution, they align closely with the QQ-line.</p>
+<p><strong>R Implementation:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model), <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If deviations are severe, consider transformations or nonparametric methods.</p>
+</section>
+</section>
+<section id="remedies-for-violations" class="level1">
+<h1>Remedies for Violations</h1>
+<section id="transformations" class="level2">
+<h2 class="anchored" data-anchor-id="transformations">Transformations</h2>
+<ul>
+<li><strong>Log Transform:</strong> Useful if variance increases roughly with the mean.</li>
+<li><strong>Square-root Transform:</strong> Often stabilizes variance when data are counts or positive and moderately skewed.</li>
+<li><strong>Box-Cox Transform:</strong> Systematically searches for a suitable power transform:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxcox</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data=</span>dataset), <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="alternative-models" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-models">Alternative Models</h2>
+<ul>
+<li><strong>Mixed-Effects Models:</strong> Address correlation among observations.</li>
+<li><strong>Nonparametric Methods:</strong> For severe non-normality or other intractable issues, methods not reliant on normality assumptions (e.g., Kruskal-Wallis test for ANOVA replacement) may be suitable.</li>
+</ul>
+</section>
+</section>
+<section id="advanced-examples-and-complex-datasets" class="level1">
+<h1>Advanced Examples and Complex Datasets</h1>
+<section id="example-trout-hemoglobin-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="example-trout-hemoglobin-experiment">Example: Trout Hemoglobin Experiment</h3>
+<p>Data: Hemoglobin levels measured under four treatments with unequal sample sizes.</p>
+<ol type="1">
+<li>Fit ANOVA model.</li>
+<li>Check residual plots for variance patterns: if one treatment shows higher variance, consider a suitable transformation.</li>
+<li>Use Box-Cox to find an appropriate lambda that equalizes variance and improves normality.</li>
+</ol>
+<p><strong>R Steps:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(Hemoglobin <span class="sc">~</span> Treatment, <span class="at">data =</span> trout_data)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model) <span class="co"># Residual and QQ-plots</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># If needed:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">boxcox</span>(model, <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Interpret the chosen lambda and re-fit the model on transformed data, then re-check assumptions.</p>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="medium-difficulty" class="level2">
+<h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
+<ol type="1">
+<li><p><strong>Residual Diagnostics (Basic):</strong> Simulate a dataset with four treatments. Perform an ANOVA and create residual vs.&nbsp;fitted plots and QQ-plots. Interpret patterns and identify if any assumptions fail.</p></li>
+<li><p><strong>Applying a Transformation:</strong> Given a dataset where variance increases with the mean, apply a log transform. Show before/after residual diagnostics and discuss improvements.</p></li>
+</ol>
+</section>
+<section id="challenging-problems" class="level2">
+<h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
+<ol type="1">
+<li><p><strong>Box-Cox Method Analysis:</strong> Use the <code>boxcox</code> function on a real or complex dataset. Determine the best lambda and re-check assumptions. Provide a detailed interpretation of why this lambda helps and what it implies theoretically.</p></li>
+<li><p><strong>Non-Constant Variance Remedies:</strong> Suppose you have a dataset with strong heteroscedasticity. Try square-root, log, and Box-Cox transforms. Compare their effectiveness using diagnostic plots and normality tests. Write a short report on which transform works best and why.</p></li>
+<li><p><strong>Non-Independent Errors:</strong> Generate a dataset with serial correlation (e.g., an AR(1) process). Fit a standard ANOVA model, show that assumptions are violated, and discuss how a mixed model or generalized least squares approach could rectify the issue. Provide code snippets and interpret results.</p></li>
+</ol>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Assumption checking in ANOVA and regression is not a mere formality—it safeguards against invalid conclusions. By using residual diagnostics, normality checks, and transformations, we ensure models accurately represent reality. While no single approach solves all problems, a combination of visual and formal diagnostic tools, along with informed corrective strategies, leads to more trustworthy and robust statistical inferences.</p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
+<li>Montgomery, D. C., &amp; Runger, G. C. (2010). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
+<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
+</ul>
+</section>
+</section>
+<section id="appendix-advanced-mathematical-derivations" class="level1">
+<h1>Appendix: Advanced Mathematical Derivations</h1>
+<section id="derivation-of-standardized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="derivation-of-standardized-residuals">Derivation of Standardized Residuals</h2>
+<p>Given a model <span class="math inline">\(Y_{ij} = \mu + \tau_i + \epsilon_{ij}\)</span> with homoscedastic errors <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma^2)\)</span>:</p>
+<ol type="1">
+<li>Residual: <span class="math inline">\(e_{ij} = Y_{ij} - \hat{Y}_{ij}\)</span>.</li>
+<li>MSE: <span class="math inline">\(\hat{\sigma}^2 = \text{SSE}/(N-v)\)</span>.</li>
+<li>Standardized Residual: <span class="math inline">\(z_{ij} = e_{ij}/\sqrt{\hat{\sigma}^2}\)</span>.</li>
+</ol>
+<p>Under ideal conditions, <span class="math inline">\(z_{ij} \sim N(0,1)\)</span> approximately, allowing outlier detection via thresholding (e.g., |z| &gt; 3).</p>
+</section>
+<section id="box-cox-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="box-cox-transformation">Box-Cox Transformation</h2>
+<p>The Box-Cox family:</p>
+<p><span class="math display">\[
+Y'(\lambda) =
+\begin{cases}
+\frac{Y^\lambda - 1}{\lambda} &amp; \lambda \neq 0 \\
+\ln(Y) &amp; \lambda = 0
+\end{cases}
+\]</span></p>
+<p>For each <span class="math inline">\(\lambda\)</span>, fit the model and compute the log-likelihood. Choose <span class="math inline">\(\lambda\)</span> that maximizes the likelihood, indicating a best variance-stabilizing and normalizing transform.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->

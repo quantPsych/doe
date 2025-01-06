@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -40,6 +74,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-aff2639e191a0a8d05f4f3608923e904.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,12 +105,46 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <meta property="og:title" content="Split-Plot ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/home.png">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/week-14_split-plot_files/figure-html/manufacturing-plot-1.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
 </head><body class="nav-fixed"><img src="../assets/images/home.png" alt="Course Banner" style="width: 100%; height: auto;">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles/css/home.css">
 
@@ -133,13 +204,13 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Split-Plot ANOVA</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -151,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">25-Dec-2024</p>
+        <p class="date">05-Jan-2025</p>
       </div>
     </div>
     
@@ -162,18 +233,580 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a>
+  <ul class="collapse">
+  <li><a href="#historical-context" id="toc-historical-context" class="nav-link" data-scroll-target="#historical-context">1.1 Historical Context</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">1.2 Learning Objectives</a></li>
+  </ul></li>
+  <li><a href="#fundamental-concepts" id="toc-fundamental-concepts" class="nav-link" data-scroll-target="#fundamental-concepts">2. Fundamental Concepts</a>
+  <ul class="collapse">
+  <li><a href="#two-error-structure" id="toc-two-error-structure" class="nav-link" data-scroll-target="#two-error-structure">2.1 Two-Error Structure</a></li>
+  <li><a href="#intuitive-analogy-paint-curing-process" id="toc-intuitive-analogy-paint-curing-process" class="nav-link" data-scroll-target="#intuitive-analogy-paint-curing-process">2.2 Intuitive Analogy: Paint Curing Process</a></li>
+  </ul></li>
+  <li><a href="#statistical-model" id="toc-statistical-model" class="nav-link" data-scroll-target="#statistical-model">3. Statistical Model</a></li>
+  <li><a href="#analysis-of-variance-anova" id="toc-analysis-of-variance-anova" class="nav-link" data-scroll-target="#analysis-of-variance-anova">4. Analysis of Variance (ANOVA)</a></li>
+  <li><a href="#implementation-in-r" id="toc-implementation-in-r" class="nav-link" data-scroll-target="#implementation-in-r">5. Implementation in R</a></li>
+  <li><a href="#detailed-examples" id="toc-detailed-examples" class="nav-link" data-scroll-target="#detailed-examples">6. Detailed Examples</a>
+  <ul class="collapse">
+  <li><a href="#manufacturing-example" id="toc-manufacturing-example" class="nav-link" data-scroll-target="#manufacturing-example">6.1 Manufacturing Example</a></li>
+  <li><a href="#agricultural-example" id="toc-agricultural-example" class="nav-link" data-scroll-target="#agricultural-example">6.2 Agricultural Example</a></li>
+  </ul></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">7. Advanced Topics</a>
+  <ul class="collapse">
+  <li><a href="#power-analysis" id="toc-power-analysis" class="nav-link" data-scroll-target="#power-analysis">7.1 Power Analysis</a></li>
+  <li><a href="#optimal-design-considerations" id="toc-optimal-design-considerations" class="nav-link" data-scroll-target="#optimal-design-considerations">7.2 Optimal Design Considerations</a></li>
+  </ul></li>
+  <li><a href="#common-pitfalls" id="toc-common-pitfalls" class="nav-link" data-scroll-target="#common-pitfalls">8. Common Pitfalls</a>
+  <ul class="collapse">
+  <li><a href="#pseudo-replication" id="toc-pseudo-replication" class="nav-link" data-scroll-target="#pseudo-replication">8.1 Pseudo-Replication</a></li>
+  <li><a href="#unbalanced-data" id="toc-unbalanced-data" class="nav-link" data-scroll-target="#unbalanced-data">8.2 Unbalanced Data</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">9. Exercises</a>
+  <ul class="collapse">
+  <li><a href="#medium-difficulty-problems" id="toc-medium-difficulty-problems" class="nav-link" data-scroll-target="#medium-difficulty-problems">9.1 Medium-Difficulty Problems</a></li>
+  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">9.2 Challenging Problems</a></li>
+  </ul></li>
+  <li><a href="#appendix-a-mathematical-derivations" id="toc-appendix-a-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-a-mathematical-derivations">Appendix A: Mathematical Derivations</a>
+  <ul class="collapse">
+  <li><a href="#a.1-expected-mean-squares" id="toc-a.1-expected-mean-squares" class="nav-link" data-scroll-target="#a.1-expected-mean-squares">A.1 Expected Mean Squares</a></li>
+  <li><a href="#a.2-power-analysis-for-whole-plot-factor" id="toc-a.2-power-analysis-for-whole-plot-factor" class="nav-link" data-scroll-target="#a.2-power-analysis-for-whole-plot-factor">A.2 Power Analysis for Whole-Plot Factor</a></li>
+  <li><a href="#a.3-optimal-design-theory" id="toc-a.3-optimal-design-theory" class="nav-link" data-scroll-target="#a.3-optimal-design-theory">A.3 Optimal Design Theory</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="introduction" class="level1">
+<h1>1. Introduction</h1>
+<p>Split-plot designs are a powerful class of experimental designs that originated in agricultural settings but now see extensive use across engineering and scientific fields where certain factors are <em>hard to change</em> and others are <em>easy to change</em>. First formalized by R. A. Fisher at Rothamsted Experimental Station, these designs address practical limitations in experimentation—for instance, when adjusting equipment temperature is costly or time-consuming (Kempthorne, 1977; Scheffé, 1959).</p>
+<section id="historical-context" class="level2">
+<h2 class="anchored" data-anchor-id="historical-context">1.1 Historical Context</h2>
+<ul>
+<li><strong>Early Development</strong>: Split-plot methodology emerged from agricultural research, where entire fields (whole plots) were assigned to certain treatments (e.g., irrigation methods), and sub-portions of each field (split plots) received additional treatments (e.g., fertilizer types).</li>
+<li><strong>Modern Applications</strong>: Today, split-plot designs are prevalent in industrial experiments (Dean et al., 2017), such as semiconductor manufacturing or paint-curing processes. They enable investigators to manipulate “hard-to-change” variables at the whole-plot level while fine-tuning other variables at the split-plot level.</li>
+</ul>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">1.2 Learning Objectives</h2>
+<p>After working through this material, you will be able to:</p>
+<ol type="1">
+<li>Recognize when split-plot designs are appropriate.</li>
+<li>Formulate the statistical models underpinning split-plot experiments.</li>
+<li>Analyze split-plot data using R and interpret the output.</li>
+<li>Understand the hierarchical (two-error) structure inherent in split-plot designs.</li>
+<li>Conduct diagnostic checks and manage potential pitfalls such as unbalanced data or pseudo-replication.</li>
+</ol>
+</section>
+</section>
+<section id="fundamental-concepts" class="level1">
+<h1>2. Fundamental Concepts</h1>
+<section id="two-error-structure" class="level2">
+<h2 class="anchored" data-anchor-id="two-error-structure">2.1 Two-Error Structure</h2>
+<p>A defining feature of split-plot designs is the presence of two distinct experimental error terms (Dean et al., 2017; Montgomery &amp; Runger, 2010; Christensen, 2018):</p>
+<ol type="1">
+<li><strong>Whole-Plot Error (<span class="math inline">\(\sigma^2_W\)</span>)</strong>
+<ul>
+<li>Arises from variation among the “hard-to-change” factors (e.g., temperature, irrigation).</li>
+<li>Typically larger due to the cost and complexity of changing these factors.</li>
+<li>Example: Oven-to-oven variability when testing different oven temperatures.</li>
+</ul></li>
+<li><strong>Split-Plot Error (<span class="math inline">\(\sigma^2_S\)</span>)</strong>
+<ul>
+<li>Captures variability within each whole plot for the “easy-to-change” factors.</li>
+<li>Usually smaller since these factors are more straightforward to manipulate.</li>
+<li>Example: Variation among parts painted in the same oven run.</li>
+</ul></li>
+</ol>
+<p>This <em>nested</em> structure means that each whole plot is subdivided into several split plots, and different analysis methods are needed to properly separate the two sources of variability.</p>
+</section>
+<section id="intuitive-analogy-paint-curing-process" class="level2">
+<h2 class="anchored" data-anchor-id="intuitive-analogy-paint-curing-process">2.2 Intuitive Analogy: Paint Curing Process</h2>
+<p>Consider an industrial paint-curing process:</p>
+<ul>
+<li><strong>Whole-Plot Factor</strong>: Oven Temperature (Low, Medium, High)</li>
+<li><strong>Split-Plot Factor</strong>: Paint Type (A, B, C)</li>
+<li><strong>Response</strong>: Coating Durability</li>
+</ul>
+<p>Running the experiment:</p>
+<ol type="1">
+<li>Set the oven to a specific temperature (hard to change).</li>
+<li>Paint several parts (easy to change) in that oven run.</li>
+<li>Measure the durability of each part’s coating.</li>
+</ol>
+<p>Because the oven temperature remains fixed for a batch of painted parts, any variation among parts at the same temperature is captured by <span class="math inline">\(\sigma^2_S\)</span> (split-plot error), whereas variation across different oven temperatures is captured by <span class="math inline">\(\sigma^2_W\)</span> (whole-plot error).</p>
+</section>
+</section>
+<section id="statistical-model" class="level1">
+<h1>3. Statistical Model</h1>
+<p>Adopting the notation from Montgomery &amp; Runger (2010) and Christensen (2018), a balanced split-plot model might look like this:</p>
+<p><span class="math display">\[
+Y_{hiujt} = \mu + \theta_h + \alpha_i + \epsilon_{Wiu(h)} + \beta_j + (\alpha\beta)*{ij} + \epsilon*{Sjt(hiu)},
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is the overall mean.</li>
+<li><span class="math inline">\(\theta_h\)</span> is the block (or replicate) effect.</li>
+<li><span class="math inline">\(\alpha_i\)</span> is the main effect of the whole-plot factor (e.g., temperature).</li>
+<li><span class="math inline">\(\beta_j\)</span> is the main effect of the split-plot factor (e.g., paint type).</li>
+<li><span class="math inline">\((\alpha\beta)_{ij}\)</span> is the interaction effect of the wholeand split-plot factors.</li>
+<li><span class="math inline">\(\epsilon_{Wiu(h)} \sim N(0, \sigma_W^2)\)</span> represents the whole-plot error.</li>
+<li><span class="math inline">\(\epsilon_{Sjt(hiu)} \sim N(0, \sigma_S^2)\)</span> represents the split-plot error.</li>
+</ul>
+</section>
+<section id="analysis-of-variance-anova" class="level1">
+<h1>4. Analysis of Variance (ANOVA)</h1>
+<p>Because of the nested structure, the ANOVA table partitions variability into different sources. A typical layout for a two-factor split-plot design (Christensen, 2018) is:</p>
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 34%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>df</th>
+<th>EMS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Blocks</td>
+<td><span class="math inline">\(b-1\)</span></td>
+<td><span class="math inline">\(\sigma^2_S + s\sigma^2_W + as\sigma^2_B\)</span></td>
+</tr>
+<tr class="even">
+<td>Whole-Plot Factor (A)</td>
+<td><span class="math inline">\(a-1\)</span></td>
+<td><span class="math inline">\(\sigma^2_S + s\sigma^2_W + bs\sigma^2_A\)</span></td>
+</tr>
+<tr class="odd">
+<td>Whole-Plot Error</td>
+<td><span class="math inline">\((b-1)(a-1)\)</span></td>
+<td><span class="math inline">\(\sigma^2_S + s\sigma^2_W\)</span></td>
+</tr>
+<tr class="even">
+<td>Split-Plot Factor (B)</td>
+<td><span class="math inline">\(s-1\)</span></td>
+<td><span class="math inline">\(\sigma^2_S + br\sigma^2_B\)</span></td>
+</tr>
+<tr class="odd">
+<td>A×B Interaction</td>
+<td><span class="math inline">\((a-1)(s-1)\)</span></td>
+<td><span class="math inline">\(\sigma^2_S + r\sigma^2_{AB}\)</span></td>
+</tr>
+<tr class="even">
+<td>Split-Plot Error</td>
+<td><span class="math inline">\(a(b-1)(s-1)\)</span></td>
+<td><span class="math inline">\(\sigma^2_S\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(b\)</span> is the number of blocks (or replicates), <span class="math inline">\(a\)</span> is the number of whole-plot factor levels, and <span class="math inline">\(s\)</span> is the number of split-plot factor levels.</p>
+</section>
+<section id="implementation-in-r" class="level1">
+<h1>5. Implementation in R</h1>
+<p>Below is a basic workflow demonstrating how to analyze a split-plot design using <code>lme4</code> and <code>emmeans</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Data: </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Whole-plot factor = temp (Low, Medium, High)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Split-plot factor = speed (Slow, Fast)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Blocks = 4</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>data_split <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">block =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">temp =</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Med"</span>, <span class="st">"High"</span>), <span class="at">each =</span> <span class="dv">2</span>), <span class="dv">4</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">speed =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Slow"</span>, <span class="st">"Fast"</span>), <span class="at">times =</span> <span class="dv">12</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">yield =</span> <span class="fu">rnorm</span>(<span class="dv">24</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the mixed-effects model (split-plot structure)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>model_split <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> temp <span class="sc">*</span> speed <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>block) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>block<span class="sc">:</span>temp),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> data_split)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_split, <span class="at">type =</span> <span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"11.52059","3":"5.760296","4":"0.05473186","_rn_":"temp"},{"1":"1","2":"23.20994","3":"23.209940","4":"0.22053088","_rn_":"speed"},{"1":"2","2":"152.47656","3":"76.238280","4":"0.72438340","_rn_":"temp:speed"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated marginal means</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model_split, <span class="sc">~</span> temp <span class="sc">|</span> speed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>speed = Fast:
+ temp emmean   SE df lower.CL upper.CL
+ High   98.4 5.17 18     87.6      109
+ Low    95.4 5.17 18     84.5      106
+ Med   103.0 5.17 18     92.1      114
+
+speed = Slow:
+ temp emmean   SE df lower.CL upper.CL
+ High  102.1 5.17 18     91.2      113
+ Low   102.5 5.17 18     91.6      113
+ Med    98.1 5.17 18     87.3      109
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Model Specification</strong>:
+<ul>
+<li><code>(1|block)</code> accounts for variation across blocks.</li>
+<li><code>(1|block:temp)</code> accounts for variation among whole plots within each block.</li>
+</ul></li>
+<li><strong>Interpretation</strong>:
+<ul>
+<li>The ANOVA indicates whether <em>temp</em>, <em>speed</em>, or their interaction is significant.</li>
+<li><code>emmeans</code> provides comparisons among factor levels.</li>
+</ul></li>
+</ul>
+</section>
+<section id="detailed-examples" class="level1">
+<h1>6. Detailed Examples</h1>
+<section id="manufacturing-example" class="level2">
+<h2 class="anchored" data-anchor-id="manufacturing-example">6.1 Manufacturing Example</h2>
+<p>Suppose you have:</p>
+<ul>
+<li><strong>Whole-Plot Factor</strong>: Furnace Temperature (<span class="math inline">\(800^\circ\)</span>C vs.&nbsp;<span class="math inline">\(900^\circ\)</span>C)</li>
+<li><strong>Split-Plot Factor</strong>: Gas Flow Rate (10, 20, 30 sccm)</li>
+<li><strong>Blocks</strong>: 4 furnace runs</li>
+<li><strong>Response</strong>: Film Thickness Uniformity</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>semi_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">run =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">temp =</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"800C"</span>, <span class="st">"900C"</span>), <span class="at">each =</span> <span class="dv">3</span>), <span class="dv">4</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">flow =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"10"</span>, <span class="st">"20"</span>, <span class="st">"30"</span>), <span class="at">times =</span> <span class="dv">8</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">uniformity =</span> <span class="fu">rnorm</span>(<span class="dv">24</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">90</span>), <span class="at">each =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">times =</span> <span class="dv">8</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="dv">2</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>semi_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(uniformity <span class="sc">~</span> temp <span class="sc">*</span> flow <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> run) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> run<span class="sc">:</span>temp),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> semi_data</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(semi_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: uniformity ~ temp * flow + (1 | run) + (1 | run:temp)
+   Data: semi_data
+
+REML criterion at convergence: 92.7
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-1.61892 -0.60661  0.00919  0.54843  1.50653 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ run:temp (Intercept) 0.000    0.000   
+ run      (Intercept) 5.452    2.335   
+ Residual             4.459    2.112   
+Number of obs: 24, groups:  run:temp, 8; run, 4
+
+Fixed effects:
+                Estimate Std. Error t value
+(Intercept)     88.00128    1.57408  55.906
+temp900C         0.09561    1.49316   0.064
+flow20           0.57004    1.49316   0.382
+flow30           3.12281    1.49316   2.091
+temp900C:flow20  1.24567    2.11164   0.590
+temp900C:flow30 -0.03002    2.11164  -0.014
+
+Correlation of Fixed Effects:
+            (Intr) tm900C flow20 flow30 t900C:2
+temp900C    -0.474                             
+flow20      -0.474  0.500                      
+flow30      -0.474  0.500  0.500               
+tmp900C:f20  0.335 -0.707 -0.707 -0.354        
+tmp900C:f30  0.335 -0.707 -0.354 -0.707  0.500 
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(semi_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1.504964","3":"1.504964","4":"0.3375085","_rn_":"temp"},{"1":"2","2":"39.328867","3":"19.664433","4":"4.4100163","_rn_":"flow"},{"1":"2","2":"2.119994","3":"1.059997","4":"0.2377188","_rn_":"temp:flow"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Plotting</strong>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(semi_data, <span class="fu">aes</span>(<span class="at">x =</span> flow, <span class="at">y =</span> uniformity, <span class="at">color =</span> temp)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>run) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Film Uniformity vs. Flow Rate by Temperature"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Flow Rate (sccm)"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Uniformity (%)"</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week-14_split-plot_files/figure-html/manufacturing-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week-14_split-plot_files/figure-html/manufacturing-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="agricultural-example" class="level2">
+<h2 class="anchored" data-anchor-id="agricultural-example">6.2 Agricultural Example</h2>
+<ul>
+<li><strong>Whole-Plot Factor</strong>: Irrigation Method (Drip, Sprinkler)</li>
+<li><strong>Split-Plot Factor</strong>: Fertilizer (None, Organic, Chemical)</li>
+<li><strong>Blocks</strong>: 6 fields</li>
+<li><strong>Response</strong>: Crop Yield</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ag_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">field =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">irrigation =</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Drip"</span>, <span class="st">"Sprinkler"</span>), <span class="at">each =</span> <span class="dv">3</span>), <span class="dv">6</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fertilizer =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"Organic"</span>, <span class="st">"Chemical"</span>), <span class="at">times =</span> <span class="dv">12</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">yield =</span> <span class="fu">rnorm</span>(<span class="dv">36</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">45</span>), <span class="at">each =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">8</span>), <span class="at">times =</span> <span class="dv">12</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="dv">3</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>ag_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  yield <span class="sc">~</span> irrigation <span class="sc">*</span> fertilizer <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> field) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> field<span class="sc">:</span>irrigation),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ag_data</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ag_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0.4184505","3":"0.4184505","4":"0.04226113","_rn_":"irrigation"},{"1":"2","2":"379.3214623","3":"189.6607311","4":"19.15465860","_rn_":"fertilizer"},{"1":"2","2":"35.7991513","3":"17.8995757","4":"1.80775566","_rn_":"irrigation:fertilizer"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(ag_model, <span class="sc">~</span> irrigation <span class="sc">|</span> fertilizer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fertilizer = Chemical:
+ irrigation emmean  SE df lower.CL upper.CL
+ Drip         49.2 1.7 21     45.7     52.8
+ Sprinkler    51.7 1.7 21     48.1     55.2
+
+fertilizer = None:
+ irrigation emmean  SE df lower.CL upper.CL
+ Drip         43.5 1.7 21     40.0     47.1
+ Sprinkler    42.2 1.7 21     38.7     45.7
+
+fertilizer = Organic:
+ irrigation emmean  SE df lower.CL upper.CL
+ Drip         49.8 1.7 21     46.3     53.3
+ Sprinkler    47.7 1.7 21     44.1     51.2
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="advanced-topics" class="level1">
+<h1>7. Advanced Topics</h1>
+<section id="power-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="power-analysis">7.1 Power Analysis</h2>
+<p>In split-plot designs, we have distinct power calculations for the whole-plot factor and the split-plot factor (Dean et al., 2017). Each factor is tested against a different error term.</p>
+<p><span class="math display">\[
+\text{Power}^*_{\text{whole-plot}} \quad=\quad P\bigl(F^*_{a-1,(b-1)(a-1)} &gt; F_{\alpha;a-1,(b-1)(a-1)} \;\bigm|\; \delta\bigr),
+\]</span></p>
+<p><span class="math display">\[
+\text{Power}^*_{\text{split-plot}} \quad=\quad P\bigl(F^*_{s-1,a(b-1)(s-1)} &gt; F_{\alpha;s-1,a(b-1)(s-1)} \;\bigm|\; \delta\bigr).
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\delta\)</span> represents the noncentrality parameter linked to the effect size.</li>
+<li>Software such as <code>pwr</code>, <code>simr</code>, or custom code can be used to approximate power.</li>
+</ul>
+</section>
+<section id="optimal-design-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-design-considerations">7.2 Optimal Design Considerations</h2>
+<p>For large-scale experiments, cost constraints and logistical feasibility often dictate the chosen design structure (Kempthorne, 1977; Dean et al., 2017). Key elements include:</p>
+<ol type="1">
+<li><strong>Balance</strong>: Achieving uniform replication across factor levels.</li>
+<li><strong>Resource Allocation</strong>: The ratio of whole-plot replicates to split-plot replicates.</li>
+<li><strong>Variance Component Estimates</strong>: Anticipating or pilot-testing <span class="math inline">\(\sigma_W^2\)</span> and <span class="math inline">\(\sigma_S^2\)</span> to inform design decisions.</li>
+</ol>
+</section>
+</section>
+<section id="common-pitfalls" class="level1">
+<h1>8. Common Pitfalls</h1>
+<section id="pseudo-replication" class="level2">
+<h2 class="anchored" data-anchor-id="pseudo-replication">8.1 Pseudo-Replication</h2>
+<p>A critical error is to treat measurements within a single whole plot as fully independent replicates for the whole-plot factor. This leads to inflated Type I error rates and overly optimistic standard errors.</p>
+<p><strong>Incorrect</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Failing to account for hierarchical structure</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>lm_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> temp <span class="sc">*</span> flow, <span class="at">data =</span> semi_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Correct</strong>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a mixed-effects model to capture nested variability</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lmer_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(uniformity <span class="sc">~</span> temp <span class="sc">*</span> flow <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>run) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>run<span class="sc">:</span>temp),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> semi_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="unbalanced-data" class="level2">
+<h2 class="anchored" data-anchor-id="unbalanced-data">8.2 Unbalanced Data</h2>
+<p>Real-world settings often produce unbalanced data (missing cells, unequal replicates):</p>
+<ul>
+<li>Use <code>lmerTest</code> for Satterthwaite or Kenward-Roger df approximations.</li>
+<li>Examine residuals and leverage robust inference methods if necessary.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>unbalanced_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(semi_data, <span class="sc">!</span>(run <span class="sc">==</span> <span class="dv">4</span> <span class="sc">&amp;</span> flow <span class="sc">==</span> <span class="st">"10"</span>)) <span class="co"># remove some observations</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>model_unbalanced <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  uniformity <span class="sc">~</span> temp <span class="sc">*</span> flow <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> run) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> run<span class="sc">:</span>temp),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> unbalanced_data</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_unbalanced, <span class="at">ddf =</span> <span class="st">"Satterthwaite"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Sum Sq"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NumDF"],"name":[3],"type":["int"],"align":["right"]},{"label":["DenDF"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"2.766374","2":"2.7663745","3":"1","4":"13.08924","5":"0.5870812","6":"0.45714637","_rn_":"temp"},{"1":"43.247929","2":"21.6239644","3":"2","4":"13.28133","5":"4.5890470","6":"0.03054116","_rn_":"flow"},{"1":"1.628877","2":"0.8144384","3":"2","4":"13.08924","5":"0.1728405","6":"0.84316084","_rn_":"temp:flow"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>9. Exercises</h1>
+<section id="medium-difficulty-problems" class="level2">
+<h2 class="anchored" data-anchor-id="medium-difficulty-problems">9.1 Medium-Difficulty Problems</h2>
+<ol type="1">
+<li><strong>Split-Plot Degrees of Freedom</strong>
+<ul>
+<li>A two-factor split-plot experiment has 3 whole-plot factor levels, 4 split-plot factor levels, and 3 blocks.
+<ol type="1">
+<li>Calculate the df for the whole-plot factor.</li>
+<li>Calculate the df for the split-plot error.</li>
+<li>Explain why whole-plot and split-plot errors differ.</li>
+</ol></li>
+</ul></li>
+<li><strong>Model Formulation</strong>
+<ul>
+<li>Write down the full split-plot model with two factors (A, B) and one blocking factor (r blocks). Identify which terms belong to the whole-plot portion vs.&nbsp;the split-plot portion.</li>
+</ul></li>
+<li><strong>Interpreting <code>lmer</code> Output</strong>
+<ul>
+<li>Fit a split-plot model using the <code>ag_data</code> dataset.</li>
+<li>Report which random effects are estimated and how they impact the F-tests for the main factors.</li>
+</ul></li>
+</ol>
+</section>
+<section id="challenging-problems" class="level2">
+<h2 class="anchored" data-anchor-id="challenging-problems">9.2 Challenging Problems</h2>
+<ol type="1">
+<li><strong>Deriving Expected Mean Squares</strong>
+<ul>
+<li><strong>Task</strong>: Show that <span class="math inline">\(E(MS_{whole}) = \sigma^2_S + s\sigma^2_W\)</span>.</li>
+<li><strong>Hint</strong>: Partition the sum of squares for the whole plot and use properties of the normal distribution.</li>
+<li><strong>Reference</strong>: See derivations in Scheffé (1959) and Appendix A below.</li>
+</ul></li>
+<li><strong>Power Calculation</strong>
+<ul>
+<li>Suppose <span class="math inline">\(\sigma_W^2 = 15\)</span> and <span class="math inline">\(\sigma_S^2 = 5\)</span>. You have 3 levels of a whole-plot factor (A) and 4 levels of a split-plot factor (B), with 3 replicates (blocks).</li>
+<li><strong>Task</strong>: Outline how you would simulate data in R to estimate the power to detect a particular effect size <span class="math inline">\(\delta\)</span> on factor A.</li>
+</ul></li>
+<li><strong>Design Optimization</strong>
+<ul>
+<li>You have a cost function <span class="math inline">\(C = c_w n_w + c_s n_s\)</span>, and you want to keep the variance of <span class="math inline">\(\hat{\tau}*i - \hat{\tau}*{i'}\)</span> below a threshold <span class="math inline">\(V_0\)</span>. Show how to derive the ratio <span class="math inline">\(n_w^* / n_s^*\)</span> that minimizes cost subject to the variance constraint (Kempthorne, 1977).</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="appendix-a-mathematical-derivations" class="level1">
+<h1>Appendix A: Mathematical Derivations</h1>
+<section id="a.1-expected-mean-squares" class="level2">
+<h2 class="anchored" data-anchor-id="a.1-expected-mean-squares">A.1 Expected Mean Squares</h2>
+<p>Using the notation in Dean et al.&nbsp;(2017) and Scheffé (1959):</p>
+<p><span class="math display">\[
+\text{For a balanced split-plot design:}
+\]</span></p>
+<ol type="1">
+<li><strong>Whole-plot error</strong>:</li>
+</ol>
+<p><span class="math display">\[
+E(MS_{\text{whole}}) = \sigma^2_S + s\,\sigma^2_W.
+\]</span></p>
+<ol type="1">
+<li><strong>Split-plot error</strong>:</li>
+</ol>
+<p><span class="math display">\[
+E(MS_{\text{split}}) = \sigma^2_S.
+\]</span></p>
+<p>The derivation partitions sums of squares and leverages properties of normal distributions (see Christensen, 2018, for a modern ANOVA treatment).</p>
+</section>
+<section id="a.2-power-analysis-for-whole-plot-factor" class="level2">
+<h2 class="anchored" data-anchor-id="a.2-power-analysis-for-whole-plot-factor">A.2 Power Analysis for Whole-Plot Factor</h2>
+<p><span class="math display">\[
+\lambda \;=\; \frac{n_w \sum_{i=1}^a \tau_i^2}{a\,\sigma_W^2},
+\]</span></p>
+<p>where <span class="math inline">\(n_w\)</span> is the number of whole-plot replicates, <span class="math inline">\(\tau_i\)</span> are the treatment contrasts, and <span class="math inline">\(\sigma_W^2\)</span> is the whole-plot variance. The power to detect a nonzero <span class="math inline">\(\tau_i\)</span> at significance level <span class="math inline">\(\alpha\)</span> becomes:</p>
+<p><span class="math display">\[
+1 - \beta \;=\; P\!\bigl(F_{a-1,(b-1)(a-1)} &gt; F_{\alpha;a-1,(b-1)(a-1)} \;\bigm|\; \lambda\bigr).
+\]</span></p>
+</section>
+<section id="a.3-optimal-design-theory" class="level2">
+<h2 class="anchored" data-anchor-id="a.3-optimal-design-theory">A.3 Optimal Design Theory</h2>
+<p>Following Kempthorne (1977):</p>
+<p><span class="math display">\[
+\text{Minimize } C = c_w n_w + c_s n_s \quad \text{subject to }
+Var(\hat{\tau}^*_i - \hat{\tau}^*_{i'}) \leq V_0.
+\]</span></p>
+<p>If <span class="math inline">\(\sigma_W^2\)</span> and <span class="math inline">\(\sigma_S^2\)</span> are known (or estimated from pilot data):</p>
+<p><span class="math display">\[
+n_w^* = \sqrt{\frac{c_s}{c_w}} \;\frac{\sigma_W}{\sigma_S}\;n_s^*.
+\]</span></p>
+<p>This balance ensures cost efficiency while meeting variance constraints.</p>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ol type="1">
+<li><strong>Dean, A., Voss, D., &amp; Draguljić, D. (2017).</strong> <em>Design and Analysis of Experiments</em>. Springer.</li>
+<li><strong>Montgomery, D. C., &amp; Runger, G. C. (2010).</strong> <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
+<li><strong>Christensen, R. (2018).</strong> <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
+<li><strong>Kempthorne, O. (1977).</strong> <em>Design and Analysis of Experiments</em>. Robert E. Krieger Publishing Company.</li>
+<li><strong>Scheffé, H. (1959).</strong> <em>The Analysis of Variance</em>. Wiley.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
@@ -606,6 +1239,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
