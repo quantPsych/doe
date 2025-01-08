@@ -104,6 +104,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="mermaid-theme" content="neutral">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -171,27 +175,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tutorial for the <code>purrr</code> Package</h1>
+      <h1 class="title">Tutorial for the purrr Package</h1>
                       </div>
   </div>
     
-  <div class="quarto-title-meta-author">
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-heading">Affiliation</div>
-    
-      <div class="quarto-title-meta-contents">
-      <p class="author">Davood Tofighi, Ph.D. </p>
-    </div>
-    <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Department of Mathematics and Statistics, University of New Mexico
-            </p>
-        </div>
-    </div>
-
+  
   <div class="quarto-title-meta">
 
-        
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Davood Tofighi, Ph.D. </p>
+            </div>
+    </div>
+      
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
@@ -264,13 +261,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<section id="tutorial-for-the-purrr-package" class="level1">
+<section id="tutorial-for-the-purrr-package" class="level1 page-columns page-full">
 <h1>Tutorial for the <code>purrr</code> Package</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
@@ -636,18 +633,34 @@ NULL</code></pre>
 </ul>
 </section>
 </section>
-<section id="references-and-resources" class="level2">
+<section id="references-and-resources" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
 <ul>
 <li><a href="https://purrr.tidyverse.org/">Official Documentation</a></li>
 <li><a href="https://www.tidyverse.org/">Tidyverse Website</a></li>
 <li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
 </ul>
-<pre class="mermaid"><code>graph TD
+<div class="cell page-columns page-full" data-layout-align="left">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-mermaid" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-mermaid">graph TD
     A["Data Input"] --&gt; B["Apply map()"]
     B --&gt; C["Iterate over elements"]
     C --&gt; D["Transform Results"]
-    D --&gt; E["Output List/Vector"]</code></pre>
+    D --&gt; E["Output List/Vector"]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Data Transformation Workflow
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>

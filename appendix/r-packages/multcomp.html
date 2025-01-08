@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Davod Tofighi, Ph.D.">
+<meta name="author" content="Davood Tofighi, Ph.D.">
 <meta name="dcterms.date" content="2025-01-06">
 
 <title>Tutorial: Using the multcomp R Package – STAT 454/545 - Analysis of Variance and Experimental Design</title>
@@ -176,27 +176,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tutorial: Using the <code>multcomp</code> R Package</h1>
+      <h1 class="title">Tutorial: Using the multcomp R Package</h1>
                       </div>
   </div>
     
-  <div class="quarto-title-meta-author">
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-heading">Affiliation</div>
-    
-      <div class="quarto-title-meta-contents">
-      <p class="author">Davod Tofighi, Ph.D. </p>
-    </div>
-    <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Department of Mathematics and Statistics, University of New Mexico
-            </p>
-        </div>
-    </div>
-
+  
   <div class="quarto-title-meta">
 
-        
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Davood Tofighi, Ph.D. </p>
+            </div>
+    </div>
+      
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
@@ -328,9 +321,9 @@ Fit: lm(formula = breaks ~ wool + tension, data = warpbreaks)
 
 Linear Hypotheses:
            Estimate Std. Error t value Pr(&gt;|t|)   
-M - L == 0  -10.000      3.872  -2.582  0.03378 * 
-H - L == 0  -14.722      3.872  -3.802  0.00112 **
-H - M == 0   -4.722      3.872  -1.219  0.44739   
+M - L == 0  -10.000      3.872  -2.582   0.0336 * 
+H - L == 0  -14.722      3.872  -3.802   0.0011 **
+H - M == 0   -4.722      3.872  -1.219   0.4475   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 (Adjusted p values reported -- single-step method)</code></pre>
@@ -373,9 +366,9 @@ Fit: lm(formula = breaks ~ wool + tension, data = warpbreaks)
 
 Linear Hypotheses:
            Estimate Std. Error t value Pr(&gt;|t|)   
-M - L == 0  -10.000      3.872  -2.582  0.03361 * 
-H - L == 0  -14.722      3.872  -3.802  0.00121 **
-H - M == 0   -4.722      3.872  -1.219  0.44743   
+M - L == 0  -10.000      3.872  -2.582  0.03353 * 
+H - L == 0  -14.722      3.872  -3.802  0.00109 **
+H - M == 0   -4.722      3.872  -1.219  0.44746   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 (Adjusted p values reported -- single-step method)</code></pre>
@@ -420,9 +413,9 @@ Fit: aov(formula = breaks ~ tension, data = warpbreaks)
 
 Linear Hypotheses:
            Estimate Std. Error t value Pr(&gt;|t|)   
-M - L == 0  -10.000      3.960  -2.525   0.0383 * 
-H - L == 0  -14.722      3.960  -3.718   0.0014 **
-H - M == 0   -4.722      3.960  -1.192   0.4631   
+M - L == 0  -10.000      3.960  -2.525  0.03853 * 
+H - L == 0  -14.722      3.960  -3.718  0.00142 **
+H - M == 0   -4.722      3.960  -1.192  0.46306   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 (Adjusted p values reported -- single-step method)</code></pre>
@@ -493,9 +486,9 @@ Fit: lmer(formula = breaks ~ tension + (1 | wool), data = warpbreaks)
 
 Linear Hypotheses:
            Estimate Std. Error z value Pr(&gt;|z|)    
-M - L == 0  -10.000      3.872  -2.582  0.02638 *  
-H - L == 0  -14.722      3.872  -3.802  0.00039 ***
-H - M == 0   -4.722      3.872  -1.219  0.44161    
+M - L == 0  -10.000      3.872  -2.582   0.0266 *  
+H - L == 0  -14.722      3.872  -3.802   &lt;0.001 ***
+H - M == 0   -4.722      3.872  -1.219   0.4416    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 (Adjusted p values reported -- single-step method)</code></pre>
