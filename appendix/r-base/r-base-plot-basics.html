@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
+<meta name="dcterms.date" content="2025-01-08">
 
-<title>Tutorial on model.tables() Function in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>r-base-plot-basics – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,6 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-eefef9cbcf3c78c39c3688c31e307d65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,9 +113,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../assets/styles/css/home.css">
-<meta property="og:title" content="Tutorial on model.tables() Function in R – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-base/assets/images/logo.png">
+<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-base/r-base-plot-basics_files/figure-html/unnamed-chunk-1-1.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -171,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tutorial on <code>model.tables()</code> Function in R</h1>
+      
                       </div>
   </div>
     
@@ -188,14 +194,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">January 8, 2025</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 7, 2025</p>
+        <p class="date-modified">January 8, 2025</p>
       </div>
     </div>
       
@@ -210,9 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tutorial-on-model.tables-function-in-r" id="toc-tutorial-on-model.tables-function-in-r" class="nav-link active" data-scroll-target="#tutorial-on-model.tables-function-in-r">Tutorial on <code>model.tables()</code> Function in R</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
@@ -220,23 +224,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
+  <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
   <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
   </ul></li>
   <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
   <ul class="collapse">
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot"><code>plot()</code></a></li>
+  <li><a href="#barplot" id="toc-barplot" class="nav-link" data-scroll-target="#barplot"><code>barplot()</code></a></li>
   </ul></li>
   <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
   <ul class="collapse">
-  <li><a href="#title-summarizing-mean-responses-in-a-three-factor-design" id="toc-title-summarizing-mean-responses-in-a-three-factor-design" class="nav-link" data-scroll-target="#title-summarizing-mean-responses-in-a-three-factor-design">Title: Summarizing Mean Responses in a Three-Factor Design</a></li>
-  <li><a href="#title-analyzing-effects-in-an-anova-model" id="toc-title-analyzing-effects-in-an-anova-model" class="nav-link" data-scroll-target="#title-analyzing-effects-in-an-anova-model">Title: Analyzing Effects in an ANOVA Model</a></li>
-  </ul></li>
-  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
-  <ul class="collapse">
-  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
-  <li><a href="#integration-with-other-tools" id="toc-integration-with-other-tools" class="nav-link" data-scroll-target="#integration-with-other-tools">Integration with Other Tools</a></li>
+  <li><a href="#plot-customization" id="toc-plot-customization" class="nav-link" data-scroll-target="#plot-customization">Plot Customization</a></li>
+  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a></li>
   </ul></li>
   <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
   <ul class="collapse">
@@ -244,13 +243,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
-  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -261,401 +255,199 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="tutorial-on-model.tables-function-in-r" class="level1">
-<h1>Tutorial on <code>model.tables()</code> Function in R</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Base R graphics provides a comprehensive suite of tools for creating high-quality plots and visualizations in R. Unlike specialized plotting libraries, Base R graphics is included with R and is highly flexible, making it ideal for both exploratory data analysis and publication-quality visuals.</p>
 <section id="overview" class="level3">
 <h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>The <code>model.tables()</code> function in the <code>stats</code> package generates summary tables for models fitted using <code>aov()</code>. It helps extract and interpret information such as effects or means for terms in a model. This function is particularly useful in analyzing complex ANOVA designs.</p>
-<p>Key components:</p>
 <ul>
-<li><strong>Package</strong>: <code>stats</code></li>
-<li><strong>Function</strong>: <code>model.tables()</code></li>
+<li><strong>Packages/Functions:</strong>
+<ul>
+<li>Base R: Functions like <code>plot()</code>, <code>barplot()</code>, <code>hist()</code>, <code>boxplot()</code>, <code>par()</code>, and <code>layout()</code>.</li>
+</ul></li>
+<li><strong>Purpose:</strong>
+<ul>
+<li>To create a wide variety of plots, from scatterplots and line graphs to histograms and boxplots.</li>
+</ul></li>
 </ul>
 </section>
 <section id="use-cases" class="level3">
 <h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
 <ul>
-<li>Summarizing model terms in ANOVA fits.</li>
-<li>Computing and displaying effects or means of factors.</li>
-<li>Adding standard errors for results, when required.</li>
+<li>Visualizing relationships between variables.</li>
+<li>Summarizing distributions of data.</li>
+<li>Customizing graphical parameters for presentation-ready visuals.</li>
 </ul>
 </section>
 <section id="benefits" class="level3">
 <h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
 <ul>
-<li>Provides detailed summaries of complex ANOVA models.</li>
-<li>Facilitates interpretation of factor effects and mean responses.</li>
-<li>Seamless integration with other ANOVA tools in R.</li>
+<li>No additional installations or dependencies.</li>
+<li>Full control over plotting parameters.</li>
+<li>Extensible for more complex use cases.</li>
 </ul>
 </section>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="loading-the-package" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
+<p>Base R graphics is built into R, so no explicit loading is required. Simply call the plotting functions directly.</p>
+</section>
 <section id="basic-usage" class="level3">
 <h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
-<p>Here is a basic example using the <code>npk</code> dataset:</p>
+<section id="example-scatterplot" class="level4">
+<h4 class="anchored" data-anchor-id="example-scatterplot">Example: Scatterplot</h4>
+<p>A simple scatterplot of <code>mpg</code> against <code>wt</code> from the <code>mtcars</code> dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(npk)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">*</span> P <span class="sc">*</span> K, <span class="at">data =</span> npk)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a table of means</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of means
-Grand mean
-       
-54.875 
-
- block 
-block
-    1     2     3     4     5     6 
-54.03 57.45 60.77 50.12 50.52 56.35 
-
- N 
-N
-    0     1 
-52.07 57.68 
-
- P 
-P
-    0     1 
-55.47 54.28 
-
- K 
-K
-    0     1 
-56.87 52.88 
-
- N:P 
-   P
-N   0     1    
-  0 51.72 52.42
-  1 59.22 56.15
-
- N:K 
-   K
-N   0     1    
-  0 52.88 51.25
-  1 60.85 54.52
-
- P:K 
-   K
-P   0     1    
-  0 57.60 53.33
-  1 56.13 52.43</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mtcars<span class="sc">$</span>wt, mtcars<span class="sc">$</span>mpg,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Scatterplot of MPG vs. Weight"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"Miles per Gallon"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"blue"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="r-base-plot-basics_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="r-base-plot-basics_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
-<p>This generates a table summarizing mean responses for each term.</p>
+</div>
+</section>
 </section>
 </section>
 <section id="key-functions-and-features" class="level2">
 <h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
-<section id="description" class="level3">
-<h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>The <code>model.tables()</code> function computes summary tables of effects or means for terms in an <code>aov</code> model.</p>
+<section id="plot" class="level3">
+<h3 class="anchored" data-anchor-id="plot"><code>plot()</code></h3>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description</h4>
+<p>The <code>plot()</code> function is a versatile tool for creating scatterplots, line plots, and other graphs depending on input data types.</p>
 </section>
-<section id="syntax" class="level3">
-<h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(x, <span class="at">type =</span> <span class="st">"effects"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, cterms, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="arguments" class="level4">
-<h4 class="anchored" data-anchor-id="arguments">Arguments</h4>
+<section id="syntax" class="level4">
+<h4 class="anchored" data-anchor-id="syntax">Syntax</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">"p"</span>, <span class="at">main =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">pch =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><strong>x</strong>: An <code>aov</code> model object.</li>
-<li><strong>type</strong>: Type of table to compute: <code>"effects"</code> (default) or <code>"means"</code>.</li>
-<li><strong>se</strong>: Logical indicating whether standard errors should be included.</li>
-<li><strong>cterms</strong>: A character vector specifying terms for which tables are computed (default: all terms).</li>
-<li><strong>…</strong>: Additional arguments passed to methods.</li>
+<li><code>x, y</code>: Coordinates for points.</li>
+<li><code>type</code>: Type of plot (<code>"p"</code> for points, <code>"l"</code> for lines, etc.).</li>
+<li><code>main</code>, <code>xlab</code>, <code>ylab</code>: Titles and axis labels.</li>
+<li><code>col</code>: Color of points/lines.</li>
+<li><code>pch</code>: Plotting symbol.</li>
 </ul>
 </section>
-</section>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
-<p>Compute effects for all terms:</p>
+<section id="example" class="level4">
+<h4 class="anchored" data-anchor-id="example">Example</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of effects
-
- block 
-block
-     1      2      3      4      5      6 
--0.850  2.575  5.900 -4.750 -4.350  1.475 
-
- N 
-N
-      0       1 
--2.8083  2.8083 
-
- P 
-P
-      0       1 
- 0.5917 -0.5917 
-
- K 
-K
-      0       1 
- 1.9917 -1.9917 
-
- N:P 
-   P
-N   0       1      
-  0 -0.9417  0.9417
-  1  0.9417 -0.9417
-
- N:K 
-   K
-N   0      1     
-  0 -1.175  1.175
-  1  1.175 -1.175
-
- P:K 
-   K
-P   0        1       
-  0  0.14167 -0.14167
-  1 -0.14167  0.14167</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure<span class="sc">$</span>temperature, pressure<span class="sc">$</span>pressure,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Pressure vs Temperature"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Temperature"</span>, <span class="at">ylab =</span> <span class="st">"Pressure"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="r-base-plot-basics_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="r-base-plot-basics_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
+</div>
+</section>
+</section>
+<section id="barplot" class="level3">
+<h3 class="anchored" data-anchor-id="barplot"><code>barplot()</code></h3>
+<section id="description-1" class="level4">
+<h4 class="anchored" data-anchor-id="description-1">Description</h4>
+<p>Creates bar charts for categorical data.</p>
+</section>
+<section id="syntax-1" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-1">Syntax</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(height, <span class="at">names.arg =</span> <span class="cn">NULL</span>, <span class="at">main =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">beside =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-1" class="level4">
+<h4 class="anchored" data-anchor-id="example-1">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">table</span>(mtcars<span class="sc">$</span>cyl)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(counts,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Cylinder Counts"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Number of Cylinders"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="r-base-plot-basics_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="r-base-plot-basics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="in-depth-examples" class="level2">
 <h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
-<section id="title-summarizing-mean-responses-in-a-three-factor-design" class="level3">
-<h3 class="anchored" data-anchor-id="title-summarizing-mean-responses-in-a-three-factor-design">Title: Summarizing Mean Responses in a Three-Factor Design</h3>
-<section id="objective" class="level4">
-<h4 class="anchored" data-anchor-id="objective">Objective</h4>
-<p>Summarize the mean responses for combinations of factors in the <code>npk</code> dataset.</p>
+<section id="plot-customization" class="level3">
+<h3 class="anchored" data-anchor-id="plot-customization">Plot Customization</h3>
+<section id="title-customizing-scatterplots" class="level4">
+<h4 class="anchored" data-anchor-id="title-customizing-scatterplots">Title: Customizing Scatterplots</h4>
+</section>
+<section id="objective-enhance-a-scatterplot-with-colors-symbols-and-labels" class="level4">
+<h4 class="anchored" data-anchor-id="objective-enhance-a-scatterplot-with-colors-symbols-and-labels">Objective: Enhance a Scatterplot with Colors, Symbols, and Labels</h4>
 </section>
 <section id="steps" class="level4">
 <h4 class="anchored" data-anchor-id="steps">Steps</h4>
 <ol type="1">
-<li><strong>Load the data</strong>:</li>
+<li>Load the <code>iris</code> dataset.</li>
+<li>Use <code>plot()</code> to create a scatterplot.</li>
+<li>Customize colors and labels.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Sepal.Width,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> iris<span class="sc">$</span>Species,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Sepal Dimensions by Species"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Sepal Length (cm)"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"Sepal Width (cm)"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend =</span> <span class="fu">levels</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">title =</span> <span class="st">"Species"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="r-base-plot-basics_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="r-base-plot-basics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
-<ol start="2" type="1">
-<li><strong>Fit the ANOVA model</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">*</span> P <span class="sc">*</span> K, <span class="at">data =</span> npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="1">
-<li><strong>Generate mean tables</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of means
-Grand mean
-       
-54.875 
-
- block 
-block
-    1     2     3     4     5     6 
-54.03 57.45 60.77 50.12 50.52 56.35 
-
- N 
-N
-    0     1 
-52.07 57.68 
-
- P 
-P
-    0     1 
-55.47 54.28 
-
- K 
-K
-    0     1 
-56.87 52.88 
-
- N:P 
-   P
-N   0     1    
-  0 51.72 52.42
-  1 59.22 56.15
-
- N:K 
-   K
-N   0     1    
-  0 52.88 51.25
-  1 60.85 54.52
-
- P:K 
-   K
-P   0     1    
-  0 57.60 53.33
-  1 56.13 52.43
-
-Standard errors for differences of means
-        block     N     P     K   N:P   N:K   P:K
-        2.779 1.604 1.604 1.604 2.269 2.269 2.269
-replic.     4    12    12    12     6     6     6</code></pre>
-</div>
-</div>
-<ol start="4" type="1">
-<li><p><strong>Interpret output</strong>:</p>
-<ul>
-<li>Each term’s mean response is displayed.</li>
-<li>Standard errors are included.</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="title-analyzing-effects-in-an-anova-model" class="level3">
-<h3 class="anchored" data-anchor-id="title-analyzing-effects-in-an-anova-model">Title: Analyzing Effects in an ANOVA Model</h3>
-<section id="objective-1" class="level4">
-<h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
-<p>Examine factor effects in the <code>npk</code> dataset.</p>
-</section>
-<section id="steps-1" class="level4">
-<h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
-<ol type="1">
-<li><strong>Define the model</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">+</span> P <span class="sc">+</span> K, <span class="at">data =</span> npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li><strong>Compute effects</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of effects
-
- block 
-block
-     1      2      3      4      5      6 
--0.850  2.575  5.900 -4.750 -4.350  1.475 
-
- N 
-N
-      0       1 
--2.8083  2.8083 
-
- P 
-P
-      0       1 
- 0.5917 -0.5917 
-
- K 
-K
-      0       1 
- 1.9917 -1.9917 
-
-Standard errors of effects
-        block     N     P     K
-        2.001 1.155 1.155 1.155
-replic.     4    12    12    12</code></pre>
-</div>
-</div>
-<ol start="3" type="1">
-<li><p><strong>Output explanation</strong>:</p>
-<ul>
-<li>Lists coefficients for each term.</li>
-<li>Includes standard errors, helping gauge variability.</li>
-</ul></li>
-</ol>
-</section>
-</section>
-</section>
-<section id="advanced-features" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
-<section id="customization" class="level3">
-<h3 class="anchored" data-anchor-id="customization">Customization</h3>
-<p>Focus on specific terms using <code>cterms</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>, <span class="at">cterms =</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"P"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of means
-Grand mean
-       
-54.875 
-
- N 
-N
-    0     1 
-52.07 57.68 
-
- P 
-P
-    0     1 
-55.47 54.28 </code></pre>
 </div>
 </div>
 </section>
-<section id="integration-with-other-tools" class="level3">
-<h3 class="anchored" data-anchor-id="integration-with-other-tools">Integration with Other Tools</h3>
-<p>Combine with <code>TukeyHSD()</code> for pairwise comparisons:</p>
+<section id="output" class="level4">
+<h4 class="anchored" data-anchor-id="output">Output</h4>
+<p>A scatterplot with a legend differentiating species.</p>
+</section>
+</section>
+<section id="advanced-features" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-features">Advanced Features</h3>
+<section id="combining-plots-with-layout" class="level4">
+<h4 class="anchored" data-anchor-id="combining-plots-with-layout">Combining Plots with <code>layout()</code></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(npk.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    95% family-wise confidence level
-
-Fit: aov(formula = yield ~ block + N + P + K, data = npk)
-
-$block
-       diff        lwr       upr     p adj
-2-1   3.425  -5.768011 12.618011 0.8253019
-3-1   6.750  -2.443011 15.943011 0.2218775
-4-1  -3.900 -13.093011  5.293011 0.7386705
-5-1  -3.500 -12.693011  5.693011 0.8125420
-6-1   2.325  -6.868011 11.518011 0.9588314
-3-2   3.325  -5.868011 12.518011 0.8416850
-4-2  -7.325 -16.518011  1.868011 0.1601517
-5-2  -6.925 -16.118011  2.268011 0.2013480
-6-2  -1.100 -10.293011  8.093011 0.9985985
-4-3 -10.650 -19.843011 -1.456989 0.0189601
-5-3 -10.250 -19.443011 -1.056989 0.0248128
-6-3  -4.425 -13.618011  4.768011 0.6320049
-5-4   0.400  -8.793011  9.593011 0.9999902
-6-4   6.225  -2.968011 15.418011 0.2931556
-6-5   5.825  -3.368011 15.018011 0.3572937
-
-$N
-        diff      lwr     upr     p adj
-1-0 5.616667 2.134683 9.09865 0.0036596
-
-$P
-         diff       lwr     upr     p adj
-1-0 -1.183333 -4.665317 2.29865 0.4799905
-
-$K
-         diff       lwr        upr     p adj
-1-0 -3.983333 -7.465317 -0.5013496 0.0276673</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of effects
-
- block 
-block
-     1      2      3      4      5      6 
--0.850  2.575  5.900 -4.750 -4.350  1.475 
-
- N 
-N
-      0       1 
--2.8083  2.8083 
-
- P 
-P
-      0       1 
- 0.5917 -0.5917 
-
- K 
-K
-      0       1 
- 1.9917 -1.9917 </code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mtcars<span class="sc">$</span>wt, mtcars<span class="sc">$</span>mpg, <span class="at">main =</span> <span class="st">"Plot 1"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(mtcars<span class="sc">$</span>cyl), <span class="at">main =</span> <span class="st">"Plot 2"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(mtcars<span class="sc">$</span>mpg <span class="sc">~</span> mtcars<span class="sc">$</span>cyl, <span class="at">main =</span> <span class="st">"Plot 3"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="at">main =</span> <span class="st">"Plot 4"</span>, <span class="at">col =</span> <span class="st">"gray"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="r-base-plot-basics_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="r-base-plot-basics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
+</div>
+</section>
 </section>
 </section>
 <section id="troubleshooting-and-faqs" class="level2">
@@ -663,50 +455,43 @@ K
 <section id="common-issues" class="level3">
 <h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
 <ol type="1">
-<li><strong>Error: “Weighted aov fits are not supported”</strong>: Ensure the <code>aov</code> model is unweighted.</li>
-<li><strong>Missing terms in output</strong>: Use <code>cterms</code> to specify required terms explicitly.</li>
+<li><strong>Error: Plot not showing</strong>
+<ul>
+<li>Ensure the plotting window is open and active.</li>
+</ul></li>
+<li><strong>Legend overlap</strong>
+<ul>
+<li>Adjust the position using <code>legend()</code> arguments like <code>x</code> and <code>y</code>.</li>
+</ul></li>
 </ol>
 </section>
 <section id="faqs" class="level3">
 <h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
-<ul>
-<li><strong>What types of models are supported?</strong> Only <code>aov</code> objects and certain <code>aovlist</code> objects.</li>
-<li><strong>Can it handle nested designs?</strong> Yes, with appropriate formula specification.</li>
-</ul>
+<ol type="1">
+<li><strong>How do I save a plot?</strong> Use <code>png()</code> or <code>pdf()</code> before plotting and <code>dev.off()</code> to close the device.</li>
+</ol>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
 <ul>
-<li>Use <code>type = "effects"</code> to understand the contributions of each term.</li>
-<li>Always include <code>se = TRUE</code> for better interpretability.</li>
-<li>Validate model assumptions before interpreting tables.</li>
+<li>Use <code>par()</code> to set global graphical parameters.</li>
+<li>Always label axes and include legends for clarity.</li>
+<li>Combine plots using <code>layout()</code> or <code>par(mfrow)</code> for comparisons.</li>
 </ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<p>The <code>model.tables()</code> function is a versatile tool for summarizing ANOVA model results, offering insights into factor effects and mean responses. Its ability to compute standard errors enhances its utility for interpreting results.</p>
-</section>
-<section id="next-steps" class="level3">
-<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
-<ul>
-<li>Explore <code>TukeyHSD()</code> for post-hoc comparisons.</li>
-<li>Combine with custom data preprocessing for more advanced analyses.</li>
-</ul>
-</section>
+<p>Base R graphics is a robust and flexible system for creating a wide range of plots. By mastering key functions like <code>plot()</code> and <code>barplot()</code>, you can create tailored visualizations for data analysis and presentation.</p>
 </section>
 <section id="references-and-resources" class="level2">
 <h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
 <ul>
-<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/model.tables.html">R Documentation for <code>model.tables()</code></a></li>
-<li><a href="https://www.statmethods.net/stats/anova.html">ANOVA Techniques in R</a></li>
-<li><a href="https://cran.r-project.org/doc/manuals/R-intro.pdf">Comprehensive Guide to R ANOVA Models</a></li>
+<li><a href="https://www.rdocumentation.org/">R Base Graphics Documentation</a></li>
+<li><a href="https://www.r-graph-gallery.com/">R Graph Gallery</a></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1140,6 +925,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

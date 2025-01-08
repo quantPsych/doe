@@ -9,7 +9,7 @@
 <meta name="author" content="Davood Tofighi, Ph.D.">
 <meta name="dcterms.date" content="2025-01-06">
 
-<title>Tutorial on model.tables() Function in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Hypothesis Testing in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,8 +110,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../assets/styles/css/home.css">
-<meta property="og:title" content="Tutorial on model.tables() Function in R – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-base/assets/images/logo.png">
+<meta property="og:title" content="Hypothesis Testing in R – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-topics/assets/images/logo.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -171,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tutorial on <code>model.tables()</code> Function in R</h1>
+      <h1 class="title">Hypothesis Testing in R</h1>
                       </div>
   </div>
     
@@ -195,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 7, 2025</p>
+        <p class="date-modified">January 8, 2025</p>
       </div>
     </div>
       
@@ -210,9 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tutorial-on-model.tables-function-in-r" id="toc-tutorial-on-model.tables-function-in-r" class="nav-link active" data-scroll-target="#tutorial-on-model.tables-function-in-r">Tutorial on <code>model.tables()</code> Function in R</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
@@ -220,23 +219,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
+  <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
   <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
   </ul></li>
   <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
   <ul class="collapse">
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#t.test" id="toc-t.test" class="nav-link" data-scroll-target="#t.test"><code>t.test()</code></a></li>
+  <li><a href="#chisq.test" id="toc-chisq.test" class="nav-link" data-scroll-target="#chisq.test"><code>chisq.test()</code></a></li>
+  <li><a href="#wilcox.test" id="toc-wilcox.test" class="nav-link" data-scroll-target="#wilcox.test"><code>wilcox.test()</code></a></li>
   </ul></li>
   <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
   <ul class="collapse">
-  <li><a href="#title-summarizing-mean-responses-in-a-three-factor-design" id="toc-title-summarizing-mean-responses-in-a-three-factor-design" class="nav-link" data-scroll-target="#title-summarizing-mean-responses-in-a-three-factor-design">Title: Summarizing Mean Responses in a Three-Factor Design</a></li>
-  <li><a href="#title-analyzing-effects-in-an-anova-model" id="toc-title-analyzing-effects-in-an-anova-model" class="nav-link" data-scroll-target="#title-analyzing-effects-in-an-anova-model">Title: Analyzing Effects in an ANOVA Model</a></li>
+  <li><a href="#comparing-means-across-groups" id="toc-comparing-means-across-groups" class="nav-link" data-scroll-target="#comparing-means-across-groups">Comparing Means Across Groups</a></li>
+  <li><a href="#goodness-of-fit-test" id="toc-goodness-of-fit-test" class="nav-link" data-scroll-target="#goodness-of-fit-test">Goodness-of-Fit Test</a></li>
   </ul></li>
   <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
   <ul class="collapse">
   <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
-  <li><a href="#integration-with-other-tools" id="toc-integration-with-other-tools" class="nav-link" data-scroll-target="#integration-with-other-tools">Integration with Other Tools</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
+  <li><a href="#optimization" id="toc-optimization" class="nav-link" data-scroll-target="#optimization">Optimization</a></li>
   </ul></li>
   <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
   <ul class="collapse">
@@ -244,13 +245,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
-  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -261,307 +257,258 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="tutorial-on-model.tables-function-in-r" class="level1">
-<h1>Tutorial on <code>model.tables()</code> Function in R</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Hypothesis testing is a cornerstone of statistical analysis, used to evaluate assumptions about population parameters based on sample data. In R, several functions and packages provide extensive tools for hypothesis testing, ranging from basic tests in base R to more specialized tests available in external packages.</p>
 <section id="overview" class="level3">
 <h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>The <code>model.tables()</code> function in the <code>stats</code> package generates summary tables for models fitted using <code>aov()</code>. It helps extract and interpret information such as effects or means for terms in a model. This function is particularly useful in analyzing complex ANOVA designs.</p>
-<p>Key components:</p>
 <ul>
-<li><strong>Package</strong>: <code>stats</code></li>
-<li><strong>Function</strong>: <code>model.tables()</code></li>
+<li><strong>Packages/Functions:</strong>
+<ul>
+<li>Base R: <code>t.test()</code>, <code>chisq.test()</code>, <code>var.test()</code>, <code>wilcox.test()</code></li>
+<li>Additional Packages: <code>stats::ks.test()</code>, <code>MASS::leveneTest()</code></li>
+</ul></li>
+<li><strong>Purpose:</strong>
+<ul>
+<li>To evaluate assumptions or hypotheses about data distributions and relationships.</li>
+</ul></li>
+<li><strong>Common Functions:</strong>
+<ul>
+<li><code>t.test()</code> for t-tests.</li>
+<li><code>chisq.test()</code> for Chi-square tests.</li>
+<li><code>ks.test()</code> for Kolmogorov-Smirnov tests.</li>
+<li><code>wilcox.test()</code> for non-parametric Wilcoxon tests.</li>
+</ul></li>
 </ul>
 </section>
 <section id="use-cases" class="level3">
 <h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
 <ul>
-<li>Summarizing model terms in ANOVA fits.</li>
-<li>Computing and displaying effects or means of factors.</li>
-<li>Adding standard errors for results, when required.</li>
+<li>Comparing means between two groups.</li>
+<li>Assessing the goodness-of-fit for categorical data.</li>
+<li>Testing for equal variances across groups.</li>
+<li>Non-parametric comparisons for skewed or ordinal data.</li>
 </ul>
 </section>
 <section id="benefits" class="level3">
 <h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
 <ul>
-<li>Provides detailed summaries of complex ANOVA models.</li>
-<li>Facilitates interpretation of factor effects and mean responses.</li>
-<li>Seamless integration with other ANOVA tools in R.</li>
+<li>Easy to implement with a range of built-in functions.</li>
+<li>Highly extensible for complex scenarios.</li>
+<li>Seamless integration with visualization and other analytical tools.</li>
 </ul>
 </section>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="loading-the-package" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
+<p>Base R provides most hypothesis testing tools. Load the <code>MASS</code> package for additional tests.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="basic-usage" class="level3">
 <h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
-<p>Here is a basic example using the <code>npk</code> dataset:</p>
+<section id="example-one-sample-t-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-one-sample-t-test">Example: One-Sample T-test</h4>
+<p>Testing whether the mean of a sample is equal to a specific value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(npk)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">*</span> P <span class="sc">*</span> K, <span class="at">data =</span> npk)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a table of means</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sample_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(sample_data, <span class="at">mu =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Tables of means
-Grand mean
-       
-54.875 
+<pre><code>
+    One Sample t-test
 
- block 
-block
-    1     2     3     4     5     6 
-54.03 57.45 60.77 50.12 50.52 56.35 
-
- N 
-N
-    0     1 
-52.07 57.68 
-
- P 
-P
-    0     1 
-55.47 54.28 
-
- K 
-K
-    0     1 
-56.87 52.88 
-
- N:P 
-   P
-N   0     1    
-  0 51.72 52.42
-  1 59.22 56.15
-
- N:K 
-   K
-N   0     1    
-  0 52.88 51.25
-  1 60.85 54.52
-
- P:K 
-   K
-P   0     1    
-  0 57.60 53.33
-  1 56.13 52.43</code></pre>
+data:  sample_data
+t = 0.29933, df = 29, p-value = 0.7668
+alternative hypothesis: true mean is not equal to 5
+95 percent confidence interval:
+ 4.199903 6.074444
+sample estimates:
+mean of x 
+ 5.137174 </code></pre>
 </div>
 </div>
-<p>This generates a table summarizing mean responses for each term.</p>
+</section>
 </section>
 </section>
 <section id="key-functions-and-features" class="level2">
 <h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
-<section id="description" class="level3">
-<h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>The <code>model.tables()</code> function computes summary tables of effects or means for terms in an <code>aov</code> model.</p>
+<section id="t.test" class="level3">
+<h3 class="anchored" data-anchor-id="t.test"><code>t.test()</code></h3>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description</h4>
+<p>Performs one-sample, two-sample, and paired t-tests to compare means.</p>
 </section>
-<section id="syntax" class="level3">
-<h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(x, <span class="at">type =</span> <span class="st">"effects"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, cterms, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="arguments" class="level4">
-<h4 class="anchored" data-anchor-id="arguments">Arguments</h4>
+<section id="syntax" class="level4">
+<h4 class="anchored" data-anchor-id="syntax">Syntax</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><strong>x</strong>: An <code>aov</code> model object.</li>
-<li><strong>type</strong>: Type of table to compute: <code>"effects"</code> (default) or <code>"means"</code>.</li>
-<li><strong>se</strong>: Logical indicating whether standard errors should be included.</li>
-<li><strong>cterms</strong>: A character vector specifying terms for which tables are computed (default: all terms).</li>
-<li><strong>…</strong>: Additional arguments passed to methods.</li>
+<li><code>x, y</code>: Numeric vectors of data values.</li>
+<li><code>alternative</code>: Type of hypothesis (“two.sided”, “greater”, “less”).</li>
+<li><code>mu</code>: Hypothesized mean (default is 0).</li>
+<li><code>paired</code>: Whether the test is paired (default is <code>FALSE</code>).</li>
+<li><code>var.equal</code>: Assume equal variances (default is <code>FALSE</code>).</li>
 </ul>
 </section>
-</section>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
-<p>Compute effects for all terms:</p>
+<section id="example-two-sample-t-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-two-sample-t-test">Example: Two-Sample T-test</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">5</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">6</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(group1, group2, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Tables of effects
+<pre><code>
+    Two Sample t-test
 
- block 
-block
-     1      2      3      4      5      6 
--0.850  2.575  5.900 -4.750 -4.350  1.475 
-
- N 
-N
-      0       1 
--2.8083  2.8083 
-
- P 
-P
-      0       1 
- 0.5917 -0.5917 
-
- K 
-K
-      0       1 
- 1.9917 -1.9917 
-
- N:P 
-   P
-N   0       1      
-  0 -0.9417  0.9417
-  1  0.9417 -0.9417
-
- N:K 
-   K
-N   0      1     
-  0 -1.175  1.175
-  1  1.175 -1.175
-
- P:K 
-   K
-P   0        1       
-  0  0.14167 -0.14167
-  1 -0.14167  0.14167</code></pre>
+data:  group1 and group2
+t = -4.6894, df = 38, p-value = 3.486e-05
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -2.1057327 -0.8358574
+sample estimates:
+mean of x mean of y 
+ 4.807940  6.278735 </code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="chisq.test" class="level3">
+<h3 class="anchored" data-anchor-id="chisq.test"><code>chisq.test()</code></h3>
+<section id="description-1" class="level4">
+<h4 class="anchored" data-anchor-id="description-1">Description</h4>
+<p>Tests for independence or goodness-of-fit in categorical data.</p>
+</section>
+<section id="syntax-1" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-1">Syntax</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">correct =</span> <span class="cn">TRUE</span>, <span class="at">simulate.p.value =</span> <span class="cn">FALSE</span>, <span class="at">rescale.p =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-independence-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-independence-test">Example: Independence Test</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">40</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(observed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  observed
+X-squared = 0.10954, df = 1, p-value = 0.7407</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="wilcox.test" class="level3">
+<h3 class="anchored" data-anchor-id="wilcox.test"><code>wilcox.test()</code></h3>
+<section id="description-2" class="level4">
+<h4 class="anchored" data-anchor-id="description-2">Description</h4>
+<p>Performs the Wilcoxon rank-sum test (non-parametric alternative to the t-test).</p>
+</section>
+<section id="syntax-2" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-2">Syntax</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span>), <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">exact =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-wilcoxon-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-wilcoxon-test">Example: Wilcoxon Test</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">1</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(x, y, <span class="at">alternative =</span> <span class="st">"less"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum exact test
+
+data:  x and y
+W = 271, p-value = 0.003824
+alternative hypothesis: true location shift is less than 0</code></pre>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="in-depth-examples" class="level2">
 <h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
-<section id="title-summarizing-mean-responses-in-a-three-factor-design" class="level3">
-<h3 class="anchored" data-anchor-id="title-summarizing-mean-responses-in-a-three-factor-design">Title: Summarizing Mean Responses in a Three-Factor Design</h3>
+<section id="comparing-means-across-groups" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-means-across-groups">Comparing Means Across Groups</h3>
+<section id="title-paired-t-test-for-preand-post-treatment-data" class="level4">
+<h4 class="anchored" data-anchor-id="title-paired-t-test-for-preand-post-treatment-data">Title: Paired T-test for Preand Post-Treatment Data</h4>
+</section>
 <section id="objective" class="level4">
 <h4 class="anchored" data-anchor-id="objective">Objective</h4>
-<p>Summarize the mean responses for combinations of factors in the <code>npk</code> dataset.</p>
+<p>Evaluate the effect of a treatment by comparing preand post-treatment scores.</p>
 </section>
 <section id="steps" class="level4">
 <h4 class="anchored" data-anchor-id="steps">Steps</h4>
 <ol type="1">
-<li><strong>Load the data</strong>:</li>
+<li>Prepare the data.</li>
+<li>Apply the paired t-test.</li>
+<li>Visualize the differences.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li><strong>Fit the ANOVA model</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">*</span> P <span class="sc">*</span> K, <span class="at">data =</span> npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="1">
-<li><strong>Generate mean tables</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">15</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">15</span>, <span class="dv">17</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(pre, post, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Tables of means
-Grand mean
-       
-54.875 
+<pre><code>
+    Paired t-test
 
- block 
-block
-    1     2     3     4     5     6 
-54.03 57.45 60.77 50.12 50.52 56.35 
-
- N 
-N
-    0     1 
-52.07 57.68 
-
- P 
-P
-    0     1 
-55.47 54.28 
-
- K 
-K
-    0     1 
-56.87 52.88 
-
- N:P 
-   P
-N   0     1    
-  0 51.72 52.42
-  1 59.22 56.15
-
- N:K 
-   K
-N   0     1    
-  0 52.88 51.25
-  1 60.85 54.52
-
- P:K 
-   K
-P   0     1    
-  0 57.60 53.33
-  1 56.13 52.43
-
-Standard errors for differences of means
-        block     N     P     K   N:P   N:K   P:K
-        2.779 1.604 1.604 1.604 2.269 2.269 2.269
-replic.     4    12    12    12     6     6     6</code></pre>
+data:  pre and post
+t = -7.9057, df = 5, p-value = 0.0005211
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.208593 -1.124740
+sample estimates:
+mean difference 
+      -1.666667 </code></pre>
 </div>
 </div>
-<ol start="4" type="1">
-<li><p><strong>Interpret output</strong>:</p>
-<ul>
-<li>Each term’s mean response is displayed.</li>
-<li>Standard errors are included.</li>
-</ul></li>
-</ol>
+</section>
+<section id="output" class="level4">
+<h4 class="anchored" data-anchor-id="output">Output</h4>
+<p>Interpret the p-value to determine if there is a significant difference between preand post-treatment scores.</p>
 </section>
 </section>
-<section id="title-analyzing-effects-in-an-anova-model" class="level3">
-<h3 class="anchored" data-anchor-id="title-analyzing-effects-in-an-anova-model">Title: Analyzing Effects in an ANOVA Model</h3>
+<section id="goodness-of-fit-test" class="level3">
+<h3 class="anchored" data-anchor-id="goodness-of-fit-test">Goodness-of-Fit Test</h3>
+<section id="title-testing-dice-fairness" class="level4">
+<h4 class="anchored" data-anchor-id="title-testing-dice-fairness">Title: Testing Dice Fairness</h4>
+</section>
 <section id="objective-1" class="level4">
 <h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
-<p>Examine factor effects in the <code>npk</code> dataset.</p>
+<p>Check if a six-sided die is fair.</p>
 </section>
 <section id="steps-1" class="level4">
 <h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
 <ol type="1">
-<li><strong>Define the model</strong>:</li>
+<li>Collect observed frequencies of each side.</li>
+<li>Specify expected frequencies.</li>
+<li>Apply the Chi-square goodness-of-fit test.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">+</span> P <span class="sc">+</span> K, <span class="at">data =</span> npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li><strong>Compute effects</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">16</span>, <span class="dv">10</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">6</span>, <span class="dv">6</span>) <span class="sc">*</span> <span class="fu">sum</span>(observed)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(observed, <span class="at">p =</span> expected <span class="sc">/</span> <span class="fu">sum</span>(expected))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Tables of effects
+<pre><code>
+    Chi-squared test for given probabilities
 
- block 
-block
-     1      2      3      4      5      6 
--0.850  2.575  5.900 -4.750 -4.350  1.475 
-
- N 
-N
-      0       1 
--2.8083  2.8083 
-
- P 
-P
-      0       1 
- 0.5917 -0.5917 
-
- K 
-K
-      0       1 
- 1.9917 -1.9917 
-
-Standard errors of effects
-        block     N     P     K
-        2.001 1.155 1.155 1.155
-replic.     4    12    12    12</code></pre>
+data:  observed
+X-squared = 1.75, df = 5, p-value = 0.8825</code></pre>
 </div>
 </div>
-<ol start="3" type="1">
-<li><p><strong>Output explanation</strong>:</p>
-<ul>
-<li>Lists coefficients for each term.</li>
-<li>Includes standard errors, helping gauge variability.</li>
-</ul></li>
-</ol>
+</section>
+<section id="output-1" class="level4">
+<h4 class="anchored" data-anchor-id="output-1">Output</h4>
+<p>Evaluate the p-value to determine if the die is fair.</p>
 </section>
 </section>
 </section>
@@ -569,93 +516,55 @@ replic.     4    12    12    12</code></pre>
 <h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
 <section id="customization" class="level3">
 <h3 class="anchored" data-anchor-id="customization">Customization</h3>
-<p>Focus on specific terms using <code>cterms</code>:</p>
+<section id="adjusting-confidence-levels" class="level4">
+<h4 class="anchored" data-anchor-id="adjusting-confidence-levels">Adjusting Confidence Levels</h4>
+<p>Set custom confidence levels in tests:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(group1, group2, <span class="at">conf.level =</span> <span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="integration" class="level3">
+<h3 class="anchored" data-anchor-id="integration">Integration</h3>
+<section id="using-hypothesis-testing-with-dplyr" class="level4">
+<h4 class="anchored" data-anchor-id="using-hypothesis-testing-with-dplyr">Using Hypothesis Testing with <code>dplyr</code></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>, <span class="at">cterms =</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"P"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of means
-Grand mean
-       
-54.875 
-
- N 
-N
-    0     1 
-52.07 57.68 
-
- P 
-P
-    0     1 
-55.47 54.28 </code></pre>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">t_result =</span> <span class="fu">list</span>(<span class="fu">t.test</span>(mpg <span class="sc">~</span> <span class="fu">as.factor</span>(am))<span class="sc">$</span>p.value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["cyl"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["t_result"],"name":[2],"type":["list"],"align":["right"]}],"data":[{"1":"4","2":"<dbl [1]>"},{"1":"6","2":"<dbl [1]>"},{"1":"8","2":"<dbl [1]>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 </div>
 </section>
-<section id="integration-with-other-tools" class="level3">
-<h3 class="anchored" data-anchor-id="integration-with-other-tools">Integration with Other Tools</h3>
-<p>Combine with <code>TukeyHSD()</code> for pairwise comparisons:</p>
+</section>
+<section id="optimization" class="level3">
+<h3 class="anchored" data-anchor-id="optimization">Optimization</h3>
+<section id="managing-large-datasets" class="level4">
+<h4 class="anchored" data-anchor-id="managing-large-datasets">Managing Large Datasets</h4>
+<p>Use vectorized operations or summary statistics for efficiency:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(npk.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>large_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e6</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(large_data, <span class="at">mu =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    95% family-wise confidence level
+<pre><code>
+    One Sample t-test
 
-Fit: aov(formula = yield ~ block + N + P + K, data = npk)
-
-$block
-       diff        lwr       upr     p adj
-2-1   3.425  -5.768011 12.618011 0.8253019
-3-1   6.750  -2.443011 15.943011 0.2218775
-4-1  -3.900 -13.093011  5.293011 0.7386705
-5-1  -3.500 -12.693011  5.693011 0.8125420
-6-1   2.325  -6.868011 11.518011 0.9588314
-3-2   3.325  -5.868011 12.518011 0.8416850
-4-2  -7.325 -16.518011  1.868011 0.1601517
-5-2  -6.925 -16.118011  2.268011 0.2013480
-6-2  -1.100 -10.293011  8.093011 0.9985985
-4-3 -10.650 -19.843011 -1.456989 0.0189601
-5-3 -10.250 -19.443011 -1.056989 0.0248128
-6-3  -4.425 -13.618011  4.768011 0.6320049
-5-4   0.400  -8.793011  9.593011 0.9999902
-6-4   6.225  -2.968011 15.418011 0.2931556
-6-5   5.825  -3.368011 15.018011 0.3572937
-
-$N
-        diff      lwr     upr     p adj
-1-0 5.616667 2.134683 9.09865 0.0036596
-
-$P
-         diff       lwr     upr     p adj
-1-0 -1.183333 -4.665317 2.29865 0.4799905
-
-$K
-         diff       lwr        upr     p adj
-1-0 -3.983333 -7.465317 -0.5013496 0.0276673</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tables of effects
-
- block 
-block
-     1      2      3      4      5      6 
--0.850  2.575  5.900 -4.750 -4.350  1.475 
-
- N 
-N
-      0       1 
--2.8083  2.8083 
-
- P 
-P
-      0       1 
- 0.5917 -0.5917 
-
- K 
-K
-      0       1 
- 1.9917 -1.9917 </code></pre>
+data:  large_data
+t = 0.59109, df = 1e+06, p-value = 0.5545
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ -0.001370263  0.002553645
+sample estimates:
+   mean of x 
+0.0005916909 </code></pre>
 </div>
 </div>
+</section>
 </section>
 </section>
 <section id="troubleshooting-and-faqs" class="level2">
@@ -663,50 +572,50 @@ K
 <section id="common-issues" class="level3">
 <h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
 <ol type="1">
-<li><strong>Error: “Weighted aov fits are not supported”</strong>: Ensure the <code>aov</code> model is unweighted.</li>
-<li><strong>Missing terms in output</strong>: Use <code>cterms</code> to specify required terms explicitly.</li>
+<li><strong>Error: Data must be numeric</strong>
+<ul>
+<li>Ensure data is numeric by using <code>as.numeric()</code>.</li>
+</ul></li>
+<li><strong>Warning: p-value approximation</strong>
+<ul>
+<li>Increase the sample size or use <code>simulate.p.value = TRUE</code>.</li>
+</ul></li>
 </ol>
 </section>
 <section id="faqs" class="level3">
 <h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
+<ol type="1">
+<li><strong>What is the minimum sample size for a t-test?</strong>
 <ul>
-<li><strong>What types of models are supported?</strong> Only <code>aov</code> objects and certain <code>aovlist</code> objects.</li>
-<li><strong>Can it handle nested designs?</strong> Yes, with appropriate formula specification.</li>
-</ul>
+<li>At least 5 observations per group are recommended.</li>
+</ul></li>
+<li><strong>Can I test for normality before t-tests?</strong>
+<ul>
+<li>Use <code>shapiro.test()</code> to check normality.</li>
+</ul></li>
+</ol>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
 <ul>
-<li>Use <code>type = "effects"</code> to understand the contributions of each term.</li>
-<li>Always include <code>se = TRUE</code> for better interpretability.</li>
-<li>Validate model assumptions before interpreting tables.</li>
+<li>Always visualize your data before performing tests.</li>
+<li>Check assumptions (e.g., normality for t-tests, independence for Chi-square tests).</li>
+<li>Use appropriate alternatives (e.g., Wilcoxon test for non-normal data).</li>
 </ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<p>The <code>model.tables()</code> function is a versatile tool for summarizing ANOVA model results, offering insights into factor effects and mean responses. Its ability to compute standard errors enhances its utility for interpreting results.</p>
-</section>
-<section id="next-steps" class="level3">
-<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
-<ul>
-<li>Explore <code>TukeyHSD()</code> for post-hoc comparisons.</li>
-<li>Combine with custom data preprocessing for more advanced analyses.</li>
-</ul>
-</section>
+<p>Hypothesis testing in R is a versatile and powerful tool for statistical analysis. From basic t-tests to advanced non-parametric methods, R provides comprehensive support for validating assumptions and making data-driven decisions.</p>
 </section>
 <section id="references-and-resources" class="level2">
 <h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
 <ul>
-<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/model.tables.html">R Documentation for <code>model.tables()</code></a></li>
-<li><a href="https://www.statmethods.net/stats/anova.html">ANOVA Techniques in R</a></li>
-<li><a href="https://cran.r-project.org/doc/manuals/R-intro.pdf">Comprehensive Guide to R ANOVA Models</a></li>
+<li><a href="https://www.rdocumentation.org/">R Documentation</a></li>
+<li><a href="https://www.r-graph-gallery.com/">R Graph Gallery</a></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
