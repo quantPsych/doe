@@ -8,7 +8,7 @@
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>Creating Data Frames in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Tutorial on plot.design() in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,8 +112,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../assets/styles/css/home.css">
-<meta property="og:title" content="Creating Data Frames in R – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-topics/r-data-frames-basics_files/figure-html/unnamed-chunk-10-1.png">
+<meta property="og:title" content="Tutorial on plot.design() in R – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-base/r-plot.design-basics_files/figure-html/unnamed-chunk-1-1.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Creating Data Frames in R</h1>
+      <h1 class="title">Tutorial on <code>plot.design()</code> in R</h1>
                       </div>
   </div>
     
@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">02-Jan-2025</p>
+        <p class="date">07-Jan-2025</p>
       </div>
     </div>
     
@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#creating-data-frames-in-r" id="toc-creating-data-frames-in-r" class="nav-link active" data-scroll-target="#creating-data-frames-in-r">Creating Data Frames in R</a>
+  <li><a href="#comprehensive-tutorial-on-plot.design-in-r" id="toc-comprehensive-tutorial-on-plot.design-in-r" class="nav-link active" data-scroll-target="#comprehensive-tutorial-on-plot.design-in-r">Comprehensive Tutorial on <code>plot.design()</code> in R</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
@@ -225,25 +225,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
-  <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
-  <li><a href="#basic-usage-in-base-r" id="toc-basic-usage-in-base-r" class="nav-link" data-scroll-target="#basic-usage-in-base-r">Basic Usage in Base R</a></li>
-  <li><a href="#basic-usage-in-tidyverse" id="toc-basic-usage-in-tidyverse" class="nav-link" data-scroll-target="#basic-usage-in-tidyverse">Basic Usage in <code>tidyverse</code></a></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
   </ul></li>
   <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
   <ul class="collapse">
-  <li><a href="#base-r-functions" id="toc-base-r-functions" class="nav-link" data-scroll-target="#base-r-functions">Base R Functions</a></li>
-  <li><a href="#tidyverse-functions" id="toc-tidyverse-functions" class="nav-link" data-scroll-target="#tidyverse-functions"><code>tidyverse</code> Functions</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   </ul></li>
   <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
   <ul class="collapse">
-  <li><a href="#example-1-joining-data-frames" id="toc-example-1-joining-data-frames" class="nav-link" data-scroll-target="#example-1-joining-data-frames">Example 1: Joining Data Frames</a></li>
-  <li><a href="#example-2-filtering-and-selecting" id="toc-example-2-filtering-and-selecting" class="nav-link" data-scroll-target="#example-2-filtering-and-selecting">Example 2: Filtering and Selecting</a></li>
+  <li><a href="#title-effects-of-two-factors-on-warp-breaks" id="toc-title-effects-of-two-factors-on-warp-breaks" class="nav-link" data-scroll-target="#title-effects-of-two-factors-on-warp-breaks">Title: Effects of Two Factors on Warp Breaks</a></li>
   </ul></li>
   <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
   <ul class="collapse">
   <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
-  <li><a href="#integration-with-visualization" id="toc-integration-with-visualization" class="nav-link" data-scroll-target="#integration-with-visualization">Integration with Visualization</a></li>
-  <li><a href="#optimization-tips" id="toc-optimization-tips" class="nav-link" data-scroll-target="#optimization-tips">Optimization Tips</a></li>
+  <li><a href="#integration-with-other-packages" id="toc-integration-with-other-packages" class="nav-link" data-scroll-target="#integration-with-other-packages">Integration with Other Packages</a></li>
   </ul></li>
   <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
   <ul class="collapse">
@@ -268,195 +265,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="creating-data-frames-in-r" class="level1">
-<h1>Creating Data Frames in R</h1>
+<section id="comprehensive-tutorial-on-plot.design-in-r" class="level1">
+<h1>Comprehensive Tutorial on <code>plot.design()</code> in R</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <section id="overview" class="level3">
 <h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:</p>
+<p>The <code>plot.design()</code> function in R, part of the base <code>graphics</code> package, is used to visualize univariate effects of one or more factors in experimental designs. It is commonly applied in the context of <code>aov()</code> analyses and supports understanding of how factors affect a numeric response variable.</p>
+<p>Key components:</p>
 <ul>
-<li><strong>Base R Functions:</strong> <code>data.frame()</code> and <code>as.data.frame()</code>.</li>
-<li><strong><code>tidyverse</code> Functions:</strong> <code>tibble::tibble()</code> and <code>dplyr::data_frame()</code>.</li>
+<li><strong>Package</strong>: <code>graphics</code></li>
+<li><strong>Function</strong>: <code>plot.design()</code></li>
 </ul>
-<p>Data frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.</p>
 </section>
 <section id="use-cases" class="level3">
 <h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
 <ul>
-<li>Cleaning and structuring raw data.</li>
-<li>Aggregating results from computations.</li>
-<li>Preparing data for visualization or modeling.</li>
+<li>Exploratory data analysis in experimental design.</li>
+<li>Comparing the effects of factors on response variables.</li>
+<li>Diagnosing potential outliers and interaction effects.</li>
 </ul>
 </section>
 <section id="benefits" class="level3">
 <h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
 <ul>
-<li><strong>Base R:</strong> Straightforward and widely supported.</li>
-<li><strong><code>tidyverse</code>:</strong> Intuitive syntax, compatibility with the pipe operator <code>|&gt;</code>, and enhanced features like printing.</li>
+<li>Facilitates quick, visual understanding of main effects.</li>
+<li>Handles multiple factors simultaneously.</li>
+<li>Compatible with formulas and data frames for flexibility.</li>
 </ul>
 </section>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<section id="loading-the-package" class="level3">
-<h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<p>The simplest use involves plotting the default dataset <code>warpbreaks</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use pacman to load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="basic-usage-in-base-r" class="level3">
-<h3 class="anchored" data-anchor-id="basic-usage-in-base-r">Basic Usage in Base R</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple data frame</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_base <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">c</span>(<span class="fl">85.5</span>, <span class="fl">90.3</span>, <span class="fl">78.9</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data_base</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(warpbreaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div>
+<figure class="figure">
+<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
 </div>
-</section>
-<section id="basic-usage-in-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="basic-usage-in-tidyverse">Basic Usage in <code>tidyverse</code></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a tibble</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data_tidy <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">c</span>(<span class="fl">85.5</span>, <span class="fl">90.3</span>, <span class="fl">78.9</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>data_tidy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
+<p>This creates a series of vertical lines where each factor’s levels are plotted against a response variable.</p>
 </section>
 </section>
 <section id="key-functions-and-features" class="level2">
 <h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
-<section id="base-r-functions" class="level3">
-<h3 class="anchored" data-anchor-id="base-r-functions">Base R Functions</h3>
-<section id="description" class="level4">
-<h4 class="anchored" data-anchor-id="description">Description</h4>
-<p><code>data.frame()</code> creates data frames from vectors or lists.</p>
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
+<p><code>plot.design()</code> visualizes the effect of factors on a numeric response variable.</p>
 </section>
-<section id="syntax" class="level4">
-<h4 class="anchored" data-anchor-id="syntax">Syntax</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(x, ..., <span class="at">row.names =</span> <span class="cn">NULL</span>, <span class="at">check.rows =</span> <span class="cn">FALSE</span>, <span class="at">check.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="syntax" class="level3">
+<h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fun =</span> mean, <span class="at">data =</span> <span class="cn">NULL</span>, ...,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylim =</span> <span class="cn">NULL</span>, <span class="at">xlab =</span> <span class="st">"Factors"</span>, <span class="at">ylab =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> <span class="cn">NULL</span>, <span class="at">ask =</span> <span class="cn">NULL</span>, <span class="at">xaxt =</span> <span class="fu">par</span>(<span class="st">"xaxt"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">xtick =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="arguments" class="level4">
+<h4 class="anchored" data-anchor-id="arguments">Arguments</h4>
+<ul>
+<li><strong>x</strong>: A data frame, formula, or terms object.</li>
+<li><strong>y</strong>: The response variable (optional if included in <code>x</code>).</li>
+<li><strong>fun</strong>: Function applied to subsets (default is <code>mean</code>).</li>
+<li><strong>data</strong>: Data frame for variables referenced in <code>x</code> if formula-like.</li>
+<li><strong>ylim</strong>: Range of y values.</li>
+<li><strong>xlab, ylab</strong>: Axis labels.</li>
+<li><strong>main</strong>: Main plot title.</li>
+<li><strong>axes, xtick</strong>: Controls for axes and tick marks.</li>
+</ul>
 </section>
-<section id="example" class="level4">
-<h4 class="anchored" data-anchor-id="example">Example</h4>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>Basic plot for a formula and dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Category =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">150</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data_example</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> warpbreaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Category"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Value"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"A","3":"100"},{"1":"2","2":"B","3":"200"},{"1":"3","2":"A","3":"150"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div>
+<figure class="figure">
+<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="tidyverse-functions" class="level3">
-<h3 class="anchored" data-anchor-id="tidyverse-functions"><code>tidyverse</code> Functions</h3>
-<section id="description-1" class="level4">
-<h4 class="anchored" data-anchor-id="description-1">Description</h4>
-<p><code>tibble::tibble()</code> constructs modern data frames with automatic column type detection.</p>
-</section>
-<section id="syntax-1" class="level4">
-<h4 class="anchored" data-anchor-id="syntax-1">Syntax</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="example-1" class="level4">
-<h4 class="anchored" data-anchor-id="example-1">Example</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_tidy_example <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Category =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">150</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>data_tidy_example</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Category"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Value"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"A","3":"100"},{"1":"2","2":"B","3":"200"},{"1":"3","2":"A","3":"150"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-</section>
+<p>This shows the effects of <code>wool</code> and <code>tension</code> on the response variable <code>breaks</code>.</p>
 </section>
 </section>
 <section id="in-depth-examples" class="level2">
 <h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
-<section id="example-1-joining-data-frames" class="level3">
-<h3 class="anchored" data-anchor-id="example-1-joining-data-frames">Example 1: Joining Data Frames</h3>
+<section id="title-effects-of-two-factors-on-warp-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="title-effects-of-two-factors-on-warp-breaks">Title: Effects of Two Factors on Warp Breaks</h3>
 <section id="objective" class="level4">
 <h4 class="anchored" data-anchor-id="objective">Objective</h4>
-<p>Combine two data frames by a common key.</p>
+<p>Visualize and compare the effects of <code>wool</code> and <code>tension</code> on <code>breaks</code>.</p>
 </section>
 <section id="steps" class="level4">
 <h4 class="anchored" data-anchor-id="steps">Steps</h4>
+<ol type="1">
+<li><strong>Prepare the data</strong>:</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">Value1 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">ID =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">Value2 =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(df1, df2, <span class="at">by =</span> <span class="st">"ID"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>merged</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"warpbreaks"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Generate the plot</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> warpbreaks,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">"Effects of Wool and Tension on Breaks"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Value1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Value2"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"10","3":"NA"},{"1":"2","2":"20","3":"40"},{"1":"3","2":"30","3":"50"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div>
+<figure class="figure">
+<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
 </div>
 </section>
 <section id="output" class="level4">
 <h4 class="anchored" data-anchor-id="output">Output</h4>
-<p>Observe how <code>NA</code> fills for unmatched rows.</p>
-</section>
-</section>
-<section id="example-2-filtering-and-selecting" class="level3">
-<h3 class="anchored" data-anchor-id="example-2-filtering-and-selecting">Example 2: Filtering and Selecting</h3>
-<section id="objective-1" class="level4">
-<h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
-<p>Filter rows where <code>Value1 &gt; 15</code> and select specific columns.</p>
-</section>
-<section id="steps-1" class="level4">
-<h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> merged <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(Value1 <span class="sc">&gt;</span> <span class="dv">15</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ID, Value1)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>filtered</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Value1"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"20"},{"1":"3","2":"30"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
+<p>The plot displays vertical lines for each factor’s levels and their impact on <code>breaks</code>, with overall mean as a horizontal reference.</p>
 </section>
 </section>
 </section>
@@ -464,58 +397,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
 <section id="customization" class="level3">
 <h3 class="anchored" data-anchor-id="customization">Customization</h3>
-<section id="adjust-column-names" class="level4">
-<h4 class="anchored" data-anchor-id="adjust-column-names">Adjust Column Names</h4>
+<p>Adjust aesthetics and parameters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_base) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"FullName"</span>, <span class="st">"Years"</span>, <span class="st">"ExamScore"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data_base</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["FullName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Years"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["ExamScore"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-</section>
-<section id="add-calculated-columns" class="level4">
-<h4 class="anchored" data-anchor-id="add-calculated-columns">Add Calculated Columns</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_tidy <span class="ot">&lt;-</span> data_tidy <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Grade =</span> <span class="fu">ifelse</span>(Score <span class="sc">&gt;</span> <span class="dv">80</span>, <span class="st">"Pass"</span>, <span class="st">"Fail"</span>))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data_tidy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Grade"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Alice","2":"25","3":"85.5","4":"Pass"},{"1":"Bob","2":"30","3":"90.3","4":"Pass"},{"1":"Charlie","2":"35","3":"78.9","4":"Fail"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="integration-with-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="integration-with-visualization">Integration with Visualization</h3>
-<p>Generate a plot from the data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data_tidy, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> Score)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age vs. Score"</span>, <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> warpbreaks,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"purple"</span>), <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">70</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">"Customized Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="r-data-frames-basics_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="r-data-frames-basics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="optimization-tips" class="level3">
-<h3 class="anchored" data-anchor-id="optimization-tips">Optimization Tips</h3>
-<ul>
-<li>Use <code>data.table</code> for large data sets.</li>
-<li>Predefine column types for better memory usage.</li>
-</ul>
+<section id="integration-with-other-packages" class="level3">
+<h3 class="anchored" data-anchor-id="integration-with-other-packages">Integration with Other Packages</h3>
+<p>Combine <code>plot.design()</code> with <code>dplyr</code> for preprocessing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>warpbreaks <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tension <span class="sc">!=</span> <span class="st">"M"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> _,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">fun =</span> median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="troubleshooting-and-faqs" class="level2">
@@ -523,49 +435,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="common-issues" class="level3">
 <h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
 <ol type="1">
-<li><strong>Data Mismatch:</strong> Ensure column lengths match when creating data frames.</li>
+<li><strong>Error: “No numeric variables”</strong>: Ensure the response variable is numeric.</li>
 </ol>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Error example</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># data.frame(a = 1:3, b = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>warpbreaks<span class="sc">$</span>breaks <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(warpbreaks<span class="sc">$</span>breaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ol start="2" type="1">
-<li><strong>Type Conversion Warnings:</strong> Avoid unintended type coercion by specifying <code>stringsAsFactors = FALSE</code>.</li>
+<li><strong>Plot not displaying</strong>: Use <code>dev.off()</code> to reset plotting device.</li>
 </ol>
 </section>
 <section id="faqs" class="level3">
 <h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
 <ul>
-<li><strong>Why use <code>tibble</code>?</strong> <code>tibble</code> provides cleaner, more readable output, and better handling of column names and types.</li>
+<li><strong>Can it handle interaction terms?</strong> No, use <code>interaction.plot()</code> for interactions.</li>
 </ul>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
 <ul>
-<li>Use consistent column names and data types.</li>
-<li>Validate data integrity before further processing.</li>
-<li>Leverage <code>tidyverse</code> pipes for readability and maintainability.</li>
+<li>Always verify numeric response variables.</li>
+<li>Use <code>fun</code> parameter to explore summary statistics like <code>median</code>.</li>
+<li>Combine with diagnostic plots for a thorough analysis.</li>
 </ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <section id="summary" class="level3">
 <h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<ul>
-<li>Base R is great for quick setups and legacy code.</li>
-<li><code>tidyverse</code> excels for scalable, readable, and modern workflows.</li>
-</ul>
+<p><code>plot.design()</code> is a versatile tool for visualizing factor effects in experimental data. It simplifies the analysis of variance by providing clear, interpretable plots.</p>
 </section>
 <section id="next-steps" class="level3">
 <h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
-<p>Explore advanced techniques like <code>data.table</code> or <code>R6</code> for complex data operations.</p>
+<p>Explore:</p>
+<ul>
+<li><code>interaction.plot()</code> for interaction effects.</li>
+<li>Advanced visualization packages like <code>ggplot2</code>.</li>
+</ul>
 </section>
 </section>
 <section id="references-and-resources" class="level2">
 <h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
 <ul>
-<li><a href="https://www.rdocumentation.org/">Base R Documentation</a></li>
-<li><a href="https://www.tidyverse.org/">Tidyverse Guide</a></li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot.design">R Documentation for <code>plot.design</code></a></li>
+<li><a href="https://www.springer.com/gp/book/9780412830402">Statistical Models in S</a></li>
 </ul>
 
 
