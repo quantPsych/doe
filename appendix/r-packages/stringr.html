@@ -9,7 +9,7 @@
 <meta name="author" content="Davood Tofighi, Ph.D.">
 <meta name="dcterms.date" content="2025-01-06">
 
-<title>Using the dplyr Package in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Tutorial for the stringr Package – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,9 +76,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-aff2639e191a0a8d05f4f3608923e904.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,17 +104,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="mermaid-theme" content="neutral">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../assets/styles/css/home.css">
-<meta property="og:title" content="Using the dplyr Package in R – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-packages/dplyr_files/figure-html/unnamed-chunk-10-1.png">
+<meta property="og:title" content="Tutorial for the stringr Package – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-packages/assets/images/logo.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -176,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Using the dplyr Package in R</h1>
+      <h1 class="title">Tutorial for the <code>stringr</code> Package</h1>
                       </div>
   </div>
     
@@ -222,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tutorial-using-the-dplyr-package-in-r" id="toc-tutorial-using-the-dplyr-package-in-r" class="nav-link active" data-scroll-target="#tutorial-using-the-dplyr-package-in-r">Tutorial: Using the Dplyr Package in R</a>
+  <li><a href="#tutorial-for-the-stringr-package" id="toc-tutorial-for-the-stringr-package" class="nav-link active" data-scroll-target="#tutorial-for-the-stringr-package">Tutorial for the <code>stringr</code> Package</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
@@ -237,20 +236,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
   <ul class="collapse">
-  <li><a href="#dplyrselect" id="toc-dplyrselect" class="nav-link" data-scroll-target="#dplyrselect">dplyr::select()</a></li>
-  <li><a href="#dplyrfilter" id="toc-dplyrfilter" class="nav-link" data-scroll-target="#dplyrfilter">dplyr::filter()</a></li>
-  <li><a href="#dplyrmutate" id="toc-dplyrmutate" class="nav-link" data-scroll-target="#dplyrmutate">dplyr::mutate()</a></li>
+  <li><a href="#str_c" id="toc-str_c" class="nav-link" data-scroll-target="#str_c"><code>str_c()</code></a></li>
+  <li><a href="#str_length" id="toc-str_length" class="nav-link" data-scroll-target="#str_length"><code>str_length()</code></a></li>
+  <li><a href="#str_detect" id="toc-str_detect" class="nav-link" data-scroll-target="#str_detect"><code>str_detect()</code></a></li>
+  <li><a href="#str_extract" id="toc-str_extract" class="nav-link" data-scroll-target="#str_extract"><code>str_extract()</code></a></li>
+  <li><a href="#str_replace_all" id="toc-str_replace_all" class="nav-link" data-scroll-target="#str_replace_all"><code>str_replace_all()</code></a></li>
   </ul></li>
   <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
   <ul class="collapse">
-  <li><a href="#example-1-aggregating-data-by-groups" id="toc-example-1-aggregating-data-by-groups" class="nav-link" data-scroll-target="#example-1-aggregating-data-by-groups">Example 1: Aggregating Data by Groups</a></li>
-  <li><a href="#example-2-sorting-and-filtering" id="toc-example-2-sorting-and-filtering" class="nav-link" data-scroll-target="#example-2-sorting-and-filtering">Example 2: Sorting and Filtering</a></li>
+  <li><a href="#title-extracting-phone-numbers-from-text" id="toc-title-extracting-phone-numbers-from-text" class="nav-link" data-scroll-target="#title-extracting-phone-numbers-from-text">Title: Extracting Phone Numbers from Text</a></li>
+  <li><a href="#title-detecting-email-addresses" id="toc-title-detecting-email-addresses" class="nav-link" data-scroll-target="#title-detecting-email-addresses">Title: Detecting Email Addresses</a></li>
+  <li><a href="#title-splitting-strings-into-words" id="toc-title-splitting-strings-into-words" class="nav-link" data-scroll-target="#title-splitting-strings-into-words">Title: Splitting Strings into Words</a></li>
   </ul></li>
   <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
   <ul class="collapse">
   <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
-  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
-  <li><a href="#optimization-tips" id="toc-optimization-tips" class="nav-link" data-scroll-target="#optimization-tips">Optimization Tips</a></li>
+  <li><a href="#integration-with-other-packages" id="toc-integration-with-other-packages" class="nav-link" data-scroll-target="#integration-with-other-packages">Integration with Other Packages</a></li>
   </ul></li>
   <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
   <ul class="collapse">
@@ -275,225 +276,283 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="tutorial-using-the-dplyr-package-in-r" class="level1">
-<h1>Tutorial: Using the Dplyr Package in R</h1>
+<section id="tutorial-for-the-stringr-package" class="level1">
+<h1>Tutorial for the <code>stringr</code> Package</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <section id="overview" class="level3">
 <h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>The <code>dplyr</code> package is a powerful tool in the <code>tidyverse</code> suite designed for data manipulation. It simplifies and accelerates common data transformation tasks with an intuitive syntax.</p>
+<p>The <code>stringr</code> package, part of the <code>tidyverse</code>, simplifies string manipulation in R by providing a consistent and human-readable interface for common operations like pattern matching, extraction, replacement, and string metrics. It builds on the base R string functions but offers better integration with modern workflows and tools.</p>
 <p>Key functions include:</p>
 <ul>
-<li><code>dplyr::select()</code>: Select specific columns.</li>
-<li><code>dplyr::filter()</code>: Filter rows based on conditions.</li>
-<li><code>dplyr::mutate()</code>: Add or modify columns.</li>
-<li><code>dplyr::summarize()</code>: Create summary statistics.</li>
-<li><code>dplyr::arrange()</code>: Sort rows.</li>
-<li><code>dplyr::group_by()</code>: Group data for grouped operations.</li>
+<li><strong>Basic Manipulation</strong>: <code>str_c()</code>, <code>str_length()</code>, <code>str_trim()</code>, <code>str_pad()</code>.</li>
+<li><strong>Pattern Matching</strong>: <code>str_detect()</code>, <code>str_extract()</code>, <code>str_match()</code>.</li>
+<li><strong>Substitution</strong>: <code>str_replace()</code>, <code>str_replace_all()</code>.</li>
+<li><strong>Splitting and Joining</strong>: <code>str_split()</code>, <code>str_flatten()</code>.</li>
+<li><strong>Other Utilities</strong>: <code>str_to_upper()</code>, <code>str_to_title()</code>, <code>str_sort()</code>.</li>
 </ul>
 </section>
 <section id="use-cases" class="level3">
 <h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
 <ul>
-<li>Filtering large datasets for analysis.</li>
-<li>Summarizing data to extract insights.</li>
-<li>Transforming variables or creating new ones.</li>
-<li>Sorting or organizing data for visualization or reporting.</li>
+<li>Cleaning and formatting text data for analysis.</li>
+<li>Extracting structured information from unstructured text.</li>
+<li>Detecting and replacing patterns in strings.</li>
+<li>Comparing and sorting textual data.</li>
 </ul>
 </section>
 <section id="benefits" class="level3">
 <h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
 <ul>
-<li>User-friendly syntax, especially with the pipe operator <code>|&gt;</code>.</li>
-<li>Optimized for speed, making it suitable for large datasets.</li>
-<li>Seamless integration with other <code>tidyverse</code> packages.</li>
+<li>Consistent and simple syntax.</li>
+<li>Handles regular expressions for powerful pattern matching.</li>
+<li>Fully vectorized for efficient processing of large datasets.</li>
+<li>Easily integrates with other <code>tidyverse</code> tools.</li>
 </ul>
+<hr>
 </section>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <section id="loading-the-package" class="level3">
 <h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
-<p>Use <code>pacman::p_load()</code> to load <code>dplyr</code>:</p>
+<p>Ensure <code>stringr</code> is loaded using the <code>pacman</code> package:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-usage" class="level3">
 <h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
-<p>Create and manipulate a simple dataset:</p>
+<p>A simple example of string concatenation using <code>str_c()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">c</span>(<span class="fl">85.5</span>, <span class="fl">90.3</span>, <span class="fl">78.9</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Select columns</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Name, Score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Score"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"85.5"},{"1":"Bob","2":"90.3"},{"1":"Charlie","2":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate strings</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">"Hello"</span>, <span class="st">"World"</span>, <span class="at">sep =</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello World"</code></pre>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter rows</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
+<p>This outputs “Hello World”, showcasing the basic functionality of combining strings.</p>
 </section>
 </section>
 <section id="key-functions-and-features" class="level2">
 <h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
-<section id="dplyrselect" class="level3">
-<h3 class="anchored" data-anchor-id="dplyrselect">dplyr::select()</h3>
+<section id="str_c" class="level3">
+<h3 class="anchored" data-anchor-id="str_c"><code>str_c()</code></h3>
 <section id="description" class="level4">
 <h4 class="anchored" data-anchor-id="description">Description</h4>
-<p>Selects specified columns from a data frame.</p>
+<p>Combines strings into a single string or vector of strings.</p>
 </section>
 <section id="syntax" class="level4">
 <h4 class="anchored" data-anchor-id="syntax">Syntax</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(..., <span class="at">sep =</span> <span class="st">""</span>, <span class="at">collapse =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><code>.data</code>: A data frame.</li>
-<li><code>…</code>: Columns to select.</li>
+<li><code>…</code>: Strings to combine.</li>
+<li><code>sep</code>: Separator between strings.</li>
+<li><code>collapse</code>: Collapses output into a single string.</li>
 </ul>
 </section>
 <section id="example" class="level4">
 <h4 class="anchored" data-anchor-id="example">Example</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Name, Score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Score"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"85.5"},{"1":"Bob","2":"90.3"},{"1":"Charlie","2":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine names with separators</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"John"</span>, <span class="st">"Jane"</span>, <span class="st">"Doe"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(names, <span class="at">collapse =</span> <span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "John, Jane, Doe"</code></pre>
 </div>
 </div>
-</div>
-<p>This extracts the <code>Name</code> and <code>Score</code> columns.</p>
 </section>
 </section>
-<section id="dplyrfilter" class="level3">
-<h3 class="anchored" data-anchor-id="dplyrfilter">dplyr::filter()</h3>
+<section id="str_length" class="level3">
+<h3 class="anchored" data-anchor-id="str_length"><code>str_length()</code></h3>
 <section id="description-1" class="level4">
 <h4 class="anchored" data-anchor-id="description-1">Description</h4>
-<p>Filters rows based on a logical condition.</p>
+<p>Returns the number of characters in each string.</p>
 </section>
 <section id="syntax-1" class="level4">
 <h4 class="anchored" data-anchor-id="syntax-1">Syntax</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>.data</code>: A data frame.</li>
-<li><code>…</code>: Logical conditions.</li>
-</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="example-1" class="level4">
 <h4 class="anchored" data-anchor-id="example-1">Example</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get string lengths</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(strings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5 6 6</code></pre>
 </div>
 </div>
-</div>
-<p>Filters rows where <code>Age</code> is greater than 25.</p>
 </section>
 </section>
-<section id="dplyrmutate" class="level3">
-<h3 class="anchored" data-anchor-id="dplyrmutate">dplyr::mutate()</h3>
+<section id="str_detect" class="level3">
+<h3 class="anchored" data-anchor-id="str_detect"><code>str_detect()</code></h3>
 <section id="description-2" class="level4">
 <h4 class="anchored" data-anchor-id="description-2">Description</h4>
-<p>Creates new columns or modifies existing ones.</p>
+<p>Detects if a pattern exists in a string.</p>
 </section>
 <section id="syntax-2" class="level4">
 <h4 class="anchored" data-anchor-id="syntax-2">Syntax</h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">mutate</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>.data</code>: A data frame.</li>
-<li><code>…</code>: Expressions for new or modified columns.</li>
-</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(string, pattern)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="example-2" class="level4">
 <h4 class="anchored" data-anchor-id="example-2">Example</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Grade =</span> <span class="fu">ifelse</span>(Score <span class="sc">&gt;</span> <span class="dv">80</span>, <span class="st">"Pass"</span>, <span class="st">"Fail"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Grade"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Alice","2":"25","3":"85.5","4":"Pass"},{"1":"Bob","2":"30","3":"90.3","4":"Pass"},{"1":"Charlie","2":"35","3":"78.9","4":"Fail"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Detect strings containing "an"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(strings, <span class="st">"an"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE FALSE</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="str_extract" class="level3">
+<h3 class="anchored" data-anchor-id="str_extract"><code>str_extract()</code></h3>
+<section id="description-3" class="level4">
+<h4 class="anchored" data-anchor-id="description-3">Description</h4>
+<p>Extracts the first match of a pattern from a string.</p>
+</section>
+<section id="syntax-3" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-3">Syntax</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(string, pattern)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-3" class="level4">
+<h4 class="anchored" data-anchor-id="example-3">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract numbers from strings</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Item 1"</span>, <span class="st">"Price 20"</span>, <span class="st">"Count 100"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(strings, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1"   "20"  "100"</code></pre>
 </div>
-<p>Adds a <code>Grade</code> column based on <code>Score</code>.</p>
+</div>
+</section>
+</section>
+<section id="str_replace_all" class="level3">
+<h3 class="anchored" data-anchor-id="str_replace_all"><code>str_replace_all()</code></h3>
+<section id="description-4" class="level4">
+<h4 class="anchored" data-anchor-id="description-4">Description</h4>
+<p>Replaces all occurrences of a pattern in a string.</p>
+</section>
+<section id="syntax-4" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-4">Syntax</h4>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(string, pattern, replacement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-4" class="level4">
+<h4 class="anchored" data-anchor-id="example-4">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace spaces with underscores</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"apple pie"</span>, <span class="st">"banana split"</span>, <span class="st">"cherry tart"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(strings, <span class="st">" "</span>, <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "apple_pie"    "banana_split" "cherry_tart" </code></pre>
+</div>
+</div>
 </section>
 </section>
 </section>
 <section id="in-depth-examples" class="level2">
 <h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
-<section id="example-1-aggregating-data-by-groups" class="level3">
-<h3 class="anchored" data-anchor-id="example-1-aggregating-data-by-groups">Example 1: Aggregating Data by Groups</h3>
+<section id="title-extracting-phone-numbers-from-text" class="level3">
+<h3 class="anchored" data-anchor-id="title-extracting-phone-numbers-from-text">Title: Extracting Phone Numbers from Text</h3>
 <section id="objective" class="level4">
 <h4 class="anchored" data-anchor-id="objective">Objective</h4>
-<p>Summarize scores by age groups.</p>
+<p>Identify and extract phone numbers from text data.</p>
 </section>
 <section id="steps" class="level4">
 <h4 class="anchored" data-anchor-id="steps">Steps</h4>
+<ol type="1">
+<li><strong>Prepare data</strong>:</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AgeGroup =</span> <span class="fu">ifelse</span>(Age <span class="sc">&gt;</span> <span class="dv">25</span>, <span class="st">"Above 25"</span>, <span class="st">"25 and Below"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(AgeGroup) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">MeanScore =</span> <span class="fu">mean</span>(Score), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["AgeGroup"],"name":[1],"type":["chr"],"align":["left"]},{"label":["MeanScore"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"25 and Below","2":"85.5"},{"1":"Above 25","2":"84.6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Call me at 555-123-4567"</span>, <span class="st">"My number is 987-654-3210"</span>, <span class="st">"No phone here"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Define a regex pattern</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pattern <span class="ot">&lt;-</span> <span class="st">"</span><span class="sc">\\</span><span class="st">d{3}-</span><span class="sc">\\</span><span class="st">d{3}-</span><span class="sc">\\</span><span class="st">d{4}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Extract phone numbers</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>phone_numbers <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(text, pattern)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>phone_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "555-123-4567" "987-654-3210" NA            </code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="output" class="level4">
-<h4 class="anchored" data-anchor-id="output">Output</h4>
-<p>A table showing average scores for each age group.</p>
+<ol start="4" type="1">
+<li><strong>Output interpretation</strong>: Non-matching strings return <code>NA</code>.</li>
+</ol>
 </section>
 </section>
-<section id="example-2-sorting-and-filtering" class="level3">
-<h3 class="anchored" data-anchor-id="example-2-sorting-and-filtering">Example 2: Sorting and Filtering</h3>
+<section id="title-detecting-email-addresses" class="level3">
+<h3 class="anchored" data-anchor-id="title-detecting-email-addresses">Title: Detecting Email Addresses</h3>
 <section id="objective-1" class="level4">
 <h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
-<p>Find the top scorer in each age group.</p>
+<p>Check if a dataset contains email addresses.</p>
 </section>
 <section id="steps-1" class="level4">
 <h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
+<ol type="1">
+<li><strong>Input data</strong>:</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(Age) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(Score)) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">slice</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Contact: john.doe@example.com"</span>, <span class="st">"Visit us"</span>, <span class="st">"Email: support@site.org"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ol start="2" type="1">
+<li><strong>Detect emails</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>email_pattern <span class="ot">&lt;-</span> <span class="st">"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+</span><span class="sc">\\</span><span class="st">.[a-zA-Z]{2,}"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>email_detected <span class="ot">&lt;-</span> <span class="fu">str_detect</span>(strings, email_pattern)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>email_detected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE  TRUE</code></pre>
 </div>
 </div>
 </section>
-<section id="output-1" class="level4">
-<h4 class="anchored" data-anchor-id="output-1">Output</h4>
-<p>Top scorer details by age.</p>
+</section>
+<section id="title-splitting-strings-into-words" class="level3">
+<h3 class="anchored" data-anchor-id="title-splitting-strings-into-words">Title: Splitting Strings into Words</h3>
+<section id="objective-2" class="level4">
+<h4 class="anchored" data-anchor-id="objective-2">Objective</h4>
+<p>Split sentences into individual words.</p>
+</section>
+<section id="steps-2" class="level4">
+<h4 class="anchored" data-anchor-id="steps-2">Steps</h4>
+<ol type="1">
+<li><strong>Define sentences</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>sentences <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"This is an example"</span>, <span class="st">"R is great for text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Split into words</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">str_split</span>(sentences, <span class="st">" "</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "This"    "is"      "an"      "example"
+
+[[2]]
+[1] "R"     "is"    "great" "for"   "text" </code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li><strong>Visualize results</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_flatten</span>(words[[<span class="dv">1</span>]], <span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "This, is, an, example"</code></pre>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -501,114 +560,102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
 <section id="customization" class="level3">
 <h3 class="anchored" data-anchor-id="customization">Customization</h3>
-<section id="rename-columns" class="level4">
-<h4 class="anchored" data-anchor-id="rename-columns">Rename Columns</h4>
+<p>Use additional parameters for flexible pattern matching, such as <code>fixed()</code> for fixed strings or <code>regex()</code> for advanced options:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">FullName =</span> Name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Case-insensitive matching</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="fu">c</span>(<span class="st">"Apple"</span>, <span class="st">"banana"</span>), <span class="fu">regex</span>(<span class="st">"apple"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="integration-with-other-packages" class="level3">
+<h3 class="anchored" data-anchor-id="integration-with-other-packages">Integration with Other Packages</h3>
+<p>Combine with <code>dplyr</code> to process text in data frames:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">text =</span> <span class="fu">c</span>(<span class="st">"One 1"</span>, <span class="st">"Two 2"</span>, <span class="st">"Three 3"</span>))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">numbers =</span> <span class="fu">str_extract</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["FullName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["text"],"name":[1],"type":["chr"],"align":["left"]},{"label":["numbers"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"One 1","2":"1"},{"1":"Two 2","2":"2"},{"1":"Three 3","2":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 </div>
-</section>
-<section id="combine-multiple-mutations" class="level4">
-<h4 class="anchored" data-anchor-id="combine-multiple-mutations">Combine Multiple Mutations</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">NormalizedScore =</span> Score <span class="sc">/</span> <span class="fu">max</span>(Score),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">Status =</span> <span class="fu">ifelse</span>(Age <span class="sc">&gt;</span> <span class="dv">30</span>, <span class="st">"Senior"</span>, <span class="st">"Junior"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["NormalizedScore"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Status"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Alice","2":"25","3":"85.5","4":"0.9468439","5":"Junior"},{"1":"Bob","2":"30","3":"90.3","4":"1.0000000","5":"Junior"},{"1":"Charlie","2":"35","3":"78.9","4":"0.8737542","5":"Senior"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="integration" class="level3">
-<h3 class="anchored" data-anchor-id="integration">Integration</h3>
-<p>Combine with <code>ggplot2</code> for visualization:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Pass =</span> Score <span class="sc">&gt;</span> <span class="dv">80</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> Score, <span class="at">color =</span> Pass)) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scores by Age"</span>, <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="dplyr_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="dplyr_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="optimization-tips" class="level3">
-<h3 class="anchored" data-anchor-id="optimization-tips">Optimization Tips</h3>
-<ul>
-<li>Use <code>dplyr::filter()</code> early in a pipeline to reduce rows.</li>
-<li>Chain operations with <code>|&gt;</code> for clarity and efficiency.</li>
-</ul>
 </section>
 </section>
 <section id="troubleshooting-and-faqs" class="level2">
 <h2 class="anchored" data-anchor-id="troubleshooting-and-faqs">Troubleshooting and FAQs</h2>
 <section id="common-issues" class="level3">
 <h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
-<section id="error-object-not-found" class="level4">
-<h4 class="anchored" data-anchor-id="error-object-not-found">Error: Object Not Found</h4>
-<p>Ensure column names are correctly spelled and case-sensitive.</p>
-</section>
-<section id="warning-no-rows-match" class="level4">
-<h4 class="anchored" data-anchor-id="warning-no-rows-match">Warning: No Rows Match</h4>
-<p>This occurs when filtering results in zero rows. Check filter conditions.</p>
-</section>
+<ol type="1">
+<li><strong>Regex not matching</strong>: Ensure patterns are correctly escaped. Use <code>\\</code> for special characters like <code>\d</code>.</li>
+<li><strong>Unexpected results</strong>: Verify input data type and length. <code>NA</code> values in input may propagate.</li>
+</ol>
 </section>
 <section id="faqs" class="level3">
 <h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
 <ul>
-<li><strong>Can <code>dplyr</code> handle large datasets?</strong> Yes, but for very large data, consider <code>data.table</code> or databases with <code>dbplyr</code>.</li>
-<li><strong>How to retain row names?</strong> Convert them to a column with <code>tibble::rownames_to_column()</code>.</li>
+<li><strong>Can <code>stringr</code> handle non-ASCII text?</strong> Yes, it supports UTF-8 encoded text.</li>
+<li><strong>How do I extract multiple matches?</strong> Use <code>str_extract_all()</code>.</li>
 </ul>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
 <ul>
-<li>Use consistent column naming conventions.</li>
-<li>Apply <code>group_by()</code> only when summarizing or calculating grouped statistics.</li>
-<li>Document pipelines for reproducibility.</li>
+<li>Leverage vectorization for efficient processing of large datasets.</li>
+<li>Use clear and descriptive regex patterns.</li>
+<li>Combine with tidyverse tools for seamless workflows.</li>
 </ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <section id="summary" class="level3">
 <h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<ul>
-<li><code>dplyr</code> streamlines data manipulation with a readable syntax.</li>
-<li>Key functions cover selecting, filtering, mutating, and summarizing data.</li>
-</ul>
+<p>The <code>stringr</code> package offers powerful and intuitive tools for string manipulation in R. Its consistent syntax and comprehensive feature set make it a go-to package for text processing tasks.</p>
 </section>
 <section id="next-steps" class="level3">
 <h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
-<p>Explore <code>dplyr</code> advanced features like joins and window functions, or integrate with <code>dbplyr</code> for database operations.</p>
+<ul>
+<li>Explore advanced regex patterns.</li>
+<li>Learn about <code>glue</code> for string interpolation.</li>
+</ul>
 </section>
 </section>
 <section id="references-and-resources" class="level2">
 <h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
 <ul>
-<li><a href="https://dplyr.tidyverse.org/">dplyr Documentation</a></li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li><a href="https://github.com/tidyverse/dplyr">Tidyverse GitHub</a></li>
+<li><a href="https://stringr.tidyverse.org/">Official Documentation</a></li>
+<li><a href="https://www.rstudio.com/resources/cheatsheets/">Regex Cheatsheet</a></li>
+<li><a href="https://r4ds.had.co.nz/strings.html">R for Data Science: String Manipulation</a></li>
 </ul>
+<div class="cell" data-layout-align="left">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>graph TD</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    A[Raw Text Data] --&gt; B[Pattern Matching]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    B --&gt; C[Extraction]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    B --&gt; D[Substitution]</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    C --&gt; E[Cleaned Data]</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    D --&gt; E</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    A[Raw Text Data] --&gt; B[Pattern Matching]
+    B --&gt; C[Extraction]
+    B --&gt; D[Substitution]
+    C --&gt; E[Cleaned Data]
+    D --&gt; E
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1045,38 +1092,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

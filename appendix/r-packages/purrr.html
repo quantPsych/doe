@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Davod Tofighi, Ph.D.">
+<meta name="author" content="Davood Tofighi, Ph.D.">
 <meta name="dcterms.date" content="2025-01-06">
 
-<title>Tutorial: Using the multcomp R Package – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Tutorial for the purrr Package – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,9 +76,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-aff2639e191a0a8d05f4f3608923e904.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,11 +110,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../assets/styles/css/home.css">
-<meta property="og:title" content="Tutorial: Using the multcomp R Package – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-packages/multcomp_files/figure-html/unnamed-chunk-6-1.png">
+<meta property="og:title" content="Tutorial for the purrr Package – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-packages/assets/images/logo.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -176,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Tutorial: Using the <code>multcomp</code> R Package</h1>
+      <h1 class="title">Tutorial for the <code>purrr</code> Package</h1>
                       </div>
   </div>
     
@@ -185,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title-meta-heading">Affiliation</div>
     
       <div class="quarto-title-meta-contents">
-      <p class="author">Davod Tofighi, Ph.D. </p>
+      <p class="author">Davood Tofighi, Ph.D. </p>
     </div>
     <div class="quarto-title-meta-contents">
           <p class="affiliation">
@@ -222,44 +217,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a>
+  <li><a href="#tutorial-for-the-purrr-package" id="toc-tutorial-for-the-purrr-package" class="nav-link active" data-scroll-target="#tutorial-for-the-purrr-package">Tutorial for the <code>purrr</code> Package</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
   <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits</a></li>
   </ul></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
   <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
   <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
   </ul></li>
-  <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">3. Key Functions and Features</a>
+  <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
   <ul class="collapse">
-  <li><a href="#glht" id="toc-glht" class="nav-link" data-scroll-target="#glht"><code>glht()</code></a></li>
-  <li><a href="#mcp" id="toc-mcp" class="nav-link" data-scroll-target="#mcp"><code>mcp()</code></a></li>
+  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map"><code>map()</code></a></li>
+  <li><a href="#map2" id="toc-map2" class="nav-link" data-scroll-target="#map2"><code>map2()</code></a></li>
+  <li><a href="#pmap" id="toc-pmap" class="nav-link" data-scroll-target="#pmap"><code>pmap()</code></a></li>
   </ul></li>
-  <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">4. In-Depth Examples</a>
+  <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
   <ul class="collapse">
-  <li><a href="#example-1-anova-multiple-comparisons" id="toc-example-1-anova-multiple-comparisons" class="nav-link" data-scroll-target="#example-1-anova-multiple-comparisons">Example 1: ANOVA Multiple Comparisons</a></li>
+  <li><a href="#title-aggregating-results-using-reduce" id="toc-title-aggregating-results-using-reduce" class="nav-link" data-scroll-target="#title-aggregating-results-using-reduce">Title: Aggregating Results Using <code>reduce()</code></a></li>
+  <li><a href="#title-handling-errors-with-safely" id="toc-title-handling-errors-with-safely" class="nav-link" data-scroll-target="#title-handling-errors-with-safely">Title: Handling Errors with <code>safely()</code></a></li>
+  <li><a href="#title-extracting-nested-elements-with-pluck" id="toc-title-extracting-nested-elements-with-pluck" class="nav-link" data-scroll-target="#title-extracting-nested-elements-with-pluck">Title: Extracting Nested Elements with <code>pluck()</code></a></li>
   </ul></li>
-  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">5. Advanced Features</a>
+  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
   <ul class="collapse">
-  <li><a href="#custom-contrasts" id="toc-custom-contrasts" class="nav-link" data-scroll-target="#custom-contrasts">Custom Contrasts</a></li>
-  <li><a href="#integration-with-mixed-effects-models" id="toc-integration-with-mixed-effects-models" class="nav-link" data-scroll-target="#integration-with-mixed-effects-models">Integration with Mixed-Effects Models</a></li>
+  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
   </ul></li>
-  <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">6. Troubleshooting and FAQs</a>
+  <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
   <ul class="collapse">
   <li><a href="#common-issues" id="toc-common-issues" class="nav-link" data-scroll-target="#common-issues">Common Issues</a></li>
   <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
   </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">7. Best Practices</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">8. Conclusion</a>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
   <ul class="collapse">
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
-  <li><a href="#encouragement" id="toc-encouragement" class="nav-link" data-scroll-target="#encouragement">Encouragement</a></li>
   </ul></li>
-  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">9. References and Resources</a></li>
+  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -270,292 +270,387 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<section id="tutorial-for-the-purrr-package" class="level1">
+<h1>Tutorial for the <code>purrr</code> Package</h1>
 <section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <section id="overview" class="level3">
 <h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>The <code>multcomp</code> package in R is designed for simultaneous inference in linear models, specifically focused on multiple comparisons. It provides tools to test hypotheses about multiple parameters in a model while controlling for family-wise error rates.</p>
+<p>The <code>purrr</code> package, part of the <code>tidyverse</code>, provides a set of tools for functional programming in R. It simplifies iteration, mapping, and manipulation of lists, vectors, and other data structures. The functions in <code>purrr</code> are designed to replace and enhance base R functions like <code>lapply()</code> and <code>sapply()</code> with more readable and consistent alternatives.</p>
+<p>Key components:</p>
+<ul>
+<li><strong>Core Functions</strong>: <code>map()</code>, <code>map2()</code>, <code>pmap()</code>, <code>reduce()</code>, <code>pluck()</code>, and others.</li>
+<li><strong>Helpers</strong>: <code>safely()</code>, <code>possibly()</code>, <code>transpose()</code>, etc.</li>
+</ul>
 </section>
 <section id="use-cases" class="level3">
 <h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
 <ul>
-<li>Comparing group means in ANOVA.</li>
-<li>Simultaneous confidence intervals.</li>
-<li>Adjusting p-values for multiple testing.</li>
+<li>Applying a function to each element of a list or vector.</li>
+<li>Handling nested data structures like lists of data frames.</li>
+<li>Aggregating results using custom operations.</li>
+<li>Safely working with functions that might return errors.</li>
 </ul>
 </section>
 <section id="benefits" class="level3">
 <h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
 <ul>
-<li>Handles a variety of multiple comparison tests.</li>
-<li>Provides flexibility with user-defined contrasts.</li>
-<li>Supports many types of linear models, including generalized linear models and mixed-effects models.</li>
+<li>Consistent syntax and predictable outputs.</li>
+<li>Seamless integration with other tidyverse packages.</li>
+<li>Tools for error handling and debugging.</li>
 </ul>
+<hr>
 </section>
 </section>
 <section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">2. Getting Started</h2>
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <section id="loading-the-package" class="level3">
 <h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
+<p>Use the <code>pacman</code> package to ensure <code>purrr</code> is loaded:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the multcomp package</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(multcomp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(purrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-usage" class="level3">
 <h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
-<p>Let’s start with a simple example:</p>
+<p>A simple example of applying a function to a list using <code>map()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example dataset</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(warpbreaks)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a list</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> warpbreaks)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a square function to each element</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>squared <span class="ot">&lt;-</span> numbers <span class="sc">|&gt;</span> <span class="fu">map</span>(<span class="sc">~</span> .x<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform multiple comparisons</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">glht</span>(model, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">tension =</span> <span class="st">"Tukey"</span>))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the results</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-     Simultaneous Tests for General Linear Hypotheses
+<pre><code>[[1]]
+[1] 1
 
-Multiple Comparisons of Means: Tukey Contrasts
+[[2]]
+[1] 4
 
+[[3]]
+[1] 9
 
-Fit: lm(formula = breaks ~ wool + tension, data = warpbreaks)
+[[4]]
+[1] 16
 
-Linear Hypotheses:
-           Estimate Std. Error t value Pr(&gt;|t|)   
-M - L == 0  -10.000      3.872  -2.582  0.03378 * 
-H - L == 0  -14.722      3.872  -3.802  0.00112 **
-H - M == 0   -4.722      3.872  -1.219  0.44739   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Adjusted p values reported -- single-step method)</code></pre>
+[[5]]
+[1] 25</code></pre>
 </div>
 </div>
-<section id="explanation" class="level4">
-<h4 class="anchored" data-anchor-id="explanation">Explanation</h4>
-<ol type="1">
-<li><strong><code>mcp</code></strong>: Specifies the type of multiple comparisons (e.g., Tukey’s test).</li>
-<li><strong><code>glht</code></strong>: General linear hypothesis testing function.</li>
-<li><strong><code>summary</code></strong>: Displays adjusted p-values and confidence intervals.</li>
-</ol>
-</section>
+<p>Here, <code>~ .x^2</code> defines an anonymous function that squares each number.</p>
 </section>
 </section>
 <section id="key-functions-and-features" class="level2">
-<h2 class="anchored" data-anchor-id="key-functions-and-features">3. Key Functions and Features</h2>
-<section id="glht" class="level3">
-<h3 class="anchored" data-anchor-id="glht"><code>glht()</code></h3>
-<p><strong>Description</strong>: Performs multiple comparisons or general linear hypothesis tests.</p>
-<p><strong>Syntax</strong>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>multcomp<span class="sc">::</span><span class="fu">glht</span>(model, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="st">"factor"</span><span class="ot">=</span><span class="st">"method"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Arguments</strong>:</p>
+<h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
+<section id="map" class="level3">
+<h3 class="anchored" data-anchor-id="map"><code>map()</code></h3>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description</h4>
+<p>The <code>map()</code> family applies a function to each element of a list or vector and returns a list, vector, or another type based on the specific <code>map_*</code> function used.</p>
+</section>
+<section id="syntax" class="level4">
+<h4 class="anchored" data-anchor-id="syntax">Syntax</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(.x, .f, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><code>model</code>: A fitted linear model object.</li>
-<li><code>linfct</code>: Defines the hypotheses to test (e.g., Tukey or user-defined contrasts).</li>
+<li><code>.x</code>: Input list or vector.</li>
+<li><code>.f</code>: Function to apply.</li>
+<li><code>…</code>: Additional arguments passed to <code>.f</code>.</li>
 </ul>
-<p><strong>Example</strong>:</p>
+</section>
+<section id="example" class="level4">
+<h4 class="anchored" data-anchor-id="example">Example</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">glht</span>(model, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">tension =</span> <span class="st">"Tukey"</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply `sqrt()` to each element</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>roots <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">16</span>) <span class="sc">|&gt;</span> <span class="fu">map</span>(sqrt)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>roots</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-     Simultaneous Tests for General Linear Hypotheses
+<pre><code>[[1]]
+[1] 2
 
-Multiple Comparisons of Means: Tukey Contrasts
+[[2]]
+[1] 3
 
-
-Fit: lm(formula = breaks ~ wool + tension, data = warpbreaks)
-
-Linear Hypotheses:
-           Estimate Std. Error t value Pr(&gt;|t|)   
-M - L == 0  -10.000      3.872  -2.582  0.03361 * 
-H - L == 0  -14.722      3.872  -3.802  0.00121 **
-H - M == 0   -4.722      3.872  -1.219  0.44743   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Adjusted p values reported -- single-step method)</code></pre>
+[[3]]
+[1] 4</code></pre>
 </div>
 </div>
 </section>
-<section id="mcp" class="level3">
-<h3 class="anchored" data-anchor-id="mcp"><code>mcp()</code></h3>
-<p><strong>Description</strong>: Creates predefined contrasts for a factor.</p>
-<p><strong>Syntax</strong>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcp</span>(<span class="at">factor =</span> <span class="st">"method"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Example</strong>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>linfct <span class="ot">=</span> <span class="fu">mcp</span>(<span class="at">tension =</span> <span class="st">"Tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="map2" class="level3">
+<h3 class="anchored" data-anchor-id="map2"><code>map2()</code></h3>
+<section id="description-1" class="level4">
+<h4 class="anchored" data-anchor-id="description-1">Description</h4>
+<p>Applies a function to two inputs simultaneously, element by element.</p>
+</section>
+<section id="syntax-1" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-1">Syntax</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map2</span>(.x, .y, .f, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-1" class="level4">
+<h4 class="anchored" data-anchor-id="example-1">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine two vectors by addition</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">map2</span>(vector1, vector2, <span class="sc">~</span> .x <span class="sc">+</span> .y)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 5
+
+[[2]]
+[1] 7
+
+[[3]]
+[1] 9</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="pmap" class="level3">
+<h3 class="anchored" data-anchor-id="pmap"><code>pmap()</code></h3>
+<section id="description-2" class="level4">
+<h4 class="anchored" data-anchor-id="description-2">Description</h4>
+<p>Applies a function to multiple inputs, where inputs are supplied as a list of named arguments.</p>
+</section>
+<section id="syntax-2" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-2">Syntax</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pmap</span>(.l, .f, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>.l</code>: A list of arguments.</li>
+<li><code>.f</code>: Function to apply.</li>
+</ul>
+</section>
+<section id="example-2" class="level4">
+<h4 class="anchored" data-anchor-id="example-2">Example</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define inputs</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>inputs <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">b =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">c =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a custom function</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">pmap</span>(inputs, \(a, b, c) a <span class="sc">+</span> b <span class="sc">+</span> c)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 12
+
+[[2]]
+[1] 15
+
+[[3]]
+[1] 18</code></pre>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="in-depth-examples" class="level2">
-<h2 class="anchored" data-anchor-id="in-depth-examples">4. In-Depth Examples</h2>
-<section id="example-1-anova-multiple-comparisons" class="level3">
-<h3 class="anchored" data-anchor-id="example-1-anova-multiple-comparisons">Example 1: ANOVA Multiple Comparisons</h3>
-<p><strong>Objective</strong>: Compare tension levels in <code>warpbreaks</code> dataset.</p>
-<p><strong>Steps</strong>:</p>
+<h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
+<section id="title-aggregating-results-using-reduce" class="level3">
+<h3 class="anchored" data-anchor-id="title-aggregating-results-using-reduce">Title: Aggregating Results Using <code>reduce()</code></h3>
+<section id="objective" class="level4">
+<h4 class="anchored" data-anchor-id="objective">Objective</h4>
+<p>Sum a list of numbers iteratively using <code>reduce()</code>.</p>
+</section>
+<section id="steps" class="level4">
+<h4 class="anchored" data-anchor-id="steps">Steps</h4>
 <ol type="1">
-<li><strong>Fit the model</strong>:</li>
+<li><strong>Define the data</strong>:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(breaks <span class="sc">~</span> tension, <span class="at">data =</span> warpbreaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li><strong>Perform Tukey’s test</strong>:</li>
+<li><strong>Apply <code>reduce()</code></strong>:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">glht</span>(model, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">tension =</span> <span class="st">"Tukey"</span>))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">reduce</span>(numbers, \(x, y) x <span class="sc">+</span> y)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-     Simultaneous Tests for General Linear Hypotheses
-
-Multiple Comparisons of Means: Tukey Contrasts
-
-
-Fit: aov(formula = breaks ~ tension, data = warpbreaks)
-
-Linear Hypotheses:
-           Estimate Std. Error t value Pr(&gt;|t|)   
-M - L == 0  -10.000      3.960  -2.525   0.0383 * 
-H - L == 0  -14.722      3.960  -3.718   0.0014 **
-H - M == 0   -4.722      3.960  -1.192   0.4631   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Adjusted p values reported -- single-step method)</code></pre>
+<pre><code>[1] 15</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
-<li><strong>Visualize the results</strong>:</li>
+<li><strong>Interpret the result</strong>: The sum of the numbers is computed iteratively.</li>
+</ol>
+</section>
+</section>
+<section id="title-handling-errors-with-safely" class="level3">
+<h3 class="anchored" data-anchor-id="title-handling-errors-with-safely">Title: Handling Errors with <code>safely()</code></h3>
+<section id="objective-1" class="level4">
+<h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
+<p>Use <code>safely()</code> to apply a function that might fail.</p>
+</section>
+<section id="steps-1" class="level4">
+<h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
+<ol type="1">
+<li><strong>Define the data</strong>:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="multcomp_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="multcomp_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>inputs <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">10</span>, <span class="st">"a"</span>, <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Use <code>safely()</code></strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>safe_sqrt <span class="ot">&lt;-</span> <span class="fu">safely</span>(sqrt)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">map</span>(inputs, safe_sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Inspect results</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[[1]]$result
+[1] 3.162278
+
+[[1]]$error
+NULL
+
+
+[[2]]
+[[2]]$result
+NULL
+
+[[2]]$error
+&lt;simpleError in .Primitive("sqrt")(x): non-numeric argument to mathematical function&gt;
+
+
+[[3]]
+[[3]]$result
+[1] 4.472136
+
+[[3]]$error
+NULL</code></pre>
 </div>
 </div>
+<p>The output includes successful results and captured errors.</p>
+</section>
+</section>
+<section id="title-extracting-nested-elements-with-pluck" class="level3">
+<h3 class="anchored" data-anchor-id="title-extracting-nested-elements-with-pluck">Title: Extracting Nested Elements with <code>pluck()</code></h3>
+<section id="objective-2" class="level4">
+<h4 class="anchored" data-anchor-id="objective-2">Objective</h4>
+<p>Retrieve nested elements from a list.</p>
+</section>
+<section id="steps-2" class="level4">
+<h4 class="anchored" data-anchor-id="steps-2">Steps</h4>
+<ol type="1">
+<li><strong>Define a nested list</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nested_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="fu">list</span>(<span class="at">b =</span> <span class="fu">list</span>(<span class="at">c =</span> <span class="dv">42</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Output</strong>: Provides adjusted p-values and confidence intervals.</p>
+<ol start="2" type="1">
+<li><strong>Use <code>pluck()</code></strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fu">pluck</span>(nested_list, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42</code></pre>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="advanced-features" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-features">5. Advanced Features</h2>
-<section id="custom-contrasts" class="level3">
-<h3 class="anchored" data-anchor-id="custom-contrasts">Custom Contrasts</h3>
-<p>Create user-defined contrasts:</p>
+<h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
+<section id="customization" class="level3">
+<h3 class="anchored" data-anchor-id="customization">Customization</h3>
+<p>Customize outputs with <code>map_*</code> variants:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>contrast_matrix <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M - L"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H - L"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H - M"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">glht</span>(model, <span class="at">linfct =</span> contrast_matrix)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Return a vector instead of a list</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>squared <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(numbers, <span class="sc">~</span> .x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-     Simultaneous Tests for General Linear Hypotheses
-
-Fit: aov(formula = breaks ~ tension, data = warpbreaks)
-
-Linear Hypotheses:
-           Estimate Std. Error t value Pr(&gt;|t|)    
-M - L == 0  -46.389      6.262  -7.408   &lt;1e-04 ***
-H - L == 0  -51.111      6.262  -8.163   &lt;1e-04 ***
-H - M == 0   -4.722      3.960  -1.192    0.456    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Adjusted p values reported -- single-step method)</code></pre>
+<pre><code>[1] 1 4 9</code></pre>
 </div>
 </div>
 </section>
-<section id="integration-with-mixed-effects-models" class="level3">
-<h3 class="anchored" data-anchor-id="integration-with-mixed-effects-models">Integration with Mixed-Effects Models</h3>
-<p>Supports models from <code>lme4</code>:</p>
+<section id="integration" class="level3">
+<h3 class="anchored" data-anchor-id="integration">Integration</h3>
+<p>Combine <code>purrr</code> with <code>dplyr</code> for tidy workflows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(breaks <span class="sc">~</span> tension <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> wool), <span class="at">data =</span> warpbreaks)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">glht</span>(model, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">tension =</span> <span class="st">"Tukey"</span>))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     Simultaneous Tests for General Linear Hypotheses
-
-Multiple Comparisons of Means: Tukey Contrasts
-
-
-Fit: lmer(formula = breaks ~ tension + (1 | wool), data = warpbreaks)
-
-Linear Hypotheses:
-           Estimate Std. Error z value Pr(&gt;|z|)    
-M - L == 0  -10.000      3.872  -2.582  0.02638 *  
-H - L == 0  -14.722      3.872  -3.802  0.00039 ***
-H - M == 0   -4.722      3.872  -1.219  0.44161    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Adjusted p values reported -- single-step method)</code></pre>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">11</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a function to each list element</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">mean_x =</span> <span class="fu">map_dbl</span>(x, mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["list"],"align":["right"]},{"label":["mean_x"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"<int [5]>","2":"3"},{"1":"<int [5]>","2":"8"},{"1":"<int [5]>","2":"13"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 </div>
 </section>
 </section>
 <section id="troubleshooting-and-faqs" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting-and-faqs">6. Troubleshooting and FAQs</h2>
+<h2 class="anchored" data-anchor-id="troubleshooting-and-faqs">Troubleshooting and FAQs</h2>
 <section id="common-issues" class="level3">
 <h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
 <ol type="1">
-<li><p><strong>Error: Non-conformable arguments</strong></p>
-<ul>
-<li>Ensure the <code>linfct</code> matches the model’s factor levels.</li>
-</ul></li>
-<li><p><strong>Confusion with model types</strong></p>
-<ul>
-<li>Use <code>glht</code> with models that support linear hypotheses (e.g., <code>lm</code>, <code>lmer</code>).</li>
-</ul></li>
+<li><strong>Error: “Object not found”</strong>: Ensure all variables are correctly defined and scoped.</li>
+<li><strong>Unexpected list outputs</strong>: Use <code>map_*</code> variants (<code>map_dbl</code>, <code>map_chr</code>) for specific return types.</li>
 </ol>
 </section>
 <section id="faqs" class="level3">
 <h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
 <ul>
-<li><strong>Can <code>multcomp</code> handle unbalanced data?</strong> Yes, but ensure your model accounts for this.</li>
+<li><strong>Can I use custom functions with <code>purrr</code>?</strong> Yes, pass any custom or anonymous function to <code>map()</code>.</li>
 </ul>
 </section>
 </section>
 <section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">7. Best Practices</h2>
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
 <ul>
-<li>Always check model diagnostics before multiple comparisons.</li>
-<li>Use visualizations like <code>plot()</code> to complement numerical results.</li>
-<li>For large datasets, consider summarizing key results to avoid overloading the output.</li>
+<li>Use <code>map_*</code> variants for predictable output types.</li>
+<li>Combine <code>purrr</code> with other tidyverse packages for efficient workflows.</li>
+<li>Leverage error-handling tools like <code>safely()</code> for robust code.</li>
 </ul>
 </section>
 <section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">8. Conclusion</h2>
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <section id="summary" class="level3">
 <h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<p>The <code>multcomp</code> package is a robust tool for conducting multiple comparisons in R, providing flexibility and accuracy.</p>
+<p>The <code>purrr</code> package simplifies iteration, functional programming, and working with nested data. Its consistent syntax and integration with the tidyverse make it an essential tool for R users.</p>
 </section>
 <section id="next-steps" class="level3">
 <h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
-<p>Explore interactions in models and extend functionality with packages like <code>emmeans</code>.</p>
-</section>
-<section id="encouragement" class="level3">
-<h3 class="anchored" data-anchor-id="encouragement">Encouragement</h3>
-<p>Experiment with different datasets to build confidence in interpreting outputs!</p>
+<ul>
+<li>Explore <code>purrr</code>’s advanced tools like <code>transpose()</code> and <code>possibly()</code>.</li>
+<li>Integrate with visualization packages like <code>ggplot2</code> for applied analyses.</li>
+</ul>
 </section>
 </section>
 <section id="references-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="references-and-resources">9. References and Resources</h2>
+<h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
 <ul>
-<li><a href="https://cran.r-project.org/web/packages/multcomp/multcomp.pdf">Package Documentation</a></li>
-<li><a href="https://cran.r-project.org/package=multcomp">Examples on CRAN</a></li>
+<li><a href="https://purrr.tidyverse.org/">Official Documentation</a></li>
+<li><a href="https://www.tidyverse.org/">Tidyverse Website</a></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
 </ul>
+<pre class="mermaid"><code>graph TD
+    A["Data Input"] --&gt; B["Apply map()"]
+    B --&gt; C["Iterate over elements"]
+    C --&gt; D["Transform Results"]
+    D --&gt; E["Output List/Vector"]</code></pre>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -989,38 +1084,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

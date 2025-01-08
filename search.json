@@ -1502,7 +1502,7 @@
     "href": "r_help.html",
     "title": "R Tutorial",
     "section": "",
-    "text": "Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on Subjects, Topics, and implementation through R Base and Packages.\n\n\nBelow are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\nData Transformation and Wrangling\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression\nANOVA\n\nProgramming with R\n\nControl Structures\nWriting Functions\nDebugging\n\n\n\n\n\n\n\ngl: Generate Factor Levels\ninteraction: Create Interaction Terms\nmodel.tables: Extract Tables from Model Fits\nplot.design: Plot Univariate Effects of a Design or Model\nrep: Replicate Elements of Vectors and Lists\nreplications: Generate Replicate Numbers\nsample: Randomly Sample Elements from a Vector\n\n\n\n\n\n\n\n\n\n\n\n\n\ndplyr\ntidyr\n\n\n\n\n\nggplot2 \n\n\n\n\n\nemmeans\nmultcomp\npwr\n\n\n\n\n\n\n\nExplore Subjects and Topics: Use the Subjects and Topics section to browse R concepts by category.\nR Base Help: Click on the R Base links to learn about core R functions.\nPackages Help: Dive into R packages to explore advanced features and functionalities."
+    "text": "Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on Subjects, Topics, and implementation through R Base and Packages.\n\n\nBelow are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\nData Transformation and Wrangling\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression\nANOVA\n\nProgramming with R\n\nControl Structures\nWriting Functions\nDebugging\n\n\n\n\n\n\n\ngl: Generate Factor Levels\ninteraction: Create Interaction Terms\nmodel.tables: Extract Tables from Model Fits\nplot.design: Plot Univariate Effects of a Design or Model\nrep: Replicate Elements of Vectors and Lists\nreplications: Generate Replicate Numbers\nsample: Randomly Sample Elements from a Vector\n\n\n\n\n\n\n\n\n\n\n\n\ndplyr\ntidyr\npurrr\nstringr\n\n\n\n\n\nggplot2\n\n\n\n\n\nemmeans\nmultcomp\npwr\n\n\n\n\n\n\n\nExplore Subjects and Topics: Use the Subjects and Topics section to browse R concepts by category.\nR Base Help: Click on the R Base links to learn about core R functions.\nPackages Help: Dive into R packages to explore advanced features and functionalities."
   },
   {
     "objectID": "r_help.html#r-subjects-topics",
@@ -1523,7 +1523,7 @@
     "href": "r_help.html#r-packages",
     "title": "R Tutorial",
     "section": "",
-    "text": "dplyr\ntidyr\n\n\n\n\n\nggplot2 \n\n\n\n\n\nemmeans\nmultcomp\npwr"
+    "text": "dplyr\ntidyr\npurrr\nstringr\n\n\n\n\n\nggplot2\n\n\n\n\n\nemmeans\nmultcomp\npwr"
   },
   {
     "objectID": "r_help.html#how-to-use-this-help",
@@ -1897,142 +1897,212 @@
     "text": "tidyr Documentation\nR for Data Science\nTidyverse GitHub"
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html",
-    "href": "appendix/r-packages/multcomp.html",
-    "title": "Tutorial: Using the multcomp R Package",
+    "objectID": "appendix/r-packages/stringr.html",
+    "href": "appendix/r-packages/stringr.html",
+    "title": "Tutorial for the stringr Package",
     "section": "",
-    "text": "The multcomp package in R is designed for simultaneous inference in linear models, specifically focused on multiple comparisons. It provides tools to test hypotheses about multiple parameters in a model while controlling for family-wise error rates.\n\n\n\n\nComparing group means in ANOVA.\nSimultaneous confidence intervals.\nAdjusting p-values for multiple testing.\n\n\n\n\n\nHandles a variety of multiple comparison tests.\nProvides flexibility with user-defined contrasts.\nSupports many types of linear models, including generalized linear models and mixed-effects models."
+    "text": "The stringr package, part of the tidyverse, simplifies string manipulation in R by providing a consistent and human-readable interface for common operations like pattern matching, extraction, replacement, and string metrics. It builds on the base R string functions but offers better integration with modern workflows and tools.\nKey functions include:\n\nBasic Manipulation: str_c(), str_length(), str_trim(), str_pad().\nPattern Matching: str_detect(), str_extract(), str_match().\nSubstitution: str_replace(), str_replace_all().\nSplitting and Joining: str_split(), str_flatten().\nOther Utilities: str_to_upper(), str_to_title(), str_sort().\n\n\n\n\n\nCleaning and formatting text data for analysis.\nExtracting structured information from unstructured text.\nDetecting and replacing patterns in strings.\nComparing and sorting textual data.\n\n\n\n\n\nConsistent and simple syntax.\nHandles regular expressions for powerful pattern matching.\nFully vectorized for efficient processing of large datasets.\nEasily integrates with other tidyverse tools.\n\n\n\n\n\n\n\n\nEnsure stringr is loaded using the pacman package:\n\npacman::p_load(stringr)\n\n\n\n\nA simple example of string concatenation using str_c():\n\n# Concatenate strings\nstr_c(\"Hello\", \"World\", sep = \" \")\n\n[1] \"Hello World\"\n\n\nThis outputs “Hello World”, showcasing the basic functionality of combining strings.\n\n\n\n\n\n\n\n\nCombines strings into a single string or vector of strings.\n\n\n\nstr_c(..., sep = \"\", collapse = NULL)\n\n…: Strings to combine.\nsep: Separator between strings.\ncollapse: Collapses output into a single string.\n\n\n\n\n\n# Combine names with separators\nnames &lt;- c(\"John\", \"Jane\", \"Doe\")\nstr_c(names, collapse = \", \")\n\n[1] \"John, Jane, Doe\"\n\n\n\n\n\n\n\n\nReturns the number of characters in each string.\n\n\n\nstr_length(string)\n\n\n\n\n# Get string lengths\nstrings &lt;- c(\"apple\", \"banana\", \"cherry\")\nstr_length(strings)\n\n[1] 5 6 6\n\n\n\n\n\n\n\n\nDetects if a pattern exists in a string.\n\n\n\nstr_detect(string, pattern)\n\n\n\n\n# Detect strings containing \"an\"\nstrings &lt;- c(\"apple\", \"banana\", \"cherry\")\nstr_detect(strings, \"an\")\n\n[1] FALSE  TRUE FALSE\n\n\n\n\n\n\n\n\nExtracts the first match of a pattern from a string.\n\n\n\nstr_extract(string, pattern)\n\n\n\n\n# Extract numbers from strings\nstrings &lt;- c(\"Item 1\", \"Price 20\", \"Count 100\")\nstr_extract(strings, \"\\\\d+\")\n\n[1] \"1\"   \"20\"  \"100\"\n\n\n\n\n\n\n\n\nReplaces all occurrences of a pattern in a string.\n\n\n\nstr_replace_all(string, pattern, replacement)\n\n\n\n\n# Replace spaces with underscores\nstrings &lt;- c(\"apple pie\", \"banana split\", \"cherry tart\")\nstr_replace_all(strings, \" \", \"_\")\n\n[1] \"apple_pie\"    \"banana_split\" \"cherry_tart\" \n\n\n\n\n\n\n\n\n\n\n\nIdentify and extract phone numbers from text data.\n\n\n\n\nPrepare data:\n\n\ntext &lt;- c(\"Call me at 555-123-4567\", \"My number is 987-654-3210\", \"No phone here\")\n\n\nDefine a regex pattern:\n\n\npattern &lt;- \"\\\\d{3}-\\\\d{3}-\\\\d{4}\"\n\n\nExtract phone numbers:\n\n\nphone_numbers &lt;- str_extract(text, pattern)\nphone_numbers\n\n[1] \"555-123-4567\" \"987-654-3210\" NA            \n\n\n\nOutput interpretation: Non-matching strings return NA.\n\n\n\n\n\n\n\nCheck if a dataset contains email addresses.\n\n\n\n\nInput data:\n\n\nstrings &lt;- c(\"Contact: john.doe@example.com\", \"Visit us\", \"Email: support@site.org\")\n\n\nDetect emails:\n\n\nemail_pattern &lt;- \"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\"\nemail_detected &lt;- str_detect(strings, email_pattern)\nemail_detected\n\n[1]  TRUE FALSE  TRUE\n\n\n\n\n\n\n\n\nSplit sentences into individual words.\n\n\n\n\nDefine sentences:\n\n\nsentences &lt;- c(\"This is an example\", \"R is great for text\")\n\n\nSplit into words:\n\n\nwords &lt;- str_split(sentences, \" \")\nwords\n\n[[1]]\n[1] \"This\"    \"is\"      \"an\"      \"example\"\n\n[[2]]\n[1] \"R\"     \"is\"    \"great\" \"for\"   \"text\" \n\n\n\nVisualize results:\n\n\nstr_flatten(words[[1]], \", \")\n\n[1] \"This, is, an, example\"\n\n\n\n\n\n\n\n\n\nUse additional parameters for flexible pattern matching, such as fixed() for fixed strings or regex() for advanced options:\n\n# Case-insensitive matching\nstr_detect(c(\"Apple\", \"banana\"), regex(\"apple\", ignore_case = TRUE))\n\n[1]  TRUE FALSE\n\n\n\n\n\nCombine with dplyr to process text in data frames:\n\nlibrary(dplyr)\n\ndata &lt;- tibble(text = c(\"One 1\", \"Two 2\", \"Three 3\"))\ndata |&gt; mutate(numbers = str_extract(text, \"\\\\d+\"))\n\n\n  \n\n\n\n\n\n\n\n\n\n\nRegex not matching: Ensure patterns are correctly escaped. Use \\\\ for special characters like \\d.\nUnexpected results: Verify input data type and length. NA values in input may propagate.\n\n\n\n\n\nCan stringr handle non-ASCII text? Yes, it supports UTF-8 encoded text.\nHow do I extract multiple matches? Use str_extract_all().\n\n\n\n\n\n\nLeverage vectorization for efficient processing of large datasets.\nUse clear and descriptive regex patterns.\nCombine with tidyverse tools for seamless workflows.\n\n\n\n\n\n\nThe stringr package offers powerful and intuitive tools for string manipulation in R. Its consistent syntax and comprehensive feature set make it a go-to package for text processing tasks.\n\n\n\n\nExplore advanced regex patterns.\nLearn about glue for string interpolation.\n\n\n\n\n\n\nOfficial Documentation\nRegex Cheatsheet\nR for Data Science: String Manipulation\n\n\ngraph TD\n    A[Raw Text Data] --&gt; B[Pattern Matching]\n    B --&gt; C[Extraction]\n    B --&gt; D[Substitution]\n    C --&gt; E[Cleaned Data]\n    D --&gt; E\n\n\n\n\ngraph TD\n    A[Raw Text Data] --&gt; B[Pattern Matching]\n    B --&gt; C[Extraction]\n    B --&gt; D[Substitution]\n    C --&gt; E[Cleaned Data]\n    D --&gt; E"
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#introduction",
-    "href": "appendix/r-packages/multcomp.html#introduction",
-    "title": "Tutorial: Using the multcomp R Package",
+    "objectID": "appendix/r-packages/stringr.html#introduction",
+    "href": "appendix/r-packages/stringr.html#introduction",
+    "title": "Tutorial for the stringr Package",
     "section": "",
-    "text": "The multcomp package in R is designed for simultaneous inference in linear models, specifically focused on multiple comparisons. It provides tools to test hypotheses about multiple parameters in a model while controlling for family-wise error rates.\n\n\n\n\nComparing group means in ANOVA.\nSimultaneous confidence intervals.\nAdjusting p-values for multiple testing.\n\n\n\n\n\nHandles a variety of multiple comparison tests.\nProvides flexibility with user-defined contrasts.\nSupports many types of linear models, including generalized linear models and mixed-effects models."
+    "text": "The stringr package, part of the tidyverse, simplifies string manipulation in R by providing a consistent and human-readable interface for common operations like pattern matching, extraction, replacement, and string metrics. It builds on the base R string functions but offers better integration with modern workflows and tools.\nKey functions include:\n\nBasic Manipulation: str_c(), str_length(), str_trim(), str_pad().\nPattern Matching: str_detect(), str_extract(), str_match().\nSubstitution: str_replace(), str_replace_all().\nSplitting and Joining: str_split(), str_flatten().\nOther Utilities: str_to_upper(), str_to_title(), str_sort().\n\n\n\n\n\nCleaning and formatting text data for analysis.\nExtracting structured information from unstructured text.\nDetecting and replacing patterns in strings.\nComparing and sorting textual data.\n\n\n\n\n\nConsistent and simple syntax.\nHandles regular expressions for powerful pattern matching.\nFully vectorized for efficient processing of large datasets.\nEasily integrates with other tidyverse tools."
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#getting-started",
-    "href": "appendix/r-packages/multcomp.html#getting-started",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "2. Getting Started",
-    "text": "2. Getting Started\n\nLoading the Package\n\n# Load the multcomp package\npacman::p_load(multcomp)\n\n\n\nBasic Usage\nLet’s start with a simple example:\n\n# Example dataset\ndata(warpbreaks)\n\n# Fit a linear model\nmodel &lt;- lm(breaks ~ wool + tension, data = warpbreaks)\n\n# Perform multiple comparisons\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\n\n# Summarize the results\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lm(formula = breaks ~ wool + tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.872  -2.582  0.03378 * \nH - L == 0  -14.722      3.872  -3.802  0.00112 **\nH - M == 0   -4.722      3.872  -1.219  0.44739   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\nExplanation\n\nmcp: Specifies the type of multiple comparisons (e.g., Tukey’s test).\nglht: General linear hypothesis testing function.\nsummary: Displays adjusted p-values and confidence intervals."
+    "objectID": "appendix/r-packages/stringr.html#getting-started",
+    "href": "appendix/r-packages/stringr.html#getting-started",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "Ensure stringr is loaded using the pacman package:\n\npacman::p_load(stringr)\n\n\n\n\nA simple example of string concatenation using str_c():\n\n# Concatenate strings\nstr_c(\"Hello\", \"World\", sep = \" \")\n\n[1] \"Hello World\"\n\n\nThis outputs “Hello World”, showcasing the basic functionality of combining strings."
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#key-functions-and-features",
-    "href": "appendix/r-packages/multcomp.html#key-functions-and-features",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "3. Key Functions and Features",
-    "text": "3. Key Functions and Features\n\nglht()\nDescription: Performs multiple comparisons or general linear hypothesis tests.\nSyntax:\nmultcomp::glht(model, linfct = mcp(\"factor\"=\"method\"))\nArguments:\n\nmodel: A fitted linear model object.\nlinfct: Defines the hypotheses to test (e.g., Tukey or user-defined contrasts).\n\nExample:\n\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lm(formula = breaks ~ wool + tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.872  -2.582  0.03361 * \nH - L == 0  -14.722      3.872  -3.802  0.00121 **\nH - M == 0   -4.722      3.872  -1.219  0.44743   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\n\nmcp()\nDescription: Creates predefined contrasts for a factor.\nSyntax:\nmcp(factor = \"method\")\nExample:\nlinfct = mcp(tension = \"Tukey\")"
+    "objectID": "appendix/r-packages/stringr.html#key-functions-and-features",
+    "href": "appendix/r-packages/stringr.html#key-functions-and-features",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "Combines strings into a single string or vector of strings.\n\n\n\nstr_c(..., sep = \"\", collapse = NULL)\n\n…: Strings to combine.\nsep: Separator between strings.\ncollapse: Collapses output into a single string.\n\n\n\n\n\n# Combine names with separators\nnames &lt;- c(\"John\", \"Jane\", \"Doe\")\nstr_c(names, collapse = \", \")\n\n[1] \"John, Jane, Doe\"\n\n\n\n\n\n\n\n\nReturns the number of characters in each string.\n\n\n\nstr_length(string)\n\n\n\n\n# Get string lengths\nstrings &lt;- c(\"apple\", \"banana\", \"cherry\")\nstr_length(strings)\n\n[1] 5 6 6\n\n\n\n\n\n\n\n\nDetects if a pattern exists in a string.\n\n\n\nstr_detect(string, pattern)\n\n\n\n\n# Detect strings containing \"an\"\nstrings &lt;- c(\"apple\", \"banana\", \"cherry\")\nstr_detect(strings, \"an\")\n\n[1] FALSE  TRUE FALSE\n\n\n\n\n\n\n\n\nExtracts the first match of a pattern from a string.\n\n\n\nstr_extract(string, pattern)\n\n\n\n\n# Extract numbers from strings\nstrings &lt;- c(\"Item 1\", \"Price 20\", \"Count 100\")\nstr_extract(strings, \"\\\\d+\")\n\n[1] \"1\"   \"20\"  \"100\"\n\n\n\n\n\n\n\n\nReplaces all occurrences of a pattern in a string.\n\n\n\nstr_replace_all(string, pattern, replacement)\n\n\n\n\n# Replace spaces with underscores\nstrings &lt;- c(\"apple pie\", \"banana split\", \"cherry tart\")\nstr_replace_all(strings, \" \", \"_\")\n\n[1] \"apple_pie\"    \"banana_split\" \"cherry_tart\""
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#in-depth-examples",
-    "href": "appendix/r-packages/multcomp.html#in-depth-examples",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "4. In-Depth Examples",
-    "text": "4. In-Depth Examples\n\nExample 1: ANOVA Multiple Comparisons\nObjective: Compare tension levels in warpbreaks dataset.\nSteps:\n\nFit the model:\n\n\nmodel &lt;- aov(breaks ~ tension, data = warpbreaks)\n\n\nPerform Tukey’s test:\n\n\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: aov(formula = breaks ~ tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.960  -2.525   0.0383 * \nH - L == 0  -14.722      3.960  -3.718   0.0014 **\nH - M == 0   -4.722      3.960  -1.192   0.4631   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\nVisualize the results:\n\n\nplot(comparison)\n\n\n\n\n\n\n\n\nOutput: Provides adjusted p-values and confidence intervals."
+    "objectID": "appendix/r-packages/stringr.html#in-depth-examples",
+    "href": "appendix/r-packages/stringr.html#in-depth-examples",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "Identify and extract phone numbers from text data.\n\n\n\n\nPrepare data:\n\n\ntext &lt;- c(\"Call me at 555-123-4567\", \"My number is 987-654-3210\", \"No phone here\")\n\n\nDefine a regex pattern:\n\n\npattern &lt;- \"\\\\d{3}-\\\\d{3}-\\\\d{4}\"\n\n\nExtract phone numbers:\n\n\nphone_numbers &lt;- str_extract(text, pattern)\nphone_numbers\n\n[1] \"555-123-4567\" \"987-654-3210\" NA            \n\n\n\nOutput interpretation: Non-matching strings return NA.\n\n\n\n\n\n\n\nCheck if a dataset contains email addresses.\n\n\n\n\nInput data:\n\n\nstrings &lt;- c(\"Contact: john.doe@example.com\", \"Visit us\", \"Email: support@site.org\")\n\n\nDetect emails:\n\n\nemail_pattern &lt;- \"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\"\nemail_detected &lt;- str_detect(strings, email_pattern)\nemail_detected\n\n[1]  TRUE FALSE  TRUE\n\n\n\n\n\n\n\n\nSplit sentences into individual words.\n\n\n\n\nDefine sentences:\n\n\nsentences &lt;- c(\"This is an example\", \"R is great for text\")\n\n\nSplit into words:\n\n\nwords &lt;- str_split(sentences, \" \")\nwords\n\n[[1]]\n[1] \"This\"    \"is\"      \"an\"      \"example\"\n\n[[2]]\n[1] \"R\"     \"is\"    \"great\" \"for\"   \"text\" \n\n\n\nVisualize results:\n\n\nstr_flatten(words[[1]], \", \")\n\n[1] \"This, is, an, example\""
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#advanced-features",
-    "href": "appendix/r-packages/multcomp.html#advanced-features",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "5. Advanced Features",
-    "text": "5. Advanced Features\n\nCustom Contrasts\nCreate user-defined contrasts:\n\ncontrast_matrix &lt;- rbind(\n    \"M - L\" = c(-1, 1, 0),\n    \"H - L\" = c(-1, 0, 1),\n    \"H - M\" = c(0, -1, 1)\n)\ncomparison &lt;- glht(model, linfct = contrast_matrix)\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nFit: aov(formula = breaks ~ tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)    \nM - L == 0  -46.389      6.262  -7.408   &lt;1e-04 ***\nH - L == 0  -51.111      6.262  -8.163   &lt;1e-04 ***\nH - M == 0   -4.722      3.960  -1.192    0.456    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\n\nIntegration with Mixed-Effects Models\nSupports models from lme4:\n\nlibrary(lme4)\nmodel &lt;- lmer(breaks ~ tension + (1 | wool), data = warpbreaks)\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lmer(formula = breaks ~ tension + (1 | wool), data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error z value Pr(&gt;|z|)    \nM - L == 0  -10.000      3.872  -2.582  0.02638 *  \nH - L == 0  -14.722      3.872  -3.802  0.00039 ***\nH - M == 0   -4.722      3.872  -1.219  0.44161    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)"
+    "objectID": "appendix/r-packages/stringr.html#advanced-features",
+    "href": "appendix/r-packages/stringr.html#advanced-features",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "Use additional parameters for flexible pattern matching, such as fixed() for fixed strings or regex() for advanced options:\n\n# Case-insensitive matching\nstr_detect(c(\"Apple\", \"banana\"), regex(\"apple\", ignore_case = TRUE))\n\n[1]  TRUE FALSE\n\n\n\n\n\nCombine with dplyr to process text in data frames:\n\nlibrary(dplyr)\n\ndata &lt;- tibble(text = c(\"One 1\", \"Two 2\", \"Three 3\"))\ndata |&gt; mutate(numbers = str_extract(text, \"\\\\d+\"))"
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#troubleshooting-and-faqs",
-    "href": "appendix/r-packages/multcomp.html#troubleshooting-and-faqs",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "6. Troubleshooting and FAQs",
-    "text": "6. Troubleshooting and FAQs\n\nCommon Issues\n\nError: Non-conformable arguments\n\nEnsure the linfct matches the model’s factor levels.\n\nConfusion with model types\n\nUse glht with models that support linear hypotheses (e.g., lm, lmer).\n\n\n\n\nFAQs\n\nCan multcomp handle unbalanced data? Yes, but ensure your model accounts for this."
+    "objectID": "appendix/r-packages/stringr.html#troubleshooting-and-faqs",
+    "href": "appendix/r-packages/stringr.html#troubleshooting-and-faqs",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "Regex not matching: Ensure patterns are correctly escaped. Use \\\\ for special characters like \\d.\nUnexpected results: Verify input data type and length. NA values in input may propagate.\n\n\n\n\n\nCan stringr handle non-ASCII text? Yes, it supports UTF-8 encoded text.\nHow do I extract multiple matches? Use str_extract_all()."
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#best-practices",
-    "href": "appendix/r-packages/multcomp.html#best-practices",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "7. Best Practices",
-    "text": "7. Best Practices\n\nAlways check model diagnostics before multiple comparisons.\nUse visualizations like plot() to complement numerical results.\nFor large datasets, consider summarizing key results to avoid overloading the output."
+    "objectID": "appendix/r-packages/stringr.html#best-practices",
+    "href": "appendix/r-packages/stringr.html#best-practices",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "Leverage vectorization for efficient processing of large datasets.\nUse clear and descriptive regex patterns.\nCombine with tidyverse tools for seamless workflows."
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#conclusion",
-    "href": "appendix/r-packages/multcomp.html#conclusion",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "8. Conclusion",
-    "text": "8. Conclusion\n\nSummary\nThe multcomp package is a robust tool for conducting multiple comparisons in R, providing flexibility and accuracy.\n\n\nNext Steps\nExplore interactions in models and extend functionality with packages like emmeans.\n\n\nEncouragement\nExperiment with different datasets to build confidence in interpreting outputs!"
+    "objectID": "appendix/r-packages/stringr.html#conclusion",
+    "href": "appendix/r-packages/stringr.html#conclusion",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "The stringr package offers powerful and intuitive tools for string manipulation in R. Its consistent syntax and comprehensive feature set make it a go-to package for text processing tasks.\n\n\n\n\nExplore advanced regex patterns.\nLearn about glue for string interpolation."
   },
   {
-    "objectID": "appendix/r-packages/multcomp.html#references-and-resources",
-    "href": "appendix/r-packages/multcomp.html#references-and-resources",
-    "title": "Tutorial: Using the multcomp R Package",
-    "section": "9. References and Resources",
-    "text": "9. References and Resources\n\nPackage Documentation\nExamples on CRAN"
+    "objectID": "appendix/r-packages/stringr.html#references-and-resources",
+    "href": "appendix/r-packages/stringr.html#references-and-resources",
+    "title": "Tutorial for the stringr Package",
+    "section": "",
+    "text": "Official Documentation\nRegex Cheatsheet\nR for Data Science: String Manipulation\n\n\ngraph TD\n    A[Raw Text Data] --&gt; B[Pattern Matching]\n    B --&gt; C[Extraction]\n    B --&gt; D[Substitution]\n    C --&gt; E[Cleaned Data]\n    D --&gt; E\n\n\n\n\ngraph TD\n    A[Raw Text Data] --&gt; B[Pattern Matching]\n    B --&gt; C[Extraction]\n    B --&gt; D[Substitution]\n    C --&gt; E[Cleaned Data]\n    D --&gt; E"
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html",
+    "href": "appendix/r-packages/purrr.html",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "The purrr package, part of the tidyverse, provides a set of tools for functional programming in R. It simplifies iteration, mapping, and manipulation of lists, vectors, and other data structures. The functions in purrr are designed to replace and enhance base R functions like lapply() and sapply() with more readable and consistent alternatives.\nKey components:\n\nCore Functions: map(), map2(), pmap(), reduce(), pluck(), and others.\nHelpers: safely(), possibly(), transpose(), etc.\n\n\n\n\n\nApplying a function to each element of a list or vector.\nHandling nested data structures like lists of data frames.\nAggregating results using custom operations.\nSafely working with functions that might return errors.\n\n\n\n\n\nConsistent syntax and predictable outputs.\nSeamless integration with other tidyverse packages.\nTools for error handling and debugging.\n\n\n\n\n\n\n\n\nUse the pacman package to ensure purrr is loaded:\n\npacman::p_load(purrr)\n\n\n\n\nA simple example of applying a function to a list using map():\n\n# Define a list\nnumbers &lt;- list(1, 2, 3, 4, 5)\n\n# Apply a square function to each element\nsquared &lt;- numbers |&gt; map(~ .x^2)\n\n# Print results\nsquared\n\n[[1]]\n[1] 1\n\n[[2]]\n[1] 4\n\n[[3]]\n[1] 9\n\n[[4]]\n[1] 16\n\n[[5]]\n[1] 25\n\n\nHere, ~ .x^2 defines an anonymous function that squares each number.\n\n\n\n\n\n\n\n\nThe map() family applies a function to each element of a list or vector and returns a list, vector, or another type based on the specific map_* function used.\n\n\n\nmap(.x, .f, ...)\n\n.x: Input list or vector.\n.f: Function to apply.\n…: Additional arguments passed to .f.\n\n\n\n\n\n# Apply `sqrt()` to each element\nroots &lt;- list(4, 9, 16) |&gt; map(sqrt)\n\n# Print results\nroots\n\n[[1]]\n[1] 2\n\n[[2]]\n[1] 3\n\n[[3]]\n[1] 4\n\n\n\n\n\n\n\n\nApplies a function to two inputs simultaneously, element by element.\n\n\n\nmap2(.x, .y, .f, ...)\n\n\n\n\n# Combine two vectors by addition\nvector1 &lt;- c(1, 2, 3)\nvector2 &lt;- c(4, 5, 6)\n\nresult &lt;- map2(vector1, vector2, ~ .x + .y)\n\nresult\n\n[[1]]\n[1] 5\n\n[[2]]\n[1] 7\n\n[[3]]\n[1] 9\n\n\n\n\n\n\n\n\nApplies a function to multiple inputs, where inputs are supplied as a list of named arguments.\n\n\n\npmap(.l, .f, ...)\n\n.l: A list of arguments.\n.f: Function to apply.\n\n\n\n\n\n# Define inputs\ninputs &lt;- list(a = c(1, 2, 3), b = c(4, 5, 6), c = c(7, 8, 9))\n\n# Apply a custom function\nresult &lt;- pmap(inputs, \\(a, b, c) a + b + c)\n\nresult\n\n[[1]]\n[1] 12\n\n[[2]]\n[1] 15\n\n[[3]]\n[1] 18\n\n\n\n\n\n\n\n\n\n\n\nSum a list of numbers iteratively using reduce().\n\n\n\n\nDefine the data:\n\n\nnumbers &lt;- list(1, 2, 3, 4, 5)\n\n\nApply reduce():\n\n\ntotal &lt;- reduce(numbers, \\(x, y) x + y)\ntotal\n\n[1] 15\n\n\n\nInterpret the result: The sum of the numbers is computed iteratively.\n\n\n\n\n\n\n\nUse safely() to apply a function that might fail.\n\n\n\n\nDefine the data:\n\n\ninputs &lt;- list(10, \"a\", 20)\n\n\nUse safely():\n\n\nsafe_sqrt &lt;- safely(sqrt)\nresults &lt;- map(inputs, safe_sqrt)\n\n\nInspect results:\n\n\nresults\n\n[[1]]\n[[1]]$result\n[1] 3.162278\n\n[[1]]$error\nNULL\n\n\n[[2]]\n[[2]]$result\nNULL\n\n[[2]]$error\n&lt;simpleError in .Primitive(\"sqrt\")(x): non-numeric argument to mathematical function&gt;\n\n\n[[3]]\n[[3]]$result\n[1] 4.472136\n\n[[3]]$error\nNULL\n\n\nThe output includes successful results and captured errors.\n\n\n\n\n\n\nRetrieve nested elements from a list.\n\n\n\n\nDefine a nested list:\n\n\nnested_list &lt;- list(a = list(b = list(c = 42)))\n\n\nUse pluck():\n\n\nvalue &lt;- pluck(nested_list, \"a\", \"b\", \"c\")\nvalue\n\n[1] 42\n\n\n\n\n\n\n\n\n\nCustomize outputs with map_* variants:\n\n# Return a vector instead of a list\nnumbers &lt;- list(1, 2, 3)\nsquared &lt;- map_dbl(numbers, ~ .x^2)\nsquared\n\n[1] 1 4 9\n\n\n\n\n\nCombine purrr with dplyr for tidy workflows:\n\nlibrary(dplyr)\ndata &lt;- tibble(x = list(1:5, 6:10, 11:15))\n\n# Apply a function to each list element\ndata |&gt; mutate(mean_x = map_dbl(x, mean))\n\n\n  \n\n\n\n\n\n\n\n\n\n\nError: “Object not found”: Ensure all variables are correctly defined and scoped.\nUnexpected list outputs: Use map_* variants (map_dbl, map_chr) for specific return types.\n\n\n\n\n\nCan I use custom functions with purrr? Yes, pass any custom or anonymous function to map().\n\n\n\n\n\n\nUse map_* variants for predictable output types.\nCombine purrr with other tidyverse packages for efficient workflows.\nLeverage error-handling tools like safely() for robust code.\n\n\n\n\n\n\nThe purrr package simplifies iteration, functional programming, and working with nested data. Its consistent syntax and integration with the tidyverse make it an essential tool for R users.\n\n\n\n\nExplore purrr’s advanced tools like transpose() and possibly().\nIntegrate with visualization packages like ggplot2 for applied analyses.\n\n\n\n\n\n\nOfficial Documentation\nTidyverse Website\nR for Data Science\n\ngraph TD\n    A[\"Data Input\"] --&gt; B[\"Apply map()\"]\n    B --&gt; C[\"Iterate over elements\"]\n    C --&gt; D[\"Transform Results\"]\n    D --&gt; E[\"Output List/Vector\"]"
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#introduction",
+    "href": "appendix/r-packages/purrr.html#introduction",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "The purrr package, part of the tidyverse, provides a set of tools for functional programming in R. It simplifies iteration, mapping, and manipulation of lists, vectors, and other data structures. The functions in purrr are designed to replace and enhance base R functions like lapply() and sapply() with more readable and consistent alternatives.\nKey components:\n\nCore Functions: map(), map2(), pmap(), reduce(), pluck(), and others.\nHelpers: safely(), possibly(), transpose(), etc.\n\n\n\n\n\nApplying a function to each element of a list or vector.\nHandling nested data structures like lists of data frames.\nAggregating results using custom operations.\nSafely working with functions that might return errors.\n\n\n\n\n\nConsistent syntax and predictable outputs.\nSeamless integration with other tidyverse packages.\nTools for error handling and debugging."
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#getting-started",
+    "href": "appendix/r-packages/purrr.html#getting-started",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "Use the pacman package to ensure purrr is loaded:\n\npacman::p_load(purrr)\n\n\n\n\nA simple example of applying a function to a list using map():\n\n# Define a list\nnumbers &lt;- list(1, 2, 3, 4, 5)\n\n# Apply a square function to each element\nsquared &lt;- numbers |&gt; map(~ .x^2)\n\n# Print results\nsquared\n\n[[1]]\n[1] 1\n\n[[2]]\n[1] 4\n\n[[3]]\n[1] 9\n\n[[4]]\n[1] 16\n\n[[5]]\n[1] 25\n\n\nHere, ~ .x^2 defines an anonymous function that squares each number."
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#key-functions-and-features",
+    "href": "appendix/r-packages/purrr.html#key-functions-and-features",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "The map() family applies a function to each element of a list or vector and returns a list, vector, or another type based on the specific map_* function used.\n\n\n\nmap(.x, .f, ...)\n\n.x: Input list or vector.\n.f: Function to apply.\n…: Additional arguments passed to .f.\n\n\n\n\n\n# Apply `sqrt()` to each element\nroots &lt;- list(4, 9, 16) |&gt; map(sqrt)\n\n# Print results\nroots\n\n[[1]]\n[1] 2\n\n[[2]]\n[1] 3\n\n[[3]]\n[1] 4\n\n\n\n\n\n\n\n\nApplies a function to two inputs simultaneously, element by element.\n\n\n\nmap2(.x, .y, .f, ...)\n\n\n\n\n# Combine two vectors by addition\nvector1 &lt;- c(1, 2, 3)\nvector2 &lt;- c(4, 5, 6)\n\nresult &lt;- map2(vector1, vector2, ~ .x + .y)\n\nresult\n\n[[1]]\n[1] 5\n\n[[2]]\n[1] 7\n\n[[3]]\n[1] 9\n\n\n\n\n\n\n\n\nApplies a function to multiple inputs, where inputs are supplied as a list of named arguments.\n\n\n\npmap(.l, .f, ...)\n\n.l: A list of arguments.\n.f: Function to apply.\n\n\n\n\n\n# Define inputs\ninputs &lt;- list(a = c(1, 2, 3), b = c(4, 5, 6), c = c(7, 8, 9))\n\n# Apply a custom function\nresult &lt;- pmap(inputs, \\(a, b, c) a + b + c)\n\nresult\n\n[[1]]\n[1] 12\n\n[[2]]\n[1] 15\n\n[[3]]\n[1] 18"
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#in-depth-examples",
+    "href": "appendix/r-packages/purrr.html#in-depth-examples",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "Sum a list of numbers iteratively using reduce().\n\n\n\n\nDefine the data:\n\n\nnumbers &lt;- list(1, 2, 3, 4, 5)\n\n\nApply reduce():\n\n\ntotal &lt;- reduce(numbers, \\(x, y) x + y)\ntotal\n\n[1] 15\n\n\n\nInterpret the result: The sum of the numbers is computed iteratively.\n\n\n\n\n\n\n\nUse safely() to apply a function that might fail.\n\n\n\n\nDefine the data:\n\n\ninputs &lt;- list(10, \"a\", 20)\n\n\nUse safely():\n\n\nsafe_sqrt &lt;- safely(sqrt)\nresults &lt;- map(inputs, safe_sqrt)\n\n\nInspect results:\n\n\nresults\n\n[[1]]\n[[1]]$result\n[1] 3.162278\n\n[[1]]$error\nNULL\n\n\n[[2]]\n[[2]]$result\nNULL\n\n[[2]]$error\n&lt;simpleError in .Primitive(\"sqrt\")(x): non-numeric argument to mathematical function&gt;\n\n\n[[3]]\n[[3]]$result\n[1] 4.472136\n\n[[3]]$error\nNULL\n\n\nThe output includes successful results and captured errors.\n\n\n\n\n\n\nRetrieve nested elements from a list.\n\n\n\n\nDefine a nested list:\n\n\nnested_list &lt;- list(a = list(b = list(c = 42)))\n\n\nUse pluck():\n\n\nvalue &lt;- pluck(nested_list, \"a\", \"b\", \"c\")\nvalue\n\n[1] 42"
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#advanced-features",
+    "href": "appendix/r-packages/purrr.html#advanced-features",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "Customize outputs with map_* variants:\n\n# Return a vector instead of a list\nnumbers &lt;- list(1, 2, 3)\nsquared &lt;- map_dbl(numbers, ~ .x^2)\nsquared\n\n[1] 1 4 9\n\n\n\n\n\nCombine purrr with dplyr for tidy workflows:\n\nlibrary(dplyr)\ndata &lt;- tibble(x = list(1:5, 6:10, 11:15))\n\n# Apply a function to each list element\ndata |&gt; mutate(mean_x = map_dbl(x, mean))"
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#troubleshooting-and-faqs",
+    "href": "appendix/r-packages/purrr.html#troubleshooting-and-faqs",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "Error: “Object not found”: Ensure all variables are correctly defined and scoped.\nUnexpected list outputs: Use map_* variants (map_dbl, map_chr) for specific return types.\n\n\n\n\n\nCan I use custom functions with purrr? Yes, pass any custom or anonymous function to map()."
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#best-practices",
+    "href": "appendix/r-packages/purrr.html#best-practices",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "Use map_* variants for predictable output types.\nCombine purrr with other tidyverse packages for efficient workflows.\nLeverage error-handling tools like safely() for robust code."
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#conclusion",
+    "href": "appendix/r-packages/purrr.html#conclusion",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "The purrr package simplifies iteration, functional programming, and working with nested data. Its consistent syntax and integration with the tidyverse make it an essential tool for R users.\n\n\n\n\nExplore purrr’s advanced tools like transpose() and possibly().\nIntegrate with visualization packages like ggplot2 for applied analyses."
+  },
+  {
+    "objectID": "appendix/r-packages/purrr.html#references-and-resources",
+    "href": "appendix/r-packages/purrr.html#references-and-resources",
+    "title": "Tutorial for the purrr Package",
+    "section": "",
+    "text": "Official Documentation\nTidyverse Website\nR for Data Science\n\ngraph TD\n    A[\"Data Input\"] --&gt; B[\"Apply map()\"]\n    B --&gt; C[\"Iterate over elements\"]\n    C --&gt; D[\"Transform Results\"]\n    D --&gt; E[\"Output List/Vector\"]"
   },
   {
     "objectID": "appendix/r-packages/dplyr.html",
     "href": "appendix/r-packages/dplyr.html",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "The dplyr package is a powerful tool in the tidyverse suite designed for data manipulation. It simplifies and accelerates common data transformation tasks with an intuitive syntax.\nKey functions include:\n\ndplyr::select(): Select specific columns.\ndplyr::filter(): Filter rows based on conditions.\ndplyr::mutate(): Add or modify columns.\ndplyr::summarize(): Create summary statistics.\ndplyr::arrange(): Sort rows.\ndplyr::group_by(): Group data for grouped operations.\n\n\n\n\n\nFiltering large datasets for analysis.\nSummarizing data to extract insights.\nTransforming variables or creating new ones.\nSorting or organizing data for visualization or reporting.\n\n\n\n\n\nUser-friendly syntax, especially with the pipe operator |&gt;.\nOptimized for speed, making it suitable for large datasets.\nSeamless integration with other tidyverse packages.\n\n\n\n\n\n\n\nUse pacman::p_load() to load dplyr:\n\npacman::p_load(dplyr)\n\n\n\n\nCreate and manipulate a simple dataset:\n\ndata &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\n\n# Select columns\ndata |&gt; dplyr::select(Name, Score)\n\n\n  \n\n\n# Filter rows\ndata |&gt; dplyr::filter(Age &gt; 25)\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\nSelects specified columns from a data frame.\n\n\n\ndplyr::select(.data, ...)\n\n.data: A data frame.\n…: Columns to select.\n\n\n\n\n\ndata |&gt; dplyr::select(Name, Score)\n\n\n  \n\n\n\nThis extracts the Name and Score columns.\n\n\n\n\n\n\nFilters rows based on a logical condition.\n\n\n\ndplyr::filter(.data, ...)\n\n.data: A data frame.\n…: Logical conditions.\n\n\n\n\n\ndata |&gt; dplyr::filter(Age &gt; 25)\n\n\n  \n\n\n\nFilters rows where Age is greater than 25.\n\n\n\n\n\n\nCreates new columns or modifies existing ones.\n\n\n\ndplyr::mutate(.data, ...)\n\n.data: A data frame.\n…: Expressions for new or modified columns.\n\n\n\n\n\ndata |&gt; dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\n\n\n  \n\n\n\nAdds a Grade column based on Score.\n\n\n\n\n\n\n\n\n\nSummarize scores by age groups.\n\n\n\n\ndata |&gt;\n    dplyr::mutate(AgeGroup = ifelse(Age &gt; 25, \"Above 25\", \"25 and Below\")) |&gt;\n    dplyr::group_by(AgeGroup) |&gt;\n    dplyr::summarize(MeanScore = mean(Score), .groups = \"drop\")\n\n\n  \n\n\n\n\n\n\nA table showing average scores for each age group.\n\n\n\n\n\n\nFind the top scorer in each age group.\n\n\n\n\ndata |&gt;\n    dplyr::group_by(Age) |&gt;\n    dplyr::arrange(desc(Score)) |&gt;\n    dplyr::slice(1)\n\n\n  \n\n\n\n\n\n\nTop scorer details by age.\n\n\n\n\n\n\n\n\n\n\ndata |&gt; dplyr::rename(FullName = Name)\n\n\n  \n\n\n\n\n\n\n\ndata |&gt;\n    dplyr::mutate(\n        NormalizedScore = Score / max(Score),\n        Status = ifelse(Age &gt; 30, \"Senior\", \"Junior\")\n    )\n\n\n  \n\n\n\n\n\n\n\nCombine with ggplot2 for visualization:\n\nlibrary(ggplot2)\ndata |&gt;\n    dplyr::mutate(Pass = Score &gt; 80) |&gt;\n    ggplot(aes(x = Age, y = Score, color = Pass)) +\n    geom_point() +\n    labs(title = \"Scores by Age\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse dplyr::filter() early in a pipeline to reduce rows.\nChain operations with |&gt; for clarity and efficiency.\n\n\n\n\n\n\n\n\n\nEnsure column names are correctly spelled and case-sensitive.\n\n\n\nThis occurs when filtering results in zero rows. Check filter conditions.\n\n\n\n\n\nCan dplyr handle large datasets? Yes, but for very large data, consider data.table or databases with dbplyr.\nHow to retain row names? Convert them to a column with tibble::rownames_to_column().\n\n\n\n\n\n\nUse consistent column naming conventions.\nApply group_by() only when summarizing or calculating grouped statistics.\nDocument pipelines for reproducibility.\n\n\n\n\n\n\n\ndplyr streamlines data manipulation with a readable syntax.\nKey functions cover selecting, filtering, mutating, and summarizing data.\n\n\n\n\nExplore dplyr advanced features like joins and window functions, or integrate with dbplyr for database operations.\n\n\n\n\n\ndplyr Documentation\nR for Data Science\nTidyverse GitHub"
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#introduction",
     "href": "appendix/r-packages/dplyr.html#introduction",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "The dplyr package is a powerful tool in the tidyverse suite designed for data manipulation. It simplifies and accelerates common data transformation tasks with an intuitive syntax.\nKey functions include:\n\ndplyr::select(): Select specific columns.\ndplyr::filter(): Filter rows based on conditions.\ndplyr::mutate(): Add or modify columns.\ndplyr::summarize(): Create summary statistics.\ndplyr::arrange(): Sort rows.\ndplyr::group_by(): Group data for grouped operations.\n\n\n\n\n\nFiltering large datasets for analysis.\nSummarizing data to extract insights.\nTransforming variables or creating new ones.\nSorting or organizing data for visualization or reporting.\n\n\n\n\n\nUser-friendly syntax, especially with the pipe operator |&gt;.\nOptimized for speed, making it suitable for large datasets.\nSeamless integration with other tidyverse packages."
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#getting-started",
     "href": "appendix/r-packages/dplyr.html#getting-started",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "Use pacman::p_load() to load dplyr:\n\npacman::p_load(dplyr)\n\n\n\n\nCreate and manipulate a simple dataset:\n\ndata &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\n\n# Select columns\ndata |&gt; dplyr::select(Name, Score)\n\n\n  \n\n\n# Filter rows\ndata |&gt; dplyr::filter(Age &gt; 25)"
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#key-functions-and-features",
     "href": "appendix/r-packages/dplyr.html#key-functions-and-features",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "Selects specified columns from a data frame.\n\n\n\ndplyr::select(.data, ...)\n\n.data: A data frame.\n…: Columns to select.\n\n\n\n\n\ndata |&gt; dplyr::select(Name, Score)\n\n\n  \n\n\n\nThis extracts the Name and Score columns.\n\n\n\n\n\n\nFilters rows based on a logical condition.\n\n\n\ndplyr::filter(.data, ...)\n\n.data: A data frame.\n…: Logical conditions.\n\n\n\n\n\ndata |&gt; dplyr::filter(Age &gt; 25)\n\n\n  \n\n\n\nFilters rows where Age is greater than 25.\n\n\n\n\n\n\nCreates new columns or modifies existing ones.\n\n\n\ndplyr::mutate(.data, ...)\n\n.data: A data frame.\n…: Expressions for new or modified columns.\n\n\n\n\n\ndata |&gt; dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\n\n\n  \n\n\n\nAdds a Grade column based on Score."
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#in-depth-examples",
     "href": "appendix/r-packages/dplyr.html#in-depth-examples",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "Summarize scores by age groups.\n\n\n\n\ndata |&gt;\n    dplyr::mutate(AgeGroup = ifelse(Age &gt; 25, \"Above 25\", \"25 and Below\")) |&gt;\n    dplyr::group_by(AgeGroup) |&gt;\n    dplyr::summarize(MeanScore = mean(Score), .groups = \"drop\")\n\n\n  \n\n\n\n\n\n\nA table showing average scores for each age group.\n\n\n\n\n\n\nFind the top scorer in each age group.\n\n\n\n\ndata |&gt;\n    dplyr::group_by(Age) |&gt;\n    dplyr::arrange(desc(Score)) |&gt;\n    dplyr::slice(1)\n\n\n  \n\n\n\n\n\n\nTop scorer details by age."
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#advanced-features",
     "href": "appendix/r-packages/dplyr.html#advanced-features",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "data |&gt; dplyr::rename(FullName = Name)\n\n\n  \n\n\n\n\n\n\n\ndata |&gt;\n    dplyr::mutate(\n        NormalizedScore = Score / max(Score),\n        Status = ifelse(Age &gt; 30, \"Senior\", \"Junior\")\n    )\n\n\n  \n\n\n\n\n\n\n\nCombine with ggplot2 for visualization:\n\nlibrary(ggplot2)\ndata |&gt;\n    dplyr::mutate(Pass = Score &gt; 80) |&gt;\n    ggplot(aes(x = Age, y = Score, color = Pass)) +\n    geom_point() +\n    labs(title = \"Scores by Age\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse dplyr::filter() early in a pipeline to reduce rows.\nChain operations with |&gt; for clarity and efficiency."
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#troubleshooting-and-faqs",
     "href": "appendix/r-packages/dplyr.html#troubleshooting-and-faqs",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "Ensure column names are correctly spelled and case-sensitive.\n\n\n\nThis occurs when filtering results in zero rows. Check filter conditions.\n\n\n\n\n\nCan dplyr handle large datasets? Yes, but for very large data, consider data.table or databases with dbplyr.\nHow to retain row names? Convert them to a column with tibble::rownames_to_column()."
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#best-practices",
     "href": "appendix/r-packages/dplyr.html#best-practices",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "Use consistent column naming conventions.\nApply group_by() only when summarizing or calculating grouped statistics.\nDocument pipelines for reproducibility."
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#conclusion",
     "href": "appendix/r-packages/dplyr.html#conclusion",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "dplyr streamlines data manipulation with a readable syntax.\nKey functions cover selecting, filtering, mutating, and summarizing data.\n\n\n\n\nExplore dplyr advanced features like joins and window functions, or integrate with dbplyr for database operations."
   },
   {
     "objectID": "appendix/r-packages/dplyr.html#references-and-resources",
     "href": "appendix/r-packages/dplyr.html#references-and-resources",
-    "title": "Using the Dplyr Package in R",
+    "title": "Using the dplyr Package in R",
     "section": "",
     "text": "dplyr Documentation\nR for Data Science\nTidyverse GitHub"
   },
@@ -2443,36 +2513,36 @@
     "text": "R Documentation on interaction\nANOVA in R Tutorial"
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html",
-    "href": "appendix/r-base/r-sample-basic.html",
+    "objectID": "appendix/r-base/r-sample-basics.html",
+    "href": "appendix/r-base/r-sample-basics.html",
     "title": "Randomizing Treatments in R Using sample()",
     "section": "",
     "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html#function-description",
-    "href": "appendix/r-base/r-sample-basic.html#function-description",
+    "objectID": "appendix/r-base/r-sample-basics.html#function-description",
+    "href": "appendix/r-base/r-sample-basics.html#function-description",
     "title": "Randomizing Treatments in R Using sample()",
     "section": "",
     "text": "The sample() function operates on vectors or integers and uses random number generation to produce randomized output.\n\n\n\nx:\n\nA vector of elements to sample from.\nIf x is a single positive integer, sample() assumes x as 1:x (i.e., the sequence from 1 to x).\n\nsize:\n\nSpecifies the number of elements to sample. Default is the length of x (i.e., it permutes the entire input if size is not specified).\n\nreplace:\n\nLogical, determines if sampling is with replacement (TRUE) or without replacement (FALSE).\nDefault: FALSE.\n\nprob:\n\nA vector of weights for sampling probabilities. Weights are applied proportionally for sampling elements.\nDefault: NULL (uniform probabilities).\n\nuseHash (in sample.int):\n\nOptimizes sampling for large datasets when replace = FALSE, prob = NULL, and size &lt;= n/2.\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf replace = FALSE, size should not exceed the length of x. Otherwise, an error occurs."
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html#key-features",
-    "href": "appendix/r-base/r-sample-basic.html#key-features",
+    "objectID": "appendix/r-base/r-sample-basics.html#key-features",
+    "href": "appendix/r-base/r-sample-basics.html#key-features",
     "title": "Randomizing Treatments in R Using sample()",
     "section": "Key Features",
     "text": "Key Features\n\nRandom Permutation:\n\nIf no size is provided and replace = FALSE, the function shuffles all elements of x:\n\n\n\nset.seed(42) # For reproducibility\nsample(1:5)  # Outputs a random permutation, e.g., c(3, 5, 1, 4, 2)\n\n[1] 1 5 4 3 2\n\n\n\nWith Replacement:\n\nAllows sampling the same element multiple times:\n\n\n\nsample(1:3, size = 5, replace = TRUE)  # Outputs, e.g., c(1, 3, 2, 2, 1)\n\n[1] 2 2 1 3 3\n\n\n\nWeighted Sampling:\n\nSampling based on a specified probability vector:\n\n\n\nsample(1:3, size = 6, prob = c(0.1, 0.7, 0.2), replace = TRUE )  # Likely favors \"2\"\n\n[1] 2 2 1 1 2 2\n\n\n\nDefault Behavior with Single Numeric x:\n\nTreats x as 1:x:\n\n\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 2 3 4 1 5\n\n\n\nEdge Cases:\n\nIf size = 0 and x is empty or has length zero, the result is a zero-length vector.\nNon-integer x or n is truncated to the nearest smaller integer."
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html#examples",
-    "href": "appendix/r-base/r-sample-basic.html#examples",
+    "objectID": "appendix/r-base/r-sample-basics.html#examples",
+    "href": "appendix/r-base/r-sample-basics.html#examples",
     "title": "Randomizing Treatments in R Using sample()",
     "section": "Examples",
     "text": "Examples\n\n1. Random Permutation\n\nx &lt;- c(\"A\", \"B\", \"C\", \"D\")\nsample(x)  # Randomly shuffles elements, e.g., c(\"C\", \"A\", \"D\", \"B\")\n\n[1] \"C\" \"A\" \"D\" \"B\"\n\n\n\n\n2. Sampling With Replacement\n\nsample(1:4, size = 6, replace = TRUE)\n\n[1] 1 4 2 4 4 3\n\n# Outputs, e.g., c(2, 4, 1, 3, 2, 4)\n\n\n\n3. Weighted Sampling\n\nsample(letters[1:5], size = 5, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE)\n\n[1] \"e\" \"a\" \"a\" \"d\" \"b\"\n\n# Heavily favors \"a\" in the output\n\n\n\n4. Default Behavior for Single Integer\n\nsample(5)  # Equivalent to sample(1:5)\n\n[1] 3 5 2 4 1\n\n\n\n\n5. Safeguarding Edge Cases with sample.int\n\n# Programmatically handle edge cases for length(x) &gt; 1:\nresample &lt;- function(x, ...) x[sample.int(length(x), ...)]\n\nx &lt;- 1:10\nresample(x[x &gt; 8])   # Properly handles cases where x has length &lt; 2\n\n[1] 10  9\n\nresample(x[x &gt; 10])  # Returns an empty vector safely\n\ninteger(0)"
   },
   {
-    "objectID": "appendix/r-base/r-sample-basic.html#best-practices",
-    "href": "appendix/r-base/r-sample-basic.html#best-practices",
+    "objectID": "appendix/r-base/r-sample-basics.html#best-practices",
+    "href": "appendix/r-base/r-sample-basics.html#best-practices",
     "title": "Randomizing Treatments in R Using sample()",
     "section": "Best Practices",
     "text": "Best Practices\n\nReproducibility: Use set.seed() to ensure reproducible randomization:\n\n\nset.seed(42)\nsample(1:5)\n\n[1] 1 5 4 3 2\n\n\n\nEdge Cases: Use sample.int for numeric sequences, especially in programmatic contexts, to avoid surprises with default sample() behavior.\nWeight Verification: Ensure that weights in prob are non-negative and not all zero.\nLarge Dataset Efficiency: Use useHash (via sample.int) for large n to optimize memory and performance."
@@ -3141,6 +3211,76 @@
     "title": "Tutorial: Using the emmeans R Package",
     "section": "Conclusion",
     "text": "Conclusion\nHandling interactions with more than two factors in emmeans allows you to explore complex relationships in your data effectively. By fitting models that include multiple interactions, computing estimated marginal means, and visualizing the results, you can gain a deeper understanding of how different factors influence the response variable."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html",
+    "href": "appendix/r-packages/multcomp.html",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "",
+    "text": "The multcomp package in R is designed for simultaneous inference in linear models, specifically focused on multiple comparisons. It provides tools to test hypotheses about multiple parameters in a model while controlling for family-wise error rates.\n\n\n\n\nComparing group means in ANOVA.\nSimultaneous confidence intervals.\nAdjusting p-values for multiple testing.\n\n\n\n\n\nHandles a variety of multiple comparison tests.\nProvides flexibility with user-defined contrasts.\nSupports many types of linear models, including generalized linear models and mixed-effects models."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#introduction",
+    "href": "appendix/r-packages/multcomp.html#introduction",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "",
+    "text": "The multcomp package in R is designed for simultaneous inference in linear models, specifically focused on multiple comparisons. It provides tools to test hypotheses about multiple parameters in a model while controlling for family-wise error rates.\n\n\n\n\nComparing group means in ANOVA.\nSimultaneous confidence intervals.\nAdjusting p-values for multiple testing.\n\n\n\n\n\nHandles a variety of multiple comparison tests.\nProvides flexibility with user-defined contrasts.\nSupports many types of linear models, including generalized linear models and mixed-effects models."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#getting-started",
+    "href": "appendix/r-packages/multcomp.html#getting-started",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "2. Getting Started",
+    "text": "2. Getting Started\n\nLoading the Package\n\n# Load the multcomp package\npacman::p_load(multcomp)\n\n\n\nBasic Usage\nLet’s start with a simple example:\n\n# Example dataset\ndata(warpbreaks)\n\n# Fit a linear model\nmodel &lt;- lm(breaks ~ wool + tension, data = warpbreaks)\n\n# Perform multiple comparisons\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\n\n# Summarize the results\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lm(formula = breaks ~ wool + tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.872  -2.582  0.03378 * \nH - L == 0  -14.722      3.872  -3.802  0.00112 **\nH - M == 0   -4.722      3.872  -1.219  0.44739   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\nExplanation\n\nmcp: Specifies the type of multiple comparisons (e.g., Tukey’s test).\nglht: General linear hypothesis testing function.\nsummary: Displays adjusted p-values and confidence intervals."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#key-functions-and-features",
+    "href": "appendix/r-packages/multcomp.html#key-functions-and-features",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "3. Key Functions and Features",
+    "text": "3. Key Functions and Features\n\nglht()\nDescription: Performs multiple comparisons or general linear hypothesis tests.\nSyntax:\nmultcomp::glht(model, linfct = mcp(\"factor\"=\"method\"))\nArguments:\n\nmodel: A fitted linear model object.\nlinfct: Defines the hypotheses to test (e.g., Tukey or user-defined contrasts).\n\nExample:\n\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lm(formula = breaks ~ wool + tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.872  -2.582  0.03361 * \nH - L == 0  -14.722      3.872  -3.802  0.00121 **\nH - M == 0   -4.722      3.872  -1.219  0.44743   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\n\nmcp()\nDescription: Creates predefined contrasts for a factor.\nSyntax:\nmcp(factor = \"method\")\nExample:\nlinfct = mcp(tension = \"Tukey\")"
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#in-depth-examples",
+    "href": "appendix/r-packages/multcomp.html#in-depth-examples",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "4. In-Depth Examples",
+    "text": "4. In-Depth Examples\n\nExample 1: ANOVA Multiple Comparisons\nObjective: Compare tension levels in warpbreaks dataset.\nSteps:\n\nFit the model:\n\n\nmodel &lt;- aov(breaks ~ tension, data = warpbreaks)\n\n\nPerform Tukey’s test:\n\n\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: aov(formula = breaks ~ tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)   \nM - L == 0  -10.000      3.960  -2.525   0.0383 * \nH - L == 0  -14.722      3.960  -3.718   0.0014 **\nH - M == 0   -4.722      3.960  -1.192   0.4631   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\nVisualize the results:\n\n\nplot(comparison)\n\n\n\n\n\n\n\n\nOutput: Provides adjusted p-values and confidence intervals."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#advanced-features",
+    "href": "appendix/r-packages/multcomp.html#advanced-features",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "5. Advanced Features",
+    "text": "5. Advanced Features\n\nCustom Contrasts\nCreate user-defined contrasts:\n\ncontrast_matrix &lt;- rbind(\n    \"M - L\" = c(-1, 1, 0),\n    \"H - L\" = c(-1, 0, 1),\n    \"H - M\" = c(0, -1, 1)\n)\ncomparison &lt;- glht(model, linfct = contrast_matrix)\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nFit: aov(formula = breaks ~ tension, data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error t value Pr(&gt;|t|)    \nM - L == 0  -46.389      6.262  -7.408   &lt;1e-04 ***\nH - L == 0  -51.111      6.262  -8.163   &lt;1e-04 ***\nH - M == 0   -4.722      3.960  -1.192    0.456    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\n\nIntegration with Mixed-Effects Models\nSupports models from lme4:\n\nlibrary(lme4)\nmodel &lt;- lmer(breaks ~ tension + (1 | wool), data = warpbreaks)\ncomparison &lt;- glht(model, linfct = mcp(tension = \"Tukey\"))\nsummary(comparison)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: lmer(formula = breaks ~ tension + (1 | wool), data = warpbreaks)\n\nLinear Hypotheses:\n           Estimate Std. Error z value Pr(&gt;|z|)    \nM - L == 0  -10.000      3.872  -2.582  0.02638 *  \nH - L == 0  -14.722      3.872  -3.802  0.00039 ***\nH - M == 0   -4.722      3.872  -1.219  0.44161    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)"
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#troubleshooting-and-faqs",
+    "href": "appendix/r-packages/multcomp.html#troubleshooting-and-faqs",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "6. Troubleshooting and FAQs",
+    "text": "6. Troubleshooting and FAQs\n\nCommon Issues\n\nError: Non-conformable arguments\n\nEnsure the linfct matches the model’s factor levels.\n\nConfusion with model types\n\nUse glht with models that support linear hypotheses (e.g., lm, lmer).\n\n\n\n\nFAQs\n\nCan multcomp handle unbalanced data? Yes, but ensure your model accounts for this."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#best-practices",
+    "href": "appendix/r-packages/multcomp.html#best-practices",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "7. Best Practices",
+    "text": "7. Best Practices\n\nAlways check model diagnostics before multiple comparisons.\nUse visualizations like plot() to complement numerical results.\nFor large datasets, consider summarizing key results to avoid overloading the output."
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#conclusion",
+    "href": "appendix/r-packages/multcomp.html#conclusion",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "8. Conclusion",
+    "text": "8. Conclusion\n\nSummary\nThe multcomp package is a robust tool for conducting multiple comparisons in R, providing flexibility and accuracy.\n\n\nNext Steps\nExplore interactions in models and extend functionality with packages like emmeans.\n\n\nEncouragement\nExperiment with different datasets to build confidence in interpreting outputs!"
+  },
+  {
+    "objectID": "appendix/r-packages/multcomp.html#references-and-resources",
+    "href": "appendix/r-packages/multcomp.html#references-and-resources",
+    "title": "Tutorial: Using the multcomp R Package",
+    "section": "9. References and Resources",
+    "text": "9. References and Resources\n\nPackage Documentation\nExamples on CRAN"
   },
   {
     "objectID": "appendix/r-packages/pwr.html",
