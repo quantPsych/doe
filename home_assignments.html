@@ -196,11 +196,22 @@ Important
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
-<li><strong>Visit the Assignment Page</strong>: Click on the <a href="https://Data-Wise.github.io/doe/assignments">Assignments</a> page to access the assignment list. Then, click on the assignment link you wish to complete.</li>
-<li><strong>Download the Assignment Template Quarto File</strong>: Click on the <a href="./resources/template_assignment_quarto.pdf">Assignment Template link</a> to download the <code>.qmd</code> file. Rename the file as follows: <code>assignmentX_yourlastname.qmd</code>.</li>
+<li><strong>Visit the Assignment Page</strong>: Click on the <a href="https://Data-Wise.github.io/doe/home_assignments.html">Assignments</a> page to access the assignment list. Then, click on the assignment link you wish to complete.</li>
+<li><strong>Download the Assignment Template Quarto File</strong>: Click on the <a href="https://raw.githubusercontent.com/Data-Wise/misc/refs/heads/main/template_assignment_quarto.qmd">Assignment Template link</a> to download the <code>.qmd</code> file. One your browser, right-click on the page and select <code>Save As</code>, type the file name as <code>assignmentX_yourlastname.qmd</code>, and save it to your local machine.
+<ul>
+<li><em>Note</em>. Make sure the extension of the file is <code>.qmd</code> and not <code>.txt</code>.</li>
+</ul></li>
 <li><strong>Open in Quarto IDE</strong>: Use your preferred Quarto-supported IDE (e.g., RStudio, VS Code).</li>
-<li><strong>Complete the Assignment</strong>: Follow the instructions provided for each assignment and complete the tasks.</li>
-<li><strong>Render to PDF</strong>: Render the <code>.qmd</code> file to <code>PDF</code> format.</li>
+<li><strong>Complete the Assignment</strong>: Follow the instructions provided for each assignment and complete the tasks.
+<ul>
+<li>Esnure that you provide your name and the date at the top of the file in the YAML metadata section located at the beginning of the file (e.g., <code>title</code>, <code>author</code>).</li>
+<li>You do <strong>not</strong> need to modify other parts of the YAML metadata.</li>
+</ul></li>
+<li><strong>Render to PDF</strong>: Render the quartofile. The default output format is PDF.
+<ul>
+<li><strong>RStudio</strong>: Click on the <code>Knit</code> button.</li>
+<li><strong>VS Code</strong>: Use the Quarto extension to render the PDF. Make sure the Quarto extension is installed.</li>
+</ul></li>
 <li><strong>Submit on Canvas</strong>: Upload the rendered PDF on <a href="https://canvasinfo.unm.edu">Canvas</a> under the corresponding assignment section.</li>
 </ol>
 </section>
