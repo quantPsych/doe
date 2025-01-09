@@ -9,7 +9,7 @@
 <meta name="author" content="Davood Tofighi, Ph.D.">
 <meta name="dcterms.date" content="2025-01-06">
 
-<title>Creating Data Frames in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Hypothesis Testing Basics – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,9 +76,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-eefef9cbcf3c78c39c3688c31e307d65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,11 +110,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../assets/styles/css/home.css">
-<meta property="og:title" content="Creating Data Frames in R – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-topics/r-data-frames-basics_files/figure-html/unnamed-chunk-10-1.png">
+<meta property="og:title" content="Hypothesis Testing Basics – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-topics/assets/images/logo.png">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -180,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Creating Data Frames in R</h1>
+      <h1 class="title">Hypothesis Testing Basics</h1>
                       </div>
   </div>
     
@@ -219,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#creating-data-frames-in-r" id="toc-creating-data-frames-in-r" class="nav-link active" data-scroll-target="#creating-data-frames-in-r">Creating Data Frames in R</a>
+  <li><a href="#hypothesis-testing-in-r" id="toc-hypothesis-testing-in-r" class="nav-link active" data-scroll-target="#hypothesis-testing-in-r">Hypothesis Testing in R</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
@@ -230,24 +225,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
   <li><a href="#loading-the-package" id="toc-loading-the-package" class="nav-link" data-scroll-target="#loading-the-package">Loading the Package</a></li>
-  <li><a href="#basic-usage-in-base-r" id="toc-basic-usage-in-base-r" class="nav-link" data-scroll-target="#basic-usage-in-base-r">Basic Usage in Base R</a></li>
-  <li><a href="#basic-usage-in-tidyverse" id="toc-basic-usage-in-tidyverse" class="nav-link" data-scroll-target="#basic-usage-in-tidyverse">Basic Usage in <code>tidyverse</code></a></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
   </ul></li>
   <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
   <ul class="collapse">
-  <li><a href="#base-r-functions" id="toc-base-r-functions" class="nav-link" data-scroll-target="#base-r-functions">Base R Functions</a></li>
-  <li><a href="#tidyverse-functions" id="toc-tidyverse-functions" class="nav-link" data-scroll-target="#tidyverse-functions"><code>tidyverse</code> Functions</a></li>
+  <li><a href="#t.test" id="toc-t.test" class="nav-link" data-scroll-target="#t.test"><code>t.test()</code></a></li>
+  <li><a href="#chisq.test" id="toc-chisq.test" class="nav-link" data-scroll-target="#chisq.test"><code>chisq.test()</code></a></li>
+  <li><a href="#wilcox.test" id="toc-wilcox.test" class="nav-link" data-scroll-target="#wilcox.test"><code>wilcox.test()</code></a></li>
   </ul></li>
   <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
   <ul class="collapse">
-  <li><a href="#example-1-joining-data-frames" id="toc-example-1-joining-data-frames" class="nav-link" data-scroll-target="#example-1-joining-data-frames">Example 1: Joining Data Frames</a></li>
-  <li><a href="#example-2-filtering-and-selecting" id="toc-example-2-filtering-and-selecting" class="nav-link" data-scroll-target="#example-2-filtering-and-selecting">Example 2: Filtering and Selecting</a></li>
+  <li><a href="#comparing-means-across-groups" id="toc-comparing-means-across-groups" class="nav-link" data-scroll-target="#comparing-means-across-groups">Comparing Means Across Groups</a></li>
+  <li><a href="#goodness-of-fit-test" id="toc-goodness-of-fit-test" class="nav-link" data-scroll-target="#goodness-of-fit-test">Goodness-of-Fit Test</a></li>
   </ul></li>
   <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
   <ul class="collapse">
   <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
-  <li><a href="#integration-with-visualization" id="toc-integration-with-visualization" class="nav-link" data-scroll-target="#integration-with-visualization">Integration with Visualization</a></li>
-  <li><a href="#optimization-tips" id="toc-optimization-tips" class="nav-link" data-scroll-target="#optimization-tips">Optimization Tips</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration">Integration</a></li>
+  <li><a href="#optimization" id="toc-optimization" class="nav-link" data-scroll-target="#optimization">Optimization</a></li>
   </ul></li>
   <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
   <ul class="collapse">
@@ -255,11 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
-  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
   </ul></li>
   </ul>
@@ -272,32 +263,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="creating-data-frames-in-r" class="level1">
-<h1>Creating Data Frames in R</h1>
+<section id="hypothesis-testing-in-r" class="level1">
+<h1>Hypothesis Testing in R</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Hypothesis testing is a cornerstone of statistical analysis, used to evaluate assumptions about population parameters based on sample data. In R, several functions and packages provide extensive tools for hypothesis testing, ranging from basic tests in base R to more specialized tests available in external packages.</p>
 <section id="overview" class="level3">
 <h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:</p>
 <ul>
-<li><strong>Base R Functions:</strong> <code>data.frame()</code> and <code>as.data.frame()</code>.</li>
-<li><strong><code>tidyverse</code> Functions:</strong> <code>tibble::tibble()</code> and <code>dplyr::data_frame()</code>.</li>
+<li><strong>Packages/Functions:</strong>
+<ul>
+<li>Base R: <code>t.test()</code>, <code>chisq.test()</code>, <code>var.test()</code>, <code>wilcox.test()</code></li>
+<li>Additional Packages: <code>stats::ks.test()</code>, <code>MASS::leveneTest()</code></li>
+</ul></li>
+<li><strong>Purpose:</strong>
+<ul>
+<li>To evaluate assumptions or hypotheses about data distributions and relationships.</li>
+</ul></li>
+<li><strong>Common Functions:</strong>
+<ul>
+<li><code>t.test()</code> for t-tests.</li>
+<li><code>chisq.test()</code> for Chi-square tests.</li>
+<li><code>ks.test()</code> for Kolmogorov-Smirnov tests.</li>
+<li><code>wilcox.test()</code> for non-parametric Wilcoxon tests.</li>
+</ul></li>
 </ul>
-<p>Data frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.</p>
 </section>
 <section id="use-cases" class="level3">
 <h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
 <ul>
-<li>Cleaning and structuring raw data.</li>
-<li>Aggregating results from computations.</li>
-<li>Preparing data for visualization or modeling.</li>
+<li>Comparing means between two groups.</li>
+<li>Assessing the goodness-of-fit for categorical data.</li>
+<li>Testing for equal variances across groups.</li>
+<li>Non-parametric comparisons for skewed or ordinal data.</li>
 </ul>
 </section>
 <section id="benefits" class="level3">
 <h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
 <ul>
-<li><strong>Base R:</strong> Straightforward and widely supported.</li>
-<li><strong><code>tidyverse</code>:</strong> Intuitive syntax, compatibility with the pipe operator <code>|&gt;</code>, and enhanced features like printing.</li>
+<li>Easy to implement with a range of built-in functions.</li>
+<li>Highly extensible for complex scenarios.</li>
+<li>Seamless integration with visualization and other analytical tools.</li>
 </ul>
 </section>
 </section>
@@ -305,107 +311,132 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
 <section id="loading-the-package" class="level3">
 <h3 class="anchored" data-anchor-id="loading-the-package">Loading the Package</h3>
+<p>Base R provides most hypothesis testing tools. Additional packages like <code>MASS</code> can be used for specialized tests.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use pacman to load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="basic-usage-in-base-r" class="level3">
-<h3 class="anchored" data-anchor-id="basic-usage-in-base-r">Basic Usage in Base R</h3>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<section id="example-one-sample-t-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-one-sample-t-test">Example: One-Sample T-test</h4>
+<p>Testing whether the mean of a sample is equal to a specific value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple data frame</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_base <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">c</span>(<span class="fl">85.5</span>, <span class="fl">90.3</span>, <span class="fl">78.9</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data_base</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sample_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(sample_data, <span class="at">mu =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  sample_data
+t = 0.29933, df = 29, p-value = 0.7668
+alternative hypothesis: true mean is not equal to 5
+95 percent confidence interval:
+ 4.199903 6.074444
+sample estimates:
+mean of x 
+ 5.137174 </code></pre>
 </div>
 </div>
-</div>
+<hr>
 </section>
-<section id="basic-usage-in-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="basic-usage-in-tidyverse">Basic Usage in <code>tidyverse</code></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a tibble</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data_tidy <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">c</span>(<span class="fl">85.5</span>, <span class="fl">90.3</span>, <span class="fl">78.9</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>data_tidy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="key-functions-and-features" class="level2">
 <h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
-<section id="base-r-functions" class="level3">
-<h3 class="anchored" data-anchor-id="base-r-functions">Base R Functions</h3>
+<section id="t.test" class="level3">
+<h3 class="anchored" data-anchor-id="t.test"><code>t.test()</code></h3>
 <section id="description" class="level4">
 <h4 class="anchored" data-anchor-id="description">Description</h4>
-<p><code>data.frame()</code> creates data frames from vectors or lists.</p>
+<p>Performs one-sample, two-sample, and paired t-tests to compare means.</p>
 </section>
 <section id="syntax" class="level4">
 <h4 class="anchored" data-anchor-id="syntax">Syntax</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(x, ..., <span class="at">row.names =</span> <span class="cn">NULL</span>, <span class="at">check.rows =</span> <span class="cn">FALSE</span>, <span class="at">check.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>x, y</code>: Numeric vectors of data values.</li>
+<li><code>alternative</code>: Type of hypothesis (“two.sided”, “greater”, “less”).</li>
+<li><code>mu</code>: Hypothesized mean (default is 0).</li>
+<li><code>paired</code>: Whether the test is paired (default is <code>FALSE</code>).</li>
+<li><code>var.equal</code>: Assume equal variances (default is <code>FALSE</code>).</li>
+</ul>
 </section>
-<section id="example" class="level4">
-<h4 class="anchored" data-anchor-id="example">Example</h4>
+<section id="example-two-sample-t-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-two-sample-t-test">Example: Two-Sample T-test</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Category =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">150</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data_example</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Category"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Value"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"A","3":"100"},{"1":"2","2":"B","3":"200"},{"1":"3","2":"A","3":"150"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">5</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">6</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(group1, group2, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  group1 and group2
+t = -4.6894, df = 38, p-value = 3.486e-05
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -2.1057327 -0.8358574
+sample estimates:
+mean of x mean of y 
+ 4.807940  6.278735 </code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="tidyverse-functions" class="level3">
-<h3 class="anchored" data-anchor-id="tidyverse-functions"><code>tidyverse</code> Functions</h3>
+<section id="chisq.test" class="level3">
+<h3 class="anchored" data-anchor-id="chisq.test"><code>chisq.test()</code></h3>
 <section id="description-1" class="level4">
 <h4 class="anchored" data-anchor-id="description-1">Description</h4>
-<p><code>tibble::tibble()</code> constructs modern data frames with automatic column type detection.</p>
+<p>Tests for independence or goodness-of-fit in categorical data.</p>
 </section>
 <section id="syntax-1" class="level4">
 <h4 class="anchored" data-anchor-id="syntax-1">Syntax</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">correct =</span> <span class="cn">TRUE</span>, <span class="at">simulate.p.value =</span> <span class="cn">FALSE</span>, <span class="at">rescale.p =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="example-1" class="level4">
-<h4 class="anchored" data-anchor-id="example-1">Example</h4>
+<section id="example-independence-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-independence-test">Example: Independence Test</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_tidy_example <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Category =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">150</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>data_tidy_example</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Category"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Value"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"A","3":"100"},{"1":"2","2":"B","3":"200"},{"1":"3","2":"A","3":"150"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">40</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(observed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  observed
+X-squared = 0.10954, df = 1, p-value = 0.7407</code></pre>
 </div>
+</div>
+</section>
+</section>
+<section id="wilcox.test" class="level3">
+<h3 class="anchored" data-anchor-id="wilcox.test"><code>wilcox.test()</code></h3>
+<section id="description-2" class="level4">
+<h4 class="anchored" data-anchor-id="description-2">Description</h4>
+<p>Performs the Wilcoxon rank-sum test (non-parametric alternative to the t-test).</p>
+</section>
+<section id="syntax-2" class="level4">
+<h4 class="anchored" data-anchor-id="syntax-2">Syntax</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span>), <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">exact =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-wilcoxon-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-wilcoxon-test">Example: Wilcoxon Test</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">1</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(x, y, <span class="at">alternative =</span> <span class="st">"less"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum exact test
+
+data:  x and y
+W = 271, p-value = 0.003824
+alternative hypothesis: true location shift is less than 0</code></pre>
 </div>
 </div>
 </section>
@@ -413,54 +444,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="in-depth-examples" class="level2">
 <h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
-<section id="example-1-joining-data-frames" class="level3">
-<h3 class="anchored" data-anchor-id="example-1-joining-data-frames">Example 1: Joining Data Frames</h3>
+<section id="comparing-means-across-groups" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-means-across-groups">Comparing Means Across Groups</h3>
+<section id="title-paired-t-test-for-preand-post-treatment-data" class="level4">
+<h4 class="anchored" data-anchor-id="title-paired-t-test-for-preand-post-treatment-data">Title: Paired T-test for Preand Post-Treatment Data</h4>
+</section>
 <section id="objective" class="level4">
 <h4 class="anchored" data-anchor-id="objective">Objective</h4>
-<p>Combine two data frames by a common key.</p>
+<p>Evaluate the effect of a treatment by comparing preand post-treatment scores.</p>
 </section>
 <section id="steps" class="level4">
 <h4 class="anchored" data-anchor-id="steps">Steps</h4>
+<ol type="1">
+<li>Prepare the data.</li>
+<li>Apply the paired t-test.</li>
+<li>Visualize the differences.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">Value1 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">ID =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">Value2 =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(df1, df2, <span class="at">by =</span> <span class="st">"ID"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>merged</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Value1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Value2"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"10","3":"NA"},{"1":"2","2":"20","3":"40"},{"1":"3","2":"30","3":"50"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">15</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">15</span>, <span class="dv">17</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(pre, post, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  pre and post
+t = -7.9057, df = 5, p-value = 0.0005211
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.208593 -1.124740
+sample estimates:
+mean difference 
+      -1.666667 </code></pre>
 </div>
 </div>
 </section>
 <section id="output" class="level4">
 <h4 class="anchored" data-anchor-id="output">Output</h4>
-<p>Observe how <code>NA</code> fills for unmatched rows.</p>
+<p>Interpret the p-value to determine if there is a significant difference between preand post-treatment scores.</p>
 </section>
 </section>
-<section id="example-2-filtering-and-selecting" class="level3">
-<h3 class="anchored" data-anchor-id="example-2-filtering-and-selecting">Example 2: Filtering and Selecting</h3>
+<section id="goodness-of-fit-test" class="level3">
+<h3 class="anchored" data-anchor-id="goodness-of-fit-test">Goodness-of-Fit Test</h3>
+<section id="title-testing-dice-fairness" class="level4">
+<h4 class="anchored" data-anchor-id="title-testing-dice-fairness">Title: Testing Dice Fairness</h4>
+</section>
 <section id="objective-1" class="level4">
 <h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
-<p>Filter rows where <code>Value1 &gt; 15</code> and select specific columns.</p>
+<p>Check if a six-sided die is fair.</p>
 </section>
 <section id="steps-1" class="level4">
 <h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
+<ol type="1">
+<li>Collect observed frequencies of each side.</li>
+<li>Specify expected frequencies.</li>
+<li>Apply the Chi-square goodness-of-fit test.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> merged <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(Value1 <span class="sc">&gt;</span> <span class="dv">15</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ID, Value1)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>filtered</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Value1"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"20"},{"1":"3","2":"30"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">16</span>, <span class="dv">10</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">6</span>) <span class="sc">*</span> <span class="fu">sum</span>(observed)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(observed, <span class="at">p =</span> expected <span class="sc">/</span> <span class="fu">sum</span>(expected))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  observed
+X-squared = 1.75, df = 5, p-value = 0.8825</code></pre>
 </div>
 </div>
-</div>
+</section>
+<section id="output-1" class="level4">
+<h4 class="anchored" data-anchor-id="output-1">Output</h4>
+<p>Evaluate the p-value to determine if the die is fair.</p>
 </section>
 </section>
 </section>
@@ -468,58 +525,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
 <section id="customization" class="level3">
 <h3 class="anchored" data-anchor-id="customization">Customization</h3>
-<section id="adjust-column-names" class="level4">
-<h4 class="anchored" data-anchor-id="adjust-column-names">Adjust Column Names</h4>
+<section id="adjusting-confidence-levels" class="level4">
+<h4 class="anchored" data-anchor-id="adjusting-confidence-levels">Adjusting Confidence Levels</h4>
+<p>Set custom confidence levels in tests:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_base) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"FullName"</span>, <span class="st">"Years"</span>, <span class="st">"ExamScore"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data_base</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(group1, group2, <span class="at">conf.level =</span> <span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  group1 and group2
+t = -4.6894, df = 37.995, p-value = 3.487e-05
+alternative hypothesis: true difference in means is not equal to 0
+99 percent confidence interval:
+ -2.3212628 -0.6203274
+sample estimates:
+mean of x mean of y 
+ 4.807940  6.278735 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="integration" class="level3">
+<h3 class="anchored" data-anchor-id="integration">Integration</h3>
+<section id="using-hypothesis-testing-with-dplyr" class="level4">
+<h4 class="anchored" data-anchor-id="using-hypothesis-testing-with-dplyr">Using Hypothesis Testing with <code>dplyr</code></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">t_result =</span> <span class="fu">list</span>(<span class="fu">t.test</span>(mpg <span class="sc">~</span> <span class="fu">as.factor</span>(am))<span class="sc">$</span>p.value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["FullName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Years"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["ExamScore"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alice","2":"25","3":"85.5"},{"1":"Bob","2":"30","3":"90.3"},{"1":"Charlie","2":"35","3":"78.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["cyl"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["t_result"],"name":[2],"type":["list"],"align":["right"]}],"data":[{"1":"4","2":"<dbl [1]>"},{"1":"6","2":"<dbl [1]>"},{"1":"8","2":"<dbl [1]>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 </div>
 </section>
-<section id="add-calculated-columns" class="level4">
-<h4 class="anchored" data-anchor-id="add-calculated-columns">Add Calculated Columns</h4>
+</section>
+<section id="optimization" class="level3">
+<h3 class="anchored" data-anchor-id="optimization">Optimization</h3>
+<section id="managing-large-datasets" class="level4">
+<h4 class="anchored" data-anchor-id="managing-large-datasets">Managing Large Datasets</h4>
+<p>Use vectorized operations or summary statistics for efficiency:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_tidy <span class="ot">&lt;-</span> data_tidy <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Grade =</span> <span class="fu">ifelse</span>(Score <span class="sc">&gt;</span> <span class="dv">80</span>, <span class="st">"Pass"</span>, <span class="st">"Fail"</span>))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data_tidy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Score"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Grade"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Alice","2":"25","3":"85.5","4":"Pass"},{"1":"Bob","2":"30","3":"90.3","4":"Pass"},{"1":"Charlie","2":"35","3":"78.9","4":"Fail"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="integration-with-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="integration-with-visualization">Integration with Visualization</h3>
-<p>Generate a plot from the data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data_tidy, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> Score)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age vs. Score"</span>, <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="r-data-frames-basics_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="r-data-frames-basics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>large_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e6</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(large_data, <span class="at">mu =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  large_data
+t = 0.59109, df = 1e+06, p-value = 0.5545
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ -0.001370263  0.002553645
+sample estimates:
+   mean of x 
+0.0005916909 </code></pre>
 </div>
 </div>
 </section>
-<section id="optimization-tips" class="level3">
-<h3 class="anchored" data-anchor-id="optimization-tips">Optimization Tips</h3>
-<ul>
-<li>Use <code>data.table</code> for large data sets.</li>
-<li>Predefine column types for better memory usage.</li>
-</ul>
 </section>
 </section>
 <section id="troubleshooting-and-faqs" class="level2">
@@ -527,49 +596,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="common-issues" class="level3">
 <h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
 <ol type="1">
-<li><strong>Data Mismatch:</strong> Ensure column lengths match when creating data frames.</li>
-</ol>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Error example</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># data.frame(a = 1:3, b = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="2" type="1">
-<li><strong>Type Conversion Warnings:</strong> Avoid unintended type coercion by specifying <code>stringsAsFactors = FALSE</code>.</li>
+<li><strong>Error: Data must be numeric</strong>
+<ul>
+<li>Ensure data is numeric by using <code>as.numeric()</code>.</li>
+</ul></li>
+<li><strong>Warning: p-value approximation</strong>
+<ul>
+<li>Increase the sample size or use <code>simulate.p.value = TRUE</code>.</li>
+</ul></li>
 </ol>
 </section>
 <section id="faqs" class="level3">
 <h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
+<ol type="1">
+<li><strong>What is the minimum sample size for a t-test?</strong>
 <ul>
-<li><strong>Why use <code>tibble</code>?</strong> <code>tibble</code> provides cleaner, more readable output, and better handling of column names and types.</li>
-</ul>
+<li>At least 5 observations per group are recommended.</li>
+</ul></li>
+<li><strong>Can I test for normality before t-tests?</strong>
+<ul>
+<li>Use <code>shapiro.test()</code> to check normality.</li>
+</ul></li>
+</ol>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
 <ul>
-<li>Use consistent column names and data types.</li>
-<li>Validate data integrity before further processing.</li>
-<li>Leverage <code>tidyverse</code> pipes for readability and maintainability.</li>
+<li>Always visualize your data before performing tests.</li>
+<li>Check assumptions (e.g., normality for t-tests, independence for Chi-square tests).</li>
+<li>Use appropriate alternatives (e.g., Wilcoxon test for non-normal data).</li>
 </ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<ul>
-<li>Base R is great for quick setups and legacy code.</li>
-<li><code>tidyverse</code> excels for scalable, readable, and modern workflows.</li>
-</ul>
-</section>
-<section id="next-steps" class="level3">
-<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
-<p>Explore advanced techniques like <code>data.table</code> or <code>R6</code> for complex data operations.</p>
-</section>
+<p>Hypothesis testing in R is a versatile and powerful tool for statistical analysis. From basic t-tests to advanced non-parametric methods, R provides comprehensive support for validating assumptions and making data-driven decisions.</p>
 </section>
 <section id="references-and-resources" class="level2">
 <h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
 <ul>
-<li><a href="https://www.rdocumentation.org/">Base R Documentation</a></li>
-<li><a href="https://www.tidyverse.org/">Tidyverse Guide</a></li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a href="https://www.rdocumentation.org/">R Documentation</a></li>
+<li><a href="https://www.r-graph-gallery.com/">R Graph Gallery</a></li>
+<li><a href="https://www.datacamp.com/">R Hypothesis Testing Guide</a></li>
 </ul>
 
 
@@ -1007,38 +1075,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
