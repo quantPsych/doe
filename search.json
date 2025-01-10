@@ -1532,19 +1532,7 @@
     "href": "home_appendix.html#r-help-and-documentation",
     "title": "Appendix",
     "section": "R Help and Documentation",
-    "text": "R Help and Documentation\nFor the whole list of R functions and packages, refer to the R help Page for the Course.\n\nR Functions and Packages Provided by the Instructor\n\n\nR Subjects and Topics:\n\nSubjects and Topics\nR Base Functions\nR Packages\n\nOnline R Help:\n\nCRAN R Documentation\nRStudio Cheat Sheets\n\nVideo Tutorials:\n\nR Programming for Beginners (YouTube)",
-    "crumbs": [
-      "Home",
-      "Resources",
-      "Appendix"
-    ]
-  },
-  {
-    "objectID": "home_appendix.html#software-tools-and-resources",
-    "href": "home_appendix.html#software-tools-and-resources",
-    "title": "Appendix",
-    "section": "Software Tools and Resources",
-    "text": "Software Tools and Resources\nTo complete assignments and analyses, you will need access to R and related tools.\n\nR Installation: Download R\n\nRStudio IDE: Download RStudio\n\nVS Code IDE: Download VS Code\nPositron IDE: Positron\n\n\nAdditional Resources\n\nQuarto Documentation: Learn Quarto\nR for Data Science: R4DS Book\nOnline R Help:\n\nCRAN R Documentation\nRStudio Cheat Sheets\n\nVideo Tutorials:\n\nR Programming for Beginners (YouTube)",
+    "text": "R Help and Documentation\nFor the whole list of R functions and packages, refer to the R help Page for the Course.",
     "crumbs": [
       "Home",
       "Resources",
@@ -4170,7 +4158,7 @@
     "href": "r_help.html",
     "title": "R Help and Tutorial",
     "section": "",
-    "text": "Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on Subjects, Topics, and implementation through R Base and Packages.\n\n\nBelow are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\nData Transformation and Wrangling\nHow to Import Data Into R from DataCamp.\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression from DataCamp.\nANOVA in R from DataNovia.\n\nProgramming with R\n\nControl Structures from Roger D. Peng.\nWriting Functions from Hadley Wickham.\nDebugging from Hadley Wickham.\nDebugging with the RStudio IDE from Positron RStudio Support.\n\n\n\n\n\n\n\ngl: Generate Factor Levels\ninteraction: Create Interaction Terms\nmodel.tables: Extract Tables from Model Fits\nplot.design: Plot Univariate Effects of a Design or Model\nrep: Replicate Elements of Vectors and Lists\nreplications: Generate Replicate Numbers\nsample: Randomly Sample Elements from a Vector\nBase R Plotting \n\n\n\n\n\n\n\n\n\n\n\ndplyr\ntidyr\npurrr\nstringr\n\n\n\n\n\nggplot2\n\n\n\n\n\nemmeans\nmultcomp\npwr\n\n\n\n\n\n\nQuarto Tutorial\nRStudio IDE\nVS Code Editor\nQuarto Authoring with RStudio\nQuarto Authoring with VS Code\n\n\n\n\n\nR Documentation: User-friendly interface to R documentation.\nRStudio Cheatsheets: Quick reference guides for R and RStudio.\nR for Data Science: Online book on data science with R by Hadley Wickham and Garrett Grolemund.\nR Programming for Data Science Online book by Roger D. Peng.\nAdvanced R: Online book on advanced R programming by Hadley Wickham.\nPosit Community: Posit Community forum for R users.\nR Bloggers: Blog aggregator for R programming.\nStack Overflow R Tag: Stack Overflow questions tagged with R.\n\n\n\n\n\nExplore Subjects and Topics: Use the Subjects and Topics section to browse R concepts by category.\nR Base Help: Click on the R Base links to learn about core R functions.\nPackages Help: Dive into R packages to explore advanced features and functionalities.",
+    "text": "Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on Subjects, Topics, and implementation through R Base and Packages.\n\n\nBelow are the available subjects and their corresponding topics. Select a topic to view detailed help pages.\n\n\n\nData Manipulation\n\nCreating Data Frames\nWorking with Factors\nSubsetting Data\nData Transformation and Wrangling\nHow to Import Data Into R from DataCamp.\n\nData Visualization\n\nBase R Graphics\nggplot2 Basics\n\nStatistical Analysis\n\nHypothesis Testing\nRegression from DataCamp.\nANOVA in R from DataNovia.\n\nProgramming with R\n\nControl Structures from Roger D. Peng.\nWriting Functions from Hadley Wickham.\nDebugging from Hadley Wickham.\nDebugging with the RStudio IDE from Positron RStudio Support.",
     "crumbs": [
       "Home",
       "R Code and Datasets",
@@ -4190,23 +4178,11 @@
     ]
   },
   {
-    "objectID": "r_help.html#r-base-functions",
-    "href": "r_help.html#r-base-functions",
-    "title": "R Help and Tutorial",
-    "section": "",
-    "text": "gl: Generate Factor Levels\ninteraction: Create Interaction Terms\nmodel.tables: Extract Tables from Model Fits\nplot.design: Plot Univariate Effects of a Design or Model\nrep: Replicate Elements of Vectors and Lists\nreplications: Generate Replicate Numbers\nsample: Randomly Sample Elements from a Vector\nBase R Plotting",
-    "crumbs": [
-      "Home",
-      "R Code and Datasets",
-      "R Help"
-    ]
-  },
-  {
     "objectID": "r_help.html#r-packages",
     "href": "r_help.html#r-packages",
     "title": "R Help and Tutorial",
-    "section": "",
-    "text": "dplyr\ntidyr\npurrr\nstringr\n\n\n\n\n\nggplot2\n\n\n\n\n\nemmeans\nmultcomp\npwr",
+    "section": "Help by R Packages",
+    "text": "Help by R Packages\n\nData Manipulation\n\ndplyr\ntidyr\npurrr\nstringr\n\n\n\nData Visualization\n\nggplot2\n\n\n\nStatistical Analysis\n\nemmeans\nmultcomp\npwr\n\n\n\nQuarto Tutorial\n\nQuarto Tutorial",
     "crumbs": [
       "Home",
       "R Code and Datasets",
@@ -4214,11 +4190,11 @@
     ]
   },
   {
-    "objectID": "r_help.html#quarto-help-and-tutorial",
-    "href": "r_help.html#quarto-help-and-tutorial",
+    "objectID": "r_help.html#software-tools-and-resources",
+    "href": "r_help.html#software-tools-and-resources",
     "title": "R Help and Tutorial",
-    "section": "",
-    "text": "Quarto Tutorial\nRStudio IDE\nVS Code Editor\nQuarto Authoring with RStudio\nQuarto Authoring with VS Code",
+    "section": "Software Tools and Resources",
+    "text": "Software Tools and Resources\nTo complete assignments and analyses, you will need access to R and related tools.\n\nR Installation: Download R\n\nRStudio IDE: Download RStudio\n\nVS Code IDE: Download VS Code\nPositron IDE: Positron\nRStudio IDE\nVS Code Editor\nQuarto Authoring with RStudio\nQuarto Authoring with VS Code",
     "crumbs": [
       "Home",
       "R Code and Datasets",
@@ -4226,23 +4202,11 @@
     ]
   },
   {
-    "objectID": "r_help.html#general-r-help-and-resources",
-    "href": "r_help.html#general-r-help-and-resources",
+    "objectID": "r_help.html#additional-online-resources",
+    "href": "r_help.html#additional-online-resources",
     "title": "R Help and Tutorial",
-    "section": "",
-    "text": "R Documentation: User-friendly interface to R documentation.\nRStudio Cheatsheets: Quick reference guides for R and RStudio.\nR for Data Science: Online book on data science with R by Hadley Wickham and Garrett Grolemund.\nR Programming for Data Science Online book by Roger D. Peng.\nAdvanced R: Online book on advanced R programming by Hadley Wickham.\nPosit Community: Posit Community forum for R users.\nR Bloggers: Blog aggregator for R programming.\nStack Overflow R Tag: Stack Overflow questions tagged with R.",
-    "crumbs": [
-      "Home",
-      "R Code and Datasets",
-      "R Help"
-    ]
-  },
-  {
-    "objectID": "r_help.html#how-to-use-this-help-guide",
-    "href": "r_help.html#how-to-use-this-help-guide",
-    "title": "R Help and Tutorial",
-    "section": "",
-    "text": "Explore Subjects and Topics: Use the Subjects and Topics section to browse R concepts by category.\nR Base Help: Click on the R Base links to learn about core R functions.\nPackages Help: Dive into R packages to explore advanced features and functionalities.",
+    "section": "Additional Online Resources",
+    "text": "Additional Online Resources\n\nQuarto Documentation: Learn Quarto\nOnline R Help:\n\nCRAN R Documentation\nRStudio Cheat Sheets\n\nVideo Tutorials:\n\nR Programming for Beginners (YouTube)",
     "crumbs": [
       "Home",
       "R Code and Datasets",
