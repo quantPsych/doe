@@ -41,13 +41,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-536f8f2b87ed3368653a7b5af3e9c396.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-eefef9cbcf3c78c39c3688c31e307d65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -82,28 +82,76 @@ ul.task-list li input[type="checkbox"] {
 <meta property="og:image:width" content="1024">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 545</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./r_help.html"> 
+<span class="menu-text">R Help</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./home_appendix.html"> 
+<span class="menu-text">Appendix</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_appendix.html">Appendix</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_appendix.html">Resources</a></li><li class="breadcrumb-item"><a href="./home_appendix.html">Appendix</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_appendix.html">Resources</a></li><li class="breadcrumb-item"><a href="./home_appendix.html">Appendix</a></li></ol></nav>
       <h1 class="title">Appendix</h1>
             <p class="subtitle lead">Additional Resources and Help</p>
                       </div>
@@ -129,76 +177,122 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 7, 2025</p>
+        <p class="date-modified">January 10, 2025</p>
       </div>
     </div>
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">STAT 454/545 - Analysis of Variance and Experimental Design</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lecture Notes</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Materials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">R Code and Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Contents</span></a>
+  <a href="./appendix/r-code-data-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix/data-files-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets from the Book</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./home_appendix.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -218,32 +312,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul></li>
   <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
-  <li><a href="#r-data-files-for-design-and-analysis-of-experiments" id="toc-r-data-files-for-design-and-analysis-of-experiments" class="nav-link" data-scroll-target="#r-data-files-for-design-and-analysis-of-experiments">R Data Files for <em>Design and Analysis of Experiments</em></a>
-  <ul class="collapse">
-  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a">A</a></li>
-  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b">B</a></li>
-  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c">C</a></li>
-  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d">D</a></li>
-  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e">E</a></li>
-  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f">F</a></li>
-  <li><a href="#g" id="toc-g" class="nav-link" data-scroll-target="#g">G</a></li>
-  <li><a href="#h" id="toc-h" class="nav-link" data-scroll-target="#h">H</a></li>
-  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i">I</a></li>
-  <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l">L</a></li>
-  <li><a href="#m" id="toc-m" class="nav-link" data-scroll-target="#m">M</a></li>
-  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n">N</a></li>
-  <li><a href="#o" id="toc-o" class="nav-link" data-scroll-target="#o">O</a></li>
-  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p">P</a></li>
-  <li><a href="#q" id="toc-q" class="nav-link" data-scroll-target="#q">Q</a></li>
-  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
-  <li><a href="#s" id="toc-s" class="nav-link" data-scroll-target="#s">S</a></li>
-  <li><a href="#t" id="toc-t" class="nav-link" data-scroll-target="#t">T</a></li>
-  <li><a href="#u" id="toc-u" class="nav-link" data-scroll-target="#u">U</a></li>
-  <li><a href="#v" id="toc-v" class="nav-link" data-scroll-target="#v">V</a></li>
-  <li><a href="#w" id="toc-w" class="nav-link" data-scroll-target="#w">W</a></li>
-  <li><a href="#y" id="toc-y" class="nav-link" data-scroll-target="#y">Y</a></li>
-  <li><a href="#z" id="toc-z" class="nav-link" data-scroll-target="#z">Z</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -313,514 +381,13 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="r-code-and-data-files-from-the-textbook" class="level2">
 <h2 class="anchored" data-anchor-id="r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</h2>
-<p>The following table lists the R program files used in the textbook, along with the corresponding data files. Here is a link to the <a href="http://www.wright.edu/~dan.voss/DeanVossDraguljic.html">textbook website</a> for more information.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th><strong>R Code</strong></th>
-<th><strong>Data File</strong></th>
-<th><strong>Chapter and Problems</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="code/dean2017/startup.r">startup.r</a></td>
-<td></td>
-<td>Chapter 3: Sect. 3.9, starting R code for basic setup</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/soap.r">soap.r</a></td>
-<td><a href="data/dean2017/soap.txt">soap.txt</a></td>
-<td>Chapter 3: Sect. 3.9.2, soap randomization study</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/soap2.r">soap2.r</a></td>
-<td><a href="data/dean2017/soap.txt">soap.txt</a></td>
-<td>Chapter 3: Sect. 3.9.4, follow-up soap analysis</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/battery.r">battery.r</a></td>
-<td><a href="data/dean2017/battery.txt">battery.txt</a></td>
-<td>Chapter 4: Sect. 4.7, battery example for confidence intervals</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/mungbean.r">mungbean.r</a></td>
-<td><a href="data/dean2017/mungbean.txt">mungbean.txt</a></td>
-<td>Chapter 5: Sect. 5.9.1, mung bean experiment</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/mungbean2.r">mungbean2.r</a></td>
-<td><a href="data/dean2017/mungbean.txt">mungbean.txt</a></td>
-<td>Chapter 5: Sect. 5.9.2, continuation of mung bean analysis</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/trout.r">trout.r</a></td>
-<td><a href="data/dean2017/trout.txt">trout.txt</a></td>
-<td>Chapter 5: Sect. 5.9.3, trout multiple comparisons</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/GamesHowell.r">GamesHowell.r</a></td>
-<td></td>
-<td>Chapter 5: Sect. 5.9.3.1, related to multiple comparisons</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/reactiontime.r">reactiontime.r</a></td>
-<td><a href="data/dean2017/reaction.time.txt">reaction.time.txt</a></td>
-<td>Chapter 6: Sect. 6.9, reaction time contrasts</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/reactiontime2.r">reactiontime2.r</a></td>
-<td><a href="data/dean2017/reaction.time.txt">reaction.time.txt</a></td>
-<td>Chapter 6: Sect. 6.9.3, further reaction time analysis</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/airvelocity.r">airvelocity.r</a></td>
-<td><a href="data/dean2017/air.velocity.txt">air.velocity.txt</a></td>
-<td>Chapter 6: Sect. 6.9.4, air velocity contrasts example</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/drilladvance.r">drilladvance.r</a></td>
-<td><a href="data/dean2017/drill.advance.txt">drill.advance.txt</a></td>
-<td>Chapter 7: Sect. 7.7.1, drill advance example</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/drilladvance2.r">drilladvance2.r</a></td>
-<td><a href="data/dean2017/drill.advance.txt">drill.advance.txt</a></td>
-<td>Chapter 7: Sect. 7.7.2, follow-up to drill advance study</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/railweld.r">railweld.r</a></td>
-<td><a href="data/dean2017/rail.weld.txt">rail.weld.txt</a></td>
-<td>Chapter 7: Sect. 7.7.3, rail weld strength study</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/beansoaking.r">beansoaking.r</a></td>
-<td><a href="data/dean2017/bean.txt">bean.txt</a></td>
-<td>Chapter 8: Sect. 8.10, bean soaking experiment</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/balloon.r">balloon.r</a></td>
-<td><a href="data/dean2017/balloon.txt">balloon.txt</a></td>
-<td>Chapter 9: Sect. 9.7, balloon experiment to illustrate analysis of covariance</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/cottonspinning.r">cottonspinning.r</a></td>
-<td><a href="data/dean2017/cotton.spinning.txt">cotton.spinning.txt</a></td>
-<td>Chapter 10: Sect. 10.10, cotton spinning example for randomized block designs</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/plasma-day1.r">plasma-day1.r</a></td>
-<td><a href="data/dean2017/plasma.txt">plasma.txt</a></td>
-<td>Chapter 11: Sect. 11.9.2–3, plasma study for block designs</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/detergent.r">detergent.r</a></td>
-<td><a href="data/dean2017/detergent.txt">detergent.txt</a></td>
-<td>Chapter 11: Sect. 11.9.2, detergent optimization experiment</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/exercisebicycle.r">exercisebicycle.r</a></td>
-<td><a href="data/dean2017/exercise.bicycle.txt">exercise.bicycle.txt</a></td>
-<td>Chapter 12: Sect. 12.9, exercise bicycle example for row–column designs</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/exercisebicycle2.r">exercisebicycle2.r</a></td>
-<td><a href="data/dean2017/exercise.bicycle.txt">exercise.bicycle.txt</a></td>
-<td>Chapter 12: Sect. 12.9.2, advanced row–column design example</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/coil.r">coil.r</a></td>
-<td><a href="data/dean2017/coil.txt">coil.txt</a></td>
-<td>Chapter 13: Sect. 13.12, coil example</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/dye.r">dye.r</a></td>
-<td><a href="data/dean2017/dye2.txt">dye2.txt</a></td>
-<td>Chapter 14: Sect. 14.6, dye application study</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/sludge.r">sludge.r</a></td>
-<td><a href="data/dean2017/sludge.txt">sludge.txt</a></td>
-<td>Chapter 15: Sect. 15.10.1, sludge experiment</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/inclinometer.r">inclinometer.r</a></td>
-<td><a href="data/dean2017/inclinometer.product.txt">inclinometer.product.txt</a></td>
-<td>Chapter 15: Sect. 15.10.2, inclinometer product experiment</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/copper.r">copper.r</a></td>
-<td><a href="data/dean2017/copper.txt">copper.txt</a></td>
-<td>Chapter 16: Sect. 16.8.1, acid copper pattern plating study</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/PAH.r">PAH.r</a></td>
-<td><a href="data/dean2017/pah.txt">pah.txt</a></td>
-<td>Chapter 16: Sect. 16.8.2, PAH recovery example</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/RSMdesigns.r">RSMdesigns.r</a></td>
-<td></td>
-<td>Chapter 16: Sect. 16.8.3, generating response surface designs</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/cleanwool.r">cleanwool.r</a></td>
-<td><a href="data/dean2017/clean.wool.txt">clean.wool.txt</a></td>
-<td>Chapter 17: Sect. 17.11.1, clean wool study</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/tempr.r">tempr.r</a></td>
-<td><a href="data/dean2017/temperature.txt">temperature.txt</a></td>
-<td>Chapter 17: Sect. 17.11.2, temperature effects study</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/icecream.r">icecream.r</a></td>
-<td><a href="data/dean2017/ice.cream.txt">ice.cream.txt</a></td>
-<td>Chapter 17: Sect. 17.11.3, ice cream study</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/voltage.r">voltage.r</a></td>
-<td><a href="data/dean2017/voltage.txt">voltage.txt</a></td>
-<td>Chapter 18: Sect. 18.6.2, voltage nested effects</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/voltage2.r">voltage2.r</a></td>
-<td><a href="data/dean2017/voltage.txt">voltage.txt</a></td>
-<td>Chapter 18: Sect. 18.6.3, further analysis of voltage nested effects</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/oats.r">oats.r</a></td>
-<td><a href="data/dean2017/oats.txt">oats.txt</a></td>
-<td>Chapter 19: Sect. 19.9.1, oats experiment</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/UAV.r">UAV.r</a></td>
-<td><a href="data/dean2017/uav.txt">uav.txt</a></td>
-<td>Chapter 19: Sect. 19.9.2, unmanned aerial vehicle study</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/UAV3.r">UAV3.r</a></td>
-<td><a href="data/dean2017/uav3.txt">uav3.txt</a></td>
-<td>Chapter 19: Sect. 19.9.3, UAV switch study</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/oats2.r">oats2.r</a></td>
-<td><a href="data/dean2017/oats.txt">oats.txt</a></td>
-<td>Chapter 19: Sect. 19.9.4, follow-up oats analysis</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/MCFS71.r">MCFS71.r</a></td>
-<td><a href="data/dean2017/MCFS71.txt">MCFS71.txt</a></td>
-<td>Chapter 19: Sect. 19.9.5, mobile computing field study</td>
-</tr>
-<tr class="odd">
-<td><a href="code/dean2017/maximinLHD.r">maximinLHD.r</a></td>
-<td></td>
-<td>Chapter 20: Sect. 20.7.1, finding approximate maximin Latin hypercube designs</td>
-</tr>
-<tr class="even">
-<td><a href="code/dean2017/neuron.r">neuron.r</a></td>
-<td><a href="data/dean2017/neuron.txt">neuron.txt</a></td>
-<td>Chapter 20: Sect. 20.7.2, neuron experiment</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="r-data-files-for-design-and-analysis-of-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="r-data-files-for-design-and-analysis-of-experiments">R Data Files for <em>Design and Analysis of Experiments</em></h2>
-<p>These data files correspond to the book <em>Design and Analysis of Experiments</em> by Angela Dean, Dan Voss, and Daniel Draguljic (Springer-Verlag, 2017).</p>
-<p>Click on the links below to download the files.</p>
-<section id="a" class="level3">
-<h3 class="anchored" data-anchor-id="a">A</h3>
+<p>Here is a page for the R program files used in the textbook:</p>
 <ul>
-<li><a href="data/dean2017/abrasive.wear.txt">abrasive.wear.txt</a></li>
-<li><a href="data/dean2017/air.freshener.txt">air.freshener.txt</a></li>
-<li><a href="data/dean2017/air.rifle.txt">air.rifle.txt</a></li>
-<li><a href="data/dean2017/air.velocity.txt">air.velocity.txt</a></li>
-<li><a href="data/dean2017/air.velocity.contrasts.txt">air.velocity.contrasts.txt</a></li>
-<li><a href="data/dean2017/alcohol.txt">alcohol.txt</a></li>
-<li><a href="data/dean2017/ammunition.txt">ammunition.txt</a></li>
-<li><a href="data/dean2017/anatase.txt">anatase.txt</a></li>
-<li><a href="data/dean2017/antifungal.txt">antifungal.txt</a></li>
+<li><a href="./appendix/r-code-data-book.html">R Code and Data Files from the Textbook</a></li>
+<li><a href="./appendix/data-files-book.html">Data Files from the Textbook</a></li>
 </ul>
-</section>
-<section id="b" class="level3">
-<h3 class="anchored" data-anchor-id="b">B</h3>
-<ul>
-<li><a href="data/dean2017/balloon.txt">balloon.txt</a></li>
-<li><a href="data/dean2017/banana.txt">banana.txt</a></li>
-<li><a href="data/dean2017/battery.txt">battery.txt</a></li>
-<li><a href="data/dean2017/bean.txt">bean.txt</a></li>
-<li><a href="data/dean2017/beef.txt">beef.txt</a></li>
-<li><a href="data/dean2017/bicycle.txt">bicycle.txt</a></li>
-<li><a href="data/dean2017/biscuit.txt">biscuit.txt</a></li>
-<li><a href="data/dean2017/bleach.txt">bleach.txt</a></li>
-<li><a href="data/dean2017/buttermilk.txt">buttermilk.txt</a></li>
-</ul>
-</section>
-<section id="c" class="level3">
-<h3 class="anchored" data-anchor-id="c">C</h3>
-<ul>
-<li><a href="data/dean2017/caffeine.txt">caffeine.txt</a></li>
-<li><a href="data/dean2017/candle.txt">candle.txt</a></li>
-<li><a href="data/dean2017/catalyst.txt">catalyst.txt</a></li>
-<li><a href="data/dean2017/catalytic.reaction.txt">catalytic.reaction.txt</a></li>
-<li><a href="data/dean2017/chemical.txt">chemical.txt</a></li>
-<li><a href="data/dean2017/cigarette.txt">cigarette.txt</a></li>
-<li><a href="data/dean2017/clean.wool.txt">clean.wool.txt</a></li>
-<li><a href="data/dean2017/coating.txt">coating.txt</a></li>
-<li><a href="data/dean2017/coil.txt">coil.txt</a></li>
-<li><a href="data/dean2017/colorfastness.txt">colorfastness.txt</a></li>
-<li><a href="data/dean2017/copper.txt">copper.txt</a></li>
-<li><a href="data/dean2017/cotton.spinning.txt">cotton.spinning.txt</a></li>
-</ul>
-</section>
-<section id="d" class="level3">
-<h3 class="anchored" data-anchor-id="d">D</h3>
-<ul>
-<li><a href="data/dean2017/dairy.cow.txt">dairy.cow.txt</a></li>
-<li><a href="data/dean2017/DCIS.txt">DCIS.txt</a></li>
-<li><a href="data/dean2017/decon.alpha.txt">decon.alpha.txt</a></li>
-<li><a href="data/dean2017/decon.beta1.txt">decon.beta1.txt</a></li>
-<li><a href="data/dean2017/decon.beta2.txt">decon.beta2.txt</a></li>
-<li><a href="data/dean2017/dessert.txt">dessert.txt</a></li>
-<li><a href="data/dean2017/detergent.txt">detergent.txt</a></li>
-<li><a href="data/dean2017/drill.advance.txt">drill.advance.txt</a></li>
-<li><a href="data/dean2017/drug.txt">drug.txt</a></li>
-<li><a href="data/dean2017/dye.txt">dye.txt</a></li>
-</ul>
-</section>
-<section id="e" class="level3">
-<h3 class="anchored" data-anchor-id="e">E</h3>
-<ul>
-<li><a href="data/dean2017/effervescent.txt">effervescent.txt</a></li>
-<li><a href="data/dean2017/exercise.bicycle.txt">exercise.bicycle.txt</a></li>
-</ul>
-</section>
-<section id="f" class="level3">
-<h3 class="anchored" data-anchor-id="f">F</h3>
-<ul>
-<li><a href="data/dean2017/fabric.stain.txt">fabric.stain.txt</a></li>
-<li><a href="data/dean2017/field.txt">field.txt</a></li>
-<li><a href="data/dean2017/field2.txt">field2.txt</a></li>
-<li><a href="data/dean2017/film.viscosity.txt">film.viscosity.txt</a></li>
-<li><a href="data/dean2017/fishing.line.txt">fishing.line.txt</a></li>
-<li><a href="data/dean2017/flour.txt">flour.txt</a></li>
-<li><a href="data/dean2017/flour.early.txt">flour.early.txt</a></li>
-<li><a href="data/dean2017/flour.production.txt">flour.production.txt</a></li>
-<li><a href="data/dean2017/fractionation.PCE.txt">fractionation.PCE.txt</a></li>
-<li><a href="data/dean2017/fractionation.yield.txt">fractionation.yield.txt</a></li>
-</ul>
-</section>
-<section id="g" class="level3">
-<h3 class="anchored" data-anchor-id="g">G</h3>
-<ul>
-<li><a href="data/dean2017/golf.ball.txt">golf.ball.txt</a></li>
-<li><a href="data/dean2017/golf.driver.txt">golf.driver.txt</a></li>
-</ul>
-</section>
-<section id="h" class="level3">
-<h3 class="anchored" data-anchor-id="h">H</h3>
-<ul>
-<li><a href="data/dean2017/handwheel.txt">handwheel.txt</a></li>
-<li><a href="data/dean2017/heart.lung.pump.txt">heart.lung.pump.txt</a></li>
-</ul>
-</section>
-<section id="i" class="level3">
-<h3 class="anchored" data-anchor-id="i">I</h3>
-<ul>
-<li><a href="data/dean2017/ice.cream.txt">ice.cream.txt</a></li>
-<li><a href="data/dean2017/ice.melting.txt">ice.melting.txt</a></li>
-<li><a href="data/dean2017/inclinometer.product.txt">inclinometer.product.txt</a></li>
-<li><a href="data/dean2017/injection.molding.txt">injection.molding.txt</a></li>
-<li><a href="data/dean2017/ink.txt">ink.txt</a></li>
-<li><a href="data/dean2017/insole.cushion.txt">insole.cushion.txt</a></li>
-</ul>
-</section>
-<section id="l" class="level3">
-<h3 class="anchored" data-anchor-id="l">L</h3>
-<ul>
-<li><a href="data/dean2017/lactic.acid.txt">lactic.acid.txt</a></li>
-<li><a href="data/dean2017/length.perception.txt">length.perception.txt</a></li>
-<li><a href="data/dean2017/light.bulb.txt">light.bulb.txt</a></li>
-<li><a href="data/dean2017/lithium.txt">lithium.txt</a></li>
-<li><a href="data/dean2017/load.carrying.txt">load.carrying.txt</a></li>
-</ul>
-</section>
-<section id="m" class="level3">
-<h3 class="anchored" data-anchor-id="m">M</h3>
-<ul>
-<li><a href="data/dean2017/machine.head.txt">machine.head.txt</a></li>
-<li><a href="data/dean2017/mangold.txt">mangold.txt</a></li>
-<li><a href="data/dean2017/mangold3.txt">mangold3.txt</a></li>
-<li><a href="data/dean2017/margarine.txt">margarine.txt</a></li>
-<li><a href="data/dean2017/MCFS71.txt">MCFS71.txt</a></li>
-<li><a href="data/dean2017/MCFS71time.txt">MCFS71time.txt</a></li>
-<li><a href="data/dean2017/MCFS71x4.txt">MCFS71x4.txt</a></li>
-<li><a href="data/dean2017/meat.cooking.txt">meat.cooking.txt</a></li>
-<li><a href="data/dean2017/memory.recall.txt">memory.recall.txt</a></li>
-<li><a href="data/dean2017/memory.txt">memory.txt</a></li>
-<li><a href="data/dean2017/mungbean.txt">mungbean.txt</a></li>
-</ul>
-</section>
-<section id="n" class="level3">
-<h3 class="anchored" data-anchor-id="n">N</h3>
-<ul>
-<li><a href="data/dean2017/nail.varnish.txt">nail.varnish.txt</a></li>
-<li><a href="data/dean2017/neuron.txt">neuron.txt</a></li>
-</ul>
-</section>
-<section id="o" class="level3">
-<h3 class="anchored" data-anchor-id="o">O</h3>
-<ul>
-<li><a href="data/dean2017/oats.txt">oats.txt</a></li>
-<li><a href="data/dean2017/operator.txt">operator.txt</a></li>
-</ul>
-</section>
-<section id="p" class="level3">
-<h3 class="anchored" data-anchor-id="p">P</h3>
-<ul>
-<li><a href="data/dean2017/pah.txt">pah.txt</a></li>
-<li><a href="data/dean2017/paint.txt">paint.txt</a></li>
-<li><a href="data/dean2017/paint8.txt">paint8.txt</a></li>
-<li><a href="data/dean2017/paint.followup.txt">paint.followup.txt</a></li>
-<li><a href="data/dean2017/paper.towel.absorbency.txt">paper.towel.absorbency.txt</a></li>
-<li><a href="data/dean2017/paper.towel.strength.txt">paper.towel.strength.txt</a></li>
-<li><a href="data/dean2017/peas.txt">peas.txt</a></li>
-<li><a href="data/dean2017/penicillin.txt">penicillin.txt</a></li>
-<li><a href="data/dean2017/plasma.txt">plasma.txt</a></li>
-<li><a href="data/dean2017/popcorn.micro.txt">popcorn.micro.txt</a></li>
-<li><a href="data/dean2017/projectile.txt">projectile.txt</a></li>
-</ul>
-</section>
-<section id="q" class="level3">
-<h3 class="anchored" data-anchor-id="q">Q</h3>
-<ul>
-<li><a href="data/dean2017/quantity.perception.txt">quantity.perception.txt</a></li>
-</ul>
-</section>
-<section id="r" class="level3">
-<h3 class="anchored" data-anchor-id="r">R</h3>
-<ul>
-<li><a href="data/dean2017/rail.weld.txt">rail.weld.txt</a></li>
-<li><a href="data/dean2017/reaction.time.txt">reaction.time.txt</a></li>
-<li><a href="data/dean2017/red.blood.cell.txt">red.blood.cell.txt</a></li>
-<li><a href="data/dean2017/refinery.txt">refinery.txt</a></li>
-<li><a href="data/dean2017/resin.maturity.txt">resin.maturity.txt</a></li>
-<li><a href="data/dean2017/resin.moisure.txt">resin.moisure.txt</a></li>
-<li><a href="data/dean2017/respiratory.exchange.ratio.txt">respiratory.exchange.ratio.txt</a></li>
-<li><a href="data/dean2017/resting.metabolic.rate.txt">resting.metabolic.rate.txt</a></li>
-<li><a href="data/dean2017/rocket.txt">rocket.txt</a></li>
-<li><a href="data/dean2017/rust.txt">rust.txt</a></li>
-</ul>
-</section>
-<section id="s" class="level3">
-<h3 class="anchored" data-anchor-id="s">S</h3>
-<ul>
-<li><a href="data/dean2017/sludge.txt">sludge.txt</a></li>
-<li><a href="data/dean2017/soap.txt">soap.txt</a></li>
-<li><a href="data/dean2017/soup.txt">soup.txt</a></li>
-<li><a href="data/dean2017/spaghetti.sauce.txt">spaghetti.sauce.txt</a></li>
-<li><a href="data/dean2017/spectometer.txt">spectometer.txt</a></li>
-<li><a href="data/dean2017/steel.bar.txt">steel.bar.txt</a></li>
-<li><a href="data/dean2017/step.txt">step.txt</a></li>
-<li><a href="data/dean2017/sugar.beet.txt">sugar.beet.txt</a></li>
-<li><a href="data/dean2017/sugar.beet3.txt">sugar.beet3.txt</a></li>
-<li><a href="data/dean2017/survival.txt">survival.txt</a></li>
-<li><a href="data/dean2017/systolic.blood.pressure.txt">systolic.blood.pressure.txt</a></li>
-</ul>
-</section>
-<section id="t" class="level3">
-<h3 class="anchored" data-anchor-id="t">T</h3>
-<ul>
-<li><a href="data/dean2017/temperature.txt">temperature.txt</a></li>
-<li><a href="data/dean2017/tool.coating.txt.txt">tool.coating.txt</a></li>
-<li><a href="data/dean2017/trout.txt">trout.txt</a></li>
-</ul>
-</section>
-<section id="u" class="level3">
-<h3 class="anchored" data-anchor-id="u">U</h3>
-<ul>
-<li><a href="data/dean2017/uav.txt">uav.txt</a></li>
-<li><a href="data/dean2017/uav2sact.txt">uav2sact.txt</a></li>
-<li><a href="data/dean2017/uav3.txt">uav3.txt</a></li>
-<li><a href="data/dean2017/uav3adt.txt">uav3adt.txt</a></li>
-</ul>
-</section>
-<section id="v" class="level3">
-<h3 class="anchored" data-anchor-id="v">V</h3>
-<ul>
-<li><a href="data/dean2017/vaccine.txt">vaccine.txt</a></li>
-<li><a href="data/dean2017/video.game.txt">video.game.txt</a></li>
-<li><a href="data/dean2017/viscosity.txt">viscosity.txt</a></li>
-<li><a href="data/dean2017/voltage.txt">voltage.txt</a></li>
-</ul>
-</section>
-<section id="w" class="level3">
-<h3 class="anchored" data-anchor-id="w">W</h3>
-<ul>
-<li><a href="data/dean2017/wafer.txt">wafer.txt</a></li>
-<li><a href="data/dean2017/wafer2.txt">wafer2.txt</a></li>
-<li><a href="data/dean2017/water.boiling.txt">water.boiling.txt</a></li>
-<li><a href="data/dean2017/water.heating.txt">water.heating.txt</a></li>
-<li><a href="data/dean2017/wathering.txt">wathering.txt</a></li>
-<li><a href="data/dean2017/weight.lifting.txt">weight.lifting.txt</a></li>
-<li><a href="data/dean2017/weld.strength.txt">weld.strength.txt</a></li>
-<li><a href="data/dean2017/wildflower.txt">wildflower.txt</a></li>
-</ul>
-</section>
-<section id="y" class="level3">
-<h3 class="anchored" data-anchor-id="y">Y</h3>
-<ul>
-<li><a href="data/dean2017/yeast.txt">yeast.txt</a></li>
-</ul>
-</section>
-<section id="z" class="level3">
-<h3 class="anchored" data-anchor-id="z">Z</h3>
-<ul>
-<li><a href="data/dean2017/zinc.plating.txt">zinc.plating.txt</a></li>
-</ul>
-<p>Let the instructor know if you have additional suggestions for materials to include in this appendix.</p>
-<!-- #### R Base Functions
-
-Explore documentation and help for fundamental R base functions:
-
-- [Vectors and Data Types](r_help.html#vectors-and-data-types)
-- [Subsetting and Indexing](r_help.html#subsetting-and-indexing)
-- [Basic Statistical Functions](r_help.html#basic-statistical-functions)
-- [Data Frames and Lists](r_help.html#data-frames-and-lists)
-
-#### R Packages Used in the Course
-
-Detailed help for specific R packages utilized in this course:
-
-- [ggplot2: Data Visualization](r_help.html#ggplot2)
-- [dplyr: Data Manipulation](r_help.html#dplyr)
-- [emmeans: Estimated Marginal Means](r_help.html#emmeans) -->
-<!-- ### Datasets and Code
-
-All datasets and example R code used in the course are stored in the following directories:
-
-- **Datasets**: Accessible from the [Data Directory](data/index.html).
-- **Code Files**: Accessible from the [Code Directory](code/index.html). -->
-<!-- ### Lecture Notes and Assignments
-
-Refer to these resources for core course materials:
-
-- [Lecture Notes](lecture_notes.html)
-- [Assignments](assignments.html) -->
-<!-- 
-### Additional Resources
-
-1. **Course Syllabus**: Refer to the [Course Syllabus](syllabus.html) for complete details about the course.
-2. **Online R Help**:
-   - [CRAN R Documentation](https://cran.r-project.org/manuals.html)
-   - [RStudio Cheat Sheets](https://posit.co/resources/cheatsheets/)
-3. **Video Tutorials**:
-   - [R Programming for Beginners (YouTube)](https://www.youtube.com/results?search_query=r+programming+tutorial) -->
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
