@@ -2511,137 +2511,144 @@
     "text": "R Factor Documentation\nForcats Documentation\nTidyverse Guide to Factors"
   },
   {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html",
-    "href": "appendix/r-topics/r-subsetting-basics.html",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
+    "text": "Hypothesis testing is a cornerstone of statistical analysis, used to evaluate assumptions about population parameters based on sample data. In R, several functions and packages provide extensive tools for hypothesis testing, ranging from basic tests in base R to more specialized tests available in external packages.\n\n\n\nPackages/Functions:\n\nBase R: t.test(), chisq.test(), var.test(), wilcox.test()\nAdditional Packages: stats::ks.test(), MASS::leveneTest()\n\nPurpose:\n\nTo evaluate assumptions or hypotheses about data distributions and relationships.\n\nCommon Functions:\n\nt.test() for t-tests.\nchisq.test() for Chi-square tests.\nks.test() for Kolmogorov-Smirnov tests.\nwilcox.test() for non-parametric Wilcoxon tests.\n\n\n\n\n\n\nComparing means between two groups.\nAssessing the goodness-of-fit for categorical data.\nTesting for equal variances across groups.\nNon-parametric comparisons for skewed or ordinal data.\n\n\n\n\n\nEasy to implement with a range of built-in functions.\nHighly extensible for complex scenarios.\nSeamless integration with visualization and other analytical tools.\n\n\n\n\n\n\n\nBase R provides most hypothesis testing tools. Additional packages like MASS can be used for specialized tests.\n\nlibrary(MASS)\n\n\n\n\n\n\nTesting whether the mean of a sample is equal to a specific value.\n\nset.seed(42)\nsample_data &lt;- rnorm(30, mean = 5, sd = 2)\n\nt.test(sample_data, mu = 5)\n\n\n    One Sample t-test\n\ndata:  sample_data\nt = 0.29933, df = 29, p-value = 0.7668\nalternative hypothesis: true mean is not equal to 5\n95 percent confidence interval:\n 4.199903 6.074444\nsample estimates:\nmean of x \n 5.137174 \n\n\n\n\n\n\n\n\n\n\n\n\nPerforms one-sample, two-sample, and paired t-tests to compare means.\n\n\n\nt.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"),\n       mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)\n\nx, y: Numeric vectors of data values.\nalternative: Type of hypothesis (“two.sided”, “greater”, “less”).\nmu: Hypothesized mean (default is 0).\npaired: Whether the test is paired (default is FALSE).\nvar.equal: Assume equal variances (default is FALSE).\n\n\n\n\n\ngroup1 &lt;- rnorm(20, mean = 5)\ngroup2 &lt;- rnorm(20, mean = 6)\n\nt.test(group1, group2, alternative = \"two.sided\", var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 38, p-value = 3.486e-05\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -2.1057327 -0.8358574\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\nTests for independence or goodness-of-fit in categorical data.\n\n\n\nchisq.test(x, y = NULL, correct = TRUE, simulate.p.value = FALSE, rescale.p = FALSE)\n\n\n\n\nobserved &lt;- matrix(c(30, 20, 50, 40), ncol = 2)\n\nchisq.test(observed)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  observed\nX-squared = 0.10954, df = 1, p-value = 0.7407\n\n\n\n\n\n\n\n\nPerforms the Wilcoxon rank-sum test (non-parametric alternative to the t-test).\n\n\n\nwilcox.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"), mu = 0, paired = FALSE, exact = NULL)\n\n\n\n\nx &lt;- rnorm(30)\ny &lt;- rnorm(30, mean = 1)\n\nwilcox.test(x, y, alternative = \"less\")\n\n\n    Wilcoxon rank sum exact test\n\ndata:  x and y\nW = 271, p-value = 0.003824\nalternative hypothesis: true location shift is less than 0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEvaluate the effect of a treatment by comparing preand post-treatment scores.\n\n\n\n\nPrepare the data.\nApply the paired t-test.\nVisualize the differences.\n\n\npre &lt;- c(12, 14, 11, 10, 13, 15)\npost &lt;- c(14, 16, 12, 11, 15, 17)\n\nt.test(pre, post, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  pre and post\nt = -7.9057, df = 5, p-value = 0.0005211\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.208593 -1.124740\nsample estimates:\nmean difference \n      -1.666667 \n\n\n\n\n\nInterpret the p-value to determine if there is a significant difference between preand post-treatment scores.\n\n\n\n\n\n\n\n\n\nCheck if a six-sided die is fair.\n\n\n\n\nCollect observed frequencies of each side.\nSpecify expected frequencies.\nApply the Chi-square goodness-of-fit test.\n\n\nobserved &lt;- c(12, 15, 14, 13, 16, 10)\nexpected &lt;- rep(1/6, 6) * sum(observed)\n\nchisq.test(observed, p = expected / sum(expected))\n\n\n    Chi-squared test for given probabilities\n\ndata:  observed\nX-squared = 1.75, df = 5, p-value = 0.8825\n\n\n\n\n\nEvaluate the p-value to determine if the die is fair.\n\n\n\n\n\n\n\n\n\nSet custom confidence levels in tests:\n\nt.test(group1, group2, conf.level = 0.99)\n\n\n    Welch Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 37.995, p-value = 3.487e-05\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -2.3212628 -0.6203274\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\n\nlibrary(dplyr)\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarise(t_result = list(t.test(mpg ~ as.factor(am))$p.value))\n\n\n  \n\n\n\n\n\n\n\n\n\nUse vectorized operations or summary statistics for efficiency:\n\nlarge_data &lt;- rnorm(1e6)\nt.test(large_data, mu = 0)\n\n\n    One Sample t-test\n\ndata:  large_data\nt = 0.59109, df = 1e+06, p-value = 0.5545\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -0.001370263  0.002553645\nsample estimates:\n   mean of x \n0.0005916909 \n\n\n\n\n\n\n\n\n\n\nError: Data must be numeric\n\nEnsure data is numeric by using as.numeric().\n\nWarning: p-value approximation\n\nIncrease the sample size or use simulate.p.value = TRUE.\n\n\n\n\n\n\nWhat is the minimum sample size for a t-test?\n\nAt least 5 observations per group are recommended.\n\nCan I test for normality before t-tests?\n\nUse shapiro.test() to check normality.\n\n\n\n\n\n\n\nAlways visualize your data before performing tests.\nCheck assumptions (e.g., normality for t-tests, independence for Chi-square tests).\nUse appropriate alternatives (e.g., Wilcoxon test for non-normal data).\n\n\n\n\nHypothesis testing in R is a versatile and powerful tool for statistical analysis. From basic t-tests to advanced non-parametric methods, R provides comprehensive support for validating assumptions and making data-driven decisions.\n\n\n\n\nR Documentation\nR Graph Gallery\nR Hypothesis Testing Guide"
   },
   {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#introduction",
-    "href": "appendix/r-topics/r-subsetting-basics.html#introduction",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#introduction",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#introduction",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
+    "text": "Hypothesis testing is a cornerstone of statistical analysis, used to evaluate assumptions about population parameters based on sample data. In R, several functions and packages provide extensive tools for hypothesis testing, ranging from basic tests in base R to more specialized tests available in external packages.\n\n\n\nPackages/Functions:\n\nBase R: t.test(), chisq.test(), var.test(), wilcox.test()\nAdditional Packages: stats::ks.test(), MASS::leveneTest()\n\nPurpose:\n\nTo evaluate assumptions or hypotheses about data distributions and relationships.\n\nCommon Functions:\n\nt.test() for t-tests.\nchisq.test() for Chi-square tests.\nks.test() for Kolmogorov-Smirnov tests.\nwilcox.test() for non-parametric Wilcoxon tests.\n\n\n\n\n\n\nComparing means between two groups.\nAssessing the goodness-of-fit for categorical data.\nTesting for equal variances across groups.\nNon-parametric comparisons for skewed or ordinal data.\n\n\n\n\n\nEasy to implement with a range of built-in functions.\nHighly extensible for complex scenarios.\nSeamless integration with visualization and other analytical tools."
   },
   {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#getting-started",
-    "href": "appendix/r-topics/r-subsetting-basics.html#getting-started",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Getting Started",
-    "text": "Getting Started\nLoading the Package:\n\npacman::p_load(dplyr)  # Loads or installs the dplyr package\n\nBasic Usage: Select rows where mpg &gt; 20 using both approaches:\nBase R:\n\ndata(mtcars)\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\nTidyverse:\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Key Functions and Features",
-    "text": "Key Functions and Features\n\nBase R: Subsetting with []\nDescription: The simplest and most versatile method for subsetting in R. Use [] to extract rows, columns, or individual elements from data frames or matrices.\nSyntax:\ndata[rows, columns]\nExamples:\n\nSelect rows where mpg &gt; 20:\n\n\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\n\nSelect specific columns:\n\n\nmtcars[, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\n\nCombine row and column conditions:\n\n\nmtcars[mtcars$mpg &gt; 20, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\nNuances:\n\nOmitting rows or columns selects all:\n\n\nmtcars[mtcars$mpg &gt; 20, ]  # All columns selected\n\n\n  \n\n\nmtcars[, c(\"mpg\", \"cyl\")]  # All rows selected\n\n\n  \n\n\n\n\nNegative indexing excludes rows or columns:\n\n\nmtcars[-c(1, 2), ]  # Exclude first two rows\n\n\n  \n\n\n\n\n\nBase R: subset()\nDescription: Provides a more human-readable syntax for subsetting.\nSyntax:\nsubset(data, subset, select)\nExamples:\n\nSubset rows where mpg &gt; 20 and select mpg and cyl columns:\n\n\nsubset(mtcars, mpg &gt; 20, select = c(mpg, cyl))\n\n\n  \n\n\n\n\nSubset using multiple conditions:\n\n\nsubset(mtcars, mpg &gt; 20 & cyl == 6, select = c(mpg, cyl))\n\n\n  \n\n\n\nNuances:\n\nNon-standard evaluation allows simpler syntax but can lead to ambiguities. Use column names explicitly when necessary.\n\n\n\nTidyverse: dplyr::filter()\nDescription: Filters rows based on logical conditions.\nSyntax:\ndplyr::filter(data, condition)\nExamples:\n\nFilter rows with mpg &gt; 20:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\n  \n\n\n\n\nFilter with multiple conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 & cyl == 6)\n\n\n  \n\n\n\n\nUse dynamic variables in filtering:\n\n\nthreshold &lt;- 20\nmtcars |&gt;\n    dplyr::filter(mpg &gt; threshold)\n\n\n  \n\n\n\nNuances:\n\nUse | for “or” conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 | cyl == 6)\n\n\n  \n\n\n\n\nFilter with is.na() to handle missing values:\n\n\nmtcars |&gt;\n    dplyr::filter(!is.na(mpg))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::select()\nDescription: Selects specific columns from a data frame.\nSyntax:\ndplyr::select(data, columns)\nExamples:\n\nSelect specific columns:\n\n\nmtcars |&gt;\n    dplyr::select(mpg, cyl)\n\n\n  \n\n\n\n\nUse helpers for dynamic selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"))\n\n\n  \n\n\n\nNuances:\n\nCombine helpers for advanced selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"), ends_with(\"t\"))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::slice()\nDescription: Selects rows by position.\nSyntax:\ndplyr::slice(data, row_numbers)\nExamples:\n\nSelect the first five rows:\n\n\nmtcars |&gt;\n    dplyr::slice(1:5)\n\n\n  \n\n\n\n\nRandom sampling:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(n = 5)\n\n\n  \n\n\n\n\nSelect rows by percentages:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(prop = .1)  # 10% of rows\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::pull()\nDescription: Extracts a single column as a vector.\nSyntax:\ndplyr::pull(data, column)\nExamples:\n\nPull the mpg column:\n\n\nmtcars |&gt;\n    dplyr::pull(mpg)\n\n [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4\n[16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7\n[31] 15.0 21.4\n\n\n\nCombine with filtering:\n\n\nmtcars |&gt;\n    dplyr::filter(cyl == 6) |&gt;\n    dplyr::pull(mpg)\n\n[1] 21.0 21.0 21.4 18.1 19.2 17.8 19.7\n\n\nNuances:\n\nUseful for extracting data for external functions:\n\n\nmean(mtcars |&gt; dplyr::pull(mpg))\n\n[1] 20.09062"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
-    "href": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "In-Depth Examples",
-    "text": "In-Depth Examples\n\nExample 1: Dynamic Filtering with External Variables\nObjective: Filter rows based on user-defined thresholds for mpg and hp.\nSteps:\n\nDefine thresholds:\n\n\nmpg_threshold &lt;- 20\nhp_threshold &lt;- 100\n\n\nBase R:\n\n\nmtcars[mtcars$mpg &gt; mpg_threshold & mtcars$hp &gt; hp_threshold, ]\n\n\n  \n\n\n\n\nTidyverse:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; mpg_threshold & hp &gt; hp_threshold)\n\n\n  \n\n\n\n\n\nExample 2: Visualizing Subsets\nObjective: Visualize cars with mpg &gt; 20.\nSteps:\n\nSubset data:\n\n\nfiltered_data &lt;- mtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\nPlot:\n\n\nlibrary(ggplot2)\nggplot(filtered_data, aes(x = wt, y = mpg)) +\n    geom_point()"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
-    "href": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Advanced Features",
-    "text": "Advanced Features\nCustomization:\n\nCreate reusable functions for subsetting:\n\n\nfilter_cars &lt;- function(data, mpg_threshold, cyl_threshold) {\n    data |&gt;\n        dplyr::filter(mpg &gt; mpg_threshold, cyl == cyl_threshold)\n}\n\nfilter_cars(mtcars, 20, 6)\n\n\n  \n\n\n\nIntegration:\n\nCombine tidyr for reshaping with subsetting:\n\n\nlibrary(tidyr)\nmtcars |&gt;\n    pivot_longer(cols = everything()) |&gt;\n    dplyr::filter(value &gt; 20)"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Troubleshooting and FAQs",
-    "text": "Troubleshooting and FAQs\n\nIssue: “undefined columns selected” Fix: Double-check column names.\nIssue: Subsetting returns no rows. Fix: Ensure logical conditions are met.\n\nFAQs:\n\nHow to subset with regex? Use grepl() in Base R or matches() in dplyr::select():\n\n\nmtcars |&gt;\n    dplyr::select(matches(\"^m\"))"
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#best-practices",
-    "href": "appendix/r-topics/r-subsetting-basics.html#best-practices",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Best Practices",
-    "text": "Best Practices\n\nPreview data before subsetting using head() or glimpse().\nChain operations for clarity in tidyverse.\nAvoid hard-coding indices; use dynamic variables."
-  },
-  {
-    "objectID": "appendix/r-topics/r-subsetting-basics.html#conclusion",
-    "href": "appendix/r-topics/r-subsetting-basics.html#conclusion",
-    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
-    "section": "Conclusion",
-    "text": "Conclusion\nRecap: Subsetting is a powerful tool for extracting specific data. Base R provides flexibility, while tidyverse offers an elegant syntax for modern workflows."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html",
-    "href": "appendix/r-topics/r-data-frames-basics.html",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#getting-started",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#getting-started",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing.\n\n\n\n\n\n\n\n\n# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\ndata.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\nCombine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\ncolnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage.\n\n\n\n\n\n\n\n\nData Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types.\n\n\n\n\n\n\nUse consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability.\n\n\n\n\n\n\n\nBase R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations.\n\n\n\n\n\nBase R Documentation\nTidyverse Guide\nR for Data Science"
+    "text": "Base R provides most hypothesis testing tools. Additional packages like MASS can be used for specialized tests.\n\nlibrary(MASS)\n\n\n\n\n\n\nTesting whether the mean of a sample is equal to a specific value.\n\nset.seed(42)\nsample_data &lt;- rnorm(30, mean = 5, sd = 2)\n\nt.test(sample_data, mu = 5)\n\n\n    One Sample t-test\n\ndata:  sample_data\nt = 0.29933, df = 29, p-value = 0.7668\nalternative hypothesis: true mean is not equal to 5\n95 percent confidence interval:\n 4.199903 6.074444\nsample estimates:\nmean of x \n 5.137174"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#introduction",
-    "href": "appendix/r-topics/r-data-frames-basics.html#introduction",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#key-functions-and-features",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing."
+    "text": "Performs one-sample, two-sample, and paired t-tests to compare means.\n\n\n\nt.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"),\n       mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)\n\nx, y: Numeric vectors of data values.\nalternative: Type of hypothesis (“two.sided”, “greater”, “less”).\nmu: Hypothesized mean (default is 0).\npaired: Whether the test is paired (default is FALSE).\nvar.equal: Assume equal variances (default is FALSE).\n\n\n\n\n\ngroup1 &lt;- rnorm(20, mean = 5)\ngroup2 &lt;- rnorm(20, mean = 6)\n\nt.test(group1, group2, alternative = \"two.sided\", var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 38, p-value = 3.486e-05\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -2.1057327 -0.8358574\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\nTests for independence or goodness-of-fit in categorical data.\n\n\n\nchisq.test(x, y = NULL, correct = TRUE, simulate.p.value = FALSE, rescale.p = FALSE)\n\n\n\n\nobserved &lt;- matrix(c(30, 20, 50, 40), ncol = 2)\n\nchisq.test(observed)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  observed\nX-squared = 0.10954, df = 1, p-value = 0.7407\n\n\n\n\n\n\n\n\nPerforms the Wilcoxon rank-sum test (non-parametric alternative to the t-test).\n\n\n\nwilcox.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"), mu = 0, paired = FALSE, exact = NULL)\n\n\n\n\nx &lt;- rnorm(30)\ny &lt;- rnorm(30, mean = 1)\n\nwilcox.test(x, y, alternative = \"less\")\n\n\n    Wilcoxon rank sum exact test\n\ndata:  x and y\nW = 271, p-value = 0.003824\nalternative hypothesis: true location shift is less than 0"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#getting-started",
-    "href": "appendix/r-topics/r-data-frames-basics.html#getting-started",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#in-depth-examples",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#in-depth-examples",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy"
+    "text": "Evaluate the effect of a treatment by comparing preand post-treatment scores.\n\n\n\n\nPrepare the data.\nApply the paired t-test.\nVisualize the differences.\n\n\npre &lt;- c(12, 14, 11, 10, 13, 15)\npost &lt;- c(14, 16, 12, 11, 15, 17)\n\nt.test(pre, post, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  pre and post\nt = -7.9057, df = 5, p-value = 0.0005211\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.208593 -1.124740\nsample estimates:\nmean difference \n      -1.666667 \n\n\n\n\n\nInterpret the p-value to determine if there is a significant difference between preand post-treatment scores.\n\n\n\n\n\n\n\n\n\nCheck if a six-sided die is fair.\n\n\n\n\nCollect observed frequencies of each side.\nSpecify expected frequencies.\nApply the Chi-square goodness-of-fit test.\n\n\nobserved &lt;- c(12, 15, 14, 13, 16, 10)\nexpected &lt;- rep(1/6, 6) * sum(observed)\n\nchisq.test(observed, p = expected / sum(expected))\n\n\n    Chi-squared test for given probabilities\n\ndata:  observed\nX-squared = 1.75, df = 5, p-value = 0.8825\n\n\n\n\n\nEvaluate the p-value to determine if the die is fair."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#advanced-features",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#advanced-features",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "data.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example"
+    "text": "Set custom confidence levels in tests:\n\nt.test(group1, group2, conf.level = 0.99)\n\n\n    Welch Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 37.995, p-value = 3.487e-05\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -2.3212628 -0.6203274\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\n\nlibrary(dplyr)\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarise(t_result = list(t.test(mpg ~ as.factor(am))$p.value))\n\n\n  \n\n\n\n\n\n\n\n\n\nUse vectorized operations or summary statistics for efficiency:\n\nlarge_data &lt;- rnorm(1e6)\nt.test(large_data, mu = 0)\n\n\n    One Sample t-test\n\ndata:  large_data\nt = 0.59109, df = 1e+06, p-value = 0.5545\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -0.001370263  0.002553645\nsample estimates:\n   mean of x \n0.0005916909"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
-    "href": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#troubleshooting-and-faqs",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "Combine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered"
+    "text": "Error: Data must be numeric\n\nEnsure data is numeric by using as.numeric().\n\nWarning: p-value approximation\n\nIncrease the sample size or use simulate.p.value = TRUE.\n\n\n\n\n\n\nWhat is the minimum sample size for a t-test?\n\nAt least 5 observations per group are recommended.\n\nCan I test for normality before t-tests?\n\nUse shapiro.test() to check normality."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
-    "href": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#best-practices",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#best-practices",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "colnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage."
+    "text": "Always visualize your data before performing tests.\nCheck assumptions (e.g., normality for t-tests, independence for Chi-square tests).\nUse appropriate alternatives (e.g., Wilcoxon test for non-normal data)."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#conclusion",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#conclusion",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "Data Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types."
+    "text": "Hypothesis testing in R is a versatile and powerful tool for statistical analysis. From basic t-tests to advanced non-parametric methods, R provides comprehensive support for validating assumptions and making data-driven decisions."
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#best-practices",
-    "href": "appendix/r-topics/r-data-frames-basics.html#best-practices",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#references-and-resources",
+    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#references-and-resources",
+    "title": "Hypothesis Testing Basics",
     "section": "",
-    "text": "Use consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability."
+    "text": "R Documentation\nR Graph Gallery\nR Hypothesis Testing Guide"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#conclusion",
-    "href": "appendix/r-topics/r-data-frames-basics.html#conclusion",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-data-transformation.html",
+    "href": "appendix/r-topics/r-data-transformation.html",
+    "title": "Data Transformation and Wrangling in R",
     "section": "",
-    "text": "Base R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations."
+    "text": "Data transformation and wrangling involve cleaning, reshaping, and modifying data to prepare it for analysis. This tutorial introduces:\n\nBase R Functions: subset(), transform(), merge().\ntidyverse Functions: dplyr::filter(), dplyr::mutate(), tidyr::pivot_longer(), and others.\n\n\n\n\n\nFiltering rows based on conditions.\nAdding or modifying columns.\nReshaping data between wide and long formats.\nCombining or joining datasets.\n\n\n\n\n\nBase R: Built into R, no additional installations required.\ntidyverse: Consistent syntax and powerful chaining with the pipe operator |&gt;.\n\n\n\n\n\n\n\n\n# Base R requires no additional loading.\n\n# Load tidyverse package using pacman\npacman::p_load(tidyverse)\n\n\n\n\n\n\n\n\n\nDescription: Extract rows based on a condition.\nSyntax:\nsubset(x, subset, select = NULL)\nArguments:\n\nx: A data frame or similar object.\nsubset: Logical expression indicating rows to keep.\nselect: Columns to retain, or NULL to keep all.\n\nExample:\n\ndata(iris)\n# Filter rows where Species is \"setosa\"\nsubset(iris, Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Add or modify columns in a data frame.\nSyntax:\ntransform(data, ...)\nArguments:\n\ndata: A data frame.\n…: Expressions specifying transformations.\n\nExample:\n\n# Add a new column for Sepal Area\niris &lt;- transform(iris, Sepal.Area = Sepal.Length * Sepal.Width)\nhead(iris)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets based on common columns (keys).\nSyntax:\nmerge(x, y, by, all)\nArguments:\n\nx, y: Data frames to merge.\nby: Column names to use as keys. Defaults to all common columns.\nall: Logical. TRUE for full outer join; FALSE for inner join.\n\nExample:\n\n# Create example datasets\ndf1 &lt;- data.frame(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- data.frame(ID = 2:4, Score = c(15, 25, 35))\n# Merge on ID\nmerge(df1, df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\nDescription: Select rows using conditions with dplyr::filter().\nSyntax:\ndplyr::filter(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Logical conditions. Rows where the condition is TRUE are retained.\n\nExample:\n\n# Filter rows where Species is \"setosa\"\niris |&gt;\n  dplyr::filter(Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Create or modify columns using dplyr::mutate().\nSyntax:\ndplyr::mutate(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Name-value pairs where names are new or existing column names, and values are expressions.\n\nExample:\n\n# Add Sepal.Area column\niris |&gt;\n  dplyr::mutate(Sepal.Area = Sepal.Length * Sepal.Width)\n\n\n  \n\n\n\n\n\n\nDescription: Convert data between wide and long formats with tidyr::pivot_longer().\nSyntax:\ntidyr::pivot_longer(data, cols, names_to, values_to)\nArguments:\n\ndata: A data frame or tibble.\ncols: Columns to pivot into rows.\nnames_to: Name of the new column containing the names of the pivoted variables.\nvalues_to: Name of the new column containing the values of the pivoted variables.\n\nExample:\n\n# Convert iris to long format\niris_long &lt;- iris |&gt;\n  tidyr::pivot_longer(\n    cols = starts_with(\"Sepal\"),\n    names_to = \"Measurement\",\n    values_to = \"Value\"\n  )\nhead(iris_long)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets using dplyr::inner_join().\nSyntax:\ndplyr::inner_join(x, y, by)\nArguments:\n\nx, y: Data frames or tibbles to join.\nby: Column names to join by. Defaults to common column names.\n\nExample:\n\ndf1 &lt;- tibble(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- tibble(ID = 2:4, Score = c(15, 25, 35))\ndf1 |&gt;\n  dplyr::inner_join(df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\n\nObjective: Prepare mtcars for analysis by filtering rows, creating a new column, and summarizing data.\nSteps:\n\nFilter cars with mpg &gt; 20.\nAdd a column Weight_kg converting wt to kilograms.\nSummarize average MPG by the number of cylinders.\n\nCode:\n\n# Using Base R\nmtcars_filtered &lt;- subset(mtcars, mpg &gt; 20)\nmtcars_filtered &lt;- transform(mtcars_filtered, Weight_kg = wt * 453.6)\naggregate(mpg ~ cyl, data = mtcars_filtered, mean)\n\n\n  \n\n\n# Using tidyverse\nmtcars |&gt;\n  dplyr::filter(mpg &gt; 20) |&gt;\n  dplyr::mutate(Weight_kg = wt * 453.6) |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))\n\n\n  \n\n\n\n\n\n\n\n\n\nBase R: Use tapply() for custom aggregations. tidyverse: Leverage dplyr::group_by() for grouped operations.\nExample:\n\n# Base R\ntapply(mtcars$mpg, mtcars$cyl, mean)\n\n       4        6        8 \n26.66364 19.74286 15.10000 \n\n# tidyverse\nmtcars |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))\n\n\n  \n\n\n\n\n\n\n\n\n\n\ntidyr::pivot_longer() errors:\n\nEnsure column names in cols exist.\nUse names_pattern for extracting variable parts.\n\nMerge Mismatches in Base R:\n\nVerify columns in by are consistent between datasets.\n\n\n\n\n\n\n\nUse descriptive column names.\nKeep data in tidy format for easier analysis.\nPrefer tidyverse for a consistent and readable workflow.\n\n\n\n\n\n\n\nBase R: Ideal for simple tasks.\ntidyverse: Superior for complex workflows with a consistent syntax.\n\n\n\n\nExplore additional tidyverse packages like lubridate (dates) or stringr (text manipulation).\n\n\n\n\n\nBase R Documentation\ntidyverse Documentation\nR for Data Science"
   },
   {
-    "objectID": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
-    "href": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
-    "title": "Creating Data Frames in R",
+    "objectID": "appendix/r-topics/r-data-transformation.html#introduction",
+    "href": "appendix/r-topics/r-data-transformation.html#introduction",
+    "title": "Data Transformation and Wrangling in R",
     "section": "",
-    "text": "Base R Documentation\nTidyverse Guide\nR for Data Science"
+    "text": "Data transformation and wrangling involve cleaning, reshaping, and modifying data to prepare it for analysis. This tutorial introduces:\n\nBase R Functions: subset(), transform(), merge().\ntidyverse Functions: dplyr::filter(), dplyr::mutate(), tidyr::pivot_longer(), and others.\n\n\n\n\n\nFiltering rows based on conditions.\nAdding or modifying columns.\nReshaping data between wide and long formats.\nCombining or joining datasets.\n\n\n\n\n\nBase R: Built into R, no additional installations required.\ntidyverse: Consistent syntax and powerful chaining with the pipe operator |&gt;."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#getting-started",
+    "href": "appendix/r-topics/r-data-transformation.html#getting-started",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "# Base R requires no additional loading.\n\n# Load tidyverse package using pacman\npacman::p_load(tidyverse)"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-data-transformation.html#key-functions-and-features",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Description: Extract rows based on a condition.\nSyntax:\nsubset(x, subset, select = NULL)\nArguments:\n\nx: A data frame or similar object.\nsubset: Logical expression indicating rows to keep.\nselect: Columns to retain, or NULL to keep all.\n\nExample:\n\ndata(iris)\n# Filter rows where Species is \"setosa\"\nsubset(iris, Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Add or modify columns in a data frame.\nSyntax:\ntransform(data, ...)\nArguments:\n\ndata: A data frame.\n…: Expressions specifying transformations.\n\nExample:\n\n# Add a new column for Sepal Area\niris &lt;- transform(iris, Sepal.Area = Sepal.Length * Sepal.Width)\nhead(iris)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets based on common columns (keys).\nSyntax:\nmerge(x, y, by, all)\nArguments:\n\nx, y: Data frames to merge.\nby: Column names to use as keys. Defaults to all common columns.\nall: Logical. TRUE for full outer join; FALSE for inner join.\n\nExample:\n\n# Create example datasets\ndf1 &lt;- data.frame(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- data.frame(ID = 2:4, Score = c(15, 25, 35))\n# Merge on ID\nmerge(df1, df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\nDescription: Select rows using conditions with dplyr::filter().\nSyntax:\ndplyr::filter(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Logical conditions. Rows where the condition is TRUE are retained.\n\nExample:\n\n# Filter rows where Species is \"setosa\"\niris |&gt;\n  dplyr::filter(Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Create or modify columns using dplyr::mutate().\nSyntax:\ndplyr::mutate(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Name-value pairs where names are new or existing column names, and values are expressions.\n\nExample:\n\n# Add Sepal.Area column\niris |&gt;\n  dplyr::mutate(Sepal.Area = Sepal.Length * Sepal.Width)\n\n\n  \n\n\n\n\n\n\nDescription: Convert data between wide and long formats with tidyr::pivot_longer().\nSyntax:\ntidyr::pivot_longer(data, cols, names_to, values_to)\nArguments:\n\ndata: A data frame or tibble.\ncols: Columns to pivot into rows.\nnames_to: Name of the new column containing the names of the pivoted variables.\nvalues_to: Name of the new column containing the values of the pivoted variables.\n\nExample:\n\n# Convert iris to long format\niris_long &lt;- iris |&gt;\n  tidyr::pivot_longer(\n    cols = starts_with(\"Sepal\"),\n    names_to = \"Measurement\",\n    values_to = \"Value\"\n  )\nhead(iris_long)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets using dplyr::inner_join().\nSyntax:\ndplyr::inner_join(x, y, by)\nArguments:\n\nx, y: Data frames or tibbles to join.\nby: Column names to join by. Defaults to common column names.\n\nExample:\n\ndf1 &lt;- tibble(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- tibble(ID = 2:4, Score = c(15, 25, 35))\ndf1 |&gt;\n  dplyr::inner_join(df2, by = \"ID\")"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#in-depth-examples",
+    "href": "appendix/r-topics/r-data-transformation.html#in-depth-examples",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Objective: Prepare mtcars for analysis by filtering rows, creating a new column, and summarizing data.\nSteps:\n\nFilter cars with mpg &gt; 20.\nAdd a column Weight_kg converting wt to kilograms.\nSummarize average MPG by the number of cylinders.\n\nCode:\n\n# Using Base R\nmtcars_filtered &lt;- subset(mtcars, mpg &gt; 20)\nmtcars_filtered &lt;- transform(mtcars_filtered, Weight_kg = wt * 453.6)\naggregate(mpg ~ cyl, data = mtcars_filtered, mean)\n\n\n  \n\n\n# Using tidyverse\nmtcars |&gt;\n  dplyr::filter(mpg &gt; 20) |&gt;\n  dplyr::mutate(Weight_kg = wt * 453.6) |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#advanced-features",
+    "href": "appendix/r-topics/r-data-transformation.html#advanced-features",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Base R: Use tapply() for custom aggregations. tidyverse: Leverage dplyr::group_by() for grouped operations.\nExample:\n\n# Base R\ntapply(mtcars$mpg, mtcars$cyl, mean)\n\n       4        6        8 \n26.66364 19.74286 15.10000 \n\n# tidyverse\nmtcars |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-data-transformation.html#troubleshooting-and-faqs",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "tidyr::pivot_longer() errors:\n\nEnsure column names in cols exist.\nUse names_pattern for extracting variable parts.\n\nMerge Mismatches in Base R:\n\nVerify columns in by are consistent between datasets."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#best-practices",
+    "href": "appendix/r-topics/r-data-transformation.html#best-practices",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Use descriptive column names.\nKeep data in tidy format for easier analysis.\nPrefer tidyverse for a consistent and readable workflow."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#conclusion",
+    "href": "appendix/r-topics/r-data-transformation.html#conclusion",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Base R: Ideal for simple tasks.\ntidyverse: Superior for complex workflows with a consistent syntax.\n\n\n\n\nExplore additional tidyverse packages like lubridate (dates) or stringr (text manipulation)."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-transformation.html#references-and-resources",
+    "href": "appendix/r-topics/r-data-transformation.html#references-and-resources",
+    "title": "Data Transformation and Wrangling in R",
+    "section": "",
+    "text": "Base R Documentation\ntidyverse Documentation\nR for Data Science"
   },
   {
     "objectID": "appendix/r-base/r-rep-basics.html",
@@ -3146,179 +3153,172 @@
     "text": "R Documentation on interaction\nANOVA in R Tutorial"
   },
   {
-    "objectID": "appendix/r-topics/r-import-data-basics.html",
-    "href": "appendix/r-topics/r-import-data-basics.html",
+    "objectID": "appendix/r-topics/r-data-frames-basics.html",
+    "href": "appendix/r-topics/r-data-frames-basics.html",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing.\n\n\n\n\n\n\n\n\n# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\ndata.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\nCombine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\ncolnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage.\n\n\n\n\n\n\n\n\nData Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types.\n\n\n\n\n\n\nUse consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability.\n\n\n\n\n\n\n\nBase R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations.\n\n\n\n\n\nBase R Documentation\nTidyverse Guide\nR for Data Science"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#introduction",
+    "href": "appendix/r-topics/r-data-frames-basics.html#introduction",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Creating data frames is fundamental in R for managing and analyzing tabular data. This tutorial explores:\n\nBase R Functions: data.frame() and as.data.frame().\ntidyverse Functions: tibble::tibble() and dplyr::data_frame().\n\nData frames allow structured data storage, enabling row and column manipulations akin to spreadsheets.\n\n\n\n\nCleaning and structuring raw data.\nAggregating results from computations.\nPreparing data for visualization or modeling.\n\n\n\n\n\nBase R: Straightforward and widely supported.\ntidyverse: Intuitive syntax, compatibility with the pipe operator |&gt;, and enhanced features like printing."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#getting-started",
+    "href": "appendix/r-topics/r-data-frames-basics.html#getting-started",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "# Use pacman to load packages\npacman::p_load(tidyverse)\n\n\n\n\n\n# Create a simple data frame\ndata_base &lt;- data.frame(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_base\n\n\n  \n\n\n\n\n\n\n\n# Create a tibble\ndata_tidy &lt;- tibble::tibble(\n    Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n    Age = c(25, 30, 35),\n    Score = c(85.5, 90.3, 78.9)\n)\ndata_tidy"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-data-frames-basics.html#key-functions-and-features",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "data.frame() creates data frames from vectors or lists.\n\n\n\n#| echo: fenced\ndata.frame(x, ..., row.names = NULL, check.rows = FALSE, check.names = TRUE)\n\n\n\n\ndata_example &lt;- data.frame(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_example\n\n\n  \n\n\n\n\n\n\n\n\n\ntibble::tibble() constructs modern data frames with automatic column type detection.\n\n\n\ntibble::tibble(...)\n\n\n\n\ndata_tidy_example &lt;- tibble::tibble(\n    ID = 1:3,\n    Category = c(\"A\", \"B\", \"A\"),\n    Value = c(100, 200, 150)\n)\ndata_tidy_example"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
+    "href": "appendix/r-topics/r-data-frames-basics.html#in-depth-examples",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Combine two data frames by a common key.\n\n\n\n\ndf1 &lt;- tibble::tibble(ID = 1:3, Value1 = c(10, 20, 30))\ndf2 &lt;- tibble::tibble(ID = 2:4, Value2 = c(40, 50, 60))\nmerged &lt;- dplyr::left_join(df1, df2, by = \"ID\")\nmerged\n\n\n  \n\n\n\n\n\n\nObserve how NA fills for unmatched rows.\n\n\n\n\n\n\nFilter rows where Value1 &gt; 15 and select specific columns.\n\n\n\n\nfiltered &lt;- merged |&gt;\n    dplyr::filter(Value1 &gt; 15) |&gt;\n    dplyr::select(ID, Value1)\nfiltered"
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
+    "href": "appendix/r-topics/r-data-frames-basics.html#advanced-features",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "colnames(data_base) &lt;- c(\"FullName\", \"Years\", \"ExamScore\")\ndata_base\n\n\n  \n\n\n\n\n\n\n\ndata_tidy &lt;- data_tidy |&gt;\n    dplyr::mutate(Grade = ifelse(Score &gt; 80, \"Pass\", \"Fail\"))\ndata_tidy\n\n\n  \n\n\n\n\n\n\n\nGenerate a plot from the data.\n\nggplot2::ggplot(data_tidy, ggplot2::aes(x = Age, y = Score)) +\n    ggplot2::geom_point() +\n    ggplot2::labs(title = \"Age vs. Score\", x = \"Age\", y = \"Score\")\n\n\n\n\n\n\n\n\n\n\n\n\nUse data.table for large data sets.\nPredefine column types for better memory usage."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-data-frames-basics.html#troubleshooting-and-faqs",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Data Mismatch: Ensure column lengths match when creating data frames.\n\n# Error example\n# data.frame(a = 1:3, b = 1:4)\n\nType Conversion Warnings: Avoid unintended type coercion by specifying stringsAsFactors = FALSE.\n\n\n\n\n\nWhy use tibble? tibble provides cleaner, more readable output, and better handling of column names and types."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#best-practices",
+    "href": "appendix/r-topics/r-data-frames-basics.html#best-practices",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Use consistent column names and data types.\nValidate data integrity before further processing.\nLeverage tidyverse pipes for readability and maintainability."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#conclusion",
+    "href": "appendix/r-topics/r-data-frames-basics.html#conclusion",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Base R is great for quick setups and legacy code.\ntidyverse excels for scalable, readable, and modern workflows.\n\n\n\n\nExplore advanced techniques like data.table or R6 for complex data operations."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
+    "href": "appendix/r-topics/r-data-frames-basics.html#references-and-resources",
+    "title": "Creating Data Frames in R",
+    "section": "",
+    "text": "Base R Documentation\nTidyverse Guide\nR for Data Science"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html",
+    "href": "appendix/r-topics/r-subsetting-basics.html",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "",
+    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#introduction",
+    "href": "appendix/r-topics/r-subsetting-basics.html#introduction",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "",
+    "text": "Subsetting data in R is a fundamental operation for data manipulation and analysis. It involves selecting specific rows, columns, or elements of a data structure based on conditions or indices. This tutorial explores subsetting techniques in R using Base R and tidyverse packages. It will provide comprehensive examples, tips, and nuances to master this essential skill.\nPackages and Functions Covered:\n\nBase R Functions: [], subset()\nTidyverse Functions: dplyr::filter(), dplyr::select(), dplyr::slice(), dplyr::pull()\n\nUse Cases:\n\nExtracting subsets of data for focused analysis.\nFiltering data for visualization or modeling.\nReducing dataset size for computation efficiency.\nHandling missing or specific data points.\n\nBenefits:\n\nBase R: Lightweight and does not require additional installations.\nTidyverse: Provides clean, readable syntax and integrates well with pipelines (|&gt;)."
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#getting-started",
+    "href": "appendix/r-topics/r-subsetting-basics.html#getting-started",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Getting Started",
+    "text": "Getting Started\nLoading the Package:\n\npacman::p_load(dplyr)  # Loads or installs the dplyr package\n\nBasic Usage: Select rows where mpg &gt; 20 using both approaches:\nBase R:\n\ndata(mtcars)\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\nTidyverse:\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
+    "href": "appendix/r-topics/r-subsetting-basics.html#key-functions-and-features",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Key Functions and Features",
+    "text": "Key Functions and Features\n\nBase R: Subsetting with []\nDescription: The simplest and most versatile method for subsetting in R. Use [] to extract rows, columns, or individual elements from data frames or matrices.\nSyntax:\ndata[rows, columns]\nExamples:\n\nSelect rows where mpg &gt; 20:\n\n\nmtcars[mtcars$mpg &gt; 20, ]\n\n\n  \n\n\n\n\nSelect specific columns:\n\n\nmtcars[, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\n\nCombine row and column conditions:\n\n\nmtcars[mtcars$mpg &gt; 20, c(\"mpg\", \"cyl\")]\n\n\n  \n\n\n\nNuances:\n\nOmitting rows or columns selects all:\n\n\nmtcars[mtcars$mpg &gt; 20, ]  # All columns selected\n\n\n  \n\n\nmtcars[, c(\"mpg\", \"cyl\")]  # All rows selected\n\n\n  \n\n\n\n\nNegative indexing excludes rows or columns:\n\n\nmtcars[-c(1, 2), ]  # Exclude first two rows\n\n\n  \n\n\n\n\n\nBase R: subset()\nDescription: Provides a more human-readable syntax for subsetting.\nSyntax:\nsubset(data, subset, select)\nExamples:\n\nSubset rows where mpg &gt; 20 and select mpg and cyl columns:\n\n\nsubset(mtcars, mpg &gt; 20, select = c(mpg, cyl))\n\n\n  \n\n\n\n\nSubset using multiple conditions:\n\n\nsubset(mtcars, mpg &gt; 20 & cyl == 6, select = c(mpg, cyl))\n\n\n  \n\n\n\nNuances:\n\nNon-standard evaluation allows simpler syntax but can lead to ambiguities. Use column names explicitly when necessary.\n\n\n\nTidyverse: dplyr::filter()\nDescription: Filters rows based on logical conditions.\nSyntax:\ndplyr::filter(data, condition)\nExamples:\n\nFilter rows with mpg &gt; 20:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\n  \n\n\n\n\nFilter with multiple conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 & cyl == 6)\n\n\n  \n\n\n\n\nUse dynamic variables in filtering:\n\n\nthreshold &lt;- 20\nmtcars |&gt;\n    dplyr::filter(mpg &gt; threshold)\n\n\n  \n\n\n\nNuances:\n\nUse | for “or” conditions:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; 20 | cyl == 6)\n\n\n  \n\n\n\n\nFilter with is.na() to handle missing values:\n\n\nmtcars |&gt;\n    dplyr::filter(!is.na(mpg))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::select()\nDescription: Selects specific columns from a data frame.\nSyntax:\ndplyr::select(data, columns)\nExamples:\n\nSelect specific columns:\n\n\nmtcars |&gt;\n    dplyr::select(mpg, cyl)\n\n\n  \n\n\n\n\nUse helpers for dynamic selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"))\n\n\n  \n\n\n\nNuances:\n\nCombine helpers for advanced selection:\n\n\nmtcars |&gt;\n    dplyr::select(starts_with(\"d\"), ends_with(\"t\"))\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::slice()\nDescription: Selects rows by position.\nSyntax:\ndplyr::slice(data, row_numbers)\nExamples:\n\nSelect the first five rows:\n\n\nmtcars |&gt;\n    dplyr::slice(1:5)\n\n\n  \n\n\n\n\nRandom sampling:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(n = 5)\n\n\n  \n\n\n\n\nSelect rows by percentages:\n\n\nmtcars |&gt;\n    dplyr::slice_sample(prop = .1)  # 10% of rows\n\n\n  \n\n\n\n\n\nTidyverse: dplyr::pull()\nDescription: Extracts a single column as a vector.\nSyntax:\ndplyr::pull(data, column)\nExamples:\n\nPull the mpg column:\n\n\nmtcars |&gt;\n    dplyr::pull(mpg)\n\n [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4\n[16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7\n[31] 15.0 21.4\n\n\n\nCombine with filtering:\n\n\nmtcars |&gt;\n    dplyr::filter(cyl == 6) |&gt;\n    dplyr::pull(mpg)\n\n[1] 21.0 21.0 21.4 18.1 19.2 17.8 19.7\n\n\nNuances:\n\nUseful for extracting data for external functions:\n\n\nmean(mtcars |&gt; dplyr::pull(mpg))\n\n[1] 20.09062"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
+    "href": "appendix/r-topics/r-subsetting-basics.html#in-depth-examples",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "In-Depth Examples",
+    "text": "In-Depth Examples\n\nExample 1: Dynamic Filtering with External Variables\nObjective: Filter rows based on user-defined thresholds for mpg and hp.\nSteps:\n\nDefine thresholds:\n\n\nmpg_threshold &lt;- 20\nhp_threshold &lt;- 100\n\n\nBase R:\n\n\nmtcars[mtcars$mpg &gt; mpg_threshold & mtcars$hp &gt; hp_threshold, ]\n\n\n  \n\n\n\n\nTidyverse:\n\n\nmtcars |&gt;\n    dplyr::filter(mpg &gt; mpg_threshold & hp &gt; hp_threshold)\n\n\n  \n\n\n\n\n\nExample 2: Visualizing Subsets\nObjective: Visualize cars with mpg &gt; 20.\nSteps:\n\nSubset data:\n\n\nfiltered_data &lt;- mtcars |&gt;\n    dplyr::filter(mpg &gt; 20)\n\n\nPlot:\n\n\nlibrary(ggplot2)\nggplot(filtered_data, aes(x = wt, y = mpg)) +\n    geom_point()"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
+    "href": "appendix/r-topics/r-subsetting-basics.html#advanced-features",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Advanced Features",
+    "text": "Advanced Features\nCustomization:\n\nCreate reusable functions for subsetting:\n\n\nfilter_cars &lt;- function(data, mpg_threshold, cyl_threshold) {\n    data |&gt;\n        dplyr::filter(mpg &gt; mpg_threshold, cyl == cyl_threshold)\n}\n\nfilter_cars(mtcars, 20, 6)\n\n\n  \n\n\n\nIntegration:\n\nCombine tidyr for reshaping with subsetting:\n\n\nlibrary(tidyr)\nmtcars |&gt;\n    pivot_longer(cols = everything()) |&gt;\n    dplyr::filter(value &gt; 20)"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
+    "href": "appendix/r-topics/r-subsetting-basics.html#troubleshooting-and-faqs",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Troubleshooting and FAQs",
+    "text": "Troubleshooting and FAQs\n\nIssue: “undefined columns selected” Fix: Double-check column names.\nIssue: Subsetting returns no rows. Fix: Ensure logical conditions are met.\n\nFAQs:\n\nHow to subset with regex? Use grepl() in Base R or matches() in dplyr::select():\n\n\nmtcars |&gt;\n    dplyr::select(matches(\"^m\"))"
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#best-practices",
+    "href": "appendix/r-topics/r-subsetting-basics.html#best-practices",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Best Practices",
+    "text": "Best Practices\n\nPreview data before subsetting using head() or glimpse().\nChain operations for clarity in tidyverse.\nAvoid hard-coding indices; use dynamic variables."
+  },
+  {
+    "objectID": "appendix/r-topics/r-subsetting-basics.html#conclusion",
+    "href": "appendix/r-topics/r-subsetting-basics.html#conclusion",
+    "title": "STAT 454/545 - Analysis of Variance and Experimental Design",
+    "section": "Conclusion",
+    "text": "Conclusion\nRecap: Subsetting is a powerful tool for extracting specific data. Base R provides flexibility, while tidyverse offers an elegant syntax for modern workflows."
+  },
+  {
+    "objectID": "appendix/r-topics/r-data-import-basics.html",
+    "href": "appendix/r-topics/r-data-import-basics.html",
     "title": "Importing Various Data Set Forms in R",
     "section": "",
     "text": "R’s strength lies in its data manipulation and analysis capabilities. Effectively importing data is the crucial first step. Various functions and packages handle diverse data formats, ensuring a smooth transition from your data source to R."
   },
   {
-    "objectID": "appendix/r-topics/r-import-data-basics.html#introduction",
-    "href": "appendix/r-topics/r-import-data-basics.html#introduction",
+    "objectID": "appendix/r-topics/r-data-import-basics.html#introduction",
+    "href": "appendix/r-topics/r-data-import-basics.html#introduction",
     "title": "Importing Various Data Set Forms in R",
     "section": "",
     "text": "R’s strength lies in its data manipulation and analysis capabilities. Effectively importing data is the crucial first step. Various functions and packages handle diverse data formats, ensuring a smooth transition from your data source to R."
   },
   {
-    "objectID": "appendix/r-topics/r-import-data-basics.html#common-data-formats-and-import-functions",
-    "href": "appendix/r-topics/r-import-data-basics.html#common-data-formats-and-import-functions",
+    "objectID": "appendix/r-topics/r-data-import-basics.html#common-data-formats-and-import-functions",
+    "href": "appendix/r-topics/r-data-import-basics.html#common-data-formats-and-import-functions",
     "title": "Importing Various Data Set Forms in R",
     "section": "Common Data Formats and Import Functions",
     "text": "Common Data Formats and Import Functions\n\n1. CSV (Comma-Separated Values)\nCSV files are among the most widely used for storing tabular data. R’s read.csv() function is highly efficient for this format.\n# Basic usage\nmy_data &lt;- read.csv(\"my_data.csv\")\n\n# Specifying the separator (if not a comma)\nmy_data &lt;- read.csv(\"my_data.csv\", sep = \";\") # For semicolon-separated values\n\n# Handling header rows\nmy_data &lt;- read.csv(\"my_data.csv\", header = TRUE) # If the first row contains column names (default)\nmy_data &lt;- read.csv(\"my_data.csv\", header = FALSE) # If the first row is data\n\n# Setting the decimal point\nmy_data &lt;- read.csv(\"my_data.csv\", dec = \",\") # If using a comma as the decimal separator\n\n\n2. TXT (Text Files)\nPlain text files often require more careful handling due to variations in formatting. read.table() is the core function, offering extensive control.\n# Basic usage (assumes header and tab separation)\nmy_data &lt;- read.table(\"my_data.txt\", header = TRUE, sep = \"\\t\")\n\n# Specifying separators and other parameters\nmy_data &lt;- read.table(\"my_data.txt\", header = FALSE, sep = \",\", dec = \".\", fill = TRUE, na.strings = c(\"NA\", \".\", \"\"))\n#fill=TRUE: handles rows with different number of elements\n#na.strings: defines what to treat as missing values.\n\n\n3. Excel Files (.xls, .xlsx)\nThe readxl package provides efficient tools for importing Excel files.\n# Install if necessary: install.packages(\"readxl\")\nlibrary(readxl)\n\n# Importing a specific sheet\nmy_data &lt;- read_excel(\"my_excel_file.xlsx\", sheet = \"Sheet1\")\n\n# Importing multiple sheets (returns a list)\nmy_data &lt;- lapply(excel_sheets(\"my_excel_file.xlsx\"), read_excel, path = \"my_excel_file.xlsx\")\n\n#Specifying the column types\nmy_data &lt;- read_excel(\"my_excel_file.xlsx\", sheet = \"Sheet1\", col_types = c(\"numeric\", \"text\", \"date\"))\n\n\n4. SPSS Files (.save)\nThe haven package simplifies importing SPSS data files.\n# Install if necessary: install.packages(\"haven\")\nlibrary(haven)\n\nmy_data &lt;- read_sav(\"my_spss_file.sav\")\n\n\n5. SAS Files (.sas7bdat)\nhaven also handles SAS data sets.\n# Install haven if you haven't already\nlibrary(haven)\n\nmy_data &lt;- read_sas(\"my_sas_file.sas7bdat\")\n\n\n6. Stata Files (.dta)\nSimilarly, haven supports Stata files.\n# Install haven if you haven't already\nlibrary(haven)\n\nmy_data &lt;- read_dta(\"my_stata_file.dta\")\n\n\n7. JSON (JavaScript Object Notation)\nJSON is widely used for web-based data exchange. The jsonlite package is excellent for this task.\n# Install if necessary: install.packages(\"jsonlite\")\nlibrary(jsonlite)\n\nmy_data &lt;- fromJSON(\"my_json_file.json\")\n\n\n8. RData Files\nThese are R-specific binary files preserving data structures and objects.\nload(\"my_rdata_file.RData\") #loads all objects in the RData file into the current R environment"
   },
   {
-    "objectID": "appendix/r-topics/r-import-data-basics.html#handling-data-issues",
-    "href": "appendix/r-topics/r-import-data-basics.html#handling-data-issues",
+    "objectID": "appendix/r-topics/r-data-import-basics.html#handling-data-issues",
+    "href": "appendix/r-topics/r-data-import-basics.html#handling-data-issues",
     "title": "Importing Various Data Set Forms in R",
     "section": "Handling Data Issues",
     "text": "Handling Data Issues\n\nMissing Values\nMany functions have na.strings arguments to specify how missing values are represented in the source file (e.g., “NA”, ““,”.”, ” “).\n\n\nData Types\nIncorrect data type inferences can cause problems. Explicitly specify column types using functions like col_types in readxl or using colClasses in read.table and read.csv to avoid such issues.\n\n\nLarge Files\nFor very large files, consider using packages designed for memory-efficient data handling, like data.table or readr. readr::read_csv() is typically faster and more memory-efficient than read.csv().\n# Install readr if necessary: install.packages(\"readr\")\nlibrary(readr)\nmy_data &lt;- read_csv(\"large_file.csv\")   #Handles large CSV files more efficiently"
   },
   {
-    "objectID": "appendix/r-topics/r-import-data-basics.html#best-practices",
-    "href": "appendix/r-topics/r-import-data-basics.html#best-practices",
+    "objectID": "appendix/r-topics/r-data-import-basics.html#best-practices",
+    "href": "appendix/r-topics/r-data-import-basics.html#best-practices",
     "title": "Importing Various Data Set Forms in R",
     "section": "Best Practices",
     "text": "Best Practices\n\nInspect your data: Preview your files before importing (e.g., in a text editor or spreadsheet program).\nSpecify options explicitly: Don’t rely on defaults – customize arguments for optimal results.\nCheck the data structure: After import, always inspect your data frame using str(my_data) or summary(my_data) to verify correct formatting.\nHandle missing values: Carefully address missing data using appropriate R functions (e.g., na.omit(), imputation methods).\n\nThis tutorial provides a foundation for importing diverse data formats into R. Remember to consult the documentation for each specific package and function for comprehensive options and detailed parameter descriptions."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html",
-    "href": "appendix/r-topics/r-data-transformation.html",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Data transformation and wrangling involve cleaning, reshaping, and modifying data to prepare it for analysis. This tutorial introduces:\n\nBase R Functions: subset(), transform(), merge().\ntidyverse Functions: dplyr::filter(), dplyr::mutate(), tidyr::pivot_longer(), and others.\n\n\n\n\n\nFiltering rows based on conditions.\nAdding or modifying columns.\nReshaping data between wide and long formats.\nCombining or joining datasets.\n\n\n\n\n\nBase R: Built into R, no additional installations required.\ntidyverse: Consistent syntax and powerful chaining with the pipe operator |&gt;.\n\n\n\n\n\n\n\n\n# Base R requires no additional loading.\n\n# Load tidyverse package using pacman\npacman::p_load(tidyverse)\n\n\n\n\n\n\n\n\n\nDescription: Extract rows based on a condition.\nSyntax:\nsubset(x, subset, select = NULL)\nArguments:\n\nx: A data frame or similar object.\nsubset: Logical expression indicating rows to keep.\nselect: Columns to retain, or NULL to keep all.\n\nExample:\n\ndata(iris)\n# Filter rows where Species is \"setosa\"\nsubset(iris, Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Add or modify columns in a data frame.\nSyntax:\ntransform(data, ...)\nArguments:\n\ndata: A data frame.\n…: Expressions specifying transformations.\n\nExample:\n\n# Add a new column for Sepal Area\niris &lt;- transform(iris, Sepal.Area = Sepal.Length * Sepal.Width)\nhead(iris)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets based on common columns (keys).\nSyntax:\nmerge(x, y, by, all)\nArguments:\n\nx, y: Data frames to merge.\nby: Column names to use as keys. Defaults to all common columns.\nall: Logical. TRUE for full outer join; FALSE for inner join.\n\nExample:\n\n# Create example datasets\ndf1 &lt;- data.frame(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- data.frame(ID = 2:4, Score = c(15, 25, 35))\n# Merge on ID\nmerge(df1, df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\nDescription: Select rows using conditions with dplyr::filter().\nSyntax:\ndplyr::filter(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Logical conditions. Rows where the condition is TRUE are retained.\n\nExample:\n\n# Filter rows where Species is \"setosa\"\niris |&gt;\n  dplyr::filter(Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Create or modify columns using dplyr::mutate().\nSyntax:\ndplyr::mutate(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Name-value pairs where names are new or existing column names, and values are expressions.\n\nExample:\n\n# Add Sepal.Area column\niris |&gt;\n  dplyr::mutate(Sepal.Area = Sepal.Length * Sepal.Width)\n\n\n  \n\n\n\n\n\n\nDescription: Convert data between wide and long formats with tidyr::pivot_longer().\nSyntax:\ntidyr::pivot_longer(data, cols, names_to, values_to)\nArguments:\n\ndata: A data frame or tibble.\ncols: Columns to pivot into rows.\nnames_to: Name of the new column containing the names of the pivoted variables.\nvalues_to: Name of the new column containing the values of the pivoted variables.\n\nExample:\n\n# Convert iris to long format\niris_long &lt;- iris |&gt;\n  tidyr::pivot_longer(\n    cols = starts_with(\"Sepal\"),\n    names_to = \"Measurement\",\n    values_to = \"Value\"\n  )\nhead(iris_long)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets using dplyr::inner_join().\nSyntax:\ndplyr::inner_join(x, y, by)\nArguments:\n\nx, y: Data frames or tibbles to join.\nby: Column names to join by. Defaults to common column names.\n\nExample:\n\ndf1 &lt;- tibble(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- tibble(ID = 2:4, Score = c(15, 25, 35))\ndf1 |&gt;\n  dplyr::inner_join(df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\n\nObjective: Prepare mtcars for analysis by filtering rows, creating a new column, and summarizing data.\nSteps:\n\nFilter cars with mpg &gt; 20.\nAdd a column Weight_kg converting wt to kilograms.\nSummarize average MPG by the number of cylinders.\n\nCode:\n\n# Using Base R\nmtcars_filtered &lt;- subset(mtcars, mpg &gt; 20)\nmtcars_filtered &lt;- transform(mtcars_filtered, Weight_kg = wt * 453.6)\naggregate(mpg ~ cyl, data = mtcars_filtered, mean)\n\n\n  \n\n\n# Using tidyverse\nmtcars |&gt;\n  dplyr::filter(mpg &gt; 20) |&gt;\n  dplyr::mutate(Weight_kg = wt * 453.6) |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))\n\n\n  \n\n\n\n\n\n\n\n\n\nBase R: Use tapply() for custom aggregations. tidyverse: Leverage dplyr::group_by() for grouped operations.\nExample:\n\n# Base R\ntapply(mtcars$mpg, mtcars$cyl, mean)\n\n       4        6        8 \n26.66364 19.74286 15.10000 \n\n# tidyverse\nmtcars |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))\n\n\n  \n\n\n\n\n\n\n\n\n\n\ntidyr::pivot_longer() errors:\n\nEnsure column names in cols exist.\nUse names_pattern for extracting variable parts.\n\nMerge Mismatches in Base R:\n\nVerify columns in by are consistent between datasets.\n\n\n\n\n\n\n\nUse descriptive column names.\nKeep data in tidy format for easier analysis.\nPrefer tidyverse for a consistent and readable workflow.\n\n\n\n\n\n\n\nBase R: Ideal for simple tasks.\ntidyverse: Superior for complex workflows with a consistent syntax.\n\n\n\n\nExplore additional tidyverse packages like lubridate (dates) or stringr (text manipulation).\n\n\n\n\n\nBase R Documentation\ntidyverse Documentation\nR for Data Science"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#introduction",
-    "href": "appendix/r-topics/r-data-transformation.html#introduction",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Data transformation and wrangling involve cleaning, reshaping, and modifying data to prepare it for analysis. This tutorial introduces:\n\nBase R Functions: subset(), transform(), merge().\ntidyverse Functions: dplyr::filter(), dplyr::mutate(), tidyr::pivot_longer(), and others.\n\n\n\n\n\nFiltering rows based on conditions.\nAdding or modifying columns.\nReshaping data between wide and long formats.\nCombining or joining datasets.\n\n\n\n\n\nBase R: Built into R, no additional installations required.\ntidyverse: Consistent syntax and powerful chaining with the pipe operator |&gt;."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#getting-started",
-    "href": "appendix/r-topics/r-data-transformation.html#getting-started",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "# Base R requires no additional loading.\n\n# Load tidyverse package using pacman\npacman::p_load(tidyverse)"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-data-transformation.html#key-functions-and-features",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Description: Extract rows based on a condition.\nSyntax:\nsubset(x, subset, select = NULL)\nArguments:\n\nx: A data frame or similar object.\nsubset: Logical expression indicating rows to keep.\nselect: Columns to retain, or NULL to keep all.\n\nExample:\n\ndata(iris)\n# Filter rows where Species is \"setosa\"\nsubset(iris, Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Add or modify columns in a data frame.\nSyntax:\ntransform(data, ...)\nArguments:\n\ndata: A data frame.\n…: Expressions specifying transformations.\n\nExample:\n\n# Add a new column for Sepal Area\niris &lt;- transform(iris, Sepal.Area = Sepal.Length * Sepal.Width)\nhead(iris)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets based on common columns (keys).\nSyntax:\nmerge(x, y, by, all)\nArguments:\n\nx, y: Data frames to merge.\nby: Column names to use as keys. Defaults to all common columns.\nall: Logical. TRUE for full outer join; FALSE for inner join.\n\nExample:\n\n# Create example datasets\ndf1 &lt;- data.frame(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- data.frame(ID = 2:4, Score = c(15, 25, 35))\n# Merge on ID\nmerge(df1, df2, by = \"ID\")\n\n\n  \n\n\n\n\n\n\n\n\n\nDescription: Select rows using conditions with dplyr::filter().\nSyntax:\ndplyr::filter(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Logical conditions. Rows where the condition is TRUE are retained.\n\nExample:\n\n# Filter rows where Species is \"setosa\"\niris |&gt;\n  dplyr::filter(Species == \"setosa\")\n\n\n  \n\n\n\n\n\n\nDescription: Create or modify columns using dplyr::mutate().\nSyntax:\ndplyr::mutate(.data, ...)\nArguments:\n\n.data: A data frame or tibble.\n…: Name-value pairs where names are new or existing column names, and values are expressions.\n\nExample:\n\n# Add Sepal.Area column\niris |&gt;\n  dplyr::mutate(Sepal.Area = Sepal.Length * Sepal.Width)\n\n\n  \n\n\n\n\n\n\nDescription: Convert data between wide and long formats with tidyr::pivot_longer().\nSyntax:\ntidyr::pivot_longer(data, cols, names_to, values_to)\nArguments:\n\ndata: A data frame or tibble.\ncols: Columns to pivot into rows.\nnames_to: Name of the new column containing the names of the pivoted variables.\nvalues_to: Name of the new column containing the values of the pivoted variables.\n\nExample:\n\n# Convert iris to long format\niris_long &lt;- iris |&gt;\n  tidyr::pivot_longer(\n    cols = starts_with(\"Sepal\"),\n    names_to = \"Measurement\",\n    values_to = \"Value\"\n  )\nhead(iris_long)\n\n\n  \n\n\n\n\n\n\nDescription: Combine datasets using dplyr::inner_join().\nSyntax:\ndplyr::inner_join(x, y, by)\nArguments:\n\nx, y: Data frames or tibbles to join.\nby: Column names to join by. Defaults to common column names.\n\nExample:\n\ndf1 &lt;- tibble(ID = 1:3, Value = c(10, 20, 30))\ndf2 &lt;- tibble(ID = 2:4, Score = c(15, 25, 35))\ndf1 |&gt;\n  dplyr::inner_join(df2, by = \"ID\")"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#in-depth-examples",
-    "href": "appendix/r-topics/r-data-transformation.html#in-depth-examples",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Objective: Prepare mtcars for analysis by filtering rows, creating a new column, and summarizing data.\nSteps:\n\nFilter cars with mpg &gt; 20.\nAdd a column Weight_kg converting wt to kilograms.\nSummarize average MPG by the number of cylinders.\n\nCode:\n\n# Using Base R\nmtcars_filtered &lt;- subset(mtcars, mpg &gt; 20)\nmtcars_filtered &lt;- transform(mtcars_filtered, Weight_kg = wt * 453.6)\naggregate(mpg ~ cyl, data = mtcars_filtered, mean)\n\n\n  \n\n\n# Using tidyverse\nmtcars |&gt;\n  dplyr::filter(mpg &gt; 20) |&gt;\n  dplyr::mutate(Weight_kg = wt * 453.6) |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#advanced-features",
-    "href": "appendix/r-topics/r-data-transformation.html#advanced-features",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Base R: Use tapply() for custom aggregations. tidyverse: Leverage dplyr::group_by() for grouped operations.\nExample:\n\n# Base R\ntapply(mtcars$mpg, mtcars$cyl, mean)\n\n       4        6        8 \n26.66364 19.74286 15.10000 \n\n# tidyverse\nmtcars |&gt;\n  dplyr::group_by(cyl) |&gt;\n  dplyr::summarize(Average_MPG = mean(mpg))"
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-data-transformation.html#troubleshooting-and-faqs",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "tidyr::pivot_longer() errors:\n\nEnsure column names in cols exist.\nUse names_pattern for extracting variable parts.\n\nMerge Mismatches in Base R:\n\nVerify columns in by are consistent between datasets."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#best-practices",
-    "href": "appendix/r-topics/r-data-transformation.html#best-practices",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Use descriptive column names.\nKeep data in tidy format for easier analysis.\nPrefer tidyverse for a consistent and readable workflow."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#conclusion",
-    "href": "appendix/r-topics/r-data-transformation.html#conclusion",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Base R: Ideal for simple tasks.\ntidyverse: Superior for complex workflows with a consistent syntax.\n\n\n\n\nExplore additional tidyverse packages like lubridate (dates) or stringr (text manipulation)."
-  },
-  {
-    "objectID": "appendix/r-topics/r-data-transformation.html#references-and-resources",
-    "href": "appendix/r-topics/r-data-transformation.html#references-and-resources",
-    "title": "Data Transformation and Wrangling in R",
-    "section": "",
-    "text": "Base R Documentation\ntidyverse Documentation\nR for Data Science"
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Hypothesis testing is a cornerstone of statistical analysis, used to evaluate assumptions about population parameters based on sample data. In R, several functions and packages provide extensive tools for hypothesis testing, ranging from basic tests in base R to more specialized tests available in external packages.\n\n\n\nPackages/Functions:\n\nBase R: t.test(), chisq.test(), var.test(), wilcox.test()\nAdditional Packages: stats::ks.test(), MASS::leveneTest()\n\nPurpose:\n\nTo evaluate assumptions or hypotheses about data distributions and relationships.\n\nCommon Functions:\n\nt.test() for t-tests.\nchisq.test() for Chi-square tests.\nks.test() for Kolmogorov-Smirnov tests.\nwilcox.test() for non-parametric Wilcoxon tests.\n\n\n\n\n\n\nComparing means between two groups.\nAssessing the goodness-of-fit for categorical data.\nTesting for equal variances across groups.\nNon-parametric comparisons for skewed or ordinal data.\n\n\n\n\n\nEasy to implement with a range of built-in functions.\nHighly extensible for complex scenarios.\nSeamless integration with visualization and other analytical tools.\n\n\n\n\n\n\n\nBase R provides most hypothesis testing tools. Additional packages like MASS can be used for specialized tests.\n\nlibrary(MASS)\n\n\n\n\n\n\nTesting whether the mean of a sample is equal to a specific value.\n\nset.seed(42)\nsample_data &lt;- rnorm(30, mean = 5, sd = 2)\n\nt.test(sample_data, mu = 5)\n\n\n    One Sample t-test\n\ndata:  sample_data\nt = 0.29933, df = 29, p-value = 0.7668\nalternative hypothesis: true mean is not equal to 5\n95 percent confidence interval:\n 4.199903 6.074444\nsample estimates:\nmean of x \n 5.137174 \n\n\n\n\n\n\n\n\n\n\n\n\nPerforms one-sample, two-sample, and paired t-tests to compare means.\n\n\n\nt.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"),\n       mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)\n\nx, y: Numeric vectors of data values.\nalternative: Type of hypothesis (“two.sided”, “greater”, “less”).\nmu: Hypothesized mean (default is 0).\npaired: Whether the test is paired (default is FALSE).\nvar.equal: Assume equal variances (default is FALSE).\n\n\n\n\n\ngroup1 &lt;- rnorm(20, mean = 5)\ngroup2 &lt;- rnorm(20, mean = 6)\n\nt.test(group1, group2, alternative = \"two.sided\", var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 38, p-value = 3.486e-05\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -2.1057327 -0.8358574\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\nTests for independence or goodness-of-fit in categorical data.\n\n\n\nchisq.test(x, y = NULL, correct = TRUE, simulate.p.value = FALSE, rescale.p = FALSE)\n\n\n\n\nobserved &lt;- matrix(c(30, 20, 50, 40), ncol = 2)\n\nchisq.test(observed)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  observed\nX-squared = 0.10954, df = 1, p-value = 0.7407\n\n\n\n\n\n\n\n\nPerforms the Wilcoxon rank-sum test (non-parametric alternative to the t-test).\n\n\n\nwilcox.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"), mu = 0, paired = FALSE, exact = NULL)\n\n\n\n\nx &lt;- rnorm(30)\ny &lt;- rnorm(30, mean = 1)\n\nwilcox.test(x, y, alternative = \"less\")\n\n\n    Wilcoxon rank sum exact test\n\ndata:  x and y\nW = 271, p-value = 0.003824\nalternative hypothesis: true location shift is less than 0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEvaluate the effect of a treatment by comparing preand post-treatment scores.\n\n\n\n\nPrepare the data.\nApply the paired t-test.\nVisualize the differences.\n\n\npre &lt;- c(12, 14, 11, 10, 13, 15)\npost &lt;- c(14, 16, 12, 11, 15, 17)\n\nt.test(pre, post, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  pre and post\nt = -7.9057, df = 5, p-value = 0.0005211\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.208593 -1.124740\nsample estimates:\nmean difference \n      -1.666667 \n\n\n\n\n\nInterpret the p-value to determine if there is a significant difference between preand post-treatment scores.\n\n\n\n\n\n\n\n\n\nCheck if a six-sided die is fair.\n\n\n\n\nCollect observed frequencies of each side.\nSpecify expected frequencies.\nApply the Chi-square goodness-of-fit test.\n\n\nobserved &lt;- c(12, 15, 14, 13, 16, 10)\nexpected &lt;- rep(1/6, 6) * sum(observed)\n\nchisq.test(observed, p = expected / sum(expected))\n\n\n    Chi-squared test for given probabilities\n\ndata:  observed\nX-squared = 1.75, df = 5, p-value = 0.8825\n\n\n\n\n\nEvaluate the p-value to determine if the die is fair.\n\n\n\n\n\n\n\n\n\nSet custom confidence levels in tests:\n\nt.test(group1, group2, conf.level = 0.99)\n\n\n    Welch Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 37.995, p-value = 3.487e-05\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -2.3212628 -0.6203274\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\n\nlibrary(dplyr)\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarise(t_result = list(t.test(mpg ~ as.factor(am))$p.value))\n\n\n  \n\n\n\n\n\n\n\n\n\nUse vectorized operations or summary statistics for efficiency:\n\nlarge_data &lt;- rnorm(1e6)\nt.test(large_data, mu = 0)\n\n\n    One Sample t-test\n\ndata:  large_data\nt = 0.59109, df = 1e+06, p-value = 0.5545\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -0.001370263  0.002553645\nsample estimates:\n   mean of x \n0.0005916909 \n\n\n\n\n\n\n\n\n\n\nError: Data must be numeric\n\nEnsure data is numeric by using as.numeric().\n\nWarning: p-value approximation\n\nIncrease the sample size or use simulate.p.value = TRUE.\n\n\n\n\n\n\nWhat is the minimum sample size for a t-test?\n\nAt least 5 observations per group are recommended.\n\nCan I test for normality before t-tests?\n\nUse shapiro.test() to check normality.\n\n\n\n\n\n\n\nAlways visualize your data before performing tests.\nCheck assumptions (e.g., normality for t-tests, independence for Chi-square tests).\nUse appropriate alternatives (e.g., Wilcoxon test for non-normal data).\n\n\n\n\nHypothesis testing in R is a versatile and powerful tool for statistical analysis. From basic t-tests to advanced non-parametric methods, R provides comprehensive support for validating assumptions and making data-driven decisions.\n\n\n\n\nR Documentation\nR Graph Gallery\nR Hypothesis Testing Guide"
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#introduction",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#introduction",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Hypothesis testing is a cornerstone of statistical analysis, used to evaluate assumptions about population parameters based on sample data. In R, several functions and packages provide extensive tools for hypothesis testing, ranging from basic tests in base R to more specialized tests available in external packages.\n\n\n\nPackages/Functions:\n\nBase R: t.test(), chisq.test(), var.test(), wilcox.test()\nAdditional Packages: stats::ks.test(), MASS::leveneTest()\n\nPurpose:\n\nTo evaluate assumptions or hypotheses about data distributions and relationships.\n\nCommon Functions:\n\nt.test() for t-tests.\nchisq.test() for Chi-square tests.\nks.test() for Kolmogorov-Smirnov tests.\nwilcox.test() for non-parametric Wilcoxon tests.\n\n\n\n\n\n\nComparing means between two groups.\nAssessing the goodness-of-fit for categorical data.\nTesting for equal variances across groups.\nNon-parametric comparisons for skewed or ordinal data.\n\n\n\n\n\nEasy to implement with a range of built-in functions.\nHighly extensible for complex scenarios.\nSeamless integration with visualization and other analytical tools."
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#getting-started",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#getting-started",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Base R provides most hypothesis testing tools. Additional packages like MASS can be used for specialized tests.\n\nlibrary(MASS)\n\n\n\n\n\n\nTesting whether the mean of a sample is equal to a specific value.\n\nset.seed(42)\nsample_data &lt;- rnorm(30, mean = 5, sd = 2)\n\nt.test(sample_data, mu = 5)\n\n\n    One Sample t-test\n\ndata:  sample_data\nt = 0.29933, df = 29, p-value = 0.7668\nalternative hypothesis: true mean is not equal to 5\n95 percent confidence interval:\n 4.199903 6.074444\nsample estimates:\nmean of x \n 5.137174"
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#key-functions-and-features",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#key-functions-and-features",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Performs one-sample, two-sample, and paired t-tests to compare means.\n\n\n\nt.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"),\n       mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)\n\nx, y: Numeric vectors of data values.\nalternative: Type of hypothesis (“two.sided”, “greater”, “less”).\nmu: Hypothesized mean (default is 0).\npaired: Whether the test is paired (default is FALSE).\nvar.equal: Assume equal variances (default is FALSE).\n\n\n\n\n\ngroup1 &lt;- rnorm(20, mean = 5)\ngroup2 &lt;- rnorm(20, mean = 6)\n\nt.test(group1, group2, alternative = \"two.sided\", var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 38, p-value = 3.486e-05\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -2.1057327 -0.8358574\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\nTests for independence or goodness-of-fit in categorical data.\n\n\n\nchisq.test(x, y = NULL, correct = TRUE, simulate.p.value = FALSE, rescale.p = FALSE)\n\n\n\n\nobserved &lt;- matrix(c(30, 20, 50, 40), ncol = 2)\n\nchisq.test(observed)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  observed\nX-squared = 0.10954, df = 1, p-value = 0.7407\n\n\n\n\n\n\n\n\nPerforms the Wilcoxon rank-sum test (non-parametric alternative to the t-test).\n\n\n\nwilcox.test(x, y = NULL, alternative = c(\"two.sided\", \"less\", \"greater\"), mu = 0, paired = FALSE, exact = NULL)\n\n\n\n\nx &lt;- rnorm(30)\ny &lt;- rnorm(30, mean = 1)\n\nwilcox.test(x, y, alternative = \"less\")\n\n\n    Wilcoxon rank sum exact test\n\ndata:  x and y\nW = 271, p-value = 0.003824\nalternative hypothesis: true location shift is less than 0"
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#in-depth-examples",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#in-depth-examples",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Evaluate the effect of a treatment by comparing preand post-treatment scores.\n\n\n\n\nPrepare the data.\nApply the paired t-test.\nVisualize the differences.\n\n\npre &lt;- c(12, 14, 11, 10, 13, 15)\npost &lt;- c(14, 16, 12, 11, 15, 17)\n\nt.test(pre, post, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  pre and post\nt = -7.9057, df = 5, p-value = 0.0005211\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.208593 -1.124740\nsample estimates:\nmean difference \n      -1.666667 \n\n\n\n\n\nInterpret the p-value to determine if there is a significant difference between preand post-treatment scores.\n\n\n\n\n\n\n\n\n\nCheck if a six-sided die is fair.\n\n\n\n\nCollect observed frequencies of each side.\nSpecify expected frequencies.\nApply the Chi-square goodness-of-fit test.\n\n\nobserved &lt;- c(12, 15, 14, 13, 16, 10)\nexpected &lt;- rep(1/6, 6) * sum(observed)\n\nchisq.test(observed, p = expected / sum(expected))\n\n\n    Chi-squared test for given probabilities\n\ndata:  observed\nX-squared = 1.75, df = 5, p-value = 0.8825\n\n\n\n\n\nEvaluate the p-value to determine if the die is fair."
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#advanced-features",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#advanced-features",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Set custom confidence levels in tests:\n\nt.test(group1, group2, conf.level = 0.99)\n\n\n    Welch Two Sample t-test\n\ndata:  group1 and group2\nt = -4.6894, df = 37.995, p-value = 3.487e-05\nalternative hypothesis: true difference in means is not equal to 0\n99 percent confidence interval:\n -2.3212628 -0.6203274\nsample estimates:\nmean of x mean of y \n 4.807940  6.278735 \n\n\n\n\n\n\n\n\n\nlibrary(dplyr)\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarise(t_result = list(t.test(mpg ~ as.factor(am))$p.value))\n\n\n  \n\n\n\n\n\n\n\n\n\nUse vectorized operations or summary statistics for efficiency:\n\nlarge_data &lt;- rnorm(1e6)\nt.test(large_data, mu = 0)\n\n\n    One Sample t-test\n\ndata:  large_data\nt = 0.59109, df = 1e+06, p-value = 0.5545\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -0.001370263  0.002553645\nsample estimates:\n   mean of x \n0.0005916909"
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#troubleshooting-and-faqs",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#troubleshooting-and-faqs",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Error: Data must be numeric\n\nEnsure data is numeric by using as.numeric().\n\nWarning: p-value approximation\n\nIncrease the sample size or use simulate.p.value = TRUE.\n\n\n\n\n\n\nWhat is the minimum sample size for a t-test?\n\nAt least 5 observations per group are recommended.\n\nCan I test for normality before t-tests?\n\nUse shapiro.test() to check normality."
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#best-practices",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#best-practices",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Always visualize your data before performing tests.\nCheck assumptions (e.g., normality for t-tests, independence for Chi-square tests).\nUse appropriate alternatives (e.g., Wilcoxon test for non-normal data)."
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#conclusion",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#conclusion",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "Hypothesis testing in R is a versatile and powerful tool for statistical analysis. From basic t-tests to advanced non-parametric methods, R provides comprehensive support for validating assumptions and making data-driven decisions."
-  },
-  {
-    "objectID": "appendix/r-topics/r-hypothesis-testing-basics.html#references-and-resources",
-    "href": "appendix/r-topics/r-hypothesis-testing-basics.html#references-and-resources",
-    "title": "Hypothesis Testing Basics",
-    "section": "",
-    "text": "R Documentation\nR Graph Gallery\nR Hypothesis Testing Guide"
   },
   {
     "objectID": "appendix/r-topics/r-base-graphics-basics.html",
