@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
+<meta name="dcterms.date" content="2025-01-10">
 
-<title>Final Review – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>R Code and Data Files from the Textbook – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../assets/images/favicon.ico" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./assets/images/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,8 +73,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
 
-<meta property="og:title" content="Final Review – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/logo.png">
+<meta property="og:title" content="R Code and Data Files from the Textbook – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -84,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -95,35 +97,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" aria-current="page"> 
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../home_lectures.html"> 
+    <a class="nav-link" href="./home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus/schedule.html"> 
+    <a class="nav-link" href="./syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../home_assignments.html"> 
+    <a class="nav-link" href="./home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../r_help.html"> 
+    <a class="nav-link" href="./r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../home_appendix.html"> 
+    <a class="nav-link" href="./home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contents.html"> 
+    <a class="nav-link" href="./contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -137,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Final Review</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">R Code and Data Files from the Textbook</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -147,27 +149,40 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Final Review</h1>
+      <h1 class="title">R Code and Data Files from the Textbook</h1>
                       </div>
   </div>
     
-  
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Davood Tofighi, Ph.D. </p>
-            </div>
-    </div>
-      
+        
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">25-Dec-2024</p>
+        <p class="date">January 10, 2025</p>
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 10, 2025</p>
+      </div>
+    </div>
       
     </div>
     
@@ -188,19 +203,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -217,13 +232,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -240,19 +255,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
+  <a href="./r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../appendix/r-code-data-book.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./appendix/r-code-data-book.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../appendix/data-files-book.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./appendix/data-files-book.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -269,13 +284,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../contents.html" class="sidebar-item-text sidebar-link">
+  <a href="./contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -286,8 +301,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link active" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -296,8 +317,208 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="r-code-and-data-files-from-the-textbook" class="level1">
+<h1>R Code and Data Files from the Textbook</h1>
+<p>I Created the following table lists the R program files used in the textbook, along with the corresponding data files. Here is a link to the orginal <a href="http://www.wright.edu/~dan.voss/DeanVossDraguljic.html">textbook website</a> for more information.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Chapter</th>
+<th>Experiment</th>
+<th>R Code File</th>
+<th>Data File</th>
+<th>Data Set Description</th>
+<th>Table/Details</th>
+<th>Page(s)</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Chap. 3</td>
+<td>Randomization Procedure</td>
+<td><a href="code/dean2017/randomize.r">randomize.r</a></td>
+<td>-</td>
+<td>Randomization demonstration data</td>
+<td>(in text)</td>
+<td>pp.&nbsp;59-60</td>
+<td>Sect. 3.9.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Soap</td>
+<td><a href="code/dean2017/soap.r">soap.r</a></td>
+<td><a href="data/dean2017/soap.txt">soap.txt</a></td>
+<td>Soap-making process data</td>
+<td>Tables 3.10, 3.11</td>
+<td>pp.&nbsp;60, 63</td>
+<td>Sects. 3.9.2, 3.9.3</td>
+</tr>
+<tr class="odd">
+<td>Chap. 4</td>
+<td>Battery Experiment</td>
+<td><a href="code/dean2017/battery.r">battery.r</a></td>
+<td><a href="data/dean2017/battery.txt">battery.txt</a></td>
+<td>Battery life experiment data</td>
+<td>Table 4.2</td>
+<td>p.&nbsp;97</td>
+<td>Sect. 4.7</td>
+</tr>
+<tr class="even">
+<td>Chap. 5</td>
+<td>Mung Bean Experiment</td>
+<td><a href="code/dean2017/mungbean.r">mungbean.r</a></td>
+<td><a href="data/dean2017/mungbean.txt">mungbean.txt</a></td>
+<td>Mung bean growth experiment data</td>
+<td>Table 5.11</td>
+<td>p.&nbsp;126</td>
+<td>Sect. 5.9.1</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><a href="code/dean2017/mungbean2.r">mungbean2.r</a></td>
+<td><a href="data/dean2017/mungbean.txt">mungbean.txt</a></td>
+<td>Mung bean growth experiment (extended)</td>
+<td>Table 5.12</td>
+<td>p.&nbsp;128</td>
+<td>Sect. 5.9.2</td>
+</tr>
+<tr class="even">
+<td>Chap. 6</td>
+<td>Reaction Time</td>
+<td><a href="code/dean2017/reactiontime.r">reactiontime.r</a></td>
+<td><a href="data/dean2017/reaction.time.txt">reaction.time.txt</a></td>
+<td>Human reaction time data</td>
+<td>Table 6.15</td>
+<td>p.&nbsp;185</td>
+<td>Sect. 6.9</td>
+</tr>
+<tr class="odd">
+<td>Chap. 7</td>
+<td>Drill Advance</td>
+<td><a href="code/dean2017/drilladvance.r">drilladvance.r</a></td>
+<td><a href="data/dean2017/drill.advance.txt">drill.advance.txt</a></td>
+<td>Drill efficiency data</td>
+<td>Table 7.12</td>
+<td>p.&nbsp;232</td>
+<td>Sect. 7.7.1</td>
+</tr>
+<tr class="even">
+<td>Chap. 8</td>
+<td>Bean Soaking</td>
+<td><a href="code/dean2017/beansoaking.r">beansoaking.r</a></td>
+<td><a href="data/dean2017/bean.txt">bean.txt</a></td>
+<td>Bean soaking time and weight data</td>
+<td>Table 8.10</td>
+<td>p.&nbsp;278</td>
+<td>Sect. 8.10</td>
+</tr>
+<tr class="odd">
+<td>Chap. 9</td>
+<td>Balloon Experiment</td>
+<td><a href="code/dean2017/balloon.r">balloon.r</a></td>
+<td><a href="data/dean2017/balloon.txt">balloon.txt</a></td>
+<td>Balloon pressure and volume data</td>
+<td>Table 9.6</td>
+<td>p.&nbsp;300</td>
+<td>Sect. 9.7</td>
+</tr>
+<tr class="even">
+<td>Chap. 10</td>
+<td>Cotton Spinning</td>
+<td><a href="code/dean2017/cottonspinning.r">cottonspinning.r</a></td>
+<td><a href="data/dean2017/cotton.spinning.txt">cotton.spinning.txt</a></td>
+<td>Cotton spinning machine performance data</td>
+<td>Tables 10.14-17</td>
+<td>pp.&nbsp;332-336</td>
+<td>Sect. 10.10</td>
+</tr>
+<tr class="odd">
+<td>Chap. 12</td>
+<td>Exercise Bicycle</td>
+<td><a href="code/dean2017/exercisebicycle.r">exercisebicycle.r</a></td>
+<td><a href="data/dean2017/exercise.bicycle.txt">exercise.bicycle.txt</a></td>
+<td>Exercise bicycle performance data</td>
+<td>Table 12.12</td>
+<td>p.&nbsp;420</td>
+<td>Sect. 12.9</td>
+</tr>
+<tr class="even">
+<td>Chap. 13</td>
+<td>Coil</td>
+<td><a href="code/dean2017/coil.r">coil.r</a></td>
+<td><a href="data/dean2017/coil.txt">coil.txt</a></td>
+<td>Electrical coil properties data</td>
+<td>Table 13.21</td>
+<td>p.&nbsp;463</td>
+<td>Sect. 13.12</td>
+</tr>
+<tr class="odd">
+<td>Chap. 14</td>
+<td>Dye Experiment</td>
+<td><a href="code/dean2017/dye.r">dye.r</a></td>
+<td><a href="data/dean2017/dye2.txt">dye2.txt</a></td>
+<td>Dye color intensity experiment data</td>
+<td>Table 14.17</td>
+<td>p.&nbsp;490</td>
+<td>Sect. 14.6</td>
+</tr>
+<tr class="even">
+<td>Chap. 15</td>
+<td>Sludge</td>
+<td><a href="code/dean2017/sludge.r">sludge.r</a></td>
+<td><a href="data/dean2017/sludge.txt">sludge.txt</a></td>
+<td>Sludge sample chemical analysis data</td>
+<td>Tables 15.45-46</td>
+<td>pp.&nbsp;544-545</td>
+<td>Sect. 15.10.1</td>
+</tr>
+<tr class="odd">
+<td>Chap. 16</td>
+<td>Acid Copper Pattern Plating</td>
+<td><a href="code/dean2017/copper.r">copper.r</a></td>
+<td><a href="data/dean2017/copper.txt">copper.txt</a></td>
+<td>Copper plating pattern performance data</td>
+<td>Tables 16.17-18</td>
+<td>pp.&nbsp;602-603</td>
+<td>Sect. 16.8.1</td>
+</tr>
+<tr class="even">
+<td>Chap. 17</td>
+<td>Clean Wool</td>
+<td><a href="code/dean2017/cleanwool.r">cleanwool.r</a></td>
+<td><a href="data/dean2017/clean.wool.txt">clean.wool.txt</a></td>
+<td>Wool cleaning efficiency data</td>
+<td>Table 17.15</td>
+<td>p.&nbsp;661</td>
+<td>Sect. 17.11.1</td>
+</tr>
+<tr class="odd">
+<td>Chap. 18</td>
+<td>Voltage</td>
+<td><a href="code/dean2017/voltage.r">voltage.r</a></td>
+<td><a href="data/dean2017/voltage.txt">voltage.txt</a></td>
+<td>Voltage readings from electrical systems</td>
+<td>Table 18.8</td>
+<td>p.&nbsp;693</td>
+<td>Sect. 18.6.2</td>
+</tr>
+<tr class="even">
+<td>Chap. 19</td>
+<td>Oats</td>
+<td><a href="code/dean2017/oats.r">oats.r</a></td>
+<td><a href="data/dean2017/oats.txt">oats.txt</a></td>
+<td>Oats growth under varying conditions</td>
+<td>Tables 19.22-23</td>
+<td>pp.&nbsp;746-747</td>
+<td>Sect. 19.9.1</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
@@ -734,5 +955,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
