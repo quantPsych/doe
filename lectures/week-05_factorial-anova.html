@@ -103,8 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -139,7 +137,7 @@ window.Quarto = {
 
 <meta property="og:title" content="Factorial ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/assets/images/logo.png">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -217,20 +215,27 @@ window.Quarto = {
                       </div>
   </div>
     
-  
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Davood Tofighi, Ph.D. </p>
-            </div>
-    </div>
-      
+        
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">05-Jan-2025</p>
+        <p class="date">11-Jan-2025</p>
       </div>
     </div>
     
@@ -719,27 +724,145 @@ Table&nbsp;1: Reaction Time Experiment
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>modelAB <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> fA <span class="sc">+</span> fB <span class="sc">+</span> fA<span class="sc">:</span>fB, <span class="at">data =</span> react_df)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelAB) <span class="co"># Type I ANOVA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0.0235445000","3":"0.0235445000","4":"81.375000","5":"1.077481e-06","_rn_":"fA"},{"1":"2","2":"0.0011581111","3":"0.0005790556","4":"2.001344","5":"1.777992e-01","_rn_":"fB"},{"1":"2","2":"0.0008463333","3":"0.0004231667","4":"1.462558","5":"2.701353e-01","_rn_":"fA:fB"},{"1":"12","2":"0.0034720000","3":"0.0002893333","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0235445</td>
+<td style="text-align: right;">0.0235445</td>
+<td style="text-align: right;">81.375000</td>
+<td style="text-align: right;">0.0000011</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0011581</td>
+<td style="text-align: right;">0.0005791</td>
+<td style="text-align: right;">2.001344</td>
+<td style="text-align: right;">0.1777992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fA:fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0008463</td>
+<td style="text-align: right;">0.0004232</td>
+<td style="text-align: right;">1.462558</td>
+<td style="text-align: right;">0.2701353</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.0034720</td>
+<td style="text-align: right;">0.0002893</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(modelAB, <span class="sc">~</span>., <span class="at">test =</span> <span class="st">"F"</span>) <span class="co"># Type III ANOVA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sum of Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["RSS"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"NA","2":"NA","3":"0.003472000","4":"-141.9611","5":"NA","6":"NA","_rn_":"<none>"},{"1":"1","2":"0.0104166667","3":"0.013888667","4":"-119.0070","5":"36.002304","6":"6.214908e-05","_rn_":"fA"},{"1":"2","2":"0.0018802222","3":"0.005352222","4":"-138.1711","5":"3.249232","6":"7.452011e-02","_rn_":"fB"},{"1":"2","2":"0.0008463333","3":"0.004318333","4":"-142.0346","5":"1.462558","6":"2.701353e-01","_rn_":"fA:fB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum of Sq</th>
+<th style="text-align: right;">RSS</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><none></none></td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.0034720</td>
+<td style="text-align: right;">-141.9611</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0104167</td>
+<td style="text-align: right;">0.0138887</td>
+<td style="text-align: right;">-119.0070</td>
+<td style="text-align: right;">36.002304</td>
+<td style="text-align: right;">0.0000621</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0018802</td>
+<td style="text-align: right;">0.0053522</td>
+<td style="text-align: right;">-138.1711</td>
+<td style="text-align: right;">3.249232</td>
+<td style="text-align: right;">0.0745201</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fA:fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0008463</td>
+<td style="text-align: right;">0.0043183</td>
+<td style="text-align: right;">-142.0346</td>
+<td style="text-align: right;">1.462558</td>
+<td style="text-align: right;">0.2701353</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>modelTC <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> fTC, <span class="at">data =</span> react_df)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelTC) <span class="co"># Model F-test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"0.02554894","3":"0.0051097889","4":"17.66056","5":"3.655918e-05","_rn_":"fTC"},{"1":"12","2":"0.00347200","3":"0.0002893333","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fTC</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0255489</td>
+<td style="text-align: right;">0.0051098</td>
+<td style="text-align: right;">17.66056</td>
+<td style="text-align: right;">3.66e-05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.0034720</td>
+<td style="text-align: right;">0.0002893</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p>Reaction Time Example</p>
@@ -791,38 +914,235 @@ Confidence level used: 0.95 </code></pre>
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-contrast-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"B12","2":"0.007666667","3":"0.009820613","4":"12","5":"-0.01373061","6":"0.02906394","7":"0.7806709","8":"0.4501222","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">B12</td>
+<td style="text-align: right;">0.0076667</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0137306</td>
+<td style="text-align: right;">0.0290639</td>
+<td style="text-align: right;">0.7806709</td>
+<td style="text-align: right;">0.4501222</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"AB","2":"-0.03033333","3":"0.01964123","4":"12","5":"-0.07312789","6":"0.01246122","7":"-1.544371","8":"0.1484504","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 4%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AB</td>
+<td style="text-align: right;">-0.0303333</td>
+<td style="text-align: right;">0.0196412</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0731279</td>
+<td style="text-align: right;">0.0124612</td>
+<td style="text-align: right;">-1.544371</td>
+<td style="text-align: right;">0.1484504</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["fB"],"name":[1],"type":["fct"],"align":["left"]},{"label":["lsmean"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0.2266667","3":"0.006944222","4":"12","5":"0.2054553","6":"0.2478781","_rn_":"1"},{"1":"2","2":"0.2190000","3":"0.006944222","4":"12","5":"0.1977886","6":"0.2402114","_rn_":"2"},{"1":"3","2":"0.2385000","3":"0.006944222","4":"12","5":"0.2172886","6":"0.2597114","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">fB</th>
+<th style="text-align: right;">lsmean</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">0.2266667</td>
+<td style="text-align: right;">0.0069442</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.2054553</td>
+<td style="text-align: right;">0.2478781</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">0.2190000</td>
+<td style="text-align: right;">0.0069442</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.1977886</td>
+<td style="text-align: right;">0.2402114</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">0.2385000</td>
+<td style="text-align: right;">0.0069442</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.2172886</td>
+<td style="text-align: right;">0.2597114</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"fB1 - fB2","2":"0.007666667","3":"0.009820613","4":"12","5":"-0.02737342","6":"0.04270676","7":"0.7806709","8":"0.7214544","_rn_":"1"},{"1":"fB1 - fB3","2":"-0.011833333","3":"0.009820613","4":"12","5":"-0.04687342","6":"0.02320676","7":"-1.2049485","8":"0.4727382","_rn_":"2"},{"1":"fB2 - fB3","2":"-0.019500000","3":"0.009820613","4":"12","5":"-0.05454009","6":"0.01554009","7":"-1.9856194","8":"0.1581646","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 3%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fB1 - fB2</td>
+<td style="text-align: right;">0.0076667</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0273734</td>
+<td style="text-align: right;">0.0427068</td>
+<td style="text-align: right;">0.7806709</td>
+<td style="text-align: right;">0.7214544</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fB1 - fB3</td>
+<td style="text-align: right;">-0.0118333</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0468734</td>
+<td style="text-align: right;">0.0232068</td>
+<td style="text-align: right;">-1.2049485</td>
+<td style="text-align: right;">0.4727382</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fB2 - fB3</td>
+<td style="text-align: right;">-0.0195000</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0545401</td>
+<td style="text-align: right;">0.0155401</td>
+<td style="text-align: right;">-1.9856194</td>
+<td style="text-align: right;">0.1581646</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"fB2 - fB1","2":"-0.007666667","3":"0.009820613","4":"12","5":"-0.04093482","6":"0.02560148","7":"-0.7806709","8":"0.6611256","_rn_":"1"},{"1":"fB3 - fB1","2":"0.011833333","3":"0.009820613","4":"12","5":"-0.02143482","6":"0.04510148","7":"1.2049485","8":"0.4032893","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 3%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fB2 - fB1</td>
+<td style="text-align: right;">-0.0076667</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0409348</td>
+<td style="text-align: right;">0.0256015</td>
+<td style="text-align: right;">-0.7806709</td>
+<td style="text-align: right;">0.6611256</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fB3 - fB1</td>
+<td style="text-align: right;">0.0118333</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0214348</td>
+<td style="text-align: right;">0.0451015</td>
+<td style="text-align: right;">1.2049485</td>
+<td style="text-align: right;">0.4032893</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

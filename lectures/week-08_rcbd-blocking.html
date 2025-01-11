@@ -106,8 +106,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -142,10 +140,8 @@ window.Quarto = {
 
 <meta property="og:title" content="Randomized Complete Block Design (RCBD) with Blocking – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/week-08_rcbd-blocking_files/figure-html/fig-rcbd-diagnostic-plots-1.png">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-sidebar floating nav-fixed slimcontent">
@@ -222,20 +218,27 @@ window.Quarto = {
                       </div>
   </div>
     
-  
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Davood Tofighi, Ph.D. </p>
-            </div>
-    </div>
-      
+        
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">30-Dec-2024</p>
+        <p class="date">11-Jan-2025</p>
       </div>
     </div>
     
@@ -746,10 +749,77 @@ Figure&nbsp;1: Diagnostic Plots for RCBD
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-rcbd-posthoc-comparisons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["contrast"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["t.ratio"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"treatments1 - treatments2","2":"15.090624","3":"5.586712","4":"6","5":"2.7011640","6":"0.1232253","_rn_":"1"},{"1":"treatments1 - treatments3","2":"2.047101","3":"5.586712","4":"6","5":"0.3664233","6":"0.9816357","_rn_":"2"},{"1":"treatments1 - treatments4","2":"3.229338","3":"5.586712","4":"6","5":"0.5780392","6":"0.9351362","_rn_":"3"},{"1":"treatments2 - treatments3","2":"-13.043523","3":"5.586712","4":"6","5":"-2.3347406","6":"0.1917580","_rn_":"4"},{"1":"treatments2 - treatments4","2":"-11.861286","3":"5.586712","4":"6","5":"-2.1231247","6":"0.2467385","_rn_":"5"},{"1":"treatments3 - treatments4","2":"1.182237","3":"5.586712","4":"6","5":"0.2116159","6":"0.9962846","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">treatments1 - treatments2</td>
+<td style="text-align: right;">15.090624</td>
+<td style="text-align: right;">5.586712</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2.7011640</td>
+<td style="text-align: right;">0.1232253</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">treatments1 - treatments3</td>
+<td style="text-align: right;">2.047101</td>
+<td style="text-align: right;">5.586712</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.3664233</td>
+<td style="text-align: right;">0.9816357</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">treatments1 - treatments4</td>
+<td style="text-align: right;">3.229338</td>
+<td style="text-align: right;">5.586712</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.5780392</td>
+<td style="text-align: right;">0.9351362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">treatments2 - treatments3</td>
+<td style="text-align: right;">-13.043523</td>
+<td style="text-align: right;">5.586712</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-2.3347406</td>
+<td style="text-align: right;">0.1917580</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">treatments2 - treatments4</td>
+<td style="text-align: right;">-11.861286</td>
+<td style="text-align: right;">5.586712</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-2.1231247</td>
+<td style="text-align: right;">0.2467385</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">treatments3 - treatments4</td>
+<td style="text-align: right;">1.182237</td>
+<td style="text-align: right;">5.586712</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.2116159</td>
+<td style="text-align: right;">0.9962846</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
