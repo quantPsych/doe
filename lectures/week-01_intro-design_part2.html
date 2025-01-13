@@ -95,6 +95,9 @@ div.csl-indent {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -259,7 +262,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">11-Jan-2025</p>
+        <p class="date">12-Jan-2025</p>
       </div>
     </div>
     
@@ -493,6 +496,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#summary-of-key-takeaways" id="toc-summary-of-key-takeaways" class="nav-link" data-scroll-target="#summary-of-key-takeaways">Summary of Key Takeaways</a></li>
   <li><a href="#definitions-of-key-terms" id="toc-definitions-of-key-terms" class="nav-link" data-scroll-target="#definitions-of-key-terms">Definitions of Key Terms</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -524,7 +528,7 @@ window.Quarto = {
 <section id="readings" class="level3">
 <h3 class="anchored" data-anchor-id="readings">Readings</h3>
 <ul>
-<li><span class="citation" data-cites="dean2017">Dean, Voss, and Draguljić (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 3)</span></li>
+<li><span class="citation" data-cites="dean2017">Dean et al. (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 3)</span></li>
 </ul>
 </section>
 </section>
@@ -642,7 +646,7 @@ Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-doe-plan-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
-<svg width="672" height="480" viewbox="0.00 0.00 431.00 702.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<svg width="672" height="864" viewbox="0.00 0.00 431.00 702.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 698.4)">
 <title>ExperimentalDesign</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-698.4 427,-698.4 427,4 -4,4"></polygon>
@@ -807,7 +811,7 @@ Figure&nbsp;1: Experimental Design Planning Flowchart
 </section>
 <section id="explaining-experimental-design-concepts" class="level1 page-columns page-full">
 <h1>Explaining Experimental Design Concepts</h1>
-<section id="identifying-experiment-objectives-and-variation-sources" class="level2">
+<section id="identifying-experiment-objectives-and-variation-sources" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="identifying-experiment-objectives-and-variation-sources">Identifying Experiment Objectives and Variation Sources</h2>
 <section id="setting-objectives" class="level3">
 <h3 class="anchored" data-anchor-id="setting-objectives">Setting Objectives</h3>
@@ -828,8 +832,18 @@ Figure&nbsp;1: Experimental Design Planning Flowchart
 </ul>
 <p>By identifying and classifying sources of variation, we can decide which factors to manipulate as treatments, which to fix or control, and which to block or treat as covariates.</p>
 </section>
-<section id="example" class="level3">
+<section id="example" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
+<div id="fig-variation-sources1" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full" title="Variation Sources in an Experiment">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-variation-sources1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../assets/images/pics/week-01-fertilizer-experiment-example.png" class="lightbox" title="" data-gallery="quarto-lightbox-gallery-1"><img src="../assets/images/pics/week-01-fertilizer-experiment-example.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-variation-sources1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Variation Sources in an Experiment
+</figcaption>
+</figure>
+</div>
 <p>Consider an agricultural experiment testing different fertilizer types (A, B, C). The main factors are the fertilizer types. Soil heterogeneity could be a nuisance factor. If the field has varying soil quality, it might mask the fertilizer effect. Recognizing this early allows us to incorporate blocking or other strategies to handle this nuisance variation.</p>
 </section>
 <section id="activity-work-out-experiment-think-pair-share" class="level3">
@@ -947,7 +961,7 @@ Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Factor Classification Flowchart
+Figure&nbsp;3: Factor Classification Flowchart
 </figcaption>
 </figure>
 </div>
@@ -1052,33 +1066,38 @@ OUTPUT: Randomized assignments within each block
 <div id="tbl-random-assignment-crd" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-random-assignment-crd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># Number of experimental units</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># Number of experimental units, Step 1</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define experimental units and treatments</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>experimental_units <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n  <span class="co"># 10 experimental units</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)  <span class="co"># 3 treatments</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>experimental_units <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>N <span class="do">## 10 experimental units</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>) <span class="do">## 3 treatments, Step 2</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat treatments to match the number of units</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(treatments, <span class="at">length.out =</span> n)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat treatments to match the number of units. The code covers both balanced and unbalanced designs.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(treatments, <span class="at">length.out =</span> N)  <span class="do">## Step 3</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle treatments randomly</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>randomized_treatments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with randomized assignments</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>randomization_crd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> experimental_units, <span class="at">Treatment =</span> randomized_treatments)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(randomization_crd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For a balanced design, we can also use:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># treatments &lt;- rep(treatments, each = N/length(treatments))</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle (randomize) treatments randomly to assign to units, Step 4</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="do">## For reproducibility</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>randomized_treatments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with randomized assignments</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>randomization_crd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> experimental_units, <span class="at">Treatment =</span> randomized_treatments)  <span class="do">## Step 5</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(randomization_crd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Unit Treatment
 1     1         C
-2     2         A
-3     3         B
+2     2         C
+3     3         A
 4     4         B
 5     5         C
-6     6         C
-7     7         A
+6     6         B
+7     7         B
 8     8         A
-9     9         B
-10   10         A</code></pre>
+9     9         C
+10   10         B
+11   11         A
+12   12         A</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-random-assignment-crd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1087,9 +1106,11 @@ Table&nbsp;1: Randomized Assignments in CRD
 </figure>
 </div>
 </section>
-<section id="randomized-block-design-1" class="level4">
+<section id="randomized-block-design-1" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="randomized-block-design-1"><strong>2. Randomized Block Design</strong></h4>
-<div class="cell">
+<div id="tbl-random-assignment-rbd" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-random-assignment-rbd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define blocks and treatments</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="co"># 4 blocks</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>) <span class="co"># 3 treatments</span></span>
@@ -1129,6 +1150,11 @@ Table&nbsp;1: Randomized Assignments in CRD
 12     4    3         C</code></pre>
 </div>
 </div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-random-assignment-rbd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Randomized Assignments in RBD
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="explanation-in-r" class="level3 page-columns page-full">
@@ -1144,14 +1170,14 @@ Table&nbsp;1: Randomized Assignments in CRD
 <div class="no-row-height column-margin column-container"><div class="">
 <ul>
 <li>See the help page for <a href="../appendix/r-base/r-rep-basics.html">rep()</a> in the Appendix for more details.</li>
-<li>See the help page for <a href="../appendix/r-base/r-sample-basic.qmd">sample()</a> in the Appendix for more details.</li>
+<li>See the help page for <a href="../appendix/r-base/r-sample-basics.html">sample()</a> in the Appendix for more details.</li>
 </ul>
 </div></div></section>
 <section id="r-example-simple-random-assignment" class="level3">
 <h3 class="anchored" data-anchor-id="r-example-simple-random-assignment">R Example: Simple Random Assignment</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each=</span><span class="dv">4</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">4</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>assignments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1250,9 +1276,9 @@ Table&nbsp;1: Randomized Assignments in CRD
 <section id="linear-models-and-anova" class="level3">
 <h3 class="anchored" data-anchor-id="linear-models-and-anova">Linear Models and ANOVA</h3>
 <p>Experiments often use a linear model to relate responses to treatments and blocks:</p>
-<p><span class="math display">\[
+<p><span id="eq-linear-model"><span class="math display">\[
 Y = \mu + \text{treatment effects} + \text{block effects} + \text{error}
-\]</span> {#eq:linear-model}</p>
+\qquad(1)\]</span></span></p>
 <p>ANOVA decomposes total variation into components attributable to treatments, blocks, and error, enabling inference on treatment effects.</p>
 </section>
 <section id="fixed-vs.-random-effects" class="level3">
@@ -1390,7 +1416,7 @@ Residuals            9  391.5   43.50               </code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: ANOVA Table
+Table&nbsp;3: ANOVA Table
 </figcaption>
 </figure>
 </div>
@@ -1457,15 +1483,27 @@ Table&nbsp;2: ANOVA Table
 <li><strong>Power:</strong> The probability of detecting a true treatment effect.</li>
 <li><strong>ANOVA:</strong> A statistical method for comparing means across groups.</li>
 </ul>
+</section>
+<section id="references" class="level2">
+
 
 
 
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-christensen2018" class="csl-entry" role="listitem">
+Christensen, R. (2018). <em>Analysis of variance, design, and regression: Linear modeling for unbalanced data</em> (2nd ed.). <span>Chapman and Hall/CRC</span>.
+</div>
 <div id="ref-dean2017" class="csl-entry" role="listitem">
-Dean, Angela, Daniel Voss, and Danel Draguljić. 2017. <em>Design and Analysis of Experiments</em>. 2nd ed. Springer <span>Texts</span> in <span>Statistics</span>. Cham, Switzerland: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>.
+Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em> (2nd ed.). Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>
+</div>
+<div id="ref-montgomery2020" class="csl-entry" role="listitem">
+Montgomery, D. C., Peck, E. A., &amp; Vining, G. G. (2020). <em>Introduction to linear regression analysis</em> (Fifth edition). Wiley.
+</div>
+<div id="ref-scheffe1959" class="csl-entry" role="listitem">
+Scheffé, H. (1959). <em>The analysis of variance</em>. Wiley.
 </div>
 </div></section></div></main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
@@ -1898,6 +1936,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

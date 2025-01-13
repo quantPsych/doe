@@ -1201,9 +1201,9 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 </section>
 <section id="fitting-the-cell-means-model" class="level2">
 <h2 class="anchored" data-anchor-id="fitting-the-cell-means-model">Fitting the Cell-Means Model</h2>
-<p>An alternative is the <strong>cell-means model</strong>, which estimates each τij_{ij} directly:</p>
+<p>An alternative is the <strong>cell-means model</strong>, which estimates each <span class="math inline">\(\tau_{ij}\)</span> directly:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>modelTC <span class="ot">=</span> <span class="fu">aov</span>(y <span class="sc">~</span> fTC, <span class="at">data =</span> react_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where <code>fTC</code> is a factor that indicates each treatment combination (i,j)(i,j). This approach is ideal for more direct comparisons of the individual cell means.</p>
+<p>where <code>fTC</code> is a factor that indicates each treatment combination (i,j). This approach is ideal for more direct comparisons of the individual cell means.</p>
 </section>
 <section id="example-reaction-time-experiment" class="level2">
 <h2 class="anchored" data-anchor-id="example-reaction-time-experiment">Example: Reaction Time Experiment</h2>
@@ -1256,7 +1256,7 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 </section>
 <section id="handling-unequal-sample-sizes" class="level2">
 <h2 class="anchored" data-anchor-id="handling-unequal-sample-sizes">Handling Unequal Sample Sizes</h2>
-<p>When the sample sizes rijr_{ij} differ, Type I and Type III sums of squares can produce different inferences. <strong>Type III</strong> is standard for “unbalanced” data when we interpret each effect adjusted for the others. The same code is used:</p>
+<p>When the sample sizes <span class="math inline">\(r_{ij}\)</span> differ, Type I and Type III sums of squares can produce different inferences. <strong>Type III</strong> is standard for “unbalanced” data when we interpret each effect adjusted for the others. The same code is used:</p>
 <ul>
 <li><code>aov(y ~ fA + fB + fA:fB, data=…)</code></li>
 <li><code>drop1(model, ~., test="F")</code></li>
@@ -1277,7 +1277,7 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 <h1>Advanced Topics</h1>
 <section id="orthogonal-contrasts" class="level2">
 <h2 class="anchored" data-anchor-id="orthogonal-contrasts">Orthogonal Contrasts</h2>
-<p>Two contrasts are <strong>orthogonal</strong> if their corresponding sums of squares are uncorrelated. Equivalently, for equal rij=rr_{ij}=r, the sum of products of coefficients must be zero.</p>
+<p>Two contrasts are <strong>orthogonal</strong> if their corresponding sums of squares are uncorrelated. Equivalently, for equal <span class="math inline">\(r_{ij}=r\)</span>, the sum of products of coefficients must be zero.</p>
 </section>
 <section id="model-building-and-type-i-ss" class="level2">
 <h2 class="anchored" data-anchor-id="model-building-and-type-i-ss">Model Building and Type I SS</h2>

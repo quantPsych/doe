@@ -255,7 +255,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">11-Jan-2025</p>
+        <p class="date">12-Jan-2025</p>
       </div>
     </div>
     
@@ -444,7 +444,7 @@ window.Quarto = {
 <section id="readings" class="level3">
 <h3 class="anchored" data-anchor-id="readings">Readings</h3>
 <ul>
-<li><span class="citation" data-cites="dean2017">Dean, Voss, and Draguljić (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 1 and 2)</span></li>
+<li><span class="citation" data-cites="dean2017">Dean et al. (<a href="#ref-dean2017" role="doc-biblioref">2017</a>, Ch. 1 and 2)</span></li>
 </ul>
 </section>
 </section>
@@ -474,7 +474,7 @@ window.Quarto = {
 <li><strong>Resource Allocation:</strong> Deciding how many observations to collect and how to arrange them ensures the best return on time, effort, and material.</li>
 <li><strong>Efficient Analysis:</strong> A well-designed experiment simplifies subsequent data analysis and makes model assumptions (e.g., distributional forms, independence) more credible.</li>
 </ul>
-<p>(See Montgomery, 2019, <em>Design and Analysis of Experiments</em> for a comprehensive treatment.)</p>
+<!-- (See Montgomery, 2019, *Design and Analysis of Experiments* for a comprehensive treatment.) -->
 </section>
 </section>
 <section id="key-techniques-replication-blocking-and-randomization" class="level1">
@@ -502,10 +502,8 @@ window.Quarto = {
 <li><strong>Rationale:</strong> Random assignment of treatments to experimental units is fundamental. It ensures that no systematic bias influences treatment allocation.</li>
 <li><strong>Benefits:</strong></li>
 </ul>
-<p>&nbsp; - Prevents experimenter preferences or unconscious patterns from influencing results.</p>
-<p>&nbsp; - Justifies the use of standard statistical distributions (F, t) for inference.</p>
-<p>&nbsp; - Confirms that observed effects can be attributed to treatments and not assignment bias.</p>
-<p><strong>Reference:</strong> Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests.</p>
+<p>&nbsp; - Prevents experimenter preferences or unconscious patterns from influencing results. &nbsp; - Justifies the use of standard statistical distributions (F, t) for inference. &nbsp; - Confirms that observed effects can be attributed to treatments and not assignment bias.</p>
+<!-- **Reference:** Kempthorne (1977) explains how randomization ensures the validity of distributional assumptions underpinning common statistical tests. -->
 <section id="methods-of-randomization" class="level3">
 <h3 class="anchored" data-anchor-id="methods-of-randomization">Methods of Randomization</h3>
 <ul>
@@ -660,11 +658,6 @@ Table&nbsp;2: ANOVA Results
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<ul>
-<li>Montgomery, D. C. (2019). <em>Design and Analysis of Experiments</em>. Wiley.</li>
-<li>Kempthorne, O. (1977). <em>Design and Analysis of Experiments</em>. Robert E. Krieger Publishing Company.</li>
-<li>Scheffé, H. (1959). <em>The Analysis of Variance</em>. Wiley.</li>
-</ul>
 </section>
 </section>
 <section id="appendix-advanced-mathematical-derivations" class="level1">
@@ -677,7 +670,7 @@ Table&nbsp;2: ANOVA Results
 <li>Under <span class="math inline">\(H_0: \alpha_i=0\)</span>, the test statistic (e.g., ANOVA F-statistic) follows an F-distribution derived from the ratio of quadratic forms in normal variables (Scheffé, 1959).</li>
 <li>Without randomization, the assumptions that justify the standard F and t distributions could be invalid, making inferences incorrect.</li>
 </ol>
-<p>For more technical details, see Kempthorne (1977, Ch. 2).</p>
+<!-- For more technical details, see Kempthorne (1977, Ch. 2). -->
 </section>
 <section id="a-derivation-of-expected-mean-squares" class="level2">
 <h2 class="anchored" data-anchor-id="a-derivation-of-expected-mean-squares">A Derivation of Expected Mean Squares</h2>
@@ -699,9 +692,18 @@ E(MS_{\text{Error}}) = \sigma^2.
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-christensen2018" class="csl-entry" role="listitem">
+Christensen, R. (2018). <em>Analysis of variance, design, and regression: Linear modeling for unbalanced data</em> (2nd ed.). <span>Chapman and Hall/CRC</span>.
+</div>
 <div id="ref-dean2017" class="csl-entry" role="listitem">
-Dean, Angela, Daniel Voss, and Danel Draguljić. 2017. <em>Design and Analysis of Experiments</em>. 2nd ed. Springer <span>Texts</span> in <span>Statistics</span>. Cham, Switzerland: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>.
+Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em> (2nd ed.). Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>
+</div>
+<div id="ref-montgomery2020" class="csl-entry" role="listitem">
+Montgomery, D. C., Peck, E. A., &amp; Vining, G. G. (2020). <em>Introduction to linear regression analysis</em> (Fifth edition). Wiley.
+</div>
+<div id="ref-scheffe1959" class="csl-entry" role="listitem">
+Scheffé, H. (1959). <em>The analysis of variance</em>. Wiley.
 </div>
 </div></section></div></main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->

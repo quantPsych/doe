@@ -855,19 +855,18 @@ MS = \frac{SS}{DF}
 <strong>R Implementation:</strong></li>
 </ol>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">library</span>(MASS)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Box-Cox Transformation</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>   boxcox_fit <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(fit, <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">by=</span><span class="fl">0.1</span>))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Identify optimal lambda</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>   optimal_lambda <span class="ot">&lt;-</span> boxcox_fit<span class="sc">$</span>x[<span class="fu">which.max</span>(boxcox_fit<span class="sc">$</span>y)]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Transform Response</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>   data<span class="sc">$</span>Response_transformed <span class="ot">&lt;-</span> (data<span class="sc">$</span>Response<span class="sc">^</span>optimal_lambda <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> optimal_lambda</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Re-fit the model with transformed data</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>   fit_transformed <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response_transformed <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summary</span>(fit_transformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Box-Cox Transformation</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   boxcox_fit <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(fit, <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">by=</span><span class="fl">0.1</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Identify optimal lambda</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>   optimal_lambda <span class="ot">&lt;-</span> boxcox_fit<span class="sc">$</span>x[<span class="fu">which.max</span>(boxcox_fit<span class="sc">$</span>y)]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Transform Response</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>   data<span class="sc">$</span>Response_transformed <span class="ot">&lt;-</span> (data<span class="sc">$</span>Response<span class="sc">^</span>optimal_lambda <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> optimal_lambda</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Re-fit the model with transformed data</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>   fit_transformed <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response_transformed <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summary</span>(fit_transformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
 <li><strong>Alternative Models:</strong>
 <ul>
