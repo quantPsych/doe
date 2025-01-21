@@ -235,7 +235,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">11-Jan-2025</p>
+        <p class="date">16-Jan-2025</p>
       </div>
     </div>
     
@@ -372,6 +372,15 @@ window.Quarto = {
   <li><a href="#defining-experimental-design" id="toc-defining-experimental-design" class="nav-link" data-scroll-target="#defining-experimental-design">Defining Experimental Design</a></li>
   <li><a href="#randomization-procedure" id="toc-randomization-procedure" class="nav-link" data-scroll-target="#randomization-procedure">Randomization Procedure</a></li>
   </ul></li>
+  <li><a href="#principles-of-randomization" id="toc-principles-of-randomization" class="nav-link" data-scroll-target="#principles-of-randomization">Principles of Randomization</a>
+  <ul class="collapse">
+  <li><a href="#randomization-concept" id="toc-randomization-concept" class="nav-link" data-scroll-target="#randomization-concept">Randomization Concept</a></li>
+  <li><a href="#how-to-perform-randomization" id="toc-how-to-perform-randomization" class="nav-link" data-scroll-target="#how-to-perform-randomization">How to Perform Randomization</a>
+  <ul class="collapse">
+  <li><a href="#procedure" id="toc-procedure" class="nav-link" data-scroll-target="#procedure"><strong>Procedure</strong></a></li>
+  </ul></li>
+  <li><a href="#r-implementation-randomization-examples-in-crd" id="toc-r-implementation-randomization-examples-in-crd" class="nav-link" data-scroll-target="#r-implementation-randomization-examples-in-crd">R Implementation: Randomization Examples in CRD</a></li>
+  </ul></li>
   <li><a href="#the-one-way-anova-model" id="toc-the-one-way-anova-model" class="nav-link" data-scroll-target="#the-one-way-anova-model">The One-Way ANOVA Model</a>
   <ul class="collapse">
   <li><a href="#model-formulation" id="toc-model-formulation" class="nav-link" data-scroll-target="#model-formulation">Model Formulation</a></li>
@@ -468,14 +477,85 @@ window.Quarto = {
 <p>This procedure ensures every arrangement is equally likely, aligning with the assumptions in ANOVA and related inference.</p>
 </section>
 </section>
+<section id="principles-of-randomization" class="level1 page-columns page-full">
+<h1>Principles of Randomization</h1>
+<section id="randomization-concept" class="level2">
+<h2 class="anchored" data-anchor-id="randomization-concept">Randomization Concept</h2>
+<p>Randomization ensures that each experimental unit has an equal chance of receiving any treatment. This prevents systematic bias and justifies the assumptions underlying standard statistical tests.</p>
+<p><strong>Example:</strong> Use a random number generator to assign treatments to plots, ensuring no predetermined pattern.</p>
+</section>
+<section id="how-to-perform-randomization" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-perform-randomization">How to Perform Randomization</h2>
+<section id="procedure" class="level3">
+<h3 class="anchored" data-anchor-id="procedure"><strong>Procedure</strong></h3>
+<ul>
+<li>INPUT: List of experimental units, List of treatments</li>
+<li>OUTPUT: Randomized assignments of treatments to units</li>
+</ul>
+<ol type="1">
+<li>Define <span class="math inline">\(N\)</span> = Total number of experimental units (e.g., 12).</li>
+<li>Define <span class="math inline">\(T\)</span> = List of treatments (e.g., A, B, C).</li>
+<li>Repeat <span class="math inline">\(T\)</span> to match the number of experimental units.</li>
+<li>Shuffle the list of the repeated treatmentsn from step 3 randomly.</li>
+<li>Assign shuffled treatments to the experimental units.</li>
+<li>Return randomized assignments</li>
+</ol>
+</section>
+</section>
+<section id="r-implementation-randomization-examples-in-crd" class="level2 slide--code page-columns page-full">
+<h2 class="slide--code anchored" data-anchor-id="r-implementation-randomization-examples-in-crd">R Implementation: Randomization Examples in CRD</h2>
+<div id="tbl-random-assignment-crd" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full" data-output-location="column">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-random-assignment-crd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># Number of experimental units, Step 1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define experimental units and treatments</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>experimental_units <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>N <span class="do">## 10 experimental units</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>) <span class="do">## 3 treatments, Step 2</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat treatments to match the number of units. The code covers both balanced and unbalanced designs.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(treatments, <span class="at">length.out =</span> N)  <span class="do">## Step 3</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For a balanced design, we can also use:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># treatments &lt;- rep(treatments, each = N/length(treatments))</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle (randomize) treatments randomly to assign to units, Step 4</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="do">## For reproducibility</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>randomized_treatments <span class="ot">&lt;-</span> <span class="fu">sample</span>(treatments)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with randomized assignments</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>randomization_crd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> experimental_units, <span class="at">Treatment =</span> randomized_treatments)  <span class="do">## Step 5</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(randomization_crd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Unit Treatment
+1     1         C
+2     2         C
+3     3         A
+4     4         B
+5     5         C
+6     6         B
+7     7         B
+8     8         A
+9     9         C
+10   10         B
+11   11         A
+12   12         A</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-random-assignment-crd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Randomized Assignments in CRD
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
 <section id="the-one-way-anova-model" class="level1 page-columns page-full">
 <h1>The One-Way ANOVA Model</h1>
 <section id="model-formulation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="model-formulation">Model Formulation</h2>
 <p>Consider <span class="math inline">\(v\)</span> treatments with <span class="math inline">\(n\)</span> observations each (for simplicity). Let <span class="math inline">\(Y_{ij}\)</span> denote the response from the <span class="math inline">\(j\)</span>-th unit receiving treatment <span class="math inline">\(i\)</span>, with <span class="math inline">\(i=1,\dots,v\)</span> and <span class="math inline">\(j=1,\dots,n\)</span>. A common model is:</p>
-<p><span class="math display">\[
+<p><span id="eq-anova-model"><span class="math display">\[
 Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
-\]</span> {#eq:anova-model}</p>
+\qquad(1)\]</span></span></p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(\mu\)</span> is the overall mean response.</li>
@@ -498,22 +578,22 @@ Y_{ij} = \mu + \tau_i + \varepsilon_{ij},
 <h2 class="anchored" data-anchor-id="estimability-and-least-squares-estimation">Estimability and Least Squares Estimation</h2>
 <p>Not all model parameters (<span class="math inline">\(\tau_i\)</span>) are independently estimable. However, <strong>estimable functions</strong>, linear combinations of parameters that correspond to expected values of observed data, can be estimated uniquely.</p>
 <p>The least squares estimators (LSEs) solve the normal equations obtained by minimizing the sum of squared errors (SSE):</p>
-<p><span class="math display">\[
+<p><span id="eq-sse"><span class="math display">\[
 \text{SSE} = \sum_{i=1}^v \sum_{j=1}^n (Y_{ij} - \hat{\mu}_i)^2,
-\]</span> {#eq:sse}</p>
+\qquad(2)\]</span></span></p>
 <p>where <span class="math inline">\(\hat{\mu}_i\)</span> is the estimated mean for treatment <span class="math inline">\(i\)</span>. The LSE for each treatment mean <span class="math inline">\(\mu_i = \mu + \tau_i\)</span> is simply the sample mean <span class="math inline">\(\bar{Y}_i = \frac{1}{n}\sum_{j=1}^n Y_{ij}\)</span>.</p>
 <p>Because the normal equations are linearly dependent, an additional constraint is needed (e.g., <span class="math inline">\(\sum \tau_i = 0\)</span>). Still, any estimable function (like differences between treatment means) can be uniquely estimated.</p>
 </section>
 <section id="distribution-of-estimators" class="level2">
 <h2 class="anchored" data-anchor-id="distribution-of-estimators">Distribution of Estimators</h2>
 <p>Under the normal error assumption, each estimator <span class="math inline">\(\bar{Y}_i\)</span> is normally distributed, with:</p>
-<p><span class="math display">\[
+<p><span id="eq-estimator-variance"><span class="math display">\[
 E(\bar{Y}_i) = \mu_i, \quad \text{Var}(\bar{Y}_i) = \frac{\sigma^2}{n}.
-\]</span> {#eq:estimator-variance}</p>
+\qquad(3)\]</span></span></p>
 <p>The error variance <span class="math inline">\(\sigma^2\)</span> is estimated by the mean square error (MSE):</p>
-<p><span class="math display">\[
+<p><span id="eq-mse"><span class="math display">\[
 \hat{\sigma}^2 = \frac{\text{SSE}}{N - v},
-\]</span> {#eq:mse}</p>
+\qquad(4)\]</span></span></p>
 <p>where <span class="math inline">\(N = v \cdot n\)</span> is the total number of observations.</p>
 </section>
 </section>
@@ -522,9 +602,9 @@ E(\bar{Y}_i) = \mu_i, \quad \text{Var}(\bar{Y}_i) = \frac{\sigma^2}{n}.
 <section id="the-anova-f-test" class="level2">
 <h2 class="anchored" data-anchor-id="the-anova-f-test">The ANOVA F-Test</h2>
 <p>To test <span class="math inline">\(H_0: \tau_1 = \cdots = \tau_v = 0\)</span> against <span class="math inline">\(H_a:\)</span> at least two <span class="math inline">\(\tau_i\)</span> differ, we use the ANOVA F-statistic:</p>
-<p><span class="math display">\[
+<p><span id="eq-f-statistic"><span class="math display">\[
 F = \frac{\text{MST}}{\text{MSE}},
-\]</span> {#eq:f-statistic}</p>
+\qquad(5)\]</span></span></p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(\text{SST}\)</span> = treatment sum of squares measures variation among treatment means.</li>
@@ -575,7 +655,7 @@ F = \frac{\text{MST}}{\text{MSE}},
 </table>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: ANOVA Table for a Completely Randomized Design
+Table&nbsp;2: ANOVA Table for a Completely Randomized Design
 </figcaption>
 </figure>
 </div>
@@ -593,9 +673,9 @@ Table&nbsp;1: ANOVA Table for a Completely Randomized Design
 <section id="confidence-limits-for-variance" class="level2">
 <h2 class="anchored" data-anchor-id="confidence-limits-for-variance">Confidence Limits for Variance</h2>
 <p>A one-sided confidence interval on <span class="math inline">\(\sigma^2\)</span> prevents underestimating required observations. The upper confidence limit is derived from the chi-squared distribution:</p>
-<p><span class="math display">\[
+<p><span id="eq-variance-ci"><span class="math display">\[
 \frac{(N-v)\hat{\sigma}^2}{\sigma^2} \sim \chi^2_{N-v}.
-\]</span> {#eq:variance-ci}</p>
+\qquad(6)\]</span></span></p>
 <p>Such intervals guide planning by addressing uncertainty in the variance estimate.</p>
 </section>
 </section>
@@ -605,13 +685,13 @@ Table&nbsp;1: ANOVA Table for a Completely Randomized Design
 <h2 class="anchored" data-anchor-id="randomization-in-r">Randomization in R</h2>
 <p>Suppose we have 3 treatments (A, B, C) and total 9 units (3 per treatment):</p>
 <div class="cell page-columns page-full" width="60%">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Total units</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">9</span> <span class="co"># Assign treatments to units, e.g., AAABBBCCC</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">3</span>) <span class="co"># Assign random numbers</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rand_nums <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">9</span>) <span class="co"># Genrates random numbers</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">Treatment =</span> treatments, <span class="at">RN =</span> rand_nums)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>data_frame_sorted <span class="ot">&lt;-</span> data_frame[<span class="fu">order</span>(data_frame<span class="sc">$</span>RN), ] <span class="co"># Sort by RN</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data_frame_sorted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Total units</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">9</span> <span class="co"># Assign treatments to units, e.g., AAABBBCCC</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">3</span>) <span class="co"># Assign random numbers</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>rand_nums <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">9</span>) <span class="co"># Genrates random numbers</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">Treatment =</span> treatments, <span class="at">RN =</span> rand_nums)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>data_frame_sorted <span class="ot">&lt;-</span> data_frame[<span class="fu">order</span>(data_frame<span class="sc">$</span>RN), ] <span class="co"># Sort by RN</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>data_frame_sorted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-randomization" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full" width="60%">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -687,7 +767,7 @@ Table&nbsp;1: ANOVA Table for a Completely Randomized Design
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Randomized Treatment Allocation Data
+Table&nbsp;3: Randomized Treatment Allocation Data
 </figcaption>
 </figure>
 </div>
@@ -707,14 +787,14 @@ Table&nbsp;2: Randomized Treatment Allocation Data
 <h2 class="anchored" data-anchor-id="fitting-a-one-way-anova-model">Fitting a One-Way ANOVA Model</h2>
 <p>Assume we have data from a soap experiment (soap.txt) with three soap types (regular, deodorant, moisturizing):</p>
 <div class="cell" data-tbl-cap="ANOVA Results for Soap Experiment">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>soap.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"soap.txt"</span>), <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>soap.data<span class="sc">$</span>fSoap <span class="ot">&lt;-</span> <span class="fu">factor</span>(soap.data<span class="sc">$</span>Soap)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a one-way ANOVA</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(WtLoss <span class="sc">~</span> fSoap, <span class="at">data =</span> soap.data)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>soap.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"soap.txt"</span>), <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>soap.data<span class="sc">$</span>fSoap <span class="ot">&lt;-</span> <span class="fu">factor</span>(soap.data<span class="sc">$</span>Soap)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a one-way ANOVA</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(WtLoss <span class="sc">~</span> fSoap, <span class="at">data =</span> soap.data)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 fSoap        2 16.122   8.061   104.5 5.91e-07 ***
@@ -729,8 +809,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2 class="anchored" data-anchor-id="estimating-means-and-contrasts">Estimating Means and Contrasts</h2>
 <p>We can estimate treatment means (least squares means) and test contrasts using <code>emmeans</code> or <code>multcomp</code> packages. For example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(fit, <span class="sc">~</span>fSoap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(fit, <span class="sc">~</span>fSoap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> fSoap emmean    SE df lower.CL upper.CL
  1     -0.035 0.139  9   -0.349    0.279
@@ -762,25 +842,25 @@ Confidence level used: 0.95 </code></pre>
 <section id="a.1-normal-equations-and-estimability" class="level2">
 <h2 class="anchored" data-anchor-id="a.1-normal-equations-and-estimability">A.1 Normal Equations and Estimability</h2>
 <p>The one-way ANOVA model can be written as:</p>
-<p><span class="math display">\[
+<p><span id="eq-anova-model-2"><span class="math display">\[
 Y_{ij} = \mu_i + \varepsilon_{ij}, \quad \text{with } \mu_i = \mu + \tau_i.
-\]</span></p>
+\qquad(7)\]</span></span></p>
 <p>The least squares approach forms normal equations from partial derivatives of SSE. Because <span class="math inline">\(\sum \tau_i = 0\)</span>, only differences in means are estimable. The space of estimable functions includes contrasts like <span class="math inline">\(\mu_1 - \mu_2\)</span>, but not individual <span class="math inline">\(\tau_i\)</span> alone.</p>
 </section>
 <section id="a.2-distribution-of-the-f-statistic" class="level2">
 <h2 class="anchored" data-anchor-id="a.2-distribution-of-the-f-statistic">A.2 Distribution of the F-Statistic</h2>
 <p>Under <span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math display">\[
+<p><span id="eq-f-distribution"><span class="math display">\[
 F = \frac{MST}{MSE} \sim F_{v-1, N-v}.
-\]</span></p>
+\qquad(8)\]</span></span></p>
 <p>If treatments truly differ, F follows a noncentral F-distribution, enabling power calculations and minimum detectable differences.</p>
 </section>
 <section id="a.3-power-calculations" class="level2">
 <h2 class="anchored" data-anchor-id="a.3-power-calculations">A.3 Power Calculations</h2>
 <p>Power for detecting a difference <span class="math inline">\(\delta\)</span> in means involves the noncentrality parameter of the F-distribution. By selecting <span class="math inline">\(\alpha, \sigma^2, \delta,\)</span> and desired power, tables or software (e.g., <code>pwr</code> package in R) guide sample size choices.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(pwr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.anova.test</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">f =</span> <span class="fl">0.4</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tbl-cap="Power Calculation for ANOVA">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(pwr)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.anova.test</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">f =</span> <span class="fl">0.4</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Balanced one-way analysis of variance power calculation 
