@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -238,7 +258,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">11-Jan-2025</p>
+        <p class="date">16-Feb-2025</p>
       </div>
     </div>
     
@@ -369,9 +389,31 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
   <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
-  </ul></li>
   <li><a href="#motivating-example-and-intuition" id="toc-motivating-example-and-intuition" class="nav-link" data-scroll-target="#motivating-example-and-intuition">Motivating Example and Intuition</a></li>
   <li><a href="#strategies-for-checking-assumptions" id="toc-strategies-for-checking-assumptions" class="nav-link" data-scroll-target="#strategies-for-checking-assumptions">Strategies for Checking Assumptions</a></li>
+  <li><a href="#raw-residuals-vs.-standardized-residuals" id="toc-raw-residuals-vs.-standardized-residuals" class="nav-link" data-scroll-target="#raw-residuals-vs.-standardized-residuals">Raw Residuals vs.&nbsp;Standardized Residuals</a>
+  <ul class="collapse">
+  <li><a href="#raw-residuals" id="toc-raw-residuals" class="nav-link" data-scroll-target="#raw-residuals">Raw Residuals</a></li>
+  <li><a href="#why-standardize" id="toc-why-standardize" class="nav-link" data-scroll-target="#why-standardize">Why Standardize?</a></li>
+  </ul></li>
+  <li><a href="#formulasdefinitions-of-standardized-residuals" id="toc-formulasdefinitions-of-standardized-residuals" class="nav-link" data-scroll-target="#formulasdefinitions-of-standardized-residuals">Formulas/Definitions Of Standardized Residuals</a></li>
+  <li><a href="#usage-in-anova-vs.-regression" id="toc-usage-in-anova-vs.-regression" class="nav-link" data-scroll-target="#usage-in-anova-vs.-regression">Usage in ANOVA vs.&nbsp;Regression</a></li>
+  <li><a href="#relationship-to-rstandard-in-r" id="toc-relationship-to-rstandard-in-r" class="nav-link" data-scroll-target="#relationship-to-rstandard-in-r">Relationship to <code>rstandard()</code> in R</a>
+  <ul class="collapse">
+  <li><a href="#rstandard-in-base-r-for-lm-objects" id="toc-rstandard-in-base-r-for-lm-objects" class="nav-link" data-scroll-target="#rstandard-in-base-r-for-lm-objects"><code>rstandard()</code> In Base R (for <code>lm</code> Objects)</a></li>
+  <li><a href="#other-related-functions" id="toc-other-related-functions" class="nav-link" data-scroll-target="#other-related-functions">Other Related Functions</a></li>
+  </ul></li>
+  <li><a href="#example-in-r" id="toc-example-in-r" class="nav-link" data-scroll-target="#example-in-r">Example in R</a>
+  <ul class="collapse">
+  <li><a href="#example-regression-on-the-mtcars-dataset" id="toc-example-regression-on-the-mtcars-dataset" class="nav-link" data-scroll-target="#example-regression-on-the-mtcars-dataset">Example: Regression on the <code>mtcars</code> Dataset</a></li>
+  <li><a href="#example-one-way-anova" id="toc-example-one-way-anova" class="nav-link" data-scroll-target="#example-one-way-anova">Example: One-Way ANOVA</a></li>
+  </ul></li>
+  <li><a href="#interpretation-and-best-practices" id="toc-interpretation-and-best-practices" class="nav-link" data-scroll-target="#interpretation-and-best-practices">Interpretation and Best Practices</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
+  <ul class="collapse">
+  <li><a href="#key-takeaway" id="toc-key-takeaway" class="nav-link" data-scroll-target="#key-takeaway">Key Takeaway:</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#detailed-assumption-checks" id="toc-detailed-assumption-checks" class="nav-link" data-scroll-target="#detailed-assumption-checks">Detailed Assumption Checks</a>
   <ul class="collapse">
   <li><a href="#checking-independence" id="toc-checking-independence" class="nav-link" data-scroll-target="#checking-independence">Checking Independence</a></li>
@@ -379,28 +421,58 @@ window.Quarto = {
   <li><a href="#checking-equal-variance-homoscedasticity" id="toc-checking-equal-variance-homoscedasticity" class="nav-link" data-scroll-target="#checking-equal-variance-homoscedasticity">Checking Equal Variance (Homoscedasticity)</a></li>
   <li><a href="#checking-normality" id="toc-checking-normality" class="nav-link" data-scroll-target="#checking-normality">Checking Normality</a></li>
   </ul></li>
-  <li><a href="#remedies-for-violations" id="toc-remedies-for-violations" class="nav-link" data-scroll-target="#remedies-for-violations">Remedies for Violations</a>
+  <li><a href="#remedies-for-violations" id="toc-remedies-for-violations" class="nav-link" data-scroll-target="#remedies-for-violations">Remedies for Violations</a></li>
+  <li><a href="#transformation" id="toc-transformation" class="nav-link" data-scroll-target="#transformation">Transformation</a>
   <ul class="collapse">
+  <li><a href="#why-transform-data" id="toc-why-transform-data" class="nav-link" data-scroll-target="#why-transform-data">Why Transform Data?</a></li>
+  <li><a href="#when-the-transformation-works" id="toc-when-the-transformation-works" class="nav-link" data-scroll-target="#when-the-transformation-works">When the Transformation Works</a></li>
+  <li><a href="#does-the-transformation-work-when-there-is-no-meanvariance-relationship" id="toc-does-the-transformation-work-when-there-is-no-meanvariance-relationship" class="nav-link" data-scroll-target="#does-the-transformation-work-when-there-is-no-meanvariance-relationship">Does the Transformation Work When There is No Mean–Variance Relationship?</a>
+  <ul class="collapse">
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  </ul></li>
   <li><a href="#transformations" id="toc-transformations" class="nav-link" data-scroll-target="#transformations">Transformations</a></li>
-  <li><a href="#alternative-models" id="toc-alternative-models" class="nav-link" data-scroll-target="#alternative-models">Alternative Models</a></li>
-  </ul></li>
-  <li><a href="#advanced-examples-and-complex-datasets" id="toc-advanced-examples-and-complex-datasets" class="nav-link" data-scroll-target="#advanced-examples-and-complex-datasets">Advanced Examples and Complex Datasets</a>
+  <li><a href="#background-on-box-cox-transformation" id="toc-background-on-box-cox-transformation" class="nav-link" data-scroll-target="#background-on-box-cox-transformation">Background on Box-Cox Transformation</a>
   <ul class="collapse">
-  <li><a href="#example-trout-hemoglobin-experiment" id="toc-example-trout-hemoglobin-experiment" class="nav-link" data-scroll-target="#example-trout-hemoglobin-experiment">Example: Trout Hemoglobin Experiment</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">Purpose</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
-  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  <li><a href="#simulate-a-dataset-with-heteroscedasticity" id="toc-simulate-a-dataset-with-heteroscedasticity" class="nav-link" data-scroll-target="#simulate-a-dataset-with-heteroscedasticity">Simulate a Dataset with Heteroscedasticity</a></li>
+  <li><a href="#fit-an-initial-linear-model" id="toc-fit-an-initial-linear-model" class="nav-link" data-scroll-target="#fit-an-initial-linear-model">Fit an Initial Linear Model</a></li>
+  <li><a href="#apply-the-box-cox-transformation" id="toc-apply-the-box-cox-transformation" class="nav-link" data-scroll-target="#apply-the-box-cox-transformation">Apply the Box-Cox Transformation</a></li>
+  <li><a href="#re-fit-the-model-with-the-transformed-response" id="toc-re-fit-the-model-with-the-transformed-response" class="nav-link" data-scroll-target="#re-fit-the-model-with-the-transformed-response">Re-Fit the Model with the Transformed Response</a></li>
+  <li><a href="#compare-diagnostic-plots-for-the-transformed-model" id="toc-compare-diagnostic-plots-for-the-transformed-model" class="nav-link" data-scroll-target="#compare-diagnostic-plots-for-the-transformed-model">Compare Diagnostic Plots for the Transformed Model</a></li>
+  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings">Summary of Findings</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <li><a href="#satterthwaite-approximation" id="toc-satterthwaite-approximation" class="nav-link" data-scroll-target="#satterthwaite-approximation">Satterthwaite Approximation</a>
   <ul class="collapse">
+  <li><a href="#the-statistical-model" id="toc-the-statistical-model" class="nav-link" data-scroll-target="#the-statistical-model">The Statistical Model</a></li>
+  <li><a href="#satterthwaites-approximation-for-a-contrast" id="toc-satterthwaites-approximation-for-a-contrast" class="nav-link" data-scroll-target="#satterthwaites-approximation-for-a-contrast">Satterthwaite’s Approximation for a Contrast</a></li>
+  <li><a href="#estimated-variance-of-the-contrast" id="toc-estimated-variance-of-the-contrast" class="nav-link" data-scroll-target="#estimated-variance-of-the-contrast">Estimated Variance of the Contrast</a></li>
+  <li><a href="#degrees-of-freedom-welchsatterthwaite-formula" id="toc-degrees-of-freedom-welchsatterthwaite-formula" class="nav-link" data-scroll-target="#degrees-of-freedom-welchsatterthwaite-formula">Degrees of Freedom (Welch–Satterthwaite Formula)</a></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals">Confidence Intervals</a></li>
+  <li><a href="#multiple-comparisons-the-gameshowell-method" id="toc-multiple-comparisons-the-gameshowell-method" class="nav-link" data-scroll-target="#multiple-comparisons-the-gameshowell-method">Multiple Comparisons: The Games–Howell Method</a></li>
+  <li><a href="#example-trout-experiment-illustrative-data" id="toc-example-trout-experiment-illustrative-data" class="nav-link" data-scroll-target="#example-trout-experiment-illustrative-data">Example: Trout Experiment (Illustrative Data)</a></li>
+  <li><a href="#trout-experiment-data" id="toc-trout-experiment-data" class="nav-link" data-scroll-target="#trout-experiment-data">Trout Experiment Data</a>
+  <ul class="collapse">
+  <li><a href="#what-is-the-experiment-about" id="toc-what-is-the-experiment-about" class="nav-link" data-scroll-target="#what-is-the-experiment-about">What Is the Experiment About?</a></li>
+  <li><a href="#key-terms-explained" id="toc-key-terms-explained" class="nav-link" data-scroll-target="#key-terms-explained">Key Terms Explained</a></li>
+  <li><a href="#why-are-they-doing-this" id="toc-why-are-they-doing-this" class="nav-link" data-scroll-target="#why-are-they-doing-this">Why Are They Doing This?</a></li>
+  <li><a href="#what-does-the-data-look-like" id="toc-what-does-the-data-look-like" class="nav-link" data-scroll-target="#what-does-the-data-look-like">What Does the Data Look Like?</a></li>
+  </ul></li>
+  <li><a href="#generating-or-loading-the-data-in-r" id="toc-generating-or-loading-the-data-in-r" class="nav-link" data-scroll-target="#generating-or-loading-the-data-in-r">Generating or Loading the Data in R</a></li>
+  <li><a href="#exploratory-plots" id="toc-exploratory-plots" class="nav-link" data-scroll-target="#exploratory-plots">Exploratory Plots</a></li>
+  <li><a href="#check-group-means-and-variances" id="toc-check-group-means-and-variances" class="nav-link" data-scroll-target="#check-group-means-and-variances">Check Group Means and Variances</a></li>
+  <li><a href="#manual-gameshowell-multiple-comparisons-step-by-step-in-r" id="toc-manual-gameshowell-multiple-comparisons-step-by-step-in-r" class="nav-link" data-scroll-target="#manual-gameshowell-multiple-comparisons-step-by-step-in-r">Manual Games–Howell Multiple Comparisons (Step-by-Step in R)</a></li>
+  <li><a href="#manual-calculations" id="toc-manual-calculations" class="nav-link" data-scroll-target="#manual-calculations">Manual Calculations</a></li>
+  <li><a href="#create-a-summary-table" id="toc-create-a-summary-table" class="nav-link" data-scroll-target="#create-a-summary-table">Create a Summary Table</a></li>
+  <li><a href="#compute-each-pairs-stats" id="toc-compute-each-pairs-stats" class="nav-link" data-scroll-target="#compute-each-pairs-stats">Compute Each Pair’s Stats</a></li>
+  <li><a href="#compute-the-gameshowell-test-statistic-and-p-values" id="toc-compute-the-gameshowell-test-statistic-and-p-values" class="nav-link" data-scroll-target="#compute-the-gameshowell-test-statistic-and-p-values">Compute the Games–Howell Test Statistic and p-Values</a></li>
+  <li><a href="#minimum-significant-difference-msd-for-each-pair-tukey-likeness" id="toc-minimum-significant-difference-msd-for-each-pair-tukey-likeness" class="nav-link" data-scroll-target="#minimum-significant-difference-msd-for-each-pair-tukey-likeness">Minimum Significant Difference (msd) for Each Pair (Tukey-likeness)</a></li>
+  <li><a href="#using-a-ready-made-r-function" id="toc-using-a-ready-made-r-function" class="nav-link" data-scroll-target="#using-a-ready-made-r-function">Using a Ready-Made R Function</a></li>
+  <li><a href="#interpretation-and-conclusion" id="toc-interpretation-and-conclusion" class="nav-link" data-scroll-target="#interpretation-and-conclusion">Interpretation and Conclusion</a></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
-  <ul class="collapse">
-  <li><a href="#derivation-of-standardized-residuals" id="toc-derivation-of-standardized-residuals" class="nav-link" data-scroll-target="#derivation-of-standardized-residuals">Derivation of Standardized Residuals</a></li>
-  <li><a href="#box-cox-transformation" id="toc-box-cox-transformation" class="nav-link" data-scroll-target="#box-cox-transformation">Box-Cox Transformation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -412,7 +484,7 @@ window.Quarto = {
 
 
 
-<section id="introduction" class="level1">
+<section id="introduction" class="level1 page-columns page-full">
 <h1>Introduction</h1>
 <p>When using ANOVA or regression models, the reliability and validity of inferences depend on certain assumptions:</p>
 <ol type="1">
@@ -435,7 +507,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
 <p>To implement MCPs and contrasts in R, we will use the following packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, here, readr, flextable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, here, readr, flextable, PMCMRplus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><strong><code>dplyr</code></strong>: Data manipulation and summarization.</li>
@@ -444,16 +516,17 @@ window.Quarto = {
 <li><strong><code>pacman</code></strong>: Package management.</li>
 <li><strong><code>here</code></strong>: File path management.</li>
 <li><strong><code>readr</code></strong>: Reading data files.</li>
+<li><strong><code>flextable</code></strong>: Creating tables.</li>
+<li><strong><code>PMCMRplus</code></strong>: Pairwise multiple comparisons.</li>
 </ul>
 </section>
-</section>
-<section id="motivating-example-and-intuition" class="level1">
-<h1>Motivating Example and Intuition</h1>
+<section id="motivating-example-and-intuition" class="level2">
+<h2 class="anchored" data-anchor-id="motivating-example-and-intuition">Motivating Example and Intuition</h2>
 <p><strong>Analogy:</strong> Imagine you have a pair of binoculars (your model). The assumptions are like cleaning the lenses before use. If the lenses are dirty (violated assumptions), you see distorted images (biased conclusions). Checking assumptions and fixing issues (cleaning lenses) ensures a clear view of the underlying relationships.</p>
 <p><strong>Simple Example:</strong> Suppose you test four treatments for battery life. After ANOVA suggests differences, you examine residuals. If residuals fan out like a megaphone, variance is not constant. Just as uneven ground makes walking difficult, uneven variance complicates inference. You may need transformations to “level the playing field.”</p>
 </section>
-<section id="strategies-for-checking-assumptions" class="level1">
-<h1>Strategies for Checking Assumptions</h1>
+<section id="strategies-for-checking-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="strategies-for-checking-assumptions">Strategies for Checking Assumptions</h2>
 <ol type="1">
 <li><p><strong>Visual Inspection of Residuals:</strong> Residuals, defined as <span class="math inline">\(e_{ij} = Y_{ij} - \hat{Y}_{ij}\)</span>, reflect unexplained variation. By plotting residuals against fitted values or explanatory variables, patterns emerge.</p></li>
 <li><p><strong>Standardized Residuals:</strong> Standardized residuals <span class="math inline">\(z_{ij} = \frac{e_{ij}}{\sqrt{\text{MSE}}}\)</span> help detect outliers and unusual patterns because they are put on a common scale.</p></li>
@@ -461,6 +534,270 @@ window.Quarto = {
 <li><p><strong>Independence Checks:</strong> Residuals plotted in the order of data collection can reveal time trends or autocorrelation, violating independence.</p></li>
 <li><p><strong>Variance Homogeneity Checks:</strong> Residuals vs.&nbsp;fitted value plots or group-specific standard deviations highlight heteroscedasticity.</p></li>
 </ol>
+<p>Below is a step-by-step tutorial on <strong>standardized residuals</strong> in both ANOVA and Regression contexts. We will cover:</p>
+<ol type="1">
+<li>The difference between raw residuals and standardized residuals.</li>
+<li>Various formulas/definitions of standardized residuals.</li>
+<li>Usage in both ANOVA and regression models.</li>
+<li>The relationship of these definitions to the <code>rstandard()</code> function in R.</li>
+</ol>
+</section>
+<section id="raw-residuals-vs.-standardized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="raw-residuals-vs.-standardized-residuals">Raw Residuals vs.&nbsp;Standardized Residuals</h2>
+<section id="raw-residuals" class="level3">
+<h3 class="anchored" data-anchor-id="raw-residuals">Raw Residuals</h3>
+<ul>
+<li>In a linear model—be it for ANOVA or regression—the <strong>raw residual</strong> <span class="math inline">\(e_i\)</span> for the <span class="math inline">\(i\)</span>th observation is:</li>
+</ul>
+<p><span class="math display">\[
+e_i = y_i - \hat{y}_i,
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(y_i\)</span> is the observed value,</li>
+<li><span class="math inline">\(\hat{y}_i\)</span> is the fitted (predicted) value from the model.</li>
+</ul>
+</section>
+<section id="why-standardize" class="level3">
+<h3 class="anchored" data-anchor-id="why-standardize">Why Standardize?</h3>
+<ul>
+<li>Raw residuals are on the same scale as the response variable, so comparing residuals across data points or across different models can be less meaningful if the variance of the error changes or the scale of the response variable changes.</li>
+<li><strong>Standardized residuals</strong> (or <strong>scaled residuals</strong>) transform the raw residuals so that they take into account the model’s standard error of the residual for each point. This makes it easier to detect outliers or high-leverage points, because you put them on a comparable scale (akin to a z-score).</li>
+</ul>
+</section>
+</section>
+<section id="formulasdefinitions-of-standardized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="formulasdefinitions-of-standardized-residuals">Formulas/Definitions Of Standardized Residuals</h2>
+<p>The exact formula for a “standardized” residual can vary across textbooks and software. The major variants you will see are:</p>
+<ol type="1">
+<li><strong>Simple Standardized Residual</strong> (often used in introductory ANOVA contexts):</li>
+</ol>
+<p><span class="math display">\[
+r_i = \frac{e_i}{\sqrt{\text{MSE}}},
+\]</span></p>
+<p>where <strong>MSE</strong> is the mean squared error (also called <span class="math inline">\(s^2\)</span>) from the overall model.</p>
+<ul>
+<li>This approach uses the same denominator (i.e., <span class="math inline">\(\sqrt{MSE}\)</span>) for every residual.</li>
+</ul>
+<ol type="1">
+<li><strong>Internally Studentized Residual</strong> (sometimes also called the “standardized residual” in many software packages, including base R’s <code>rstandard()</code> for <code>lm</code> objects):</li>
+</ol>
+<p><span class="math display">\[
+r_i^\text{(int)} = \frac{e_i}{\sqrt{s^2(1 - h_{ii})}},
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(s^2\)</span> is the residual (error) variance estimate from the full model,</li>
+<li><span class="math inline">\(h_{ii}\)</span> is the <strong>hat value</strong> (or leverage) for observation <span class="math inline">\(i\)</span>. (In matrix terms, <span class="math inline">\(\mathbf{H} = X (X^\top X)^{-1} X^\top\)</span> is the “hat matrix,” and <span class="math inline">\(h_{ii}\)</span> is its <span class="math inline">\(i\)</span>th diagonal element.)</li>
+<li><span class="math inline">\(1 - h_{ii}\)</span> is a scale adjustment that accounts for leverage.</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Externally Studentized Residual</strong> (also called the “deleted residual” or “R-student”):</li>
+</ol>
+<p><span class="math display">\[
+r_i^\text{(ext)} = \frac{e_i}{\sqrt{s_{(-i)}^2 (1 - h_{ii})}},
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(s_{(-i)}^2\)</span> is the mean squared error calculated by fitting the model <strong>without</strong> the <span class="math inline">\(i\)</span>th observation (i.e., a leave-one-out MSE).</li>
+<li>This further adjusts the estimate of residual variance by removing the <span class="math inline">\(i\)</span>th point from the fit, which can detect outliers more sensitively.</li>
+</ul>
+<p>Depending on the method or software, “standardized residuals” could refer to either the simple version or the internally studentized version. In most modern regression/ANOVA software:</p>
+<ul>
+<li><strong><code>rstandard()</code></strong> typically provides the <strong>internally studentized</strong> residuals.</li>
+<li><strong><code>rstudent()</code></strong> typically provides the <strong>externally studentized</strong> residuals.</li>
+</ul>
+</section>
+<section id="usage-in-anova-vs.-regression" class="level2">
+<h2 class="anchored" data-anchor-id="usage-in-anova-vs.-regression">Usage in ANOVA vs.&nbsp;Regression</h2>
+<p><strong>ANOVA</strong> (Analysis of Variance) is essentially a special case of linear regression with categorical predictors. The concept of residuals is exactly the same: - In a one-way ANOVA, each group has a predicted mean <span class="math inline">\(\hat{y}_i\)</span>. The raw residual is <span class="math inline">\(y_i - \hat{y}_i\)</span>. - If you want to standardize by the overall MSE, you could compute</p>
+<p><span class="math display">\[
+r_i = \frac{y_i - \hat{y}_i}{\sqrt{MSE}}
+\]</span></p>
+<p>or the more general (internally studentized) version:</p>
+<p><span class="math display">\[
+r_i^\text{(int)} = \frac{y_i - \hat{y}_i}{\sqrt{MSE \cdot (1 - h_{ii})}}.
+\]</span></p>
+<p>In an ANOVA model, <span class="math inline">\(h_{ii}\)</span> is often simpler to compute because design matrices are typically 0/1-coded for each group, so each point’s leverage depends on how many replicates are in each group, among other factors.</p>
+<p><strong>Regression</strong> (with continuous predictors) uses exactly the same approach: the raw residual is <span class="math inline">\(e_i = y_i - \hat{y}_i\)</span>. - In regression, the hat value <span class="math inline">\(h_{ii}\)</span> depends on the design matrix <span class="math inline">\(X\)</span> (i.e., the set of predictors, their transformations, interactions, etc.). - Standardized or studentized residuals are used to: - Check for <strong>outliers</strong> (extreme residuals). - Assess <strong>model fit</strong> in residual vs.&nbsp;fitted-value plots. - Evaluate if residuals follow typical assumptions (normality, equal variance).</p>
+</section>
+<section id="relationship-to-rstandard-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="relationship-to-rstandard-in-r">Relationship to <code>rstandard()</code> in R</h2>
+<section id="rstandard-in-base-r-for-lm-objects" class="level3">
+<h3 class="anchored" data-anchor-id="rstandard-in-base-r-for-lm-objects"><code>rstandard()</code> In Base R (for <code>lm</code> Objects)</h3>
+<ul>
+<li>If you fit a linear model in R using:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then you can get standardized residuals via:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>std_res <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>By default, <code>rstandard()</code> returns the <em>internally studentized residuals</em></strong>. Mathematically (for observation <span class="math inline">\(i\)</span>):</li>
+</ul>
+<p><span class="math display">\[
+\text{rstandard}(i) = \frac{e_i}{\sqrt{s^2 (1 - h_{ii})}},
+\]</span></p>
+<p>where <span class="math inline">\(s^2\)</span> is the estimated MSE from the full model, and <span class="math inline">\(h_{ii}\)</span> is the leverage for observation <span class="math inline">\(i\)</span>.</p>
+</section>
+<section id="other-related-functions" class="level3">
+<h3 class="anchored" data-anchor-id="other-related-functions">Other Related Functions</h3>
+<ul>
+<li><code>rstudent(fit)</code> returns the <strong>externally</strong> studentized residuals (sometimes called the R-student residuals):</li>
+</ul>
+<p><span class="math display">\[
+\text{rstudent}(i) = \frac{e_i}{\sqrt{s_{(-i)}^2 (1 - h_{ii})}},
+\]</span></p>
+<ul>
+<li><code>residuals(fit)</code> or simply <code>fit$residuals</code> returns the <strong>raw</strong> (unstandardized) residuals:</li>
+</ul>
+<p><span class="math display">\[
+e_i = y_i - \hat{y}_i.
+\]</span></p>
+</section>
+</section>
+<section id="example-in-r" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="example-in-r">Example in R</h2>
+<p>Here’s a quick demonstration using a built-in dataset in R.</p>
+<section id="example-regression-on-the-mtcars-dataset" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="example-regression-on-the-mtcars-dataset">Example: Regression on the <code>mtcars</code> Dataset</h3>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the built-in dataset</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model (mpg ~ wt + hp)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> hp, <span class="at">data =</span> mtcars)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw residuals</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>raw_res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Internally studentized (standardized) residuals</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>std_res <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fit)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Externally studentized residuals</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>stud_res <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(fit)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">data.frame</span>(raw_res, std_res, stud_res))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-standardized-residuals-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">raw_res</th>
+<th style="text-align: right;">std_res</th>
+<th style="text-align: right;">stud_res</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mazda RX4</td>
+<td style="text-align: right;">-2.5723294</td>
+<td style="text-align: right;">-1.0145865</td>
+<td style="text-align: right;">-1.0151193</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mazda RX4 Wag</td>
+<td style="text-align: right;">-1.5834826</td>
+<td style="text-align: right;">-0.6233275</td>
+<td style="text-align: right;">-0.6166309</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Datsun 710</td>
+<td style="text-align: right;">-2.4758187</td>
+<td style="text-align: right;">-0.9847588</td>
+<td style="text-align: right;">-0.9842273</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hornet 4 Drive</td>
+<td style="text-align: right;">0.1349799</td>
+<td style="text-align: right;">0.0533285</td>
+<td style="text-align: right;">0.0524035</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hornet Sportabout</td>
+<td style="text-align: right;">0.3727334</td>
+<td style="text-align: right;">0.1464478</td>
+<td style="text-align: right;">0.1439539</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valiant</td>
+<td style="text-align: right;">-2.3738163</td>
+<td style="text-align: right;">-0.9476980</td>
+<td style="text-align: right;">-0.9459788</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Standardized Residuals Example
+</figcaption>
+</figure>
+</div>
+</div>
+<p>You can see how the raw residuals are just differences from fitted values, while the standardized and studentized ones have been scaled differently.</p>
+</section>
+<section id="example-one-way-anova" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="example-one-way-anova">Example: One-Way ANOVA</h3>
+<div id="tbl-anova-standardized-residuals-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-anova-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A simple one-way ANOVA example</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each=</span><span class="dv">10</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">7</span>, <span class="at">sd=</span><span class="dv">1</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">6</span>, <span class="at">sd=</span><span class="dv">1</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>fit_anova <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group, <span class="at">data =</span> df)  <span class="co"># identical to aov(y ~ group, data = df)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>std_res_anova <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fit_anova)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(std_res_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+ 0.5631951 -0.8289786 -1.0887392 -0.4679677 -0.2081103  1.0475481 </code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: ANOVA Standardized Residuals Example
+</figcaption>
+</figure>
+</div>
+<p>This again yields internally studentized residuals. The same formulas from regression hold for an ANOVA setting because ANOVA is just a linear model with categorical predictors.</p>
+</section>
+</section>
+<section id="interpretation-and-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-and-best-practices">Interpretation and Best Practices</h2>
+<ol type="1">
+<li><strong>Thresholds for potential outliers</strong>:
+<ul>
+<li>A standardized (or studentized) residual that exceeds about <span class="math inline">\(\pm 2\)</span> could be noteworthy, and <span class="math inline">\(\pm 3\)</span> is often considered large in typical Normal-error contexts.</li>
+<li>However, the interpretation depends on your sample size and the distribution of residuals.</li>
+</ul></li>
+<li><strong>Leverage and influence</strong>:
+<ul>
+<li>If you see a large standardized residual, check also the point’s leverage <span class="math inline">\((h_{ii})\)</span>. A high-leverage point with a large standardized residual can strongly affect the regression line or ANOVA estimates.</li>
+</ul></li>
+<li><strong>Diagnostic Plots</strong>:
+<ul>
+<li>Plotting standardized residuals vs.&nbsp;fitted values is a common practice to detect patterns in the residuals. If the model is well-specified, these points should look like random scatter around 0 with no obvious pattern and relatively consistent variance.</li>
+</ul></li>
+</ol>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li><strong>Raw residuals</strong> tell you the difference between observed and fitted values on the scale of the original data.</li>
+<li><strong>Standardized (or Studentized) residuals</strong> provide a way to compare residuals on a common scale that accounts for the overall error variance and, importantly, each point’s leverage.</li>
+<li>R’s <strong><code>rstandard()</code></strong> function by default computes <strong>internally studentized residuals</strong>, which is often what people mean by “standardized residuals” in practice.</li>
+<li>For more robust outlier detection, you can use <strong><code>rstudent()</code></strong> (externally studentized residuals), which removes the <span class="math inline">\(i\)</span>th point when estimating its variance.</li>
+</ul>
+<section id="key-takeaway" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaway">Key Takeaway:</h3>
+<p>When someone says “standardized residual,” check which version they are referring to. In modern usage (especially in R), “standardized residual” commonly refers to the <strong>internally studentized</strong> residual <span class="math inline">\(\frac{e_i}{\sqrt{s^2 (1-h_{ii})}}\)</span>, as provided by <code>rstandard()</code>. For more sensitive outlier detection, consider the <strong>externally studentized</strong> residuals <span class="math inline">\(\frac{e_i}{\sqrt{s_{(-i)}^2 (1-h_{ii})}}\)</span> from <code>rstudent()</code>. Both are useful for checking model assumptions and identifying influential points.</p>
+</section>
+</section>
 </section>
 <section id="detailed-assumption-checks" class="level1 page-columns page-full">
 <h1>Detailed Assumption Checks</h1>
@@ -469,8 +806,8 @@ window.Quarto = {
 <p><strong>Context:</strong> Consider a balloon inflation experiment where each time a subject inflates a balloon, they learn and get faster. Residuals vs.&nbsp;observation order might show a trend, indicating non-independence (learning effect).</p>
 <p><strong>R Implementation:</strong></p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"balloon.txt"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"balloon.txt"</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div class="kable-table page-columns page-full">
 <table class="table table-sm table-striped small">
@@ -519,8 +856,8 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell" data-tbl-cap="ANOVA Model for Balloon Inflation Data">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Time <span class="sc">~</span> Order, <span class="at">data =</span> dataset)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Time <span class="sc">~</span> Order, <span class="at">data =</span> dataset)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -547,8 +884,8 @@ F-statistic: 11.71 on 1 and 30 DF,  p-value: 0.001813</code></pre>
 <h2 class="anchored" data-anchor-id="checking-independence-1">Checking Independence</h2>
 <p><strong>Visual Clue:</strong> A “megaphone” shape in residuals vs.&nbsp;time suggests non-independence.</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">resid</span>(model) <span class="sc">~</span> Time, <span class="at">data =</span> dataset)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">resid</span>(model) <span class="sc">~</span> Time, <span class="at">data =</span> dataset)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-balloon-inflation-diagnostics" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -569,8 +906,8 @@ Figure&nbsp;1: Residuals vs.&nbsp;Time Plot
 <p><strong>Visual Clue:</strong> A “megaphone” shape in residuals vs.&nbsp;fitted values suggests variance grows with the mean. <strong>Rule of Thumb:</strong> If ratio of largest to smallest sample variance &gt; 3, consider a transformation.</p>
 <p><strong>R Implementation:</strong></p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(model), <span class="fu">resid</span>(model))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(model), <span class="fu">resid</span>(model))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-balloon-inflation-heteroscedasticity" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -591,8 +928,8 @@ Figure&nbsp;2: Residuals vs.&nbsp;Fitted Values Plot
 <p><strong>QQ-Plot:</strong> If residuals follow a normal distribution, they align closely with the QQ-line.</p>
 <p><strong>R Implementation:</strong></p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-balloon-inflation-normality" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -611,197 +948,1133 @@ Figure&nbsp;3: Normal Probability Plot
 </section>
 <section id="remedies-for-violations" class="level1">
 <h1>Remedies for Violations</h1>
+<ul>
+<li><strong>Independence Violation:</strong> Use mixed-effects models or time-series methods to account for correlation.</li>
+<li><strong>Heteroscedasticity:</strong>
+<ul>
+<li><strong>Transformations:</strong> Log, square-root, arcsine, or Box-Cox to stabilize variance.</li>
+<li><strong>Satterthwaite’s Approximation:</strong> For unequal variances in ANOVA.</li>
+<li><strong>Weighted Least Squares:</strong> Assign weights inversely proportional to variance– not discussed here.</li>
+<li><strong>Robust Methods:</strong> Huber-White or bootstrapping to correct standard errors. We only discuss the former.</li>
+<li><strong>Generalized Least Squares (GLS):</strong> Model variance structure explicitly - not covered here.</li>
+</ul></li>
+</ul>
+</section>
+<section id="transformation" class="level1 page-columns page-full">
+<h1>Transformation</h1>
+<p>Transformations to stabilize variance in ANOVA are most effective when there is a systematic relationship between group means and variances (e.g., variance increases with the mean). If there is no apparent relationship between the mean and variance, a standard variance-stabilizing transformation (such as a log, square-root, or arcsine transform) often does <em>not</em> help and may even complicate interpretation. In such scenarios, other methods designed for heterogeneous variances (e.g., Welch’s ANOVA, generalized linear models, or nonparametric tests) may be more appropriate.</p>
+<section id="why-transform-data" class="level2">
+<h2 class="anchored" data-anchor-id="why-transform-data">Why Transform Data?</h2>
+<ol type="1">
+<li><p><strong>Homoscedasticity (equal variance assumption)</strong><br>
+Classic (fixed-effects) one-way ANOVA assumes that the error variance is constant across groups (homoscedasticity). Violating this assumption can inflate Type I or Type II error rates.</p></li>
+<li><p><strong>Variance-Stabilizing Transformations</strong></p>
+<ul>
+<li>Common transformations include:
+<ul>
+<li><strong>Logarithmic</strong>: used when the standard deviation is roughly proportional to the mean.</li>
+<li><strong>Square root</strong>: used for count data, especially when counts are low.</li>
+<li><strong>Arcsine</strong>: commonly used for proportional data with values between 0 and 1.</li>
+</ul></li>
+<li>These transformations are meant to make the variance more constant across groups <em>if</em> the variance depends on the mean in a predictable way.</li>
+</ul></li>
+<li><p><strong>Role of Relationship Between Mean and Variance</strong></p>
+<ul>
+<li>When group means and variances show a <strong>positive relationship</strong> (e.g., bigger means have bigger variances in proportionate fashion), a variance-stabilizing transformation often helps.<br>
+</li>
+<li>If the variance is unrelated to the mean, applying a traditional “mean-based” transformation (like a log) may have little or no effect on stabilizing the variance.</li>
+</ul></li>
+</ol>
+</section>
+<section id="when-the-transformation-works" class="level2">
+<h2 class="anchored" data-anchor-id="when-the-transformation-works">When the Transformation Works</h2>
+<ol type="1">
+<li><p><strong>Detecting a relationship</strong><br>
+Plot the group standard deviations (or group variances) against group means. If you see a pattern such as an increasing linear or non-linear trend, you can often guess an appropriate transformation (log, sqrt, etc.).</p></li>
+<li><p><strong>Selecting a transformation</strong></p>
+<ul>
+<li><strong>Log transformation</strong>: Common if <span class="math inline">\(\text{variance} \propto (\text{mean})^\alpha\)</span>.<br>
+</li>
+<li><strong>Box-Cox approach</strong>: A systematic way to find <span class="math inline">\(\lambda\)</span> in a power transformation <span class="math inline">\(y^\lambda\)</span>.<br>
+</li>
+<li><strong>Arcsine</strong>: For data restricted between 0 and 1 (e.g., proportions).</li>
+</ul></li>
+<li><p><strong>Checking success</strong><br>
+After transforming, re-check the group variances (e.g., with a residual plot or a test for homogeneity). If the transformation was effective, the variances should appear more uniform across groups.</p></li>
+</ol>
+</section>
+<section id="does-the-transformation-work-when-there-is-no-meanvariance-relationship" class="level2">
+<h2 class="anchored" data-anchor-id="does-the-transformation-work-when-there-is-no-meanvariance-relationship">Does the Transformation Work When There is No Mean–Variance Relationship?</h2>
+<ul>
+<li><strong>Likely not</strong>. If the group variances do <em>not</em> systematically depend on the group means, a standard transformation aimed at stabilizing “mean-related” variance typically will <em>not</em> help.<br>
+</li>
+<li>In some cases, a transformation could still help if the original data are very skewed or if there are other distributional issues. However, if variance is <em>truly</em> unrelated to the mean, transformations specifically intended to fix mean-variance dependence will not systematically improve homogeneity of variance.<br>
+</li>
+<li><strong>Alternatives</strong>: Instead of forcing a transformation, consider:
+<ul>
+<li><strong>Welch’s ANOVA</strong> (unequal variances ANOVA), which does <em>not</em> assume equal variances across groups.<br>
+</li>
+<li><strong>Generalized Linear Models (GLMs)</strong>, if the data structure suggests a particular distribution (e.g., Poisson for counts, binomial for proportions).<br>
+</li>
+<li><strong>Nonparametric tests</strong> (e.g., Kruskal–Wallis test) when distributional assumptions are severely violated.</li>
+</ul></li>
+</ul>
+<section id="key-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h3>
+<ul>
+<li><strong>Transformation “success” depends on whether the data’s variance problem stems from an identifiable mean–variance relationship.</strong><br>
+</li>
+<li><strong>No relationship → transformations designed for mean-related variance may not help.</strong><br>
+</li>
+<li><strong>Consider alternative methods</strong> (Welch’s ANOVA, GLMs, or nonparametric) when classical ANOVA’s equal variance assumption is clearly violated and transformations prove ineffective.</li>
+</ul>
+</section>
+</section>
 <section id="transformations" class="level2">
 <h2 class="anchored" data-anchor-id="transformations">Transformations</h2>
+<p>Below is a detailed example of using the Box-Cox transformation in R. The Box-Cox transformation is a family of power transformations designed to stabilize the variance and make the data more normally distributed. This example will simulate a dataset with heteroscedasticity, fit a linear model, use the Box-Cox procedure to identify an optimal transformation, and then re-fit the model on the transformed response.</p>
+</section>
+<section id="background-on-box-cox-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="background-on-box-cox-transformation">Background on Box-Cox Transformation</h2>
+<p>The Box-Cox transformation is defined as:</p>
+<p><span class="math display">\[
+Y^{(\lambda)} =
+\begin{cases}
+\frac{Y^\lambda - 1}{\lambda}, &amp; \lambda \neq 0, \\
+\ln(Y), &amp; \lambda = 0.
+\end{cases}
+\]</span></p>
+<section id="purpose" class="level3">
+<h3 class="anchored" data-anchor-id="purpose">Purpose</h3>
 <ul>
-<li><strong>Log Transform:</strong> Useful if variance increases roughly with the mean.</li>
-<li><strong>Square-root Transform:</strong> Often stabilizes variance when data are counts or positive and moderately skewed.</li>
-<li><strong>Box-Cox Transform:</strong> Systematically searches for a suitable power transform:</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxcox</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data=</span>dataset), <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="alternative-models" class="level2">
-<h2 class="anchored" data-anchor-id="alternative-models">Alternative Models</h2>
-<ul>
-<li><strong>Mixed-Effects Models:</strong> Address correlation among observations.</li>
-<li><strong>Nonparametric Methods:</strong> For severe non-normality or other intractable issues, methods not reliant on normality assumptions (e.g., Kruskal-Wallis test for ANOVA replacement) may be suitable.</li>
+<li><strong>Stabilize Variance:</strong> When the variance of the response variable changes (i.e., heteroscedasticity is present).</li>
+<li><strong>Improve Normality:</strong> To make the distribution of the response more closely approximate a normal distribution.</li>
 </ul>
 </section>
 </section>
-<section id="advanced-examples-and-complex-datasets" class="level1 page-columns page-full">
-<h1>Advanced Examples and Complex Datasets</h1>
-<section id="example-trout-hemoglobin-experiment" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="example-trout-hemoglobin-experiment">Example: Trout Hemoglobin Experiment</h3>
-<p>Data: Hemoglobin levels measured under four treatments with unequal sample sizes.</p>
-<ol type="1">
-<li>Fit ANOVA model.</li>
-<li>Check residual plots for variance patterns: if one treatment shows higher variance, consider a suitable transformation.</li>
-<li>Use Box-Cox to find an appropriate lambda that equalizes variance and improves normality.</li>
-</ol>
-<p><strong>R Steps:</strong></p>
+<section id="simulate-a-dataset-with-heteroscedasticity" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="simulate-a-dataset-with-heteroscedasticity">Simulate a Dataset with Heteroscedasticity</h2>
+<p>In this example, we simulate data where the variance of the errors increases with the predictor <span class="math inline">\(X\)</span>.</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>trout_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"trout.txt"</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>trout_data <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Heteroscedastic Errors: Error variance Increases with X</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>errors <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.5</span> <span class="sc">*</span> X)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> X <span class="sc">+</span> errors  <span class="co"># Linear relationship with increasing variance</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X =</span> X, <span class="at">Y =</span> Y)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>data_sim <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div class="kable-table page-columns page-full">
 <table class="table table-sm table-striped small">
 
 <thead>
 <tr class="header">
-<th style="text-align: right;">Sulfa</th>
+<th style="text-align: right;">X</th>
+<th style="text-align: right;">Y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">3.588198</td>
+<td style="text-align: right;">13.219072</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8.094746</td>
+<td style="text-align: right;">26.168699</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.680792</td>
+<td style="text-align: right;">15.942043</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8.947157</td>
+<td style="text-align: right;">34.964019</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9.464206</td>
+<td style="text-align: right;">29.324245</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.410008</td>
+<td style="text-align: right;">7.299144</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Simulated Data with Heteroscedasticity</div></div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the Raw Data</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_sim, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Simulated Data with Heteroscedasticity"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Predictor (X)"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Response (Y)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-simulated-data" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-simulated-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="week-04_model-diagnostics_files/figure-html/fig-simulated-data-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Simulated Data with Heteroscedasticity"><img src="week-04_model-diagnostics_files/figure-html/fig-simulated-data-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-simulated-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Simulated Data with Heteroscedasticity
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Explanation:</em><br>
+The above code creates 100 observations where the error standard deviation increases with <span class="math inline">\(X\)</span>. This pattern may lead to heteroscedasticity in a linear regression model.</p>
+</section>
+<section id="fit-an-initial-linear-model" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="fit-an-initial-linear-model">Fit an Initial Linear Model</h2>
+<p>We first fit a simple linear regression model to the simulated data and then examine its residuals.</p>
+<div class="cell" data-tbl-cap="Initial Linear Model">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_initial <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> data_sim)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_initial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X, data = data_sim)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.1305 -1.6273  0.0422  1.2916 10.1121 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.9557     0.6977   2.803   0.0061 ** 
+X             2.9753     0.1153  25.805   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.943 on 98 degrees of freedom
+Multiple R-squared:  0.8717,    Adjusted R-squared:  0.8704 
+F-statistic: 665.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><em>Interpretation:</em><br>
+Review the model summary and diagnostic plots to check for heteroscedasticity. A residual vs.&nbsp;fitted plot (see next code) may reveal a “fanning out” pattern.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_initial<span class="sc">$</span>fitted.values, <span class="fu">residuals</span>(model_initial),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residuals vs Fitted"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(model_initial), <span class="at">main =</span> <span class="st">"QQ Plot"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(model_initial), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-diagnostic-plots-initial" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-diagnostic-plots-initial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="week-04_model-diagnostics_files/figure-html/fig-diagnostic-plots-initial-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Diagnostic Plots for the Initial Model"><img src="week-04_model-diagnostics_files/figure-html/fig-diagnostic-plots-initial-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-diagnostic-plots-initial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Diagnostic Plots for the Initial Model
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="apply-the-box-cox-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="apply-the-box-cox-transformation">Apply the Box-Cox Transformation</h2>
+<p>We use the <code>boxcox()</code> function from the <strong>MASS</strong> package to determine the optimal <span class="math inline">\(\lambda\)</span> value for the transformation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>boxcox_result <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">boxcox</span>(model_initial, <span class="at">lambda =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week-04_model-diagnostics_files/figure-html/r-boxcox-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="week-04_model-diagnostics_files/figure-html/r-boxcox-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Explanation:</em></p>
+<ul>
+<li>The <code>boxcox()</code> function examines a range of <span class="math inline">\(\lambda\)</span> values (here from -2 to 2) and calculates the log-likelihood for each transformation.</li>
+<li>The optimal <span class="math inline">\(\lambda\)</span> is the one that maximizes the log-likelihood (the peak of the plot).</li>
+</ul>
+<p><em>Observation:</em><br>
+After running the code, you should see a plot with <span class="math inline">\(\lambda\)</span> on the horizontal axis and the corresponding log-likelihood on the vertical axis. Suppose the plot suggests an optimal <span class="math inline">\(\lambda \approx 0\)</span> (i.e., a log transformation) or a value different from 0.</p>
+</section>
+<section id="re-fit-the-model-with-the-transformed-response" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="re-fit-the-model-with-the-transformed-response">Re-Fit the Model with the Transformed Response</h2>
+<p>Assume the Box-Cox plot indicates that <span class="math inline">\(\lambda = 0\)</span> is optimal (a log transformation). We then transform <span class="math inline">\(Y\)</span> and re-fit the model.</p>
+<div id="tbl-fit-transformed-model" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-fit-transformed-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> data_sim <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Y_trans =</span> <span class="fu">log</span>(Y))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>model_transformed <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y_trans <span class="sc">~</span> X, <span class="at">data =</span> data_sim)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_transformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y_trans ~ X, data = data_sim)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.39876 -0.11500 -0.00162  0.13085  0.39509 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 1.803965   0.041251   43.73   &lt;2e-16 ***
+X           0.180587   0.006817   26.49   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.174 on 98 degrees of freedom
+Multiple R-squared:  0.8775,    Adjusted R-squared:  0.8762 
+F-statistic: 701.8 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-fit-transformed-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Transformed Linear Model
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="compare-diagnostic-plots-for-the-transformed-model" class="level2">
+<h2 class="anchored" data-anchor-id="compare-diagnostic-plots-for-the-transformed-model">Compare Diagnostic Plots for the Transformed Model</h2>
+<p>After refitting the model, we check whether the transformation improved the model assumptions.</p>
+<div class="cell" data-tbl-cap="Diagnostic Plots for the Transformed Model">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_transformed<span class="sc">$</span>fitted.values, <span class="fu">residuals</span>(model_transformed),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residuals vs Fitted (Transformed)"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(model_transformed), <span class="at">main =</span> <span class="st">"QQ Plot (Transformed)"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(model_transformed), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week-04_model-diagnostics_files/figure-html/r-diagnostic-plots-transformed-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="week-04_model-diagnostics_files/figure-html/r-diagnostic-plots-transformed-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Interpretation:</em><br>
+- <strong>Residuals vs.&nbsp;Fitted Plot:</strong> Look for a more random scatter with no apparent pattern (indicating stabilized variance). - <strong>Q-Q Plot:</strong> Check whether the residuals are more normally distributed compared to the initial model.</p>
+</section>
+<section id="summary-of-findings" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-findings">Summary of Findings</h2>
+<ul>
+<li><p><strong>Before Transformation:</strong><br>
+The initial model showed signs of heteroscedasticity as the variance of the residuals increased with the fitted values.</p></li>
+<li><p><strong>Box-Cox Analysis:</strong><br>
+The Box-Cox procedure suggested an optimal <span class="math inline">\(\lambda\)</span> value (in our example, <span class="math inline">\(\lambda \approx 0\)</span>, which corresponds to a log transformation).</p></li>
+<li><p><strong>After Transformation:</strong><br>
+The re-fitted model using the log-transformed response showed improved diagnostic plots with more constant variance and residuals closer to normality.</p></li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The Box-Cox transformation is a powerful tool to address non-constant variance and non-normality in regression models. By applying the transformation, selecting the optimal <span class="math inline">\(\lambda\)</span> based on the maximum log-likelihood, and re-fitting the model, we can often achieve a model that better meets the assumptions required for valid inference.</p>
+<p>In practice, it’s essential to interpret the Box-Cox plot, choose a transformation that makes sense for the data, and verify that the transformed model improves the diagnostic plots. When the assumptions of homoscedasticity and normality are met, the model’s estimates and inferences are more reliable.</p>
+</section>
+</section>
+<section id="satterthwaite-approximation" class="level1 page-columns page-full">
+<h1>Satterthwaite Approximation</h1>
+<p>In a one-way ANOVA, we typically assume a common variance <span class="math inline">\(\sigma^2\)</span> across all treatment groups. However, in many real applications, <strong>error variances differ</strong> across treatments. When that happens, the usual F-test and Tukey’s pairwise comparisons (which rely on a pooled <span class="math inline">\(s^2\)</span>) can become <strong>invalid</strong>.</p>
+<p>One solution is to <strong>transform</strong> the data in hopes of stabilizing the variances. But sometimes:</p>
+<ul>
+<li>No suitable transformation is apparent, or</li>
+<li>We really want to keep the original scale of measurement.</li>
+</ul>
+<p><strong><span class="citation" data-cites="satterthwaite1946">Satterthwaite (<a href="#ref-satterthwaite1946" role="doc-biblioref">1946</a>)</span>’s approximation</strong> provides a way to create confidence intervals and do multiple comparisons even when variances are not equal. It is sometimes referred to as the <strong>Welch–Satterthwaite approach</strong> <span class="citation" data-cites="welch1947 welch1951">(<a href="#ref-welch1947" role="doc-biblioref">Welch, 1947</a>, <a href="#ref-welch1951" role="doc-biblioref">1951</a>)</span> when dealing with two-sample t-tests, or the <strong>Games–Howell method</strong> <span class="citation" data-cites="games1976">(<a href="#ref-games1976" role="doc-biblioref">Games &amp; Howell, 1976</a>)</span> when applying Tukey-like multiple comparisons with unequal variances.</p>
+<section id="the-statistical-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-statistical-model">The Statistical Model</h2>
+<p>A one-way layout with <span class="math inline">\(v\)</span> treatments can be written:</p>
+<p><span class="math display">\[
+Y_{it} \;=\; \mu \;+\; \tau_i \;+\; \varepsilon_{it},
+\quad
+\varepsilon_{it} \,\sim\, N(0, \sigma_i^2),
+\quad
+\text{independently for each } i,t.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(i = 1, 2, \dots, v\)</span> is the treatment index.</li>
+<li><span class="math inline">\(t = 1, 2, \dots, r_i\)</span> indexes observations within the <span class="math inline">\(i\)</span>-th treatment.</li>
+</ul>
+<p>We <strong>do not assume</strong> <span class="math inline">\(\sigma_1^2 = \sigma_2^2 = \cdots = \sigma_v^2\)</span>. Instead, each group has its own variance <span class="math inline">\(\sigma_i^2\)</span>.</p>
+<p>The sample mean and variance for group <span class="math inline">\(i\)</span> are</p>
+<p><span class="math display">\[
+\bar{Y}_{i\cdot} \;=\; \frac{1}{r_i} \sum_{t=1}^{r_i} Y_{it},
+\quad\quad
+s_i^2 \;=\; \frac{1}{r_i - 1} \sum_{t=1}^{r_i} \bigl(Y_{it} - \bar{Y}_{i\cdot}\bigr)^2.
+\]</span></p>
+</section>
+<section id="satterthwaites-approximation-for-a-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="satterthwaites-approximation-for-a-contrast">Satterthwaite’s Approximation for a Contrast</h2>
+<p>A <strong>contrast</strong> in the group means <span class="math inline">\(\{\tau_i\}\)</span> is a linear combination <span class="math inline">\(\sum_{i=1}^v c_i \tau_i\)</span> such that <span class="math inline">\(\sum_i c_i = 0\)</span>. For pairwise differences, you can think of <span class="math inline">\(c_h = +1\)</span>, <span class="math inline">\(c_i = -1\)</span>, and the rest 0, to compare <span class="math inline">\(\tau_h - \tau_i\)</span>.</p>
+<p>The least squares estimate of a contrast is</p>
+<p><span class="math display">\[
+\widehat{\sum_{i} c_i \tau_i}
+\;=\;
+\sum_{i} c_i \,\bar{Y}_{i\cdot}.
+\]</span></p>
+</section>
+<section id="estimated-variance-of-the-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="estimated-variance-of-the-contrast">Estimated Variance of the Contrast</h2>
+<p>Because group <span class="math inline">\(i\)</span> has variance <span class="math inline">\(\sigma_i^2\)</span>, the variance of <span class="math inline">\(\bar{Y}_{i\cdot}\)</span> is <span class="math inline">\(\sigma_i^2 / r_i\)</span>. Thus,</p>
+<p><span class="math display">\[
+\text{Var}\!\Bigl(\sum_{i} c_i \,\bar{Y}_{i\cdot}\Bigr)
+\;=\;
+\sum_{i} \frac{c_i^2 \,\sigma_i^2}{r_i}.
+\]</span></p>
+<p>In practice, we estimate <span class="math inline">\(\sigma_i^2\)</span> by <span class="math inline">\(s_i^2\)</span>. Hence,</p>
+<p><span class="math display">\[
+\widehat{\text{Var}}\Bigl(\sum_{i} c_i \,\bar{Y}_{i\cdot}\Bigr)
+\;=\;
+\sum_{i} \frac{c_i^2 \,s_i^2}{r_i}.
+\]</span></p>
+</section>
+<section id="degrees-of-freedom-welchsatterthwaite-formula" class="level2">
+<h2 class="anchored" data-anchor-id="degrees-of-freedom-welchsatterthwaite-formula">Degrees of Freedom (Welch–Satterthwaite Formula)</h2>
+<p>We do <strong>not</strong> pool variances; each group’s variance is separately estimated. So the approximate degrees of freedom is given by:</p>
+<p><span class="math display">\[
+\text{df}
+\;\approx\;
+\frac{\left(\sum_{i} \frac{c_i^2\,s_i^2}{r_i}\right)^2}
+{\sum_{i} \frac{\left(\frac{c_i^2\,s_i^2}{r_i}\right)^2}{r_i-1}},
+\]</span></p>
+<p>sometimes called the <strong>Satterthwaite</strong> or <strong>Welch–Satterthwaite</strong> formula.</p>
+</section>
+<section id="confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h2>
+<p>Therefore, an approximate <span class="math inline">\((1 - \alpha)100\%\)</span> confidence interval for <span class="math inline">\(\sum_i c_i \tau_i\)</span> becomes:</p>
+<p><span class="math display">\[
+\sum_i c_i \,\bar{Y}_{i\cdot}
+\;\pm\;
+t_{\text{df},\,\alpha/2}
+\;\sqrt{\sum_i \frac{c_i^2 \, s_i^2}{r_i}},
+\]</span></p>
+<p>where <span class="math inline">\(t_{\text{df},\,\alpha/2}\)</span> is the usual <span class="math inline">\(t\)</span>-quantile with <span class="math inline">\(\text{df}\)</span> degrees of freedom from above.</p>
+</section>
+<section id="multiple-comparisons-the-gameshowell-method" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-comparisons-the-gameshowell-method">Multiple Comparisons: The Games–Howell Method</h2>
+<p>When you want <strong>all pairwise</strong> comparisons, you can adapt the usual <strong>Tukey</strong> “Honestly Significant Difference” (HSD) approach by:</p>
+<ol type="1">
+<li><strong>Computing</strong> the standard error <span class="math inline">\(\sqrt{(s_h^2/r_h) + (s_i^2/r_i)}\)</span> for each pair <span class="math inline">\((h,i)\)</span>.</li>
+<li><strong>Computing</strong> the approximate df from Satterthwaite’s formula for that pair.</li>
+<li><strong>Using</strong> the studentized-range critical value <span class="math inline">\(q_{v,\text{df},\alpha}\)</span> (the same one used in Tukey’s HSD) but evaluating it at each pairwise df if you want to be extra precise, or at a conservative minimum among the pairs.</li>
+<li><strong>Hence</strong> getting the “minimum significant difference” (<span class="math inline">\(\text{msd}\)</span>) for each pair and deciding if <span class="math inline">\(|\bar{Y}_{h\cdot} - \bar{Y}_{i\cdot}|\)</span> exceeds that msd.</li>
+</ol>
+<p>In R, this is usually done through built-in or add-on functions called the <strong>Games–Howell test</strong>.</p>
+</section>
+<section id="example-trout-experiment-illustrative-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-trout-experiment-illustrative-data">Example: Trout Experiment (Illustrative Data)</h2>
+<p>In the “Trout Experiment” example from many textbooks, there are 4 treatment levels (let’s label them A, B, C, D) each with <span class="math inline">\(n=10\)</span> observations. Suppose the <strong>raw data</strong> are as follows (fictitious for illustration). In practice, you would read them from a file or have them given in a data frame.</p>
+<p>Below, we create a simulated dataset with <strong>unequal group variances</strong> roughly resembling the example’s summary:</p>
+<ul>
+<li>Treatment A: <span class="math inline">\(\bar{Y} \approx 7.7\)</span>, variance <span class="math inline">\(\approx 1.0\)</span></li>
+<li>Treatment B: <span class="math inline">\(\bar{Y} \approx 9.5\)</span>, variance <span class="math inline">\(\approx 3.0\)</span></li>
+<li>Treatment C: <span class="math inline">\(\bar{Y} \approx 9.2\)</span>, variance <span class="math inline">\(\approx 1.3\)</span></li>
+<li>Treatment D: <span class="math inline">\(\bar{Y} \approx 8.8\)</span>, variance <span class="math inline">\(\approx 1.0\)</span></li>
+</ul>
+</section>
+<section id="trout-experiment-data" class="level2">
+<h2 class="anchored" data-anchor-id="trout-experiment-data">Trout Experiment Data</h2>
+<p>Below is a <strong>plain-language</strong> summary of the trout experiment data to help someone with little background in fish biology or statistics understand the context and technical terms:</p>
+<section id="what-is-the-experiment-about" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-the-experiment-about">What Is the Experiment About?</h3>
+<p>Researchers are trying out <strong>four different treatments</strong> (labeled “1,” “2,” “3,” and “4”) on trout. These treatments are various <strong>sulfa-based</strong> or sulfonamide medications (often used to control bacterial infections or other conditions in fish). The main goal is to see whether different treatments lead to different outcomes in the trout’s health.</p>
+</section>
+<section id="key-terms-explained" class="level3">
+<h3 class="anchored" data-anchor-id="key-terms-explained">Key Terms Explained</h3>
+<ol type="1">
+<li><strong>Trout</strong>
+<ul>
+<li>A common type of freshwater fish.<br>
+</li>
+<li>In the experiment, trout are the “test subjects,” similar to patients in a medical study.</li>
+</ul></li>
+<li><strong>Sulfa</strong>
+<ul>
+<li>This refers to <strong>sulfonamide</strong> treatments (a type of medication).<br>
+</li>
+<li>The data labels (1, 2, 3, or 4) tell us which specific sulfa treatment each trout received.</li>
+</ul></li>
+<li><strong>Hemo</strong>
+<ul>
+<li>Short for “hemoglobin” (or a similar blood measure).<br>
+</li>
+<li>Hemoglobin is the substance in blood that carries oxygen. A higher or lower level can indicate different states of health.<br>
+</li>
+<li>In the experiment, <strong>Hemo</strong> is the response variable— what the researchers measure in each trout to see if the treatment had any effect.</li>
+</ul></li>
+<li><strong>Experimental Setup</strong>
+<ul>
+<li>Each of the four treatments was given to 10 different trout (total of 40 fish).<br>
+</li>
+<li>After some time, the <strong>Hemo</strong> level was measured for each fish, giving one reading per trout.</li>
+</ul></li>
+</ol>
+</section>
+<section id="why-are-they-doing-this" class="level3">
+<h3 class="anchored" data-anchor-id="why-are-they-doing-this">Why Are They Doing This?</h3>
+<p>Trout farmers or fisheries might want a medication to keep fish healthier or improve survival. By comparing different sulfa treatments:</p>
+<ul>
+<li>They can see <strong>if</strong> one treatment leads to higher (better) or lower Hemo measurements than another.</li>
+<li>They can learn <strong>which</strong> treatments seem to work best, or if they all perform about the same.</li>
+</ul>
+</section>
+<section id="what-does-the-data-look-like" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-the-data-look-like">What Does the Data Look Like?</h3>
+<p>The data table has two columns: 1. <strong>Sulfa</strong> – which of the four treatments the trout received.<br>
+2. <strong>Hemo</strong> – the measured blood value after treatment.</p>
+<p>Each row in the table is a single trout’s record: - <strong>Sulfa</strong> (1, 2, 3, or 4)<br>
+- <strong>Hemo</strong> (a number, like 7.0 or 10.6)</p>
+</section>
+</section>
+<section id="generating-or-loading-the-data-in-r" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="generating-or-loading-the-data-in-r">Generating or Loading the Data in R</h2>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>troutData <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"trout.txt"</span>)) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Sulfa=</span> <span class="fu">factor</span>(Sulfa))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(troutData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-trout-data" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-trout-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sulfa</th>
 <th style="text-align: right;">Hemo</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: right;">6.7</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: right;">7.8</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: right;">5.5</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: right;">8.4</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: right;">7.0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: right;">7.8</td>
 </tr>
 </tbody>
 </table>
-<div class="quarto-table-caption margin-caption">Trout Hemoglobin Data</div></div>
 </div>
 </div>
-<div class="cell" data-tbl-cap="ANOVA Model for Trout Hemoglobin Data">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit_trout <span class="ot">&lt;-</span> <span class="fu">lm</span>(Hemo <span class="sc">~</span> Sulfa, <span class="at">data =</span> trout_data)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_trout)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Hemo ~ Sulfa, data = trout_data)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--2.4370 -0.9370 -0.0210  0.7338  3.5460 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   7.5200     0.5426  13.860   &lt;2e-16 ***
-Sulfa         0.4170     0.1981   2.105    0.042 *  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.401 on 38 degrees of freedom
-Multiple R-squared:  0.1044,    Adjusted R-squared:  0.08084 
-F-statistic:  4.43 on 1 and 38 DF,  p-value: 0.04198</code></pre>
 </div>
-</div>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_trout) <span class="co"># Residual and QQ-plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div id="fig-trout-hemoglobin-diagnostics" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-trout-hemoglobin-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="week-04_model-diagnostics_files/figure-html/fig-trout-hemoglobin-diagnostics-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Diagnostics for Trout Hemoglobin Data"><img src="week-04_model-diagnostics_files/figure-html/fig-trout-hemoglobin-diagnostics-1.png" class="img-fluid figure-img" width="672"></a>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-trout-hemoglobin-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Diagnostics for Trout Hemoglobin Data
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-trout-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Trout Experiment Data: Sulfa Treatment and Hemoglobin Levels
 </figcaption>
 </figure>
 </div>
 </div>
-</div>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxcox</span>(fit_trout, <span class="at">lambda =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="fl">0.1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div id="fig-trout-boxcox" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-trout-boxcox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="week-04_model-diagnostics_files/figure-html/fig-trout-boxcox-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Box-Cox Transform for Trout Hemoglobin Data"><img src="week-04_model-diagnostics_files/figure-html/fig-trout-boxcox-1.png" class="img-fluid figure-img" width="672"></a>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-trout-boxcox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Box-Cox Transform for Trout Hemoglobin Data
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Interpret the chosen lambda and re-fit the model on transformed data, then re-check assumptions.</p>
-</section>
-</section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<section id="medium-difficulty" class="level2">
-<h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
 <ol type="1">
-<li><p><strong>Residual Diagnostics (Basic):</strong> Simulate a dataset with four treatments. Perform an ANOVA and create residual vs.&nbsp;fitted plots and QQ-plots. Interpret patterns and identify if any assumptions fail.</p></li>
-<li><p><strong>Applying a Transformation:</strong> Given a dataset where variance increases with the mean, apply a log transform. Show before/after residual diagnostics and discuss improvements.</p></li>
-</ol>
-</section>
-<section id="challenging-problems" class="level2">
-<h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
-<ol type="1">
-<li><p><strong>Box-Cox Method Analysis:</strong> Use the <code>boxcox</code> function on a real or complex dataset. Determine the best lambda and re-check assumptions. Provide a detailed interpretation of why this lambda helps and what it implies theoretically.</p></li>
-<li><p><strong>Non-Constant Variance Remedies:</strong> Suppose you have a dataset with strong heteroscedasticity. Try square-root, log, and Box-Cox transforms. Compare their effectiveness using diagnostic plots and normality tests. Write a short report on which transform works best and why.</p></li>
-<li><p><strong>Non-Independent Errors:</strong> Generate a dataset with serial correlation (e.g., an AR(1) process). Fit a standard ANOVA model, show that assumptions are violated, and discuss how a mixed model or generalized least squares approach could rectify the issue. Provide code snippets and interpret results.</p></li>
-</ol>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>Assumption checking in ANOVA and regression is not a mere formality—it safeguards against invalid conclusions. By using residual diagnostics, normality checks, and transformations, we ensure models accurately represent reality. While no single approach solves all problems, a combination of visual and formal diagnostic tools, along with informed corrective strategies, leads to more trustworthy and robust statistical inferences.</p>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+<li>Sulfa
 <ul>
-<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
-<li>Montgomery, D. C., &amp; Runger, G. C. (2010). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
-<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
-</ul>
-</section>
-</section>
-<section id="appendix-advanced-mathematical-derivations" class="level1">
-<h1>Appendix: Advanced Mathematical Derivations</h1>
-<section id="derivation-of-standardized-residuals" class="level2">
-<h2 class="anchored" data-anchor-id="derivation-of-standardized-residuals">Derivation of Standardized Residuals</h2>
-<p>Given a model <span class="math inline">\(Y_{ij} = \mu + \tau_i + \epsilon_{ij}\)</span> with homoscedastic errors <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma^2)\)</span>:</p>
-<ol type="1">
-<li>Residual: <span class="math inline">\(e_{ij} = Y_{ij} - \hat{Y}_{ij}\)</span>.</li>
-<li>MSE: <span class="math inline">\(\hat{\sigma}^2 = \text{SSE}/(N-v)\)</span>.</li>
-<li>Standardized Residual: <span class="math inline">\(z_{ij} = e_{ij}/\sqrt{\hat{\sigma}^2}\)</span>.</li>
+<li>Definition: Indicates the type or level of sulfonamide treatment.</li>
+<li>Values: 1, 2, 3, or 4 (categorical factor with four levels).</li>
+<li>Each level (1 through 4) appears exactly 10 times, so we have 10 trout in each of the four treatments.</li>
+</ul></li>
+<li>Hemo
+<ul>
+<li>Definition: The response variable measured on each trout (for example, “hemoglobin” concentration or “hematocrit” level; depending on the specific study description).</li>
+<li>Values: Numeric, typically representing some biological measurement linked to trout health or oxygen-carrying capacity in the blood.</li>
+</ul></li>
 </ol>
-<p>Under ideal conditions, <span class="math inline">\(z_{ij} \sim N(0,1)\)</span> approximately, allowing outlier detection via thresholding (e.g., |z| &gt; 3).</p>
 </section>
-<section id="box-cox-transformation" class="level2">
-<h2 class="anchored" data-anchor-id="box-cox-transformation">Box-Cox Transformation</h2>
-<p>The Box-Cox family:</p>
+<section id="exploratory-plots" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="exploratory-plots">Exploratory Plots</h2>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick Boxplot to See Group means and Variation</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Hemo <span class="sc">~</span> Sulfa, <span class="at">data =</span> troutData,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Trout Experiment Data"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Hemoglobin"</span>, <span class="at">xlab=</span><span class="st">"Sulfonamide"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-trout-boxplot" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-trout-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="week-04_model-diagnostics_files/figure-html/fig-trout-boxplot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;6: Boxplot of Hemoglobin Levels by Sulfa Treatment"><img src="week-04_model-diagnostics_files/figure-html/fig-trout-boxplot-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-trout-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Boxplot of Hemoglobin Levels by Sulfa Treatment
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="check-group-means-and-variances" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="check-group-means-and-variances">Check Group Means and Variances</h2>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>troutSummary <span class="ot">&lt;-</span> troutData <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sulfa) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n       =</span> <span class="fu">n</span>(),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanVal =</span> <span class="fu">mean</span>(Hemo),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">varVal  =</span> <span class="fu">var</span>(Hemo),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sdVal   =</span> <span class="fu">sd</span>(Hemo)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>troutSummary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div class="kable-table page-columns page-full">
+<table class="table table-sm table-striped small">
+
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sulfa</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">meanVal</th>
+<th style="text-align: right;">varVal</th>
+<th style="text-align: right;">sdVal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">7.20</td>
+<td style="text-align: right;">1.037778</td>
+<td style="text-align: right;">1.018714</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">9.33</td>
+<td style="text-align: right;">2.946778</td>
+<td style="text-align: right;">1.716618</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">9.03</td>
+<td style="text-align: right;">1.289000</td>
+<td style="text-align: right;">1.135341</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">8.69</td>
+<td style="text-align: right;">1.001000</td>
+<td style="text-align: right;">1.000500</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Summary Statistics for Trout Experiment Data</div></div>
+</div>
+</div>
+<p>This roughly replicates the scenario in the textbook example (<span class="math inline">\(s_1^2 \approx 1.04, s_2^2 \approx 2.95,\)</span> etc.).</p>
+</section>
+<section id="manual-gameshowell-multiple-comparisons-step-by-step-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="manual-gameshowell-multiple-comparisons-step-by-step-in-r">Manual Games–Howell Multiple Comparisons (Step-by-Step in R)</h2>
+<p>We can either:</p>
+<ol type="1">
+<li><strong>Manually</strong> compute each pairwise difference, its standard error, degrees of freedom, and the corresponding “minimum significant difference.”</li>
+<li>Use an <strong>R package</strong> function that automates these calculations.</li>
+</ol>
+<p>Below, we first show a brief “manual” approach, then a dedicated function from a package.</p>
+</section>
+<section id="manual-calculations" class="level2">
+<h2 class="anchored" data-anchor-id="manual-calculations">Manual Calculations</h2>
+</section>
+<section id="create-a-summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-summary-table">Create a Summary Table</h2>
+<div class="cell" data-tbl-cap="Summary Statistics for Trout Experiment Data">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Means, Variances for Each Group</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>meanVal</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>vars  <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>varVal</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(means) <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>Sulfa</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vars)  <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>Sulfa</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll Use 'combn' to Get All Pairs: This yields pairs like `A-B`, `A-C`, `A-D`, `B-C`, `B-D`, `C-D`.</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">levels</span>(troutData<span class="sc">$</span>Sulfa)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>pairs <span class="ot">&lt;-</span> <span class="fu">combn</span>(groups, <span class="dv">2</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>pairs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,] "1"  "1"  "1"  "2"  "2"  "3" 
+[2,] "2"  "3"  "4"  "3"  "4"  "4" </code></pre>
+</div>
+</div>
+<p>This yields pairs like <code>A-B</code>, <code>A-C</code>, <code>A-D</code>, <code>B-C</code>, <code>B-D</code>, <code>C-D</code>.</p>
+</section>
+<section id="compute-each-pairs-stats" class="level2">
+<h2 class="anchored" data-anchor-id="compute-each-pairs-stats">Compute Each Pair’s Stats</h2>
+<p>We can write a small function to compute:</p>
+<ul>
+<li>The difference in means.</li>
+<li>The standard error <span class="math inline">\(\sqrt{\frac{s_h^2}{n_h} + \frac{s_i^2}{n_i}}\)</span>.</li>
+<li>The approximate df from Satterthwaite’s formula.</li>
+</ul>
+<div class="cell" data-tbl-cap="Pairwise Comparisons: Mean Difference, SE, and Satterthwaite df" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that takes a data frame with a grouping column (factor) </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and a numeric response column, then computes pairwise comparisons </span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (mean difference, standard error, and Satterthwaite df) for each pair.</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>pairwise_satterthwaite <span class="ot">&lt;-</span> <span class="cf">function</span>(data, group_col, response_col) {</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ensure the grouping column is a factor</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  data[[group_col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data[[group_col]])</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Summarize mean, variance, n for each group</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  summary_df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(.data[[group_col]]) <span class="sc">%&gt;%</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">n       =</span> <span class="fu">n</span>(),</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">meanVal =</span> <span class="fu">mean</span>(.data[[response_col]]),</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">varVal  =</span> <span class="fu">var</span>(.data[[response_col]]),</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For convenience</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  group_levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(data[[group_col]])</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  means  <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>meanVal, summary_df[[group_col]])</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  vars   <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>varVal,  summary_df[[group_col]])</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  ns     <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>n,       summary_df[[group_col]])</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define Satterthwaite function</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  satterthwaite_df <span class="ot">&lt;-</span> <span class="cf">function</span>(var1, var2, n1, n2) {</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    num   <span class="ot">&lt;-</span> (var1 <span class="sc">/</span> n1 <span class="sc">+</span> var2 <span class="sc">/</span> n2)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    denom <span class="ot">&lt;-</span> (var1<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (n1<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (n1 <span class="sc">-</span> <span class="dv">1</span>))) <span class="sc">+</span> (var2<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (n2<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (n2 <span class="sc">-</span> <span class="dv">1</span>)))</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    num <span class="sc">/</span> denom</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get all pairs of groups</span></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  pair_mat <span class="ot">&lt;-</span> <span class="fu">combn</span>(group_levels, <span class="dv">2</span>)</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate stats for each pair</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  pair_list <span class="ot">&lt;-</span> <span class="fu">apply</span>(pair_mat, <span class="dv">2</span>, <span class="cf">function</span>(pair) {</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    g1   <span class="ot">&lt;-</span> pair[<span class="dv">1</span>]</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>    g2   <span class="ot">&lt;-</span> pair[<span class="dv">2</span>]</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>    diff <span class="ot">&lt;-</span> means[g2] <span class="sc">-</span> means[g1]</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>    se   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(vars[g1] <span class="sc">/</span> ns[g1] <span class="sc">+</span> vars[g2] <span class="sc">/</span> ns[g2])</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>    df   <span class="ot">&lt;-</span> <span class="fu">satterthwaite_df</span>(vars[g1], vars[g2], ns[g1], ns[g2])</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">group1  =</span> g1,</span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">group2  =</span> g2,</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">meanDiff =</span> diff,</span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">SE       =</span> se,</span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">df       =</span> <span class="fu">round</span>(df, <span class="dv">1</span>)</span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine into a single data frame</span></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, pair_list)</span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage (assuming your data frame is called 'troutData'</span></span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a><span class="co"># and has columns 'Group' and 'Response'):</span></span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> <span class="fu">pairwise_satterthwaite</span>(troutData, <span class="at">group_col =</span> <span class="st">"Sulfa"</span>, <span class="at">response_col =</span> <span class="st">"Hemo"</span>)</span>
+<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pairwiseDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group2 meanDiff        SE   df
+2       1      2     2.13 0.6312334 14.6
+3       1      3     1.83 0.4823668 17.8
+4       1      4     1.49 0.4515283 18.0
+31      2      3    -0.30 0.6508285 15.6
+41      2      4    -0.64 0.6283134 14.5
+42      3      4    -0.34 0.4785394 17.7</code></pre>
+</div>
+</div>
+</section>
+<section id="compute-the-gameshowell-test-statistic-and-p-values" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="compute-the-gameshowell-test-statistic-and-p-values">Compute the Games–Howell Test Statistic and p-Values</h2>
+<p>For each pair <span class="math inline">\((h,i)\)</span>, we have:</p>
 <p><span class="math display">\[
-Y'(\lambda) =
-\begin{cases}
-\frac{Y^\lambda - 1}{\lambda} &amp; \lambda \neq 0 \\
-\ln(Y) &amp; \lambda = 0
-\end{cases}
+t_{hi}^* = \frac{\bar{Y}_{i\cdot} - \bar{Y}_{h\cdot}}{\text{SE}_{(h,i)}},
+\quad
+\text{df}_{(h,i)} \approx \text{(Satterthwaite formula)},
 \]</span></p>
-<p>For each <span class="math inline">\(\lambda\)</span>, fit the model and compute the log-likelihood. Choose <span class="math inline">\(\lambda\)</span> that maximizes the likelihood, indicating a best variance-stabilizing and normalizing transform.</p>
+<p>and the p-value is based on the <strong>studentized range</strong> distribution if you want to replicate “Tukey-like” inference, or you can do an approximate t-test approach. For a full Games–Howell:</p>
+<ol type="1">
+<li><strong>Studentized range approach</strong>:</li>
+</ol>
+<p><span class="math display">\[
+q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
+\]</span></p>
+<p>compare with <span class="math inline">\(q_{v,\text{df},\alpha}\)</span>.</p>
+<ol start="2" type="1">
+<li><strong>Alternative</strong>: Use a t-approximation with df from above. (This is a bit simpler to code manually.)</li>
+</ol>
+<p>Below, we do the simpler <strong>t-based</strong> approach for each pair:</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> pairwiseDF <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">tval =</span> meanDiff <span class="sc">/</span> SE,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pval =</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(tval), df)  <span class="co"># two-sided p-value</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>pairwiseDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div class="kable-table page-columns page-full">
+<table class="table table-sm table-striped small">
+
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">group1</th>
+<th style="text-align: left;">group2</th>
+<th style="text-align: right;">meanDiff</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">tval</th>
+<th style="text-align: right;">pval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">2.13</td>
+<td style="text-align: right;">0.6312334</td>
+<td style="text-align: right;">14.6</td>
+<td style="text-align: right;">3.3743464</td>
+<td style="text-align: right;">0.0043106</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">0.4823668</td>
+<td style="text-align: right;">17.8</td>
+<td style="text-align: right;">3.7937930</td>
+<td style="text-align: right;">0.0013522</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">1.49</td>
+<td style="text-align: right;">0.4515283</td>
+<td style="text-align: right;">18.0</td>
+<td style="text-align: right;">3.2999041</td>
+<td style="text-align: right;">0.0039821</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">-0.30</td>
+<td style="text-align: right;">0.6508285</td>
+<td style="text-align: right;">15.6</td>
+<td style="text-align: right;">-0.4609509</td>
+<td style="text-align: right;">0.6511949</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">41</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">-0.64</td>
+<td style="text-align: right;">0.6283134</td>
+<td style="text-align: right;">14.5</td>
+<td style="text-align: right;">-1.0185999</td>
+<td style="text-align: right;">0.3250884</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">42</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">-0.34</td>
+<td style="text-align: right;">0.4785394</td>
+<td style="text-align: right;">17.7</td>
+<td style="text-align: right;">-0.7104952</td>
+<td style="text-align: right;">0.4866541</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Pairwise t-Tests: t-Value and p-Value</div></div>
+</div>
+</div>
+<p>That yields approximate pairwise t-tests that do <strong>not</strong> assume equal variances, with Satterthwaite df. However, be aware that controlling <strong>familywise error</strong> strictly with a t-test approach requires a correction or the studentized-range approach.</p>
+</section>
+<section id="minimum-significant-difference-msd-for-each-pair-tukey-likeness" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="minimum-significant-difference-msd-for-each-pair-tukey-likeness">Minimum Significant Difference (msd) for Each Pair (Tukey-likeness)</h2>
+<p>To emulate the <strong>Games–Howell</strong> approach specifically, you compute:</p>
+<p><span class="math display">\[
+\text{msd}_{(h,i)}
+\;=\;
+\sqrt{\frac{s_h^2}{n_h} + \frac{s_i^2}{n_i}}
+\;\times\;
+\frac{q_{v,\,\text{df}_{(h,i)},\,\alpha}}{\sqrt{2}},
+\]</span></p>
+<p>where <span class="math inline">\(v=4\)</span> is the number of treatments. Then you see if <span class="math inline">\(|\bar{Y}_{h\cdot} - \bar{Y}_{i\cdot}|\)</span> is larger than msd.</p>
+<p>A small snippet:</p>
+<div class="cell page-columns page-full" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll Define a Function that Approximates q_{v, Df, alpha}</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Because the 'df' is not Straightforward, We Might Do a Conservative Approach</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or We Can Do Per-pair if We Like.</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>gamesHowell_msd <span class="ot">&lt;-</span> <span class="cf">function</span>(var_hi, df_hi, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">v=</span><span class="dv">4</span>) {</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We Have Pair-specific Df, but the 'Tukey' Distribution with Non-integer Df</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes Requires Approximation.</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll Do a Rough Approach: q_{v, floor(df_hi), alpha}</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  df_floor <span class="ot">&lt;-</span> <span class="fu">floor</span>(df_hi)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 'multcomp' Has 'qtukey' Function: qtukey(p, Nmeans, df)</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># q_{v, Df, alpha} = qtukey(1 - Alpha, nmeans=v, df_floor)</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Then We Scale by 1/sqrt(2).</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  qval <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> v, <span class="at">df =</span> df_floor)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  msd  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  msd</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate group-specific variances and sample sizes</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">tapply</span>(troutData<span class="sc">$</span>Hemo, troutData<span class="sc">$</span>Sulfa, var)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>nvec <span class="ot">&lt;-</span> <span class="fu">tapply</span>(troutData<span class="sc">$</span>Hemo, troutData<span class="sc">$</span>Sulfa, length)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Now We Apply it Pairwise:</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> pairwiseDF <span class="sc">|&gt;</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_hi =</span> (vars[group1]<span class="sc">/</span>nvec[group1] <span class="sc">+</span> vars[group2]<span class="sc">/</span>nvec[group2]),</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">qval   =</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="fu">floor</span>(df)),</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">msd    =</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)),</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">diffSignificant =</span> (<span class="fu">abs</span>(meanDiff) <span class="sc">&gt;</span> msd)</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>pairwiseDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div class="kable-table page-columns page-full">
+<table class="table table-sm table-striped small">
+
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">group1</th>
+<th style="text-align: left;">group2</th>
+<th style="text-align: right;">meanDiff</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">tval</th>
+<th style="text-align: right;">pval</th>
+<th style="text-align: right;">var_hi</th>
+<th style="text-align: right;">qval</th>
+<th style="text-align: right;">msd</th>
+<th style="text-align: left;">diffSignificant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">2.13</td>
+<td style="text-align: right;">0.6312334</td>
+<td style="text-align: right;">14.6</td>
+<td style="text-align: right;">3.3743464</td>
+<td style="text-align: right;">0.0043106</td>
+<td style="text-align: right;">0.3984556</td>
+<td style="text-align: right;">4.110506</td>
+<td style="text-align: right;">1.834722</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">0.4823668</td>
+<td style="text-align: right;">17.8</td>
+<td style="text-align: right;">3.7937930</td>
+<td style="text-align: right;">0.0013522</td>
+<td style="text-align: right;">0.2326778</td>
+<td style="text-align: right;">4.019985</td>
+<td style="text-align: right;">1.371156</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">1.49</td>
+<td style="text-align: right;">0.4515283</td>
+<td style="text-align: right;">18.0</td>
+<td style="text-align: right;">3.2999041</td>
+<td style="text-align: right;">0.0039821</td>
+<td style="text-align: right;">0.2038778</td>
+<td style="text-align: right;">3.996978</td>
+<td style="text-align: right;">1.276150</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">-0.30</td>
+<td style="text-align: right;">0.6508285</td>
+<td style="text-align: right;">15.6</td>
+<td style="text-align: right;">-0.4609509</td>
+<td style="text-align: right;">0.6511949</td>
+<td style="text-align: right;">0.4235778</td>
+<td style="text-align: right;">4.075974</td>
+<td style="text-align: right;">1.875785</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">-0.64</td>
+<td style="text-align: right;">0.6283134</td>
+<td style="text-align: right;">14.5</td>
+<td style="text-align: right;">-1.0185999</td>
+<td style="text-align: right;">0.3250884</td>
+<td style="text-align: right;">0.3947778</td>
+<td style="text-align: right;">4.110506</td>
+<td style="text-align: right;">1.826235</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">-0.34</td>
+<td style="text-align: right;">0.4785394</td>
+<td style="text-align: right;">17.7</td>
+<td style="text-align: right;">-0.7104952</td>
+<td style="text-align: right;">0.4866541</td>
+<td style="text-align: right;">0.2290000</td>
+<td style="text-align: right;">4.019985</td>
+<td style="text-align: right;">1.360276</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Pairwise Comparisons: Minimum Significant Difference (msd)</div></div>
+</div>
+</div>
+</section>
+<section id="using-a-ready-made-r-function" class="level2">
+<h2 class="anchored" data-anchor-id="using-a-ready-made-r-function">Using a Ready-Made R Function</h2>
+<p>Several R packages implement the Games–Howell test automatically. Two common approaches:</p>
+<ol type="1">
+<li><strong><code>PairwiseTTest()</code></strong> from the <strong>DescTools</strong> package with the <code>pool.sd = FALSE</code> argument.<br>
+</li>
+<li><strong><code>gamesHowellTest()</code></strong> from the <strong>rcompanion</strong> or <strong>PMCMRplus</strong> packages.</li>
+</ol>
+<p>For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Hemo <span class="sc">~</span> Sulfa, <span class="at">data =</span> troutData)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>gh_test <span class="ot">&lt;-</span> PMCMRplus<span class="sc">::</span><span class="fu">gamesHowellTest</span>(fit, <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gh_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           q value Pr(&gt;|q|)   
+2 - 1 == 0   4.772 0.019942  *
+3 - 1 == 0   5.365 0.006735 **
+4 - 1 == 0   4.667 0.018973  *
+3 - 2 == 0  -0.652 0.966450   
+4 - 2 == 0  -1.441 0.741476   
+4 - 3 == 0  -1.005 0.891609   </code></pre>
+</div>
+</div>
+<p>This will print out pairwise comparisons, confidence intervals, and p-values, controlling familywise error at alpha = 0.05. You’ll see a compact letter display or a table showing which pairs are significantly different.</p>
+<p><strong>NOTE</strong>: Different packages might handle rounding or approximate df differently, so minor numerical differences from manual calculations can occur.</p>
+</section>
+<section id="interpretation-and-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-and-conclusion">Interpretation and Conclusion</h2>
+<ul>
+<li><strong>Interpretation</strong>: If <span class="math inline">\(\bar{Y}_{h\cdot} - \bar{Y}_{i\cdot}\)</span> exceeds the corresponding Games–Howell msd in absolute value, we conclude that the treatments <span class="math inline">\(h\)</span> and <span class="math inline">\(i\)</span> differ <strong>significantly</strong> at the chosen familywise error rate (often 5%).<br>
+</li>
+<li><strong>Advantages</strong>: No need to assume equal variances; results stay in <strong>original data units</strong> without forcing a transformation.<br>
+</li>
+<li><strong>Disadvantages</strong>: Typically has <strong>lower power</strong> than methods that rely on a correct assumption of equal variances (or a well-chosen variance-stabilizing transformation).</li>
+</ul>
+<p>In the trout example, we often find that Treatment B is significantly different from A, that A differs from B and C, etc., while B, C, and D might be close or show smaller pairwise differences (depending on the data).</p>
+</section>
+<section id="summary-1" class="level2">
+<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
+<ol type="1">
+<li><strong>Satterthwaite’s Approximation</strong> gives an approximate <span class="math inline">\(t\)</span>-distribution for each contrast with a “floating” degrees of freedom.<br>
+</li>
+<li>The <strong>Games–Howell</strong> procedure adapts Tukey’s HSD to unequal variances, computing pair-specific standard errors and degrees of freedom.<br>
+</li>
+<li>In R, you can do these calculations <strong>manually</strong> (as demonstrated) or use a <strong>dedicated function</strong> from packages like <strong>DescTools</strong> or <strong>rcompanion</strong> to streamline the process.<br>
+</li>
+<li>Always check the <strong>assumptions</strong> (normality, independence, etc.). When in doubt, consider <strong>robust</strong> or <strong>nonparametric</strong> approaches as well.</li>
+</ol>
+<!-- # Exercises
+
+## Medium Difficulty
+
+1. **Residual Diagnostics (Basic):**
+   Simulate a dataset with four treatments. Perform an ANOVA and create residual vs. fitted plots and QQ-plots. Interpret patterns and identify if any assumptions fail.
+
+2. **Applying a Transformation:**
+   Given a dataset where variance increases with the mean, apply a log transform. Show before/after residual diagnostics and discuss improvements.
+
+## Challenging Problems
+
+1. **Box-Cox Method Analysis:**
+   Use the `boxcox` function on a real or complex dataset. Determine the best lambda and re-check assumptions. Provide a detailed interpretation of why this lambda helps and what it implies theoretically.
+
+2. **Non-Constant Variance Remedies:**
+   Suppose you have a dataset with strong heteroscedasticity. Try square-root, log, and Box-Cox transforms. Compare their effectiveness using diagnostic plots and normality tests. Write a short report on which transform works best and why.
+
+3. **Non-Independent Errors:**
+   Generate a dataset with serial correlation (e.g., an AR(1) process). Fit a standard ANOVA model, show that assumptions are violated, and discuss how a mixed model or generalized least squares approach could rectify the issue. Provide code snippets and interpret results. -->
+</section>
+<section id="conclusion-1" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-1">Conclusion</h2>
+<p>Assumption checking in ANOVA and regression is not a mere formality—it safeguards against invalid conclusions. By using residual diagnostics, normality checks, and transformations, we ensure models accurately represent reality. While no single approach solves all problems, a combination of visual and formal diagnostic tools, along with informed corrective strategies, leads to more trustworthy and robust statistical inferences.</p>
+</section>
+<section id="references" class="level2">
+
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-BoxCox1964" class="csl-entry" role="listitem">
+Box, G. E. P., &amp; Cox, D. R. (1964). An analysis of transformations. <em>Journal of the Royal Statistical Society, Series B</em>, <em>26</em>, 211–252.
+</div>
+<div id="ref-christensen2018" class="csl-entry" role="listitem">
+Christensen, R. (2018). <em>Analysis of variance, design, and regression: Linear modeling for unbalanced data</em> (2nd ed.). <span>Chapman and Hall/CRC</span>.
+</div>
+<div id="ref-dean2017" class="csl-entry" role="listitem">
+Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em> (2nd ed.). Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>
+</div>
+<div id="ref-games1976" class="csl-entry" role="listitem">
+Games, P. A., &amp; Howell, J. F. (1976). Pairwise multiple comparison procedures with unequal n’s and/or variances: A monte carlo study. <em>Journal of Educational Statistics</em>, <em>1</em>(2), 113–125.
+</div>
+<div id="ref-satterthwaite1946" class="csl-entry" role="listitem">
+Satterthwaite, F. E. (1946). An approximate distribution of estimates of variance components. <em>Biometrics Bulletin</em>, <em>2</em>(6), 110–114.
+</div>
+<div id="ref-SnedecorCochran1989" class="csl-entry" role="listitem">
+Snedecor, G. W., &amp; Cochran, W. G. (1989). <em>Statistical methods</em> (8th ed.). Iowa State University Press.
+</div>
+<div id="ref-welch1947" class="csl-entry" role="listitem">
+Welch, B. L. (1947). The generalization of "student’s" problem when several different population variances are involved. <em>Biometrika</em>, <em>34</em>(1/2), 28–35.
+</div>
+<div id="ref-welch1951" class="csl-entry" role="listitem">
+Welch, B. L. (1951). On the comparison of several mean values: An alternative approach. <em>Biometrika</em>, <em>38</em>(3/4), 330–336.
+</div>
+</div></section></div></main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
 <footer class="site-footer">
     <div class="container text-center">

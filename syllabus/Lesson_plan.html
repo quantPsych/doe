@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
 
-<title>R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Lesson Plan – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,9 +72,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
 
-<meta property="og:title" content="R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Lesson Plan – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/syllabus/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -86,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +96,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Lesson Plan</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +147,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
-      <h1 class="title">R Help and Tutorial</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Lesson Plan</h1>
                       </div>
   </div>
     
@@ -173,14 +172,14 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">06-Jan-2025</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 7, 2025</p>
+        <p class="date-modified">29-Jan-2025</p>
       </div>
     </div>
       
@@ -203,19 +202,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +231,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +254,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link active">
+  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +283,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -306,32 +305,74 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-help-and-tutorial-provided-by-the-instructor" id="toc-r-help-and-tutorial-provided-by-the-instructor" class="nav-link active" data-scroll-target="#r-help-and-tutorial-provided-by-the-instructor">R Help and Tutorial Provided by the Instructor</a>
+  <li><a href="#week-1-introduction-to-experimental-design" id="toc-week-1-introduction-to-experimental-design" class="nav-link active" data-scroll-target="#week-1-introduction-to-experimental-design">Week 1: Introduction to Experimental Design</a>
   <ul class="collapse">
-  <li><a href="#r-subjects-topics" id="toc-r-subjects-topics" class="nav-link" data-scroll-target="#r-subjects-topics">Subjects and Topics</a>
+  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link" data-scroll-target="#topics-covered">Topics Covered</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#class-activities" id="toc-class-activities" class="nav-link" data-scroll-target="#class-activities">Class Activities</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  </ul></li>
+  <li><a href="#week-2-completely-randomized-designs-crd" id="toc-week-2-completely-randomized-designs-crd" class="nav-link" data-scroll-target="#week-2-completely-randomized-designs-crd">Week 2: Completely Randomized Designs (CRD)</a>
   <ul class="collapse">
-  <li><a href="#subjects" id="toc-subjects" class="nav-link" data-scroll-target="#subjects">Subjects</a></li>
+  <li><a href="#topics-covered-1" id="toc-topics-covered-1" class="nav-link" data-scroll-target="#topics-covered-1">Topics Covered</a></li>
+  <li><a href="#learning-objectives-1" id="toc-learning-objectives-1" class="nav-link" data-scroll-target="#learning-objectives-1">Learning Objectives</a></li>
+  <li><a href="#class-activities-1" id="toc-class-activities-1" class="nav-link" data-scroll-target="#class-activities-1">Class Activities</a></li>
+  <li><a href="#homework-1" id="toc-homework-1" class="nav-link" data-scroll-target="#homework-1">Homework</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#r-base-functions" id="toc-r-base-functions" class="nav-link" data-scroll-target="#r-base-functions">Help by R Base Functions</a>
+  <li><a href="#week-3-multiple-comparisons" id="toc-week-3-multiple-comparisons" class="nav-link" data-scroll-target="#week-3-multiple-comparisons">Week 3: Multiple Comparisons</a>
   <ul class="collapse">
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">Help by R Packages</a>
+  <li><a href="#topics-covered-2" id="toc-topics-covered-2" class="nav-link" data-scroll-target="#topics-covered-2">Topics Covered</a></li>
+  <li><a href="#learning-objectives-2" id="toc-learning-objectives-2" class="nav-link" data-scroll-target="#learning-objectives-2">Learning Objectives</a></li>
+  <li><a href="#class-activities-2" id="toc-class-activities-2" class="nav-link" data-scroll-target="#class-activities-2">Class Activities</a></li>
+  <li><a href="#homework-2" id="toc-homework-2" class="nav-link" data-scroll-target="#homework-2">Homework</a></li>
+  </ul></li>
+  <li><a href="#week-4-checking-model-assumptions" id="toc-week-4-checking-model-assumptions" class="nav-link" data-scroll-target="#week-4-checking-model-assumptions">Week 4: Checking Model Assumptions</a>
   <ul class="collapse">
-  <li><a href="#data-manipulation" id="toc-data-manipulation" class="nav-link" data-scroll-target="#data-manipulation">Data Manipulation</a></li>
-  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
-  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">Statistical Analysis</a></li>
-  <li><a href="#quarto-tutorial" id="toc-quarto-tutorial" class="nav-link" data-scroll-target="#quarto-tutorial">Quarto Tutorial</a></li>
+  <li><a href="#topics-covered-3" id="toc-topics-covered-3" class="nav-link" data-scroll-target="#topics-covered-3">Topics Covered</a></li>
+  <li><a href="#learning-objectives-3" id="toc-learning-objectives-3" class="nav-link" data-scroll-target="#learning-objectives-3">Learning Objectives</a></li>
+  <li><a href="#class-activities-3" id="toc-class-activities-3" class="nav-link" data-scroll-target="#class-activities-3">Class Activities</a></li>
+  <li><a href="#homework-3" id="toc-homework-3" class="nav-link" data-scroll-target="#homework-3">Homework</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#general-online-r-help-and-resources" id="toc-general-online-r-help-and-resources" class="nav-link" data-scroll-target="#general-online-r-help-and-resources">General Online R Help and Resources</a>
+  <li><a href="#week-5-two-way-factorial-designs" id="toc-week-5-two-way-factorial-designs" class="nav-link" data-scroll-target="#week-5-two-way-factorial-designs">Week 5: Two-Way Factorial Designs</a>
   <ul class="collapse">
-  <li><a href="#by-subjects" id="toc-by-subjects" class="nav-link" data-scroll-target="#by-subjects">By Subjects:</a></li>
-  <li><a href="#general-r-help-and-resources" id="toc-general-r-help-and-resources" class="nav-link" data-scroll-target="#general-r-help-and-resources">General R Help and Resources:</a></li>
-  <li><a href="#software-tools-and-resources" id="toc-software-tools-and-resources" class="nav-link" data-scroll-target="#software-tools-and-resources">Software Tools and Resources</a></li>
-  <li><a href="#additional-online-resources" id="toc-additional-online-resources" class="nav-link" data-scroll-target="#additional-online-resources">Additional Online Resources</a></li>
+  <li><a href="#topics-covered-4" id="toc-topics-covered-4" class="nav-link" data-scroll-target="#topics-covered-4">Topics Covered</a></li>
+  <li><a href="#learning-objectives-4" id="toc-learning-objectives-4" class="nav-link" data-scroll-target="#learning-objectives-4">Learning Objectives</a></li>
+  <li><a href="#class-activities-4" id="toc-class-activities-4" class="nav-link" data-scroll-target="#class-activities-4">Class Activities</a></li>
+  <li><a href="#homework-4" id="toc-homework-4" class="nav-link" data-scroll-target="#homework-4">Homework</a></li>
   </ul></li>
-  <li><a href="#how-to-use-this-help-guide" id="toc-how-to-use-this-help-guide" class="nav-link" data-scroll-target="#how-to-use-this-help-guide">How to Use This Help Guide</a></li>
-  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
+  <li><a href="#week-6-higher-order-factorial-designs" id="toc-week-6-higher-order-factorial-designs" class="nav-link" data-scroll-target="#week-6-higher-order-factorial-designs">Week 6: Higher-Order Factorial Designs</a>
+  <ul class="collapse">
+  <li><a href="#topics-covered-5" id="toc-topics-covered-5" class="nav-link" data-scroll-target="#topics-covered-5">Topics Covered</a></li>
+  <li><a href="#learning-objectives-5" id="toc-learning-objectives-5" class="nav-link" data-scroll-target="#learning-objectives-5">Learning Objectives</a></li>
+  <li><a href="#class-activities-5" id="toc-class-activities-5" class="nav-link" data-scroll-target="#class-activities-5">Class Activities</a></li>
+  <li><a href="#homework-5" id="toc-homework-5" class="nav-link" data-scroll-target="#homework-5">Homework</a></li>
+  </ul></li>
+  <li><a href="#week-7-midterm-review-and-exam" id="toc-week-7-midterm-review-and-exam" class="nav-link" data-scroll-target="#week-7-midterm-review-and-exam">Week 7: Midterm Review and Exam</a></li>
+  <li><a href="#week-8-blocking-randomized-complete-block-design-rcbd" id="toc-week-8-blocking-randomized-complete-block-design-rcbd" class="nav-link" data-scroll-target="#week-8-blocking-randomized-complete-block-design-rcbd">Week 8: Blocking &amp; Randomized Complete Block Design (RCBD)</a>
+  <ul class="collapse">
+  <li><a href="#topics-covered-6" id="toc-topics-covered-6" class="nav-link" data-scroll-target="#topics-covered-6">Topics Covered</a></li>
+  <li><a href="#learning-objectives-6" id="toc-learning-objectives-6" class="nav-link" data-scroll-target="#learning-objectives-6">Learning Objectives</a></li>
+  <li><a href="#class-activities-6" id="toc-class-activities-6" class="nav-link" data-scroll-target="#class-activities-6">Class Activities</a></li>
+  <li><a href="#homework-6" id="toc-homework-6" class="nav-link" data-scroll-target="#homework-6">Homework</a></li>
+  </ul></li>
+  <li><a href="#week-9-spring-break-no-classes" id="toc-week-9-spring-break-no-classes" class="nav-link" data-scroll-target="#week-9-spring-break-no-classes">Week 9: Spring Break – No Classes</a></li>
+  <li><a href="#week-10-complete-block-designs" id="toc-week-10-complete-block-designs" class="nav-link" data-scroll-target="#week-10-complete-block-designs">Week 10: Complete Block Designs</a>
+  <ul class="collapse">
+  <li><a href="#topics-covered-7" id="toc-topics-covered-7" class="nav-link" data-scroll-target="#topics-covered-7">Topics Covered</a></li>
+  <li><a href="#learning-objectives-7" id="toc-learning-objectives-7" class="nav-link" data-scroll-target="#learning-objectives-7">Learning Objectives</a></li>
+  <li><a href="#class-activities-7" id="toc-class-activities-7" class="nav-link" data-scroll-target="#class-activities-7">Class Activities</a></li>
+  <li><a href="#homework-7" id="toc-homework-7" class="nav-link" data-scroll-target="#homework-7">Homework</a></li>
+  </ul></li>
+  <li><a href="#week-11-analysis-of-covariance-ancova" id="toc-week-11-analysis-of-covariance-ancova" class="nav-link" data-scroll-target="#week-11-analysis-of-covariance-ancova">Week 11: Analysis of Covariance (ANCOVA)</a>
+  <ul class="collapse">
+  <li><a href="#topics-covered-8" id="toc-topics-covered-8" class="nav-link" data-scroll-target="#topics-covered-8">Topics Covered</a></li>
+  <li><a href="#learning-objectives-8" id="toc-learning-objectives-8" class="nav-link" data-scroll-target="#learning-objectives-8">Learning Objectives</a></li>
+  <li><a href="#class-activities-8" id="toc-class-activities-8" class="nav-link" data-scroll-target="#class-activities-8">Class Activities</a></li>
+  <li><a href="#homework-8" id="toc-homework-8" class="nav-link" data-scroll-target="#homework-8">Homework</a></li>
+  </ul></li>
+  <li><a href="#week-1215-advanced-experimental-designs" id="toc-week-1215-advanced-experimental-designs" class="nav-link" data-scroll-target="#week-1215-advanced-experimental-designs">Week 12–15: Advanced Experimental Designs</a></li>
+  <li><a href="#week-16-catching-up-and-review" id="toc-week-16-catching-up-and-review" class="nav-link" data-scroll-target="#week-16-catching-up-and-review">Week 16: Catching Up and Review</a></li>
+  <li><a href="#week-17-final-exam" id="toc-week-17-final-exam" class="nav-link" data-scroll-target="#week-17-final-exam">Week 17: Final Exam</a></li>
   </ul>
 </nav>
     </div>
@@ -342,175 +383,337 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="r-help-and-tutorial-provided-by-the-instructor" class="level1">
-<h1>R Help and Tutorial Provided by the Instructor</h1>
-<p>Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on <strong>Subjects</strong>, <strong>Topics</strong>, and implementation through <strong>R Base</strong> and <strong>Packages</strong>.</p>
-<section id="r-subjects-topics" class="level2">
-<h2 class="anchored" data-anchor-id="r-subjects-topics">Subjects and Topics</h2>
-<p>Below are the available subjects and their corresponding topics. Select a topic to view detailed help pages.</p>
-<section id="subjects" class="level3">
-<h3 class="anchored" data-anchor-id="subjects">Subjects</h3>
+<section id="week-1-introduction-to-experimental-design" class="level2">
+<h2 class="anchored" data-anchor-id="week-1-introduction-to-experimental-design">Week 1: Introduction to Experimental Design</h2>
+<section id="topics-covered" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered">Topics Covered</h3>
 <ul>
-<li><strong>Data Manipulation</strong>
+<li>Purpose and scope of experimental design</li>
+<li>Observational studies vs.&nbsp;designed experiments</li>
+<li>Key principles: randomization, replication, and control</li>
+</ul>
+</section>
+<section id="learning-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h3>
 <ul>
-<li><a href="./appendix/r-topics/r-data-frames-basics.html">Creating Data Frames</a></li>
-<li><a href="./appendix/r-topics/r-factors-basics.html">Working with Factors</a></li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Subsetting Data</a></li>
-<li><a href="./appendix/r-topics/r-data-transformation.html">Data Transformation and Wrangling</a></li>
-<li><a href="./appendix/r-topics/r-data-import-basics.html">Inporting Data into R</a></li>
-</ul></li>
-<li><strong>Data Visualization</strong>
+<li>Differentiate between observational studies and experiments.</li>
+<li>Explain the three fundamental principles of experimental design.</li>
+<li>Recognize scenarios where designed experiments are beneficial.</li>
+</ul>
+</section>
+<section id="class-activities" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities">Class Activities</h3>
 <ul>
-<li><a href="./appendix/r-topics/r-base-graphics-basics.html">Base R Graphics</a></li>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2 Basics</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
+<li>Lecture: Introduction to experimentation (Dean et al., Ch. 1, Sec. 1.1–1.1.1; Ch. 2, Sec. 2.1–2.2).</li>
+<li>Case Study Discussion: The role of experimental design in manufacturing and biomedical research.</li>
+<li>Hands-on Activity: Simple randomization exercises in R.</li>
+</ul>
+</section>
+<section id="homework" class="level3">
+<h3 class="anchored" data-anchor-id="homework">Homework</h3>
 <ul>
-<li><a href="./appendix/r-topics/r-hypothesis-testing-basics.html">Hypothesis Testing</a></li>
-</ul></li>
-<li><strong>Quarto Tutorial</strong>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure-extra.html">Figures and Tables in Quarto: Advanced Features</a></li>
-</ul></li>
+<li>Homework 1: Basics of Experimental Design (due Feb.&nbsp;6).</li>
 </ul>
 </section>
 </section>
-</section>
-<section id="r-base-functions" class="level1">
-<h1>Help by R Base Functions</h1>
+<section id="week-2-completely-randomized-designs-crd" class="level2">
+<h2 class="anchored" data-anchor-id="week-2-completely-randomized-designs-crd">Week 2: Completely Randomized Designs (CRD)</h2>
+<section id="topics-covered-1" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-1">Topics Covered</h3>
 <ul>
-<li><a href="./appendix/r-base/r-gl-basics.html">gl</a>: Generate Factor Levels</li>
-<li><a href="./appendix/r-base/r-interaction-basics.html">interaction</a>: Create Interaction Terms</li>
-<li><a href="./appendix/r-base/r-model.tables-basics.html">model.tables</a>: Extract Tables from Model Fits</li>
-<li><a href="./appendix/r-base/r-plot.design-basics.html">plot.design</a>: Plot Univariate Effects of a Design or Model</li>
-<li><a href="./appendix/r-base/r-rep-basics.html">rep</a>: Replicate Elements of Vectors and Lists</li>
-<li><a href="./appendix/r-base/r-replications-basics.html">replications</a>: Generate Replicate Numbers</li>
-<li><a href="./appendix/r-base/r-sample-basics.html">sample</a>: Randomly Sample Elements from a Vector</li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Base R Plotting</a></li>
-</ul>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">Help by R Packages</h2>
-<section id="data-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="data-manipulation">Data Manipulation</h3>
-<ul>
-<li><a href="./appendix/r-packages/dplyr.html">dplyr</a></li>
-<li><a href="./appendix/r-packages/tidyr.html">tidyr</a></li>
-<li><a href="./appendix/r-packages/purrr.html">purrr</a></li>
-<li><a href="./appendix/r-packages/stringr.html">stringr</a></li>
+<li>Structure and application of CRD</li>
+<li>One-way ANOVA model and assumptions</li>
+<li>Conducting and interpreting ANOVA in R</li>
 </ul>
 </section>
-<section id="data-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="data-visualization">Data Visualization</h3>
+<section id="learning-objectives-1" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-1">Learning Objectives</h3>
 <ul>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2</a></li>
+<li>Design and analyze experiments using CRD.</li>
+<li>Conduct one-way ANOVA and interpret results.</li>
+<li>Check ANOVA assumptions and assess validity.</li>
 </ul>
 </section>
-<section id="statistical-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h3>
+<section id="class-activities-1" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-1">Class Activities</h3>
 <ul>
-<li><a href="./appendix/r-packages/emmeans.html">emmeans</a></li>
-<li><a href="./appendix/r-packages/multcomp.html">multcomp</a></li>
-<li><a href="./appendix/r-packages/pwr.html">pwr</a></li>
+<li>Lecture: CRD framework and implementation (Dean et al., Ch. 3, Sec. 3.1–3.5).</li>
+<li>In-class Example: One-way ANOVA in R using real-world data.</li>
+<li>Group Discussion: Interpreting ANOVA tables and visualizing results.</li>
 </ul>
 </section>
-<section id="quarto-tutorial" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-tutorial">Quarto Tutorial</h3>
+<section id="homework-1" class="level3">
+<h3 class="anchored" data-anchor-id="homework-1">Homework</h3>
 <ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
+<li>Homework 2: CRD Analysis (due Feb.&nbsp;13).</li>
 </ul>
 </section>
 </section>
-</section>
-<section id="general-online-r-help-and-resources" class="level1">
-<h1>General Online R Help and Resources</h1>
-<p>Here are some general online resources to help you learn R programming and data analysis:</p>
-<section id="by-subjects" class="level2">
-<h2 class="anchored" data-anchor-id="by-subjects">By Subjects:</h2>
+<section id="week-3-multiple-comparisons" class="level2">
+<h2 class="anchored" data-anchor-id="week-3-multiple-comparisons">Week 3: Multiple Comparisons</h2>
+<section id="topics-covered-2" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-2">Topics Covered</h3>
 <ul>
-<li><strong>Data Manipulation</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/r-data-import-tutorial">How to Import Data Into R</a> from <a href="https://www.datacamp.com/">DataCamp</a>.</li>
-</ul></li>
-<li><strong>Data Visualization</strong>
-<ul>
-<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">ggplot2 Basics</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/linear-regression-R">Regression</a> from DataCamp.</li>
-<li><a href="https://www.datanovia.com/en/lessons/anova-in-r/">ANOVA in R</a> from DataNovia.</li>
-</ul></li>
-<li><strong>Programming with R</strong>
-<ul>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/control-structures.html">Control Structures</a> from Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/functions.html">Writing Functions</a> from Hadley Wickham.</li>
-<li><a href="https://adv-r.hadley.nz/debugging.html">Debugging</a> from Hadley Wickham.</li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">Debugging with the RStudio IDE</a> from Positron RStudio Support.</li>
-</ul></li>
+<li>Post-hoc tests: Tukey, Bonferroni, Scheffé</li>
+<li>Contrasts: linear, orthogonal, and non-orthogonal comparisons</li>
 </ul>
 </section>
-<section id="general-r-help-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="general-r-help-and-resources">General R Help and Resources:</h2>
+<section id="learning-objectives-2" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-2">Learning Objectives</h3>
 <ul>
-<li><a href="https://www.rdocumentation.org/">R Documentation</a>: User-friendly interface to R documentation.</li>
-<li><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a>: Quick reference guides for R and RStudio.</li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a>: Online book on data science with R by Hadley Wickham and Garrett Grolemund.</li>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/">R Programming for Data Science</a> Online book by Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/">Advanced R</a>: Online book on advanced R programming by Hadley Wickham.</li>
-<li><a href="https://forum.posit.co/">Posit Community</a>p: Posit Community forum for R users.</li>
-<li><a href="https://www.r-bloggers.com/">R Bloggers</a>: Blog aggregator for R programming.</li>
-<li><a href="https://stackoverflow.com/questions/tagged/r">Stack Overflow R Tag</a>: Stack Overflow questions tagged with R.</li>
+<li>Implement multiple comparison methods in R.</li>
+<li>Interpret post-hoc test results.</li>
+<li>Apply linear contrasts for deeper treatment comparisons.</li>
 </ul>
 </section>
-<section id="software-tools-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="software-tools-and-resources">Software Tools and Resources</h2>
-<p>To complete assignments and analyses, you will need access to R and related tools.</p>
+<section id="class-activities-2" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-2">Class Activities</h3>
 <ul>
-<li><strong>R Installation:</strong> <a href="https://cran.r-project.org/">Download R</a><br>
-</li>
-<li><strong>RStudio IDE:</strong> <a href="https://www.rstudio.com/products/rstudio/download/">Download RStudio</a><br>
-</li>
-<li><strong>VS Code IDE:</strong> <a href="https://code.visualstudio.com/">Download VS Code</a></li>
-<li><strong>Positron IDE</strong>: <a href="https://positron.posit.co/download">Download Positron</a></li>
-<li><a href="https://quarto.org/docs/tools/rstudio.html">RStudio IDE Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/hello/vscode.html">VS Code Editor Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/rstudio.html">Quarto Authoring with RStudio</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/vscode.html">Quarto Authoring with VS Code</a></li>
+<li>Lecture: Multiple comparisons and contrasts (Dean et al., Ch. 4, Sec. 4.1–4.4).</li>
+<li>R Demonstration: Tukey’s HSD, Bonferroni correction, and Scheffé method.</li>
+<li>Practice Exercise: Identifying significant treatment differences.</li>
 </ul>
 </section>
-<section id="additional-online-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-online-resources">Additional Online Resources</h2>
+<section id="homework-2" class="level3">
+<h3 class="anchored" data-anchor-id="homework-2">Homework</h3>
 <ul>
-<li><strong>Quarto Documentation</strong>: <a href="https://quarto.org/docs/">Learn Quarto</a></li>
-<li><strong>Online R Help</strong>:
-<ul>
-<li><a href="https://cran.r-project.org/manuals.html">CRAN R Documentation</a></li>
-<li><a href="https://posit.co/resources/cheatsheets/">RStudio Cheat Sheets</a></li>
-</ul></li>
-<li><strong>Video Tutorials</strong>:
-<ul>
-<li><a href="https://www.youtube.com/results?search_query=r+programming+tutorial">R Programming for Beginners (YouTube)</a></li>
-</ul></li>
+<li>Homework 3: Multiple Comparisons (due Feb.&nbsp;20).</li>
 </ul>
 </section>
 </section>
-<section id="how-to-use-this-help-guide" class="level1">
-<h1>How to Use This Help Guide</h1>
-<ol type="1">
-<li><strong>Explore Subjects and Topics:</strong> Use the Subjects and Topics section to browse R concepts by category.</li>
-<li><strong>R Base Help:</strong> Click on the R Base links to learn about core R functions.</li>
-<li><strong>Packages Help:</strong> Dive into R packages to explore advanced features and functionalities.</li>
-</ol>
-</section>
-<section id="r-code-and-data-files-from-the-textbook" class="level1">
-<h1>R Code and Data Files from the Textbook</h1>
-<p>Here is a page for the R program files used in the textbook:</p>
+<section id="week-4-checking-model-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="week-4-checking-model-assumptions">Week 4: Checking Model Assumptions</h2>
+<section id="topics-covered-3" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-3">Topics Covered</h3>
 <ul>
-<li><a href="./r-code-data-book.html">R Code and Data Files from the Textbook</a></li>
-<li><a href="./data-files-book.html">Data Files from the Textbook</a></li>
+<li>Residual diagnostics</li>
+<li>Detecting non-normality and heteroscedasticity</li>
+<li>Applying transformations</li>
+</ul>
+</section>
+<section id="learning-objectives-3" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-3">Learning Objectives</h3>
+<ul>
+<li>Conduct residual analysis to check ANOVA assumptions.</li>
+<li>Implement transformations when needed.</li>
+<li>Identify and handle outliers in experimental data.</li>
+</ul>
+</section>
+<section id="class-activities-3" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-3">Class Activities</h3>
+<ul>
+<li>Lecture: Model assumption checking (Dean et al., Ch. 5, Sec. 5.1–5.3).</li>
+<li>R Practical: Visualizing residuals and testing normality.</li>
+<li>Group Activity: Analyzing transformed data.</li>
+</ul>
+</section>
+<section id="homework-3" class="level3">
+<h3 class="anchored" data-anchor-id="homework-3">Homework</h3>
+<ul>
+<li>Homework 4: Residual Analysis (due Feb.&nbsp;27).</li>
+</ul>
+</section>
+</section>
+<section id="week-5-two-way-factorial-designs" class="level2">
+<h2 class="anchored" data-anchor-id="week-5-two-way-factorial-designs">Week 5: Two-Way Factorial Designs</h2>
+<section id="topics-covered-4" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-4">Topics Covered</h3>
+<ul>
+<li>Two-factor factorial structure</li>
+<li>Main effects and interactions</li>
+<li>Two-way ANOVA model and interpretation</li>
+</ul>
+</section>
+<section id="learning-objectives-4" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-4">Learning Objectives</h3>
+<ul>
+<li>Implement and analyze two-way factorial designs.</li>
+<li>Interpret interaction plots and ANOVA tables.</li>
+<li>Recognize the significance of main effects vs.&nbsp;interactions.</li>
+</ul>
+</section>
+<section id="class-activities-4" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-4">Class Activities</h3>
+<ul>
+<li>Lecture: Factorial design theory (Dean et al., Ch. 6, Sec. 6.1–6.5).</li>
+<li>R Practical: Running and interpreting a two-way ANOVA.</li>
+<li>Class Discussion: Interaction effects and their implications.</li>
+</ul>
+</section>
+<section id="homework-4" class="level3">
+<h3 class="anchored" data-anchor-id="homework-4">Homework</h3>
+<ul>
+<li>Homework 5: Two-Factor ANOVA (due Mar.&nbsp;6).</li>
+</ul>
+</section>
+</section>
+<section id="week-6-higher-order-factorial-designs" class="level2">
+<h2 class="anchored" data-anchor-id="week-6-higher-order-factorial-designs">Week 6: Higher-Order Factorial Designs</h2>
+<section id="topics-covered-5" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-5">Topics Covered</h3>
+<ul>
+<li>Three-way factorial designs</li>
+<li>Higher-order interactions</li>
+<li>Managing unbalanced designs</li>
+</ul>
+</section>
+<section id="learning-objectives-5" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-5">Learning Objectives</h3>
+<ul>
+<li>Analyze three-factor experiments.</li>
+<li>Identify and interpret complex interactions.</li>
+<li>Handle missing or unbalanced data in factorial designs.</li>
+</ul>
+</section>
+<section id="class-activities-5" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-5">Class Activities</h3>
+<ul>
+<li>Lecture: Higher-order factorial designs (Dean et al., Ch. 7, Sec. 7.1–7.6).</li>
+<li>R Demonstration: Analyzing a three-way factorial experiment.</li>
+<li>Discussion: Real-world applications of high-order designs.</li>
+</ul>
+</section>
+<section id="homework-5" class="level3">
+<h3 class="anchored" data-anchor-id="homework-5">Homework</h3>
+<ul>
+<li>Homework 6: Higher-Order Factorial Analysis (due Mar.&nbsp;6).</li>
+</ul>
+</section>
+</section>
+<section id="week-7-midterm-review-and-exam" class="level2">
+<h2 class="anchored" data-anchor-id="week-7-midterm-review-and-exam">Week 7: Midterm Review and Exam</h2>
+<ul>
+<li>Midterm Review Session: Key concepts from Weeks 1–6.</li>
+<li>Midterm Exam: Covers CRD, factorial designs, and multiple comparisons.</li>
+</ul>
+</section>
+<section id="week-8-blocking-randomized-complete-block-design-rcbd" class="level2">
+<h2 class="anchored" data-anchor-id="week-8-blocking-randomized-complete-block-design-rcbd">Week 8: Blocking &amp; Randomized Complete Block Design (RCBD)</h2>
+<section id="topics-covered-6" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-6">Topics Covered</h3>
+<ul>
+<li>Concept of blocking</li>
+<li>RCBD structure and analysis</li>
+<li>Efficiency of blocking designs</li>
+</ul>
+</section>
+<section id="learning-objectives-6" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-6">Learning Objectives</h3>
+<ul>
+<li>Apply RCBD principles to experimental design.</li>
+<li>Conduct ANOVA for blocked designs.</li>
+<li>Assess the efficiency of blocking.</li>
+</ul>
+</section>
+<section id="class-activities-6" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-6">Class Activities</h3>
+<ul>
+<li>Lecture: RCBD and blocking efficiency (Dean et al., Ch. 10, Sec. 10.1–10.4).</li>
+<li>R Demonstration: Implementing RCBD.</li>
+<li>Discussion: Comparing blocking to CRD.</li>
+</ul>
+</section>
+<section id="homework-6" class="level3">
+<h3 class="anchored" data-anchor-id="homework-6">Homework</h3>
+<ul>
+<li>Homework 7: RCBD Analysis (due Mar.&nbsp;25).</li>
+</ul>
+</section>
+</section>
+<section id="week-9-spring-break-no-classes" class="level2">
+<h2 class="anchored" data-anchor-id="week-9-spring-break-no-classes">Week 9: Spring Break – No Classes</h2>
+</section>
+<section id="week-10-complete-block-designs" class="level2">
+<h2 class="anchored" data-anchor-id="week-10-complete-block-designs">Week 10: Complete Block Designs</h2>
+<section id="topics-covered-7" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-7">Topics Covered</h3>
+<ul>
+<li>Extensions of RCBD</li>
+<li>Factorial treatments within blocks</li>
+<li>Variance components analysis</li>
+</ul>
+</section>
+<section id="learning-objectives-7" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-7">Learning Objectives</h3>
+<ul>
+<li>Analyze complete block designs.</li>
+<li>Estimate variance components.</li>
+<li>Compare efficiency of different blocking approaches.</li>
+</ul>
+</section>
+<section id="class-activities-7" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-7">Class Activities</h3>
+<ul>
+<li>Lecture: Advanced blocking designs (Dean et al., Ch. 10, Sec. 10.6–10.8).</li>
+<li>R Practical: Implementing factorial treatments in blocks.</li>
+<li>Group Activity: Evaluating blocking efficiency.</li>
+</ul>
+</section>
+<section id="homework-7" class="level3">
+<h3 class="anchored" data-anchor-id="homework-7">Homework</h3>
+<ul>
+<li>Homework 8: Complete Block Designs (due Apr.&nbsp;3).</li>
+</ul>
+</section>
+</section>
+<section id="week-11-analysis-of-covariance-ancova" class="level2">
+<h2 class="anchored" data-anchor-id="week-11-analysis-of-covariance-ancova">Week 11: Analysis of Covariance (ANCOVA)</h2>
+<section id="topics-covered-8" class="level3">
+<h3 class="anchored" data-anchor-id="topics-covered-8">Topics Covered</h3>
+<ul>
+<li>Incorporating covariates into ANOVA</li>
+<li>Adjusted treatment means</li>
+<li>ANCOVA assumptions</li>
+</ul>
+</section>
+<section id="learning-objectives-8" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-8">Learning Objectives</h3>
+<ul>
+<li>Implement ANCOVA in R.</li>
+<li>Interpret adjusted means and significance.</li>
+<li>Apply ANCOVA in experimental studies.</li>
+</ul>
+</section>
+<section id="class-activities-8" class="level3">
+<h3 class="anchored" data-anchor-id="class-activities-8">Class Activities</h3>
+<ul>
+<li>Lecture: ANCOVA theory and application (Dean et al., Ch. 9, Sec. 9.1–9.4).</li>
+<li>R Practical: Performing ANCOVA and interpreting results.</li>
+<li>Discussion: Comparing ANCOVA to standard ANOVA.</li>
+</ul>
+</section>
+<section id="homework-8" class="level3">
+<h3 class="anchored" data-anchor-id="homework-8">Homework</h3>
+<ul>
+<li>Homework 9: ANCOVA Analysis (due Apr.&nbsp;10).</li>
+</ul>
+</section>
+</section>
+<section id="week-1215-advanced-experimental-designs" class="level2">
+<h2 class="anchored" data-anchor-id="week-1215-advanced-experimental-designs">Week 12–15: Advanced Experimental Designs</h2>
+<ul>
+<li>Row–Column Designs (Latin Squares) (Week 12)</li>
+<li>Random &amp; Mixed Models (Week 13)</li>
+<li>Nested Models (Week 14)</li>
+<li>Split-Plot Designs (Week 15)</li>
+</ul>
+<p>Each week will include: - Lectures on theoretical foundations. - R demonstrations on implementing models. - Group discussions on real-world applications.</p>
+<p>Homework: - Week 12: Row–Column Analysis (due Apr.&nbsp;17). - Week 13: Random and Mixed Models (due Apr.&nbsp;24). - Week 14: Nested Models (due May 1). - Week 15: Split-Plot Analysis (due May 6).</p>
+</section>
+<section id="week-16-catching-up-and-review" class="level2">
+<h2 class="anchored" data-anchor-id="week-16-catching-up-and-review">Week 16: Catching Up and Review</h2>
+<ul>
+<li>Review key concepts from Weeks 1–15.</li>
+<li>Address common misconceptions and questions.</li>
+<li>Provide additional practice problems.</li>
+</ul>
+</section>
+<section id="week-17-final-exam" class="level2">
+<h2 class="anchored" data-anchor-id="week-17-final-exam">Week 17: Final Exam</h2>
+<ul>
+<li>Date: Tuesday, May 13, 2025.</li>
+<li>Content: Comprehensive (Weeks 1–15).</li>
+<li>Format: Short-answer, computations, and application-based problems.</li>
 </ul>
 
 
@@ -951,5 +1154,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

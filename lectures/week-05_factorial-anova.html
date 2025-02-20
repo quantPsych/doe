@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -75,6 +95,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -235,7 +258,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">11-Jan-2025</p>
+        <p class="date">20-Feb-2025</p>
       </div>
     </div>
     
@@ -364,10 +387,8 @@ window.Quarto = {
   <ul>
   <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
   <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
-  <li><a href="#checking-the-assumptions-on-the-model" id="toc-checking-the-assumptions-on-the-model" class="nav-link" data-scroll-target="#checking-the-assumptions-on-the-model">Checking the Assumptions on the Model</a>
-  <ul class="collapse">
+  <li><a href="#checking-the-assumptions-on-the-model" id="toc-checking-the-assumptions-on-the-model" class="nav-link" data-scroll-target="#checking-the-assumptions-on-the-model">Checking the Assumptions on the Model</a></li>
   <li><a href="#standardized-residuals" id="toc-standardized-residuals" class="nav-link" data-scroll-target="#standardized-residuals">Standardized Residuals</a></li>
-  </ul></li>
   <li><a href="#contrasts" id="toc-contrasts" class="nav-link" data-scroll-target="#contrasts">Contrasts</a>
   <ul class="collapse">
   <li><a href="#contrasts-for-main-effects-and-interactions" id="toc-contrasts-for-main-effects-and-interactions" class="nav-link" data-scroll-target="#contrasts-for-main-effects-and-interactions">Contrasts for Main Effects and Interactions</a></li>
@@ -469,8 +490,9 @@ window.Quarto = {
 <section id="checking-the-assumptions-on-the-model" class="level2">
 <h2 class="anchored" data-anchor-id="checking-the-assumptions-on-the-model">Checking the Assumptions on the Model</h2>
 <p>The assumptions for both the two-way complete model and the two-way main-effects model are that the error random variables have equal variances, are mutually independent, and are normally distributed. The strategy for checking these assumptions follows the procedures outlined in Chapter 5 (see Dean et al.&nbsp;2017).</p>
-<section id="standardized-residuals" class="level3">
-<h3 class="anchored" data-anchor-id="standardized-residuals">Standardized Residuals</h3>
+</section>
+<section id="standardized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="standardized-residuals">Standardized Residuals</h2>
 <p>The standardized residuals are computed as</p>
 <p><span class="math display">\[
 z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{SS_{Error}/(n - 1)}},
@@ -488,7 +510,6 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{SS_{Error}/(n - 1)}},
 <li><strong>Normal Q-Q Plot (Normal Scores)</strong> to assess normality.</li>
 </ul>
 <p>When using the main-effects model, interaction plots (e.g., Figures 6.1, 6.2 in reference texts) help visualize any potential interaction. Another method is to plot standardized residuals against one factor’s levels while labeling or grouping by the second factor’s levels.</p>
-</section>
 </section>
 <section id="contrasts" class="level1">
 <h1>Contrasts</h1>
@@ -555,7 +576,7 @@ MS_{Error} = \frac{SS_{Error}}{n - v}.
 \]</span></p>
 <p><strong>Example 6.4.2 (Reaction Time Experiment)</strong> A pilot experiment with <span class="math inline">\(a=2\)</span> levels of “Cue Stimulus” and <span class="math inline">\(b=3\)</span> levels of “Cue Time,” each having <span class="math inline">\(r=3\)</span> replications, yields data in Table 6.2. The sum of squares for error is computed as</p>
 <p><span class="math display">\[
-SS_{Error} = \sum_{i,j,t} y_{ijt}^2 \;-\; \sum_{i,j} \frac{r_{ij}\,\bar{Y}_{ij\cdot}^2}{\cdot} \;=\; 0.00347,
+SS_{Error} = \sum_{i,j,t} y_{ijt}^2 \;-\; \sum_{i,j} r_{ij}\,\bar{Y}_{ij\cdot}^2 \;=\; 0.00347,
 \]</span></p>
 <p>and hence <span class="math inline">\(MS_{Error} = SS_{Error}/(n-ab)\)</span>.</p>
 <section id="multiple-comparisons-with-unequal-variances" class="level3">
@@ -870,13 +891,13 @@ Table&nbsp;1: Reaction Time Experiment
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Post-hoc Contrasts</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Main-effect-of-B contrast: B1-B2</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lsmB <span class="ot">&lt;-</span> lsmeans<span class="sc">::</span><span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span>fB)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lsmB <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(modelAB, <span class="sc">~</span>fB)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmB, <span class="fu">list</span>(<span class="at">B12 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>))), <span class="at">infer =</span> <span class="fu">c</span>(T, T))</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># AB-interaction contrast: AB11-AB13-AB21+AB23</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="ot">&lt;-</span> <span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span> fB<span class="sc">:</span>fA) <span class="co"># Using "fB:fA" yields AB lex order</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(modelAB, <span class="sc">~</span> fB<span class="sc">:</span>fA) <span class="co"># Using "fB:fA" yields AB lex order</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="co"># Display to see order of AB combos for contrast coefficients</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> fB fA lsmean      SE df lower.CL upper.CL
+<pre><code> fB fA emmean      SE df lower.CL upper.CL
  1  1   0.185 0.00982 12    0.164    0.206
  2  1   0.179 0.00982 12    0.157    0.200
  3  1   0.212 0.00982 12    0.191    0.233
@@ -999,7 +1020,7 @@ Confidence level used: 0.95 </code></pre>
 <thead>
 <tr class="header">
 <th style="text-align: left;">fB</th>
-<th style="text-align: right;">lsmean</th>
+<th style="text-align: right;">emmean</th>
 <th style="text-align: right;">SE</th>
 <th style="text-align: right;">df</th>
 <th style="text-align: right;">lower.CL</th>
@@ -1186,8 +1207,115 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 <p>or equivalently:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>modelAB <span class="ot">=</span> <span class="fu">aov</span>(y <span class="sc">~</span> fA <span class="sc">*</span> fB, <span class="at">data =</span> react_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here, <code>fA</code> and <code>fB</code> are <strong>factor variables</strong> in R. The operator <code>*</code> adds both main effects and the interaction term. We often check:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelAB)        <span class="co"># "Type I" sums of squares</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(modelAB, <span class="sc">~</span>., <span class="at">test =</span> <span class="st">"F"</span>)  <span class="co"># "Type III" sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelAB)        <span class="co"># "Type I" sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0235445</td>
+<td style="text-align: right;">0.0235445</td>
+<td style="text-align: right;">81.375000</td>
+<td style="text-align: right;">0.0000011</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0011581</td>
+<td style="text-align: right;">0.0005791</td>
+<td style="text-align: right;">2.001344</td>
+<td style="text-align: right;">0.1777992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fA:fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0008463</td>
+<td style="text-align: right;">0.0004232</td>
+<td style="text-align: right;">1.462558</td>
+<td style="text-align: right;">0.2701353</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.0034720</td>
+<td style="text-align: right;">0.0002893</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(modelAB, <span class="sc">~</span>., <span class="at">test =</span> <span class="st">"F"</span>)  <span class="co"># "Type III" sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum of Sq</th>
+<th style="text-align: right;">RSS</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><none></none></td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.0034720</td>
+<td style="text-align: right;">-141.9611</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0104167</td>
+<td style="text-align: right;">0.0138887</td>
+<td style="text-align: right;">-119.0070</td>
+<td style="text-align: right;">36.002304</td>
+<td style="text-align: right;">0.0000621</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0018802</td>
+<td style="text-align: right;">0.0053522</td>
+<td style="text-align: right;">-138.1711</td>
+<td style="text-align: right;">3.249232</td>
+<td style="text-align: right;">0.0745201</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fA:fB</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0008463</td>
+<td style="text-align: right;">0.0043183</td>
+<td style="text-align: right;">-142.0346</td>
+<td style="text-align: right;">1.462558</td>
+<td style="text-align: right;">0.2701353</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </section>
 <section id="type-i-vs.-type-iii-sums-of-squares" class="level2">
 <h2 class="anchored" data-anchor-id="type-i-vs.-type-iii-sums-of-squares">Type I vs.&nbsp;Type III Sums of Squares</h2>
@@ -1202,7 +1330,7 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 <section id="fitting-the-cell-means-model" class="level2">
 <h2 class="anchored" data-anchor-id="fitting-the-cell-means-model">Fitting the Cell-Means Model</h2>
 <p>An alternative is the <strong>cell-means model</strong>, which estimates each <span class="math inline">\(\tau_{ij}\)</span> directly:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>modelTC <span class="ot">=</span> <span class="fu">aov</span>(y <span class="sc">~</span> fTC, <span class="at">data =</span> react_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>modelTC <span class="ot">=</span> <span class="fu">aov</span>(y <span class="sc">~</span> fTC, <span class="at">data =</span> react_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where <code>fTC</code> is a factor that indicates each treatment combination (i,j). This approach is ideal for more direct comparisons of the individual cell means.</p>
 </section>
 <section id="example-reaction-time-experiment" class="level2">
@@ -1220,11 +1348,95 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 <p>Once we fit the model, we often need <strong>post hoc</strong> comparisons among factor levels or interactions. R packages like <strong><code>lsmeans</code></strong> (or <code>emmeans</code> in newer versions) facilitate this.</p>
 <section id="main-effect-contrasts" class="level2">
 <h2 class="anchored" data-anchor-id="main-effect-contrasts">Main-Effect Contrasts</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lsmB <span class="ot">=</span> <span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span> fB)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmB, <span class="fu">list</span>(<span class="at">B12 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>))), <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This obtains the contrast β1−β2_1 - _2 for Factor B. We can similarly construct more complex contrasts or even interaction contrasts:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="ot">=</span> <span class="fu">lsmeans</span>(modelAB, <span class="sc">~</span> fB<span class="sc">:</span>fA)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmAB, <span class="fu">list</span>(<span class="at">AB =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))), <span class="at">infer=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lsmB  <span class="ot">&lt;-</span>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(modelAB, <span class="sc">~</span> fB)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmB, <span class="fu">list</span>(<span class="at">B12 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>))), <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">B12</td>
+<td style="text-align: right;">0.0076667</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0137306</td>
+<td style="text-align: right;">0.0290639</td>
+<td style="text-align: right;">0.7806709</td>
+<td style="text-align: right;">0.4501222</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>This obtains the contrast <span class="math inline">\(\beta_1 - \beta_2\)</span> for Factor B. We can similarly construct more complex contrasts or even interaction contrasts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lsmAB <span class="ot">=</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(modelAB, <span class="sc">~</span> fB<span class="sc">:</span>fA)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">contrast</span>(lsmAB, <span class="fu">list</span>(<span class="at">AB =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))), <span class="at">infer=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 4%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AB</td>
+<td style="text-align: right;">-0.0303333</td>
+<td style="text-align: right;">0.0196412</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0731279</td>
+<td style="text-align: right;">0.0124612</td>
+<td style="text-align: right;">-1.544371</td>
+<td style="text-align: right;">0.1484504</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </section>
 <section id="multiple-comparison-procedures" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-comparison-procedures">Multiple Comparison Procedures</h2>
@@ -1237,21 +1449,135 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 </ul>
 <section id="tukey-example" class="level3">
 <h3 class="anchored" data-anchor-id="tukey-example">Tukey Example</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(lsmB, <span class="at">method=</span><span class="st">"pairwise"</span>, <span class="at">adjust=</span><span class="st">"tukey"</span>),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.99</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(lsmB, <span class="at">method=</span><span class="st">"pairwise"</span>, <span class="at">adjust=</span><span class="st">"tukey"</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.99</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 3%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fB1 - fB2</td>
+<td style="text-align: right;">0.0076667</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0273734</td>
+<td style="text-align: right;">0.0427068</td>
+<td style="text-align: right;">0.7806709</td>
+<td style="text-align: right;">0.7214544</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fB1 - fB3</td>
+<td style="text-align: right;">-0.0118333</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0468734</td>
+<td style="text-align: right;">0.0232068</td>
+<td style="text-align: right;">-1.2049485</td>
+<td style="text-align: right;">0.4727382</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fB2 - fB3</td>
+<td style="text-align: right;">-0.0195000</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0545401</td>
+<td style="text-align: right;">0.0155401</td>
+<td style="text-align: right;">-1.9856194</td>
+<td style="text-align: right;">0.1581646</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <p>Generates pairwise comparisons among the levels of B with Tukey’s adjustment at 99% confidence.</p>
 </section>
 </section>
 <section id="dunnett-example" class="level2">
 <h2 class="anchored" data-anchor-id="dunnett-example">Dunnett Example</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(lsmB, <span class="at">method=</span><span class="st">"trt.vs.ctrl"</span>, <span class="at">adj=</span><span class="st">"mvt"</span>, <span class="at">ref=</span><span class="dv">1</span>),</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.99</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(lsmB, <span class="at">method=</span><span class="st">"trt.vs.ctrl"</span>, <span class="at">adj=</span><span class="st">"mvt"</span>, <span class="at">ref=</span><span class="dv">1</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.99</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 3%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fB2 - fB1</td>
+<td style="text-align: right;">-0.0076667</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0409348</td>
+<td style="text-align: right;">0.0256015</td>
+<td style="text-align: right;">-0.7806709</td>
+<td style="text-align: right;">0.6611256</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fB3 - fB1</td>
+<td style="text-align: right;">0.0118333</td>
+<td style="text-align: right;">0.0098206</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0214348</td>
+<td style="text-align: right;">0.0451015</td>
+<td style="text-align: right;">1.2049485</td>
+<td style="text-align: right;">0.4032893</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <p>Compares each level of B to the control (the first factor level by default).</p>
 </section>
 <section id="handling-unequal-sample-sizes" class="level2">
@@ -1288,20 +1614,36 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 <ul>
 <li><strong>Residual plots</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelAB)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">fitted</span>(modelAB)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res <span class="sc">~</span> fits)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(res); <span class="fu">qqline</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelAB)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">fitted</span>(modelAB)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res <span class="sc">~</span> fits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week-05_factorial-anova_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week-05_factorial-anova_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(res); <span class="fu">qqline</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week-05_factorial-anova_files/figure-html/unnamed-chunk-10-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week-05_factorial-anova_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
 <ul>
 <li><strong>Interaction plots</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> react.data<span class="sc">$</span>fA, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.factor =</span> react.data<span class="sc">$</span>fB,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">response =</span> react.data<span class="sc">$</span>y, </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type=</span><span class="st">"b"</span>, </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab=</span><span class="st">"A"</span>, </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.label=</span><span class="st">"B"</span>, </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab=</span><span class="st">"Mean of y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> react.data<span class="sc">$</span>fA, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.factor =</span> react.data<span class="sc">$</span>fB,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">response =</span> react.data<span class="sc">$</span>y, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type=</span><span class="st">"b"</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab=</span><span class="st">"A"</span>, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.label=</span><span class="st">"B"</span>, </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab=</span><span class="st">"Mean of y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -1380,18 +1722,21 @@ z_{ijt} = \frac{y_{ijt} - \hat{y}_{ijt}}{\sqrt{\tfrac{SS_{Error}}{n - 1}}}.
 </ol>
 </section>
 <section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a></li>
-<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression: Linear Modeling for Unbalanced Data</em> (Second Edition). Chapman and Hall/CRC, imprint of Taylor &amp; Francis.</li>
-<li>Montgomery, D. C. (2020). <em>Design and Analysis of Experiments</em> (10th ed.). Wiley.</li>
-</ol>
+
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-christensen2018" class="csl-entry" role="listitem">
+Christensen, R. (2018). <em>Analysis of variance, design, and regression: Linear modeling for unbalanced data</em> (2nd ed.). <span>Chapman and Hall/CRC</span>.
+</div>
+<div id="ref-dean2017" class="csl-entry" role="listitem">
+Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em> (2nd ed.). Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
 <footer class="site-footer">
     <div class="container text-center">
@@ -1822,6 +2167,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

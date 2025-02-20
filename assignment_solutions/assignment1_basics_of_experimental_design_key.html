@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
 
-<title>R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 1: Introduction to Experimental Design - Solution – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +21,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,10 +105,39 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
-<meta property="og:title" content="R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Assignment 1: Introduction to Experimental Design - Solution – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/assignment_solutions/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -86,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +159,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignment 1: Introduction to Experimental Design - Solution</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +210,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
-      <h1 class="title">R Help and Tutorial</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Assignment 1: Introduction to Experimental Design - Solution</h1>
                       </div>
   </div>
     
@@ -173,16 +235,10 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">18-Feb-2025</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 7, 2025</p>
-      </div>
-    </div>
       
     </div>
     
@@ -203,19 +259,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +288,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +311,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link active">
+  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +340,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -306,32 +362,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-help-and-tutorial-provided-by-the-instructor" id="toc-r-help-and-tutorial-provided-by-the-instructor" class="nav-link active" data-scroll-target="#r-help-and-tutorial-provided-by-the-instructor">R Help and Tutorial Provided by the Instructor</a>
+  <li><a href="#solution-key-and-grading-rubric" id="toc-solution-key-and-grading-rubric" class="nav-link active" data-scroll-target="#solution-key-and-grading-rubric"><strong>Solution Key and Grading Rubric</strong></a></li>
+  <li><a href="#part-1-key-concepts-of-experimental-design" id="toc-part-1-key-concepts-of-experimental-design" class="nav-link" data-scroll-target="#part-1-key-concepts-of-experimental-design"><strong>Part 1: Key Concepts of Experimental Design</strong></a>
   <ul class="collapse">
-  <li><a href="#r-subjects-topics" id="toc-r-subjects-topics" class="nav-link" data-scroll-target="#r-subjects-topics">Subjects and Topics</a>
+  <li><a href="#defining-objectives" id="toc-defining-objectives" class="nav-link" data-scroll-target="#defining-objectives"><strong>1. Defining Objectives</strong></a></li>
+  <li><a href="#experimental-vs.-observational-studies" id="toc-experimental-vs.-observational-studies" class="nav-link" data-scroll-target="#experimental-vs.-observational-studies"><strong>2. Experimental vs.&nbsp;Observational Studies</strong></a></li>
+  <li><a href="#basic-techniques-replication-blocking-and-randomization" id="toc-basic-techniques-replication-blocking-and-randomization" class="nav-link" data-scroll-target="#basic-techniques-replication-blocking-and-randomization"><strong>3. Basic Techniques: Replication, Blocking, and Randomization</strong></a></li>
+  </ul></li>
+  <li><a href="#part-2-checklist-for-planning-experiments" id="toc-part-2-checklist-for-planning-experiments" class="nav-link" data-scroll-target="#part-2-checklist-for-planning-experiments"><strong>Part 2: Checklist for Planning Experiments</strong></a>
   <ul class="collapse">
-  <li><a href="#subjects" id="toc-subjects" class="nav-link" data-scroll-target="#subjects">Subjects</a></li>
+  <li><a href="#defining-objectives-in-experiment-planning" id="toc-defining-objectives-in-experiment-planning" class="nav-link" data-scroll-target="#defining-objectives-in-experiment-planning"><strong>1. Defining Objectives in Experiment Planning</strong></a></li>
+  <li><a href="#purpose-of-pilot-experiments" id="toc-purpose-of-pilot-experiments" class="nav-link" data-scroll-target="#purpose-of-pilot-experiments"><strong>2. Purpose of Pilot Experiments</strong></a></li>
+  <li><a href="#hypothetical-scenario-fertilizer-experiment" id="toc-hypothetical-scenario-fertilizer-experiment" class="nav-link" data-scroll-target="#hypothetical-scenario-fertilizer-experiment"><strong>3. Hypothetical Scenario: Fertilizer Experiment</strong></a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#r-base-functions" id="toc-r-base-functions" class="nav-link" data-scroll-target="#r-base-functions">Help by R Base Functions</a>
+  <li><a href="#part-3-real-world-applications" id="toc-part-3-real-world-applications" class="nav-link" data-scroll-target="#part-3-real-world-applications"><strong>Part 3: Real-World Applications</strong></a>
   <ul class="collapse">
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">Help by R Packages</a>
+  <li><a href="#cotton-spinning-experiment" id="toc-cotton-spinning-experiment" class="nav-link" data-scroll-target="#cotton-spinning-experiment"><strong>1. Cotton-Spinning Experiment</strong></a></li>
+  <li><a href="#improvements-to-experiment" id="toc-improvements-to-experiment" class="nav-link" data-scroll-target="#improvements-to-experiment"><strong>2. Improvements to Experiment</strong></a></li>
+  </ul></li>
+  <li><a href="#part-4-numerical-application" id="toc-part-4-numerical-application" class="nav-link" data-scroll-target="#part-4-numerical-application"><strong>Part 4: Numerical Application</strong></a>
   <ul class="collapse">
-  <li><a href="#data-manipulation" id="toc-data-manipulation" class="nav-link" data-scroll-target="#data-manipulation">Data Manipulation</a></li>
-  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
-  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">Statistical Analysis</a></li>
-  <li><a href="#quarto-tutorial" id="toc-quarto-tutorial" class="nav-link" data-scroll-target="#quarto-tutorial">Quarto Tutorial</a></li>
+  <li><a href="#statistical-model" id="toc-statistical-model" class="nav-link" data-scroll-target="#statistical-model"><strong>1. Statistical Model</strong></a></li>
+  <li><a href="#anova-in-r" id="toc-anova-in-r" class="nav-link" data-scroll-target="#anova-in-r"><strong>2. ANOVA in R</strong></a></li>
+  <li><a href="#interpretation-of-anova" id="toc-interpretation-of-anova" class="nav-link" data-scroll-target="#interpretation-of-anova"><strong>3. Interpretation of ANOVA</strong></a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#general-online-r-help-and-resources" id="toc-general-online-r-help-and-resources" class="nav-link" data-scroll-target="#general-online-r-help-and-resources">General Online R Help and Resources</a>
-  <ul class="collapse">
-  <li><a href="#by-subjects" id="toc-by-subjects" class="nav-link" data-scroll-target="#by-subjects">By Subjects:</a></li>
-  <li><a href="#general-r-help-and-resources" id="toc-general-r-help-and-resources" class="nav-link" data-scroll-target="#general-r-help-and-resources">General R Help and Resources:</a></li>
-  <li><a href="#software-tools-and-resources" id="toc-software-tools-and-resources" class="nav-link" data-scroll-target="#software-tools-and-resources">Software Tools and Resources</a></li>
-  <li><a href="#additional-online-resources" id="toc-additional-online-resources" class="nav-link" data-scroll-target="#additional-online-resources">Additional Online Resources</a></li>
-  </ul></li>
-  <li><a href="#how-to-use-this-help-guide" id="toc-how-to-use-this-help-guide" class="nav-link" data-scroll-target="#how-to-use-this-help-guide">How to Use This Help Guide</a></li>
-  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
   </ul>
 </nav>
     </div>
@@ -342,178 +396,300 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="r-help-and-tutorial-provided-by-the-instructor" class="level1">
-<h1>R Help and Tutorial Provided by the Instructor</h1>
-<p>Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on <strong>Subjects</strong>, <strong>Topics</strong>, and implementation through <strong>R Base</strong> and <strong>Packages</strong>.</p>
-<section id="r-subjects-topics" class="level2">
-<h2 class="anchored" data-anchor-id="r-subjects-topics">Subjects and Topics</h2>
-<p>Below are the available subjects and their corresponding topics. Select a topic to view detailed help pages.</p>
-<section id="subjects" class="level3">
-<h3 class="anchored" data-anchor-id="subjects">Subjects</h3>
+<section id="solution-key-and-grading-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="solution-key-and-grading-rubric"><strong>Solution Key and Grading Rubric</strong></h2>
+<p>Each question includes a <strong>solution key</strong> with step-by-step explanations and a <strong>grading rubric</strong> that outlines how points should be awarded.</p>
+<hr>
+</section>
+<section id="part-1-key-concepts-of-experimental-design" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-key-concepts-of-experimental-design"><strong>Part 1: Key Concepts of Experimental Design</strong></h2>
+<section id="defining-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="defining-objectives"><strong>1. Defining Objectives</strong></h3>
+<section id="solution-key" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key"><strong>Solution Key</strong></h4>
+<p>Experiments are conducted for several primary reasons:</p>
 <ul>
-<li><strong>Data Manipulation</strong>
+<li><strong>To determine principal causes of variation</strong> in a response variable.
 <ul>
-<li><a href="./appendix/r-topics/r-data-frames-basics.html">Creating Data Frames</a></li>
-<li><a href="./appendix/r-topics/r-factors-basics.html">Working with Factors</a></li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Subsetting Data</a></li>
-<li><a href="./appendix/r-topics/r-data-transformation.html">Data Transformation and Wrangling</a></li>
-<li><a href="./appendix/r-topics/r-data-import-basics.html">Inporting Data into R</a></li>
+<li>Example: Studying how temperature affects product yield in a chemical reaction.</li>
 </ul></li>
-<li><strong>Data Visualization</strong>
+<li><strong>To find conditions for optimal response (max/min)</strong>.
 <ul>
-<li><a href="./appendix/r-topics/r-base-graphics-basics.html">Base R Graphics</a></li>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2 Basics</a></li>
+<li>Example: Identifying the ideal fertilizer application rate for maximum crop yield.</li>
 </ul></li>
-<li><strong>Statistical Analysis</strong>
+<li><strong>To compare responses across different conditions</strong>.
 <ul>
-<li><a href="./appendix/r-topics/r-hypothesis-testing-basics.html">Hypothesis Testing</a></li>
+<li>Example: Comparing the effectiveness of two manufacturing processes.</li>
 </ul></li>
-<li><strong>Quarto Tutorial</strong>
+<li><strong>To develop a predictive model</strong>.
 <ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure-extra.html">Figures and Tables in Quarto: Advanced Features</a></li>
+<li>Example: Creating a statistical model to forecast machinery failure.</li>
 </ul></li>
 </ul>
+<p><em>(Source: Dean et al., 2017, Ch. 1)</em></p>
 </section>
-</section>
-</section>
-<section id="r-base-functions" class="level1">
-<h1>Help by R Base Functions</h1>
+<section id="grading-rubric-10-points" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points"><strong>Grading Rubric (10 points)</strong></h4>
 <ul>
-<li><a href="./appendix/r-base/r-gl-basics.html">gl</a>: Generate Factor Levels</li>
-<li><a href="./appendix/r-base/r-interaction-basics.html">interaction</a>: Create Interaction Terms</li>
-<li><a href="./appendix/r-base/r-model.tables-basics.html">model.tables</a>: Extract Tables from Model Fits</li>
-<li><a href="./appendix/r-base/r-plot.design-basics.html">plot.design</a>: Plot Univariate Effects of a Design or Model</li>
-<li><a href="./appendix/r-base/r-rep-basics.html">rep</a>: Replicate Elements of Vectors and Lists</li>
-<li><a href="./appendix/r-base/r-replications-basics.html">replications</a>: Generate Replicate Numbers</li>
-<li><a href="./appendix/r-base/r-sample-basics.html">sample</a>: Randomly Sample Elements from a Vector</li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Base R Plotting</a></li>
-</ul>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">Help by R Packages</h2>
-<section id="data-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="data-manipulation">Data Manipulation</h3>
+<li><strong>Clear explanation of all four objectives (6 points)</strong>
 <ul>
-<li><a href="./appendix/r-packages/dplyr.html">dplyr</a></li>
-<li><a href="./appendix/r-packages/tidyr.html">tidyr</a></li>
-<li><a href="./appendix/r-packages/purrr.html">purrr</a></li>
-<li><a href="./appendix/r-packages/stringr.html">stringr</a></li>
-</ul>
-</section>
-<section id="data-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="data-visualization">Data Visualization</h3>
-<ul>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2</a></li>
-</ul>
-</section>
-<section id="statistical-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h3>
-<ul>
-<li><a href="./appendix/r-packages/emmeans.html">emmeans</a></li>
-<li><a href="./appendix/r-packages/multcomp.html">multcomp</a></li>
-<li><a href="./appendix/r-packages/pwr.html">pwr</a></li>
-</ul>
-</section>
-<section id="quarto-tutorial" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-tutorial">Quarto Tutorial</h3>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="general-online-r-help-and-resources" class="level1">
-<h1>General Online R Help and Resources</h1>
-<p>Here are some general online resources to help you learn R programming and data analysis:</p>
-<section id="by-subjects" class="level2">
-<h2 class="anchored" data-anchor-id="by-subjects">By Subjects:</h2>
-<ul>
-<li><strong>Data Manipulation</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/r-data-import-tutorial">How to Import Data Into R</a> from <a href="https://www.datacamp.com/">DataCamp</a>.</li>
+<li>Full points for detailed definitions and correct examples.</li>
+<li>Deduct <strong>1-2 points</strong> for missing or vague descriptions.</li>
 </ul></li>
-<li><strong>Data Visualization</strong>
+<li><strong>Relevant examples provided (4 points)</strong>
 <ul>
-<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">ggplot2 Basics</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/linear-regression-R">Regression</a> from DataCamp.</li>
-<li><a href="https://www.datanovia.com/en/lessons/anova-in-r/">ANOVA in R</a> from DataNovia.</li>
-</ul></li>
-<li><strong>Programming with R</strong>
-<ul>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/control-structures.html">Control Structures</a> from Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/functions.html">Writing Functions</a> from Hadley Wickham.</li>
-<li><a href="https://adv-r.hadley.nz/debugging.html">Debugging</a> from Hadley Wickham.</li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">Debugging with the RStudio IDE</a> from Positron RStudio Support.</li>
+<li>Full points if each objective has a valid example.</li>
+<li>Deduct <strong>1-2 points</strong> for incorrect or unclear examples.</li>
 </ul></li>
 </ul>
+<hr>
 </section>
-<section id="general-r-help-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="general-r-help-and-resources">General R Help and Resources:</h2>
-<ul>
-<li><a href="https://www.rdocumentation.org/">R Documentation</a>: User-friendly interface to R documentation.</li>
-<li><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a>: Quick reference guides for R and RStudio.</li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a>: Online book on data science with R by Hadley Wickham and Garrett Grolemund.</li>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/">R Programming for Data Science</a> Online book by Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/">Advanced R</a>: Online book on advanced R programming by Hadley Wickham.</li>
-<li><a href="https://forum.posit.co/">Posit Community</a>p: Posit Community forum for R users.</li>
-<li><a href="https://www.r-bloggers.com/">R Bloggers</a>: Blog aggregator for R programming.</li>
-<li><a href="https://stackoverflow.com/questions/tagged/r">Stack Overflow R Tag</a>: Stack Overflow questions tagged with R.</li>
-</ul>
 </section>
-<section id="software-tools-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="software-tools-and-resources">Software Tools and Resources</h2>
-<p>To complete assignments and analyses, you will need access to R and related tools.</p>
-<ul>
-<li><strong>R Installation:</strong> <a href="https://cran.r-project.org/">Download R</a><br>
-</li>
-<li><strong>RStudio IDE:</strong> <a href="https://www.rstudio.com/products/rstudio/download/">Download RStudio</a><br>
-</li>
-<li><strong>VS Code IDE:</strong> <a href="https://code.visualstudio.com/">Download VS Code</a></li>
-<li><strong>Positron IDE</strong>: <a href="https://positron.posit.co/download">Download Positron</a></li>
-<li><a href="https://quarto.org/docs/tools/rstudio.html">RStudio IDE Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/hello/vscode.html">VS Code Editor Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/rstudio.html">Quarto Authoring with RStudio</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/vscode.html">Quarto Authoring with VS Code</a></li>
-</ul>
+<section id="experimental-vs.-observational-studies" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-vs.-observational-studies"><strong>2. Experimental vs.&nbsp;Observational Studies</strong></h3>
+<section id="solution-key-1" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-1"><strong>Solution Key</strong></h4>
+<p><strong>Experimental studies</strong> involve controlled manipulation of variables to establish cause-effect relationships. - Example: A factory runs an experiment by adjusting machine settings to measure output quality.</p>
+<p><strong>Observational studies</strong> involve collecting data without intervention. - Example: Monitoring factory machines to identify trends in product defects without changing settings.</p>
+<p><em>(Source: Dean et al., 2017, Ch. 1)</em></p>
 </section>
-<section id="additional-online-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-online-resources">Additional Online Resources</h2>
+<section id="grading-rubric-10-points-1" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points-1"><strong>Grading Rubric (10 points)</strong></h4>
 <ul>
-<li><strong>Quarto Documentation</strong>: <a href="https://quarto.org/docs/">Learn Quarto</a></li>
-<li><strong>Online R Help</strong>:
+<li><strong>Definition of experimental vs.&nbsp;observational studies (6 points)</strong>
 <ul>
-<li><a href="https://cran.r-project.org/manuals.html">CRAN R Documentation</a></li>
-<li><a href="https://posit.co/resources/cheatsheets/">RStudio Cheat Sheets</a></li>
+<li>3 points each for clear, correct definitions.</li>
 </ul></li>
-<li><strong>Video Tutorials</strong>:
+<li><strong>Examples related to the factory setting (4 points)</strong>
 <ul>
-<li><a href="https://www.youtube.com/results?search_query=r+programming+tutorial">R Programming for Beginners (YouTube)</a></li>
+<li>Deduct <strong>1-2 points</strong> for unclear or missing examples.</li>
 </ul></li>
 </ul>
+<hr>
 </section>
 </section>
-<section id="how-to-use-this-help-guide" class="level1">
-<h1>How to Use This Help Guide</h1>
+<section id="basic-techniques-replication-blocking-and-randomization" class="level3">
+<h3 class="anchored" data-anchor-id="basic-techniques-replication-blocking-and-randomization"><strong>3. Basic Techniques: Replication, Blocking, and Randomization</strong></h3>
+<section id="solution-key-2" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-2"><strong>Solution Key</strong></h4>
+<ul>
+<li><strong>Replication</strong>: Repeating experimental conditions to increase precision.
+<ul>
+<li>Example: Testing a drug on multiple patients to estimate treatment effects.</li>
+</ul></li>
+<li><strong>Blocking</strong>: Grouping experimental units based on similarities to control variability.
+<ul>
+<li>Example: In an agricultural experiment, blocking plots based on soil type.</li>
+</ul></li>
+<li><strong>Randomization</strong>: Assigning treatments randomly to reduce bias.
+<ul>
+<li>Example: Randomly assigning test subjects to treatment and control groups.</li>
+</ul></li>
+</ul>
+<p><em>(Source: Dean et al., 2017, Ch. 1.1.2–1.1.4)</em></p>
+</section>
+<section id="grading-rubric-10-points-2" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points-2"><strong>Grading Rubric (10 points)</strong></h4>
+<ul>
+<li><strong>Clear definitions of replication, blocking, and randomization (6 points)</strong>
+<ul>
+<li>Deduct <strong>1-2 points</strong> for missing or unclear definitions.</li>
+</ul></li>
+<li><strong>Relevant examples (4 points)</strong>
+<ul>
+<li>Deduct <strong>1-2 points</strong> for incorrect or vague examples.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-2-checklist-for-planning-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-checklist-for-planning-experiments"><strong>Part 2: Checklist for Planning Experiments</strong></h2>
+<section id="defining-objectives-in-experiment-planning" class="level3">
+<h3 class="anchored" data-anchor-id="defining-objectives-in-experiment-planning"><strong>1. Defining Objectives in Experiment Planning</strong></h3>
+<section id="solution-key-3" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-3"><strong>Solution Key</strong></h4>
+<p>Key steps in experimental planning:</p>
 <ol type="1">
-<li><strong>Explore Subjects and Topics:</strong> Use the Subjects and Topics section to browse R concepts by category.</li>
-<li><strong>R Base Help:</strong> Click on the R Base links to learn about core R functions.</li>
-<li><strong>Packages Help:</strong> Dive into R packages to explore advanced features and functionalities.</li>
+<li>Define clear <strong>objectives</strong>.</li>
+<li>Identify <strong>sources of variation</strong>.</li>
+<li>Choose <strong>assignment rules</strong> for treatments.</li>
+<li>Specify <strong>measurements and procedures</strong>.</li>
+<li>Conduct a <strong>pilot experiment</strong>.</li>
+<li>Define the <strong>statistical model</strong>.</li>
+<li>Plan <strong>data analysis</strong>.</li>
+<li>Determine <strong>sample size</strong>.</li>
+<li><strong>Review and revise</strong> the plan.</li>
 </ol>
+<p><em>(Source: Dean et al., 2017, Ch. 2.2)</em></p>
 </section>
-<section id="r-code-and-data-files-from-the-textbook" class="level1">
-<h1>R Code and Data Files from the Textbook</h1>
-<p>Here is a page for the R program files used in the textbook:</p>
+<section id="grading-rubric-10-points-3" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points-3"><strong>Grading Rubric (10 points)</strong></h4>
 <ul>
-<li><a href="./r-code-data-book.html">R Code and Data Files from the Textbook</a></li>
-<li><a href="./data-files-book.html">Data Files from the Textbook</a></li>
+<li><strong>Accurate list of checklist items (6 points)</strong>
+<ul>
+<li>Full points if all are listed; partial credit for missing or incorrect items.</li>
+</ul></li>
+<li><strong>Explanation of defining objectives and identifying variation (4 points)</strong>
+<ul>
+<li>Deduct <strong>1-2 points</strong> for incomplete explanations.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="purpose-of-pilot-experiments" class="level3">
+<h3 class="anchored" data-anchor-id="purpose-of-pilot-experiments"><strong>2. Purpose of Pilot Experiments</strong></h3>
+<section id="solution-key-4" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-4"><strong>Solution Key</strong></h4>
+<p>Pilot experiments:</p>
+<ul>
+<li>Help <strong>identify unforeseen challenges</strong>.</li>
+<li>Provide <strong>preliminary estimates</strong> of variation.</li>
+<li>Allow refinement of <strong>experimental procedures</strong>.</li>
+</ul>
+<p><em>(Source: Dean et al., 2017, Ch. 2.2.5)</em></p>
+</section>
+<section id="grading-rubric-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-5-points"><strong>Grading Rubric (5 points)</strong></h4>
+<ul>
+<li><strong>Accurate explanation of purpose (3 points)</strong></li>
+<li><strong>Examples or rationale provided (2 points)</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="hypothetical-scenario-fertilizer-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="hypothetical-scenario-fertilizer-experiment"><strong>3. Hypothetical Scenario: Fertilizer Experiment</strong></h3>
+<section id="solution-key-5" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-5"><strong>Solution Key</strong></h4>
+<ul>
+<li><strong>Define Objectives</strong>: Determine which fertilizer maximizes plant growth.</li>
+<li><strong>Identify Sources of Variation</strong>: Soil type, sunlight, watering.</li>
+<li><strong>Assignment Rule</strong>: Randomly assign fertilizers to plots, use blocking if needed.</li>
+</ul>
+<p><em>(Source: Dean et al., 2017, Ch. 2.2.1–2.2.3)</em></p>
+</section>
+<section id="grading-rubric-10-points-4" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points-4"><strong>Grading Rubric (10 points)</strong></h4>
+<ul>
+<li><strong>Clear outline of experiment (6 points)</strong></li>
+<li><strong>Appropriate use of blocking/randomization (4 points)</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-3-real-world-applications" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-real-world-applications"><strong>Part 3: Real-World Applications</strong></h2>
+<section id="cotton-spinning-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="cotton-spinning-experiment"><strong>1. Cotton-Spinning Experiment</strong></h3>
+<section id="solution-key-6" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-6"><strong>Solution Key</strong></h4>
+<ul>
+<li><strong>Objective</strong>: Improve yarn strength.</li>
+<li><strong>Blocking</strong>: Used different batches of cotton to reduce variability.</li>
+</ul>
+<p><em>(Source: Dean et al., 2017, Ch. 2.3)</em></p>
+</section>
+<section id="grading-rubric-10-points-5" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points-5"><strong>Grading Rubric (10 points)</strong></h4>
+<ul>
+<li><strong>Accurate summary (6 points)</strong></li>
+<li><strong>Explanation of blocking (4 points)</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="improvements-to-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="improvements-to-experiment"><strong>2. Improvements to Experiment</strong></h3>
+<section id="solution-key-7" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-7"><strong>Solution Key</strong></h4>
+<ul>
+<li>Introduce <strong>randomized complete block design</strong>.</li>
+<li>Increase <strong>replication</strong> to improve statistical power.</li>
+</ul>
+<p><em>(Source: Dean et al., 2017, Ch. 2.3)</em></p>
+</section>
+<section id="grading-rubric-5-points-1" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-5-points-1"><strong>Grading Rubric (5 points)</strong></h4>
+<ul>
+<li><strong>Relevant improvement suggested (3 points)</strong></li>
+<li><strong>Justification provided (2 points)</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-4-numerical-application" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-numerical-application"><strong>Part 4: Numerical Application</strong></h2>
+<section id="statistical-model" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-model"><strong>1. Statistical Model</strong></h3>
+<section id="solution-key-8" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-8"><strong>Solution Key</strong></h4>
+<p><span class="math display">\[
+Y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(Y_{ij}\)</span> = Response variable</li>
+<li><span class="math inline">\(\mu\)</span> = Grand mean</li>
+<li><span class="math inline">\(\tau_i\)</span> = Treatment effect</li>
+<li><span class="math inline">\(\beta_j\)</span> = Block effect</li>
+<li><span class="math inline">\(\epsilon_{ij}\)</span> = Error term</li>
+</ul>
+</section>
+<section id="grading-rubric-5-points-2" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-5-points-2"><strong>Grading Rubric (5 points)</strong></h4>
+<ul>
+<li><strong>Correct model equation (3 points)</strong></li>
+<li><strong>Definitions provided (2 points)</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="anova-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="anova-in-r"><strong>2. ANOVA in R</strong></h3>
+<section id="solution-key-9" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-9"><strong>Solution Key</strong></h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Block =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">each=</span><span class="dv">3</span>)),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Treatment =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">times=</span><span class="dv">5</span>)),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Response =</span> <span class="fu">c</span>(<span class="fl">10.1</span>, <span class="fl">9.8</span>, <span class="fl">10.2</span>, <span class="fl">10.5</span>, <span class="fl">9.7</span>, <span class="fl">10.3</span>, <span class="fl">10.3</span>, <span class="fl">10.1</span>, <span class="fl">10.4</span>, <span class="fl">10.4</span>, <span class="fl">9.9</span>, <span class="fl">10.0</span>, <span class="fl">10.2</span>, <span class="fl">10.0</span>, <span class="fl">10.1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Treatment <span class="sc">+</span> Block, <span class="at">data=</span>data)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="grading-rubric-10-points-6" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points-6"><strong>Grading Rubric (10 points)</strong></h4>
+<ul>
+<li><strong>Correct R code (6 points)</strong></li>
+<li><strong>Interpretable output (4 points)</strong></li>
+</ul>
+</section>
+</section>
+<section id="interpretation-of-anova" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-anova"><strong>3. Interpretation of ANOVA</strong></h3>
+<section id="solution-key-10" class="level4">
+<h4 class="anchored" data-anchor-id="solution-key-10"><strong>Solution Key</strong></h4>
+<ul>
+<li><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>)</strong>: No treatment effect.</li>
+<li><strong>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>)</strong>: At least one treatment differs.</li>
+<li><strong>Decision</strong>: Reject <span class="math inline">\(H_0\)</span> if p-value &lt; 0.05.</li>
+</ul>
+</section>
+<section id="grading-rubric-10-points-7" class="level4">
+<h4 class="anchored" data-anchor-id="grading-rubric-10-points-7"><strong>Grading Rubric (10 points)</strong></h4>
+<ul>
+<li><strong>Correct hypothesis statements (4 points)</strong></li>
+<li><strong>Interpretation of p-value (6 points)</strong></li>
 </ul>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -951,5 +1127,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

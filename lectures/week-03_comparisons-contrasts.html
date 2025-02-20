@@ -235,7 +235,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">13-Jan-2025</p>
+        <p class="date">08-Feb-2025</p>
       </div>
     </div>
     
@@ -402,9 +402,30 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
   <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <li><a href="#multiple-comparisons-and-contrasts---advanced-materials" id="toc-multiple-comparisons-and-contrasts---advanced-materials" class="nav-link" data-scroll-target="#multiple-comparisons-and-contrasts---advanced-materials">Multiple Comparisons and Contrasts - Advanced Materials</a>
   <ul class="collapse">
+  <li><a href="#overview-of-classical-methods" id="toc-overview-of-classical-methods" class="nav-link" data-scroll-target="#overview-of-classical-methods">Overview of Classical Methods</a></li>
+  <li><a href="#illustration-pairwise-comparisons-after-anova" id="toc-illustration-pairwise-comparisons-after-anova" class="nav-link" data-scroll-target="#illustration-pairwise-comparisons-after-anova">Illustration: Pairwise Comparisons After ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#in-r" id="toc-in-r" class="nav-link" data-scroll-target="#in-r">In <strong>R</strong>:</a></li>
+  </ul></li>
+  <li><a href="#false-discovery-rate-fdr" id="toc-false-discovery-rate-fdr" class="nav-link" data-scroll-target="#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+  <li><a href="#benjaminihochberg-bh-procedure" id="toc-benjaminihochberg-bh-procedure" class="nav-link" data-scroll-target="#benjaminihochberg-bh-procedure">Benjamini–Hochberg (BH) Procedure</a>
+  <ul class="collapse">
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps:</a></li>
+  <li><a href="#in-r-1" id="toc-in-r-1" class="nav-link" data-scroll-target="#in-r-1">In R:</a></li>
+  </ul></li>
+  <li><a href="#other-fdr-variants" id="toc-other-fdr-variants" class="nav-link" data-scroll-target="#other-fdr-variants">Other FDR Variants</a></li>
+  <li><a href="#comparing-fdr-vs.-fwer" id="toc-comparing-fdr-vs.-fwer" class="nav-link" data-scroll-target="#comparing-fdr-vs.-fwer">Comparing FDR vs.&nbsp;FWER</a></li>
+  <li><a href="#practical-notes-and-r-guidance" id="toc-practical-notes-and-r-guidance" class="nav-link" data-scroll-target="#practical-notes-and-r-guidance">Practical Notes and R Guidance</a></li>
+  <li><a href="#extended-example" id="toc-extended-example" class="nav-link" data-scroll-target="#extended-example">Extended Example</a>
+  <ul class="collapse">
+  <li><a href="#in-r-2" id="toc-in-r-2" class="nav-link" data-scroll-target="#in-r-2">In R:</a></li>
+  </ul></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
+  <li><a href="#references-and-further-reading" id="toc-references-and-further-reading" class="nav-link" data-scroll-target="#references-and-further-reading">References and Further Reading</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   <li><a href="#appendix-advanced-mathematical-details" id="toc-appendix-advanced-mathematical-details" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-details">Appendix: Advanced Mathematical Details</a>
@@ -670,16 +691,228 @@ Table&nbsp;3: Contrast Testing
 <li><strong>Power Analysis for MCPs:</strong> Using the <code>pwr</code> package in R, simulate a scenario with four treatments and known variance. Determine sample size needed to achieve 80% power under Tukey’s HSD for detecting a specified difference.</li>
 </ol>
 </section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>MCPs and contrasts extend the basic ANOVA framework to address realistic experimental questions:</p>
 <ul>
 <li>MCPs control the “false alarm” rate across multiple inferences.</li>
 <li>Contrasts provide targeted insight into predetermined scientific hypotheses.</li>
 <li>Modern statistical software facilitates these procedures, ensuring robust, interpretable results.</li>
 </ul>
-<p>By understanding these methods, researchers can design more informative experiments and draw conclusions that stand on rigorous statistical ground.</p>
+</section>
+</section>
+<section id="multiple-comparisons-and-contrasts---advanced-materials" class="level1">
+<h1>Multiple Comparisons and Contrasts - Advanced Materials</h1>
+<p>When an analysis involves more than one hypothesis test—such as multiple pairwise contrasts after ANOVA or testing multiple outcomes—traditional per-comparison <span class="math inline">\(\alpha=0.05\)</span> thresholds can lead to an inflated chance of making at least one false discovery. Multiple comparison procedures (MCPs) are designed to ensure the probability of making <strong>at least one</strong> false rejection (i.e., <strong>familywise error rate</strong>, FWER) is controlled at a desired level (often 5%).</p>
+<section id="overview-of-classical-methods" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-classical-methods">Overview of Classical Methods</h2>
+<ul>
+<li><strong>Bonferroni Correction</strong>
+<ul>
+<li><strong>Adjustment</strong>: <span class="math inline">\(\alpha^* = \alpha / m\)</span> for each of the <span class="math inline">\(m\)</span> tests.</li>
+<li><strong>Confidence Intervals</strong>: Expand accordingly by using <span class="math inline">\(t_{\alpha^*/2,\,df}\)</span> for each test.</li>
+<li><strong>Advantages</strong>: Easy to understand and implement; mathematically guarantees control of the FWER under very general conditions (no need for independence).</li>
+<li><strong>Disadvantages</strong>: Can be <strong>overly conservative</strong>, especially for large <span class="math inline">\(m\)</span>.</li>
+</ul></li>
+<li><strong>Holm’s Step-Down Method</strong>
+<ul>
+<li>An <strong>adaptive</strong> Bonferroni: Sort p-values from smallest to largest: <span class="math inline">\(p_{(1)} \le p_{(2)} \le \dots \le p_{(m)}.\)</span></li>
+<li>Compare <span class="math inline">\(p_{(1)}\)</span> to <span class="math inline">\(\alpha/m\)</span>. If significant, compare <span class="math inline">\(p_{(2)}\)</span> to <span class="math inline">\(\alpha/(m-1)\)</span>, and so on.</li>
+<li><strong>Advantages</strong>: Less conservative than Bonferroni, still guarantees FWER control.</li>
+<li><strong>Example</strong>: If the smallest p-value is less than <span class="math inline">\(\alpha/m\)</span>, reject that hypothesis; then move to the next one with a slightly higher threshold, <span class="math inline">\(\alpha/(m-1)\)</span>. Continue until a test fails to reject or until all tests are done.</li>
+</ul></li>
+<li><strong>Hochberg’s Step-Up Method</strong>
+<ul>
+<li>Another adaptive approach, sometimes more powerful than Holm but requires <strong>certain assumptions</strong> (e.g., independence or some positive dependence structure).</li>
+<li>Sort p-values in descending order (largest to smallest) and proceed in a step-up fashion.</li>
+</ul></li>
+<li><strong>Scheffé’s Method</strong> (specific to ANOVA)
+<ul>
+<li>Designed to test <strong>any possible</strong> linear contrast among means after a one-way ANOVA.</li>
+<li>Uses an <span class="math inline">\(F\)</span>-ratio scaling factor <span class="math inline">\(\sqrt{(v-1)\,F_{v-1,\,df,\,\alpha}}\)</span> to widen intervals.</li>
+<li><strong>Pros</strong>: Very flexible when many post-hoc contrasts might be considered.</li>
+<li><strong>Cons</strong>: Often considered conservative because it covers the “worst-case” scenario of an infinite number of possible contrasts.</li>
+</ul></li>
+<li><strong>Tukey’s Honestly Significant Difference (HSD)</strong>
+<ul>
+<li>Optimized for <strong>all pairwise comparisons</strong> among <span class="math inline">\(v\)</span> groups.</li>
+<li>Relies on the <strong>Studentized range</strong> statistic <span class="math inline">\(q\)</span>.</li>
+<li>Typically more powerful than Scheffé when <em>only</em> pairwise comparisons are needed.</li>
+</ul></li>
+<li><strong>Dunnett’s Procedure</strong>
+<ul>
+<li>Special-case procedure for comparing <strong>several treatments</strong> to <strong>one control</strong>.</li>
+<li>Uses a multivariate <span class="math inline">\(t\)</span>-distribution for its critical values, producing narrower intervals (and higher power) than a general method like Bonferroni if this is the only family of tests performed.</li>
+</ul></li>
+</ul>
+</section>
+<section id="illustration-pairwise-comparisons-after-anova" class="level2">
+<h2 class="anchored" data-anchor-id="illustration-pairwise-comparisons-after-anova">Illustration: Pairwise Comparisons After ANOVA</h2>
+<p><strong>Scenario</strong>: You have 4 treatments in a one-way ANOVA, and you want to compare each pair of treatments <span class="math inline">\((v=4, m=6\)</span> pairwise comparisons). - <strong>Bonferroni</strong>: Each test at <span class="math inline">\(\alpha/6\approx 0.0083\)</span>. - <strong>Tukey’s HSD</strong>: R software would provide a critical difference based on the studentized range <span class="math inline">\(q_{4, df, \alpha}\)</span>. This typically yields narrower confidence intervals than Bonferroni because it leverages the specific nature of pairwise testing.</p>
+<section id="in-r" class="level3">
+<h3 class="anchored" data-anchor-id="in-r">In <strong>R</strong>:</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> treatment, <span class="at">data =</span> your_data)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tukey_result <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(model, <span class="st">"treatment"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>tukey_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>TukeyHSD()</code> automatically applies the Studentized range logic to give adjusted p-values and confidence intervals for each pairwise comparison.</li>
+</ul>
+</section>
+</section>
+<section id="false-discovery-rate-fdr" class="level2">
+<h2 class="anchored" data-anchor-id="false-discovery-rate-fdr">False Discovery Rate (FDR)</h2>
+<p>For studies with <strong>large numbers of hypotheses</strong>, such as genomics, proteomics, or large-scale medical analyses, controlling the FWER (i.e., the chance of <em>any</em> false positive) can be very stringent and can drastically reduce statistical power. An alternative is to control the <strong>False Discovery Rate (FDR)</strong>, which is defined as:</p>
+<p><span class="math display">\[
+\text{FDR} = \mathbb{E}\!\biggl[\frac{\text{Number of False Rejections}}{\text{Total Number of Rejections}}\biggr].
+\]</span></p>
+<p>In other words, among all the rejections you make, the FDR method aims to keep the expected proportion of those that are false under a specified level (<span class="math inline">\(\alpha\)</span>). This is often less conservative than controlling the familywise error rate and can be more suitable when you have hundreds or thousands of tests.</p>
+</section>
+<section id="benjaminihochberg-bh-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="benjaminihochberg-bh-procedure">Benjamini–Hochberg (BH) Procedure</h2>
+<section id="steps" class="level3">
+<h3 class="anchored" data-anchor-id="steps">Steps:</h3>
+<ul>
+<li>Sort p-values from <strong>smallest</strong> to <strong>largest</strong>: <span class="math inline">\(p_{(1)} \le p_{(2)} \le \cdots \le p_{(m)}\)</span>.</li>
+<li>Find the largest <span class="math inline">\(k\)</span> such that</li>
+</ul>
+<p><span class="math display">\[
+p_{(k)} \; \le \; \frac{k}{m}\,\alpha.
+\]</span></p>
+<ul>
+<li><p>Reject the null hypotheses for all <span class="math inline">\(p_{(i)}, i \le k\)</span>.</p></li>
+<li><p><strong>Interpretation</strong>: You keep rejecting from the smallest p-value up to a point where the p-value is no longer below a threshold adjusted by <span class="math inline">\(\frac{k}{m}\alpha\)</span>.</p></li>
+<li><p><strong>Result</strong>: On average, the proportion of “rejected hypotheses” that are false positives is capped by <span class="math inline">\(\alpha\)</span>.</p></li>
+</ul>
+<p><strong>Example</strong>: Suppose <span class="math inline">\(m=1000\)</span> tests, with <span class="math inline">\(\alpha=0.05\)</span>. You list p-values in ascending order. If the 40th smallest p-value still satisfies <span class="math inline">\(p_{(40)} \le (40/1000)*0.05 = 0.002\)</span>, you reject that one. But if the 41st smallest p-value is 0.003, which does not meet the criterion <span class="math inline">\(\le 0.00205\)</span>, you stop at 40 rejections.</p>
+</section>
+<section id="in-r-1" class="level3">
+<h3 class="anchored" data-anchor-id="in-r-1">In R:</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">c</span>(…)  <span class="co"># your vector of raw p-values</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>p_adjusted <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(p_vals, <span class="at">method =</span> <span class="st">"BH"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># p_adjusted now contains BH-adjusted p-values</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>significant <span class="ot">&lt;-</span> p_adjusted <span class="ot">&lt;-</span>  <span class="fl">0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>p.adjust(…, method="BH")</code> applies the Benjamini–Hochberg procedure by default.</li>
+</ul>
+</section>
+</section>
+<section id="other-fdr-variants" class="level2">
+<h2 class="anchored" data-anchor-id="other-fdr-variants">Other FDR Variants</h2>
+<ul>
+<li><strong>Benjamini–Yekutieli</strong> (BY): Accommodates certain dependency structures by replacing <span class="math inline">\(\frac{k}{m}\alpha\)</span> with <span class="math inline">\(\frac{k}{m} \frac{\alpha}{\sum_{i=1}^m (1/i)}\)</span>. More conservative.</li>
+<li><strong>Storey’s q-Value</strong> approach: Focuses on direct estimation of the <em>proportion</em> of null hypotheses that are true, providing a “q-value” analogous to an FDR-adjusted p-value.</li>
+</ul>
+</section>
+<section id="comparing-fdr-vs.-fwer" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-fdr-vs.-fwer">Comparing FDR vs.&nbsp;FWER</h2>
+<table class="table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 41%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Criterion</strong></th>
+<th><strong>Familywise Error Rate (FWER)</strong></th>
+<th><strong>False Discovery Rate (FDR)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Definition</strong></td>
+<td>Probability of <strong>at least one</strong> false rejection in a set of tests.</td>
+<td>Expected <strong>proportion</strong> of false positives among all rejections.</td>
+</tr>
+<tr class="even">
+<td><strong>Interpretation</strong></td>
+<td>Very stringent; zero-tolerance approach: “I want <strong>no</strong> false positives.”</td>
+<td>Allows some false positives but <strong>controls proportion</strong> of errors among significant findings.</td>
+</tr>
+<tr class="odd">
+<td><strong>Methods</strong></td>
+<td>Bonferroni, Holm, Hochberg, Tukey, Scheffé, Dunnett, etc.</td>
+<td>Benjamini–Hochberg, Benjamini–Yekutieli, q-value, etc.</td>
+</tr>
+<tr class="even">
+<td><strong>Use Cases</strong></td>
+<td>Small to moderate number of comparisons (e.g., typical ANOVA-based multiple comparisons).</td>
+<td>Large-scale testing (e.g., genomics, proteomics, data-mining). More powerful in “big data” scenarios.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="practical-notes-and-r-guidance" class="level2">
+<h2 class="anchored" data-anchor-id="practical-notes-and-r-guidance">Practical Notes and R Guidance</h2>
+<ul>
+<li><strong>Balancing Stringency and Discovery</strong>
+<ul>
+<li>In typical <strong>design-of-experiments</strong> contexts (small <span class="math inline">\(m\)</span>), controlling FWER with classical methods (Tukey, Dunnett, Scheffé) is common.</li>
+<li>In <strong>high-dimensional</strong> settings (large <span class="math inline">\(m\)</span>), FDR-based approaches provide more power while accepting a controlled fraction of false positives.</li>
+</ul></li>
+<li><strong>Implementation Tips</strong>
+<ul>
+<li>Always <strong>report</strong> which correction method was used.</li>
+<li>For <strong>one-way ANOVA</strong> with moderate group sizes:
+<ul>
+<li><strong>TukeyHSD</strong> for pairwise tests in base R.</li>
+<li><strong>glht()</strong> in <code>multcomp</code> can handle Dunnett’s or other customized contrasts.</li>
+</ul></li>
+<li>For <strong>large sets of p-values</strong> (e.g., from omics or data-mining):
+<ul>
+<li>Use <code>p.adjust(…, method = "BH")</code> or a specialized package for more advanced FDR control.</li>
+</ul></li>
+</ul></li>
+<li><strong>Be Aware of Underlying Assumptions</strong>
+<ul>
+<li>Some methods (e.g., Hochberg’s step-up) assume independence or positive correlation among tests.</li>
+<li>If dependencies are complex, it can alter the conservativeness of the corrections.</li>
+</ul></li>
+</ul>
+</section>
+<section id="extended-example" class="level2">
+<h2 class="anchored" data-anchor-id="extended-example">Extended Example</h2>
+<p><strong>High-Throughput Screening</strong>: Suppose you test 1000 compounds for their effect on tumor cell viability. You collect p-values for each compound’s effect vs.&nbsp;control. Without any correction:</p>
+<p><span class="math display">\[
+\text{FWER} = 1 - (1-0.05)^{1000} \approx 1 \; (\text{virtually } 100\%\text{ chance of at least one false positive}).
+\]</span></p>
+<ul>
+<li><strong>FWER Control</strong> (Bonferroni): <span class="math inline">\(\alpha^* = 0.05 / 1000 = 0.00005.\)</span> This drastically reduces your chance of even a single false discovery, but <strong>many true effects</strong> could be missed.</li>
+<li><strong>FDR Control</strong> (Benjamini–Hochberg): Typically yields a threshold that might let you reject dozens or hundreds of null hypotheses while controlling the expected proportion of false positives among your rejections at 5%.</li>
+</ul>
+<section id="in-r-2" class="level3">
+<h3 class="anchored" data-anchor-id="in-r-2">In R:</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppose p_raw is a vector of 1000 p-values from the tests</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p_vals_adj_bonf <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(p_raw, <span class="at">method =</span> <span class="st">"bonferroni"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>p_vals_adj_bh <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(p_raw, <span class="at">method =</span> <span class="st">"BH"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Summaries:</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p_vals_adj_bonf <span class="sc">&lt;</span> <span class="fl">0.05</span>)  <span class="co"># how many are called significant under Bonferroni</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p_vals_adj_bh <span class="sc">&lt;</span> <span class="fl">0.05</span>)    <span class="co"># how many are called significant under BH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Expect the <strong>Bonferroni</strong> set of significant tests to be a subset of the <strong>BH</strong> set.</li>
+<li>The BH procedure, by allowing for a controlled fraction of false positives, typically identifies more “discoveries.”</li>
+</ul>
+</section>
+</section>
+<section id="conclusion-1" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-1">Conclusion</h2>
+<p>Both <strong>familywise error rate (FWER)</strong> and <strong>false discovery rate (FDR)</strong> control are essential concepts for valid statistical inference in the face of multiple comparisons:</p>
+<ul>
+<li><strong>FWER</strong> methods (like Bonferroni, Holm, Tukey, Scheffé, Dunnett) ensure that the probability of any false positive across all tests remains below <span class="math inline">\(\alpha\)</span>.</li>
+<li><strong>FDR</strong> methods (like Benjamini–Hochberg) allow some false positives but control their proportion among all discoveries, making them particularly valuable for large-scale testing contexts.</li>
+</ul>
+<p>Understanding these frameworks—and carefully choosing which to apply—helps maintain the integrity of your findings while balancing the risk of missing real effects.</p>
+</section>
+<section id="references-and-further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="references-and-further-reading">References and Further Reading</h2>
+<ul>
+<li><strong>Benjamini, Y., &amp; Hochberg, Y.</strong> (1995). Controlling the false discovery rate: A practical and powerful approach to multiple testing. <em>Journal of the Royal Statistical Society. Series B</em>, 57(1), 289–300.</li>
+<li><strong>Hochberg, Y., &amp; Tamhane, A. C.</strong> (1987). <em>Multiple Comparison Procedures.</em> Wiley.</li>
+<li><strong>Montgomery, D. C.</strong> (2017). <em>Design and Analysis of Experiments.</em> 9th ed.&nbsp;Wiley.</li>
+<li><strong>Dean, A., Voss, D., &amp; Draguljić, D.</strong> (2017). <em>Design and Analysis of Experiments.</em> Springer. <strong>Storey, J. D.</strong> (2002). A direct approach to false discovery rates. <em>Journal of the Royal Statistical Society: Series B</em>, 64(3), 479–498.</li>
+</ul>
+</section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>

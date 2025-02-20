@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
 
-<title>R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Tukey’s Standardized Range Distribution – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,10 +71,39 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
-<meta property="og:title" content="R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Tukey’s Standardized Range Distribution – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/stat-topics/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -86,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +125,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Tukey’s Standardized Range Distribution</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +176,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
-      <h1 class="title">R Help and Tutorial</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Tukey’s Standardized Range Distribution</h1>
                       </div>
   </div>
     
@@ -173,16 +201,10 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">13-Feb-2025</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 7, 2025</p>
-      </div>
-    </div>
       
     </div>
     
@@ -203,19 +225,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +254,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +277,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +306,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -306,32 +328,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-help-and-tutorial-provided-by-the-instructor" id="toc-r-help-and-tutorial-provided-by-the-instructor" class="nav-link active" data-scroll-target="#r-help-and-tutorial-provided-by-the-instructor">R Help and Tutorial Provided by the Instructor</a>
+  <li><a href="#what-is-the-studentized-range-distribution" id="toc-what-is-the-studentized-range-distribution" class="nav-link active" data-scroll-target="#what-is-the-studentized-range-distribution">1. What Is the Studentized Range Distribution?</a>
   <ul class="collapse">
-  <li><a href="#r-subjects-topics" id="toc-r-subjects-topics" class="nav-link" data-scroll-target="#r-subjects-topics">Subjects and Topics</a>
+  <li><a href="#why-studentized" id="toc-why-studentized" class="nav-link" data-scroll-target="#why-studentized">Why “Studentized”?</a></li>
+  </ul></li>
+  <li><a href="#context-tukeys-hsd-test" id="toc-context-tukeys-hsd-test" class="nav-link" data-scroll-target="#context-tukeys-hsd-test">2. Context: Tukey’s HSD Test</a></li>
+  <li><a href="#defining-the-distribution-more-rigorously" id="toc-defining-the-distribution-more-rigorously" class="nav-link" data-scroll-target="#defining-the-distribution-more-rigorously">3. Defining the Distribution More Rigorously</a>
   <ul class="collapse">
-  <li><a href="#subjects" id="toc-subjects" class="nav-link" data-scroll-target="#subjects">Subjects</a></li>
+  <li><a href="#pdf-or-cdf-definitions" id="toc-pdf-or-cdf-definitions" class="nav-link" data-scroll-target="#pdf-or-cdf-definitions">3.1 PDF or CDF Definitions</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#r-base-functions" id="toc-r-base-functions" class="nav-link" data-scroll-target="#r-base-functions">Help by R Base Functions</a>
+  <li><a href="#critical-values-and-tables" id="toc-critical-values-and-tables" class="nav-link" data-scroll-target="#critical-values-and-tables">4. Critical Values and Tables</a></li>
+  <li><a href="#properties-and-uses" id="toc-properties-and-uses" class="nav-link" data-scroll-target="#properties-and-uses">5. Properties and Uses</a></li>
+  <li><a href="#practical-computation" id="toc-practical-computation" class="nav-link" data-scroll-target="#practical-computation">6. Practical Computation</a>
   <ul class="collapse">
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">Help by R Packages</a>
+  <li><a href="#in-r" id="toc-in-r" class="nav-link" data-scroll-target="#in-r">6.1 In R</a></li>
+  <li><a href="#in-python" id="toc-in-python" class="nav-link" data-scroll-target="#in-python">6.2 In Python</a></li>
+  <li><a href="#in-other-software" id="toc-in-other-software" class="nav-link" data-scroll-target="#in-other-software">6.3 In Other Software</a></li>
+  </ul></li>
+  <li><a href="#step-by-step-example" id="toc-step-by-step-example" class="nav-link" data-scroll-target="#step-by-step-example">7. Step-by-Step Example</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">8. Key Takeaways</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">9. Further Reading</a>
   <ul class="collapse">
-  <li><a href="#data-manipulation" id="toc-data-manipulation" class="nav-link" data-scroll-target="#data-manipulation">Data Manipulation</a></li>
-  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
-  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">Statistical Analysis</a></li>
-  <li><a href="#quarto-tutorial" id="toc-quarto-tutorial" class="nav-link" data-scroll-target="#quarto-tutorial">Quarto Tutorial</a></li>
+  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">Final Note</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#general-online-r-help-and-resources" id="toc-general-online-r-help-and-resources" class="nav-link" data-scroll-target="#general-online-r-help-and-resources">General Online R Help and Resources</a>
-  <ul class="collapse">
-  <li><a href="#by-subjects" id="toc-by-subjects" class="nav-link" data-scroll-target="#by-subjects">By Subjects:</a></li>
-  <li><a href="#general-r-help-and-resources" id="toc-general-r-help-and-resources" class="nav-link" data-scroll-target="#general-r-help-and-resources">General R Help and Resources:</a></li>
-  <li><a href="#software-tools-and-resources" id="toc-software-tools-and-resources" class="nav-link" data-scroll-target="#software-tools-and-resources">Software Tools and Resources</a></li>
-  <li><a href="#additional-online-resources" id="toc-additional-online-resources" class="nav-link" data-scroll-target="#additional-online-resources">Additional Online Resources</a></li>
-  </ul></li>
-  <li><a href="#how-to-use-this-help-guide" id="toc-how-to-use-this-help-guide" class="nav-link" data-scroll-target="#how-to-use-this-help-guide">How to Use This Help Guide</a></li>
-  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
   </ul>
 </nav>
     </div>
@@ -342,178 +361,236 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="r-help-and-tutorial-provided-by-the-instructor" class="level1">
-<h1>R Help and Tutorial Provided by the Instructor</h1>
-<p>Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on <strong>Subjects</strong>, <strong>Topics</strong>, and implementation through <strong>R Base</strong> and <strong>Packages</strong>.</p>
-<section id="r-subjects-topics" class="level2">
-<h2 class="anchored" data-anchor-id="r-subjects-topics">Subjects and Topics</h2>
-<p>Below are the available subjects and their corresponding topics. Select a topic to view detailed help pages.</p>
-<section id="subjects" class="level3">
-<h3 class="anchored" data-anchor-id="subjects">Subjects</h3>
+<p>Below is a conceptual overview and step-by-step tutorial on the Studentized Range distribution. This distribution arises frequently in multiple comparisons procedures in statistics, particularly in Tukey’s Honestly Significant Difference (HSD) test. We’ll cover the definition, context, properties, and practical computation of the Studentized Range distribution.</p>
+<section id="what-is-the-studentized-range-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-studentized-range-distribution">1. What Is the Studentized Range Distribution?</h2>
+<p>The <strong>Studentized Range distribution</strong> (often denoted <span class="math inline">\(q\)</span>) describes the distribution of the range of a sample (i.e., the difference between the sample’s maximum and minimum) standardized by the sample’s estimated standard deviation.</p>
+<p>Formally, suppose we have:</p>
 <ul>
-<li><strong>Data Manipulation</strong>
+<li>A sample of <span class="math inline">\(k\)</span> observations, all from the same normal population with unknown variance <span class="math inline">\(\sigma^2\)</span>.</li>
+<li>An independent estimate of the variance based on <span class="math inline">\(\nu\)</span> (sometimes denoted <span class="math inline">\(df\)</span>) degrees of freedom.</li>
+</ul>
+<p>Define:</p>
+<p><span class="math display">\[
+\text{Range} = \max(X_1, \dots, X_k) - \min(X_1, \dots, X_k).
+\]</span></p>
+<p>Then the statistic</p>
+<p><span class="math display">\[
+q = \frac{\max(X_1, \dots, X_k) - \min(X_1, \dots, X_k)}{s},
+\]</span></p>
+<p>where <span class="math inline">\(s\)</span> is the estimated standard deviation (based on <span class="math inline">\(\nu\)</span> degrees of freedom), follows a Studentized Range distribution with parameters <span class="math inline">\(k\)</span> (the number of means or groups being compared) and <span class="math inline">\(\nu\)</span> (degrees of freedom).</p>
+<section id="why-studentized" class="level3">
+<h3 class="anchored" data-anchor-id="why-studentized">Why “Studentized”?</h3>
 <ul>
-<li><a href="./appendix/r-topics/r-data-frames-basics.html">Creating Data Frames</a></li>
-<li><a href="./appendix/r-topics/r-factors-basics.html">Working with Factors</a></li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Subsetting Data</a></li>
-<li><a href="./appendix/r-topics/r-data-transformation.html">Data Transformation and Wrangling</a></li>
-<li><a href="./appendix/r-topics/r-data-import-basics.html">Inporting Data into R</a></li>
-</ul></li>
-<li><strong>Data Visualization</strong>
-<ul>
-<li><a href="./appendix/r-topics/r-base-graphics-basics.html">Base R Graphics</a></li>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2 Basics</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="./appendix/r-topics/r-hypothesis-testing-basics.html">Hypothesis Testing</a></li>
-</ul></li>
-<li><strong>Quarto Tutorial</strong>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure-extra.html">Figures and Tables in Quarto: Advanced Features</a></li>
-</ul></li>
+<li>“Studentized” means it has been scaled by an estimate of the standard deviation—analogous to how a <span class="math inline">\(t\)</span>-distribution arises by dividing a (normal) mean difference by an estimated standard error.</li>
+<li>The Studentized Range is a generalization of the <span class="math inline">\(t\)</span>-distribution for comparing more than two means.</li>
 </ul>
 </section>
 </section>
-</section>
-<section id="r-base-functions" class="level1">
-<h1>Help by R Base Functions</h1>
-<ul>
-<li><a href="./appendix/r-base/r-gl-basics.html">gl</a>: Generate Factor Levels</li>
-<li><a href="./appendix/r-base/r-interaction-basics.html">interaction</a>: Create Interaction Terms</li>
-<li><a href="./appendix/r-base/r-model.tables-basics.html">model.tables</a>: Extract Tables from Model Fits</li>
-<li><a href="./appendix/r-base/r-plot.design-basics.html">plot.design</a>: Plot Univariate Effects of a Design or Model</li>
-<li><a href="./appendix/r-base/r-rep-basics.html">rep</a>: Replicate Elements of Vectors and Lists</li>
-<li><a href="./appendix/r-base/r-replications-basics.html">replications</a>: Generate Replicate Numbers</li>
-<li><a href="./appendix/r-base/r-sample-basics.html">sample</a>: Randomly Sample Elements from a Vector</li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Base R Plotting</a></li>
-</ul>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">Help by R Packages</h2>
-<section id="data-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="data-manipulation">Data Manipulation</h3>
-<ul>
-<li><a href="./appendix/r-packages/dplyr.html">dplyr</a></li>
-<li><a href="./appendix/r-packages/tidyr.html">tidyr</a></li>
-<li><a href="./appendix/r-packages/purrr.html">purrr</a></li>
-<li><a href="./appendix/r-packages/stringr.html">stringr</a></li>
-</ul>
-</section>
-<section id="data-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="data-visualization">Data Visualization</h3>
-<ul>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2</a></li>
-</ul>
-</section>
-<section id="statistical-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h3>
-<ul>
-<li><a href="./appendix/r-packages/emmeans.html">emmeans</a></li>
-<li><a href="./appendix/r-packages/multcomp.html">multcomp</a></li>
-<li><a href="./appendix/r-packages/pwr.html">pwr</a></li>
-</ul>
-</section>
-<section id="quarto-tutorial" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-tutorial">Quarto Tutorial</h3>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="general-online-r-help-and-resources" class="level1">
-<h1>General Online R Help and Resources</h1>
-<p>Here are some general online resources to help you learn R programming and data analysis:</p>
-<section id="by-subjects" class="level2">
-<h2 class="anchored" data-anchor-id="by-subjects">By Subjects:</h2>
-<ul>
-<li><strong>Data Manipulation</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/r-data-import-tutorial">How to Import Data Into R</a> from <a href="https://www.datacamp.com/">DataCamp</a>.</li>
-</ul></li>
-<li><strong>Data Visualization</strong>
-<ul>
-<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">ggplot2 Basics</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/linear-regression-R">Regression</a> from DataCamp.</li>
-<li><a href="https://www.datanovia.com/en/lessons/anova-in-r/">ANOVA in R</a> from DataNovia.</li>
-</ul></li>
-<li><strong>Programming with R</strong>
-<ul>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/control-structures.html">Control Structures</a> from Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/functions.html">Writing Functions</a> from Hadley Wickham.</li>
-<li><a href="https://adv-r.hadley.nz/debugging.html">Debugging</a> from Hadley Wickham.</li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">Debugging with the RStudio IDE</a> from Positron RStudio Support.</li>
-</ul></li>
-</ul>
-</section>
-<section id="general-r-help-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="general-r-help-and-resources">General R Help and Resources:</h2>
-<ul>
-<li><a href="https://www.rdocumentation.org/">R Documentation</a>: User-friendly interface to R documentation.</li>
-<li><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a>: Quick reference guides for R and RStudio.</li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a>: Online book on data science with R by Hadley Wickham and Garrett Grolemund.</li>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/">R Programming for Data Science</a> Online book by Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/">Advanced R</a>: Online book on advanced R programming by Hadley Wickham.</li>
-<li><a href="https://forum.posit.co/">Posit Community</a>p: Posit Community forum for R users.</li>
-<li><a href="https://www.r-bloggers.com/">R Bloggers</a>: Blog aggregator for R programming.</li>
-<li><a href="https://stackoverflow.com/questions/tagged/r">Stack Overflow R Tag</a>: Stack Overflow questions tagged with R.</li>
-</ul>
-</section>
-<section id="software-tools-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="software-tools-and-resources">Software Tools and Resources</h2>
-<p>To complete assignments and analyses, you will need access to R and related tools.</p>
-<ul>
-<li><strong>R Installation:</strong> <a href="https://cran.r-project.org/">Download R</a><br>
-</li>
-<li><strong>RStudio IDE:</strong> <a href="https://www.rstudio.com/products/rstudio/download/">Download RStudio</a><br>
-</li>
-<li><strong>VS Code IDE:</strong> <a href="https://code.visualstudio.com/">Download VS Code</a></li>
-<li><strong>Positron IDE</strong>: <a href="https://positron.posit.co/download">Download Positron</a></li>
-<li><a href="https://quarto.org/docs/tools/rstudio.html">RStudio IDE Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/hello/vscode.html">VS Code Editor Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/rstudio.html">Quarto Authoring with RStudio</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/vscode.html">Quarto Authoring with VS Code</a></li>
-</ul>
-</section>
-<section id="additional-online-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-online-resources">Additional Online Resources</h2>
-<ul>
-<li><strong>Quarto Documentation</strong>: <a href="https://quarto.org/docs/">Learn Quarto</a></li>
-<li><strong>Online R Help</strong>:
-<ul>
-<li><a href="https://cran.r-project.org/manuals.html">CRAN R Documentation</a></li>
-<li><a href="https://posit.co/resources/cheatsheets/">RStudio Cheat Sheets</a></li>
-</ul></li>
-<li><strong>Video Tutorials</strong>:
-<ul>
-<li><a href="https://www.youtube.com/results?search_query=r+programming+tutorial">R Programming for Beginners (YouTube)</a></li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="how-to-use-this-help-guide" class="level1">
-<h1>How to Use This Help Guide</h1>
+<section id="context-tukeys-hsd-test" class="level2">
+<h2 class="anchored" data-anchor-id="context-tukeys-hsd-test">2. Context: Tukey’s HSD Test</h2>
+<p>The most common use case for the Studentized Range distribution is in <strong>Tukey’s Honestly Significant Difference (HSD)</strong> procedure, which is a multiple-comparison test for determining which means in a set of group means differ significantly:</p>
 <ol type="1">
-<li><strong>Explore Subjects and Topics:</strong> Use the Subjects and Topics section to browse R concepts by category.</li>
-<li><strong>R Base Help:</strong> Click on the R Base links to learn about core R functions.</li>
-<li><strong>Packages Help:</strong> Dive into R packages to explore advanced features and functionalities.</li>
+<li>Start with an ANOVA for <span class="math inline">\(k\)</span> groups (each with sample size <span class="math inline">\(n_i\)</span>), total number of degrees of freedom in error <span class="math inline">\(\nu = N - k\)</span> (if each group has the same sample size <span class="math inline">\(n\)</span>, then <span class="math inline">\(\nu = k(n - 1)\)</span>).</li>
+<li>After finding that the overall ANOVA is significant, we want to compare each pair of group means.</li>
+<li>The test statistic for comparing any two group means is</li>
+</ol>
+<p><span class="math display">\[
+q = \frac{\bar{X}_i - \bar{X}_j}{\sqrt{\frac{MSE}{n}}}
+\]</span></p>
+<p>where <span class="math inline">\(MSE\)</span> is the mean square error from the ANOVA, and <span class="math inline">\(n\)</span> is the per-group sample size (if balanced).</p>
+<ol start="4" type="1">
+<li>We compare <span class="math inline">\(q\)</span> to critical values from the Studentized Range distribution with parameters <span class="math inline">\(k\)</span> and <span class="math inline">\(\nu\)</span>.</li>
+</ol>
+<p>Hence, the Studentized Range <span class="math inline">\(q\)</span> helps control the family-wise error rate across multiple pairwise comparisons.</p>
+</section>
+<section id="defining-the-distribution-more-rigorously" class="level2">
+<h2 class="anchored" data-anchor-id="defining-the-distribution-more-rigorously">3. Defining the Distribution More Rigorously</h2>
+<section id="pdf-or-cdf-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="pdf-or-cdf-definitions">3.1 PDF or CDF Definitions</h3>
+<p>The probability density function (PDF) and cumulative distribution function (CDF) of the Studentized Range are not as simple to express in closed form as, say, the normal or <span class="math inline">\(t\)</span>-distribution. They involve integrals of the joint distribution of order statistics of normal variates.</p>
+<section id="a-simplified-conceptual-approach" class="level4">
+<h4 class="anchored" data-anchor-id="a-simplified-conceptual-approach">A simplified conceptual approach</h4>
+<ol type="1">
+<li>Let <span class="math inline">\(Z_1, Z_2, \dots, Z_k\)</span> be i.i.d. standard normal.</li>
+<li>Let <span class="math inline">\(\bar{Z}\)</span> be their mean, and let <span class="math inline">\(S^2 = \sum_{i=1}^k (Z_i - \bar{Z})^2\)</span> be an estimate of the variance (but note carefully how the degrees of freedom tie in).</li>
+<li>The difference <span class="math inline">\(\max(Z) - \min(Z)\)</span> is the “range” in the numerator.</li>
+<li>Scale that range by <span class="math inline">\(\sqrt{S^2 / \nu}\)</span> to get <span class="math inline">\(q\)</span>.</li>
+</ol>
+<p>This results in the Studentized Range distribution parameters <span class="math inline">\(k\)</span> (number of sample points) and <span class="math inline">\(\nu\)</span> (degrees of freedom).</p>
+<p>In practice, <strong>tables</strong> (or software functions) for <span class="math inline">\(q\)</span> are used to find critical values rather than dealing with the PDF or CDF directly.</p>
+</section>
+</section>
+</section>
+<section id="critical-values-and-tables" class="level2">
+<h2 class="anchored" data-anchor-id="critical-values-and-tables">4. Critical Values and Tables</h2>
+<p>When you see references to <span class="math inline">\(q_{\alpha, k, \nu}\)</span>, it means:</p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> is the desired significance level (or tail probability),</li>
+<li><span class="math inline">\(k\)</span> is the number of groups,</li>
+<li><span class="math inline">\(\nu\)</span> is the error degrees of freedom.</li>
+</ul>
+<p>For example, if you see <span class="math inline">\(q_{0.05, 4, 20}\)</span>, it’s the critical value such that</p>
+<p><span class="math display">\[
+P(Q \geq q_{0.05, 4, 20}) = 0.05
+\]</span></p>
+<p>where <span class="math inline">\(Q \sim q\)</span>-distribution with parameters <span class="math inline">\(k=4\)</span>, <span class="math inline">\(\nu=20\)</span>.</p>
+<p>These tables are typically used in Tukey’s HSD test. Statistical software (R, Python, SAS, SPSS, etc.) also can provide these critical values.</p>
+</section>
+<section id="properties-and-uses" class="level2">
+<h2 class="anchored" data-anchor-id="properties-and-uses">5. Properties and Uses</h2>
+<ol type="1">
+<li><strong>Multiple Comparisons Adjustments</strong>
+<ul>
+<li>Tukey’s HSD is probably the best-known method leveraging the Studentized Range. It maintains the familywise error rate at a specified <span class="math inline">\(\alpha\)</span> for all pairwise comparisons.</li>
+</ul></li>
+<li><strong>Relationship to Other Distributions</strong>
+<ul>
+<li>For <span class="math inline">\(k = 2\)</span>, the Studentized Range distribution is <em>identical</em> to the <span class="math inline">\(t\)</span>-distribution, because the “range” between exactly two points is just their difference.</li>
+<li>When <span class="math inline">\(k &gt; 2\)</span>, the distribution is distinct; the critical value for a given <span class="math inline">\(\alpha\)</span> will be larger than the corresponding <span class="math inline">\(t\)</span>-value to account for multiple comparisons.</li>
+</ul></li>
+<li><strong>Conservative Bound in Some Cases</strong>
+<ul>
+<li>The distribution is specifically tailored for pairwise range-based comparisons. In some cases (especially when group sizes are unequal or for non-pairwise contrasts), the distribution-based approach might be more conservative or only approximately correct. Adjustments exist for unbalanced designs.</li>
+</ul></li>
 </ol>
 </section>
-<section id="r-code-and-data-files-from-the-textbook" class="level1">
-<h1>R Code and Data Files from the Textbook</h1>
-<p>Here is a page for the R program files used in the textbook:</p>
+<section id="practical-computation" class="level2">
+<h2 class="anchored" data-anchor-id="practical-computation">6. Practical Computation</h2>
+<p>These days, manual table lookup is less common. Statistical software typically has built-in functions for either:</p>
 <ul>
-<li><a href="./r-code-data-book.html">R Code and Data Files from the Textbook</a></li>
-<li><a href="./data-files-book.html">Data Files from the Textbook</a></li>
+<li>Generating quantiles (critical values),</li>
+<li>Computing p-values for an observed Studentized Range statistic,</li>
+<li>Directly implementing Tukey’s HSD test.</li>
 </ul>
+<section id="in-r" class="level3">
+<h3 class="anchored" data-anchor-id="in-r">6.1 In R</h3>
+<ul>
+<li><strong>qtukey()</strong> gives the quantiles of the Studentized Range distribution (critical values).</li>
+<li><strong>ptukey()</strong> gives the cumulative distribution function (CDF).</li>
+<li>Functions like <code>TukeyHSD()</code> automatically handle calculations after an <code>aov()</code>.</li>
+</ul>
+</section>
+<section id="in-python" class="level3">
+<h3 class="anchored" data-anchor-id="in-python">6.2 In Python</h3>
+<p>While there is not always a direct built-in in <code>scipy.stats</code> for the Studentized Range, there are packages like <code>statsmodels</code> that implement <code>TukeyHSD</code>. Alternatively, one might use tables or approximate expansions.</p>
+</section>
+<section id="in-other-software" class="level3">
+<h3 class="anchored" data-anchor-id="in-other-software">6.3 In Other Software</h3>
+<ul>
+<li><strong>SAS</strong> has <code>PROC GLM</code> with <code>MEANS</code> statement: <code>MEANS group / TUKEY;</code></li>
+<li><strong>SPSS</strong> has Post Hoc tests with a Tukey option as well.</li>
+</ul>
+</section>
+</section>
+<section id="step-by-step-example" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-example">7. Step-by-Step Example</h2>
+<p>Let’s run through a conceptual example for clarity.</p>
+<p><strong>Scenario</strong> You have 4 groups (A, B, C, D), each with 10 observations, and you’ve performed a one-way ANOVA. The ANOVA F-test is significant. You decide to do Tukey’s HSD to compare each pair of group means.</p>
+<ol start="4" type="1">
+<li><strong>Obtain MSE and <span class="math inline">\(\nu\)</span></strong>
+<ul>
+<li>From your ANOVA table, suppose <span class="math inline">\(MSE = 2.5\)</span>.</li>
+<li>Degrees of freedom for error, <span class="math inline">\(\nu = N - k = 40 - 4 = 36\)</span>.</li>
+</ul></li>
+<li><strong>Compute Pairwise Mean Differences</strong>
+<ul>
+<li>Suppose the sample means are:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+\bar{X}_A = 12.8,\; \bar{X}_B = 14.5,\; \bar{X}_C = 13.2,\; \bar{X}_D = 15.3.
+\]</span></p>
+<ul>
+<li>Pairwise differences (absolute values):</li>
+</ul>
+<p><span class="math display">\[
+|\bar{X}_A - \bar{X}_B| = 1.7,\quad
+     |\bar{X}_A - \bar{X}_C| = 0.4,\quad
+     |\bar{X}_A - \bar{X}_D| = 2.5, \quad
+     |\bar{X}_B - \bar{X}_C| = 1.3,\quad
+     |\bar{X}_B - \bar{X}_D| = 0.8,\quad
+     |\bar{X}_C - \bar{X}_D| = 2.1.
+\]</span></p>
+<ol start="6" type="1">
+<li><strong>Calculate Standard Error</strong>
+<ul>
+<li>With equal sample size <span class="math inline">\(n = 10\)</span>, the standard error for the difference is</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[SE = \sqrt{\frac{MSE}{n}} = \sqrt{\frac{2.5}{10}} = \sqrt{0.25} = 0.5.
+\]</span></p>
+<ol start="7" type="1">
+<li><strong>Form the Tukey <span class="math inline">\(q\)</span>-Statistic</strong>
+<ul>
+<li>For each pair, <span class="math inline">\(q = \frac{\text{difference}}{SE}\)</span>.</li>
+<li>For instance, for <span class="math inline">\(\bar{X}_A - \bar{X}_D = 2.5\)</span>:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+q = \frac{2.5}{0.5} = 5.0.
+\]</span></p>
+<ol start="8" type="1">
+<li><strong>Compare to Critical Value</strong>
+<ul>
+<li>Look up (or compute via software) <span class="math inline">\(q_{0.05, k=4, \nu=36}\)</span>.</li>
+<li>Suppose you find that <span class="math inline">\(q_{0.05, 4, 36} \approx 3.80\)</span> (this is just an example value; actual lookups may differ).</li>
+<li>Since <span class="math inline">\(q = 5.0\)</span> for the A–D comparison is greater than 3.80, the difference between groups A and D is statistically significant at <span class="math inline">\(\alpha=0.05\)</span>.</li>
+</ul></li>
+<li><strong>Interpretation</strong>
+<ul>
+<li>You would interpret each pair’s <span class="math inline">\(q\)</span>-value by comparing to the Studentized Range critical value. Any pair with <span class="math inline">\(q\)</span> above the critical threshold is considered to have a significant difference in means.</li>
+</ul></li>
+</ol>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">8. Key Takeaways</h2>
+<ol start="10" type="1">
+<li><strong>Range-Based Multiple Comparisons</strong></li>
+</ol>
+<ul>
+<li>The Studentized Range distribution is the distribution of the range (max - min) of <span class="math inline">\(k\)</span> normally distributed variables, scaled by an estimate of standard deviation with <span class="math inline">\(\nu\)</span> degrees of freedom.</li>
+</ul>
+<ol start="11" type="1">
+<li><strong>Connection to Tukey’s HSD</strong></li>
+</ol>
+<ul>
+<li>It underpins Tukey’s HSD, a widely used method for controlling familywise error when comparing multiple group means post-ANOVA.</li>
+</ul>
+<ol start="12" type="1">
+<li><strong>Critical Value Lookup</strong></li>
+</ol>
+<ul>
+<li>Values <span class="math inline">\(q_{\alpha, k, \nu}\)</span> can be found in standard statistical tables or via statistical software.</li>
+<li>For large <span class="math inline">\(\nu\)</span>, the distribution converges somewhat to a normal-based range, but always consult the exact distribution for accurate results.</li>
+</ul>
+<ol start="13" type="1">
+<li><strong>Software Implementation</strong></li>
+</ol>
+<ul>
+<li>Because the PDF and CDF are complex integrals, usage typically relies on tables or built-in software routines (e.g., <code>qtukey()</code>, <code>TukeyHSD()</code>, etc.).</li>
+</ul>
+<ol start="14" type="1">
+<li><strong>Degrees of Freedom</strong></li>
+</ol>
+<ul>
+<li>Always match the appropriate error degrees of freedom, typically from an ANOVA’s residual or error term.</li>
+</ul>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">9. Further Reading</h2>
+<ul>
+<li><strong>Hochberg, Y. and Tamhane, A. C.</strong> (1987). <em>Multiple Comparison Procedures.</em> Wiley.</li>
+<li><strong>Montgomery, D. C.</strong> (2012). <em>Design and Analysis of Experiments.</em> Wiley.</li>
+<li><strong>Kirk, R. E.</strong> (2013). <em>Experimental Design: Procedures for the Behavioral Sciences.</em> SAGE.</li>
+</ul>
+<p>These sources go into more technical depth on the Studentized Range distribution, multiple comparisons, and the context of Tukey’s HSD.</p>
+<section id="final-note" class="level3">
+<h3 class="anchored" data-anchor-id="final-note">Final Note</h3>
+<p>The Studentized Range distribution is essential whenever you deal with <strong>range-based</strong> statistics, especially in the context of comparing multiple means simultaneously. Its principal role in <strong>Tukey’s HSD</strong> makes it a standard tool in the statistician’s toolbox for post-ANOVA analyses, ensuring control of the familywise error rate in pairwise comparisons.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -951,5 +1028,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
