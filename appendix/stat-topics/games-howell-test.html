@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
 
-<title>Tutorial on plot.design() in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Tutorial on the Games-Howell Test Using PMCMRplus – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,9 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,13 +103,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
 
-<meta property="og:title" content="Tutorial on plot.design() in R – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-base/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:title" content="Tutorial on the Games-Howell Test Using PMCMRplus – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/stat-topics/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -177,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Tutorial on <code>plot.design()</code> in R</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Tutorial on the Games-Howell Test Using PMCMRplus</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -187,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tutorial on <code>plot.design()</code> in R</h1>
+      <h1 class="title">Tutorial on the Games-Howell Test Using PMCMRplus</h1>
                       </div>
   </div>
     
@@ -211,16 +206,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">22-Feb-2025</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 8, 2025</p>
-      </div>
-    </div>
       
     </div>
     
@@ -344,46 +333,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#comprehensive-tutorial-on-plot.design-in-r" id="toc-comprehensive-tutorial-on-plot.design-in-r" class="nav-link active" data-scroll-target="#comprehensive-tutorial-on-plot.design-in-r">Comprehensive Tutorial on <code>plot.design()</code> in R</a>
+  <li><a href="#introduction-to-the-games-howell-test" id="toc-introduction-to-the-games-howell-test" class="nav-link active" data-scroll-target="#introduction-to-the-games-howell-test">Introduction to the Games-Howell Test</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#function-syntax" id="toc-function-syntax" class="nav-link" data-scroll-target="#function-syntax">Function Syntax</a></li>
+  <li><a href="#step-by-step-examples" id="toc-step-by-step-examples" class="nav-link" data-scroll-target="#step-by-step-examples">Step-by-Step Examples</a>
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
-  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits</a></li>
+  <li><a href="#example-1-using-an-aov-object" id="toc-example-1-using-an-aov-object" class="nav-link" data-scroll-target="#example-1-using-an-aov-object">Example 1: Using an <code>aov</code> Object</a></li>
+  <li><a href="#example-2-using-the-formula-method" id="toc-example-2-using-the-formula-method" class="nav-link" data-scroll-target="#example-2-using-the-formula-method">Example 2: Using the Formula Method</a></li>
   </ul></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
-  <ul class="collapse">
-  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
-  </ul></li>
-  <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
-  <ul class="collapse">
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  </ul></li>
-  <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
-  <ul class="collapse">
-  <li><a href="#title-effects-of-two-factors-on-warp-breaks" id="toc-title-effects-of-two-factors-on-warp-breaks" class="nav-link" data-scroll-target="#title-effects-of-two-factors-on-warp-breaks">Title: Effects of Two Factors on Warp Breaks</a></li>
-  </ul></li>
-  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
-  <ul class="collapse">
-  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
-  <li><a href="#integration-with-other-packages" id="toc-integration-with-other-packages" class="nav-link" data-scroll-target="#integration-with-other-packages">Integration with Other Packages</a></li>
-  </ul></li>
-  <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
-  <ul class="collapse">
-  <li><a href="#common-issues" id="toc-common-issues" class="nav-link" data-scroll-target="#common-issues">Common Issues</a></li>
-  <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
-  </ul></li>
-  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
-  </ul></li>
+  <li><a href="#key-output-interpretation" id="toc-key-output-interpretation" class="nav-link" data-scroll-target="#key-output-interpretation">Key Output Interpretation</a></li>
+  <li><a href="#assumptions-and-considerations" id="toc-assumptions-and-considerations" class="nav-link" data-scroll-target="#assumptions-and-considerations">Assumptions and Considerations</a></li>
+  <li><a href="#when-to-use-games-howell-vs.-other-tests" id="toc-when-to-use-games-howell-vs.-other-tests" class="nav-link" data-scroll-target="#when-to-use-games-howell-vs.-other-tests">When to Use Games-Howell vs.&nbsp;Other Tests</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -394,224 +355,198 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="comprehensive-tutorial-on-plot.design-in-r" class="level1">
-<h1>Comprehensive Tutorial on <code>plot.design()</code> in R</h1>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<section id="overview" class="level3">
-<h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>The <code>plot.design()</code> function in R, part of the base <code>graphics</code> package, is used to visualize univariate effects of one or more factors in experimental designs. It is commonly applied in the context of <code>aov()</code> analyses and supports understanding of how factors affect a numeric response variable.</p>
-<p>Key components:</p>
-<ul>
-<li><strong>Package</strong>: <code>graphics</code></li>
-<li><strong>Function</strong>: <code>plot.design()</code></li>
-</ul>
+<section id="introduction-to-the-games-howell-test" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-the-games-howell-test">Introduction to the Games-Howell Test</h2>
+<p>The <strong>Games-Howell test</strong> is a post-hoc statistical procedure used to perform <strong>all-pairs comparisons</strong> between group means after a significant ANOVA result. It is particularly useful when the assumption of <strong>equal variances across groups</strong> is violated. Unlike the Tukey HSD test, which assumes homogeneity of variances, the Games-Howell test uses Welch’s degrees of freedom to adjust for unequal variances, making it robust for such scenarios.</p>
+<p>This tutorial will guide you through using the <code>gamesHowellTest</code> function from the <code>PMCMRplus</code> package in R.</p>
 </section>
-<section id="use-cases" class="level3">
-<h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
-<ul>
-<li>Exploratory data analysis in experimental design.</li>
-<li>Comparing the effects of factors on response variables.</li>
-<li>Diagnosing potential outliers and interaction effects.</li>
-</ul>
-</section>
-<section id="benefits" class="level3">
-<h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
-<ul>
-<li>Facilitates quick, visual understanding of main effects.</li>
-<li>Handles multiple factors simultaneously.</li>
-<li>Compatible with formulas and data frames for flexibility.</li>
-</ul>
-</section>
-</section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<section id="basic-usage" class="level3">
-<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
-<p>The simplest use involves plotting the default dataset <code>warpbreaks</code>:</p>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>First, install and load the <code>PMCMRplus</code> package if not already installed:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(warpbreaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(<span class="st">"PMCMRplus"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<p>This creates a series of vertical lines where each factor’s levels are plotted against a response variable.</p>
 </section>
-</section>
-<section id="key-functions-and-features" class="level2">
-<h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
-<section id="description" class="level3">
-<h3 class="anchored" data-anchor-id="description">Description</h3>
-<p><code>plot.design()</code> visualizes the effect of factors on a numeric response variable.</p>
-</section>
-<section id="syntax" class="level3">
-<h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fun =</span> mean, <span class="at">data =</span> <span class="cn">NULL</span>, ...,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylim =</span> <span class="cn">NULL</span>, <span class="at">xlab =</span> <span class="st">"Factors"</span>, <span class="at">ylab =</span> <span class="cn">NULL</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> <span class="cn">NULL</span>, <span class="at">ask =</span> <span class="cn">NULL</span>, <span class="at">xaxt =</span> <span class="fu">par</span>(<span class="st">"xaxt"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">xtick =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="arguments" class="level4">
-<h4 class="anchored" data-anchor-id="arguments">Arguments</h4>
-<ul>
-<li><strong>x</strong>: A data frame, formula, or terms object.</li>
-<li><strong>y</strong>: The response variable (optional if included in <code>x</code>).</li>
-<li><strong>fun</strong>: Function applied to subsets (default is <code>mean</code>).</li>
-<li><strong>data</strong>: Data frame for variables referenced in <code>x</code> if formula-like.</li>
-<li><strong>ylim</strong>: Range of y values.</li>
-<li><strong>xlab, ylab</strong>: Axis labels.</li>
-<li><strong>main</strong>: Main plot title.</li>
-<li><strong>axes, xtick</strong>: Controls for axes and tick marks.</li>
-</ul>
-</section>
-</section>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
-<p>Basic plot for a formula and dataset:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> warpbreaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p>This shows the effects of <code>wool</code> and <code>tension</code> on the response variable <code>breaks</code>.</p>
-</section>
-</section>
-<section id="in-depth-examples" class="level2">
-<h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
-<section id="title-effects-of-two-factors-on-warp-breaks" class="level3">
-<h3 class="anchored" data-anchor-id="title-effects-of-two-factors-on-warp-breaks">Title: Effects of Two Factors on Warp Breaks</h3>
-<section id="objective" class="level4">
-<h4 class="anchored" data-anchor-id="objective">Objective</h4>
-<p>Visualize and compare the effects of <code>wool</code> and <code>tension</code> on <code>breaks</code>.</p>
-</section>
-<section id="steps" class="level4">
-<h4 class="anchored" data-anchor-id="steps">Steps</h4>
+<section id="function-syntax" class="level2">
+<h2 class="anchored" data-anchor-id="function-syntax">Function Syntax</h2>
+<p>The <code>gamesHowellTest</code> function has three primary methods:</p>
 <ol type="1">
-<li><strong>Prepare the data</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"warpbreaks"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li><strong>Generate the plot</strong>:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> warpbreaks,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">"Effects of Wool and Tension on Breaks"</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="output" class="level4">
-<h4 class="anchored" data-anchor-id="output">Output</h4>
-<p>The plot displays vertical lines for each factor’s levels and their impact on <code>breaks</code>, with overall mean as a horizontal reference.</p>
-</section>
-</section>
-</section>
-<section id="advanced-features" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
-<section id="customization" class="level3">
-<h3 class="anchored" data-anchor-id="customization">Customization</h3>
-<p>Adjust aesthetics and parameters:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> warpbreaks,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"purple"</span>), <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">70</span>),</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">"Customized Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="integration-with-other-packages" class="level3">
-<h3 class="anchored" data-anchor-id="integration-with-other-packages">Integration with Other Packages</h3>
-<p>Combine <code>plot.design()</code> with <code>dplyr</code> for preprocessing:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>warpbreaks <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tension <span class="sc">!=</span> <span class="st">"M"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot.design</span>(breaks <span class="sc">~</span> wool <span class="sc">+</span> tension, <span class="at">data =</span> _,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">fun =</span> median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="r-plot.design-basics_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="r-plot.design-basics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="troubleshooting-and-faqs" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting-and-faqs">Troubleshooting and FAQs</h2>
-<section id="common-issues" class="level3">
-<h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
-<ol type="1">
-<li><strong>Error: “No numeric variables”</strong>: Ensure the response variable is numeric.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>warpbreaks<span class="sc">$</span>breaks <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(warpbreaks<span class="sc">$</span>breaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li><strong>Plot not displaying</strong>: Use <code>dev.off()</code> to reset plotting device.</li>
-</ol>
-</section>
-<section id="faqs" class="level3">
-<h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
+<li><strong>Default method</strong>: <code>gamesHowellTest(x, g, …)</code>
 <ul>
-<li><strong>Can it handle interaction terms?</strong> No, use <code>interaction.plot()</code> for interactions.</li>
+<li><code>x</code>: Numeric vector of data or a list of numeric vectors.</li>
+<li><code>g</code>: Grouping vector/factor (ignored if <code>x</code> is a list).</li>
+</ul></li>
+<li><strong>Formula method</strong>: <code>gamesHowellTest(formula, data, …)</code>
+<ul>
+<li><code>formula</code>: Formula of the form <code>response ~ group</code>.</li>
+<li><code>data</code>: Data frame containing variables in the formula.</li>
+</ul></li>
+<li><strong><code>aov</code> method</strong>: <code>gamesHowellTest(x, …)</code>
+<ul>
+<li><code>x</code>: A fitted model object of class <code>aov</code>.</li>
+</ul></li>
+</ol>
+</section>
+<section id="step-by-step-examples" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-examples">Step-by-Step Examples</h2>
+<section id="example-1-using-an-aov-object" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-using-an-aov-object">Example 1: Using an <code>aov</code> Object</h3>
+<p>We’ll use the built-in <code>chickwts</code> dataset to compare chicken weights across feed types.</p>
+<section id="step-1-check-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-check-assumptions">Step 1: Check Assumptions</h4>
+<ol type="1">
+<li><strong>Normality</strong>: Shapiro-Wilk test on residuals.</li>
+<li><strong>Equal Variances</strong>: Bartlett test.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight <span class="sc">~</span> feed, <span class="at">data =</span> chickwts)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check normality of residuals</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(fit))  <span class="co"># p &gt; 0.05 → normality assumed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  residuals(fit)
+W = 0.98616, p-value = 0.6272</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check homogeneity of variances</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> feed, <span class="at">data =</span> chickwts)  <span class="co"># small p → unequal variances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  weight by feed
+Bartlett's K-squared = 3.2597, df = 5, p-value = 0.66</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2-run-anova" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-run-anova">Step 2: Run ANOVA</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">feed</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">231129.2</td>
+<td style="text-align: right;">46225.832</td>
+<td style="text-align: right;">15.3648</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">195556.0</td>
+<td style="text-align: right;">3008.554</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-perform-games-howell-test" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-perform-games-howell-test">Step 3: Perform Games-Howell Test</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">gamesHowellTest</span>(fit)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)  <span class="co"># Pairwise comparisons with p-values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           q value   Pr(&gt;|q|)    
+horsebean - casein == 0    -10.384 9.4359e-06 ***
+linseed - casein == 0       -6.192 0.00310158  **
+meatmeal - casein == 0      -2.445 0.52927013    
+soybean - casein == 0       -4.631 0.03604278   *
+sunflower - casein == 0      0.323 0.99990004    
+linseed - horsebean == 0     4.267 0.06493843   .
+meatmeal - horsebean == 0    7.155 0.00123741  **
+soybean - horsebean == 0     6.441 0.00190148  **
+sunflower - horsebean == 0  12.791 2.3072e-07 ***
+meatmeal - linseed == 0      3.329 0.22093066    
+soybean - linseed == 0       1.873 0.76889970    
+sunflower - linseed == 0     7.547 0.00030424 ***
+soybean - meatmeal == 0     -1.771 0.80599848    
+sunflower - meatmeal == 0    3.050 0.30300311    
+sunflower - soybean == 0     5.775 0.00508811  **</code></pre>
+</div>
+</div>
+</section>
+<section id="step-4-interpret-results" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-interpret-results">Step 4: Interpret Results</h4>
+<ul>
+<li><strong><code>feed</code></strong>: A significant effect of feed type on weight is observed. The Games-Howell test suggests that the means of weight are different between the different feed types.</li>
+<li><strong><code>Residuals</code></strong>: The remaining variance is due to random error.</li>
 </ul>
 </section>
 </section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="example-2-using-the-formula-method" class="level3">
+<h3 class="anchored" data-anchor-id="example-2-using-the-formula-method">Example 2: Using the Formula Method</h3>
+<p>Simulate data with three groups (A, B, C) with unequal variances.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">20</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">2</span>),  <span class="co"># Group A</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean=</span><span class="dv">15</span>, <span class="at">sd=</span><span class="dv">4</span>),  <span class="co"># Group B</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean=</span><span class="dv">12</span>, <span class="at">sd=</span><span class="dv">3</span>)) <span class="co"># Group C</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform Games-Howell Test</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">gamesHowellTest</span>(values <span class="sc">~</span> group)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           q value   Pr(&gt;|q|)    
+B - A == 0   7.416 3.2056e-05 ***
+C - A == 0   3.713   0.033796   *
+C - B == 0  -3.567   0.041576   *</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="key-output-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="key-output-interpretation">Key Output Interpretation</h2>
 <ul>
-<li>Always verify numeric response variables.</li>
-<li>Use <code>fun</code> parameter to explore summary statistics like <code>median</code>.</li>
-<li>Combine with diagnostic plots for a thorough analysis.</li>
+<li><strong><code>statistic</code></strong>: Test statistic for each pair (t-value).</li>
+<li><strong><code>p.value</code></strong>: Adjusted p-values using the Tukey distribution.</li>
+<li>Values are arranged in a lower-triangle matrix. A p-value &lt;- 0.05 indicates a significant difference between groups.</li>
+</ul>
+</section>
+<section id="assumptions-and-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-and-considerations">Assumptions and Considerations</h2>
+<ol type="1">
+<li><strong>Normality</strong>: The test assumes normality. Check using Shapiro-Wilk or QQ-plots.</li>
+<li><strong>Unequal Variances</strong>: Use Games-Howell when variances are unequal (check via Bartlett/Levene test).</li>
+<li><strong>Post-Hoc Use</strong>: Conduct only after a significant ANOVA result.</li>
+</ol>
+</section>
+<section id="when-to-use-games-howell-vs.-other-tests" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-games-howell-vs.-other-tests">When to Use Games-Howell vs.&nbsp;Other Tests</h2>
+<ul>
+<li><strong>Tukey HSD</strong>: Use when variances are equal.</li>
+<li><strong>Dunnett’s Test</strong>: Compare all groups against a control.</li>
+<li><strong>Bonferroni</strong>: Conservative adjustment for any pairwise test.</li>
 </ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<p><code>plot.design()</code> is a versatile tool for visualizing factor effects in experimental data. It simplifies the analysis of variance by providing clear, interpretable plots.</p>
-</section>
-<section id="next-steps" class="level3">
-<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
-<p>Explore:</p>
-<ul>
-<li><code>interaction.plot()</code> for interaction effects.</li>
-<li>Advanced visualization packages like <code>ggplot2</code>.</li>
-</ul>
-</section>
-</section>
-<section id="references-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
-<ul>
-<li><a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot.design">R Documentation for <code>plot.design</code></a></li>
-<li><a href="https://www.springer.com/gp/book/9780412830402">Statistical Models in S</a></li>
-</ul>
+<p>The <code>gamesHowellTest</code> is ideal for comparing group means when variances are unequal. Always validate assumptions before applying the test. Use the formula or <code>aov</code> method for cleaner syntax with data frames or model objects.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1045,38 +980,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
