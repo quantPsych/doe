@@ -757,8 +757,8 @@ Table&nbsp;1: Standardized Residuals Example
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(std_res_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          1           2           3           4           5           6 
- 0.07018243  1.79634098 -0.46769285  1.76235524  0.06382731  0.12884491 </code></pre>
+<pre><code>         1          2          3          4          5          6 
+ 0.3461597  2.2660439 -0.7190137 -0.3099960  0.2670225 -1.9737199 </code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1990,7 +1990,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <ol type="1">
 <li><strong><code>PairwiseTTest()</code></strong> from the <strong>DescTools</strong> package with the <code>pool.sd = FALSE</code> argument.<br>
 </li>
-<li><strong><code>gamesHowellTest()</code></strong> from the <strong>PMCMRplus</strong> packages. See <a href="appendix/stat-topics/games-howell-test.qmd">Games-Howell Post-Hoc Comparison</a> for more details.</li>
+<li><strong><code>gamesHowellTest()</code></strong> from the <strong>PMCMRplus</strong> packages. See <a href="../appendix/stat-topics/games-howell-test.html">Games-Howell Post-Hoc Comparison</a> for more details.</li>
 </ol>
 <p>Below, we demonstrate the <strong>PMCMRplus</strong> package’s <code>gamesHowellTest()</code> function.</p>
 <div id="tbl-games-howell-test" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
