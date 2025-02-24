@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.41">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Davood Tofighi, Ph.D.">
+
+<title>Model Diagnostics – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-79108a0fc1995748cbd19a5b0e3e3e7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Model Diagnostics – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Understanding and Validating Assumptions in ANOVA and Regression Models">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/slides/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+</head>
+
+<body class="nav-sidebar floating nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 545</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../r_help.html"> 
+<span class="menu-text">R Help</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_appendix.html"> 
+<span class="menu-text">Appendix</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Model Diagnostics</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Materials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">R Code and Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Help</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-code-data-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Code and Datasets from the Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-files-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets from the Book</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../contents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contents</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Model Diagnostics</h1>
+<p class="subtitle lead">Understanding and Validating Assumptions in ANOVA and Regression Models</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Department of Mathematics and Statistics, University of New Mexico
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="welcome-to-model-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="welcome-to-model-diagnostics">Welcome to Model Diagnostics</h2>
+<ul>
+<li><strong>Topic Overview:</strong><br>
+Understanding and validating assumptions in ANOVA and regression models.</li>
+<li><strong>Audience:</strong><br>
+Graduate students in statistics.</li>
+<li><strong>Focus:</strong><br>
+Key concepts, R implementations, mathematical foundations, and real-world applications.</li>
+</ul>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li>Recognize key model assumptions: independence, homoscedasticity, and normality.</li>
+<li>Understand the mathematical derivations behind diagnostic tools.</li>
+<li>Apply R functions to visualize and remediate model violations.</li>
+<li>Analyze real-world datasets using diagnostic techniques.</li>
+<li>Engage in interactive quizzes and hands-on exercises.</li>
+</ul>
+</section>
+<section id="agenda" class="level2">
+<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
+<ul>
+<li>Introduction &amp; Overview</li>
+<li>Key Concepts &amp; Definitions</li>
+<li>R Functions and Mathematical Foundations</li>
+<li><strong>Case-Deleted Residuals and Residual Types</strong></li>
+<li>Hands-On Examples and Real-World Applications</li>
+<li>Interactive Quizzes &amp; Discussions</li>
+<li>Summary &amp; Further Learning</li>
+</ul>
+</section>
+<section id="pre-class-material-flipped-classroom" class="level2">
+<h2 class="anchored" data-anchor-id="pre-class-material-flipped-classroom">Pre-Class Material (Flipped Classroom)</h2>
+<ul>
+<li>Watch the short video on “Introduction to Model Diagnostics”</li>
+<li>Read chapters on residual analysis and model assumptions.</li>
+<li>Explore the provided R scripts before class.</li>
+</ul>
+</section>
+</section>
+<section id="r-packages-and-tools" class="level1">
+<h1>R Packages and Tools</h1>
+<section id="r-packages-overview" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages-overview">R Packages Overview</h2>
+<p>We use several packages to manage data, create visualizations, and conduct diagnostics:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    dplyr, <span class="co"># Data manipulation</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    ggplot2, <span class="co"># Data visualization</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    here, <span class="co"># File path management</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    readr, <span class="co"># Data import</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    MASS, <span class="co"># Statistical functions including boxcox()</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    car <span class="co"># Diagnostic plots and tests</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Explanation:</strong>
+<ul>
+<li><strong>dplyr:</strong> For data manipulation.<br>
+</li>
+<li><strong>ggplot2:</strong> For creating high-quality plots.<br>
+</li>
+<li><strong>here:</strong> For consistent file paths.<br>
+</li>
+<li><strong>readr:</strong> For fast and efficient data reading.<br>
+</li>
+<li><strong>MASS:</strong> For advanced statistical methods (e.g., Box-Cox transformation).<br>
+</li>
+<li><strong>nlme:</strong> For modeling non-independent data (e.g., mixed-effects models).</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="key-concepts-and-definitions" class="level1">
+<h1>Key Concepts and Definitions</h1>
+<section id="what-are-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-residuals">What are Residuals?</h2>
+<ul>
+<li><strong>Definition:</strong><br>
+The difference between the observed value <span class="math inline">\(Y_i\)</span> and the fitted (predicted) value <span class="math inline">\(\hat{Y}_i\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+e_i = Y_i - \hat{Y}_i
+\]</span></p>
+<ul>
+<li><strong>Importance:</strong><br>
+Residuals capture the unexplained variation after fitting the model.</li>
+</ul>
+</section>
+<section id="example-calculating-a-residual" class="level2">
+<h2 class="anchored" data-anchor-id="example-calculating-a-residual">Example: Calculating a Residual</h2>
+<div class="cell" data-tbl-cap="Example: Calculating Residuals">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Fitting a simple linear model and calculating residuals</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">20</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_example <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>residuals_example <span class="ot">&lt;-</span> <span class="fu">resid</span>(model_example)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(residuals_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+-1.0715154 -0.1958163 -0.8638412 -0.6831998 -0.5747476 -1.5122930 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Discussion:</strong><br>
+Check the output to see the first few residuals calculated from the model.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>resid()</code> extracts residuals from a linear model object.</p>
+</div>
+</div>
+</section>
+<section id="quiz-what-is-a-residual" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-what-is-a-residual">Quiz: What is a Residual?</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: This is the definition of a residual.">(A): The difference between the observed and fitted values.</span></li>
+<li><span data-explanation="Incorrect: Residuals are differences, not sums.">(B): The sum of the observed and fitted values.</span></li>
+<li><span data-explanation="Incorrect: Residuals involve both observed and fitted values.">(C): Only the observed value.</span></li>
+<li><span data-explanation="Incorrect: The correct definition is given in option A.">(D): None of the above.</span></li>
+</ul>
+</section>
+<section id="standardized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="standardized-residuals">Standardized Residuals</h2>
+<ul>
+<li><p><strong>Definition:</strong><br>
+Standardized residuals scale raw residuals by the estimate of the standard deviation:</p>
+<p><span class="math display">\[
+z_i = \frac{e_i}{\sqrt{\text{MSE}}}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\text{MSE} = \frac{\sum_{i=1}^{n} e_i^2}{n-p}
+\]</span></p></li>
+<li><p><strong>Usage:</strong><br>
+Identifies outliers; values of <span class="math inline">\(|z_i| &gt; 3\)</span> are typically flagged.</p></li>
+</ul>
+</section>
+<section id="example-standardized-residuals-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="example-standardized-residuals-calculation">Example: Standardized Residuals Calculation</h2>
+<div class="cell" data-tbl-cap="Example: Calculating Standardized Residuals">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate standardized residuals from the previous model</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">&lt;-</span> <span class="fu">sum</span>(residuals_example<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="fu">length</span>(<span class="fu">coef</span>(model_example)))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>std_residuals <span class="ot">&lt;-</span> residuals_example <span class="sc">/</span> <span class="fu">sqrt</span>(mse)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(std_residuals) <span class="co"># Display the first few standardized residuals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+-1.2619625 -0.2306199 -1.0173771 -0.8046292 -0.6769011 -1.7810823 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rstandard</span>(model_example)) <span class="co"># Using the rstandard() function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+-1.3138482 -0.2375746 -1.1111842 -0.8256544 -0.6944889 -1.9762101 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Discussion:</strong><br>
+Compare the output from the manual calculation and the <code>rstandard()</code> function.</li>
+</ul>
+</section>
+<section id="quiz-standardized-residuals-interpretation" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-standardized-residuals-interpretation">Quiz: Standardized Residuals Interpretation</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: They standardize the raw residuals.">(A): They indicate the scaled difference between observed and fitted values.</span></li>
+<li><span data-explanation="Incorrect: They are scaled by the standard deviation.">(B): They are the same as the raw residuals.</span></li>
+<li><span data-explanation="Incorrect: They measure deviations, not fit.">(C): They measure model fit directly.</span></li>
+<li><span data-explanation="Incorrect: They are crucial for identifying outliers.">(D): They are irrelevant for outlier detection.</span></li>
+</ul>
+</section>
+<section id="homoscedasticity-constant-variance" class="level2">
+<h2 class="anchored" data-anchor-id="homoscedasticity-constant-variance">Homoscedasticity: Constant Variance</h2>
+<ul>
+<li><strong>Definition:</strong><br>
+The variance of residuals remains constant across levels of the predictor(s).</li>
+<li><strong>Visual Check:</strong><br>
+A residual vs.&nbsp;fitted plot should display a random cloud of points.</li>
+<li><strong>Implication:</strong><br>
+Heteroscedasticity can lead to biased standard errors.</li>
+</ul>
+</section>
+<section id="visualizing-homoscedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-homoscedasticity">Visualizing Homoscedasticity</h2>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals vs. fitted values for the example model</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_example<span class="sc">$</span>fitted.values, <span class="fu">resid</span>(model_example),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Residuals vs. Fitted Values"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-visual-variance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-visual-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-visual-variance-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Residuals vs.&nbsp;Fitted Values
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Observation:</strong><br>
+Look for any funnel or pattern indicating non-constant variance.</li>
+</ul>
+</section>
+<section id="quiz-homoscedasticity-concept" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-homoscedasticity-concept">Quiz: Homoscedasticity Concept</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: Homoscedasticity means constant variance.">(A): Residual variance is constant.</span></li>
+<li><span data-explanation="Incorrect: That describes heteroscedasticity.">(B): Residual variance increases with fitted values.</span></li>
+<li><span data-explanation="Incorrect: Normality is a separate assumption.">(C): Residuals are normally distributed.</span></li>
+<li><span data-explanation="Incorrect: Independence is another assumption.">(D): Residuals are independent.</span></li>
+</ul>
+</section>
+<section id="normality-of-errors" class="level2">
+<h2 class="anchored" data-anchor-id="normality-of-errors">Normality of Errors</h2>
+<section id="definition" class="level3">
+<h3 class="anchored" data-anchor-id="definition">Definition:</h3>
+<p>Errors (residuals) should be approximately normally distributed.</p>
+<ul>
+<li><strong>Diagnostic Tool:</strong> Q-Q plots compare the distribution of residuals to a normal distribution.</li>
+<li><strong>Mathematical Note:</strong> In a Q-Q plot, if residuals lie on a 45° line, normality is supported.</li>
+</ul>
+</section>
+</section>
+<section id="visualizing-normality-q-q-plot" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-normality-q-q-plot">Visualizing Normality: Q-Q Plot</h2>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model_example), <span class="at">main =</span> <span class="st">"QQ-Plot of Residuals"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model_example), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-qqplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-qqplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-qqplot-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qqplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: QQ-Plot of Residuals
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Interpretation:</strong> Deviations from the line indicate departures from normality.</li>
+</ul>
+</section>
+<section id="quiz-q-q-plot-interpretation" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-q-q-plot-interpretation">Quiz: Q-Q Plot Interpretation</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: This is the expected pattern if the residuals are normal.">(A): Points along the line indicate normality.</span></li>
+<li><span data-explanation="Incorrect: A curve suggests non-normality.">(B): A curved pattern is ideal.</span></li>
+<li><span data-explanation="Incorrect: A structured line is expected.">(C): Random scatter indicates normality.</span></li>
+<li><span data-explanation="Incorrect: Option A is correct.">(D): None of the above.</span></li>
+</ul>
+</section>
+<section id="independence-of-errors" class="level2">
+<h2 class="anchored" data-anchor-id="independence-of-errors">Independence of Errors</h2>
+<ul>
+<li><strong>Definition:</strong><br>
+Each error term should be independent; no autocorrelation should exist.</li>
+<li><strong>Checking Method:</strong><br>
+Plot residuals in order of data collection or use the autocorrelation function (ACF).</li>
+</ul>
+</section>
+<section id="visualizing-independence-autocorrelation-function" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-independence-autocorrelation-function">Visualizing Independence: Autocorrelation Function</h2>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(<span class="fu">resid</span>(model_example), <span class="at">main =</span> <span class="st">"ACF of Residuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-acf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-acf-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: ACF Plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Interpretation:</strong><br>
+Significant auto-correlation suggests dependency among errors.</li>
+</ul>
+</section>
+<section id="quiz-independence-of-errors" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-independence-of-errors">Quiz: Independence of Errors</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: There should be no systematic correlation.">(A): Independence means no auto-correlation.</span></li>
+<li><span data-explanation="Incorrect: Normality is a separate assumption.">(B): Independence means errors follow a normal distribution.</span></li>
+<li><span data-explanation="Incorrect: That’s homoscedasticity.">(C): Independence means errors have constant variance.</span></li>
+<li><span data-explanation="Incorrect: It is a critical assumption.">(D): Independence is not important in regression.</span></li>
+</ul>
+</section>
+</section>
+<section id="r-functions-and-their-mathematical-role" class="level1">
+<h1>R Functions and Their Mathematical Role</h1>
+<section id="using-lm-for-model-fitting" class="level2">
+<h2 class="anchored" data-anchor-id="using-lm-for-model-fitting">Using lm() for Model Fitting</h2>
+<ul>
+<li><strong>Function:</strong> <code>lm()</code> fits a linear model.</li>
+<li><strong>Mathematical Basis:</strong><br>
+Minimizes the sum of squared residuals: <span class="math display">\[
+\min_{\beta} \sum_{i=1}^{n} \left(Y_i - X_i\beta\right)^2
+\]</span></li>
+</ul>
+<div class="cell" data-tbl-cap="Regression Model Example">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5123 -0.6019 -0.1857  0.8309  1.2591 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   2.1555     0.5621   3.835  0.00121 ** 
+x             2.9609     0.1001  29.569  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8491 on 18 degrees of freedom
+Multiple R-squared:  0.9798,    Adjusted R-squared:  0.9787 
+F-statistic: 874.3 on 1 and 18 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="using-plot-for-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="using-plot-for-diagnostics">Using plot() for Diagnostics</h2>
+<ul>
+<li><strong>Function:</strong> <code>plot()</code> applied to an <code>lm</code> object produces diagnostic plots.</li>
+<li><strong>Usage:</strong></li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Interpretation:</strong><br>
+Provides residual vs.&nbsp;fitted, Q-Q, scale-location, and leverage plots.</li>
+</ul>
+</section>
+<section id="using-qqnorm-and-qqline" class="level2">
+<h2 class="anchored" data-anchor-id="using-qqnorm-and-qqline">Using <code>qqnorm()</code> and <code>qqline()</code></h2>
+<ul>
+<li><strong>Purpose:</strong> Create Q-Q plots to assess normality.</li>
+<li><strong>Usage:</strong> <code>qqnorm()</code> creates the plot, while <code>qqline()</code> adds a reference line.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model_lm), <span class="at">main =</span> <span class="st">"QQ-Plot of Model Residuals"</span>) <span class="fu">qqline</span>(<span class="fu">resid</span>(model_lm), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-acf-for-autocorrelation-checks" class="level2">
+<h2 class="anchored" data-anchor-id="using-acf-for-autocorrelation-checks">Using acf() for Autocorrelation Checks</h2>
+<ul>
+<li><strong>Purpose:</strong><br>
+Compute and visualize autocorrelation in residuals.</li>
+</ul>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(<span class="fu">resid</span>(model_lm), <span class="at">main =</span> <span class="st">"ACF of Model Residuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-r-acf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-r-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-r-acf-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: ACF Plot of Model Residuals
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="using-boxcox-for-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="using-boxcox-for-transformations">Using boxcox() for Transformations</h2>
+<ul>
+<li><strong>Purpose:</strong><br>
+Identify an optimal power transformation parameter <span class="math inline">\(\lambda\)</span> to stabilize variance.</li>
+<li><strong>Mathematical Formula:</strong><br>
+<span class="math display">\[
+Y'(\lambda) =
+\begin{cases}
+\frac{Y^\lambda - 1}{\lambda} &amp; \lambda \neq 0 \\
+\ln(Y) &amp; \lambda = 0
+\end{cases}
+\]</span></li>
+</ul>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>boxcox_result <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">boxcox</span>(model_lm, <span class="at">lambda =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-r-boxcox" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-r-boxcox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-r-boxcox-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-boxcox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Box-Cox Transformation
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="quiz-r-functions-in-diagnostics" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-r-functions-in-diagnostics">Quiz: R Functions in Diagnostics</h2>
+<ul>
+<li><span data-explanation="Correct: That is the essence of least squares.">(A): <code>lm()</code> minimizes the sum of squared errors.</span></li>
+<li><span class="correct" data-explanation="Correct: That is exactly what it does.">(B): <code>boxcox()</code> identifies the optimal lambda for transformation.</span></li>
+<li><span data-explanation="Correct: It quantifies serial correlation in residuals.">(C): <code>acf()</code> checks for auto-correlation.</span></li>
+<li><span data-explanation="Correct: Each function has a specific role in diagnostics.">(D): All of the above.</span></li>
+</ul>
+</section>
+</section>
+<section id="mathematical-foundations" class="level1">
+<h1>Mathematical Foundations</h1>
+<section id="derivation-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="derivation-residuals">Derivation: Residuals</h2>
+<ul>
+<li><strong>Formula Recap:</strong><br>
+<span class="math display">\[
+e_i = Y_i - \hat{Y}_i
+\]</span></li>
+<li><strong>Mean Squared Error (MSE):</strong> <span class="math display">\[
+\text{MSE} = \frac{\sum_{i=1}^{n} e_i^2}{n-p}
+\]</span></li>
+<li><strong>Discussion:</strong><br>
+These formulas form the basis of diagnostic statistics in regression.</li>
+</ul>
+</section>
+<section id="derivation-standardized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="derivation-standardized-residuals">Derivation: Standardized Residuals</h2>
+<ul>
+<li><p><strong>Formula:</strong><br>
+<span class="math display">\[
+z_i = \frac{e_i}{\sqrt{\text{MSE}}}
+\]</span></p></li>
+<li><p><strong>Purpose:</strong><br>
+Standardizes residuals for easier comparison and outlier detection.</p></li>
+</ul>
+</section>
+<section id="derivation-box-cox-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="derivation-box-cox-transformation">Derivation: Box-Cox Transformation</h2>
+<ul>
+<li><p><strong>Transformation:</strong> <span class="math display">\[
+Y'(\lambda) =
+\begin{cases}
+\frac{Y^\lambda - 1}{\lambda} &amp; \lambda \neq 0 \\
+\ln(Y) &amp; \lambda = 0
+\end{cases}
+\]</span></p></li>
+<li><p><strong>Objective:</strong><br>
+Stabilize variance and achieve normality by selecting <span class="math inline">\(\lambda\)</span> that maximizes the log-likelihood.</p></li>
+</ul>
+</section>
+</section>
+<section id="case-deleted-and-studentized-residuals" class="level1">
+<h1>Case-Deleted and Studentized Residuals</h1>
+<section id="introduction-to-case-deleted-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-case-deleted-residuals">Introduction to Case-Deleted Residuals</h2>
+<ul>
+<li><p><strong>Definition:</strong><br>
+Case-deleted residuals (also known as externally studentized residuals) are computed by fitting the model without a particular observation and then comparing the observed value to the prediction from that reduced model.</p></li>
+<li><p><strong>Mathematical Expression:</strong><br>
+The externally studentized residual is given by: <span class="math display">\[
+t_i = \frac{e_i}{s_{(i)}\sqrt{1-h_i}}
+\]</span></p></li>
+</ul>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(e_i\)</span> is the raw residual.</li>
+<li><span class="math inline">\(s_{(i)}\)</span> is the standard error computed with observation <span class="math inline">\(i\)</span> omitted.</li>
+<li><span class="math inline">\(h_i\)</span> is the leverage of the <span class="math inline">\(i\)</span>th observation.</li>
+<li><strong>Purpose:</strong><br>
+This measure provides a more accurate indicator of an observation’s influence by removing its own contribution to the variance estimate.</li>
+</ul>
+</section>
+<section id="r-functions-for-case-deleted-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="r-functions-for-case-deleted-residuals">R Functions for Case-Deleted Residuals</h2>
+<ul>
+<li><strong>Base R:</strong>
+<ul>
+<li>Use the function <code>rstudent()</code> to compute externally studentized residuals.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute externally studentized residuals (case-deleted)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>case_deleted_res <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(model_example)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(case_deleted_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+-1.3428426 -0.2312438 -1.1189360 -0.8180318 -0.6841502 -2.1703575 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Interpretation:</strong><br>
+Values with high absolute magnitude (commonly above 2 or 3) indicate potentially influential observations.</li>
+</ul>
+</section>
+<section id="standardized-vs.-studentized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="standardized-vs.-studentized-residuals">Standardized vs.&nbsp;Studentized Residuals</h2>
+<ul>
+<li><strong>Standardized Residuals:</strong><br>
+Computed as: <span class="math display">\[
+r_i = \frac{e_i}{s \sqrt{1-h_i}}
+\]</span></li>
+</ul>
+<p>where <span class="math inline">\(s\)</span> is the overall standard error estimate.</p>
+<ul>
+<li><strong>Studentized (Externally) Residuals:</strong><br>
+Computed as: <span class="math display">\[
+t_i = \frac{e_i}{s_{(i)}\sqrt{1-h_i}}
+\]</span></li>
+</ul>
+<p>where <span class="math inline">\(s_{(i)}\)</span> is the error standard deviation calculated by leaving the <span class="math inline">\(i\)</span>th observation out.</p>
+<ul>
+<li><strong>Key Difference:</strong><br>
+Standardized residuals use the model’s overall error variance while studentized residuals account for the influence of each observation by recalculating the variance with that observation deleted.</li>
+</ul>
+</section>
+<section id="r-code-comparing-standardized-and-studentized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="r-code-comparing-standardized-and-studentized-residuals">R Code: Comparing Standardized and Studentized Residuals</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute standardized and studentized residuals using base R</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>std_resid_base <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(model_example)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>stud_resid_base <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(model_example)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(std_resid_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+-1.3138482 -0.2375746 -1.1111842 -0.8256544 -0.6944889 -1.9762101 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stud_resid_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+-1.3428426 -0.2312438 -1.1189360 -0.8180318 -0.6841502 -2.1703575 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Observation:</strong> Compare the outputs to see how the studentized (case-deleted) residuals differ from the standardized ones.</li>
+</ul>
+</section>
+<section id="quiz-residual-types" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-residual-types">Quiz: Residual Types</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: They do not adjust for individual observation influence.">(A): Standardized residuals use the overall error variance.</span></li>
+<li><span class="correct" data-explanation="Correct: This is the key difference.">(B): Studentized residuals recalculate variance excluding the observation in question.</span></li>
+<li>[(C): Both residuals are identical in all cases.] {data-explanation=“Incorrect: They differ, especially for influential points.”}</li>
+<li><span data-explanation="Incorrect: Options A and B accurately describe the differences.">(D): None of the above.</span></li>
+</ul>
+</section>
+</section>
+<section id="functions-in-base-r-and-the-car-package-for-residual-diagnostics" class="level1">
+<h1>Functions in Base R and the car Package for Residual Diagnostics</h1>
+<section id="base-r-functions-for-residual-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="base-r-functions-for-residual-analysis">Base R Functions for Residual Analysis</h2>
+<ul>
+<li><code>rstandard()</code>:<br>
+Computes standardized residuals.</li>
+<li><code>rstudent()</code>:<br>
+Computes externally studentized (case-deleted) residuals.</li>
+<li><code>influence.measures()</code>:<br>
+Provides a summary of influence measures including Cook’s distance, leverage, etc.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized and studentized residuals in base R</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>std_resid <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(model_example)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>stud_resid <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(model_example)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>influence_stats <span class="ot">&lt;-</span> <span class="fu">influence.measures</span>(model_example)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(influence_stats<span class="sc">$</span>infmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       dfb.1_       dfb.x       dffit     cov.r      cook.d        hat
+1 -0.32350632  0.23151665 -0.38900855 0.9932937 0.072431659 0.07742312
+2 -0.03765541  0.02089027 -0.05721693 1.1822944 0.001727742 0.05769027
+3  0.29215675 -0.40847445 -0.49145570 1.1601963 0.119096878 0.16171488
+4 -0.07665434  0.01407979 -0.18822452 1.0927415 0.018045902 0.05028135
+5 -0.05494022  0.00204234 -0.15696880 1.1177273 0.012694759 0.05000847
+6  0.65927657 -0.89369779 -1.04338434 0.8462633 0.451296821 0.18772747</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-from-the-car-package" class="level2">
+<h2 class="anchored" data-anchor-id="functions-from-the-car-package">Functions from the car Package</h2>
+<ul>
+<li><code>influencePlot()</code>: Creates a bubble plot of studentized residuals versus leverage.</li>
+<li><code>residualPlots()</code>: Generates plots of residuals against each predictor to check for non-linearity.</li>
+<li><code>outlierTest()</code>: Performs a Bonferroni test for outliers.</li>
+</ul>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Influence plot from car package</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">influencePlot</span>(model_example, <span class="at">main =</span> <span class="st">"Influence Plot"</span>, <span class="at">sub =</span> <span class="st">"Circle size is proportional to Cook's distance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week-04_model-diagnostics-v1_files/figure-revealjs/r-car-functions-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Influence Plot</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">StudRes</th>
+<th style="text-align: right;">Hat</th>
+<th style="text-align: right;">CookD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-2.1703575</td>
+<td style="text-align: right;">0.1877275</td>
+<td style="text-align: right;">0.4512968</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">1.6025819</td>
+<td style="text-align: right;">0.0691875</td>
+<td style="text-align: right;">0.0878003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16</td>
+<td style="text-align: right;">1.1547888</td>
+<td style="text-align: right;">0.2005928</td>
+<td style="text-align: right;">0.1642663</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18</td>
+<td style="text-align: right;">-0.2402325</td>
+<td style="text-align: right;">0.2972635</td>
+<td style="text-align: right;">0.0128805</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Influence Plot</p>
+</div>
+</div>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual plots for assessing non-linearity</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">residualPlots</span>(model_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week-04_model-diagnostics-v1_files/figure-revealjs/r-residual-plots-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Residual Plots for Non-Linearity</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Test stat Pr(&gt;|Test stat|)
+x            -0.7884           0.4413
+Tukey test   -0.7884           0.4304</code></pre>
+</div>
+</div>
+<div class="cell" data-tbl-cap="Outlier Test Results">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Outlier test using car package</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>outlier_test <span class="ot">&lt;-</span> <span class="fu">outlierTest</span>(model_example)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>outlier_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>No Studentized residuals with Bonferroni p &lt; 0.05
+Largest |rstudent|:
+   rstudent unadjusted p-value Bonferroni p
+6 -2.170358           0.044436      0.88872</code></pre>
+</div>
+</div>
+</section>
+<section id="quiz-functions-for-residual-diagnostics" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-functions-for-residual-diagnostics">Quiz: Functions for Residual Diagnostics</h2>
+<ul>
+<li><span data-explanation="Correct: It uses the overall variance estimate.">(A): <code>rstandard()</code> computes standardized residuals in base R.</span></li>
+<li><span class="correct" data-explanation="Correct: It recalculates the variance leaving one observation out.">(B): <code>rstudent()</code> computes externally studentized (case-deleted) residuals.</span></li>
+<li><span data-explanation="Correct: It helps identify  high-leverage and high-influence points.">(C): The <strong>car</strong> package’s <code>influencePlot()</code> is used for visualizing influential observations.</span></li>
+<li><span data-explanation="Correct: Each option is accurate.">(D): All of the above.</span></li>
+</ul>
+</section>
+</section>
+<section id="hands-on-examples-and-real-world-applications" class="level1">
+<h1>Hands-On Examples and Real-World Applications</h1>
+<section id="practical-example-fitting-a-linear-model" class="level2">
+<h2 class="anchored" data-anchor-id="practical-example-fitting-a-linear-model">Practical Example: Fitting a Linear Model</h2>
+<div class="cell" data-tbl-cap="Fitting a Linear Model">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data and fit a linear model</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>x_real <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="dv">10</span>, <span class="dv">3</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>y_real <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fl">2.5</span> <span class="sc">*</span> x_real <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>model_real <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_real <span class="sc">~</span> x_real)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y_real ~ x_real)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.5863 -1.3006 -0.0922  1.3360  4.0771 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  4.82536    0.94526   5.105 5.64e-06 ***
+x_real       2.53468    0.08669  29.237  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.923 on 48 degrees of freedom
+Multiple R-squared:  0.9468,    Adjusted R-squared:  0.9457 
+F-statistic: 854.8 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-residuals-vs.-fitted-values" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-residuals-vs.-fitted-values">Visualizing Residuals vs.&nbsp;Fitted Values</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_real<span class="sc">$</span>fitted.values, <span class="fu">resid</span>(model_real),</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Residuals vs. Fitted Values"</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-residual-vs-fitted" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-residual-vs-fitted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-residual-vs-fitted-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-residual-vs-fitted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Residuals vs.&nbsp;Fitted Values
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-qq-plot-for-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-qq-plot-for-residuals">Visualizing QQ-Plot for Residuals</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model_real), <span class="at">main =</span> <span class="st">"QQ-Plot for Model Residuals"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model_real), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-qq-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-qq-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-qq-plot-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qq-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: QQ-Plot for Model Residuals
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interactive-exercise-identify-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-exercise-identify-patterns">Interactive Exercise: Identify Patterns</h2>
+<ul>
+<li><strong>Task:</strong><br>
+Examine the residual vs.&nbsp;fitted plot and the QQ-plot.<br>
+</li>
+<li><strong>Prompt:</strong><br>
+What patterns indicate potential violations of model assumptions?<br>
+</li>
+<li><strong>Discussion:</strong><br>
+Discuss your findings with your group.</li>
+</ul>
+</section>
+<section id="real-world-data-integration-battery-life-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-data-integration-battery-life-analysis">Real-World Data Integration: Battery Life Analysis</h2>
+<ul>
+<li><strong>Scenario:</strong><br>
+Analyze a dataset comparing battery life under different treatments.</li>
+<li><strong>Steps:</strong>
+<ol type="1">
+<li>Load and explore the dataset.</li>
+<li>Fit an ANOVA model.</li>
+<li>Generate diagnostic plots.</li>
+</ol></li>
+</ul>
+</section>
+<section id="loading-a-real-world-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="loading-a-real-world-dataset">Loading a Real-World Dataset</h2>
+<div id="tbl-battery-data" class="cell anchored" data-tblcap="Battery Life Dataset">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a hypothetical battery life dataset</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>battery_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"battery.txt"</span>))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(battery_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Type</th>
+<th style="text-align: right;">LPUC</th>
+<th style="text-align: right;">Order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">611</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">923</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">537</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">476</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">542</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">593</td>
+<td style="text-align: right;">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="fitting-the-model-on-real-world-data" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-the-model-on-real-world-data">Fitting the Model on Real-World Data</h2>
+<div class="cell" data-tbl-cap="Fitting a Model on Battery Life Data">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model with LPUC as the response and Type as the predictor</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>model_battery <span class="ot">&lt;-</span> <span class="fu">aov</span>(LPUC <span class="sc">~</span> Type, <span class="at">data =</span> battery_data)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_battery)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+Type         1  84760   84760   3.194 0.0956 .
+Residuals   14 371568   26541                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="diagnostic-plots-for-real-world-data" class="level2">
+<h2 class="anchored" data-anchor-id="diagnostic-plots-for-real-world-data">Diagnostic Plots for Real-World Data</h2>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_battery)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-battery-diagnostics" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-battery-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-battery-diagnostics-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-battery-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Diagnostic Plots for Battery Life Model
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="flipped-classroom-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="flipped-classroom-discussion">Flipped Classroom Discussion</h2>
+<ul>
+<li><strong>Prompt:</strong><br>
+How would you address heteroscedasticity if identified in the battery life dataset?</li>
+<li><strong>Group Activity:</strong><br>
+Discuss possible transformations or alternative models.</li>
+</ul>
+</section>
+<section id="hands-on-applying-a-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="hands-on-applying-a-transformation">Hands-On: Applying a Transformation</h2>
+<div class="cell" data-tbl-cap="Applying a Log Transformation">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a log transformation to stabilize variance</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>battery_data<span class="sc">$</span>log_lupc <span class="ot">&lt;-</span> <span class="fu">log</span>(battery_data<span class="sc">$</span>LPUC)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>model_log <span class="ot">&lt;-</span> <span class="fu">aov</span>(log_lupc <span class="sc">~</span> Type, <span class="at">data =</span> battery_data)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+Type         1 0.2484 0.24841    3.85 0.0699 .
+Residuals   14 0.9032 0.06451                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="comparing-diagnostics-pre--and-post-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-diagnostics-pre--and-post-transformation">Comparing Diagnostics Pre- and Post-Transformation</h2>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_battery)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_log)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-compare-diagnostics-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-compare-diagnostics-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-compare-diagnostics-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-compare-diagnostics-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Comparison of Diagnostic Plots
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-compare-diagnostics-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-compare-diagnostics-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="week-04_model-diagnostics-v1_files/figure-revealjs/fig-compare-diagnostics-2.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-compare-diagnostics-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Comparison of Diagnostic Plots
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="quiz-appropriate-transformation-choice" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="quiz-appropriate-transformation-choice">Quiz: Appropriate Transformation Choice</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: This transformation stabilizes variance in such cases.">(A): Log transformation is best when variance increases with the mean.</span></li>
+<li><span data-explanation="Incorrect: The choice depends on the data characteristics.">(B): Square-root transformation always works better.</span></li>
+<li><span data-explanation="Incorrect: Check for homoscedasticity separately.">(C): No transformation is needed if residuals are normally distributed.</span></li>
+<li><span data-explanation="Incorrect: Option A is correct.">(D): None of the above.</span></li>
+</ul>
+</section>
+<section id="group-discussion-best-practices-in-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="group-discussion-best-practices-in-diagnostics">Group Discussion: Best Practices in Diagnostics</h2>
+<ul>
+<li><strong>Prompt:</strong><br>
+In small groups, discuss which diagnostic method is most critical in your research area and why.</li>
+</ul>
+</section>
+</section>
+<section id="summary-and-next-steps" class="level1">
+<h1>Summary and Next Steps</h1>
+<section id="recap-of-key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="recap-of-key-takeaways">Recap of Key Takeaways</h2>
+<ul>
+<li><strong>Residual Analysis:</strong><br>
+Fundamental for checking model assumptions.</li>
+<li><strong>Diagnostic Tools:</strong><br>
+Use plots (residual vs.&nbsp;fitted, QQ, ACF) and statistical tests to identify issues.</li>
+<li><strong>Transformations and Alternative Models:</strong><br>
+Apply log, square-root, Box-Cox, or mixed-effects models as needed.</li>
+<li><strong>Case-Deleted and Studentized Residuals:</strong><br>
+Provide more sensitive measures of an observation’s influence.</li>
+<li><strong>Practical Application:</strong><br>
+Hands-on exercises and real-world datasets reinforce theoretical concepts.</li>
+</ul>
+</section>
+<section id="what-does-a-residual-represent-in-a-regression-model" class="level2 quiz-question">
+<h2 class="quiz-question anchored" data-anchor-id="what-does-a-residual-represent-in-a-regression-model">What does a residual represent in a regression model?</h2>
+<ul>
+<li><span class="correct" data-explanation="Correct: That is the definition of a residual.">(A): The difference between observed and predicted values.</span></li>
+<li><span data-explanation="Incorrect: It involves both observed and predicted values.">(B): The predicted value only.</span></li>
+<li><span data-explanation="Incorrect: Residuals are differences, not sums.">(C): The sum of observed and predicted values.</span></li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ul>
+<li>Thank you for participating!</li>
+<li><strong>Remember:</strong> Validating model assumptions is crucial for reliable statistical inference.</li>
+<li><strong>Stay Engaged:</strong> Continue exploring advanced diagnostics and real-world applications.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    // dispatch for htmlwidgets
+    function fireSlideEnter() {
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+    }
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+      fireSlideEnter();
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Data-Wise\.github\.io\/doe\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

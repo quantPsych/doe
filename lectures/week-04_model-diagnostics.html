@@ -258,7 +258,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">16-Feb-2025</p>
+        <p class="date">23-Feb-2025</p>
       </div>
     </div>
     
@@ -756,7 +756,7 @@ Table&nbsp;1: Standardized Residuals Example
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(std_res_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         1          2          3          4          5          6 
- 0.5631951 -0.8289786 -1.0887392 -0.4679677 -0.2081103  1.0475481 </code></pre>
+ 1.2739404 -1.7296935  1.3900654 -0.7474090 -0.5795041  1.1287197 </code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1823,15 +1823,15 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We Have Pair-specific Df, but the 'Tukey' Distribution with Non-integer Df</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes Requires Approximation.</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll Do a Rough Approach: q_{v, floor(df_hi), alpha}</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  df_floor <span class="ot">&lt;-</span> <span class="fu">floor</span>(df_hi)</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 'multcomp' Has 'qtukey' Function: qtukey(p, Nmeans, df)</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>df_floor <span class="ot">&lt;-</span> <span class="fu">floor</span>(df_hi)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>df_round <span class="ot">&lt;-</span> <span class="fu">round</span>(df_hi, <span class="dv">1</span>)</span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># q_{v, Df, alpha} = qtukey(1 - Alpha, nmeans=v, df_floor)</span></span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Then We Scale by 1/sqrt(2).</span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  qval <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> v, <span class="at">df =</span> df_floor)</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  msd  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  msd</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>qval <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> v, <span class="at">df =</span> df_floor)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>msd  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>msd</span>
 <span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate group-specific variances and sample sizes</span></span>
@@ -1840,16 +1840,22 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Now We Apply it Pairwise:</span></span>
 <span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> pairwiseDF <span class="sc">|&gt;</span></span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_hi =</span> (vars[group1]<span class="sc">/</span>nvec[group1] <span class="sc">+</span> vars[group2]<span class="sc">/</span>nvec[group2]),</span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">qval   =</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="fu">floor</span>(df)),</span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">msd    =</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)),</span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">diffSignificant =</span> (<span class="fu">abs</span>(meanDiff) <span class="sc">&gt;</span> msd)</span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>   <span class="at">var_hi =</span> (vars[group1]<span class="sc">/</span>nvec[group1] <span class="sc">+</span> vars[group2]<span class="sc">/</span>nvec[group2]),</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>   <span class="at">qval   =</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="fu">floor</span>(df)),</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>   <span class="at">msd    =</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)),</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>   <span class="at">diffSignificant =</span> (<span class="fu">abs</span>(meanDiff) <span class="sc">&gt;</span> msd)</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ungroup</span>()</span>
 <span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>pairwiseDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> pairwiseDF <span class="sc">|&gt;</span>  </span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>   <span class="at">tval =</span> meanDiff <span class="sc">/</span> SE,</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>   <span class="at">pval =</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(tval), df)  <span class="co"># two-sided p-value</span></span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>pairwiseDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div class="kable-table page-columns page-full">
 <table class="table table-sm table-striped small">
@@ -1967,7 +1973,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 </div>
 </div>
 </section>
-<section id="using-a-ready-made-r-function" class="level2">
+<section id="using-a-ready-made-r-function" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="using-a-ready-made-r-function">Using a Ready-Made R Function</h2>
 <p>Several R packages implement the Games–Howell test automatically. Two common approaches:</p>
 <ol type="1">
@@ -1976,11 +1982,12 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <li><strong><code>gamesHowellTest()</code></strong> from the <strong>rcompanion</strong> or <strong>PMCMRplus</strong> packages.</li>
 </ol>
 <p>For example:</p>
-<div class="cell">
+<div id="tbl-games-howell-test" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-games-howell-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Hemo <span class="sc">~</span> Sulfa, <span class="at">data =</span> troutData)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>gh_test <span class="ot">&lt;-</span> PMCMRplus<span class="sc">::</span><span class="fu">gamesHowellTest</span>(fit, <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gh_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>gh_test <span class="ot">&lt;-</span> PMCMRplus<span class="sc">::</span><span class="fu">gamesHowellTest</span>(fit)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gh_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           q value Pr(&gt;|q|)   
 2 - 1 == 0   4.772 0.019942  *
@@ -1990,6 +1997,11 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 4 - 2 == 0  -1.441 0.741476   
 4 - 3 == 0  -1.005 0.891609   </code></pre>
 </div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-games-howell-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Games–Howell Test: Pairwise Comparisons
+</figcaption>
+</figure>
 </div>
 <p>This will print out pairwise comparisons, confidence intervals, and p-values, controlling familywise error at alpha = 0.05. You’ll see a compact letter display or a table showing which pairs are significantly different.</p>
 <p><strong>NOTE</strong>: Different packages might handle rounding or approximate df differently, so minor numerical differences from manual calculations can occur.</p>
