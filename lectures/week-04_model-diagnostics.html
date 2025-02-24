@@ -420,10 +420,8 @@ window.Quarto = {
   <li><a href="#checking-independence-1" id="toc-checking-independence-1" class="nav-link" data-scroll-target="#checking-independence-1">Checking Independence</a></li>
   <li><a href="#checking-equal-variance-homoscedasticity" id="toc-checking-equal-variance-homoscedasticity" class="nav-link" data-scroll-target="#checking-equal-variance-homoscedasticity">Checking Equal Variance (Homoscedasticity)</a></li>
   <li><a href="#checking-normality" id="toc-checking-normality" class="nav-link" data-scroll-target="#checking-normality">Checking Normality</a></li>
-  </ul></li>
   <li><a href="#remedies-for-violations" id="toc-remedies-for-violations" class="nav-link" data-scroll-target="#remedies-for-violations">Remedies for Violations</a></li>
-  <li><a href="#transformation" id="toc-transformation" class="nav-link" data-scroll-target="#transformation">Transformation</a>
-  <ul class="collapse">
+  <li><a href="#transformation" id="toc-transformation" class="nav-link" data-scroll-target="#transformation">Transformation</a></li>
   <li><a href="#why-transform-data" id="toc-why-transform-data" class="nav-link" data-scroll-target="#why-transform-data">Why Transform Data?</a></li>
   <li><a href="#when-the-transformation-works" id="toc-when-the-transformation-works" class="nav-link" data-scroll-target="#when-the-transformation-works">When the Transformation Works</a></li>
   <li><a href="#does-the-transformation-work-when-there-is-no-meanvariance-relationship" id="toc-does-the-transformation-work-when-there-is-no-meanvariance-relationship" class="nav-link" data-scroll-target="#does-the-transformation-work-when-there-is-no-meanvariance-relationship">Does the Transformation Work When There is No Mean–Variance Relationship?</a>
@@ -455,11 +453,13 @@ window.Quarto = {
   <li><a href="#trout-experiment-data" id="toc-trout-experiment-data" class="nav-link" data-scroll-target="#trout-experiment-data">Trout Experiment Data</a>
   <ul class="collapse">
   <li><a href="#what-is-the-experiment-about" id="toc-what-is-the-experiment-about" class="nav-link" data-scroll-target="#what-is-the-experiment-about">What Is the Experiment About?</a></li>
-  <li><a href="#key-terms-explained" id="toc-key-terms-explained" class="nav-link" data-scroll-target="#key-terms-explained">Key Terms Explained</a></li>
+  </ul></li>
+  <li><a href="#key-terms-explained" id="toc-key-terms-explained" class="nav-link" data-scroll-target="#key-terms-explained">Key Terms Explained</a>
+  <ul class="collapse">
   <li><a href="#why-are-they-doing-this" id="toc-why-are-they-doing-this" class="nav-link" data-scroll-target="#why-are-they-doing-this">Why Are They Doing This?</a></li>
   <li><a href="#what-does-the-data-look-like" id="toc-what-does-the-data-look-like" class="nav-link" data-scroll-target="#what-does-the-data-look-like">What Does the Data Look Like?</a></li>
   </ul></li>
-  <li><a href="#generating-or-loading-the-data-in-r" id="toc-generating-or-loading-the-data-in-r" class="nav-link" data-scroll-target="#generating-or-loading-the-data-in-r">Generating or Loading the Data in R</a></li>
+  <li><a href="#loading-the-data-in-r" id="toc-loading-the-data-in-r" class="nav-link" data-scroll-target="#loading-the-data-in-r">Loading the Data in R</a></li>
   <li><a href="#exploratory-plots" id="toc-exploratory-plots" class="nav-link" data-scroll-target="#exploratory-plots">Exploratory Plots</a></li>
   <li><a href="#check-group-means-and-variances" id="toc-check-group-means-and-variances" class="nav-link" data-scroll-target="#check-group-means-and-variances">Check Group Means and Variances</a></li>
   <li><a href="#manual-gameshowell-multiple-comparisons-step-by-step-in-r" id="toc-manual-gameshowell-multiple-comparisons-step-by-step-in-r" class="nav-link" data-scroll-target="#manual-gameshowell-multiple-comparisons-step-by-step-in-r">Manual Games–Howell Multiple Comparisons (Step-by-Step in R)</a></li>
@@ -744,19 +744,21 @@ Table&nbsp;1: Standardized Residuals Example
 <div aria-describedby="tbl-anova-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A simple one-way ANOVA example</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each=</span><span class="dv">10</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">7</span>, <span class="at">sd=</span><span class="dv">1</span>),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean=</span><span class="dv">6</span>, <span class="at">sd=</span><span class="dv">1</span>))</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>fit_anova <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group, <span class="at">data =</span> df)  <span class="co"># identical to aov(y ~ group, data = df)</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>std_res_anova <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fit_anova)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(std_res_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">10</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">c</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>fit_anova <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group, <span class="at">data =</span> df) <span class="co"># identical to aov(y ~ group, data = df)</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>std_res_anova <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fit_anova)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(std_res_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         1          2          3          4          5          6 
- 1.2739404 -1.7296935  1.3900654 -0.7474090 -0.5795041  1.1287197 </code></pre>
+<pre><code>          1           2           3           4           5           6 
+ 0.07018243  1.79634098 -0.46769285  1.76235524  0.06382731  0.12884491 </code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-standardized-residuals-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -945,9 +947,8 @@ Figure&nbsp;3: Normal Probability Plot
 </div>
 <p>If deviations are severe, consider transformations or nonparametric methods.</p>
 </section>
-</section>
-<section id="remedies-for-violations" class="level1">
-<h1>Remedies for Violations</h1>
+<section id="remedies-for-violations" class="level2">
+<h2 class="anchored" data-anchor-id="remedies-for-violations">Remedies for Violations</h2>
 <ul>
 <li><strong>Independence Violation:</strong> Use mixed-effects models or time-series methods to account for correlation.</li>
 <li><strong>Heteroscedasticity:</strong>
@@ -960,9 +961,10 @@ Figure&nbsp;3: Normal Probability Plot
 </ul></li>
 </ul>
 </section>
-<section id="transformation" class="level1 page-columns page-full">
-<h1>Transformation</h1>
+<section id="transformation" class="level2">
+<h2 class="anchored" data-anchor-id="transformation">Transformation</h2>
 <p>Transformations to stabilize variance in ANOVA are most effective when there is a systematic relationship between group means and variances (e.g., variance increases with the mean). If there is no apparent relationship between the mean and variance, a standard variance-stabilizing transformation (such as a log, square-root, or arcsine transform) often does <em>not</em> help and may even complicate interpretation. In such scenarios, other methods designed for heterogeneous variances (e.g., Welch’s ANOVA, generalized linear models, or nonparametric tests) may be more appropriate.</p>
+</section>
 <section id="why-transform-data" class="level2">
 <h2 class="anchored" data-anchor-id="why-transform-data">Why Transform Data?</h2>
 <ol type="1">
@@ -1061,7 +1063,7 @@ Y^{(\lambda)} =
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">1</span>, <span class="dv">10</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Heteroscedastic Errors: Error variance Increases with X</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>errors <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.5</span> <span class="sc">*</span> X)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> X <span class="sc">+</span> errors  <span class="co"># Linear relationship with increasing variance</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> X <span class="sc">+</span> errors <span class="co"># Linear relationship with increasing variance</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X =</span> X, <span class="at">Y =</span> Y)</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>data_sim <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
@@ -1107,10 +1109,12 @@ Y^{(\lambda)} =
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the Raw Data</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_sim, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Simulated Data with Heteroscedasticity"</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Predictor (X)"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Response (Y)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Simulated Data with Heteroscedasticity"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Predictor (X)"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Response (Y)"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-simulated-data" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -1159,11 +1163,12 @@ Review the model summary and diagnostic plots to check for heteroscedasticity. A
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_initial<span class="sc">$</span>fitted.values, <span class="fu">residuals</span>(model_initial),</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residuals vs Fitted"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(model_initial), <span class="at">main =</span> <span class="st">"QQ Plot"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(model_initial), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Residuals vs Fitted"</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(model_initial), <span class="at">main =</span> <span class="st">"QQ Plot"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(model_initial), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-diagnostic-plots-initial" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -1242,11 +1247,12 @@ Table&nbsp;3: Transformed Linear Model
 <div class="cell" data-tbl-cap="Diagnostic Plots for the Transformed Model">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_transformed<span class="sc">$</span>fitted.values, <span class="fu">residuals</span>(model_transformed),</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residuals vs Fitted (Transformed)"</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(model_transformed), <span class="at">main =</span> <span class="st">"QQ Plot (Transformed)"</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(model_transformed), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Residuals vs Fitted (Transformed)"</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(model_transformed), <span class="at">main =</span> <span class="st">"QQ Plot (Transformed)"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(model_transformed), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1382,8 +1388,9 @@ t_{\text{df},\,\alpha/2}
 <h3 class="anchored" data-anchor-id="what-is-the-experiment-about">What Is the Experiment About?</h3>
 <p>Researchers are trying out <strong>four different treatments</strong> (labeled “1,” “2,” “3,” and “4”) on trout. These treatments are various <strong>sulfa-based</strong> or sulfonamide medications (often used to control bacterial infections or other conditions in fish). The main goal is to see whether different treatments lead to different outcomes in the trout’s health.</p>
 </section>
-<section id="key-terms-explained" class="level3">
-<h3 class="anchored" data-anchor-id="key-terms-explained">Key Terms Explained</h3>
+</section>
+<section id="key-terms-explained" class="level2">
+<h2 class="anchored" data-anchor-id="key-terms-explained">Key Terms Explained</h2>
 <ol type="1">
 <li><strong>Trout</strong>
 <ul>
@@ -1412,7 +1419,6 @@ t_{\text{df},\,\alpha/2}
 <li>After some time, the <strong>Hemo</strong> level was measured for each fish, giving one reading per trout.</li>
 </ul></li>
 </ol>
-</section>
 <section id="why-are-they-doing-this" class="level3">
 <h3 class="anchored" data-anchor-id="why-are-they-doing-this">Why Are They Doing This?</h3>
 <p>Trout farmers or fisheries might want a medication to keep fish healthier or improve survival. By comparing different sulfa treatments:</p>
@@ -1429,10 +1435,10 @@ t_{\text{df},\,\alpha/2}
 - <strong>Hemo</strong> (a number, like 7.0 or 10.6)</p>
 </section>
 </section>
-<section id="generating-or-loading-the-data-in-r" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="generating-or-loading-the-data-in-r">Generating or Loading the Data in R</h2>
+<section id="loading-the-data-in-r" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="loading-the-data-in-r">Loading the Data in R</h2>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>troutData <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"trout.txt"</span>)) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Sulfa=</span> <span class="fu">factor</span>(Sulfa))</span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>troutData <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"trout.txt"</span>)) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Sulfa =</span> <span class="fu">factor</span>(Sulfa))</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(troutData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-trout-data" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
@@ -1500,9 +1506,11 @@ Table&nbsp;4: Trout Experiment Data: Sulfa Treatment and Hemoglobin Levels
 <h2 class="anchored" data-anchor-id="exploratory-plots">Exploratory Plots</h2>
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick Boxplot to See Group means and Variation</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Hemo <span class="sc">~</span> Sulfa, <span class="at">data =</span> troutData,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Trout Experiment Data"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Hemoglobin"</span>, <span class="at">xlab=</span><span class="st">"Sulfonamide"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Hemo <span class="sc">~</span> Sulfa,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> troutData,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Trout Experiment Data"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"Hemoglobin"</span>, <span class="at">xlab =</span> <span class="st">"Sulfonamide"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-trout-boxplot" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -1521,13 +1529,13 @@ Figure&nbsp;6: Boxplot of Hemoglobin Levels by Sulfa Treatment
 <h2 class="anchored" data-anchor-id="check-group-means-and-variances">Check Group Means and Variances</h2>
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>troutSummary <span class="ot">&lt;-</span> troutData <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sulfa) <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n       =</span> <span class="fu">n</span>(),</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanVal =</span> <span class="fu">mean</span>(Hemo),</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">varVal  =</span> <span class="fu">var</span>(Hemo),</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sdVal   =</span> <span class="fu">sd</span>(Hemo)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Sulfa) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">n       =</span> <span class="fu">n</span>(),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">meanVal =</span> <span class="fu">mean</span>(Hemo),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">varVal  =</span> <span class="fu">var</span>(Hemo),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">sdVal   =</span> <span class="fu">sd</span>(Hemo)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>troutSummary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div class="kable-table page-columns page-full">
@@ -1595,9 +1603,9 @@ Figure&nbsp;6: Boxplot of Hemoglobin Levels by Sulfa Treatment
 <div class="cell" data-tbl-cap="Summary Statistics for Trout Experiment Data">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Means, Variances for Each Group</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>meanVal</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>vars  <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>varVal</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>varVal</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(means) <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>Sulfa</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vars)  <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>Sulfa</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vars) <span class="ot">&lt;-</span> troutSummary<span class="sc">$</span>Sulfa</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll Use 'combn' to Get All Pairs: This yields pairs like `A-B`, `A-C`, `A-D`, `B-C`, `B-D`, `C-D`.</span></span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -1621,59 +1629,59 @@ Figure&nbsp;6: Boxplot of Hemoglobin Levels by Sulfa Treatment
 <li>The approximate df from Satterthwaite’s formula.</li>
 </ul>
 <div class="cell" data-tbl-cap="Pairwise Comparisons: Mean Difference, SE, and Satterthwaite df" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that takes a data frame with a grouping column (factor) </span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and a numeric response column, then computes pairwise comparisons </span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that takes a data frame with a grouping column (factor)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and a numeric response column, then computes pairwise comparisons</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (mean difference, standard error, and Satterthwaite df) for each pair.</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>pairwise_satterthwaite <span class="ot">&lt;-</span> <span class="cf">function</span>(data, group_col, response_col) {</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ensure the grouping column is a factor</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  data[[group_col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data[[group_col]])</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Summarize mean, variance, n for each group</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  summary_df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(.data[[group_col]]) <span class="sc">%&gt;%</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">n       =</span> <span class="fu">n</span>(),</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">meanVal =</span> <span class="fu">mean</span>(.data[[response_col]]),</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">varVal  =</span> <span class="fu">var</span>(.data[[response_col]]),</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For convenience</span></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  group_levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(data[[group_col]])</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  means  <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>meanVal, summary_df[[group_col]])</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  vars   <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>varVal,  summary_df[[group_col]])</span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  ns     <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>n,       summary_df[[group_col]])</span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define Satterthwaite function</span></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  satterthwaite_df <span class="ot">&lt;-</span> <span class="cf">function</span>(var1, var2, n1, n2) {</span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    num   <span class="ot">&lt;-</span> (var1 <span class="sc">/</span> n1 <span class="sc">+</span> var2 <span class="sc">/</span> n2)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    denom <span class="ot">&lt;-</span> (var1<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (n1<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (n1 <span class="sc">-</span> <span class="dv">1</span>))) <span class="sc">+</span> (var2<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (n2<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (n2 <span class="sc">-</span> <span class="dv">1</span>)))</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    num <span class="sc">/</span> denom</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get all pairs of groups</span></span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  pair_mat <span class="ot">&lt;-</span> <span class="fu">combn</span>(group_levels, <span class="dv">2</span>)</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate stats for each pair</span></span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  pair_list <span class="ot">&lt;-</span> <span class="fu">apply</span>(pair_mat, <span class="dv">2</span>, <span class="cf">function</span>(pair) {</span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    g1   <span class="ot">&lt;-</span> pair[<span class="dv">1</span>]</span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>    g2   <span class="ot">&lt;-</span> pair[<span class="dv">2</span>]</span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>    diff <span class="ot">&lt;-</span> means[g2] <span class="sc">-</span> means[g1]</span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>    se   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(vars[g1] <span class="sc">/</span> ns[g1] <span class="sc">+</span> vars[g2] <span class="sc">/</span> ns[g2])</span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>    df   <span class="ot">&lt;-</span> <span class="fu">satterthwaite_df</span>(vars[g1], vars[g2], ns[g1], ns[g2])</span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">group1  =</span> g1,</span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">group2  =</span> g2,</span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">meanDiff =</span> diff,</span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">SE       =</span> se,</span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">df       =</span> <span class="fu">round</span>(df, <span class="dv">1</span>)</span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine into a single data frame</span></span>
-<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, pair_list)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure the grouping column is a factor</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    data[[group_col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data[[group_col]])</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Summarize mean, variance, n for each group</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    summary_df <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(.data[[group_col]]) <span class="sc">|&gt;</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarize</span>(</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">n       =</span> <span class="fu">n</span>(),</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanVal =</span> <span class="fu">mean</span>(.data[[response_col]]),</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">varVal  =</span> <span class="fu">var</span>(.data[[response_col]]),</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For convenience</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    group_levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(data[[group_col]])</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    means <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>meanVal, summary_df[[group_col]])</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    vars <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>varVal, summary_df[[group_col]])</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    ns <span class="ot">&lt;-</span> <span class="fu">setNames</span>(summary_df<span class="sc">$</span>n, summary_df[[group_col]])</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define Satterthwaite function</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    satterthwaite_df <span class="ot">&lt;-</span> <span class="cf">function</span>(var1, var2, n1, n2) {</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>        num <span class="ot">&lt;-</span> (var1 <span class="sc">/</span> n1 <span class="sc">+</span> var2 <span class="sc">/</span> n2)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>        denom <span class="ot">&lt;-</span> (var1<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (n1<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (n1 <span class="sc">-</span> <span class="dv">1</span>))) <span class="sc">+</span> (var2<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (n2<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (n2 <span class="sc">-</span> <span class="dv">1</span>)))</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>        num <span class="sc">/</span> denom</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get all pairs of groups</span></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>    pair_mat <span class="ot">&lt;-</span> <span class="fu">combn</span>(group_levels, <span class="dv">2</span>)</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate stats for each pair</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>    pair_list <span class="ot">&lt;-</span> <span class="fu">apply</span>(pair_mat, <span class="dv">2</span>, <span class="cf">function</span>(pair) {</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>        g1 <span class="ot">&lt;-</span> pair[<span class="dv">1</span>]</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>        g2 <span class="ot">&lt;-</span> pair[<span class="dv">2</span>]</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>        diff <span class="ot">&lt;-</span> means[g2] <span class="sc">-</span> means[g1]</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>        se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(vars[g1] <span class="sc">/</span> ns[g1] <span class="sc">+</span> vars[g2] <span class="sc">/</span> ns[g2])</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>        df <span class="ot">&lt;-</span> <span class="fu">satterthwaite_df</span>(vars[g1], vars[g2], ns[g1], ns[g2])</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(</span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">group1 =</span> g1,</span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>            <span class="at">group2 =</span> g2,</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDiff =</span> diff,</span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>            <span class="at">SE =</span> se,</span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>            <span class="at">df =</span> <span class="fu">round</span>(df, <span class="dv">1</span>)</span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine into a single data frame</span></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">do.call</span>(rbind, pair_list)</span>
 <span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage (assuming your data frame is called 'troutData'</span></span>
@@ -1714,10 +1722,10 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> pairwiseDF <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">tval =</span> meanDiff <span class="sc">/</span> SE,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pval =</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(tval), df)  <span class="co"># two-sided p-value</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">tval =</span> meanDiff <span class="sc">/</span> SE,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">pval_satt =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(tval), df) <span class="co"># two-sided p-value from t-distribution with Satterthwaite df</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>pairwiseDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div class="kable-table page-columns page-full">
@@ -1732,7 +1740,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <th style="text-align: right;">SE</th>
 <th style="text-align: right;">df</th>
 <th style="text-align: right;">tval</th>
-<th style="text-align: right;">pval</th>
+<th style="text-align: right;">pval_satt</th>
 </tr>
 </thead>
 <tbody>
@@ -1819,19 +1827,19 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll Define a Function that Approximates q_{v, Df, alpha}</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Because the 'df' is not Straightforward, We Might Do a Conservative Approach</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or We Can Do Per-pair if We Like.</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>gamesHowell_msd <span class="ot">&lt;-</span> <span class="cf">function</span>(var_hi, df_hi, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">v=</span><span class="dv">4</span>) {</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We Have Pair-specific Df, but the 'Tukey' Distribution with Non-integer Df</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes Requires Approximation.</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll Do a Rough Approach: q_{v, floor(df_hi), alpha}</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>gamesHowell_msd <span class="ot">&lt;-</span> <span class="cf">function</span>(var_hi, df_hi, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">v =</span> <span class="dv">4</span>) {</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We Have Pair-specific Df, but the 'Tukey' Distribution with Non-integer Df</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sometimes Requires Approximation.</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We'll Do a Rough Approach: q_{v, floor(df_hi), alpha}</span></span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>df_floor <span class="ot">&lt;-</span> <span class="fu">floor</span>(df_hi)</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>df_round <span class="ot">&lt;-</span> <span class="fu">round</span>(df_hi, <span class="dv">1</span>)</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># q_{v, Df, alpha} = qtukey(1 - Alpha, nmeans=v, df_floor)</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Then We Scale by 1/sqrt(2).</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    df_floor <span class="ot">&lt;-</span> <span class="fu">floor</span>(df_hi)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    df_round <span class="ot">&lt;-</span> <span class="fu">round</span>(df_hi, <span class="dv">1</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># q_{v, Df, alpha} = qtukey(1 - Alpha, nmeans=v, df_floor)</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Then We Scale by 1/sqrt(2).</span></span>
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>qval <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> v, <span class="at">df =</span> df_floor)</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>msd  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>msd</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    qval <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> v, <span class="at">df =</span> df_floor)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    msd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    msd</span>
 <span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate group-specific variances and sample sizes</span></span>
@@ -1840,22 +1848,17 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Now We Apply it Pairwise:</span></span>
 <span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> pairwiseDF <span class="sc">|&gt;</span></span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>   <span class="at">var_hi =</span> (vars[group1]<span class="sc">/</span>nvec[group1] <span class="sc">+</span> vars[group2]<span class="sc">/</span>nvec[group2]),</span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>   <span class="at">qval   =</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="fu">floor</span>(df)),</span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>   <span class="at">msd    =</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)),</span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>   <span class="at">diffSignificant =</span> (<span class="fu">abs</span>(meanDiff) <span class="sc">&gt;</span> msd)</span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ungroup</span>()</span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>pairwiseDF <span class="ot">&lt;-</span> pairwiseDF <span class="sc">|&gt;</span>  </span>
-<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>   <span class="at">tval =</span> meanDiff <span class="sc">/</span> SE,</span>
-<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>   <span class="at">pval =</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(tval), df)  <span class="co"># two-sided p-value</span></span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>pairwiseDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">var_hi =</span> (vars[group1] <span class="sc">/</span> nvec[group1] <span class="sc">+</span> vars[group2] <span class="sc">/</span> nvec[group2]),</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">qval =</span> <span class="fu">qtukey</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">nmeans =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="fu">floor</span>(df)),</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">msd =</span> <span class="fu">sqrt</span>(var_hi) <span class="sc">*</span> (qval <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)),</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">diffSignificant =</span> (<span class="fu">abs</span>(meanDiff) <span class="sc">&gt;</span> msd),</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">pval_ght =</span> <span class="fu">ptukey</span>(<span class="fu">abs</span>(tval) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">2</span>), <span class="at">nmeans =</span> <span class="dv">4</span>, <span class="at">df =</span> <span class="fu">floor</span>(df), <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>pairwiseDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div class="kable-table page-columns page-full">
 <table class="table table-sm table-striped small">
@@ -1863,15 +1866,16 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <colgroup>
 <col style="width: 6%">
 <col style="width: 6%">
+<col style="width: 7%">
 <col style="width: 8%">
-<col style="width: 9%">
 <col style="width: 4%">
-<col style="width: 10%">
-<col style="width: 9%">
 <col style="width: 9%">
 <col style="width: 8%">
 <col style="width: 8%">
-<col style="width: 15%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 8%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1881,11 +1885,12 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <th style="text-align: right;">SE</th>
 <th style="text-align: right;">df</th>
 <th style="text-align: right;">tval</th>
-<th style="text-align: right;">pval</th>
+<th style="text-align: right;">pval_satt</th>
 <th style="text-align: right;">var_hi</th>
 <th style="text-align: right;">qval</th>
 <th style="text-align: right;">msd</th>
 <th style="text-align: left;">diffSignificant</th>
+<th style="text-align: right;">pval_ght</th>
 </tr>
 </thead>
 <tbody>
@@ -1901,6 +1906,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <td style="text-align: right;">4.110506</td>
 <td style="text-align: right;">1.834722</td>
 <td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.0208959</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1</td>
@@ -1914,6 +1920,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <td style="text-align: right;">4.019985</td>
 <td style="text-align: right;">1.371156</td>
 <td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.0071669</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1</td>
@@ -1927,6 +1934,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <td style="text-align: right;">3.996978</td>
 <td style="text-align: right;">1.276150</td>
 <td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.0189679</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2</td>
@@ -1940,6 +1948,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <td style="text-align: right;">4.075974</td>
 <td style="text-align: right;">1.875785</td>
 <td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">0.9664090</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2</td>
@@ -1953,6 +1962,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <td style="text-align: right;">4.110506</td>
 <td style="text-align: right;">1.826235</td>
 <td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">0.7415785</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">3</td>
@@ -1966,6 +1976,7 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <td style="text-align: right;">4.019985</td>
 <td style="text-align: right;">1.360276</td>
 <td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">0.8915554</td>
 </tr>
 </tbody>
 </table>
@@ -1979,9 +1990,9 @@ q = \frac{ |\bar{Y}_{i} - \bar{Y}_{h}| }{SE_{(h,i)}},
 <ol type="1">
 <li><strong><code>PairwiseTTest()</code></strong> from the <strong>DescTools</strong> package with the <code>pool.sd = FALSE</code> argument.<br>
 </li>
-<li><strong><code>gamesHowellTest()</code></strong> from the <strong>rcompanion</strong> or <strong>PMCMRplus</strong> packages.</li>
+<li><strong><code>gamesHowellTest()</code></strong> from the <strong>PMCMRplus</strong> packages. See <a href="appendix/stat-topics/games-howell-test.qmd">Games-Howell Post-Hoc Comparison</a> for more details.</li>
 </ol>
-<p>For example:</p>
+<p>Below, we demonstrate the <strong>PMCMRplus</strong> package’s <code>gamesHowellTest()</code> function.</p>
 <div id="tbl-games-howell-test" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-games-howell-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
