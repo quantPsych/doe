@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.41">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-79108a0fc1995748cbd19a5b0e3e3e7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
@@ -138,10 +140,10 @@ window.Quarto = {
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -205,7 +207,42 @@ window.Quarto = {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">Invalid Date</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -319,162 +356,35 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-</div>
-
-
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Department of Mathematics and Statistics, University of New Mexico
-          </p>
-      </div>
-  </div>
-
-<div class="quarto-title-meta">
-
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#solution-key" id="toc-solution-key" class="nav-link active" data-scroll-target="#solution-key">Solution Key</a></li>
+  <li><a href="#grading-summary-table" id="toc-grading-summary-table" class="nav-link" data-scroll-target="#grading-summary-table">Grading Summary Table</a></li>
+  <li><a href="#total-points-available-135" id="toc-total-points-available-135" class="nav-link" data-scroll-target="#total-points-available-135">Total Points Available: <strong>135</strong></a></li>
+  <li><a href="#performance-scale" id="toc-performance-scale" class="nav-link" data-scroll-target="#performance-scale">Performance Scale</a></li>
+  <li><a href="#grading-rubric" id="toc-grading-rubric" class="nav-link" data-scroll-target="#grading-rubric">Grading Rubric</a></li>
+  </ul>
+</nav>
     </div>
-  </div>
-  
-    
-  </div>
-  
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-</header>
 
 
-<section id="grading-rubric" class="level3">
-<h3 class="anchored" data-anchor-id="grading-rubric">Grading Rubric</h3>
-<section id="exercise-3-margarine-experiment" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-3-margarine-experiment"><strong>Exercise 3: Margarine Experiment</strong></h4>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Task</strong></th>
-<th><strong>Excellent (100%)</strong></th>
-<th><strong>Good (85%)</strong></th>
-<th><strong>Needs Improvement (70%)</strong></th>
-<th><strong>Point Allocation</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(a) Check Equal-Variance Assumption</td>
-<td>Clear explanation of variance check; correct identification of violations and justification for the chosen transformation.</td>
-<td>Mostly correct identification of variance issues but minor errors in justification or application of transformation.</td>
-<td>Incorrect evaluation of variance assumption or poorly justified transformation choice.</td>
-<td>15 points</td>
-</tr>
-<tr class="even">
-<td>(b) Confidence Interval with Transformed Data</td>
-<td>Confidence interval computed correctly with transformed data, detailed explanation of method used, and proper interpretation of results.</td>
-<td>Confidence interval mostly correct but minor errors in calculation or interpretation.</td>
-<td>Significant errors in calculation or interpretation of the confidence interval.</td>
-<td>20 points</td>
-</tr>
-<tr class="odd">
-<td>(c) Confidence Interval with Untransformed Data</td>
-<td>Confidence interval computed correctly using Satterthwaite’s approximation, with clear comparison to part (b).</td>
-<td>Computation mostly correct but missing or unclear comparison to part (b).</td>
-<td>Incorrect computation or no comparison provided.</td>
-<td>20 points</td>
-</tr>
-<tr class="even">
-<td>(d) Preferred Analysis</td>
-<td>Logical and well-reasoned preference based on results and clear explanation.</td>
-<td>Preference chosen but reasoning partially incomplete or unclear.</td>
-<td>Preference given without explanation or reasoning is flawed.</td>
-<td>10 points</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="exercise-6-bicycle-experiment" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-6-bicycle-experiment"><strong>Exercise 6: Bicycle Experiment</strong></h4>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Task</strong></th>
-<th><strong>Excellent (100%)</strong></th>
-<th><strong>Good (85%)</strong></th>
-<th><strong>Needs Improvement (70%)</strong></th>
-<th><strong>Point Allocation</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(a) Evaluate Error Variances</td>
-<td>Clear and accurate residual plot, detailed evaluation of variances, and correct conclusion about equality of error variances.</td>
-<td>Residual plot and variance evaluation mostly correct, minor errors in conclusions.</td>
-<td>Residual plot missing or incorrect, and conclusion about variances unclear or incorrect.</td>
-<td>15 points</td>
-</tr>
-<tr class="even">
-<td>(b) Transformation and Hypothesis Testing</td>
-<td>Correctly identifies and applies transformation, tests linear and quadratic trends accurately, and interprets results at <span class="math inline">\(\alpha = 0.01\)</span>.</td>
-<td>Transformation and hypothesis tests mostly correct, minor calculation or interpretation errors.</td>
-<td>Incorrect or incomplete transformation, incorrect hypothesis tests or interpretation.</td>
-<td>25 points</td>
-</tr>
-<tr class="odd">
-<td>(c) Untransformed Data and Hypothesis Testing</td>
-<td>Correctly conducts hypothesis testing using untransformed data with Satterthwaite’s approximation and compares results to part (b).</td>
-<td>Hypothesis testing mostly correct, with some errors in comparison to part (b).</td>
-<td>Significant errors in hypothesis testing or no comparison provided.</td>
-<td>20 points</td>
-</tr>
-<tr class="even">
-<td>(d) Compare Methods</td>
-<td>Well-reasoned comparison of methods with insights into relative merits and recommendations based on results.</td>
-<td>Comparison provided but lacks depth or some insights missing.</td>
-<td>Minimal or unclear comparison, lacking insights or recommendations.</td>
-<td>10 points</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-</section>
+
 <section id="solution-key" class="level3">
 <h3 class="anchored" data-anchor-id="solution-key">Solution Key</h3>
-<section id="exercise-3-margarine-experiment-1" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-3-margarine-experiment-1"><strong>Exercise 3: Margarine Experiment</strong></h4>
+<section id="exercise-3-margarine-experiment" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-3-margarine-experiment"><strong>Exercise 3: Margarine Experiment</strong></h4>
 <p><strong>(a) Check Equal-Variance Assumption</strong></p>
 <ul>
 <li><p><strong>Step 1:</strong> Plot the residuals or calculate variances for each group (Brands 1–3 for margarine and Brand 4 for butter).</p></li>
 <li><p><strong>Step 2:</strong> Use Bartlett’s test or Levene’s test to check for equality of variances:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(MeltingTime <span class="sc">~</span> Brand, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bartlett.test</span>(MeltingTime <span class="sc">~</span> Brand, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>If <span class="math inline">\(p\)</span>-value is small (e.g., <span class="math inline">\(&lt; 0.05\)</span>), the equal-variance assumption is violated.</li>
 </ul></li>
@@ -488,7 +398,7 @@ window.Quarto = {
 <p><strong>(b) Confidence Interval with Transformed Data</strong></p>
 <ol type="1">
 <li>Use transformed data to compute group means and variances.</li>
-<li>Compute the confidence interval for the difference in means: CI=yˉ1−yˉ2±tα/2s12n1+s22n2CI = {y}_1 - {y}<em>2 t</em>{/2} </li>
+<li>Compute the confidence interval for the difference in means: CI=yˉ1−yˉ2±tα/2s12n1+s22n2CI = {y}<em>1 - {y}_2 t</em>{/2} </li>
 </ol>
 <p><strong>(c) Confidence Interval with Untransformed Data</strong></p>
 <ol type="1">
@@ -502,14 +412,14 @@ window.Quarto = {
 </ul>
 <hr>
 </section>
-<section id="exercise-6-bicycle-experiment-1" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-6-bicycle-experiment-1"><strong>Exercise 6: Bicycle Experiment</strong></h4>
+<section id="exercise-6-bicycle-experiment" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-6-bicycle-experiment"><strong>Exercise 6: Bicycle Experiment</strong></h4>
 <p><strong>(a) Evaluate Error Variances</strong></p>
 <ul>
 <li><p><strong>Step 1:</strong> Plot standardized residuals against fitted values:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(model), <span class="fu">rstandard</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">fitted</span>(model), <span class="fu">rstandard</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Step 2:</strong> Compute sample variances for each speed group and compare:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(CrankRates, Speed, var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tapply</span>(CrankRates, Speed, var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 <p><strong>(b) Transformation and Hypothesis Testing</strong></p>
 <ol type="1">
@@ -536,13 +446,13 @@ window.Quarto = {
 </section>
 <section id="grading-summary-table" class="level3">
 <h3 class="anchored" data-anchor-id="grading-summary-table">Grading Summary Table</h3>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 48%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -619,11 +529,11 @@ window.Quarto = {
 </section>
 <section id="performance-scale" class="level3">
 <h3 class="anchored" data-anchor-id="performance-scale">Performance Scale</h3>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 69%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -655,11 +565,129 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</section>
+<section id="grading-rubric" class="level3">
+<h3 class="anchored" data-anchor-id="grading-rubric">Grading Rubric</h3>
+<section id="exercise-3-margarine-experiment-1" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-3-margarine-experiment-1"><strong>Exercise 3: Margarine Experiment</strong></h4>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 33%">
+<col style="width: 28%">
+<col style="width: 21%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Task</strong></th>
+<th><strong>Excellent (100%)</strong></th>
+<th><strong>Good (85%)</strong></th>
+<th><strong>Needs Improvement (70%)</strong></th>
+<th><strong>Point Allocation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(a) Check Equal-Variance Assumption</td>
+<td>Clear explanation of variance check; correct identification of violations and justification for the chosen transformation.</td>
+<td>Mostly correct identification of variance issues but minor errors in justification or application of transformation.</td>
+<td>Incorrect evaluation of variance assumption or poorly justified transformation choice.</td>
+<td>15 points</td>
+</tr>
+<tr class="even">
+<td>(b) Confidence Interval with Transformed Data</td>
+<td>Confidence interval computed correctly with transformed data, detailed explanation of method used, and proper interpretation of results.</td>
+<td>Confidence interval mostly correct but minor errors in calculation or interpretation.</td>
+<td>Significant errors in calculation or interpretation of the confidence interval.</td>
+<td>20 points</td>
+</tr>
+<tr class="odd">
+<td>(c) Confidence Interval with Untransformed Data</td>
+<td>Confidence interval computed correctly using Satterthwaite’s approximation, with clear comparison to part (b).</td>
+<td>Computation mostly correct but missing or unclear comparison to part (b).</td>
+<td>Incorrect computation or no comparison provided.</td>
+<td>20 points</td>
+</tr>
+<tr class="even">
+<td>(d) Preferred Analysis</td>
+<td>Logical and well-reasoned preference based on results and clear explanation.</td>
+<td>Preference chosen but reasoning partially incomplete or unclear.</td>
+<td>Preference given without explanation or reasoning is flawed.</td>
+<td>10 points</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exercise-6-bicycle-experiment-1" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-6-bicycle-experiment-1"><strong>Exercise 6: Bicycle Experiment</strong></h4>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 35%">
+<col style="width: 24%">
+<col style="width: 22%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Task</strong></th>
+<th><strong>Excellent (100%)</strong></th>
+<th><strong>Good (85%)</strong></th>
+<th><strong>Needs Improvement (70%)</strong></th>
+<th><strong>Point Allocation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(a) Evaluate Error Variances</td>
+<td>Clear and accurate residual plot, detailed evaluation of variances, and correct conclusion about equality of error variances.</td>
+<td>Residual plot and variance evaluation mostly correct, minor errors in conclusions.</td>
+<td>Residual plot missing or incorrect, and conclusion about variances unclear or incorrect.</td>
+<td>15 points</td>
+</tr>
+<tr class="even">
+<td>(b) Transformation and Hypothesis Testing</td>
+<td>Correctly identifies and applies transformation, tests linear and quadratic trends accurately, and interprets results at <span class="math inline">\(\alpha = 0.01\)</span>.</td>
+<td>Transformation and hypothesis tests mostly correct, minor calculation or interpretation errors.</td>
+<td>Incorrect or incomplete transformation, incorrect hypothesis tests or interpretation.</td>
+<td>25 points</td>
+</tr>
+<tr class="odd">
+<td>(c) Untransformed Data and Hypothesis Testing</td>
+<td>Correctly conducts hypothesis testing using untransformed data with Satterthwaite’s approximation and compares results to part (b).</td>
+<td>Hypothesis testing mostly correct, with some errors in comparison to part (b).</td>
+<td>Significant errors in hypothesis testing or no comparison provided.</td>
+<td>20 points</td>
+</tr>
+<tr class="even">
+<td>(d) Compare Methods</td>
+<td>Well-reasoned comparison of methods with insights into relative merits and recommendations based on results.</td>
+<td>Comparison provided but lacks depth or some insights missing.</td>
+<td>Minimal or unclear comparison, lacking insights or recommendations.</td>
+<td>10 points</td>
+</tr>
+</tbody>
+</table>
+<hr>
 
 
 </section>
+</section>
 
 </main> <!-- /main -->
+<!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
+<footer class="site-footer">
+    <div class="container text-center">
+        <hr> 
+        © <span id="current-year"></span> Dr. Davood Tofighi |
+        <a href="https://canvasinfo.unm.edu/">UNM Canvas</a> |
+        <a href="https://data-wise.github.io/doe">Course GitHub Page</a> |
+    </div>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</footer>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1082,4 +1110,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
