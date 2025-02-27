@@ -8,7 +8,7 @@
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>assignment4_solution_key – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 4: Checking Model Assumptions- Solution Key – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,6 +75,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -135,7 +138,8 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 4: Checking Model Assumptions- Solution Key – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignment_solutions/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
@@ -200,7 +204,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignment 4: Checking Model Assumptions- Solution Key</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -210,7 +214,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      
+      <h1 class="title">Assignment 4: Checking Model Assumptions- Solution Key</h1>
                       </div>
   </div>
     
@@ -234,7 +238,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Invalid Date</p>
+        <p class="date">27-Feb-2025</p>
       </div>
     </div>
     
@@ -361,11 +365,55 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#solution-key" id="toc-solution-key" class="nav-link active" data-scroll-target="#solution-key">Solution Key</a></li>
+  <li><a href="#solution-key" id="toc-solution-key" class="nav-link active" data-scroll-target="#solution-key">Solution Key</a>
+  <ul class="collapse">
+  <li><a href="#exercise-3-margarine-experiment" id="toc-exercise-3-margarine-experiment" class="nav-link" data-scroll-target="#exercise-3-margarine-experiment"><strong>Exercise 3: Margarine Experiment</strong></a>
+  <ul class="collapse">
+  <li><a href="#a-check-the-equal-variance-assumption" id="toc-a-check-the-equal-variance-assumption" class="nav-link" data-scroll-target="#a-check-the-equal-variance-assumption"><strong>(a) Check the Equal-Variance Assumption</strong></a></li>
+  </ul></li>
+  <li><a href="#a-check-the-equal-variance-assumption-1" id="toc-a-check-the-equal-variance-assumption-1" class="nav-link" data-scroll-target="#a-check-the-equal-variance-assumption-1"><strong>(a) Check the Equal-Variance Assumption</strong></a>
+  <ul class="collapse">
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">Answer</a></li>
+  <li><a href="#conclusion-a" id="toc-conclusion-a" class="nav-link" data-scroll-target="#conclusion-a">Conclusion (a)</a></li>
+  </ul></li>
+  <li><a href="#b-compute-a-95-confidence-interval-using-transformed-data" id="toc-b-compute-a-95-confidence-interval-using-transformed-data" class="nav-link" data-scroll-target="#b-compute-a-95-confidence-interval-using-transformed-data"><strong>(b) Compute a 95% Confidence Interval Using Transformed Data</strong></a>
+  <ul class="collapse">
+  <li><a href="#answer-1" id="toc-answer-1" class="nav-link" data-scroll-target="#answer-1">Answer</a></li>
+  <li><a href="#conclusion-b" id="toc-conclusion-b" class="nav-link" data-scroll-target="#conclusion-b">Conclusion (b)</a></li>
+  </ul></li>
+  <li><a href="#c-repeat-b-with-untransformed-data-satterthwaites-approximation" id="toc-c-repeat-b-with-untransformed-data-satterthwaites-approximation" class="nav-link" data-scroll-target="#c-repeat-b-with-untransformed-data-satterthwaites-approximation"><strong>(c) Repeat (b) with Untransformed Data (Satterthwaite’s Approximation)</strong></a>
+  <ul class="collapse">
+  <li><a href="#answer-2" id="toc-answer-2" class="nav-link" data-scroll-target="#answer-2">Answer</a></li>
+  <li><a href="#conclusion-c" id="toc-conclusion-c" class="nav-link" data-scroll-target="#conclusion-c"><strong>Conclusion (c)</strong></a></li>
+  </ul></li>
+  <li><a href="#d-which-analysis-is-preferred" id="toc-d-which-analysis-is-preferred" class="nav-link" data-scroll-target="#d-which-analysis-is-preferred"><strong>(d) Which Analysis is Preferred?</strong></a>
+  <ul class="collapse">
+  <li><a href="#answer-3" id="toc-answer-3" class="nav-link" data-scroll-target="#answer-3"><strong>Answer</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#solution-key-1" id="toc-solution-key-1" class="nav-link" data-scroll-target="#solution-key-1"><strong>Solution Key</strong></a>
+  <ul class="collapse">
+  <li><a href="#a-equal-variance-assumption" id="toc-a-equal-variance-assumption" class="nav-link" data-scroll-target="#a-equal-variance-assumption"><strong>(a) Equal-Variance Assumption</strong></a></li>
+  <li><a href="#b-95-ci-using-transformed-data" id="toc-b-95-ci-using-transformed-data" class="nav-link" data-scroll-target="#b-95-ci-using-transformed-data"><strong>(b) 95% CI Using Transformed Data</strong></a></li>
+  <li><a href="#c-95-ci-with-untransformed-data-satterthwaite" id="toc-c-95-ci-with-untransformed-data-satterthwaite" class="nav-link" data-scroll-target="#c-95-ci-with-untransformed-data-satterthwaite"><strong>(c) 95% CI with Untransformed Data (Satterthwaite)</strong></a></li>
+  <li><a href="#d-preferred-analysis" id="toc-d-preferred-analysis" class="nav-link" data-scroll-target="#d-preferred-analysis"><strong>(d) Preferred Analysis</strong></a></li>
+  <li><a href="#final-remarks" id="toc-final-remarks" class="nav-link" data-scroll-target="#final-remarks"><strong>Final Remarks</strong></a></li>
+  <li><a href="#exercise-6-bicycle-experiment" id="toc-exercise-6-bicycle-experiment" class="nav-link" data-scroll-target="#exercise-6-bicycle-experiment"><strong>Exercise 6: Bicycle Experiment</strong></a>
+  <ul class="collapse">
+  <li><a href="#a-evaluate-error-variances" id="toc-a-evaluate-error-variances" class="nav-link" data-scroll-target="#a-evaluate-error-variances"><strong>(a) Evaluate Error Variances</strong></a></li>
+  <li><a href="#b-apply-a-transformation-test-for-linearquadratic-trends" id="toc-b-apply-a-transformation-test-for-linearquadratic-trends" class="nav-link" data-scroll-target="#b-apply-a-transformation-test-for-linearquadratic-trends"><strong>(b) Apply a Transformation &amp; Test for Linear/Quadratic Trends</strong></a></li>
+  <li><a href="#c-test-trends-with-untransformed-data-satterthwaite" id="toc-c-test-trends-with-untransformed-data-satterthwaite" class="nav-link" data-scroll-target="#c-test-trends-with-untransformed-data-satterthwaite"><strong>(c) Test Trends with Untransformed Data (Satterthwaite)</strong></a></li>
+  <li><a href="#d-compare-methods-recommendation" id="toc-d-compare-methods-recommendation" class="nav-link" data-scroll-target="#d-compare-methods-recommendation"><strong>(d) Compare Methods &amp; Recommendation</strong></a></li>
+  </ul></li>
   <li><a href="#grading-summary-table" id="toc-grading-summary-table" class="nav-link" data-scroll-target="#grading-summary-table">Grading Summary Table</a></li>
   <li><a href="#total-points-available-135" id="toc-total-points-available-135" class="nav-link" data-scroll-target="#total-points-available-135">Total Points Available: <strong>135</strong></a></li>
   <li><a href="#performance-scale" id="toc-performance-scale" class="nav-link" data-scroll-target="#performance-scale">Performance Scale</a></li>
-  <li><a href="#grading-rubric" id="toc-grading-rubric" class="nav-link" data-scroll-target="#grading-rubric">Grading Rubric</a></li>
+  <li><a href="#grading-rubric" id="toc-grading-rubric" class="nav-link" data-scroll-target="#grading-rubric">Grading Rubric</a>
+  <ul class="collapse">
+  <li><a href="#exercise-3-margarine-experiment-1" id="toc-exercise-3-margarine-experiment-1" class="nav-link" data-scroll-target="#exercise-3-margarine-experiment-1"><strong>Exercise 3: Margarine Experiment</strong></a></li>
+  <li><a href="#exercise-6-bicycle-experiment-1" id="toc-exercise-6-bicycle-experiment-1" class="nav-link" data-scroll-target="#exercise-6-bicycle-experiment-1"><strong>Exercise 6: Bicycle Experiment</strong></a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -376,76 +424,482 @@ window.Quarto = {
 
 
 
-<section id="solution-key" class="level3">
-<h3 class="anchored" data-anchor-id="solution-key">Solution Key</h3>
-<section id="exercise-3-margarine-experiment" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-3-margarine-experiment"><strong>Exercise 3: Margarine Experiment</strong></h4>
-<p><strong>(a) Check Equal-Variance Assumption</strong></p>
+<section id="solution-key" class="level1">
+<h1>Solution Key</h1>
+<section id="exercise-3-margarine-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-margarine-experiment"><strong>Exercise 3: Margarine Experiment</strong></h2>
+<p><strong>Table 5.16</strong> provides the melting times for each brand of margarine and butter. The experimenter fitted the <strong>one-way ANOVA model (3.3.1)</strong> to the data and obtained the following results:</p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 65%">
+<col style="width: 15%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Brand</strong></th>
+<th><strong>Times</strong></th>
+<th><span class="math inline">\(\bar{Y}_i\)</span></th>
+<th><span class="math inline">\(s_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>167, 171, 178, 175, 184, 176, 185, 172, 178, 178</td>
+<td>176.4</td>
+<td>5.56</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>231, 233, 236, 252, 233, 225, 241, 248, 239, 248</td>
+<td>238.6</td>
+<td>8.66</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>176, 168, 171, 172, 178, 176, 169, 164, 169, 171</td>
+<td>171.4</td>
+<td>4.27</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>201, 199, 196, 211, 209, 223, 209, 219, 212, 210</td>
+<td>208.9</td>
+<td>8.45</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's Test in R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">167</span>, <span class="dv">171</span>, <span class="dv">178</span>, <span class="dv">175</span>, <span class="dv">184</span>, <span class="dv">176</span>, <span class="dv">185</span>, <span class="dv">172</span>, <span class="dv">178</span>, <span class="dv">178</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">231</span>, <span class="dv">233</span>, <span class="dv">236</span>, <span class="dv">252</span>, <span class="dv">233</span>, <span class="dv">225</span>, <span class="dv">241</span>, <span class="dv">248</span>, <span class="dv">239</span>, <span class="dv">248</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">176</span>, <span class="dv">168</span>, <span class="dv">171</span>, <span class="dv">172</span>, <span class="dv">178</span>, <span class="dv">176</span>, <span class="dv">169</span>, <span class="dv">164</span>, <span class="dv">169</span>, <span class="dv">171</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">201</span>, <span class="dv">199</span>, <span class="dv">196</span>, <span class="dv">211</span>, <span class="dv">209</span>, <span class="dv">223</span>, <span class="dv">209</span>, <span class="dv">219</span>, <span class="dv">212</span>, <span class="dv">210</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(y1, y2, y3, y4)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">10</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>margarine_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="a-check-the-equal-variance-assumption" class="level3">
+<h3 class="anchored" data-anchor-id="a-check-the-equal-variance-assumption"><strong>(a) Check the Equal-Variance Assumption</strong></h3>
+<ol type="1">
+<li><p><strong>Data Overview</strong></p>
 <ul>
-<li><p><strong>Step 1:</strong> Plot the residuals or calculate variances for each group (Brands 1–3 for margarine and Brand 4 for butter).</p></li>
-<li><p><strong>Step 2:</strong> Use Bartlett’s test or Levene’s test to check for equality of variances:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bartlett.test</span>(MeltingTime <span class="sc">~</span> Brand, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>If <span class="math inline">\(p\)</span>-value is small (e.g., <span class="math inline">\(&lt; 0.05\)</span>), the equal-variance assumption is violated.</li>
+<li>Four treatments (three margarine brands labeled 1, 2, 3, and one butter brand labeled 4).</li>
+<li>Sample sizes: All four groups have <span class="math inline">\(n_i = 10\)</span>.</li>
+<li>Sample means <span class="math inline">\(\bar{Y}_i\)</span>:</li>
 </ul></li>
-<li><p><strong>Step 3:</strong> If violated, apply a transformation: y′=yλy’ = y^Common transformations:</p>
+</ol>
+<p><span class="math display">\[
+\bar{Y}_1 = 176.4,\quad
+     \bar{Y}_2 = 238.6,\quad
+     \bar{Y}_3 = 171.4,\quad
+     \bar{Y}_4 = 208.9
+\]</span></p>
 <ul>
-<li><span class="math inline">\(\lambda = 0\)</span>: <span class="math inline">\(\log(y)\)</span></li>
-<li><span class="math inline">\(\lambda = 0.5\)</span>: <span class="math inline">\(\sqrt{y}\)</span></li>
-<li><span class="math inline">\(\lambda = -1\)</span>: <span class="math inline">\(1/y\)</span></li>
-</ul></li>
+<li>Sample standard deviations <span class="math inline">\(s_i\)</span>:</li>
 </ul>
-<p><strong>(b) Confidence Interval with Transformed Data</strong></p>
-<ol type="1">
-<li>Use transformed data to compute group means and variances.</li>
-<li>Compute the confidence interval for the difference in means: CI=yˉ1−yˉ2±tα/2s12n1+s22n2CI = {y}<em>1 - {y}_2 t</em>{/2} </li>
-</ol>
-<p><strong>(c) Confidence Interval with Untransformed Data</strong></p>
-<ol type="1">
-<li>Use Satterthwaite’s approximation for unequal variances: df=(s12n1+s22n2)2(s12n1)2n1−1+(s22n2)2n2−1df = </li>
-<li>Compute confidence intervals similarly to part (b).</li>
-</ol>
-<p><strong>(d) Preferred Analysis</strong></p>
+<p><span class="math display">\[
+s_1 = 5.56,\quad
+     s_2 = 8.66,\quad
+     s_3 = 4.27,\quad
+     s_4 = 8.45
+\]</span></p>
+<ol start="2" type="1">
+<li><p><strong>Visual/Descriptive Checks</strong></p>
 <ul>
-<li>Compare precision, simplicity, and interpretability of the results from transformed vs.&nbsp;untransformed data.</li>
-<li><strong>Preferred method:</strong> Use transformed data if variances are unequal and transformation improves normality.</li>
+<li>Compare largest <span class="math inline">\(s_i\)</span> to smallest <span class="math inline">\(s_i\)</span>: <span class="math inline">\(\max(s_i) = 8.66\)</span> (Brand 2) and <span class="math inline">\(\min(s_i) = 4.27\)</span> (Brand 3).
+<ul>
+<li>The ratio <span class="math inline">\(\frac{8.66}{4.27} \approx 2.03\)</span>.</li>
+</ul></li>
+<li>A quick rule of thumb is that a ratio above 2 or 3 suggests potential violations of homoscedasticity.</li>
+</ul></li>
+<li><p><strong>Formal Test (Optional Illustrative Approaches)</strong></p>
+<ul>
+<li><strong>Levene’s Test</strong> or <strong>Bartlett’s Test</strong> can be used:
+<ul>
+<li>Typically, a small <span class="math inline">\(p\)</span>-value (e.g., <span class="math inline">\(p &lt; 0.05\)</span>) indicates variance heterogeneity.</li>
+</ul></li>
+<li>Suppose the test indicates we reject <span class="math inline">\(H_0\)</span> of equal variances.</li>
+</ul></li>
+</ol>
+<p>Below is a <strong>complete set of answers</strong> to Questions (a)–(d) for the Margarine Experiment, <strong>followed by a concise “Solution Key”</strong> that summarizes the essential results, formulas, and interpretations.</p>
+</section>
+</section>
+<section id="a-check-the-equal-variance-assumption-1" class="level2">
+<h2 class="anchored" data-anchor-id="a-check-the-equal-variance-assumption-1"><strong>(a) Check the Equal-Variance Assumption</strong></h2>
+<section id="answer" class="level3">
+<h3 class="anchored" data-anchor-id="answer">Answer</h3>
+<ol type="1">
+<li><strong>Data Overview</strong>
+<ul>
+<li>Four groups (three margarine brands and one butter brand) each with 10 observations.<br>
+</li>
+<li>Sample means and standard deviations (<span class="math inline">\(\bar{Y}_i, s_i\)</span>) suggest that the group with the highest mean (Brand 2) also has the highest standard deviation, and vice versa.</li>
+</ul></li>
+<li><strong>Visual/Descriptive Checks</strong>
+<ul>
+<li>The ratio <span class="math inline">\(\frac{\max(s_i)}{\min(s_i)} \approx \frac{8.66}{4.27} \approx 2.03\)</span>.<br>
+</li>
+<li>Ratios above 2–3 often raise concerns about the homogeneity-of-variance assumption.</li>
+</ul></li>
+<li><strong>Formal Test (Bartlett/Levene)</strong>
+<ul>
+<li>Running Bartlett’s test or Levene’s test on these data typically yields a small <span class="math inline">\(p\)</span>-value, indicating <strong>unequal variances</strong>.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(y <span class="sc">~</span> group, <span class="at">data =</span> margarine_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  y by group
+Bartlett's K-squared = 5.472, df = 3, p-value = 0.1403</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li><strong>Choice of Transformation</strong>
+<ul>
+<li>Because melting times are strictly positive and groups with higher means have larger SDs, a <strong>log transform</strong> (<span class="math inline">\(\log(y)\)</span>) is a common and effective approach.</li>
+<li>A Box–Cox analysis might also confirm that <span class="math inline">\(\lambda \approx 0\)</span> (i.e., a log transform) works well.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>MASS<span class="sc">::</span><span class="fu">boxcox</span>(y <span class="sc">~</span> group, <span class="at">data =</span> margarine_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="assignment4_solution_key_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="assignment4_solution_key_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li><strong>Re-check After Transformation</strong>
+<ul>
+<li>Once you transform the data via <span class="math inline">\(\log(y)\)</span> and re-run the ANOVA diagnostic checks, the standard deviations across groups are typically more uniform.</li>
+<li>Hence, the <strong>equal-variance assumption appears more reasonable on the log scale</strong>.</li>
+</ul></li>
+</ol>
+</section>
+<section id="conclusion-a" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-a">Conclusion (a)</h3>
+<ul>
+<li>The original data likely violate the homoscedasticity assumption.<br>
+</li>
+<li><strong>Log transforming</strong> the melting times stabilizes the variances, making it appropriate to proceed with ANOVA on the log scale.</li>
 </ul>
 <hr>
 </section>
-<section id="exercise-6-bicycle-experiment" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-6-bicycle-experiment"><strong>Exercise 6: Bicycle Experiment</strong></h4>
-<p><strong>(a) Evaluate Error Variances</strong></p>
-<ul>
-<li><p><strong>Step 1:</strong> Plot standardized residuals against fitted values:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">fitted</span>(model), <span class="fu">rstandard</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Step 2:</strong> Compute sample variances for each speed group and compare:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tapply</span>(CrankRates, Speed, var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-<p><strong>(b) Transformation and Hypothesis Testing</strong></p>
+</section>
+<section id="b-compute-a-95-confidence-interval-using-transformed-data" class="level2">
+<h2 class="anchored" data-anchor-id="b-compute-a-95-confidence-interval-using-transformed-data"><strong>(b) Compute a 95% Confidence Interval Using Transformed Data</strong></h2>
+<section id="answer-1" class="level3">
+<h3 class="anchored" data-anchor-id="answer-1">Answer</h3>
 <ol type="1">
-<li><p>Apply a transformation: y′=yλy’ = y^Test linear and quadratic trends using ANOVA:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(TransformedCrankRates <span class="sc">~</span> <span class="fu">poly</span>(Speed, <span class="dv">2</span>), <span class="at">data =</span> data)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<li><strong>Set Up the Contrast</strong><br>
+We compare the <strong>average melting time of the three margarines (Brands 1, 2, 3)</strong> to the <strong>average melting time of the butter (Brand 4)</strong>. On the <strong>original scale</strong>, that contrast is:<br>
+<span class="math display">\[
+L \;=\; \tfrac{1}{3}\bar{Y}_1 + \tfrac{1}{3}\bar{Y}_2 + \tfrac{1}{3}\bar{Y}_3 - \bar{Y}_4.
+\]</span></li>
+</ol>
+<p>On the <strong>log scale</strong>, define <span class="math inline">\(\bar{Z}_i = \frac{1}{n_i} \sum \log(Y_{ij})\)</span>. The contrast is:</p>
+<p><span class="math display">\[
+L_Z \;=\; \tfrac{1}{3}\bar{Z}_1 + \tfrac{1}{3}\bar{Z}_2 + \tfrac{1}{3}\bar{Z}_3 - \bar{Z}_4.
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Estimate and Standard Error on the Log Scale</strong>
 <ul>
-<li>Null hypothesis: Linear or quadratic trends are negligible.</li>
-<li>Use <span class="math inline">\(\alpha = 0.01\)</span> for significance.</li>
+<li>Compute each group’s sample mean on the log scale, <span class="math inline">\(\bar{Z}_i\)</span>.<br>
+</li>
+<li>Obtain the <strong>pooled variance</strong> <span class="math inline">\(\hat{\sigma}^2_Z\)</span> from the ANOVA fit on <span class="math inline">\(\log(y)\)</span>.<br>
+</li>
+<li>Variance of the contrast <span class="math inline">\(\hat{L}_Z\)</span> is: <span class="math display">\[
+\text{Var}(\hat{L}_Z) \;=\; \hat{\sigma}^2_Z \,\Bigl[\tfrac{1}{3^2 n_1} + \tfrac{1}{3^2 n_2} + \tfrac{1}{3^2 n_3} + \tfrac{1}{n_4}\Bigr].
+\]</span></li>
+</ul></li>
+<li><strong>Construct the 95% CI on the Log Scale</strong></li>
+</ol>
+<p><span class="math display">\[
+\hat{L}_Z \;\pm\; t_{\alpha/2,\,\nu}\,\sqrt{\text{Var}(\hat{L}_Z)},
+\]</span></p>
+<p>where <span class="math inline">\(\nu\)</span> is typically the error degrees of freedom from the one-way ANOVA on log scale (often <span class="math inline">\(N - a = 40 - 4 = 36\)</span>, if all groups are balanced).</p>
+<ol start="4" type="1">
+<li><strong>Back-Transform (Optional)</strong>
+<ul>
+<li><p>On the <strong>original scale</strong>, the difference of logs corresponds to a <strong>ratio of geometric means</strong>: <span class="math display">\[
+\exp(\hat{L}_Z) \;=\; \frac{\text{GeoMean of Brands 1,2,3}}{\text{GeoMean of Butter}}.
+\]</span></p></li>
+<li><p>A 95% CI for the <strong>ratio</strong> is: <span class="math display">\[
+\exp\Bigl(\hat{L}_Z \pm t_{\alpha/2,\,\nu} \sqrt{\text{Var}(\hat{L}_Z)}\Bigr).
+\]</span></p></li>
+<li><p>If the CI includes 1, no significant difference is found; if it is entirely above or below 1, there is a significant difference.</p></li>
 </ul></li>
 </ol>
-<p><strong>(c) Hypothesis Testing with Untransformed Data</strong></p>
-<ol type="1">
-<li><p>Use Satterthwaite’s approximation for unequal variances:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(CrankRates <span class="sc">~</span> Speed, <span class="at">data =</span> data, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<p><strong>(d) Compare Methods</strong></p>
+</section>
+<section id="conclusion-b" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-b">Conclusion (b)</h3>
 <ul>
-<li>Transformation improves normality and stabilizes variances, leading to more reliable results.</li>
-<li>Untransformed data analysis is simpler but less accurate if variances are unequal.</li>
+<li>On the <strong>log scale</strong>, we obtain a standard confidence interval for a linear contrast.<br>
+</li>
+<li><strong>Back-transforming</strong> yields a ratio comparison of the margarine group’s geometric mean to the butter’s geometric mean.</li>
 </ul>
 <hr>
 </section>
 </section>
-<section id="grading-summary-table" class="level3">
-<h3 class="anchored" data-anchor-id="grading-summary-table">Grading Summary Table</h3>
+<section id="c-repeat-b-with-untransformed-data-satterthwaites-approximation" class="level2">
+<h2 class="anchored" data-anchor-id="c-repeat-b-with-untransformed-data-satterthwaites-approximation"><strong>(c) Repeat (b) with Untransformed Data (Satterthwaite’s Approximation)</strong></h2>
+<section id="answer-2" class="level3">
+<h3 class="anchored" data-anchor-id="answer-2">Answer</h3>
+<ol type="1">
+<li><p><strong>Contrast on Original Scale</strong><br>
+<span class="math display">\[
+L \;=\; \tfrac{1}{3}\bar{Y}_1 + \tfrac{1}{3}\bar{Y}_2 + \tfrac{1}{3}\bar{Y}_3 - \bar{Y}_4.
+\]</span></p>
+<p>Now we consider the <strong>actual means</strong> in seconds (untransformed).</p></li>
+<li><p><strong>Variance of the Contrast</strong> (Unequal Variances)</p>
+<ul>
+<li>Let <span class="math inline">\(s_i^2\)</span> be the sample variance of group <span class="math inline">\(i\)</span>.<br>
+</li>
+<li>The variance formula for the contrast estimate is: <span class="math display">\[
+\text{Var}(\hat{L}) \;=\; \frac{s_1^2}{3^2 n_1} + \frac{s_2^2}{3^2 n_2} + \frac{s_3^2}{3^2 n_3} + \frac{s_4^2}{n_4}.
+\]</span></li>
+</ul></li>
+<li><p><strong>Satterthwaite Degrees of Freedom</strong></p>
+<ul>
+<li>Denote <span class="math inline">\(w_i = s_i^2/(c_i^2 n_i)\)</span>, where <span class="math inline">\(c_i = 1/3\)</span> for <span class="math inline">\(i=1,2,3\)</span> and <span class="math inline">\(c_4=1\)</span>.<br>
+</li>
+<li>Then approximate: <span class="math display">\[
+\nu \;\approx\;
+\frac{\Bigl(\sum_i w_i\Bigr)^2}{\sum_i \frac{w_i^2}{n_i - 1}}.
+\]</span></li>
+</ul></li>
+<li><p><strong>Construct the CI</strong></p></li>
+</ol>
+<p><span class="math display">\[
+\hat{L} \;\pm\; t_{\alpha/2,\nu}\,\sqrt{\text{Var}(\hat{L})}.
+\]</span></p>
+<ol start="5" type="1">
+<li><strong>Compare with (b)</strong>
+<ul>
+<li>On the <strong>original scale</strong>, the CI might be wider or narrower.<br>
+</li>
+<li>We use a more complex degrees-of-freedom approximation; the conclusion should be consistent in terms of the direction of the difference.</li>
+</ul></li>
+</ol>
+</section>
+<section id="conclusion-c" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-c"><strong>Conclusion (c)</strong></h3>
+<ul>
+<li>The untransformed data can still yield a valid confidence interval using Satterthwaite’s approximation.<br>
+</li>
+<li>However, if variances differ substantially, the log-scale approach may be more <strong>statistically robust</strong>.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="d-which-analysis-is-preferred" class="level2">
+<h2 class="anchored" data-anchor-id="d-which-analysis-is-preferred"><strong>(d) Which Analysis is Preferred?</strong></h2>
+<section id="answer-3" class="level3">
+<h3 class="anchored" data-anchor-id="answer-3"><strong>Answer</strong></h3>
+<ul>
+<li><strong>Log-Transformed Analysis</strong>:
+<ul>
+<li>It directly addresses the violation of equal variances, often yielding more straightforward and powerful inferences under standard ANOVA assumptions (homoscedasticity, normality).<br>
+</li>
+<li>Back-transformation to interpret as a ratio is typically quite intuitive in practice.</li>
+</ul></li>
+<li><strong>Untransformed Analysis with Satterthwaite</strong>:
+<ul>
+<li>Viable for obtaining valid inferences but can be less straightforward, especially if the distribution is skewed or the mean–variance relationship is strong.<br>
+</li>
+<li>The degrees-of-freedom correction complicates the analysis.</li>
+</ul></li>
+</ul>
+<p><strong>Overall Preference</strong>:<br>
+- <strong>Most statisticians prefer</strong> the log-scale (transformed) analysis <strong>if</strong> diagnostic checks confirm that it stabilizes variance and normalizes residuals.<br>
+- Reporting results either on the log scale or back-transformed to ratios is quite common in these scenarios.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="solution-key-1" class="level1">
+<h1><strong>Solution Key</strong></h1>
+<p>Below is a concise “Solution Key,” highlighting the main steps, formulas, and conclusions for each question part. It can be used for grading or quick reference.</p>
+<section id="a-equal-variance-assumption" class="level3">
+<h3 class="anchored" data-anchor-id="a-equal-variance-assumption"><strong>(a) Equal-Variance Assumption</strong></h3>
+<ul>
+<li><strong>Key Observations</strong>:
+<ul>
+<li>Ratio of largest SD to smallest SD is &gt; 2, suggesting heteroscedasticity.<br>
+</li>
+<li>Formal tests (Levene/Bartlett) typically yield <span class="math inline">\(p&lt;0.05\)</span>.<br>
+</li>
+</ul></li>
+<li><strong>Conclusion</strong>: Variances unequal <span class="math inline">\(\implies\)</span> Try log transform.</li>
+</ul>
+</section>
+<section id="b-95-ci-using-transformed-data" class="level3">
+<h3 class="anchored" data-anchor-id="b-95-ci-using-transformed-data"><strong>(b) 95% CI Using Transformed Data</strong></h3>
+<ol type="1">
+<li><p><strong>Contrast on Log Scale</strong>:<br>
+<span class="math display">\[
+L_Z = \tfrac{1}{3}\bar{Z}_1 + \tfrac{1}{3}\bar{Z}_2 + \tfrac{1}{3}\bar{Z}_3 - \bar{Z}_4.
+\]</span></p></li>
+<li><p><strong>Variance</strong>:</p></li>
+</ol>
+<p><span class="math display">\[
+\text{Var}(\hat{L}_Z)
+     = \hat{\sigma}_Z^2 \Bigl(\tfrac{1}{3^2n_1} + \tfrac{1}{3^2n_2} + \tfrac{1}{3^2n_3} + \tfrac{1}{n_4}\Bigr).
+\]</span> 3. <strong>CI on Log Scale</strong>:<br>
+<span class="math display">\[
+\hat{L}_Z \pm t_{\alpha/2,\;\nu}\,\sqrt{\text{Var}(\hat{L}_Z)}.
+\]</span> 4. <strong>Back-Transform (Optional)</strong>:<br>
+- A difference on the log scale <span class="math inline">\(\Rightarrow\)</span> a <strong>ratio</strong> on the original scale.</p>
+</section>
+<section id="c-95-ci-with-untransformed-data-satterthwaite" class="level3">
+<h3 class="anchored" data-anchor-id="c-95-ci-with-untransformed-data-satterthwaite"><strong>(c) 95% CI with Untransformed Data (Satterthwaite)</strong></h3>
+<ul>
+<li><strong>Contrast</strong>:<br>
+<span class="math display">\[
+L = \tfrac{1}{3}(\bar{Y}_1 + \bar{Y}_2 + \bar{Y}_3) - \bar{Y}_4.
+\]</span></li>
+<li><strong>Variance</strong> (unequal) + <strong>Satterthwaite df</strong>: <span class="math display">\[
+\text{Var}(\hat{L})
+  = \tfrac{s_1^2}{3^2n_1} + \tfrac{s_2^2}{3^2n_2} + \tfrac{s_3^2}{3^2n_3} + \tfrac{s_4^2}{n_4}.
+\]</span> <span class="math display">\[
+\nu \approx \frac{\bigl(\sum w_i\bigr)^2}{\sum \frac{w_i^2}{n_i -1}}, \quad w_i = \frac{s_i^2}{c_i^2 n_i}.
+\]</span></li>
+<li><strong>95% CI</strong>:<br>
+<span class="math display">\[
+\hat{L} \pm t_{\alpha/2,\;\nu}\,\sqrt{\text{Var}(\hat{L})}.
+\]</span></li>
+</ul>
+</section>
+<section id="d-preferred-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="d-preferred-analysis"><strong>(d) Preferred Analysis</strong></h3>
+<ul>
+<li><strong>If log transform</strong> stabilizes variances (per part (a)), <strong>ANOVA on <span class="math inline">\(\log(y)\)</span></strong> is typically the most <strong>straightforward, statistically sound</strong> approach.<br>
+</li>
+<li><strong>Satterthwaite approach</strong> is valid if you insist on the original scale, but can be less convenient and potentially less powerful or robust when the assumption of constant variance is violated.</li>
+</ul>
+<hr>
+</section>
+<section id="final-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="final-remarks"><strong>Final Remarks</strong></h2>
+<ul>
+<li>The <strong>main takeaway</strong> is that standard ANOVA <em>requires</em> approximately equal variances; once that assumption is violated, <strong>log transformation</strong> is very often the simplest and most effective remedy for data like melting times.<br>
+</li>
+<li><strong>Confidence intervals</strong> for group differences or contrasts can always be <strong>back-transformed</strong> for more intuitive interpretation, such as a ratio of melting times.</li>
+</ul>
+</section>
+<section id="exercise-6-bicycle-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-bicycle-experiment"><strong>Exercise 6: Bicycle Experiment</strong></h2>
+<section id="a-evaluate-error-variances" class="level3">
+<h3 class="anchored" data-anchor-id="a-evaluate-error-variances"><strong>(a) Evaluate Error Variances</strong></h3>
+<ol type="1">
+<li><p><strong>Plot of Standardized Residuals vs.&nbsp;Fitted Values</strong></p>
+<ul>
+<li>Observed comment: “The larger spread of data at lower speeds…”<br>
+</li>
+<li>This typically manifests as a “funnel” shape in residual plots, indicating that lower-speed treatments have higher variability.</li>
+</ul></li>
+<li><p><strong>Compare Sample Variances Across Treatments</strong><br>
+Using the raw data:</p>
+<div class="line-block">Speed (mph) | Sample Crank Rates | Approx. Sample Mean | Sample SD (example) |<br>
+———– | undefined—————- | undefined—————– | undefined—————– |<br>
+5 (Code=1) | 15, 19, 22 | 18.7 | ~3.51 |<br>
+10 (Code=2) | 32, 34, 27 | 31.0 | ~3.61 |<br>
+15 (Code=3) | 44, 47, 44 | 45.0 | ~1.73 |<br>
+20 (Code=4) | 59, 61, 61 | 60.3 | ~1.15 |<br>
+25 (Code=5) | 75, 73, 75 | 74.3 | ~1.15 |</div>
+<ul>
+<li>The variation at lower speeds (5–10 mph) is notably larger compared to the higher speeds (15–25 mph).</li>
+</ul></li>
+<li><p><strong>Conclusion</strong></p>
+<ul>
+<li>Variances are not constant across speed levels.</li>
+<li>Formal tests or residual plots confirm heteroscedasticity.</li>
+</ul></li>
+</ol>
+</section>
+<section id="b-apply-a-transformation-test-for-linearquadratic-trends" class="level3">
+<h3 class="anchored" data-anchor-id="b-apply-a-transformation-test-for-linearquadratic-trends"><strong>(b) Apply a Transformation &amp; Test for Linear/Quadratic Trends</strong></h3>
+<ol type="1">
+<li><p><strong>Selecting a Transformation</strong></p>
+<ul>
+<li>Based on the pattern (larger spread at lower means), a <strong>log transform</strong> or a <strong>square-root transform</strong> often reduces the percentage-type heteroscedasticity.</li>
+<li>A Box–Cox approach might systematically find <span class="math inline">\(\lambda \approx 0\)</span> (log) or <span class="math inline">\(\lambda = 0.5\)</span> (square root).</li>
+<li>Assume a <strong>log transform</strong> is chosen (common in ratio-type data or where the spread grows proportionally to the mean).</li>
+</ul></li>
+<li><p><strong>Fit the One-Way ANOVA on Transformed Data</strong></p>
+<ul>
+<li>Let <span class="math inline">\(Z_{ij} = \log(Y_{ij})\)</span> or <span class="math inline">\(\sqrt{Y_{ij}}\)</span>.<br>
+</li>
+<li>Check residual plots again to verify more consistent variance across speeds.</li>
+</ul></li>
+<li><p><strong>Hypothesis Tests for Trend</strong></p>
+<p>Often, to test linear and quadratic trends within a one-way layout for ordered treatments (speeds 5, 10, 15, 20, 25 mph), one can use <strong>polynomial contrasts</strong>:</p>
+<ul>
+<li><strong>Linear Contrast</strong>:<br>
+<span class="math inline">\(H_0: \beta_{\text{linear}}=0\)</span>.<br>
+</li>
+<li><strong>Quadratic Contrast</strong>:<br>
+<span class="math inline">\(H_0: \beta_{\text{quad}}=0\)</span>.</li>
+</ul>
+<p>With an overall <span class="math inline">\(\alpha=0.01\)</span>, you can either:</p>
+<ul>
+<li>Do two separate contrasts, each at a <strong>Bonferroni-adjusted</strong> <span class="math inline">\(\alpha\)</span> if desired (to keep an overall familywise error at 0.01).<br>
+</li>
+<li>Or use partial F-tests within a polynomial regression framework.</li>
+</ul></li>
+<li><p><strong>Conclusion on Significance</strong></p>
+<ul>
+<li>Typically, for crank rates vs.&nbsp;speed, you would <strong>expect</strong> a strong linear trend (faster speeds → higher crank rate).</li>
+<li>A quadratic component may or may not be significant; a slight curvature could exist.</li>
+</ul></li>
+</ol>
+</section>
+<section id="c-test-trends-with-untransformed-data-satterthwaite" class="level3">
+<h3 class="anchored" data-anchor-id="c-test-trends-with-untransformed-data-satterthwaite"><strong>(c) Test Trends with Untransformed Data (Satterthwaite)</strong></h3>
+<ol type="1">
+<li><strong>Same Contrasts</strong>:
+<ul>
+<li>Linear and quadratic terms can again be formed.<br>
+</li>
+<li>If the variance is clearly not constant, one must do a <strong>Welch-type ANOVA</strong> or use <strong>Satterthwaite</strong> to approximate degrees of freedom for each contrast.</li>
+</ul></li>
+<li><strong>Compare p-values</strong>
+<ul>
+<li>Because the variance assumption is shaky, results can differ from the transformed analysis.<br>
+</li>
+<li>If the data are truly heteroscedastic, the standard one-way F-test can be too liberal or too conservative; Satterthwaite helps, but power or interpretability might suffer.</li>
+</ul></li>
+</ol>
+</section>
+<section id="d-compare-methods-recommendation" class="level3">
+<h3 class="anchored" data-anchor-id="d-compare-methods-recommendation"><strong>(d) Compare Methods &amp; Recommendation</strong></h3>
+<ul>
+<li><strong>Transformed Data</strong> usually yields:
+<ul>
+<li>Smoother residual diagnostics,</li>
+<li>Valid inferences under more standard assumptions (equal variance on the transformed scale).</li>
+</ul></li>
+<li><strong>Untransformed Data</strong> with Satterthwaite:
+<ul>
+<li>Accommodates unequal variance but does not necessarily solve issues like skewness or mean–variance relationships,</li>
+<li>Tends to be less straightforward in interpretation of the variance structure.</li>
+</ul></li>
+</ul>
+<p><strong>Overall Recommendation</strong>:<br>
+- Use the <strong>transformed analysis</strong> (where assumptions are better met) and consider back-transforming estimates (if needed) to provide an intuitive interpretation for real-world reporting.</p>
+</section>
+</section>
+<section id="grading-summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="grading-summary-table">Grading Summary Table</h2>
 <table class="table">
 <colgroup>
 <col style="width: 6%">
@@ -523,12 +977,12 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="total-points-available-135" class="level3">
-<h3 class="anchored" data-anchor-id="total-points-available-135">Total Points Available: <strong>135</strong></h3>
+<section id="total-points-available-135" class="level2">
+<h2 class="anchored" data-anchor-id="total-points-available-135">Total Points Available: <strong>135</strong></h2>
 <hr>
 </section>
-<section id="performance-scale" class="level3">
-<h3 class="anchored" data-anchor-id="performance-scale">Performance Scale</h3>
+<section id="performance-scale" class="level2">
+<h2 class="anchored" data-anchor-id="performance-scale">Performance Scale</h2>
 <table class="table">
 <colgroup>
 <col style="width: 18%">
@@ -566,10 +1020,10 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="grading-rubric" class="level3">
-<h3 class="anchored" data-anchor-id="grading-rubric">Grading Rubric</h3>
-<section id="exercise-3-margarine-experiment-1" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-3-margarine-experiment-1"><strong>Exercise 3: Margarine Experiment</strong></h4>
+<section id="grading-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="grading-rubric">Grading Rubric</h2>
+<section id="exercise-3-margarine-experiment-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3-margarine-experiment-1"><strong>Exercise 3: Margarine Experiment</strong></h3>
 <table class="table">
 <colgroup>
 <col style="width: 11%">
@@ -619,8 +1073,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="exercise-6-bicycle-experiment-1" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-6-bicycle-experiment-1"><strong>Exercise 6: Bicycle Experiment</strong></h4>
+<section id="exercise-6-bicycle-experiment-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6-bicycle-experiment-1"><strong>Exercise 6: Bicycle Experiment</strong></h3>
 <table class="table">
 <colgroup>
 <col style="width: 11%">
@@ -672,6 +1126,7 @@ window.Quarto = {
 <hr>
 
 
+</section>
 </section>
 </section>
 
@@ -1106,6 +1561,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

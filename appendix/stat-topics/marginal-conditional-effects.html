@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
 
-<title>R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Marginal and Conditional Effects in GLM and GLMM – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,10 +71,39 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
-<meta property="og:title" content="R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Marginal and Conditional Effects in GLM and GLMM – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/stat-topics/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -86,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +125,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Marginal and Conditional Effects in GLM and GLMM</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +176,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
-      <h1 class="title">R Help and Tutorial</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Marginal and Conditional Effects in GLM and GLMM</h1>
                       </div>
   </div>
     
@@ -173,16 +201,10 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">26-Feb-2025</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 26, 2025</p>
-      </div>
-    </div>
       
     </div>
     
@@ -203,19 +225,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +254,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +277,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +306,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -306,32 +328,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-help-and-tutorial-provided-by-the-instructor" id="toc-r-help-and-tutorial-provided-by-the-instructor" class="nav-link active" data-scroll-target="#r-help-and-tutorial-provided-by-the-instructor">R Help and Tutorial Provided by the Instructor</a>
+  <li><a href="#marginal-vs.-conditional-effects" id="toc-marginal-vs.-conditional-effects" class="nav-link active" data-scroll-target="#marginal-vs.-conditional-effects">1. Marginal vs.&nbsp;Conditional Effects</a>
   <ul class="collapse">
-  <li><a href="#r-subjects-topics" id="toc-r-subjects-topics" class="nav-link" data-scroll-target="#r-subjects-topics">Subjects and Topics</a>
+  <li><a href="#in-general-statistics" id="toc-in-general-statistics" class="nav-link" data-scroll-target="#in-general-statistics">1.1 In General (Statistics)</a></li>
+  <li><a href="#biostatistics" id="toc-biostatistics" class="nav-link" data-scroll-target="#biostatistics">1.2 Biostatistics</a></li>
+  <li><a href="#social-science" id="toc-social-science" class="nav-link" data-scroll-target="#social-science">1.3 Social Science</a></li>
+  </ul></li>
+  <li><a href="#what-does-effect-mean-in-each-field" id="toc-what-does-effect-mean-in-each-field" class="nav-link" data-scroll-target="#what-does-effect-mean-in-each-field">2. What Does “Effect” Mean in Each Field?</a></li>
+  <li><a href="#how-the-definition-changes-for-non-linear-models" id="toc-how-the-definition-changes-for-non-linear-models" class="nav-link" data-scroll-target="#how-the-definition-changes-for-non-linear-models">3. How the Definition Changes for Non-Linear Models</a>
   <ul class="collapse">
-  <li><a href="#subjects" id="toc-subjects" class="nav-link" data-scroll-target="#subjects">Subjects</a></li>
+  <li><a href="#linear-vs.-non-linear" id="toc-linear-vs.-non-linear" class="nav-link" data-scroll-target="#linear-vs.-non-linear">3.1 Linear vs.&nbsp;Non-Linear</a></li>
+  <li><a href="#example-logistic-regression" id="toc-example-logistic-regression" class="nav-link" data-scroll-target="#example-logistic-regression">3.2 Example: Logistic Regression</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#r-base-functions" id="toc-r-base-functions" class="nav-link" data-scroll-target="#r-base-functions">Help by R Base Functions</a>
+  <li><a href="#summary-highlights" id="toc-summary-highlights" class="nav-link" data-scroll-target="#summary-highlights">4. Summary Highlights</a>
   <ul class="collapse">
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">Help by R Packages</a>
-  <ul class="collapse">
-  <li><a href="#data-manipulation" id="toc-data-manipulation" class="nav-link" data-scroll-target="#data-manipulation">Data Manipulation</a></li>
-  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
-  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">Statistical Analysis</a></li>
-  <li><a href="#quarto-tutorial" id="toc-quarto-tutorial" class="nav-link" data-scroll-target="#quarto-tutorial">Quarto Tutorial</a></li>
+  <li><a href="#final-takeaway" id="toc-final-takeaway" class="nav-link" data-scroll-target="#final-takeaway">Final Takeaway</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#general-online-r-help-and-resources" id="toc-general-online-r-help-and-resources" class="nav-link" data-scroll-target="#general-online-r-help-and-resources">General Online R Help and Resources</a>
-  <ul class="collapse">
-  <li><a href="#by-subjects" id="toc-by-subjects" class="nav-link" data-scroll-target="#by-subjects">By Subjects:</a></li>
-  <li><a href="#general-r-help-and-resources" id="toc-general-r-help-and-resources" class="nav-link" data-scroll-target="#general-r-help-and-resources">General R Help and Resources:</a></li>
-  <li><a href="#software-tools-and-resources" id="toc-software-tools-and-resources" class="nav-link" data-scroll-target="#software-tools-and-resources">Software Tools and Resources</a></li>
-  <li><a href="#additional-online-resources" id="toc-additional-online-resources" class="nav-link" data-scroll-target="#additional-online-resources">Additional Online Resources</a></li>
-  </ul></li>
-  <li><a href="#how-to-use-this-help-guide" id="toc-how-to-use-this-help-guide" class="nav-link" data-scroll-target="#how-to-use-this-help-guide">How to Use This Help Guide</a></li>
-  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
+  <li><a href="#references-further-reading" id="toc-references-further-reading" class="nav-link" data-scroll-target="#references-further-reading">References / Further Reading</a></li>
   </ul>
 </nav>
     </div>
@@ -342,181 +355,196 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="r-help-and-tutorial-provided-by-the-instructor" class="level1">
-<h1>R Help and Tutorial Provided by the Instructor</h1>
-<p>Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on <strong>Subjects</strong>, <strong>Topics</strong>, and implementation through <strong>R Base</strong> and <strong>Packages</strong>.</p>
-<section id="r-subjects-topics" class="level2">
-<h2 class="anchored" data-anchor-id="r-subjects-topics">Subjects and Topics</h2>
-<p>Below are the available subjects and their corresponding topics. Select a topic to view detailed help pages.</p>
-<section id="subjects" class="level3">
-<h3 class="anchored" data-anchor-id="subjects">Subjects</h3>
+<p>Below is an integrated overview of <strong>marginal</strong> versus <strong>conditional</strong> effects, highlighting how each concept is defined and interpreted in <strong>statistics</strong>, <strong>biostatistics</strong>, and <strong>social science</strong> contexts. We then consider how the notion of “effect” changes when moving from linear to non-linear models.</p>
+<section id="marginal-vs.-conditional-effects" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-vs.-conditional-effects">1. Marginal vs.&nbsp;Conditional Effects</h2>
+<section id="in-general-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="in-general-statistics">1.1 In General (Statistics)</h3>
 <ul>
-<li><strong>Data Manipulation</strong>
-<ul>
-<li><a href="./appendix/r-topics/r-data-frames-basics.html">Creating Data Frames</a></li>
-<li><a href="./appendix/r-topics/r-factors-basics.html">Working with Factors</a></li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Subsetting Data</a></li>
-<li><a href="./appendix/r-topics/r-data-transformation.html">Data Transformation and Wrangling</a></li>
-<li><a href="./appendix/r-topics/r-data-import-basics.html">Inporting Data into R</a></li>
-</ul></li>
-<li><strong>Data Visualization</strong>
-<ul>
-<li><a href="./appendix/r-topics/r-base-graphics-basics.html">Base R Graphics</a></li>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2 Basics</a></li>
-<li><a href="./appendix/r-packages/sjPlot.html">sjPlot Tutorial</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="./appendix/r-topics/r-hypothesis-testing-basics.html">Hypothesis Testing</a></li>
-<li><a href="./appendix/stat-topics/games-howell-test.html">Games-Howell Post-Hoc Comparison</a></li>
-<li><a href="appendix/stat-topics/standardized-range.qmd">Standadized Rannge Distribution and ANOVA</a></li>
-</ul></li>
-<li><strong>Quarto Tutorial</strong>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure-extra.html">Figures and Tables in Quarto: Advanced Features</a></li>
-</ul></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="r-base-functions" class="level1">
-<h1>Help by R Base Functions</h1>
-<ul>
-<li><a href="./appendix/r-base/r-gl-basics.html">gl</a>: Generate Factor Levels</li>
-<li><a href="./appendix/r-base/r-interaction-basics.html">interaction</a>: Create Interaction Terms</li>
-<li><a href="./appendix/r-base/r-model.tables-basics.html">model.tables</a>: Extract Tables from Model Fits</li>
-<li><a href="./appendix/r-base/r-plot.design-basics.html">plot.design</a>: Plot Univariate Effects of a Design or Model</li>
-<li><a href="./appendix/r-base/r-rep-basics.html">rep</a>: Replicate Elements of Vectors and Lists</li>
-<li><a href="./appendix/r-base/r-replications-basics.html">replications</a>: Generate Replicate Numbers</li>
-<li><a href="./appendix/r-base/r-sample-basics.html">sample</a>: Randomly Sample Elements from a Vector</li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Base R Plotting</a></li>
-</ul>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">Help by R Packages</h2>
-<section id="data-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="data-manipulation">Data Manipulation</h3>
-<ul>
-<li><a href="./appendix/r-packages/dplyr.html">dplyr</a></li>
-<li><a href="./appendix/r-packages/tidyr.html">tidyr</a></li>
-<li><a href="./appendix/r-packages/purrr.html">purrr</a></li>
-<li><a href="./appendix/r-packages/stringr.html">stringr</a></li>
-</ul>
-</section>
-<section id="data-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="data-visualization">Data Visualization</h3>
-<ul>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2</a></li>
-<li><a href="./appendix/r-packages/sjPlot.html">sjPlot Tutorial</a></li>
-</ul>
-</section>
-<section id="statistical-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h3>
-<ul>
-<li><a href="./appendix/r-packages/emmeans.html">emmeans</a></li>
-<li><a href="./appendix/r-packages/multcomp.html">multcomp</a></li>
-<li><a href="./appendix/r-packages/pwr.html">pwr</a></li>
-<li><a href="./appendix/stat-topics/games-howell-test.html">Games-Howell Post-Hoc Comparison</a></li>
-<li><a href="appendix/stat-topics/standardized-range.qmd">Standadized Rannge Distribution and ANOVA</a></li>
-</ul>
-</section>
-<section id="quarto-tutorial" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-tutorial">Quarto Tutorial</h3>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="general-online-r-help-and-resources" class="level1">
-<h1>General Online R Help and Resources</h1>
-<p>Here are some general online resources to help you learn R programming and data analysis:</p>
-<section id="by-subjects" class="level2">
-<h2 class="anchored" data-anchor-id="by-subjects">By Subjects:</h2>
-<ul>
-<li><strong>Data Manipulation</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/r-data-import-tutorial">How to Import Data Into R</a> from <a href="https://www.datacamp.com/">DataCamp</a>.</li>
-</ul></li>
-<li><strong>Data Visualization</strong>
-<ul>
-<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">ggplot2 Basics</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/linear-regression-R">Regression</a> from DataCamp.</li>
-<li><a href="https://www.datanovia.com/en/lessons/anova-in-r/">ANOVA in R</a> from DataNovia.</li>
-</ul></li>
-<li><strong>Programming with R</strong>
-<ul>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/control-structures.html">Control Structures</a> from Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/functions.html">Writing Functions</a> from Hadley Wickham.</li>
-<li><a href="https://adv-r.hadley.nz/debugging.html">Debugging</a> from Hadley Wickham.</li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">Debugging with the RStudio IDE</a> from Positron RStudio Support.</li>
-</ul></li>
-</ul>
-</section>
-<section id="general-r-help-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="general-r-help-and-resources">General R Help and Resources:</h2>
-<ul>
-<li><a href="https://www.rdocumentation.org/">R Documentation</a>: User-friendly interface to R documentation.</li>
-<li><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a>: Quick reference guides for R and RStudio.</li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a>: Online book on data science with R by Hadley Wickham and Garrett Grolemund.</li>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/">R Programming for Data Science</a> Online book by Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/">Advanced R</a>: Online book on advanced R programming by Hadley Wickham.</li>
-<li></li>
-<li><a href="https://www.r-bloggers.com/">R Bloggers</a>: Blog aggregator for R programming.</li>
-<li><a href="https://stackoverflow.com/questions/tagged/r">Stack Overflow R Tag</a>: Stack Overflow questions tagged with R.</li>
-</ul>
-</section>
-<section id="software-tools-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="software-tools-and-resources">Software Tools and Resources</h2>
-<p>To complete assignments and analyses, you will need access to R and related tools.</p>
-<ul>
-<li><strong>R Installation:</strong> <a href="https://cran.r-project.org/">Download R</a><br>
-</li>
-<li><strong>RStudio IDE:</strong> <a href="https://www.rstudio.com/products/rstudio/download/">Download RStudio</a><br>
-</li>
-<li><strong>VS Code IDE:</strong> <a href="https://code.visualstudio.com/">Download VS Code</a></li>
-<li><strong>Positron IDE</strong>: <a href="https://positron.posit.co/download">Download Positron</a></li>
-<li><a href="https://quarto.org/docs/tools/rstudio.html">RStudio IDE Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/hello/vscode.html">VS Code Editor Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/rstudio.html">Quarto Authoring with RStudio</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/vscode.html">Quarto Authoring with VS Code</a></li>
-</ul>
-</section>
-<section id="additional-online-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-online-resources">Additional Online Resources</h2>
-<ul>
-<li><strong>Quarto Documentation</strong>: <a href="https://quarto.org/docs/">Learn Quarto</a></li>
-<li><strong>Online R Help</strong>:
-<ul>
-<li><a href="https://cran.r-project.org/manuals.html">CRAN R Documentation</a></li>
-<li><a href="https://posit.co/resources/cheatsheets/">RStudio Cheat Sheets</a></li>
-</ul></li>
-<li><strong>Video Tutorials</strong>:
-<ul>
-<li><a href="https://www.youtube.com/results?search_query=r+programming+tutorial">R Programming for Beginners (YouTube)</a></li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="how-to-use-this-help-guide" class="level1">
-<h1>How to Use This Help Guide</h1>
+<li><strong>Marginal Effect</strong>
 <ol type="1">
-<li><strong>Explore Subjects and Topics:</strong> Use the Subjects and Topics section to browse R concepts by category.</li>
-<li><strong>R Base Help:</strong> Click on the R Base links to learn about core R functions.</li>
-<li><strong>Packages Help:</strong> Dive into R packages to explore advanced features and functionalities.</li>
+<li><strong>Definition</strong>: A marginal effect is usually understood as an <em>overall</em> or <em>population-averaged</em> effect of a predictor on an outcome, either by:
+<ul>
+<li>Ignoring other variables entirely, or</li>
+<li>Averaging (integrating) over the distribution of other variables or random effects.</li>
+</ul></li>
+<li><strong>Usage</strong>:
+<ul>
+<li>In a simple regression setting (e.g., ordinary least squares with one predictor <span class="math inline">\(x\)</span>), the marginal effect is often the slope from regressing <span class="math inline">\(y\)</span> on <span class="math inline">\(x\)</span> alone (i.e., not conditioning on other covariates).</li>
+<li>In more complex settings (especially with mixed models or multi-level models), marginal effects often refer to <em>population-averaged</em> effects when random effects or other covariates have been integrated out.</li>
+</ul></li>
+</ol></li>
+<li><strong>Conditional Effect</strong>
+<ol type="1">
+<li><strong>Definition</strong>: A conditional effect is the <em>partial</em> or <em>subject-specific</em> effect of a predictor on the outcome <em>given</em> specific values (or levels) of the other covariates (and possibly given a specific value of any random effect).</li>
+<li><strong>Usage</strong>:
+<ul>
+<li>In a multiple regression with predictors <span class="math inline">\(\{x_1, x_2, \ldots\}\)</span>, the coefficient <span class="math inline">\(\beta_1\)</span> is typically referred to as the conditional effect of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(y\)</span>, holding all other covariates fixed.</li>
+<li>In multi-level or longitudinal models, “conditional” often means “subject-specific,” as in a random-intercept or random-slope model.</li>
+</ul></li>
+</ol></li>
+</ul>
+<section id="why-the-terminology-matters" class="level4">
+<h4 class="anchored" data-anchor-id="why-the-terminology-matters">Why the Terminology Matters</h4>
+<ul>
+<li><strong>Marginal</strong> = <em>Averaged over</em> or <em>ignoring</em> other variables (or random effects).</li>
+<li><strong>Conditional</strong> = <em>Given</em> or <em>holding constant</em> other variables (or random effects).</li>
+</ul>
+</section>
+</section>
+<section id="biostatistics" class="level3">
+<h3 class="anchored" data-anchor-id="biostatistics">1.2 Biostatistics</h3>
+<p>In <strong>biostatistics</strong>, the terms <em>marginal</em> and <em>conditional</em> often surface in the context of <strong>Generalized Estimating Equations (GEE)</strong> and <strong>mixed-effects GLMs</strong> for correlated data:</p>
+<ol type="1">
+<li><strong>Marginal (Population-Averaged) Models</strong>
+<ul>
+<li>Fit via GEE (Generalized Estimating Equations).</li>
+<li>The coefficients represent <em>population-averaged (or population-level) effects</em>.</li>
+<li>Example: A logistic GEE for binary outcomes yields <em>marginal odds ratios</em>, which interpret changes in odds at the <em>population</em> level.</li>
+</ul></li>
+<li><strong>Conditional (Subject-Specific) Models</strong>
+<ul>
+<li>Typically fit via mixed-effects (random effects) models (e.g., generalized linear mixed models, GLMMs).</li>
+<li>Coefficients represent <em>subject-specific (conditional) effects</em>, i.e., the effect of a predictor on the outcome <em>within</em> a particular subject, conditioning on that subject’s random intercept (and/or slope).</li>
+<li>Example: A logistic mixed model yields <em>subject-specific odds ratios</em>, meaning how the odds change <em>within</em> an individual, controlling for that individual’s random effect.</li>
+</ul></li>
+</ol>
+<p><strong>Interpretation Differences</strong> - A <em>marginal odds ratio</em> (or risk ratio, or difference) for a binary outcome can differ significantly from a <em>subject-specific</em> odds ratio in non-linear models because averaging on the link scale does not equal averaging on the response scale. This is sometimes referred to as the “ecological” or “Simpson’s paradox”-type phenomena when aggregated or marginal relationships differ from within-subject or conditional relationships.</p>
+</section>
+<section id="social-science" class="level3">
+<h3 class="anchored" data-anchor-id="social-science">1.3 Social Science</h3>
+<p>In <strong>social science</strong> research (e.g., econometrics, sociology, political science):</p>
+<ul>
+<li><strong>Marginal Effects</strong>
+<ul>
+<li>Often refers to a <em>partial derivative</em> (or discrete difference) of the outcome with respect to a predictor, <em>averaged</em> across the observed data or at specific “typical” values of other covariates.</li>
+<li>In nonlinear models (e.g., logistic or probit models), researchers frequently calculate “average marginal effects” (AMEs) or “marginal effects at the mean” (MEMs) to communicate how a 1-unit change in <span class="math inline">\(x\)</span> affects the probability of an outcome <em>on average in the population</em>.</li>
+</ul></li>
+<li><strong>Conditional Effects</strong>
+<ul>
+<li>Typically refers to the <em>partial effect</em> of a predictor on the outcome <em>given</em> certain levels of other predictors—commonly expressed as “holding other things constant.”</li>
+<li>For interaction terms, “conditional effect” highlights how the effect of one variable depends on a particular level of another variable.</li>
+</ul></li>
+</ul>
+<p>Moreover, in social science, “effect” often implies a <strong>causal</strong> interpretation if certain identification assumptions are met (e.g., from a randomized experiment or strong quasi-experimental design). However, without these assumptions, “effect” may be used loosely to mean an <em>association</em> controlling for other covariates.</p>
+</section>
+</section>
+<section id="what-does-effect-mean-in-each-field" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-effect-mean-in-each-field">2. What Does “Effect” Mean in Each Field?</h2>
+<ol type="1">
+<li><strong>Statistics</strong>
+<ul>
+<li>“Effect” can be purely descriptive: the change in the expected value (or another parameter, like odds or rate) of the response given a change in the predictor. Causality is not necessarily implied unless explicitly stated (e.g., in a causal inference framework).</li>
+</ul></li>
+<li><strong>Biostatistics</strong>
+<ul>
+<li>Often concerned with <em>treatment effects</em> (drug vs.&nbsp;placebo) or <em>exposure effects</em> (risk factor vs.&nbsp;no risk factor). The term “effect” can be used in a causal sense, especially in clinical trial contexts where randomization helps identify a cause–effect relationship.</li>
+<li>Still, “marginal” vs.&nbsp;“subject-specific” effect might differ: the “marginal (population-averaged) effect” is the difference (or ratio) in the population outcome if the entire population were exposed vs.&nbsp;unexposed; the “conditional (subject-specific) effect” is the difference for a given individual, possibly with random intercepts accounted for.</li>
+</ul></li>
+<li><strong>Social Science</strong>
+<ul>
+<li>The language of “effect” is often connected to causal interpretations, but many observational studies are correlational.</li>
+<li>Researchers often talk about “marginal effects” (especially in logistic or probit regression) as the difference in predicted probability of an event for a 1-unit change in a predictor, either at average values of other variables or averaged across the sample distribution.</li>
+</ul></li>
 </ol>
 </section>
-<section id="r-code-and-data-files-from-the-textbook" class="level1">
-<h1>R Code and Data Files from the Textbook</h1>
-<p>Here is a page for the R program files used in the textbook:</p>
+<section id="how-the-definition-changes-for-non-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-definition-changes-for-non-linear-models">3. How the Definition Changes for Non-Linear Models</h2>
+<section id="linear-vs.-non-linear" class="level3">
+<h3 class="anchored" data-anchor-id="linear-vs.-non-linear">3.1 Linear vs.&nbsp;Non-Linear</h3>
 <ul>
-<li><a href="./r-code-data-book.html">R Code and Data Files from the Textbook</a></li>
-<li><a href="./data-files-book.html">Data Files from the Textbook</a></li>
+<li>In a <strong>linear model</strong> <span class="math inline">\(y = X\beta + \varepsilon\)</span>:
+<ul>
+<li>The effect of <span class="math inline">\(\beta_j\)</span> is literally the amount <span class="math inline">\(y\)</span> changes <em>on average</em> per 1-unit change in <span class="math inline">\(x_j\)</span>, holding other <span class="math inline">\(x\)</span>’s constant.</li>
+<li>Marginal vs.&nbsp;conditional effects in a simple linear model can sometimes coincide if the model is fully specified (no omitted confounders, etc.). However, once you bring random effects or partialing out other covariates, the distinction can still appear (subject-specific vs.&nbsp;population-level interpretation).</li>
+</ul></li>
+<li>In a <strong>non-linear model</strong> (e.g., logistic, Poisson, probit):
+<ol type="1">
+<li><strong>Link Function</strong>: The coefficient <span class="math inline">\(\beta_j\)</span> is the change in the <em>log-odds</em> (logit), <em>log of rate</em> (Poisson), or another link-scale quantity, not necessarily the change in the raw outcome scale.</li>
+<li><strong>Marginal vs.&nbsp;Conditional</strong>:
+<ul>
+<li><em>Marginal (Population-Averaged) Effect</em>: Often found by integrating out random effects or averaging across the distribution of covariates. In logistic regression, this might be the average change in predicted probability for a 1-unit change in <span class="math inline">\(x_j\)</span> across the population.</li>
+<li><em>Conditional (Subject-Specific) Effect</em>: The change in the linear predictor (e.g., log-odds) for a 1-unit change in <span class="math inline">\(x_j\)</span> within an individual or holding all covariates (and random effects) fixed at certain values.</li>
+</ul></li>
+</ol></li>
+</ul>
+<p><strong>Key Point</strong>: For <strong>non-linear</strong> models, the difference between marginal and conditional can be <em>much larger</em> than in linear models, because</p>
+<p><span class="math display">\[
+\mathbb{E}[g^{-1}(\eta)] \;\neq\; g^{-1}(\mathbb{E}[\eta]),
+\]</span></p>
+<p>and thus integrating the nonlinear link function can yield fundamentally different “average” effects compared to those conditional on specific levels.</p>
+</section>
+<section id="example-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="example-logistic-regression">3.2 Example: Logistic Regression</h3>
+<ol type="1">
+<li><strong>Subject-Specific (Conditional) Model</strong>
+<ul>
+<li>A random-intercept logistic model:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+\text{logit}(P(Y_{i}=1 \mid X_{i}, b_i)) = \beta_0 + \beta_1 X_{i} + b_i.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> is the log-odds change for a 1-unit change in <span class="math inline">\(X_i\)</span> <em>within an individual</em>, conditioning on that individual’s random effect <span class="math inline">\(b_i\)</span>.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Marginal (Population-Averaged) Model</strong>
+<ul>
+<li>A GEE approach or a marginal logistic regression:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+\text{logit}(P(Y_{i}=1 \mid X_{i})) = \alpha_0 + \alpha_1 X_{i},
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\alpha_1\)</span> is the log-odds change <em>averaged over</em> the distribution of random intercepts.</li>
+</ul>
+<p>Because of the non-linearity of the logit function, <span class="math inline">\(\alpha_1\)</span> and <span class="math inline">\(\beta_1\)</span> typically differ: the population-averaged effect on the odds of <span class="math inline">\(Y=1\)</span> is not the same as the subject-specific effect <em>within</em> an individual.</p>
+</section>
+</section>
+<section id="summary-highlights" class="level2">
+<h2 class="anchored" data-anchor-id="summary-highlights">4. Summary Highlights</h2>
+<ol type="1">
+<li><strong>Marginal Effects</strong>
+<ul>
+<li><em>Population-level</em> interpretation.</li>
+<li>“Average” effect when other factors are not held fixed or are integrated out (in random-effects settings).</li>
+</ul></li>
+<li><strong>Conditional Effects</strong>
+<ul>
+<li><em>Subject-specific</em> or <em>partial</em> interpretation.</li>
+<li>Effect given specific values of other covariates (and random effects, if any).</li>
+</ul></li>
+<li><strong>Different Disciplines, Different Emphases</strong>
+<ul>
+<li><strong>Statistics</strong>: Tends to emphasize whether you are conditioning on or marginalizing over random effects or covariates.</li>
+<li><strong>Biostatistics</strong>: Clear distinction between <em>population-averaged</em> (GEE) vs.&nbsp;<em>subject-specific</em> (mixed-effects) interpretations, especially for repeated-measures or clustered data.</li>
+<li><strong>Social Science</strong>: Focus on <em>marginal effects</em> in logistic or probit models (at means or averaged over the sample) versus <em>conditional</em> effects with other variables “held constant.” Also, “effect” language often implies causal interpretation if the design justifies it.</li>
+</ul></li>
+<li><strong>Non-Linear Models</strong>
+<ul>
+<li>The difference between marginal and conditional effects can be large because of the link function.</li>
+<li>One cannot simply interpret a coefficient on the link scale (e.g., log-odds) as the change in probability; instead, the effect on the probability scale usually requires partial derivatives or predicted probability calculations—either holding variables at certain values (conditional) or averaging across their distribution (marginal).</li>
+</ul></li>
+</ol>
+<section id="final-takeaway" class="level3">
+<h3 class="anchored" data-anchor-id="final-takeaway">Final Takeaway</h3>
+<ul>
+<li><strong>Marginal Effect</strong> = Effect of a predictor without conditioning on other variables, or after averaging over them (population-level).</li>
+<li><strong>Conditional Effect</strong> = Effect of a predictor at specific values of other variables (subject-specific or partial effect).</li>
+<li><strong>“Effect”</strong> in each field may be purely <em>associational</em> or may imply <em>causation</em> if the study design (e.g., randomized trial) and assumptions permit.</li>
+<li>In <strong>non-linear</strong> models (logistic, Poisson, etc.), marginal vs.&nbsp;conditional effects differ more dramatically because averaging or integrating out variables/parameters on the link scale does not equate to averaging on the outcome scale.</li>
+</ul>
+</section>
+</section>
+<section id="references-further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="references-further-reading">References / Further Reading</h2>
+<ul>
+<li>Skrondal, A., &amp; Rabe-Hesketh, S. (2004). <em>Generalized Latent Variable Modeling: Multilevel, Longitudinal, and Structural Equation Models</em>.</li>
+<li>Long, J. S., &amp; Freese, J. (2014). <em>Regression Models for Categorical Dependent Variables Using Stata</em>.</li>
+<li>Hardin, J. W., &amp; Hilbe, J. M. (2003). <em>Generalized Estimating Equations</em>.</li>
+<li>McCullagh, P., &amp; Nelder, J. A. (1989). <em>Generalized Linear Models</em>.</li>
 </ul>
 
 
@@ -957,5 +985,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
