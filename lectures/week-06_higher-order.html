@@ -159,7 +159,7 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="Higher-Order Designs – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Factorial Designs and Interaction Effects">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
@@ -235,6 +235,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Higher-Order Designs</h1>
+            <p class="subtitle lead">Factorial Designs and Interaction Effects</p>
                       </div>
   </div>
     
@@ -258,7 +259,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">27-Feb-2025</p>
+        <p class="date">02-Mar-2025</p>
       </div>
     </div>
     
@@ -499,35 +500,34 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#three-way-anova-example" id="toc-three-way-anova-example" class="nav-link" data-scroll-target="#three-way-anova-example">Three-Way ANOVA Example</a></li>
   <li><a href="#r-code-for-three-way-anova" id="toc-r-code-for-three-way-anova" class="nav-link" data-scroll-target="#r-code-for-three-way-anova">R Code for Three-Way ANOVA</a></li>
-  <li><a href="#interpreting-the-three-way-anova-results" id="toc-interpreting-the-three-way-anova-results" class="nav-link" data-scroll-target="#interpreting-the-three-way-anova-results">Interpreting the Three-Way ANOVA Results</a></li>
-  </ul></li>
-  <li><a href="#probling-two-way-interactions" id="toc-probling-two-way-interactions" class="nav-link" data-scroll-target="#probling-two-way-interactions">Probling Two-Way Interactions</a>
-  <ul class="collapse">
-  <li><a href="#simple-effects-analysis-for-material-age-interaction" id="toc-simple-effects-analysis-for-material-age-interaction" class="nav-link" data-scroll-target="#simple-effects-analysis-for-material-age-interaction">Simple Effects Analysis for Material × Age Interaction</a></li>
-  <li><a href="#simple-effects-analysis" id="toc-simple-effects-analysis" class="nav-link" data-scroll-target="#simple-effects-analysis">Simple Effects Analysis</a></li>
-  <li><a href="#probing-simple-effects-of-material-by-age" id="toc-probing-simple-effects-of-material-by-age" class="nav-link" data-scroll-target="#probing-simple-effects-of-material-by-age">Probing Simple Effects of Material by Age</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
   <li><a href="#probling-three-way-interaction-illustrative" id="toc-probling-three-way-interaction-illustrative" class="nav-link" data-scroll-target="#probling-three-way-interaction-illustrative">Probling Three-Way Interaction (Illustrative)</a>
   <ul class="collapse">
-  <li><a href="#simple-effects-analysis-1" id="toc-simple-effects-analysis-1" class="nav-link" data-scroll-target="#simple-effects-analysis-1">Simple Effects Analysis</a></li>
+  <li><a href="#three-way-interaction-interpretation" id="toc-three-way-interaction-interpretation" class="nav-link" data-scroll-target="#three-way-interaction-interpretation">Three Way Interaction Interpretation</a></li>
+  <li><a href="#simple-effects-analysis" id="toc-simple-effects-analysis" class="nav-link" data-scroll-target="#simple-effects-analysis">Simple Effects Analysis</a></li>
+  <li><a href="#ls-means-for-material-and-feedback-by-age-group" id="toc-ls-means-for-material-and-feedback-by-age-group" class="nav-link" data-scroll-target="#ls-means-for-material-and-feedback-by-age-group">LS Means for Material and Feedback by Age Group</a></li>
+  <li><a href="#r-code-for-simple-effects-of-material-and-feedback-by-age-group" id="toc-r-code-for-simple-effects-of-material-and-feedback-by-age-group" class="nav-link" data-scroll-target="#r-code-for-simple-effects-of-material-and-feedback-by-age-group">R Code for Simple Effects of Material and Feedback by Age Group</a></li>
   <li><a href="#interpreting-the-simple-effects-analysis" id="toc-interpreting-the-simple-effects-analysis" class="nav-link" data-scroll-target="#interpreting-the-simple-effects-analysis">Interpreting the Simple Effects Analysis</a>
   <ul class="collapse">
-  <li><a href="#simple-main-effects-of-material-at-each-age" id="toc-simple-main-effects-of-material-at-each-age" class="nav-link" data-scroll-target="#simple-main-effects-of-material-at-each-age">Simple Main Effects of Material (at each Age)</a></li>
   <li><a href="#fifth-graders" id="toc-fifth-graders" class="nav-link" data-scroll-target="#fifth-graders">Fifth Graders:</a></li>
   <li><a href="#high-school-seniors" id="toc-high-school-seniors" class="nav-link" data-scroll-target="#high-school-seniors">High School Seniors:</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary:</a></li>
+  </ul></li>
+  <li><a href="#probing-simple-effects-of-material-and-feedback-for-fifth-graders" id="toc-probing-simple-effects-of-material-and-feedback-for-fifth-graders" class="nav-link" data-scroll-target="#probing-simple-effects-of-material-and-feedback-for-fifth-graders">Probing Simple Effects of Material and Feedback for Fifth Graders</a>
+  <ul class="collapse">
   <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary:</a></li>
   </ul></li>
-  <li><a href="#probing-simple-effects-of-material-by-age-1" id="toc-probing-simple-effects-of-material-by-age-1" class="nav-link" data-scroll-target="#probing-simple-effects-of-material-by-age-1">Probing Simple Effects of Material by Age</a></li>
-  <li><a href="#summary-2" id="toc-summary-2" class="nav-link" data-scroll-target="#summary-2">Summary:</a></li>
+  </ul></li>
+  <li><a href="#probling-two-way-interactions" id="toc-probling-two-way-interactions" class="nav-link" data-scroll-target="#probling-two-way-interactions">Probling Two-Way Interactions</a>
+  <ul class="collapse">
+  <li><a href="#interpreting-the-two-way-anova-results" id="toc-interpreting-the-two-way-anova-results" class="nav-link" data-scroll-target="#interpreting-the-two-way-anova-results">Interpreting the Two-Way ANOVA Results</a></li>
+  <li><a href="#reduced-model-for-two-way-interaction-material-age" id="toc-reduced-model-for-two-way-interaction-material-age" class="nav-link" data-scroll-target="#reduced-model-for-two-way-interaction-material-age">Reduced Model for Two-Way Interaction (Material × Age)</a></li>
+  <li><a href="#simple-effects-analysis-for-material-age-interaction" id="toc-simple-effects-analysis-for-material-age-interaction" class="nav-link" data-scroll-target="#simple-effects-analysis-for-material-age-interaction">Simple Effects Analysis for Material × Age Interaction</a></li>
+  <li><a href="#probing-simple-effects-of-material-by-age" id="toc-probing-simple-effects-of-material-by-age" class="nav-link" data-scroll-target="#probing-simple-effects-of-material-by-age">Probing Simple Effects of Material by Age</a></li>
+  <li><a href="#summary-2" id="toc-summary-2" class="nav-link" data-scroll-target="#summary-2">Summary</a></li>
   </ul></li>
   <li><a href="#advanced-analysis-techniques" id="toc-advanced-analysis-techniques" class="nav-link" data-scroll-target="#advanced-analysis-techniques">Advanced Analysis Techniques</a>
   <ul class="collapse">
-  <li><a href="#handling-three-factor-interactions" id="toc-handling-three-factor-interactions" class="nav-link" data-scroll-target="#handling-three-factor-interactions">Handling Three-Factor Interactions</a>
-  <ul class="collapse">
-  <li><a href="#three-factor-interaction" id="toc-three-factor-interaction" class="nav-link" data-scroll-target="#three-factor-interaction">Three-Factor Interaction</a></li>
-  <li><a href="#example-in-r" id="toc-example-in-r" class="nav-link" data-scroll-target="#example-in-r">Example in R</a></li>
-  </ul></li>
   <li><a href="#addressing-complex-interactions" id="toc-addressing-complex-interactions" class="nav-link" data-scroll-target="#addressing-complex-interactions">Addressing Complex Interactions</a>
   <ul class="collapse">
   <li><a href="#higher-order-interactions-1" id="toc-higher-order-interactions-1" class="nav-link" data-scroll-target="#higher-order-interactions-1">Higher-Order Interactions</a></li>
@@ -543,21 +543,6 @@ window.Quarto = {
   <li><a href="#r-implementation" id="toc-r-implementation" class="nav-link" data-scroll-target="#r-implementation">R Implementation</a></li>
   <li><a href="#remedies-for-assumption-violations" id="toc-remedies-for-assumption-violations" class="nav-link" data-scroll-target="#remedies-for-assumption-violations">Remedies for Assumption Violations</a></li>
   </ul></li>
-  <li><a href="#visualizing-and-understanding-interactions" id="toc-visualizing-and-understanding-interactions" class="nav-link" data-scroll-target="#visualizing-and-understanding-interactions">Visualizing and Understanding Interactions</a>
-  <ul class="collapse">
-  <li><a href="#interaction-plots" id="toc-interaction-plots" class="nav-link" data-scroll-target="#interaction-plots">Interaction Plots</a></li>
-  </ul></li>
-  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#medium-difficulty" id="toc-medium-difficulty" class="nav-link" data-scroll-target="#medium-difficulty">Medium Difficulty</a></li>
-  <li><a href="#challenging-problems" id="toc-challenging-problems" class="nav-link" data-scroll-target="#challenging-problems">Challenging Problems</a></li>
-  </ul></li>
-  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#medium-difficulty-1" id="toc-medium-difficulty-1" class="nav-link" data-scroll-target="#medium-difficulty-1">Medium Difficulty</a></li>
-  <li><a href="#challenging-problems-1" id="toc-challenging-problems-1" class="nav-link" data-scroll-target="#challenging-problems-1">Challenging Problems</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul></li>
   <li><a href="#appendix-advanced-mathematical-details" id="toc-appendix-advanced-mathematical-details" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-details">Appendix: Advanced Mathematical Details</a>
   <ul class="collapse">
   <li><a href="#confidence-intervals-for-higher-order-contrasts" id="toc-confidence-intervals-for-higher-order-contrasts" class="nav-link" data-scroll-target="#confidence-intervals-for-higher-order-contrasts">Confidence Intervals for Higher-Order Contrasts</a></li>
@@ -571,7 +556,19 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key Points</a></li>
   <li><a href="#relationship-between-the-two" id="toc-relationship-between-the-two" class="nav-link" data-scroll-target="#relationship-between-the-two">Relationship Between the Two</a></li>
+  <li><a href="#orthogonality-without-balance-a-caveat" id="toc-orthogonality-without-balance-a-caveat" class="nav-link" data-scroll-target="#orthogonality-without-balance-a-caveat">Orthogonality Without Balance: A Caveat</a></li>
   <li><a href="#summary-3" id="toc-summary-3" class="nav-link" data-scroll-target="#summary-3">Summary</a></li>
+  </ul></li>
+  <li><a href="#proof-of-orthogonality-in-balanced-designs" id="toc-proof-of-orthogonality-in-balanced-designs" class="nav-link" data-scroll-target="#proof-of-orthogonality-in-balanced-designs">Proof of Orthogonality in Balanced Designs</a>
+  <ul class="collapse">
+  <li><a href="#the-concept-of-orthogonality" id="toc-the-concept-of-orthogonality" class="nav-link" data-scroll-target="#the-concept-of-orthogonality">The Concept of Orthogonality</a></li>
+  <li><a href="#the-role-of-balance" id="toc-the-role-of-balance" class="nav-link" data-scroll-target="#the-role-of-balance">The Role of Balance</a></li>
+  <li><a href="#matrix-proof-of-orthogonality" id="toc-matrix-proof-of-orthogonality" class="nav-link" data-scroll-target="#matrix-proof-of-orthogonality">Matrix Proof of Orthogonality</a>
+  <ul class="collapse">
+  <li><a href="#detailed-steps" id="toc-detailed-steps" class="nav-link" data-scroll-target="#detailed-steps">Detailed Steps</a></li>
+  </ul></li>
+  <li><a href="#intuitive-explanation" id="toc-intuitive-explanation" class="nav-link" data-scroll-target="#intuitive-explanation">Intuitive Explanation</a></li>
+  <li><a href="#summary-4" id="toc-summary-4" class="nav-link" data-scroll-target="#summary-4">Summary</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
@@ -609,8 +606,13 @@ window.Quarto = {
 <p>To run the R code examples in these notes, we recommend installing the following packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Required R Packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, lsmeans, emmeans, here, readr, ggpubr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_pubclean</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, emmeans, here, readr, ggpubr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"hecedsm"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    pacman<span class="sc">::</span><span class="fu">p_install_gh</span>(<span class="st">"lbelzile/hecedsm"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_pubr</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><strong><code>dplyr</code></strong>: Data manipulation and summarization.</li>
@@ -1142,12 +1144,16 @@ Table&nbsp;1
 <div class="cell page-columns page-full" data-output-location="slide">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2 interaction plot for A and B at each level of C</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> brand, <span class="at">y =</span> PoppingRate, <span class="at">color =</span> power, <span class="at">group =</span> power)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> brand, <span class="at">y =</span> PoppingRate, <span class="at">color =</span> power, <span class="at">group =</span> power)) <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>) <span class="sc">+</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>time) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Interaction Plot for Popcorn-Microwave Experiment"</span>, <span class="at">x =</span> <span class="st">"Brand"</span>, <span class="at">y =</span> <span class="st">"Popping Rate"</span>) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Interaction Plot for Popcorn-Microwave Experiment"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Brand"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Popping Rate"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-popcorn-interaction-plot-1" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -1414,22 +1420,30 @@ F = \frac{\text{MS}(E)}{\text{MS}_E},
 <span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate response</span></span>
 <span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>y_mean <span class="ot">&lt;-</span> grand_mean <span class="sc">+</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    a_eff <span class="sc">*</span> A <span class="sc">+</span> b_eff <span class="sc">*</span> B <span class="sc">+</span> c_eff <span class="sc">*</span> C <span class="sc">+</span> d_eff <span class="sc">*</span> D <span class="sc">+</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    ab_eff <span class="sc">*</span> A <span class="sc">*</span> B <span class="sc">+</span> ac_eff <span class="sc">*</span> A <span class="sc">*</span> C <span class="sc">+</span> bc_eff <span class="sc">*</span> B <span class="sc">*</span> C <span class="sc">+</span> ad_eff <span class="sc">*</span> A <span class="sc">*</span> D <span class="sc">+</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    bd_eff <span class="sc">*</span> B <span class="sc">*</span> D <span class="sc">+</span> cd_eff <span class="sc">*</span> C <span class="sc">*</span> D <span class="sc">+</span> abcd_eff <span class="sc">*</span> A <span class="sc">*</span> B <span class="sc">*</span> C <span class="sc">*</span> D</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Add random error</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y_mean <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">A =</span> <span class="fu">factor</span>(A),</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">B =</span> <span class="fu">factor</span>(B),</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">C =</span> <span class="fu">factor</span>(C),</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">D =</span> <span class="fu">factor</span>(D),</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    a_eff <span class="sc">*</span> A <span class="sc">+</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    b_eff <span class="sc">*</span> B <span class="sc">+</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    c_eff <span class="sc">*</span> C <span class="sc">+</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    d_eff <span class="sc">*</span> D <span class="sc">+</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    ab_eff <span class="sc">*</span> A <span class="sc">*</span> B <span class="sc">+</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    ac_eff <span class="sc">*</span> A <span class="sc">*</span> C <span class="sc">+</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    bc_eff <span class="sc">*</span> B <span class="sc">*</span> C <span class="sc">+</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    ad_eff <span class="sc">*</span> A <span class="sc">*</span> D <span class="sc">+</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    bd_eff <span class="sc">*</span> B <span class="sc">*</span> D <span class="sc">+</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    cd_eff <span class="sc">*</span> C <span class="sc">*</span> D <span class="sc">+</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    abcd_eff <span class="sc">*</span> A <span class="sc">*</span> B <span class="sc">*</span> C <span class="sc">*</span> D</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Add random error</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y_mean <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
 <span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">A =</span> <span class="fu">factor</span>(A),</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">B =</span> <span class="fu">factor</span>(B),</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">C =</span> <span class="fu">factor</span>(C),</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">D =</span> <span class="fu">factor</span>(D),</span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-factorial-example-data" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full" data-output-location="slide">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-factorial-example-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1635,7 +1649,7 @@ Suppose in a 3-factor design <span class="math inline">\(A, B, C\)</span> with e
 </section>
 <section id="real-world-application-in-r" class="level1 page-columns page-full">
 <h1>Real-World Application in R</h1>
-<section id="three-way-anova-example" class="level2">
+<section id="three-way-anova-example" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="three-way-anova-example">Three-Way ANOVA Example</h2>
 <p>To illustrate these concepts, let’s walk through a three-way ANOVA example and use R’s <strong><code>emmeans</code></strong> package to conduct simple effects analysis and probe interactions. We will use a dataset from a (fictional but realistic) experiment on memory retention (<a href="https://edsm.rbind.io/example/threewayanova#:~:text=There%20are%20three%20factors%3A%20the,to%20study%20both%20age%20groups">Three-way analysis of variance – Experimental Designs and Statistical Methods</a>). In this study, researchers manipulated:</p>
 <ul>
@@ -1644,14 +1658,41 @@ Suppose in a 3-factor design <span class="math inline">\(A, B, C\)</span> with e
 <li><strong>Age group</strong> of participants (Factor C with levels: <em>fifth graders</em> vs.&nbsp;<em>high school seniors</em>).</li>
 </ul>
 <p>The outcome is the number of words recalled one week later. There are <span class="math inline">\(3 \times 3 \times 2 = 18\)</span> experimental conditions (cells), with a balanced design of <span class="math inline">\(n=5\)</span> participants per cell (90 observations total) (<a href="https://edsm.rbind.io/example/threewayanova#:~:text=%2C%20%2C%20material%20%3D%20high,freq%2Fhigh%20emotion">Three-way analysis of variance – Experimental Designs and Statistical Methods</a>). We fit a three-way ANOVA to this data and then examine simple effects.</p>
+<div id="tbl-code-words-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-code-words-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(words, <span class="at">package =</span> <span class="st">"hecedsm"</span>) <span class="co"># hypothetical dataset from Keppel &amp; Wickens (2004)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(words <span class="sc">~</span> feedback <span class="sc">+</span> material <span class="sc">+</span> age, <span class="at">data =</span> words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , age = fifth grade
+
+          material
+feedback   low freq/low emotion high freq/low emotion high freq/high emotion
+  none                       42                    44                     40
+  positive                   39                    40                     22
+  negative                   40                    38                     19
+
+, , age = senior
+
+          material
+feedback   low freq/low emotion high freq/low emotion high freq/high emotion
+  none                       42                    44                     39
+  positive                   40                    41                     37
+  negative                   42                    40                     35</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-code-words-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Hypothetical Dataset from Keppel &amp; Wickens (2004)
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="r-code-for-three-way-anova" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="r-code-for-three-way-anova">R Code for Three-Way ANOVA</h2>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and fit three-way ANOVA model</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(words, <span class="at">package =</span> <span class="st">"hecedsm"</span>) <span class="co"># hypothetical dataset from Keppel &amp; Wickens (2004)</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(words <span class="sc">~</span> feedback <span class="sc">*</span> material <span class="sc">*</span> age, <span class="at">data =</span> words)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and fit three-way ANOVA model</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(words <span class="sc">~</span> feedback <span class="sc">*</span> material <span class="sc">*</span> age, <span class="at">data =</span> words)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-code-threeway-anova-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-code-threeway-anova-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1739,49 +1780,291 @@ Suppose in a 3-factor design <span class="math inline">\(A, B, C\)</span> with e
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-code-threeway-anova-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;6: R Code for Three-Way ANOVA Example
+Table&nbsp;7: R Code for Three-Way ANOVA Example
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
-<section id="interpreting-the-three-way-anova-results" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-the-three-way-anova-results">Interpreting the Three-Way ANOVA Results</h2>
-<p>According to the principles discussed, since the three-way interaction is not significant, we do not necessarily have to probe a three-way pattern. However, we <em>do</em> have a significant two-way interaction (material × age). This suggests the effect of material type on memory depends on age group (or vice versa). We will demonstrate simple effects for that two-way interaction. Additionally, for learning purposes, we will <em>illustrate how one would probe a three-way interaction if it had been significant</em>, by examining two-way interactions at each level of the third factor (<a href="https://www.ou.edu/faculty/M/Jorge.L.Mendoza-1/psy5013/Three-way%20ANOVAr.pdf#:~:text=Three,hoc%20%28or%20planned">Microsoft PowerPoint - Three-way ANOVAr.ppt</a>). This will show the workflow for probing interactions using <code>emmeans</code>.</p>
+</section>
+<section id="probling-three-way-interaction-illustrative" class="level1 page-columns page-full">
+<h1>Probling Three-Way Interaction (Illustrative)</h1>
+<section id="three-way-interaction-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="three-way-interaction-interpretation">Three Way Interaction Interpretation</h2>
+<p>For padagogial purposes, we examine the three-way interaction between material type, feedback, and age group. We will use the <code>emmeans</code> package to probe the interaction.</p>
+</section>
+<section id="simple-effects-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="simple-effects-analysis">Simple Effects Analysis</h2>
+<p><strong>Simple Two-Way Interactions at Each Level of C:</strong> The significant material×age interaction means the difference in recall between material types is different for fifth graders versus seniors. We can explore this by testing the <strong>simple two-way effect of material × feedback within each age group</strong>. Essentially, we split the analysis by age to see how the other factors behave for each subgroup (<a href="https://www.ou.edu/faculty/M/Jorge.L.Mendoza-1/psy5013/Three-way%20ANOVAr.pdf#:~:text=%E2%80%A2%20ABC%20is%20NOT%20significant%2C,hoc%20%28or%20planned%29%20comparisons">Microsoft PowerPoint - Three-way ANOVAr.ppt</a>).</p>
+<p>We will use the <code>emmeans</code> package to probe the interaction.</p>
+</section>
+<section id="ls-means-for-material-and-feedback-by-age-group" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="ls-means-for-material-and-feedback-by-age-group">LS Means for Material and Feedback by Age Group</h2>
+<div id="tbl-ls-means-by-age" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-ls-means-by-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>emm_material_feedback_by_age <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> material <span class="sc">*</span> feedback <span class="sc">|</span> age)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>emm_material_feedback_by_age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>age = fifth grade:
+ material               feedback emmean    SE df lower.CL upper.CL
+ low freq/low emotion   none        8.4 0.615 72     7.17     9.63
+ high freq/low emotion  none        8.8 0.615 72     7.57    10.03
+ high freq/high emotion none        8.0 0.615 72     6.77     9.23
+ low freq/low emotion   positive    7.8 0.615 72     6.57     9.03
+ high freq/low emotion  positive    8.0 0.615 72     6.77     9.23
+ high freq/high emotion positive    4.4 0.615 72     3.17     5.63
+ low freq/low emotion   negative    8.0 0.615 72     6.77     9.23
+ high freq/low emotion  negative    7.6 0.615 72     6.37     8.83
+ high freq/high emotion negative    3.8 0.615 72     2.57     5.03
+
+age = senior:
+ material               feedback emmean    SE df lower.CL upper.CL
+ low freq/low emotion   none        8.4 0.615 72     7.17     9.63
+ high freq/low emotion  none        8.8 0.615 72     7.57    10.03
+ high freq/high emotion none        7.8 0.615 72     6.57     9.03
+ low freq/low emotion   positive    8.0 0.615 72     6.77     9.23
+ high freq/low emotion  positive    8.2 0.615 72     6.97     9.43
+ high freq/high emotion positive    7.4 0.615 72     6.17     8.63
+ low freq/low emotion   negative    8.4 0.615 72     7.17     9.63
+ high freq/low emotion  negative    8.0 0.615 72     6.77     9.23
+ high freq/high emotion negative    7.0 0.615 72     5.77     8.23
+
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-ls-means-by-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8: Least-Squares Means by Age Group
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="r-code-for-simple-effects-of-material-and-feedback-by-age-group" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="r-code-for-simple-effects-of-material-and-feedback-by-age-group">R Code for Simple Effects of Material and Feedback by Age Group</h2>
+<p>In R, the <code>emmeans::joint_tests()</code> function conveniently provides tests analogous to an ANOVA for specified slices of the data. We use the <code>by</code> argument to get separate tests for each age level. This produces two separate ANOVA summaries, one for each age group.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>emm_material_feedback_by_age <span class="sc">|&gt;</span> <span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="st">"age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-simple-effects-material-age" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-simple-effects-material-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">model term</th>
+<th style="text-align: left;">age</th>
+<th style="text-align: right;">df1</th>
+<th style="text-align: right;">df2</th>
+<th style="text-align: right;">F.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">material</td>
+<td style="text-align: left;">fifth grade</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">19.306</td>
+<td style="text-align: right;">0.0000002</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">material</td>
+<td style="text-align: left;">senior</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">2.153</td>
+<td style="text-align: right;">0.1235609</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">feedback</td>
+<td style="text-align: left;">fifth grade</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">8.718</td>
+<td style="text-align: right;">0.0004071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">feedback</td>
+<td style="text-align: left;">senior</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">0.671</td>
+<td style="text-align: right;">0.5145724</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">material:feedback</td>
+<td style="text-align: left;">fifth grade</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">3.088</td>
+<td style="text-align: right;">0.0209781</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">material:feedback</td>
+<td style="text-align: left;">senior</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">0.176</td>
+<td style="text-align: right;">0.9498252</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-simple-effects-material-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9: Simple Effects of Material by Age Group
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The degrees of freedom for error (df2) remain 72 for each slice because we are using the pooled residual from the full model as the error term.</p>
+</div>
+</div>
+<p>Let’s interpret these results.</p>
+</section>
+<section id="interpreting-the-simple-effects-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-simple-effects-analysis">Interpreting the Simple Effects Analysis</h2>
+<section id="fifth-graders" class="level3">
+<h3 class="anchored" data-anchor-id="fifth-graders">Fifth Graders:</h3>
+<ul>
+<li><strong>Feedback × Material:</strong> Significant interaction (p ≈ 0.021).</li>
+<li><strong>Interpretation:</strong> Both feedback and material type significantly affect recall in fifth graders, with a possible interaction between the two.</li>
+<li><strong>Follow-Up:</strong> We will probe the material effect further.</li>
+</ul>
+</section>
+<section id="high-school-seniors" class="level3">
+<h3 class="anchored" data-anchor-id="high-school-seniors">High School Seniors:</h3>
+<ul>
+<li><strong>Note:</strong> The feedback × material interaction is not significant in seniors.</li>
+</ul>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary:</h3>
+<ul>
+<li>In fifth graders, both feedback and material significantly affect recall, with a possible interaction.</li>
+<li>In high school seniors, neither feedback nor material significantly affects recall.</li>
+</ul>
+</section>
+</section>
+<section id="probing-simple-effects-of-material-and-feedback-for-fifth-graders" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="probing-simple-effects-of-material-and-feedback-for-fifth-graders">Probing Simple Effects of Material and Feedback for Fifth Graders</h2>
+<p>The code below is more elegant and efficient than running multiple pairwise comparisons. It provides a comprehensive summary of the pairwise differences between material types for fifth graders.</p>
+<div id="tbl-simple-effects-material-age-pairs-fifth" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-simple-effects-material-age-pairs-fifth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>emm_material_feedback_by_age_fifth <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> material <span class="sc">|</span> feedback <span class="sc">*</span> age,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">at =</span> <span class="fu">list</span>(<span class="at">age =</span> <span class="st">"fifth grade"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_material_feedback_by_age_fifth, <span class="at">adjust =</span> <span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>feedback = none, age = fifth grade:
+ contrast                                           estimate    SE df t.ratio
+ (low freq/low emotion) - (high freq/low emotion)       -0.4 0.869 72  -0.460
+ (low freq/low emotion) - (high freq/high emotion)       0.4 0.869 72   0.460
+ (high freq/low emotion) - (high freq/high emotion)      0.8 0.869 72   0.920
+ p.value
+  0.8900
+  0.8900
+  0.6293
+
+feedback = positive, age = fifth grade:
+ contrast                                           estimate    SE df t.ratio
+ (low freq/low emotion) - (high freq/low emotion)       -0.2 0.869 72  -0.230
+ (low freq/low emotion) - (high freq/high emotion)       3.4 0.869 72   3.912
+ (high freq/low emotion) - (high freq/high emotion)      3.6 0.869 72   4.142
+ p.value
+  0.9712
+  0.0006
+  0.0003
+
+feedback = negative, age = fifth grade:
+ contrast                                           estimate    SE df t.ratio
+ (low freq/low emotion) - (high freq/low emotion)        0.4 0.869 72   0.460
+ (low freq/low emotion) - (high freq/high emotion)       4.2 0.869 72   4.832
+ (high freq/low emotion) - (high freq/high emotion)      3.8 0.869 72   4.372
+ p.value
+  0.8900
+  &lt;.0001
+  0.0001
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-simple-effects-material-age-pairs-fifth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10: Simple Effects of Material by Age Group
+</figcaption>
+</figure>
+</div>
+<section id="summary-1" class="level3">
+<h3 class="anchored" data-anchor-id="summary-1">Summary:</h3>
+<ul>
+<li><strong>Fifth Graders:</strong> Recall significantly differs between low/low and high/low, and between low/low and high/high materials. The high/high material yields the highest recall.</li>
+<li><strong>High School Seniors:</strong> Recall does not significantly differ between material types.</li>
+<li><strong>Interpretation:</strong> The material type significantly affects recall in fifth graders, with the high/high material showing the highest recall. In contrast, material type does not significantly affect high school seniors’ recall.</li>
+</ul>
+</section>
 </section>
 </section>
 <section id="probling-two-way-interactions" class="level1 page-columns page-full">
 <h1>Probling Two-Way Interactions</h1>
-<section id="simple-effects-analysis-for-material-age-interaction" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="simple-effects-analysis-for-material-age-interaction">Simple Effects Analysis for Material × Age Interaction</h2>
+<section id="interpreting-the-two-way-anova-results" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-two-way-anova-results">Interpreting the Two-Way ANOVA Results</h2>
+<p>According to the principles discussed, since the three-way interaction is not significant, we do not necessarily have to probe a three-way pattern. However, we <em>do</em> have a significant two-way interaction (material × age). This suggests the effect of material type on memory depends on age group (or vice versa). We will demonstrate simple effects for that two-way interaction. This will show the workflow for probing interactions using <code>emmeans</code>.</p>
+</section>
+<section id="reduced-model-for-two-way-interaction-material-age" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="reduced-model-for-two-way-interaction-material-age">Reduced Model for Two-Way Interaction (Material × Age)</h2>
 <p>We will demonstrate simple effects for that two-way interaction.</p>
 <div id="tbl-two-way-interaction-material-age-model" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-two-way-interaction-material-age-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit two-way interaction model for material × age</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model_material_age <span class="ot">&lt;-</span> <span class="fu">aov</span>(words <span class="sc">~</span> material <span class="sc">*</span> age, <span class="at">data =</span> words)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_material_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit two-way interaction model for material × age</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>model_material_age <span class="ot">&lt;-</span> <span class="fu">aov</span>(words <span class="sc">~</span> feedback <span class="sc">+</span> material <span class="sc">*</span> age, <span class="at">data =</span> words)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_material_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-material      2  64.87   32.43  13.891 6.14e-06 ***
-age           1  14.40   14.40   6.167   0.0150 *  
-material:age  2  16.20    8.10   3.469   0.0357 *  
-Residuals    84 196.13    2.33                     
+feedback      2  26.87   13.43   6.508  0.00238 ** 
+material      2  64.87   32.43  15.712 1.67e-06 ***
+age           1  14.40   14.40   6.976  0.00989 ** 
+material:age  2  16.20    8.10   3.924  0.02358 *  
+Residuals    82 169.27    2.06                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-two-way-interaction-material-age-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7: Two-Way Interaction Model for Material × Age
+Table&nbsp;11: Two-Way Interaction Model for Material × Age
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="simple-effects-analysis" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="simple-effects-analysis">Simple Effects Analysis</h2>
-<p><strong>Simple Two-Way Interactions at Each Level of C:</strong> The significant material×age interaction means the difference in recall between material types is different for fifth graders versus seniors. We can explore this by testing the <strong>simple two-way effect of material × feedback within each age group</strong>. Essentially, we split the analysis by age to see how the other factors behave for each subgroup</p>
+<section id="simple-effects-analysis-for-material-age-interaction" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="simple-effects-analysis-for-material-age-interaction">Simple Effects Analysis for Material × Age Interaction</h2>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">joint_tests</span>(model_material_age, <span class="at">by =</span> <span class="st">"age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>emm_material_by_age <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> material <span class="sc">|</span> age)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>emm_material_by_age <span class="sc">|&gt;</span> <span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="st">"age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-simple-effects-material-age-" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-simple-effects-material-age--caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1805,18 +2088,18 @@ Table&nbsp;7: Two-Way Interaction Model for Material × Age
 <td style="text-align: left;">material</td>
 <td style="text-align: left;">fifth grade</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">84</td>
-<td style="text-align: right;">15.618</td>
-<td style="text-align: right;">0.0000017</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">19.306</td>
+<td style="text-align: right;">0.0000002</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">3</td>
 <td style="text-align: left;">material</td>
 <td style="text-align: left;">senior</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">84</td>
-<td style="text-align: right;">1.742</td>
-<td style="text-align: right;">0.1814948</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">2.153</td>
+<td style="text-align: right;">0.1235609</td>
 </tr>
 </tbody>
 </table>
@@ -1824,20 +2107,19 @@ Table&nbsp;7: Two-Way Interaction Model for Material × Age
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-simple-effects-material-age--caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8: Simple Effects of Material by Age Group
+Table&nbsp;12: Simple Effects of Material by Age Group
 </figcaption>
 </figure>
 </div>
 </div>
-<p>For fifth graders, the material effect is significant (p &lt; 0.0001), indicating that material type significantly affects recall in this age group. In contrast, for high school seniors, the material effect is not significant (p = 0.1815), suggesting that material type does not significantly affect recall in this age group.</p>
+<p>The results suggest that the difference in recall between material types is different for fifth graders versus seniors. For the fifth graders, material appears to have an effect on recall, whereas for seniors, material appears to have no significant effect on recall.</p>
 </section>
 <section id="probing-simple-effects-of-material-by-age" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="probing-simple-effects-of-material-by-age">Probing Simple Effects of Material by Age</h2>
 <div id="tbl-simple-effects-material-age-pairs" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-simple-effects-material-age-pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>emm_material_by_age <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> material <span class="sc">|</span> age)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_material_by_age, <span class="at">adjust =</span> <span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_material_by_age, <span class="at">adjust =</span> <span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>age = fifth grade:
  contrast                                           estimate    SE df t.ratio
@@ -1864,14 +2146,14 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-simple-effects-material-age-pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;9: Simple Effects of Material by Age Group
+Table&nbsp;13: Simple Effects of Material by Age Group
 </figcaption>
 </figure>
 </div>
-<p>For the fifth graders, the high-frequency/high-emotion material yields significantly higher recall than the low-frequency/low-emotion material (p &lt; 0.0001) and the high-frequency/low-emotion material (p &lt; 0.0001). In contrast, for high school seniors, the material type does not significantly affect recall.</p>
+<p>Upon further probing of the interaction, we see that the effect of material type on recall differs between the two age groups. For the fifth graders, the high-frequency/high-emotion material (let’s call it the “difficult material”) yields the highest recall, whereas for seniors, material type does not have a significant effect on recall.</p>
 </section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<section id="summary-2" class="level2">
+<h2 class="anchored" data-anchor-id="summary-2">Summary</h2>
 <ul>
 <li><strong>Fifth Graders:</strong> Recall significantly differs between low/low and high/low, and between low/low and high/high materials. The high/high material yields the highest recall.</li>
 <li><strong>High School Seniors:</strong> Recall does not significantly differ between material types.</li>
@@ -1879,212 +2161,38 @@ Table&nbsp;9: Simple Effects of Material by Age Group
 <p>The results of the simple effects analysis show that the material type significantly affects recall in fifth graders, with the high-frequency/high-emotion material (let’s call it the “difficult material”) yielding the highest recall. In contrast, material type does not significantly affect high school seniors’ recall. The significant interaction between material and age suggests that the effect of material type on memory retention differs between the two age groups. Specifically, the high-frequency/high-emotion material has a more pronounced impact on recall for fifth graders compared to high school seniors. This finding highlights the importance of considering age-specific factors when designing educational interventions or memory enhancement strategies.</p>
 </section>
 </section>
-<section id="probling-three-way-interaction-illustrative" class="level1 page-columns page-full">
-<h1>Probling Three-Way Interaction (Illustrative)</h1>
-<section id="simple-effects-analysis-1" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="simple-effects-analysis-1">Simple Effects Analysis</h2>
-<!-- **Simple Two-Way Interactions at Each Level of C:** The significant material×age interaction means the difference in recall between material types is different for fifth graders versus seniors. We can explore this by testing the **simple two-way effect of material × feedback within each age group**. Essentially, we split the analysis by age to see how the other factors behave for each subgroup ([Microsoft PowerPoint - Three-way ANOVAr.ppt](https://www.ou.edu/faculty/M/Jorge.L.Mendoza-1/psy5013/Three-way%20ANOVAr.pdf#:~:text=%E2%80%A2%20ABC%20is%20NOT%20significant%2C,hoc%20%28or%20planned%29%20comparisons)). 
-
-In R, the `emmeans::joint_tests()` function conveniently provides tests analogous to an ANOVA for specified slices of the data. We use the `by` argument to get separate tests for each age level: -->
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">joint_tests</span>(model, <span class="at">by =</span> <span class="st">"age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-simple-effects-material-age" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-simple-effects-material-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="do-not-create-environment cell table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: left;">model term</th>
-<th style="text-align: left;">age</th>
-<th style="text-align: right;">df1</th>
-<th style="text-align: right;">df2</th>
-<th style="text-align: right;">F.ratio</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">feedback</td>
-<td style="text-align: left;">fifth grade</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">8.718</td>
-<td style="text-align: right;">0.0004071</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">feedback</td>
-<td style="text-align: left;">senior</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">0.671</td>
-<td style="text-align: right;">0.5145724</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">12</td>
-<td style="text-align: left;">material</td>
-<td style="text-align: left;">fifth grade</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">19.306</td>
-<td style="text-align: right;">0.0000002</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">31</td>
-<td style="text-align: left;">material</td>
-<td style="text-align: left;">senior</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">2.153</td>
-<td style="text-align: right;">0.1235609</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">11</td>
-<td style="text-align: left;">feedback:material</td>
-<td style="text-align: left;">fifth grade</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">3.088</td>
-<td style="text-align: right;">0.0209781</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">feedback:material</td>
-<td style="text-align: left;">senior</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">0.176</td>
-<td style="text-align: right;">0.9498252</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-simple-effects-material-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10: Simple Effects of Material by Age Group
-</figcaption>
-</figure>
-</div>
-</div>
-<p>This produces two separate ANOVA summaries, one for each age group:</p>
-<p>*(Note: The degrees of freedom for error (df2) remain 72 for each slice because we are using the pooled residual from the full model as the error term.)_</p>
-<p>Let’s interpret these results.</p>
-</section>
-<section id="interpreting-the-simple-effects-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-the-simple-effects-analysis">Interpreting the Simple Effects Analysis</h2>
-<section id="simple-main-effects-of-material-at-each-age" class="level3">
-<h3 class="anchored" data-anchor-id="simple-main-effects-of-material-at-each-age">Simple Main Effects of Material (at each Age)</h3>
-</section>
-<section id="fifth-graders" class="level3">
-<h3 class="anchored" data-anchor-id="fifth-graders">Fifth Graders:</h3>
-<ul>
-<li><strong>Feedback × Material:</strong> Significant interaction (p ≈ 0.021).</li>
-<li><strong>Interpretation:</strong> Both feedback and material type significantly affect recall in fifth graders, with a possible interaction between the two.</li>
-<li><strong>Follow-Up:</strong> We will probe the material effect further.</li>
-</ul>
-</section>
-<section id="high-school-seniors" class="level3">
-<h3 class="anchored" data-anchor-id="high-school-seniors">High School Seniors:</h3>
-<ul>
-<li><strong>Note:</strong> The feedback × material interaction is not significant in seniors.</li>
-</ul>
-</section>
-<section id="summary-1" class="level3">
-<h3 class="anchored" data-anchor-id="summary-1">Summary:</h3>
-<ul>
-<li>In fifth graders, both feedback and material significantly affect recall, with a possible interaction.</li>
-<li>In high school seniors, neither feedback nor material significantly affects recall.</li>
-</ul>
-</section>
-</section>
-<section id="probing-simple-effects-of-material-by-age-1" class="level2">
-<h2 class="anchored" data-anchor-id="probing-simple-effects-of-material-by-age-1">Probing Simple Effects of Material by Age</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>emm_material_by_age <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> material <span class="sc">|</span> age)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_material_by_age, <span class="at">adjust =</span> <span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>age = fifth grade:
- contrast                                           estimate    SE df t.ratio
- (low freq/low emotion) - (high freq/low emotion)    -0.0667 0.502 72  -0.133
- (low freq/low emotion) - (high freq/high emotion)    2.6667 0.502 72   5.314
- (high freq/low emotion) - (high freq/high emotion)   2.7333 0.502 72   5.447
- p.value
-  0.9903
-  &lt;.0001
-  &lt;.0001
-
-age = senior:
- contrast                                           estimate    SE df t.ratio
- (low freq/low emotion) - (high freq/low emotion)    -0.0667 0.502 72  -0.133
- (low freq/low emotion) - (high freq/high emotion)    0.8667 0.502 72   1.727
- (high freq/low emotion) - (high freq/high emotion)   0.9333 0.502 72   1.860
- p.value
-  0.9903
-  0.2022
-  0.1579
-
-Results are averaged over the levels of: feedback 
-P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
-</div>
-</div>
-<p>This gives the mean recall for each material within each age, and Tukey-adjusted pairwise comparisons:</p>
-<ul>
-<li><p>Pairwise differences (5th grade):</p>
-<ul>
-<li>low/low vs.&nbsp;high/low: -0.07 (n.s., p=0.99)</li>
-<li>low/low vs.&nbsp;high/high: 2.67 (p&lt;0.001)–<strong>significant</strong></li>
-<li>high/low vs.&nbsp;high/high: 2.73 (p&lt;0.001)–<strong>significant</strong></li>
-</ul></li>
-<li><p>For <strong>seniors</strong>, mean recall by material:</p></li>
-<li><p>Pairwise differences (seniors):</p>
-<ul>
-<li>low/low vs.&nbsp;high/low: -0.07 (n.s., p=0.99)</li>
-<li>low/low vs.&nbsp;high/high: 0.87 (n.s., p=0.20)</li>
-<li>high/low vs.&nbsp;high/high: 0.93 (n.s., p=0.16)</li>
-</ul></li>
-</ul>
-</section>
-<section id="summary-2" class="level2">
-<h2 class="anchored" data-anchor-id="summary-2">Summary:</h2>
-<ul>
-<li><strong>Fifth Graders:</strong> Recall significantly differs between low/low and high/low, and between low/low and high/high materials. The high/high material yields the highest recall.</li>
-<li><strong>High School Seniors:</strong> Recall does not significantly differ between material types.</li>
-<li><strong>Interpretation:</strong> The material type significantly affects recall in fifth graders, with the high/high material showing the highest recall. In contrast, material type does not significantly affect high school seniors’ recall.</li>
-</ul>
-</section>
-</section>
 <section id="advanced-analysis-techniques" class="level1">
 <h1>Advanced Analysis Techniques</h1>
-<section id="handling-three-factor-interactions" class="level2">
-<h2 class="anchored" data-anchor-id="handling-three-factor-interactions">Handling Three-Factor Interactions</h2>
-<p>In higher-order designs, interactions can involve three or more factors, complicating interpretation.</p>
-<section id="three-factor-interaction" class="level3">
-<h3 class="anchored" data-anchor-id="three-factor-interaction">Three-Factor Interaction</h3>
-<p>Occurs when the two-factor interaction between two factors depends on the level of a third factor.</p>
-<p><strong>Interpretation:</strong> If the two-factor interaction between Factors A and B changes across levels of Factor C, a three-factor interaction is present.</p>
-</section>
-<section id="example-in-r" class="level3">
-<h3 class="anchored" data-anchor-id="example-in-r">Example in R</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit three-way ANOVA model</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of ANOVA</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Three-factor interaction plot</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x=</span>FactorA, <span class="at">y=</span>Response, <span class="at">color=</span>FactorB, <span class="at">linetype=</span>FactorC)) <span class="sc">+</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Three-Factor Interaction Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Interpretation:</strong> Assess if the lines representing different levels of Factor B change across Factor C levels, indicating an interaction.</p>
-</section>
-</section>
+<!-- ## Handling Three-Factor Interactions
+
+In higher-order designs, interactions can involve three or more factors, complicating interpretation.
+
+### Three-Factor Interaction
+
+Occurs when the two-factor interaction between two factors depends on the level of a third factor.
+
+**Interpretation:**
+If the two-factor interaction between Factors A and B changes across levels of Factor C, a three-factor interaction is present.
+
+### Example in R
+
+```r
+# Fit three-way ANOVA model
+fit <- aov(Response ~ FactorA * FactorB * FactorC, data = data)
+
+# Summary of ANOVA
+summary(fit)
+
+# Three-factor interaction plot
+library(ggplot2)
+ggplot(data, aes(x=FactorA, y=Response, color=FactorB, linetype=FactorC)) +
+geom_point() +
+geom_line() +
+labs(title="Three-Factor Interaction Plot")
+```
+
+**Interpretation:**
+Assess if the lines representing different levels of Factor B change across Factor C levels, indicating an interaction. -->
 <section id="addressing-complex-interactions" class="level2">
 <h2 class="anchored" data-anchor-id="addressing-complex-interactions">Addressing Complex Interactions</h2>
 <section id="higher-order-interactions-1" class="level3">
@@ -2098,14 +2206,14 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 <li><p><strong>Hierarchical Models:</strong> Retain lower-order interactions when higher-order interactions are present, but omit higher-order interactions if lower-order ones are not significant.</p></li>
 </ul>
 <p><strong>Example in R:</strong></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full model</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>full_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduced model without three-way interaction</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>reduced_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">+</span> FactorA <span class="sc">*</span> FactorC <span class="sc">+</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare models</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reduced_fit, full_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full model</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>full_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduced model without three-way interaction</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>reduced_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">+</span> FactorA <span class="sc">*</span> FactorC <span class="sc">+</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare models</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reduced_fit, full_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 </section>
@@ -2150,19 +2258,19 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </section>
 <section id="r-implementation" class="level2">
 <h2 class="anchored" data-anchor-id="r-implementation">R Implementation</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs Fitted</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which=</span><span class="dv">1</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Normal Q-Q Plot</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which=</span><span class="dv">2</span>)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs Order</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Order <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data<span class="sc">$</span>Order, <span class="fu">resid</span>(fit), <span class="at">main=</span><span class="st">"Residuals vs. Order"</span>, <span class="at">xlab=</span><span class="st">"Order"</span>, <span class="at">ylab=</span><span class="st">"Residuals"</span>)</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs Fitted</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which=</span><span class="dv">1</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Normal Q-Q Plot</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which=</span><span class="dv">2</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs Order</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Order <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data<span class="sc">$</span>Order, <span class="fu">resid</span>(fit), <span class="at">main=</span><span class="st">"Residuals vs. Order"</span>, <span class="at">xlab=</span><span class="st">"Order"</span>, <span class="at">ylab=</span><span class="st">"Residuals"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Interpretation:</strong> Examine each plot for signs of assumption violations and consider corrective actions if needed.</p>
 </section>
 <section id="remedies-for-assumption-violations" class="level2">
@@ -2176,19 +2284,19 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </ul>
 <strong>R Implementation:</strong></li>
 </ol>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Box-Cox Transformation</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>boxcox_fit <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(fit, <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">by=</span><span class="fl">0.1</span>))</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify optimal lambda</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>optimal_lambda <span class="ot">&lt;-</span> boxcox_fit<span class="sc">$</span>x[<span class="fu">which.max</span>(boxcox_fit<span class="sc">$</span>y)]</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform Response</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Response_transformed <span class="ot">&lt;-</span> (data<span class="sc">$</span>Response<span class="sc">^</span>optimal_lambda <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> optimal_lambda</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-fit the model with transformed data</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>fit_transformed <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response_transformed <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_transformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Box-Cox Transformation</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>boxcox_fit <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(fit, <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">by=</span><span class="fl">0.1</span>))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify optimal lambda</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>optimal_lambda <span class="ot">&lt;-</span> boxcox_fit<span class="sc">$</span>x[<span class="fu">which.max</span>(boxcox_fit<span class="sc">$</span>y)]</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform Response</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Response_transformed <span class="ot">&lt;-</span> (data<span class="sc">$</span>Response<span class="sc">^</span>optimal_lambda <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> optimal_lambda</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-fit the model with transformed data</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>fit_transformed <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response_transformed <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_transformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
 <li><strong>Alternative Models:</strong>
 <ul>
@@ -2197,314 +2305,124 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </ul>
 <strong>R Implementation:</strong></li>
 </ol>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed-Effects Model Example</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>mixed_fit <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>RandomFactor), <span class="at">data =</span> data)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mixed_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="visualizing-and-understanding-interactions" class="level1">
-<h1>Visualizing and Understanding Interactions</h1>
-<section id="interaction-plots" class="level2">
-<h2 class="anchored" data-anchor-id="interaction-plots">Interaction Plots</h2>
-<p><strong>Two-Way Interaction Plot:</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(data<span class="sc">$</span>FactorA, data<span class="sc">$</span>FactorB, data<span class="sc">$</span>Response, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Three-Way Interaction Plot:</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x=</span>FactorA, <span class="at">y=</span>Response, <span class="at">color=</span>FactorB)) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>FactorB)) <span class="sc">+</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span> FactorC) <span class="sc">+</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Three-Way Interaction Plot"</span>, <span class="at">x=</span><span class="st">"Factor A"</span>, <span class="at">y=</span><span class="st">"Response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Interpretation:</strong> Non-parallel lines in two-way plots indicate interaction effects. In three-way plots, varying interaction patterns across the third factor’s levels suggest higher-order interactions.</p>
-<p><strong>Example Interpretation:</strong> In the popcorn experiment, if the optimal baking time varies significantly across different brands and power settings, interaction plots will reveal these dependencies, guiding recommendations for specific conditions.</p>
-</section>
-</section>
-<section id="exercises-1" class="level1">
-<h1>Exercises</h1>
-<section id="medium-difficulty" class="level2">
-<h2 class="anchored" data-anchor-id="medium-difficulty">Medium Difficulty</h2>
-<ol type="1">
-<li><strong>Two-Way ANOVA with Interaction:</strong>
-<ul>
-<li><strong>Dataset:</strong> Simulate data for a <span class="math inline">\(3 \times 2\)</span> factorial design with factors A (3 levels) and B (2 levels), each with 5 replicates.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Fit a two-way ANOVA model with interaction.</li>
-<li>Generate interaction plots.</li>
-<li>Interpret the ANOVA table and interaction plots.</li>
-</ul></li>
-</ul>
-<strong>Hints:</strong></li>
-</ol>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">each=</span><span class="dv">10</span>))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each=</span><span class="dv">5</span>, <span class="at">times=</span><span class="dv">3</span>))</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>Response <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">2</span>),</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>               <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">14</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">16</span>, <span class="dv">2</span>),</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">18</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">2</span>))</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, Response)</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>fit_sim <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB, <span class="at">data =</span> data_sim)</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_sim)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(data_sim<span class="sc">$</span>FactorA, data_sim<span class="sc">$</span>FactorB, data_sim<span class="sc">$</span>Response, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol type="1">
-<li><strong>Contrast Construction:</strong>
-<ul>
-<li><strong>Scenario:</strong> In a three-factor experiment (A, B, C), construct a contrast to compare the average effect of Factor A at high levels of Factors B and C versus low levels.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Define the contrast coefficients.</li>
-<li>Calculate the contrast estimate and its variance.</li>
-<li>Test the significance of the contrast.</li>
-</ul></li>
-</ul>
-<strong>Hints:</strong>
-<ul>
-<li>Use <code>emmeans</code> or <code>multcomp</code> packages for contrast testing.</li>
-</ul></li>
-</ol>
-</section>
-<section id="challenging-problems" class="level2">
-<h2 class="anchored" data-anchor-id="challenging-problems">Challenging Problems</h2>
-<ol type="1">
-<li><strong>Unbalanced Two-Factor Design Analysis:</strong>
-<ul>
-<li><strong>Dataset:</strong> Use an unbalanced dataset with unequal replicates across treatment combinations.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Fit a two-way ANOVA model.</li>
-<li>Perform Type II and Type III sum of squares analysis.</li>
-<li>Compare results and discuss how imbalance affects the interpretation of main and interaction effects.</li>
-</ul></li>
-</ul>
-<strong>Hints:</strong></li>
-</ol>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume 'data_unbalanced' is loaded with unequal replicates</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>fit_unbalanced <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB, <span class="at">data =</span> data_unbalanced)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Type II SS</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(fit_unbalanced, <span class="at">type=</span><span class="st">"II"</span>)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Type III SS</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(fit_unbalanced, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol type="1">
-<li><strong>Three-Factor Interaction Interpretation:</strong>
-<ul>
-<li><strong>Dataset:</strong> Simulate or use a real dataset with three factors exhibiting a significant three-way interaction.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Fit a three-way ANOVA model.</li>
-<li>Visualize the three-way interaction.</li>
-<li>Use <code>emmeans</code> to explore and interpret the interaction.</li>
-<li>Discuss how the three-way interaction affects the interpretation of main and two-way interactions.</li>
-</ul></li>
-</ul>
-<strong>Hints:</strong></li>
-</ol>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data with three-way interaction</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">each=</span><span class="dv">12</span>))</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each=</span><span class="dv">6</span>, <span class="at">times=</span><span class="dv">3</span>))</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>FactorC <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span>), <span class="at">times=</span><span class="dv">6</span>))</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>Response <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">36</span>, <span class="at">mean=</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">as.numeric</span>(FactorB)<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(FactorC)<span class="sc">*</span><span class="fl">1.5</span> <span class="sc">+</span> </span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorB) <span class="sc">+</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorC) <span class="sc">+</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(FactorB)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorC) <span class="sc">+</span></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorB)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorC), <span class="dv">2</span>)</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>data_three <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, FactorC, Response)</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>fit_three <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data_three)</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_three)</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_three, <span class="fu">aes</span>(<span class="at">x=</span>FactorA, <span class="at">y=</span>Response, <span class="at">color=</span>FactorB)) <span class="sc">+</span></span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>FactorB)) <span class="sc">+</span></span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>   <span class="fu">facet_wrap</span>(<span class="sc">~</span> FactorC) <span class="sc">+</span></span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Three-Way Interaction Plot"</span>)</span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Using emmeans</span></span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_three, <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC)</span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm, <span class="at">interaction =</span> <span class="st">"trt.vs.ctrl"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol type="1">
-<li><strong>Mathematical Proof of Interaction Contrasts:</strong>
-<ul>
-<li><strong>Task:</strong> Derive the formulas for interaction contrasts in a three-factor design and prove that they measure deviations from additivity.</li>
-<li><strong>Requirements:</strong>
-<ul>
-<li>Show how to construct interaction contrasts.</li>
-<li>Prove that if all interaction contrasts are zero, the model is additive.</li>
-</ul></li>
-</ul>
-<strong>Hints:</strong>
-<ul>
-<li>Use the definition of main effects and interaction terms.</li>
-<li>Utilize properties of linear algebra to demonstrate additivity.</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="exercises-2" class="level1">
-<h1>Exercises</h1>
-<section id="medium-difficulty-1" class="level2">
-<h2 class="anchored" data-anchor-id="medium-difficulty-1">Medium Difficulty</h2>
-<ol type="1">
-<li><strong>Two-Way ANOVA with Interaction:</strong>
-<ul>
-<li><strong>Dataset:</strong> Simulate a balanced <span class="math inline">\(3 \times 2\)</span> factorial design with factors A (3 levels) and B (2 levels), each with 5 replicates.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Fit a two-way ANOVA model with interaction.</li>
-<li>Generate interaction plots.</li>
-<li>Interpret the ANOVA table and interaction plots.</li>
-</ul></li>
-</ul>
-<strong>R Code Example:</strong></li>
-</ol>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">each=</span><span class="dv">10</span>))</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each=</span><span class="dv">5</span>, <span class="at">times=</span><span class="dv">3</span>))</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>Response <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">2</span>),</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>               <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">14</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">16</span>, <span class="dv">2</span>),</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">18</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">2</span>))</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, Response)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>fit_sim <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB, <span class="at">data =</span> data_sim)</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_sim)</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(data_sim<span class="sc">$</span>FactorA, data_sim<span class="sc">$</span>FactorB, data_sim<span class="sc">$</span>Response, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol type="1">
-<li><strong>Constructing and Testing Contrasts:</strong>
-<ul>
-<li><strong>Scenario:</strong> In a three-factor experiment (A, B, C), construct a contrast comparing the average effect of Factor A at high levels of Factors B and C versus low levels.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Define the contrast coefficients.</li>
-<li>Calculate the contrast estimate and its variance.</li>
-<li>Test the significance of the contrast using ANOVA.</li>
-</ul></li>
-</ul>
-<strong>R Code Example:</strong></li>
-</ol>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume 'fit' is a fitted three-way ANOVA model</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit, <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define contrast coefficients for comparing high vs. low levels</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Contrast comparing (A1 + A2 + A3)/3 at high levels vs. low levels</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>contrast_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>), <span class="at">ncol=</span><span class="dv">1</span>)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(contrast_matrix) <span class="ot">&lt;-</span> <span class="st">"A_high_vs_low"</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the contrast</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>contrast_results <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm, <span class="at">method =</span> contrast_matrix)</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(contrast_results, <span class="at">infer =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="challenging-problems-1" class="level2">
-<h2 class="anchored" data-anchor-id="challenging-problems-1">Challenging Problems</h2>
-<ol type="1">
-<li><strong>Unbalanced Two-Factor Design Analysis:</strong>
-<ul>
-<li><strong>Dataset:</strong> Utilize a dataset with an unequal number of replicates across treatment combinations.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Fit a two-way ANOVA model.</li>
-<li>Perform Type II and Type III sum of squares analysis.</li>
-<li>Compare and discuss how the choice of sum of squares type affects the interpretation of main and interaction effects.</li>
-</ul></li>
-</ul>
-<strong>R Code Example:</strong></li>
-</ol>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume 'data_unbalanced' is your dataset</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>fit_unbalanced <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB, <span class="at">data =</span> data_unbalanced)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Type II SS</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>typeII <span class="ot">&lt;-</span> <span class="fu">Anova</span>(fit_unbalanced, <span class="at">type=</span><span class="st">"II"</span>)</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(typeII)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Type III SS</span></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>typeIII <span class="ot">&lt;-</span> <span class="fu">Anova</span>(fit_unbalanced, <span class="at">type=</span><span class="st">"III"</span>)</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(typeIII)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Discussion Points:</strong> - How do Type II and Type III SS handle imbalance? - Which interactions or main effects become significant under each type? - Implications for experimental conclusions.</p>
-<ol type="1">
-<li><strong>Three-Factor Interaction Interpretation:</strong>
-<ul>
-<li><strong>Dataset:</strong> Use a simulated or real dataset with three factors exhibiting a significant three-way interaction.</li>
-<li><strong>Tasks:</strong>
-<ul>
-<li>Fit a three-way ANOVA model.</li>
-<li>Visualize the three-way interaction.</li>
-<li>Use <code>emmeans</code> to estimate marginal means and perform pairwise comparisons.</li>
-<li>Explain how the three-way interaction affects the interpretation of main and two-way interactions.</li>
-</ul></li>
-</ul>
-<strong>R Code Example:</strong></li>
-</ol>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">library</span>(emmeans)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">library</span>(ggplot2)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Simulate data with three-way interaction</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>   FactorA <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>, <span class="st">"A3"</span>), <span class="at">each=</span><span class="dv">12</span>))</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>   FactorB <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B1"</span>, <span class="st">"B2"</span>), <span class="at">each=</span><span class="dv">6</span>, <span class="at">times=</span><span class="dv">3</span>))</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>   FactorC <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>, <span class="st">"C3"</span>), <span class="at">times=</span><span class="dv">6</span>))</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>   Response <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">36</span>, <span class="at">mean=</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">as.numeric</span>(FactorB)<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">as.numeric</span>(FactorC)<span class="sc">*</span><span class="fl">1.5</span> <span class="sc">+</span> </span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorB) <span class="sc">+</span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorC) <span class="sc">+</span></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">as.numeric</span>(FactorB)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorC) <span class="sc">+</span></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">as.numeric</span>(FactorA)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorB)<span class="sc">*</span><span class="fu">as.numeric</span>(FactorC), <span class="dv">2</span>)</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>   data_three <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(FactorA, FactorB, FactorC, Response)</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Fit the model</span></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>   fit_three <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data_three)</span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summary</span>(fit_three)</span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Interaction plot</span></span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ggplot</span>(data_three, <span class="fu">aes</span>(<span class="at">x=</span>FactorA, <span class="at">y=</span>Response, <span class="at">color=</span>FactorB, <span class="at">linetype=</span>FactorC)) <span class="sc">+</span></span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>     <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Three-Way Interaction Plot"</span>, <span class="at">x=</span><span class="st">"Factor A"</span>, <span class="at">y=</span><span class="st">"Response"</span>)</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Using emmeans for contrasts</span></span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>   emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_three, <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC)</span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>   contrast_results <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"none"</span>)</span>
-<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summary</span>(contrast_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Interpretation:</strong> - How does the interaction manifest across different levels? - What do the estimated marginal means reveal about the three-way interaction? - Implications for factor effect interpretations.</p>
-<ol type="1">
-<li><strong>Mathematical Proof of Interaction Contrasts:</strong>
-<ul>
-<li><strong>Task:</strong> Derive formulas for interaction contrasts in a three-factor design and prove that they measure deviations from additivity.</li>
-<li><strong>Steps:</strong>
-<ol type="1">
-<li>Define the contrast for three-way interaction.</li>
-<li>Show that if all interaction contrasts are zero, the model reduces to an additive model.</li>
-<li>Use properties of linear combinations and contrasts to demonstrate the relationship.</li>
-</ol></li>
-</ul>
-<strong>Hints:</strong>
-<ul>
-<li>Utilize the definitions of main effects and interactions.</li>
-<li>Employ algebraic manipulation to isolate interaction terms.</li>
-<li>Reference Dean et al.&nbsp;(2017) and Christensen (2018) for theoretical foundations.</li>
-</ul></li>
-</ol>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Higher-order factorial designs are indispensable for unraveling complex interactions among multiple factors in experimental research. By systematically analyzing main effects and interactions, researchers can gain nuanced insights into how factors jointly influence outcomes. Mastery of two-way ANOVA, interaction interpretation, handling unequal replication, and advanced analytical techniques using R equips graduate students with the tools necessary for robust experimental analysis. Emphasizing both theoretical rigor and practical application ensures that statistical conclusions are both valid and meaningful.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed-Effects Model Example</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>mixed_fit <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>RandomFactor), <span class="at">data =</span> data)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mixed_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- 
+# Exercises
+
+## Medium Difficulty
+
+1. **Two-Way ANOVA with Interaction:**
+   - **Dataset:** Simulate data for a $3 \times 2$ factorial design with factors A (3 levels) and B (2 levels), each with 5 replicates.
+   - **Tasks:**
+     - Fit a two-way ANOVA model with interaction.
+     - Generate interaction plots.
+     - Interpret the ANOVA table and interaction plots.
+
+   **Hints:**
+
+```r
+set.seed(123)
+FactorA <- factor(rep(c("A1", "A2", "A3"), each=10))
+FactorB <- factor(rep(c("B1", "B2"), each=5, times=3))
+Response <- c(rnorm(5, 10, 2), rnorm(5, 12, 2),
+               rnorm(5, 14, 2), rnorm(5, 16, 2),
+               rnorm(5, 18, 2), rnorm(5, 20, 2))
+data_sim <- data.frame(FactorA, FactorB, Response)
+
+fit_sim <- aov(Response ~ FactorA * FactorB, data = data_sim)
+summary(fit_sim)
+
+interaction.plot(data_sim$FactorA, data_sim$FactorB, data_sim$Response, col=c("blue", "red"))
+```
+
+1. **Contrast Construction:**
+   - **Scenario:** In a three-factor experiment (A, B, C), construct a contrast to compare the average effect of Factor A at high levels of Factors B and C versus low levels.
+   - **Tasks:**
+     - Define the contrast coefficients.
+     - Calculate the contrast estimate and its variance.
+     - Test the significance of the contrast.
+
+   **Hints:**
+   - Use `emmeans` or `multcomp` packages for contrast testing.
+
+## Challenging Problems
+
+1. **Unbalanced Two-Factor Design Analysis:**
+   - **Dataset:** Use an unbalanced dataset with unequal replicates across treatment combinations.
+   - **Tasks:**
+     - Fit a two-way ANOVA model.
+     - Perform Type II and Type III sum of squares analysis.
+     - Compare results and discuss how imbalance affects the interpretation of main and interaction effects.
+
+   **Hints:**
+
+```r
+library(car)
+# Assume 'data_unbalanced' is loaded with unequal replicates
+fit_unbalanced <- aov(Response ~ FactorA * FactorB, data = data_unbalanced)
+
+# Type II SS
+Anova(fit_unbalanced, type="II")
+
+# Type III SS
+Anova(fit_unbalanced, type="III")
+```
+
+1. **Three-Factor Interaction Interpretation:**
+   - **Dataset:** Simulate or use a real dataset with three factors exhibiting a significant three-way interaction.
+   - **Tasks:**
+     - Fit a three-way ANOVA model.
+     - Visualize the three-way interaction.
+     - Use `emmeans` to explore and interpret the interaction.
+     - Discuss how the three-way interaction affects the interpretation of main and two-way interactions.
+
+   **Hints:**
+
+```r
+library(emmeans)
+
+# Simulate data with three-way interaction
+set.seed(456)
+FactorA <- factor(rep(c("A1", "A2", "A3"), each=12))
+FactorB <- factor(rep(c("B1", "B2"), each=6, times=3))
+FactorC <- factor(rep(c("C1", "C2", "C3"), times=6))
+Response <- rnorm(36, mean=10 + as.numeric(FactorA)*2 + as.numeric(FactorB)*3 +
+                  as.numeric(FactorC)*1.5 + 
+                  as.numeric(FactorA)*as.numeric(FactorB) +
+                  as.numeric(FactorA)*as.numeric(FactorC) +
+                  as.numeric(FactorB)*as.numeric(FactorC) +
+                  as.numeric(FactorA)*as.numeric(FactorB)*as.numeric(FactorC), 2)
+data_three <- data.frame(FactorA, FactorB, FactorC, Response)
+
+fit_three <- aov(Response ~ FactorA * FactorB * FactorC, data = data_three)
+summary(fit_three)
+
+# Interaction plot
+ggplot(data_three, aes(x=FactorA, y=Response, color=FactorB)) +
+   geom_point() +
+   geom_line(aes(group=FactorB)) +
+   facet_wrap(~ FactorC) +
+   labs(title="Three-Way Interaction Plot")
+
+# Using emmeans
+emm <- emmeans(fit_three, ~ FactorA * FactorB * FactorC)
+contrast(emm, interaction = "trt.vs.ctrl", adjust = "none")
+```
+
+1. **Mathematical Proof of Interaction Contrasts:**
+   - **Task:** Derive the formulas for interaction contrasts in a three-factor design and prove that they measure deviations from additivity.
+   - **Requirements:**
+     - Show how to construct interaction contrasts.
+     - Prove that if all interaction contrasts are zero, the model is additive.
+
+   **Hints:**
+   - Use the definition of main effects and interaction terms.
+   - Utilize properties of linear algebra to demonstrate additivity.
+ -->
 </section>
 </section>
 <section id="appendix-advanced-mathematical-details" class="level1">
@@ -2531,35 +2449,33 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 <section id="box-cox-transformation" class="level2">
 <h2 class="anchored" data-anchor-id="box-cox-transformation">Box-Cox Transformation</h2>
 <p>The Box-Cox transformation seeks an optimal power transformation to stabilize variance and normalize residuals.</p>
-<p>$$ Y’() =</p>
-<span class="math display">\[\begin{cases}
-
+<p><span class="math display">\[
+Y'(\lambda) =
+\begin{cases}
 \frac{Y^\lambda - 1}{\lambda} &amp; \text{if } \lambda \neq 0, \\
-
 \ln(Y) &amp; \text{if } \lambda = 0.
-
-\end{cases}\]</span>
-<p>$$</p>
+\end{cases}
+\]</span></p>
 <p><strong>Steps in R:</strong></p>
 <ol type="1">
 <li><strong>Fit the ANOVA model:</strong></li>
 </ol>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
 <li><strong>Apply Box-Cox:</strong></li>
 </ol>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>boxcox_fit <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(fit, <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>, <span class="at">by=</span><span class="fl">0.1</span>))</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>optimal_lambda <span class="ot">&lt;-</span> boxcox_fit<span class="sc">$</span>x[<span class="fu">which.max</span>(boxcox_fit<span class="sc">$</span>y)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>boxcox_fit <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(fit, <span class="at">lambda=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>, <span class="at">by=</span><span class="fl">0.1</span>))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>optimal_lambda <span class="ot">&lt;-</span> boxcox_fit<span class="sc">$</span>x[<span class="fu">which.max</span>(boxcox_fit<span class="sc">$</span>y)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
 <li><strong>Transform the Response:</strong></li>
 </ol>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Response_transformed <span class="ot">&lt;-</span> (data<span class="sc">$</span>Response<span class="sc">^</span>optimal_lambda <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> optimal_lambda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Response_transformed <span class="ot">&lt;-</span> (data<span class="sc">$</span>Response<span class="sc">^</span>optimal_lambda <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> optimal_lambda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
 <li><strong>Re-fit the Model with Transformed Data:</strong></li>
 </ol>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fit_transformed <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response_transformed <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_transformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fit_transformed <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response_transformed <span class="sc">~</span> FactorA <span class="sc">*</span> FactorB <span class="sc">*</span> FactorC, <span class="at">data =</span> data)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_transformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Interpretation:</strong> The optimal <span class="math inline">\(\lambda\)</span> indicates the best power transformation to achieve homoscedasticity and normality. Re-fitting the model on transformed data should show improved diagnostic plots.</p>
 </section>
 <section id="mathematical-proof-of-interaction-contrasts" class="level2">
@@ -2619,11 +2535,16 @@ Orthogonality refers to the statistical property where the columns of the design
 In a full factorial experiment with equal replication (a balanced design) and proper coding (such as using orthogonal contrasts), the main effects and interaction effects tend to be orthogonal. This means that the estimates for one effect do not “borrow” information from another, simplifying both interpretation and hypothesis testing. For example, in the model<br>
 <span class="math display">\[
 Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + (\alpha\beta)_{ij} + \epsilon_{ijk},
-\]</span> a balanced design will typically ensure that the estimates for <span class="math inline">\(\alpha_i\)</span>, <span class="math inline">\(\beta_j\)</span>, and <span class="math inline">\((\alpha\beta)_{ij}\)</span> are independent—provided that the design matrix is constructed with orthogonal contrasts. This is one of the reasons why balanced designs are highly valued—they help satisfy the conditions required for the Gauss-Markov theorem, ensuring that the least squares estimators are BLUE <span class="citation" data-cites="box2005">(<a href="#ref-box2005" role="doc-biblioref">Box et al., 2005</a>)</span>.</p></li>
-<li><p><strong>Orthogonality Without Balance:</strong><br>
-It is possible, in some cases, to have orthogonal contrasts even if the design is not perfectly balanced. However, achieving this often requires careful design construction (for instance, through specific contrast coding) that compensates for unequal sample sizes. In general, though, balance makes it much easier to achieve and verify orthogonality.</p></li>
-<li><p><strong>Balanced Does Not Always Imply Complete Orthogonality:</strong><br>
-Not every balanced design will automatically produce orthogonal estimates for all effects. For instance:</p>
+\]</span> the main effects <span class="math inline">\(\alpha_i\)</span>, <span class="math inline">\(\beta_j\)</span>, and <span class="math inline">\(\gamma_k\)</span> are orthogonal to each other, as are the interaction effects <span class="math inline">\((\alpha\beta)_{ij}\)</span> with the main effects.</p>
+<p>A balanced design will typically ensure that the estimates for <span class="math inline">\(\alpha_i\)</span>, <span class="math inline">\(\beta_j\)</span>, and <span class="math inline">\((\alpha\beta)_{ij}\)</span> are independent—provided that the design matrix is constructed with orthogonal contrasts. This is one of the reasons why balanced designs are highly valued—they help satisfy the conditions required for the Gauss-Markov theorem, ensuring that the least squares estimators are BLUE <span class="citation" data-cites="box2005">(<a href="#ref-box2005" role="doc-biblioref">Box et al., 2005</a>)</span>.</p></li>
+</ul>
+</section>
+<section id="orthogonality-without-balance-a-caveat" class="level2">
+<h2 class="anchored" data-anchor-id="orthogonality-without-balance-a-caveat">Orthogonality Without Balance: A Caveat</h2>
+<p>It is possible, in some cases, to have orthogonal contrasts even if the design is not perfectly balanced. However, achieving this often requires careful design construction (for instance, through specific contrast coding) that compensates for unequal sample sizes. In general, though, balance makes it much easier to achieve and verify orthogonality.</p>
+<ul>
+<li><strong>Balanced Does Not Always Imply Complete Orthogonality:</strong><br>
+Not every balanced design will automatically produce orthogonal estimates for all effects. For instance:
 <ul>
 <li>In fractional factorial designs or designs with certain constraints, balance in the number of observations per cell does not guarantee that the factor levels or contrasts are arranged in an orthogonal fashion.</li>
 <li>If the design involves aliasing or confounding (even in a balanced structure), some effects may not be independently estimated.</li>
@@ -2639,13 +2560,92 @@ Not every balanced design will automatically produce orthogonal estimates for al
 </ul>
 <p>Thus, while a balanced design is a key step toward orthogonal estimation of effects, it is not a blanket guarantee—additional considerations in the design (such as the structure of contrasts and the absence of confounding) are necessary to ensure that all effects, including interactions, are estimated orthogonally.</p>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+</section>
+<section id="proof-of-orthogonality-in-balanced-designs" class="level1">
+<h1>Proof of Orthogonality in Balanced Designs</h1>
+<p>In balanced designs, each treatment level (or combination in factorial designs) appears the same number of times. This balanced replication leads to important orthogonality properties that simplify the analysis of variance (ANOVA) and the interpretation of contrasts.</p>
+<section id="the-concept-of-orthogonality" class="level2">
+<h2 class="anchored" data-anchor-id="the-concept-of-orthogonality">The Concept of Orthogonality</h2>
+<p>Two vectors (or columns in a design matrix) are said to be <strong>orthogonal</strong> if their inner product is zero. In the context of experimental design, consider two contrast vectors <span class="math inline">\(\mathbf{c}_1\)</span> and <span class="math inline">\(\mathbf{c}_2\)</span> corresponding to two treatment contrasts. They are orthogonal if</p>
+<p><span class="math display">\[
+\mathbf{c}_1^\top \mathbf{c}_2 = 0.
+\]</span></p>
+<p>Orthogonality implies that the information contained in one contrast is independent of the information in the other.</p>
+</section>
+<section id="the-role-of-balance" class="level2">
+<h2 class="anchored" data-anchor-id="the-role-of-balance">The Role of Balance</h2>
+<p>For a one-way ANOVA with <span class="math inline">\(t\)</span> treatments and a common replication number <span class="math inline">\(n\)</span> for each treatment, the design matrix <span class="math inline">\(\mathbf{X}\)</span> can be structured so that the sum of the indicator variables for each treatment is equal. In such a design, the sum of squares associated with the treatments is completely independent of the error sum of squares.</p>
+</section>
+<section id="matrix-proof-of-orthogonality" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-proof-of-orthogonality">Matrix Proof of Orthogonality</h2>
+<p>Consider the following model for a balanced one-way design:</p>
+<p><span class="math display">\[
+Y_{ij} = \mu + \tau_i + \epsilon_{ij}, \quad i = 1, 2, \dots, t,\quad j = 1, 2, \dots, n,
+\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is the overall mean,</li>
+<li><span class="math inline">\(\tau_i\)</span> is the effect of the <span class="math inline">\(i\)</span>-th treatment (subject to the constraint <span class="math inline">\(\sum_{i=1}^{t} \tau_i = 0\)</span>),</li>
+<li><span class="math inline">\(\epsilon_{ij}\)</span> are independent errors with <span class="math inline">\(E[\epsilon_{ij}] = 0\)</span> and <span class="math inline">\(\operatorname{Var}(\epsilon_{ij}) = \sigma^2\)</span>.</li>
+</ul>
+<p>Let the design matrix <span class="math inline">\(\mathbf{X}\)</span> be partitioned as</p>
+<p><span class="math display">\[
+\mathbf{X} = \begin{pmatrix}
+\mathbf{1} &amp; \mathbf{X}_\tau
+\end{pmatrix},
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{1}\)</span> is an <span class="math inline">\(N \times 1\)</span> vector of ones (with <span class="math inline">\(N = tn\)</span>), and <span class="math inline">\(\mathbf{X}_\tau\)</span> is the <span class="math inline">\(N \times (t-1)\)</span> matrix representing the treatment effects with an appropriate set of contrasts.</p>
+<p>For a balanced design the structure of <span class="math inline">\(\mathbf{X}_\tau\)</span> ensures that</p>
+<p><span class="math display">\[
+\mathbf{X}_\tau^\top \mathbf{X}_\tau = k\, \mathbf{I}_{t-1},
+\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is a constant proportional to the number of replications and <span class="math inline">\(\mathbf{I}_{t-1}\)</span> is the <span class="math inline">\((t-1)\times(t-1)\)</span> identity matrix. This result shows that the columns (i.e., the treatment contrasts) are orthogonal.</p>
+<section id="detailed-steps" class="level3">
+<h3 class="anchored" data-anchor-id="detailed-steps">Detailed Steps</h3>
 <ol type="1">
-<li>Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and Analysis of Experiments</em>. Springer.</li>
-<li>Montgomery, D. C., &amp; Runger, G. C. (2010). <em>Applied Statistics and Probability for Engineers</em>. Wiley.</li>
-<li>Christensen, R. (2018). <em>Analysis of Variance, Design, and Regression</em>. Chapman and Hall/CRC.</li>
+<li><p><strong>Balanced Replication:</strong></p>
+<p>Each treatment appears <span class="math inline">\(n\)</span> times so that the sum of the indicator for treatment <span class="math inline">\(i\)</span> is <span class="math inline">\(n\)</span>. For any two different treatments <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>:</p></li>
 </ol>
+<p><span class="math display">\[
+\sum_{l=1}^{N} x_{l,i} \, x_{l,j} = 0,
+\]</span></p>
+<p>when the columns are centered (i.e., after imposing the constraint <span class="math inline">\(\sum_{i=1}^{t} \tau_i = 0\)</span>). This centering is key to orthogonality.</p>
+<ol start="2" type="1">
+<li><p><strong>Contrast Construction:</strong></p>
+<p>When forming contrasts, one typically chooses contrast coefficients <span class="math inline">\(c_{i}\)</span> such that</p></li>
+</ol>
+<p><span class="math display">\[
+\sum_{i=1}^{t} c_{i} = 0.
+\]</span> For two contrasts <span class="math inline">\(\mathbf{c}^{(1)}\)</span> and <span class="math inline">\(\mathbf{c}^{(2)}\)</span>, the balance of the design implies</p>
+<p><span class="math display">\[
+\sum_{i=1}^{t} c^{(1)}_i \, c^{(2)}_i = 0.
+\]</span> This follows because, with equal replication, each contrast is scaled by <span class="math inline">\(n\)</span> and the orthogonality condition is preserved.</p>
+<ol start="3" type="1">
+<li><p><strong>Projection Interpretation:</strong></p>
+<p>The projection matrix onto the column space of <span class="math inline">\(\mathbf{X}_\tau\)</span> is given by</p></li>
+</ol>
+<p><span class="math display">\[
+\mathbf{P} = \mathbf{X}_\tau \left(\mathbf{X}_\tau^\top \mathbf{X}_\tau\right)^{-1}\mathbf{X}_\tau^\top.
+\]</span></p>
+<p>When <span class="math inline">\(\mathbf{X}_\tau^\top \mathbf{X}_\tau\)</span> is diagonal (as in the balanced case), the off-diagonal elements of the projection matrix vanish, indicating that the treatment effects are estimated independently (i.e., orthogonally).</p>
+</section>
+</section>
+<section id="intuitive-explanation" class="level2">
+<h2 class="anchored" data-anchor-id="intuitive-explanation">Intuitive Explanation</h2>
+<p>Imagine you have a set of equally weighted arrows (representing treatment contrasts) in a space. In a balanced design, these arrows point in mutually independent directions—none of the arrows “shadow” any other. As a result, any movement (or change) in one direction does not influence the measurement in any other direction. This geometrical interpretation is exactly what orthogonality means and why it simplifies the ANOVA table: the treatment sum of squares does not “contaminate” the error sum of squares.</p>
+</section>
+<section id="summary-4" class="level2">
+<h2 class="anchored" data-anchor-id="summary-4">Summary</h2>
+<p>The orthogonality in balanced designs stems from:</p>
+<ul>
+<li><strong>Equal replication:</strong> Each treatment is observed an equal number of times.</li>
+<li><strong>Properly constructed contrasts:</strong> With the constraint <span class="math inline">\(\sum_{i=1}^{t} \tau_i = 0\)</span>, contrasts satisfy <span class="math inline">\(\sum c_i = 0\)</span> and, hence, their inner products are zero.</li>
+<li><strong>Diagonal structure of <span class="math inline">\(\mathbf{X}_\tau^\top \mathbf{X}_\tau\)</span>:</strong> This ensures that the estimated effects are uncorrelated.</li>
+</ul>
+<p>This property is central in simplifying the statistical analysis, as it allows the decomposition of the total variability into independent components corresponding to treatments and error.</p>
+</section>
+<section id="references" class="level2">
+
 
 
 
@@ -2655,6 +2655,12 @@ Not every balanced design will automatically produce orthogonal estimates for al
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-box2005" class="csl-entry" role="listitem">
 Box, G. E. P., Hunter, J. S., &amp; Hunter, W. G. (2005). <em>Statistics for experimenters: <span>Design</span>, innovation and discovery</em> (2nd ed.). Wiley.
+</div>
+<div id="ref-christensen2018" class="csl-entry" role="listitem">
+Christensen, R. (2018). <em>Analysis of variance, design, and regression: Linear modeling for unbalanced data</em> (2nd ed.). <span>Chapman and Hall/CRC</span>.
+</div>
+<div id="ref-dean2017" class="csl-entry" role="listitem">
+Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em> (2nd ed.). Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52250-0">https://doi.org/10.1007/978-3-319-52250-0</a>
 </div>
 <div id="ref-montgomery2020a" class="csl-entry" role="listitem">
 Montgomery, D. C. (2020). <em>Design and analysis of experiments</em> (10th ed.). Wiley.

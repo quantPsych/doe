@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -71,6 +105,35 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="Midterm Review – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
@@ -171,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">11-Jan-2025</p>
+        <p class="date">04-Mar-2025</p>
       </div>
     </div>
     
@@ -293,8 +356,103 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#review-questions-for-exam-1--part-1" id="toc-review-questions-for-exam-1--part-1" class="nav-link active" data-scroll-target="#review-questions-for-exam-1--part-1">Review Questions for Exam 1- Part 1</a>
+  <ul class="collapse">
+  <li><a href="#chapter-1-introduction-to-design-and-analysis-of-experiments" id="toc-chapter-1-introduction-to-design-and-analysis-of-experiments" class="nav-link" data-scroll-target="#chapter-1-introduction-to-design-and-analysis-of-experiments"><strong>Chapter 1: Introduction to Design and Analysis of Experiments</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-questions" id="toc-conceptual-questions" class="nav-link" data-scroll-target="#conceptual-questions"><strong>Conceptual Questions</strong></a></li>
+  <li><a href="#computational-questions" id="toc-computational-questions" class="nav-link" data-scroll-target="#computational-questions"><strong>Computational Questions</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-2-basic-statistical-concepts-in-experimental-design" id="toc-chapter-2-basic-statistical-concepts-in-experimental-design" class="nav-link" data-scroll-target="#chapter-2-basic-statistical-concepts-in-experimental-design"><strong>Chapter 2: Basic Statistical Concepts in Experimental Design</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-questions-1" id="toc-conceptual-questions-1" class="nav-link" data-scroll-target="#conceptual-questions-1"><strong>Conceptual Questions</strong></a></li>
+  <li><a href="#computational-questions-1" id="toc-computational-questions-1" class="nav-link" data-scroll-target="#computational-questions-1"><strong>Computational Questions</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-3-completely-randomized-designs" id="toc-chapter-3-completely-randomized-designs" class="nav-link" data-scroll-target="#chapter-3-completely-randomized-designs"><strong>Chapter 3: Completely Randomized Designs</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-questions-2" id="toc-conceptual-questions-2" class="nav-link" data-scroll-target="#conceptual-questions-2"><strong>Conceptual Questions</strong></a></li>
+  <li><a href="#computational-questions-2" id="toc-computational-questions-2" class="nav-link" data-scroll-target="#computational-questions-2"><strong>Computational Questions</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-4-factorial-designs" id="toc-chapter-4-factorial-designs" class="nav-link" data-scroll-target="#chapter-4-factorial-designs"><strong>Chapter 4: Factorial Designs</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-questions-3" id="toc-conceptual-questions-3" class="nav-link" data-scroll-target="#conceptual-questions-3"><strong>Conceptual Questions</strong></a></li>
+  <li><a href="#computational-questions-3" id="toc-computational-questions-3" class="nav-link" data-scroll-target="#computational-questions-3"><strong>Computational Questions</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-5-analysis-of-variance-anova" id="toc-chapter-5-analysis-of-variance-anova" class="nav-link" data-scroll-target="#chapter-5-analysis-of-variance-anova"><strong>Chapter 5: Analysis of Variance (ANOVA)</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-questions-4" id="toc-conceptual-questions-4" class="nav-link" data-scroll-target="#conceptual-questions-4"><strong>Conceptual Questions</strong></a></li>
+  <li><a href="#computational-questions-4" id="toc-computational-questions-4" class="nav-link" data-scroll-target="#computational-questions-4"><strong>Computational Questions</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#solutions-and-explanations" id="toc-solutions-and-explanations" class="nav-link" data-scroll-target="#solutions-and-explanations">Solutions And Explanations</a>
+  <ul class="collapse">
+  <li><a href="#exam-1-review-questions---part-1" id="toc-exam-1-review-questions---part-1" class="nav-link" data-scroll-target="#exam-1-review-questions---part-1">Exam 1: Review Questions - Part 1</a>
+  <ul class="collapse">
+  <li><a href="#question-9-probability-of-a-light-bulb-lasting-more-than-1300-hours" id="toc-question-9-probability-of-a-light-bulb-lasting-more-than-1300-hours" class="nav-link" data-scroll-target="#question-9-probability-of-a-light-bulb-lasting-more-than-1300-hours"><strong>Question 9: Probability of a light Bulb Lasting More than 1300 hours</strong></a></li>
+  <li><a href="#question-10-probability-that-sample-mean-52" id="toc-question-10-probability-that-sample-mean-52" class="nav-link" data-scroll-target="#question-10-probability-that-sample-mean-52"><strong>Question 10: Probability that Sample Mean &gt; 52</strong></a></li>
+  <li><a href="#question-14-anova-table-for-three-diets" id="toc-question-14-anova-table-for-three-diets" class="nav-link" data-scroll-target="#question-14-anova-table-for-three-diets"><strong>Question 14: ANOVA Table for Three Diets</strong></a></li>
+  <li><a href="#question-15-degrees-of-freedom" id="toc-question-15-degrees-of-freedom" class="nav-link" data-scroll-target="#question-15-degrees-of-freedom"><strong>Question 15: Degrees of Freedom</strong></a></li>
+  <li><a href="#question-19-main-and-interaction-effects" id="toc-question-19-main-and-interaction-effects" class="nav-link" data-scroll-target="#question-19-main-and-interaction-effects"><strong>Question 19: Main and Interaction Effects</strong></a></li>
+  <li><a href="#question-20-total-observations-in-a-23-factorial-design" id="toc-question-20-total-observations-in-a-23-factorial-design" class="nav-link" data-scroll-target="#question-20-total-observations-in-a-23-factorial-design"><strong>Question 20: Total Observations in a <span class="math inline">\(2^3\)</span> Factorial Design</strong></a></li>
+  <li><a href="#question-24-one-way-anova-table" id="toc-question-24-one-way-anova-table" class="nav-link" data-scroll-target="#question-24-one-way-anova-table"><strong>Question 24: One-Way ANOVA Table</strong></a></li>
+  <li><a href="#question-25-f-ratios-for-two-way-anova" id="toc-question-25-f-ratios-for-two-way-anova" class="nav-link" data-scroll-target="#question-25-f-ratios-for-two-way-anova"><strong>Question 25: F-ratios for Two-Way ANOVA</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exam-1-review-questions---part-2" id="toc-exam-1-review-questions---part-2" class="nav-link" data-scroll-target="#exam-1-review-questions---part-2">Exam 1: Review Questions - Part 2</a>
+  <ul class="collapse">
+  <li><a href="#chapter-1-introduction-to-design-and-analysis-of-experiments-1" id="toc-chapter-1-introduction-to-design-and-analysis-of-experiments-1" class="nav-link" data-scroll-target="#chapter-1-introduction-to-design-and-analysis-of-experiments-1"><strong>Chapter 1: Introduction to Design and Analysis of Experiments</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-questions-5" id="toc-conceptual-questions-5" class="nav-link" data-scroll-target="#conceptual-questions-5"><strong>Conceptual Questions</strong></a></li>
+  <li><a href="#numerical-computational-problems" id="toc-numerical-computational-problems" class="nav-link" data-scroll-target="#numerical-computational-problems"><strong>Numerical &amp; Computational Problems</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-2-basic-statistical-concepts-in-experimental-design-1" id="toc-chapter-2-basic-statistical-concepts-in-experimental-design-1" class="nav-link" data-scroll-target="#chapter-2-basic-statistical-concepts-in-experimental-design-1"><strong>Chapter 2: Basic Statistical Concepts in Experimental Design</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-proof-based-questions" id="toc-conceptual-proof-based-questions" class="nav-link" data-scroll-target="#conceptual-proof-based-questions"><strong>Conceptual &amp; Proof-Based Questions</strong></a></li>
+  <li><a href="#numerical-r-based-interpretation" id="toc-numerical-r-based-interpretation" class="nav-link" data-scroll-target="#numerical-r-based-interpretation"><strong>Numerical &amp; R-Based Interpretation</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-3-completely-randomized-designs-crd-blocking-designs" id="toc-chapter-3-completely-randomized-designs-crd-blocking-designs" class="nav-link" data-scroll-target="#chapter-3-completely-randomized-designs-crd-blocking-designs">Chapter 3: Completely Randomized Designs (CRD) &amp; Blocking Designs</a>
+  <ul class="collapse">
+  <li><a href="#conceptual-proof-based-questions-1" id="toc-conceptual-proof-based-questions-1" class="nav-link" data-scroll-target="#conceptual-proof-based-questions-1">Conceptual &amp; Proof-Based Questions</a></li>
+  <li><a href="#numerical-computational-problems-1" id="toc-numerical-computational-problems-1" class="nav-link" data-scroll-target="#numerical-computational-problems-1"><strong>Numerical &amp; Computational Problems</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-4-factorial-designs-1" id="toc-chapter-4-factorial-designs-1" class="nav-link" data-scroll-target="#chapter-4-factorial-designs-1"><strong>Chapter 4: Factorial Designs</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-proof-based-questions-2" id="toc-conceptual-proof-based-questions-2" class="nav-link" data-scroll-target="#conceptual-proof-based-questions-2"><strong>Conceptual &amp; Proof-Based Questions</strong></a></li>
+  <li><a href="#numerical-r-based-interpretation-1" id="toc-numerical-r-based-interpretation-1" class="nav-link" data-scroll-target="#numerical-r-based-interpretation-1"><strong>Numerical &amp; R-Based Interpretation</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-5-analysis-of-variance-anova-1" id="toc-chapter-5-analysis-of-variance-anova-1" class="nav-link" data-scroll-target="#chapter-5-analysis-of-variance-anova-1"><strong>Chapter 5: Analysis of Variance (ANOVA)</strong></a>
+  <ul class="collapse">
+  <li><a href="#conceptual-proof-based-questions-3" id="toc-conceptual-proof-based-questions-3" class="nav-link" data-scroll-target="#conceptual-proof-based-questions-3"><strong>Conceptual &amp; Proof-Based Questions</strong></a></li>
+  <li><a href="#numerical-r-based-interpretation-2" id="toc-numerical-r-based-interpretation-2" class="nav-link" data-scroll-target="#numerical-r-based-interpretation-2"><strong>Numerical &amp; R-Based Interpretation</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-2-basic-statistical-concepts-in-experimental-design-2" id="toc-chapter-2-basic-statistical-concepts-in-experimental-design-2" class="nav-link" data-scroll-target="#chapter-2-basic-statistical-concepts-in-experimental-design-2"><strong>Chapter 2: Basic Statistical Concepts in Experimental Design</strong></a>
+  <ul class="collapse">
+  <li><a href="#q9-probability-of-survival-beyond-22-months" id="toc-q9-probability-of-survival-beyond-22-months" class="nav-link" data-scroll-target="#q9-probability-of-survival-beyond-22-months"><strong>Q9: Probability of Survival beyond 22 months</strong></a></li>
+  <li><a href="#q10-r-output-interpretation-one-way-anova" id="toc-q10-r-output-interpretation-one-way-anova" class="nav-link" data-scroll-target="#q10-r-output-interpretation-one-way-anova"><strong>Q10: R Output Interpretation (One-Way ANOVA)</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-3-factorial-design" id="toc-chapter-3-factorial-design" class="nav-link" data-scroll-target="#chapter-3-factorial-design"><strong>Chapter 3: Factorial Design</strong></a>
+  <ul class="collapse">
+  <li><a href="#q14-main-and-interaction-effects" id="toc-q14-main-and-interaction-effects" class="nav-link" data-scroll-target="#q14-main-and-interaction-effects"><strong>Q14: Main and Interaction Effects</strong></a></li>
+  <li><a href="#q15-two-way-anova-r-output-interpretation" id="toc-q15-two-way-anova-r-output-interpretation" class="nav-link" data-scroll-target="#q15-two-way-anova-r-output-interpretation"><strong>Q15: Two-Way ANOVA (R Output Interpretation)</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-4-factorial-designs-2" id="toc-chapter-4-factorial-designs-2" class="nav-link" data-scroll-target="#chapter-4-factorial-designs-2"><strong>Chapter 4: Factorial Designs</strong></a>
+  <ul class="collapse">
+  <li><a href="#q19-total-observations-in-a-23-factorial-design" id="toc-q19-total-observations-in-a-23-factorial-design" class="nav-link" data-scroll-target="#q19-total-observations-in-a-23-factorial-design"><strong>Q19: Total Observations in a <span class="math inline">\(2^3\)</span> Factorial Design</strong></a></li>
+  <li><a href="#q20-factorial-design-r-output-interpretation" id="toc-q20-factorial-design-r-output-interpretation" class="nav-link" data-scroll-target="#q20-factorial-design-r-output-interpretation"><strong>Q20: Factorial Design (R Output Interpretation)</strong></a></li>
+  </ul></li>
+  <li><a href="#chapter-5-analysis-of-variance-anova-2" id="toc-chapter-5-analysis-of-variance-anova-2" class="nav-link" data-scroll-target="#chapter-5-analysis-of-variance-anova-2"><strong>Chapter 5: Analysis of Variance (ANOVA)</strong></a>
+  <ul class="collapse">
+  <li><a href="#q24-one-way-anova" id="toc-q24-one-way-anova" class="nav-link" data-scroll-target="#q24-one-way-anova"><strong>Q24: One-Way ANOVA</strong></a></li>
+  <li><a href="#q25-one-way-anova-r-output-interpretation" id="toc-q25-one-way-anova-r-output-interpretation" class="nav-link" data-scroll-target="#q25-one-way-anova-r-output-interpretation"><strong>Q25: One-Way ANOVA (R Output Interpretation)</strong></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -303,8 +461,1003 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="review-questions-for-exam-1--part-1" class="level1">
+<h1>Review Questions for Exam 1- Part 1</h1>
+<section id="chapter-1-introduction-to-design-and-analysis-of-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-1-introduction-to-design-and-analysis-of-experiments"><strong>Chapter 1: Introduction to Design and Analysis of Experiments</strong></h2>
+<section id="conceptual-questions" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-questions"><strong>Conceptual Questions</strong></h3>
+<ol type="1">
+<li>What is the primary difference between an <strong>observational study</strong> and a <strong>designed experiment</strong>?
+<ul>
+<li><ol type="A">
+<li>Observational studies actively manipulate variables, while designed experiments do not.</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>Observational studies establish causation, while designed experiments establish correlation.</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>Observational studies do not impose treatments, while designed experiments actively manipulate variables.</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>Observational studies always involve randomization, while designed experiments do not.</li>
+</ol></li>
+</ul></li>
+<li>Explain why <strong>randomization</strong> is a key principle in the design of experiments.</li>
+<li>What are the three basic principles of experimental design? Provide a brief explanation of each.</li>
+</ol>
+</section>
+<section id="computational-questions" class="level3">
+<h3 class="anchored" data-anchor-id="computational-questions"><strong>Computational Questions</strong></h3>
+<ol type="1">
+<li>Suppose a study is conducted on the effect of a new fertilizer on crop yield. There are <strong>two fertilizer types (A, B)</strong> and <strong>three different soil conditions (1, 2, 3)</strong>. If each combination of fertilizer type and soil condition is tested on <strong>four plots</strong>, how many total experimental units are there?</li>
+<li>A completely randomized design is conducted with <strong>4 treatments</strong> and <strong>5 replicates per treatment</strong>. Construct an appropriate ANOVA table, identifying sources of variation and degrees of freedom.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-2-basic-statistical-concepts-in-experimental-design" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-2-basic-statistical-concepts-in-experimental-design"><strong>Chapter 2: Basic Statistical Concepts in Experimental Design</strong></h2>
+<section id="conceptual-questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-questions-1"><strong>Conceptual Questions</strong></h3>
+<ol type="1">
+<li>Define the following terms:
+<ul>
+<li>Population vs.&nbsp;Sample</li>
+<li>Parameter vs.&nbsp;Statistic</li>
+<li>Sampling Distribution</li>
+</ul></li>
+<li>Why is it important for a sample to be <strong>random</strong> when conducting statistical inference?</li>
+<li>Which of the following is NOT a property of the normal distribution?
+<ul>
+<li><ol type="A">
+<li>It is symmetric about its mean.</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>It has a mean of 0 and a standard deviation of 1 in all cases.</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>The total area under the curve is 1.</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>The mean, median, and mode are equal.</li>
+</ol></li>
+</ul></li>
+</ol>
+</section>
+<section id="computational-questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="computational-questions-1"><strong>Computational Questions</strong></h3>
+<ol type="1">
+<li>The lifespan of a type of light bulb follows a normal distribution with a <strong>mean of 1200 hours</strong> and a <strong>standard deviation of 100 hours</strong>. If a bulb is randomly selected, what is the probability that it lasts <strong>more than 1300 hours</strong>?</li>
+<li>A random sample of 40 observations is drawn from a normal population with <strong>μ = 50</strong> and <strong>σ = 10</strong>. Compute the probability that the sample mean <strong>is greater than 52</strong>.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-3-completely-randomized-designs" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-3-completely-randomized-designs"><strong>Chapter 3: Completely Randomized Designs</strong></h2>
+<section id="conceptual-questions-2" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-questions-2"><strong>Conceptual Questions</strong></h3>
+<ol type="1">
+<li>What is the purpose of <strong>blocking</strong> in an experiment? When should it be used?</li>
+<li>Which of the following statements about <strong>randomized complete block designs (RCBD)</strong> is true?
+<ul>
+<li><ol type="A">
+<li>It is used to remove known sources of variability.</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>It requires an equal number of observations for each treatment.</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>It assumes treatments and blocks are independent.</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>All of the above.</li>
+</ol></li>
+</ul></li>
+<li>Describe the difference between <strong>fixed effects</strong> and <strong>random effects</strong> models.</li>
+</ol>
+</section>
+<section id="computational-questions-2" class="level3">
+<h3 class="anchored" data-anchor-id="computational-questions-2"><strong>Computational Questions</strong></h3>
+<ol type="1">
+<li><p>An experiment tests the effect of <strong>three different diets</strong> on the weight gain of pigs. A total of <strong>15 pigs</strong> are used, with <strong>five pigs randomly assigned to each diet</strong>. The following sum of squares are obtained:</p>
+<ul>
+<li><strong>Total Sum of Squares (SST) = 400</strong></li>
+<li><strong>Sum of Squares for Treatment (SSTr) = 300</strong></li>
+<li><strong>Sum of Squares for Error (SSE) = 100</strong></li>
+</ul>
+<p>Construct the ANOVA table and test whether diet has a significant effect at <strong>α = 0.05</strong>.</p></li>
+<li><p>Suppose an experiment consists of <strong>four treatment levels</strong> with <strong>six observations per treatment</strong>. Calculate the <strong>degrees of freedom</strong> for the following:</p>
+<ul>
+<li>Treatment</li>
+<li>Error</li>
+<li>Total</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-4-factorial-designs" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4-factorial-designs"><strong>Chapter 4: Factorial Designs</strong></h2>
+<section id="conceptual-questions-3" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-questions-3"><strong>Conceptual Questions</strong></h3>
+<ol type="1">
+<li>What is the main advantage of <strong>factorial designs</strong> compared to <strong>one-factor-at-a-time (OFAT) experiments</strong>?</li>
+<li>A <strong><span class="math inline">\(2^2\)</span> factorial design</strong> involves two factors, each at two levels. How many treatment combinations are there?</li>
+<li>How do you interpret the <strong>main effect</strong> and <strong>interaction effect</strong> in a factorial design?</li>
+</ol>
+</section>
+<section id="computational-questions-3" class="level3">
+<h3 class="anchored" data-anchor-id="computational-questions-3"><strong>Computational Questions</strong></h3>
+<ol type="1">
+<li><p>Consider a <strong><span class="math inline">\(2^2\)</span> factorial experiment</strong> where Factor A has levels <strong>A1 and A2</strong>, and Factor B has levels <strong>B1 and B2</strong>. The following treatment means were obtained:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Treatment</th>
+<th>Mean Response</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A1B1</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>A1B2</td>
+<td>30</td>
+</tr>
+<tr class="odd">
+<td>A2B1</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td>A2B2</td>
+<td>35</td>
+</tr>
+</tbody>
+</table>
+<p>Compute:</p>
+<ul>
+<li>The <strong>main effect</strong> of A</li>
+<li>The <strong>main effect</strong> of B</li>
+<li>The <strong>interaction effect</strong> <span class="math inline">\(AB\)</span></li>
+</ul></li>
+<li><p>A researcher conducts a <strong><span class="math inline">\(2^3\)</span> factorial experiment</strong> with <strong>factors A, B, and C</strong>. The experiment is replicated <strong>twice</strong>. How many total observations are required?</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-5-analysis-of-variance-anova" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-5-analysis-of-variance-anova"><strong>Chapter 5: Analysis of Variance (ANOVA)</strong></h2>
+<section id="conceptual-questions-4" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-questions-4"><strong>Conceptual Questions</strong></h3>
+<ol type="1">
+<li>What assumptions must be met for a <strong>one-way ANOVA</strong> to be valid?</li>
+<li>In a <strong>two-way ANOVA</strong>, how many hypotheses are tested, and what do they represent?</li>
+<li>A researcher wants to compare the effectiveness of <strong>three fertilizers</strong> on crop yield. What type of ANOVA should be used?</li>
+</ol>
+</section>
+<section id="computational-questions-4" class="level3">
+<h3 class="anchored" data-anchor-id="computational-questions-4"><strong>Computational Questions</strong></h3>
+<ol type="1">
+<li><p>A researcher conducts a <strong>one-way ANOVA</strong> with <strong>three groups</strong> (<span class="math inline">\(n_1 = 8, n_2 = 8, n_3 = 8\)</span>) and calculates the following sum of squares:</p>
+<ul>
+<li><strong>SST = 90</strong></li>
+<li><strong>SSTr = 60</strong></li>
+<li><strong>SSE = 30</strong></li>
+</ul>
+<p>Construct the ANOVA table and test the significance at <strong><span class="math inline">\(\alpha = 0.05\)</span></strong>.</p></li>
+<li><p>In a <strong>two-way ANOVA</strong>, the sum of squares values are given:</p>
+<ul>
+<li><strong>SST = 180</strong></li>
+<li><strong>SSA = 60</strong></li>
+<li><strong>SSB = 40</strong></li>
+<li><strong>SSAB = 30</strong></li>
+<li><strong>SSE = 50</strong></li>
+</ul>
+<p>Compute the <strong>F-ratios</strong> for Factor A, Factor B, and the interaction term, assuming the total sample size is <strong>30</strong>.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="solutions-and-explanations" class="level1">
+<h1>Solutions And Explanations</h1>
+<section id="exam-1-review-questions---part-1" class="level2">
+<h2 class="anchored" data-anchor-id="exam-1-review-questions---part-1">Exam 1: Review Questions - Part 1</h2>
+<section id="question-9-probability-of-a-light-bulb-lasting-more-than-1300-hours" class="level3">
+<h3 class="anchored" data-anchor-id="question-9-probability-of-a-light-bulb-lasting-more-than-1300-hours"><strong>Question 9: Probability of a light Bulb Lasting More than 1300 hours</strong></h3>
+<ul>
+<li>Given: <span class="math inline">\(X \sim N(1200, 100^2)\)</span></li>
+<li>Standardizing:</li>
+</ul>
+<p><span class="math display">\[
+Z = \frac{1300 - 1200}{100} = 1
+\]</span></p>
+<ul>
+<li>Using the standard normal table:</li>
+</ul>
+<p><span class="math display">\[
+P(Z &gt; 1) = 1 - P(Z \leq 1) = 1 - 0.8413 = 0.1587
+\]</span></p>
+<ul>
+<li><strong>Answer:</strong> <strong>0.1587</strong> (approximately <strong>15.87%</strong>)</li>
+</ul>
+<hr>
+</section>
+<section id="question-10-probability-that-sample-mean-52" class="level3">
+<h3 class="anchored" data-anchor-id="question-10-probability-that-sample-mean-52"><strong>Question 10: Probability that Sample Mean &gt; 52</strong></h3>
+<ul>
+<li>Given: <span class="math inline">\(X \sim N(50, 10^2)\)</span>, sample size <span class="math inline">\(n = 40\)</span></li>
+<li>Standard deviation of sample mean:</li>
+</ul>
+<p><span class="math display">\[
+\sigma_{\bar{X}} = \frac{10}{\sqrt{40}} = 1.58
+\]</span></p>
+<ul>
+<li>Standardizing:</li>
+</ul>
+<p><span class="math display">\[
+Z = \frac{52 - 50}{1.58} = 1.27
+\]</span></p>
+<ul>
+<li>From the normal table:</li>
+</ul>
+<p><span class="math display">\[
+P(Z &gt; 1.27) = 1 - 0.8980 = 0.1029
+\]</span></p>
+<ul>
+<li><strong>Answer:</strong> <strong>0.1029</strong> (approximately <strong>10.29%</strong>)</li>
+</ul>
+<hr>
+</section>
+<section id="question-14-anova-table-for-three-diets" class="level3">
+<h3 class="anchored" data-anchor-id="question-14-anova-table-for-three-diets"><strong>Question 14: ANOVA Table for Three Diets</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>SS</th>
+<th>df</th>
+<th>MS</th>
+<th>F</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td>300</td>
+<td>2</td>
+<td>150.000</td>
+<td>18.0</td>
+<td>0.000244</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td>100</td>
+<td>12</td>
+<td>8.333</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>400</td>
+<td>14</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The F-statistic <strong>F = 18.0</strong>, and the p-value <strong>0.000244</strong> is much less than 0.05.</li>
+<li><strong>Conclusion:</strong> <strong>Reject <span class="math inline">\(H_0\)</span></strong>; at least one diet significantly affects weight gain.</li>
+</ul>
+<hr>
+</section>
+<section id="question-15-degrees-of-freedom" class="level3">
+<h3 class="anchored" data-anchor-id="question-15-degrees-of-freedom"><strong>Question 15: Degrees of Freedom</strong></h3>
+<ul>
+<li><strong>Treatment df</strong> = <span class="math inline">\(4 - 1 = 3\)</span></li>
+<li><strong>Error df</strong> = <span class="math inline">\((4 \times 6) - 4 = 20\)</span></li>
+<li><strong>Total df</strong> = <span class="math inline">\(3 + 20 = 23\)</span></li>
+</ul>
+<p><strong>Answer:</strong> <strong>(3, 20, 23)</strong></p>
+<hr>
+</section>
+<section id="question-19-main-and-interaction-effects" class="level3">
+<h3 class="anchored" data-anchor-id="question-19-main-and-interaction-effects"><strong>Question 19: Main and Interaction Effects</strong></h3>
+<ul>
+<li><strong>Main Effect of A</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\frac{(A2B1 + A2B2)}{2} - \frac{(A1B1 + A1B2)}{2} = \frac{(25 + 35)}{2} - \frac{(20 + 30)}{2} = 5
+\]</span></p>
+<ul>
+<li><strong>Main Effect of B</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\frac{(A1B2 + A2B2)}{2} - \frac{(A1B1 + A2B1)}{2} = \frac{(30 + 35)}{2} - \frac{(20 + 25)}{2} = 10
+\]</span></p>
+<ul>
+<li><strong>Interaction Effect <span class="math inline">\(AB\)</span></strong>:</li>
+</ul>
+<p><span class="math display">\[
+\frac{(A1B1 + A2B2)}{2} - \frac{(A1B2 + A2B1)}{2} = \frac{(20 + 35)}{2} - \frac{(30 + 25)}{2} = 0
+\]</span></p>
+<p><strong>Answer:</strong> <strong>(5, 10, 0)</strong></p>
+<hr>
+</section>
+<section id="question-20-total-observations-in-a-23-factorial-design" class="level3">
+<h3 class="anchored" data-anchor-id="question-20-total-observations-in-a-23-factorial-design"><strong>Question 20: Total Observations in a <span class="math inline">\(2^3\)</span> Factorial Design</strong></h3>
+<p><span class="math display">\[
+\text{Total Observations} = (2^3) \times 2 = 16
+\]</span></p>
+<p><strong>Answer:</strong> <strong>16 observations</strong></p>
+<hr>
+</section>
+<section id="question-24-one-way-anova-table" class="level3">
+<h3 class="anchored" data-anchor-id="question-24-one-way-anova-table"><strong>Question 24: One-Way ANOVA Table</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>SS</th>
+<th>df</th>
+<th>MS</th>
+<th>F</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td>60</td>
+<td>2</td>
+<td>30.000</td>
+<td>21.0</td>
+<td>0.00001</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td>30</td>
+<td>21</td>
+<td>1.428</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>90</td>
+<td>23</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The F-statistic <strong>F = 21.0</strong>, and the p-value <strong>0.00001</strong> is much smaller than 0.05.</li>
+<li><strong>Conclusion:</strong> <strong>Reject <span class="math inline">\(H_0\)</span></strong>; there is a significant effect of treatment on response.</li>
+</ul>
+<hr>
+</section>
+<section id="question-25-f-ratios-for-two-way-anova" class="level3">
+<h3 class="anchored" data-anchor-id="question-25-f-ratios-for-two-way-anova"><strong>Question 25: F-ratios for Two-Way ANOVA</strong></h3>
+<ul>
+<li><strong><span class="math inline">\(F_A\)</span> (Factor A)</strong></li>
+</ul>
+<p><span class="math display">\[
+\frac{MS_A}{MSE} = \frac{60}{2.083} = 28.8
+\]</span></p>
+<ul>
+<li><strong><span class="math inline">\(F_B\)</span> (Factor B)</strong></li>
+</ul>
+<p><span class="math display">\[
+\frac{MS_B}{MSE} = \frac{40}{4.167} = 9.6
+\]</span></p>
+<ul>
+<li><strong><span class="math inline">\(F_{AB}\)</span> (Interaction)</strong></li>
+</ul>
+<p><span class="math display">\[
+\frac{MS_{AB}}{MSE} = \frac{30}{4.167} = 7.2
+\]</span></p>
+<p><strong>Answer:</strong> <strong>(28.8, 9.6, 7.2)</strong></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="exam-1-review-questions---part-2" class="level1">
+<h1>Exam 1: Review Questions - Part 2</h1>
+<section id="chapter-1-introduction-to-design-and-analysis-of-experiments-1" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-1-introduction-to-design-and-analysis-of-experiments-1"><strong>Chapter 1: Introduction to Design and Analysis of Experiments</strong></h2>
+<section id="conceptual-questions-5" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-questions-5"><strong>Conceptual Questions</strong></h3>
+<ol type="1">
+<li><strong>(Short Answer)</strong> Explain the three fundamental principles of experimental design and how they contribute to the validity of an experiment.</li>
+<li><strong>(Multiple Choice)</strong> Which of the following is <strong>not</strong> a key advantage of a designed experiment over an observational study?
+<ul>
+<li><ol type="A">
+<li>Ability to establish causality</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>Ability to control variability</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>Requires fewer resources in all cases</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>Allows for factor interactions to be studied</li>
+</ol></li>
+</ul></li>
+<li><strong>(Explanation Required)</strong> Why is randomization crucial in experimental design? Provide an example where lack of randomization leads to bias.</li>
+</ol>
+</section>
+<section id="numerical-computational-problems" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-computational-problems"><strong>Numerical &amp; Computational Problems</strong></h3>
+<ol type="1">
+<li><strong>(Completely Randomized Design)</strong> An experimenter is testing the effect of <strong>three different fertilizers</strong> on plant growth. <strong>Four plants</strong> are assigned to each fertilizer treatment. Construct a <strong>completely randomized design (CRD)</strong> layout and describe the randomization procedure.</li>
+<li><strong>(ANOVA Table Construction)</strong> A researcher tests the effects of <strong>four different training programs</strong> on running performance. The following sum of squares values are obtained:
+<ul>
+<li><strong>Total SS = 500</strong>, <strong>Treatment SS = 300</strong>, <strong>Error SS = 200</strong></li>
+<li>There are <strong>5 subjects per group</strong></li>
+</ul>
+Construct the <strong>ANOVA table</strong> and test whether training programs have a significant effect at <strong><span class="math inline">\(\alpha = 0.05\)</span></strong>.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-2-basic-statistical-concepts-in-experimental-design-1" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-2-basic-statistical-concepts-in-experimental-design-1"><strong>Chapter 2: Basic Statistical Concepts in Experimental Design</strong></h2>
+<section id="conceptual-proof-based-questions" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-proof-based-questions"><strong>Conceptual &amp; Proof-Based Questions</strong></h3>
+<ol type="1">
+<li><strong>(Conceptual)</strong> Define the following and provide an example of each:
+<ul>
+<li>Population vs.&nbsp;Sample</li>
+<li>Parameter vs.&nbsp;Statistic</li>
+<li>Sampling Distribution</li>
+</ul></li>
+<li><strong>(Proof)</strong> Prove that the <strong>sample mean is an unbiased estimator</strong> of the population mean.</li>
+<li><strong>(Short Answer)</strong> Explain why <strong>independent and identically distributed (i.i.d.) samples</strong> are a key assumption in many experimental designs.</li>
+</ol>
+</section>
+<section id="numerical-r-based-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-r-based-interpretation"><strong>Numerical &amp; R-Based Interpretation</strong></h3>
+<ol type="1">
+<li><p><strong>(Probability Computation)</strong> A new drug extends survival time, which follows a <strong>normal distribution with a mean of 18 months and a standard deviation of 4 months</strong>. What is the probability that a randomly selected patient survives more than <strong>22 months</strong>?</p></li>
+<li><p><strong>(R Output Interpretation)</strong> Below is an R output of a simple <strong>one-way ANOVA</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Analysis of Variance Table</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Response<span class="sc">:</span> Yield</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Df Sum Sq Mean Sq F value <span class="fu">Pr</span>(<span class="sc">&gt;</span>F)  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Treatment  <span class="dv">3</span>  <span class="fl">24.6</span>   <span class="fl">8.2</span>     <span class="fl">5.4</span>    <span class="fl">0.009</span>  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Residuals  <span class="dv">16</span> <span class="fl">24.3</span>   <span class="fl">1.5</span>                 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="a">
+<li><p>How many total observations are in the dataset?</p></li>
+<li><p>What is the decision at <strong><span class="math inline">\(\alpha = 0.05\)</span></strong>?</p></li>
+<li><p>What is the total sum of squares?</p></li>
+</ol></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-3-completely-randomized-designs-crd-blocking-designs" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-3-completely-randomized-designs-crd-blocking-designs">Chapter 3: Completely Randomized Designs (CRD) &amp; Blocking Designs</h2>
+<section id="conceptual-proof-based-questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-proof-based-questions-1">Conceptual &amp; Proof-Based Questions</h3>
+<ol type="1">
+<li><strong>(Conceptual)</strong> Describe when a <strong>randomized complete block design (RCBD)</strong> is preferred over a <strong>completely randomized design (CRD)</strong>.</li>
+<li><strong>(Proof-Based)</strong> Show that, under an ANOVA model, the total sum of squares can be decomposed as:</li>
+</ol>
+<p><span class="math display">\[
+SS_{Total} = SS_{Treatments} + SS_{Error}
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>(Short Answer)</strong> What are the advantages of using blocking in an experiment?</li>
+</ol>
+</section>
+<section id="numerical-computational-problems-1" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-computational-problems-1"><strong>Numerical &amp; Computational Problems</strong></h3>
+<ol type="1">
+<li><p><strong>(Factorial ANOVA Computation)</strong> A study examines the effects of <strong>two different fertilizers (A, B)</strong> and <strong>two irrigation methods (X, Y)</strong> on plant growth. The average growth (in cm) per treatment is given below:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Treatment</th>
+<th>Mean Growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A-X</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>A-Y</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>B-X</td>
+<td>22</td>
+</tr>
+<tr class="even">
+<td>B-Y</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+<p>Compute:</p>
+<ul>
+<li>The <strong>main effect</strong> of Fertilizer</li>
+<li>The <strong>main effect</strong> of Irrigation</li>
+<li>The <strong>interaction effect</strong> between Fertilizer and Irrigation</li>
+</ul></li>
+<li><p><strong>(R Output Interpretation: Two-Way ANOVA)</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Analysis of Variance Table</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Response<span class="sc">:</span> Growth</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Df Sum Sq Mean Sq F value <span class="fu">Pr</span>(<span class="sc">&gt;</span>F)  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Fertilizer  <span class="dv">1</span>  <span class="fl">45.6</span>   <span class="fl">45.6</span>    <span class="fl">12.3</span>    <span class="fl">0.004</span>  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Irrigation  <span class="dv">1</span>  <span class="fl">35.2</span>   <span class="fl">35.2</span>    <span class="fl">9.4</span>     <span class="fl">0.009</span>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Interaction <span class="dv">1</span>  <span class="fl">10.1</span>   <span class="fl">10.1</span>    <span class="fl">2.7</span>     <span class="fl">0.105</span>  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Residuals   <span class="dv">16</span> <span class="fl">59.8</span>   <span class="fl">3.74</span>                   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="a">
+<li><p>Which factors have a significant effect at <strong><span class="math inline">\(\alpha = 0.05\)</span></strong>?</p></li>
+<li><p>Interpret the <strong>interaction term</strong> in the context of the study.</p></li>
+<li><p>Compute the total sum of squares.</p></li>
+</ol></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-4-factorial-designs-1" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4-factorial-designs-1"><strong>Chapter 4: Factorial Designs</strong></h2>
+<section id="conceptual-proof-based-questions-2" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-proof-based-questions-2"><strong>Conceptual &amp; Proof-Based Questions</strong></h3>
+<ol type="1">
+<li><strong>(Conceptual)</strong> Why are <strong>factorial designs</strong> superior to <strong>one-factor-at-a-time (OFAT) designs</strong>?</li>
+<li><strong>(Proof-Based)</strong> Show that the <strong>expected mean square (EMS)</strong> for a factorial ANOVA follows:</li>
+</ol>
+<p><span class="math display">\[
+E(MS_Treatment) = \sigma^2 + \frac{n}{k} \sum (\tau_i^2)
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>(Short Answer)</strong> What does it mean if a <strong>factor interaction is significant</strong> in a factorial design?</li>
+</ol>
+</section>
+<section id="numerical-r-based-interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-r-based-interpretation-1"><strong>Numerical &amp; R-Based Interpretation</strong></h3>
+<ol type="1">
+<li><p><strong>(Factorial Design Computation)</strong> A <strong><span class="math inline">\(2^3\)</span> factorial design</strong> is conducted with <strong>three factors (A, B, C)</strong> at two levels each. If each treatment combination is replicated <strong>twice</strong>, how many total observations are needed?</p></li>
+<li><p><strong>(R Output for Factorial Design)</strong> Given the following R output:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Analysis of Variance Table</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Response<span class="sc">:</span> Time</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Df Sum Sq Mean Sq F value <span class="fu">Pr</span>(<span class="sc">&gt;</span>F)  </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>A  <span class="dv">1</span>  <span class="fl">30.2</span>   <span class="fl">30.2</span>    <span class="fl">8.5</span>    <span class="fl">0.007</span>  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>B  <span class="dv">1</span>  <span class="fl">10.1</span>   <span class="fl">10.1</span>    <span class="fl">2.8</span>    <span class="fl">0.103</span>  </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>A<span class="sc">:</span>B  <span class="dv">1</span>  <span class="fl">25.3</span>   <span class="fl">25.3</span>    <span class="fl">7.1</span>    <span class="fl">0.012</span>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>Residuals  <span class="dv">20</span>  <span class="fl">71.2</span>   <span class="fl">3.56</span>                   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="a">
+<li><p>What does the <strong>interaction term (A:B)</strong> suggest?</p></li>
+<li><p>Is Factor <strong>B</strong> significant at <span class="math inline">\(\alpha = 0.05\)</span>?</p></li>
+<li><p>Compute the total sum of squares.</p></li>
+</ol></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-5-analysis-of-variance-anova-1" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-5-analysis-of-variance-anova-1"><strong>Chapter 5: Analysis of Variance (ANOVA)</strong></h2>
+<section id="conceptual-proof-based-questions-3" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-proof-based-questions-3"><strong>Conceptual &amp; Proof-Based Questions</strong></h3>
+<ol type="1">
+<li><strong>(Conceptual)</strong> What are the key <strong>assumptions</strong> of ANOVA?</li>
+<li><strong>(Proof-Based)</strong> Derive the <strong>expected mean square (EMS)</strong> for the error term in an ANOVA model.</li>
+<li><strong>(Short Answer)</strong> What is the <strong>difference between a fixed-effects and a random-effects model</strong> in ANOVA?</li>
+</ol>
+</section>
+<section id="numerical-r-based-interpretation-2" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-r-based-interpretation-2"><strong>Numerical &amp; R-Based Interpretation</strong></h3>
+<ol type="1">
+<li><p><strong>(ANOVA Computation)</strong> A <strong>one-way ANOVA</strong> is conducted with <strong>three groups</strong> (<span class="math inline">\(n_1 = 8, n_2 = 8, n_3 = 8\)</span>) and the following sum of squares:</p>
+<ul>
+<li><strong>SST = 90</strong>, <strong>SSTr = 60</strong>, <strong>SSE = 30</strong></li>
+</ul>
+<p>Construct the <strong>ANOVA table</strong> and test the significance at <strong><span class="math inline">\(\alpha = 0.05\)</span></strong>.</p></li>
+<li><p><strong>(R Output for One-Way ANOVA)</strong> Given the R output:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Analysis of Variance Table</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Response<span class="sc">:</span> Score</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Df Sum Sq Mean Sq F value <span class="fu">Pr</span>(<span class="sc">&gt;</span>F)  </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Treatment  <span class="dv">2</span>  <span class="fl">50.1</span>   <span class="fl">25.05</span>   <span class="fl">7.2</span>    <span class="fl">0.002</span>  </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>Residuals  <span class="dv">27</span>  <span class="fl">93.8</span>   <span class="fl">3.47</span>                   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="a">
+<li>What is the total sample size?</li>
+<li>Is there a significant effect of treatment?</li>
+<li>Compute the total sum of squares.</li>
+</ol>
+<h3 id="solution-key-for-review-questions" class="anchored"><strong>Solution Key for Review Questions</strong></h3></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="chapter-2-basic-statistical-concepts-in-experimental-design-2" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-2-basic-statistical-concepts-in-experimental-design-2"><strong>Chapter 2: Basic Statistical Concepts in Experimental Design</strong></h2>
+<section id="q9-probability-of-survival-beyond-22-months" class="level3">
+<h3 class="anchored" data-anchor-id="q9-probability-of-survival-beyond-22-months"><strong>Q9: Probability of Survival beyond 22 months</strong></h3>
+<ul>
+<li>Given: <span class="math inline">\(X \sim N(18, 4^2)\)</span></li>
+<li>Standardizing:</li>
+</ul>
+<p><span class="math display">\[
+Z = \frac{22 - 18}{4} = 1
+\]</span></p>
+<ul>
+<li>Using the standard normal table:</li>
+</ul>
+<p><span class="math display">\[
+P(Z &gt; 1) = 1 - P(Z \leq 1) = 1 - 0.8413 = 0.1587
+\]</span></p>
+<ul>
+<li><strong>Answer:</strong> <strong>0.1587</strong> (approximately <strong>15.87%</strong>)</li>
+</ul>
+<hr>
+</section>
+<section id="q10-r-output-interpretation-one-way-anova" class="level3">
+<h3 class="anchored" data-anchor-id="q10-r-output-interpretation-one-way-anova"><strong>Q10: R Output Interpretation (One-Way ANOVA)</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Df</th>
+<th>Sum Sq</th>
+<th>Mean Sq</th>
+<th>F value</th>
+<th>Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td>3</td>
+<td>24.6</td>
+<td>8.2</td>
+<td>5.4</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td>16</td>
+<td>24.3</td>
+<td>1.5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li><strong>Total observations:</strong></li>
+</ol>
+<p><span class="math display">\[
+df_{Total} = df_{Treatment} + df_{Residual} + 1 = 3 + 16 + 1 = 20
+\]</span></p>
+<ol start="2" type="a">
+<li><strong>Decision at <span class="math inline">\(\alpha = 0.05\)</span></strong></li>
+</ol>
+<p>Since <strong><span class="math inline">\(p = 0.009 &lt; 0.05\)</span></strong>, <strong>reject <span class="math inline">\(H_0\)</span></strong> → The treatment effect is significant.</p>
+<ol start="3" type="a">
+<li><strong>Total SS</strong></li>
+</ol>
+<p><span class="math display">\[
+SS_{Total} = SS_{Treatment} + SS_{Residual} = 24.6 + 24.3 = 48.9
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="chapter-3-factorial-design" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-3-factorial-design"><strong>Chapter 3: Factorial Design</strong></h2>
+<section id="q14-main-and-interaction-effects" class="level3">
+<h3 class="anchored" data-anchor-id="q14-main-and-interaction-effects"><strong>Q14: Main and Interaction Effects</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Treatment</th>
+<th>Mean Growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A-X</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>A-Y</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>B-X</td>
+<td>22</td>
+</tr>
+<tr class="even">
+<td>B-Y</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Main Effect of A:</strong></li>
+</ul>
+<p><span class="math display">\[
+\frac{(B-X + B-Y)}{2} - \frac{(A-X + A-Y)}{2} = \frac{(22 + 25)}{2} - \frac{(15 + 18)}{2} = 7.0
+\]</span></p>
+<ul>
+<li><strong>Main Effect of B:</strong></li>
+</ul>
+<p><span class="math display">\[
+\frac{(A-Y + B-Y)}{2} - \frac{(A-X + B-X)}{2} = \frac{(18 + 25)}{2} - \frac{(15 + 22)}{2} = 3.0
+\]</span></p>
+<ul>
+<li><strong>Interaction Effect <span class="math inline">\(AB\)</span>:</strong></li>
+</ul>
+<p><span class="math display">\[
+\frac{(A-X + B-Y)}{2} - \frac{(A-Y + B-X)}{2} = \frac{(15 + 25)}{2} - \frac{(18 + 22)}{2} = 0.0
+\]</span></p>
+<hr>
+</section>
+<section id="q15-two-way-anova-r-output-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="q15-two-way-anova-r-output-interpretation"><strong>Q15: Two-Way ANOVA (R Output Interpretation)</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Df</th>
+<th>Sum Sq</th>
+<th>Mean Sq</th>
+<th>F value</th>
+<th>Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fertilizer</td>
+<td>1</td>
+<td>45.6</td>
+<td>45.6</td>
+<td>12.3</td>
+<td>0.004</td>
+</tr>
+<tr class="even">
+<td>Irrigation</td>
+<td>1</td>
+<td>35.2</td>
+<td>35.2</td>
+<td>9.4</td>
+<td>0.009</td>
+</tr>
+<tr class="odd">
+<td>Interaction</td>
+<td>1</td>
+<td>10.1</td>
+<td>10.1</td>
+<td>2.7</td>
+<td>0.105</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td>16</td>
+<td>59.8</td>
+<td>3.74</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li><strong>Which factors are significant at <span class="math inline">\(\alpha = 0.05\)</span>?</strong></li>
+</ol>
+<ul>
+<li>Fertilizer (<span class="math inline">\(p = 0.004\)</span>) → <strong>Significant</strong></li>
+<li>Irrigation (<span class="math inline">\(p = 0.009\)</span>) → <strong>Significant</strong></li>
+<li>Interaction (<span class="math inline">\(p = 0.105\)</span>) → <strong>Not significant</strong></li>
+</ul>
+<ol start="2" type="a">
+<li><strong>Interpret the interaction term</strong></li>
+</ol>
+<ul>
+<li>Since <span class="math inline">\(p = 0.105 &gt; 0.05\)</span>, the interaction effect is <strong>not significant</strong>, meaning the combined effect of <strong>Fertilizer × Irrigation</strong> does not significantly influence plant growth.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Total sum of squares</strong></li>
+</ol>
+<p><span class="math display">\[
+SS_{Total} = SS_{Fertilizer} + SS_{Irrigation} + SS_{Interaction} + SS_{Residual} = 45.6 + 35.2 + 10.1 + 59.8 = 150.7
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="chapter-4-factorial-designs-2" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4-factorial-designs-2"><strong>Chapter 4: Factorial Designs</strong></h2>
+<section id="q19-total-observations-in-a-23-factorial-design" class="level3">
+<h3 class="anchored" data-anchor-id="q19-total-observations-in-a-23-factorial-design"><strong>Q19: Total Observations in a <span class="math inline">\(2^3\)</span> Factorial Design</strong></h3>
+<ul>
+<li><span class="math inline">\(2^3\)</span> factorial with <strong>two replications per treatment</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\text{Total observations} = (2^3) \times 2 = 16
+\]</span></p>
+<hr>
+</section>
+<section id="q20-factorial-design-r-output-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="q20-factorial-design-r-output-interpretation"><strong>Q20: Factorial Design (R Output Interpretation)</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Df</th>
+<th>Sum Sq</th>
+<th>Mean Sq</th>
+<th>F value</th>
+<th>Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>1</td>
+<td>30.2</td>
+<td>30.2</td>
+<td>8.5</td>
+<td>0.007</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>1</td>
+<td>10.1</td>
+<td>10.1</td>
+<td>2.8</td>
+<td>0.103</td>
+</tr>
+<tr class="odd">
+<td>A:B</td>
+<td>1</td>
+<td>25.3</td>
+<td>25.3</td>
+<td>7.1</td>
+<td>0.012</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td>20</td>
+<td>71.2</td>
+<td>3.56</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li><strong>What does the interaction term (A:B) suggest?</strong></li>
+</ol>
+<ul>
+<li>Since <span class="math inline">\(p = 0.012 &lt; 0.05\)</span>, the interaction effect is <strong>significant</strong>, indicating that the effect of factor A on response time depends on the level of factor B.</li>
+</ul>
+<ol start="2" type="a">
+<li><strong>Is Factor B significant at <span class="math inline">\(\alpha = 0.05\)</span>?</strong></li>
+</ol>
+<ul>
+<li><span class="math inline">\(p = 0.103 &gt; 0.05\)</span> → <strong>Not significant</strong></li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Total SS</strong></li>
+</ol>
+<p><span class="math display">\[
+SS_{Total} = SS_A + SS_B + SS_{A:B} + SS_{Residual} = 30.2 + 10.1 + 25.3 + 71.2 = 136.8
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="chapter-5-analysis-of-variance-anova-2" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-5-analysis-of-variance-anova-2"><strong>Chapter 5: Analysis of Variance (ANOVA)</strong></h2>
+<section id="q24-one-way-anova" class="level3">
+<h3 class="anchored" data-anchor-id="q24-one-way-anova"><strong>Q24: One-Way ANOVA</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>SS</th>
+<th>df</th>
+<th>MS</th>
+<th>F</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td>60</td>
+<td>2</td>
+<td>30.0</td>
+<td>21.0</td>
+<td>0.00001</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td>30</td>
+<td>21</td>
+<td>1.428</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>90</td>
+<td>23</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Decision: Since <span class="math inline">\(p = 0.00001 &lt; 0.05\)</span>, <strong>reject <span class="math inline">\(H_0\)</span></strong> → Treatment has a significant effect.</p>
+<hr>
+</section>
+<section id="q25-one-way-anova-r-output-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="q25-one-way-anova-r-output-interpretation"><strong>Q25: One-Way ANOVA (R Output Interpretation)</strong></h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Df</th>
+<th>Sum Sq</th>
+<th>Mean Sq</th>
+<th>F value</th>
+<th>Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td>2</td>
+<td>50.1</td>
+<td>25.05</td>
+<td>7.2</td>
+<td>0.002</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td>27</td>
+<td>93.8</td>
+<td>3.47</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li><strong>Total sample size</strong></li>
+</ol>
+<p><span class="math display">\[
+df_{Total} = df_{Treatment} + df_{Residual} + 1 = 2 + 27 + 1 = 30
+\]</span></p>
+<ol start="2" type="a">
+<li><strong>Decision at <span class="math inline">\(\alpha = 0.05\)</span></strong></li>
+</ol>
+<p>Since <span class="math inline">\(p = 0.002 &lt; 0.05\)</span>, <strong>reject <span class="math inline">\(H_0\)</span></strong> → The treatment effect is significant.</p>
+<ol start="3" type="a">
+<li><strong>Total SS</strong></li>
+</ol>
+<p><span class="math display">\[
+SS_{Total} = SS_{Treatment} + SS_{Residual} = 50.1 + 93.8 = 143.9
+\]</span></p>
+<hr>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->

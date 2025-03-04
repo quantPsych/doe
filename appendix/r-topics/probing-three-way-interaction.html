@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Davood Tofighi, Ph.D.">
+
+<title>Probing Three-Way Interaction in ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Probing Three-Way Interaction in ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-topics/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+</head>
+
+<body class="nav-sidebar floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">STAT 545</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../r_help.html"> 
+<span class="menu-text">R Help</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../home_appendix.html"> 
+<span class="menu-text">Appendix</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Probing Three-Way Interaction in ANOVA</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Probing Three-Way Interaction in ANOVA</h1>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">28-Feb-2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Materials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../home_lectures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../home_assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">R Code and Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../r_help.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Help</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../r-code-data-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Code and Datasets from the Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../data-files-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets from the Book</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../home_appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../contents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contents</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#using-emmeans-for-simple-effects" id="toc-using-emmeans-for-simple-effects" class="nav-link active" data-scroll-target="#using-emmeans-for-simple-effects">Using <code>emmeans</code> for simple effects</a></li>
+  <li><a href="#lets-apply-these-to-our-example" id="toc-lets-apply-these-to-our-example" class="nav-link" data-scroll-target="#lets-apply-these-to-our-example">Let’s apply these to our example:</a></li>
+  <li><a href="#comprehension-questions" id="toc-comprehension-questions" class="nav-link" data-scroll-target="#comprehension-questions">4. Comprehension Questions</a></li>
+  <li><a href="#detailed-solutions" id="toc-detailed-solutions" class="nav-link" data-scroll-target="#detailed-solutions">5. Detailed Solutions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<p>This tutorial will include:</p>
+<ul>
+<li><strong>Intuitive Understanding</strong>: A conceptual explanation of simple effects and interaction probing in three-way ANOVA.</li>
+<li><strong>Mathematical Foundations</strong>: Detailed derivations and proofs of the relevant statistical principles.</li>
+<li><strong>Application in R</strong>: Step-by-step implementation using <code>emmeans</code>, including code examples and interpretations.</li>
+<li><strong>Comprehension Questions</strong>: Thought-provoking questions to test your understanding.</li>
+<li><strong>Detailed Solutions</strong>: Thorough explanations and solutions to the questions.</li>
+</ul>
+<div id="tbl-factorial-anova" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-factorial-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"auto.noise"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(noise <span class="sc">~</span> size <span class="sc">*</span> type <span class="sc">*</span> side, <span class="at">data =</span> auto.noise)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+size            2  26051   13026 893.190  &lt; 2e-16 ***
+type            1   1056    1056  72.429 1.04e-08 ***
+side            1      1       1   0.048 0.829104    
+size:type       2    804     402  27.571 6.05e-07 ***
+size:side       2   1293     647  44.333 8.73e-09 ***
+type:side       1     17      17   1.190 0.286067    
+size:type:side  2    301     151  10.333 0.000579 ***
+Residuals      24    350      15                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl quarto-uncaptioned margin-caption" id="tbl-factorial-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>Here we see significant two-way interactions (size:type, size:side) and a significant three-way interaction (size:type:side). The presence of these interactions warns us that interpreting main effects alone (e.g.&nbsp;<code>size</code> differences averaged over <code>type</code> and <code>side</code>) could be misleading. Instead, we proceed to probe the interactions with simple effects.</p>
+<section id="using-emmeans-for-simple-effects" class="level2">
+<h2 class="anchored" data-anchor-id="using-emmeans-for-simple-effects">Using <code>emmeans</code> for simple effects</h2>
+<p>The <code>emmeans</code> package provides multiple approaches to examine simple effects:</p>
+<ul>
+<li><strong>Conditioning with <code>|</code> in formula:</strong> We can request <em>simple means and pairwise comparisons</em> by conditioning on one factor. For example, <code>emmeans(model, pairwise ~ size | type)</code> asks: give me the means of <code>size</code> at each level of <code>type</code>, and compare them. This yields the simple main effects of <code>size</code> within each <code>type</code> (with appropriate warnings or adjustments since <code>side</code> is also in the model).</li>
+<li><strong>Using <code>emmeans</code> followed by <code>joint_tests()</code>:</strong> This is useful for testing a <strong>simple <em>omnibus</em> effect</strong> (like an <span class="math inline">\(F\)</span> test for any difference among the levels of a factor within a condition). We first get an <code>emmeans</code> object restricted to the cells of interest, then apply <code>joint_tests(by = …)</code> to test that factor within each condition. This corresponds to the <em>F-tests of simple effects</em>.</li>
+<li><strong>Using <code>contrast()</code>:</strong> After obtaining an <code>emmeans</code> grid, we can specify custom contrasts or use built-in contrast families (<code>pairwise</code> for all pairwise differences, <code>consec</code> for consecutive comparisons, etc.) to probe specific comparisons.</li>
+</ul>
+</section>
+<section id="lets-apply-these-to-our-example" class="level2">
+<h2 class="anchored" data-anchor-id="lets-apply-these-to-our-example">Let’s apply these to our example:</h2>
+<ol type="1">
+<li><strong>Simple two-way interactions</strong>–examine each two-way interaction at levels of the third factor. Given the significant three-way interaction, any two-way interaction might differ by the third factor. For instance, we check the <code>size:type</code> interaction at each <code>side</code>:</li>
+</ol>
+<div id="tbl-factorial-anova-results-4" class="cell anchored">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple two-way interaction: size by type at each side</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>emm_size_type <span class="ot">=</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> size <span class="sc">*</span> type <span class="sc">|</span> side) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>emm_size_type <span class="sc">|&gt;</span> <span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="st">"side"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">model term</th>
+<th style="text-align: left;">side</th>
+<th style="text-align: right;">df1</th>
+<th style="text-align: right;">df2</th>
+<th style="text-align: right;">F.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">size</td>
+<td style="text-align: left;">L</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">651.714</td>
+<td style="text-align: right;">0.00e+00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">size</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">285.810</td>
+<td style="text-align: right;">0.00e+00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">L</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">46.095</td>
+<td style="text-align: right;">5.00e-07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">27.524</td>
+<td style="text-align: right;">2.23e-05</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">size:type</td>
+<td style="text-align: left;">L</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">23.524</td>
+<td style="text-align: right;">2.20e-06</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">size:type</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">14.381</td>
+<td style="text-align: right;">7.85e-05</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>This yields F-tests for the <code>size:type</code> interaction separately for <code>side = left</code> and <code>side = right</code> (each test has <span class="math inline">\(df_1 = (a-1)(b-1) = 2\)</span> for size(3)×type(2), and <span class="math inline">\(df_{2} = \text{ residual df} = 24\)</span>).</p>
+<p>This indicates the size×type interaction is significant on the right side but maybe weaker on the left. That asymmetry is exactly what the three-way interaction captures.</p>
+<ol type="1">
+<li><strong>Simple main effects</strong>–now dive deeper. Say we want the <em>simple effect of <code>size</code> at each combination of <code>type</code> and <code>side</code>.</em> We can do that with:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple main effect of size at each combination of type and side</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>emm_size_by_type_side <span class="ot">=</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span> size <span class="sc">|</span> type <span class="sc">*</span> side)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_size_by_type_side)  <span class="co"># pairwise comparisons for size within each type-side combo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>type = Std, side = L:
+ contrast estimate   SE df t.ratio p.value
+ S - M      -15.00 3.12 24  -4.811  0.0002
+ S - L       71.67 3.12 24  22.984  &lt;.0001
+ M - L       86.67 3.12 24  27.795  &lt;.0001
+
+type = Octel, side = L:
+ contrast estimate   SE df t.ratio p.value
+ S - M        3.33 3.12 24   1.069  0.5419
+ S - L       60.00 3.12 24  19.243  &lt;.0001
+ M - L       56.67 3.12 24  18.174  &lt;.0001
+
+type = Std, side = R:
+ contrast estimate   SE df t.ratio p.value
+ S - M      -25.00 3.12 24  -8.018  &lt;.0001
+ S - L       30.00 3.12 24   9.621  &lt;.0001
+ M - L       55.00 3.12 24  17.639  &lt;.0001
+
+type = Octel, side = R:
+ contrast estimate   SE df t.ratio p.value
+ S - M       -1.67 3.12 24  -0.535  0.8552
+ S - L       45.00 3.12 24  14.432  &lt;.0001
+ M - L       46.67 3.12 24  14.967  &lt;.0001
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+<p>Each section provides the differences between car sizes (S, M, L) when we fix type and side. The p-values tell us which differences are significant. We could also use <code>joint_tests()</code> on the same grid to get an omnibus F for “any size effect” at that condition, which should match the contrasts’ overall significance.</p>
+<ol type="1">
+<li><strong>Using <code>emmeans::joint_tests()</code> for simple effects</strong>–an alternative to the above is:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="sc">~</span> size <span class="sc">|</span> type <span class="sc">*</span> side)<span class="sc">|&gt;</span> <span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"type"</span>,<span class="st">"side"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">model term</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">side</th>
+<th style="text-align: right;">df1</th>
+<th style="text-align: right;">df2</th>
+<th style="text-align: right;">F.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">size</td>
+<td style="text-align: left;">Std</td>
+<td style="text-align: left;">L</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">441.333</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">size</td>
+<td style="text-align: left;">Octel</td>
+<td style="text-align: left;">L</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">233.905</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">size</td>
+<td style="text-align: left;">Std</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">156.000</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">size</td>
+<td style="text-align: left;">Octel</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">144.190</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>indicating whether the simple main effect of size is significant in each condition. One might find that, for example, size is highly significant for type A on the right side, but not significant for type B on the left side, etc. This aligns with the idea of the three-way interaction: the effect of size differs depending on type and side.</p>
+<ol type="1">
+<li><strong>Complex custom contrasts</strong>–We could even test specific theoretical contrasts. For example, if we predicted that “for type A, the difference between small and medium cars is larger on the right side than left side”, this is a contrast of cell means: (mean[S,A,right] - mean[M,A,right]) vs (mean[S,A,left] - mean[M,A,left]). We can set up such differences with the <code>contrast()</code> function by specifying a matrix or using the <code>interaction</code> argument for factorial contrasts. However, for brevity, we’ll focus on more standard simple effects.</li>
+</ol>
+<p><strong>Interpreting results:</strong> After running these analyses, interpretation goes as follows: <em>We report where significant simple effects occur.</em> For instance, <em>“There was a significant simple effect of car size for Type A filters on the right side (F(2,24)=…, p&lt;- .01), but no significant size effect for Type A on the left side (F(2,24)=…, p=.n.s.). Specifically, on the right side with Type A, medium cars had higher noise than small cars by 0.96 units (SE=0.16, p&lt;- .001), and large cars had significantly lower noise than both small and medium cars (all p&lt;- .001). In contrast, for Type B filters, …”</em> etc. We weave together the story that the interaction is painting.</p>
+<p><strong>Common issues and best practices:</strong></p>
+<ul>
+<li><em>Multiplicity:</em> If you test many simple effects (and then pairwise comparisons within them), adjust for multiple comparisons or focus on theoretically guided comparisons. <code>emmeans</code> allows p-value adjustments (e.g., <code>p.adjust = "bonferroni"</code> in the <code>contrast</code> call).</li>
+<li><em>Unbalanced data:</em> In unbalanced designs, use <code>emmeans(model, specs = …)</code> with care. The default in <code>emmeans</code> is equivalent to Type I (sequential) sums of squares unless you constructed the model with contrasts or used <code>car::Anova(type=3)</code>. For unbalanced data, consider using <code>emmeans</code> on a model with appropriate Type-II/III methods if necessary.</li>
+<li><em>Interactions with continuous covariates:</em> The concept of simple effects extends (simple slopes in regression, Johnson-Neyman technique, etc.), but <code>emmeans</code> can still help via its <code>emtrends</code> function for simple slopes. In a pure ANOVA (all categorical), we don’t worry about that.</li>
+<li><em>Model assumptions:</em> Check homogeneity of variance (e.g., Levene’s test) because the pooled error approach relies on it. If violated, you might need a different approach (perhaps a mixed model with heterogeneous variance, or separate one-way ANOVAs as a last resort, though that complicates error terms).</li>
+</ul>
+<p>Below is a concrete R example using a built-in dataset for demonstration (assuming <code>auto.noise</code> is available):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"auto.noise"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit three-way ANOVA</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(noise <span class="sc">~</span> size <span class="sc">*</span> type <span class="sc">*</span> side, <span class="at">data =</span> auto.noise)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3-way interaction significant? (assume yes from earlier)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Simple two-way (size:type) at each side:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>emm_sxt <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m, <span class="sc">~</span> size <span class="sc">*</span> type <span class="sc">|</span> side)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">joint_tests</span>(emm_sxt, <span class="at">by =</span> <span class="st">"side"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Output interpretation:</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># For each side, see if size:type interaction is sig.</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Now simple main effect of size at each combination of type and side:</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>emm_size <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m, <span class="sc">~</span> size <span class="sc">|</span> type <span class="sc">*</span> side)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>simple_size_tests <span class="ot">&lt;-</span> <span class="fu">joint_tests</span>(emm_size, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"type"</span>,<span class="st">"side"</span>))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>simple_size_pairs <span class="ot">&lt;-</span> <span class="fu">pairs</span>(emm_size)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect results</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>simple_size_tests</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>simple_size_pairs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This script will print tables for <code>simple_size_tests</code> (F tests for size in every type×side condition) and <code>simple_size_pairs</code> (the list of pairwise comparisons of size levels in each condition, with estimates and p-values). In practice, you would report the F tests to show where the effect is significant, and then the pairwise comparisons to elaborate on which specific differences drive that effect, ideally using an adjusted significance criterion.</p>
+<p>Finally, one might visualize the three-way interaction with an interaction plot (not asked for here), but it’s often useful to plot, say, lines for <code>size</code> across <code>side</code>, faceted by <code>type</code>. This can qualitatively show the interaction patterns that our tests confirm statistically.</p>
+</section>
+<section id="comprehension-questions" class="level2">
+<h2 class="anchored" data-anchor-id="comprehension-questions">4. Comprehension Questions</h2>
+<p>To ensure a deep understanding of simple effects and probing interactions, consider the following questions:</p>
+<p><strong>Conceptual Questions:</strong></p>
+<ol type="1">
+<li><strong>Interpreting Interactions:</strong> In your own words, what does a significant three-way interaction (A×B×C) tell you about the data? Why can focusing only on main effects be misleading in this case?</li>
+<li><strong>Definitions:</strong> Define a <em>simple main effect</em> in the context of a three-way ANOVA. How does it differ from an ordinary main effect?</li>
+<li><strong>Hierarchy of Effects:</strong> If you find a significant three-way interaction, what is the recommended sequence of follow-up analyses? (Hint: Think about simple two-way interactions and then simple main effects.)</li>
+<li><strong>Visualization:</strong> Describe how you might graphically display a three-way interaction to aid interpretation. What patterns in the plot would suggest simple effects worth testing?</li>
+<li><strong>Theory to Practice:</strong> A researcher finds an A×B×C interaction. They claim “Factor A matters only for one combination of B and C; otherwise it has no effect.” How would you verify this claim using simple effects analysis?</li>
+</ol>
+<p><strong>Computational Questions:</strong></p>
+<ol type="1">
+<li><p>Given a balanced 2×2×2 ANOVA design (all factors have 2 levels, n per cell), how many degrees of freedom does the A×B×C interaction have? If the interaction F-test has <span class="math inline">\(df_1=1\)</span> and yields <span class="math inline">\(p&lt;- 0.05\)</span>, what does that imply about the differences in two-way interactions?</p></li>
+<li><p>In the <code>emmeans</code> output below (for a simple effect of A at B=b and C=c), fill in the blanks and interpret the results:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>C <span class="ot">=</span> c1, B <span class="ot">=</span> b1<span class="sc">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>A emmean   SE df lower.CL upper.CL</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>a1   <span class="fl">50.0</span>  <span class="fl">2.1</span> <span class="dv">24</span>    <span class="fl">45.6</span>    <span class="fl">54.4</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>a2   <span class="fl">55.5</span>  <span class="fl">2.1</span> <span class="dv">24</span>    <span class="fl">51.1</span>    <span class="fl">59.9</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>a3   <span class="fl">57.0</span>  <span class="fl">2.1</span> <span class="dv">24</span>    <span class="fl">52.6</span>    <span class="fl">61.4</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>Confidence level used<span class="sc">:</span> <span class="fl">0.95</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>C <span class="ot">=</span> c1, B <span class="ot">=</span> b1<span class="sc">:</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>contrast    estimate   SE df t.ratio p.value</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>a1 <span class="sc">-</span> a2    _____      ___ __  <span class="sc">-</span><span class="fl">2.50</span>   <span class="fl">0.020</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>a1 <span class="sc">-</span> a3    <span class="sc">-</span><span class="fl">7.0</span>      <span class="fl">2.1</span> <span class="dv">24</span>  <span class="sc">-</span><span class="fl">3.33</span>   <span class="fl">0.002</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>a2 <span class="sc">-</span> a3     _____      ___ __   ?      ?   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What are the missing values for the <code>a1 - a2</code> estimate and for <code>a2 - a3</code> (t.ratio, p.value)? Is the simple main effect of A at (B=b1,C=c1) significant?</p></li>
+<li><p>Suppose <code>joint_tests(emmeans(model, ~ A | B*C))</code> returns a p-value of 0.8 for the simple effect of A at B=b2, C=c3. What does that imply about factor A’s impact in that condition? How would you report it?</p></li>
+</ol>
+<p><strong>Application Questions:</strong></p>
+<ol type="1">
+<li>You conducted a three-way ANOVA and found no significant three-way interaction, but one of the two-way interactions (A×B) is significant. Describe how you would follow up on the A×B interaction using simple effects (mention <code>emmeans</code> steps and what to look for).</li>
+<li>In R, if you have an <code>emmeans</code> object for a three-way layout (A, B, C), how can you extract the cell means for all combinations? And how could you use those to manually compute (for example) the simple effect of A at C=c2 (averaging over B)?</li>
+<li>A colleague ran <code>emmeans(model, pairwise ~ A | B)</code> in R and got a warning: <code>"Results may be misleading due to involvement in interactions"</code>. They ask you why the warning appeared and how to properly obtain the comparisons they want. What is your explanation and advice?</li>
+<li>Consider a scenario with a 3×3×2 design where the A×B×C interaction is significant. How would you determine if the two-way interaction A×B is present at <strong>each</strong> level of C? What <code>emmeans</code> code would you write, and how would you interpret a nonsignificant result for one level of C versus a significant result for the other?</li>
+</ol>
+<p>These questions range from conceptual understanding to practical application, ensuring you think about <em>why</em> and <em>how</em> we probe interactions.</p>
+</section>
+<section id="detailed-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-solutions">5. Detailed Solutions</h2>
+<p><strong>1. Interpreting Interactions:</strong> A significant three-way interaction indicates that the way any two factors interact is different across levels of the third factor. For example, maybe A and B have a strong interaction when C is low, but no interaction when C is high. If we looked only at main effects, we’d miss this nuance. Main effects average over all levels of other factors; in doing so, they can cancel out differences. It’s misleading because a main effect might be non-significant overall even if the factor has a large effect in one condition and an opposite effect in another. Or a main effect might appear significant, but in reality the effect exists only under certain conditions (and reverses elsewhere). Thus, focusing only on main effects in the presence of interactions can lead to incorrect or incomplete conclusions. Always first assess interactions: if an interaction is significant, interpret the simple effects (conditional effects) rather than the marginal (main) effects.</p>
+<p><strong>2. Definitions:</strong> A <em>simple main effect</em> for factor A in a three-way ANOVA is the effect of A at a specific level of B and/or C. For example, “the effect of A when B = b1 and C = c2” (a fully simple case with both other factors fixed) or “the effect of A at B = b1 (averaged over C)” are both simple effects. In contrast, an <em>ordinary main effect</em> of A is the effect of A averaged across <em>all</em> levels of B and C. The difference is that simple effects are conditional on certain levels of other factors, while main effects are marginal (averaged). Simple effects help us understand interactions: if there’s no interaction, all the simple effects of A will be identical (or very similar) across levels of B and C, matching the main effect. If there is an interaction, simple effects differ, and the main effect of A becomes a blend of possibly divergent effects in each condition.</p>
+<p><strong>3. Hierarchy of Effects:</strong> After finding a significant three-way interaction, the typical sequence is: - <strong>Simple two-way interactions:</strong> Pick one factor as the moderator (often the one with more levels or based on theory). For each level of that moderator, test the two-way interaction of the other two factors. For example, test A×B at each level of C (as we did with <code>joint_tests(emm_size_type, by="side")</code> above). - If a simple two-way interaction is significant, <strong>probe that two-way interaction</strong> further: examine simple main effects within that two-way slice. E.g., if A×B at C=c1 is significant, then test A at each level of B (or B at each level of A) for C=c1. This can involve <code>emmeans(model, ~ A | B, subset = C==c1)</code> or similar. - <strong>Pairwise comparisons:</strong> If a simple main effect is significant (more than 2 levels), do pairwise comparisons (with adjustment) to see which specific means differ. - Throughout, maintain clarity with the error term (use pooled error from full model if assumptions hold, which <code>emmeans</code> does by default via the full model). - If the three-way had not been significant, we’d then interpret significant two-way interactions similarly: break them down into simple effects of one factor at levels of the other, etc.. - Always keep the number of tests reasonable and adjust for multiple comparisons to avoid false positives.</p>
+<p><strong>4. Visualization:</strong> To graphically display a three-way interaction, one common approach is an <em>interaction plot</em>. For example, use lines to represent one factor, the x-axis for second factor, and create separate panels (facets) for the third factor. Suppose A on x-axis, Y on y-axis, lines for B, and separate plots for each level of C. If the lines (representing B) have different shapes/slopes in one panel compared to another, that indicates an A×B interaction that changes with C. Patterns: - If in all C panels the lines are roughly parallel (no crossing) and similarly spaced, there’s no significant two-way interaction difference–likely no three-way interaction. - If in Panel C1 the lines cross (interaction), but in Panel C2 they don’t (or cross differently), that’s a sign of a three-way interaction. - Such differences suggest which simple effects to test: e.g., “lines cross in C1” suggests the A×B simple interaction is significant at C1. - Also look at vertical gaps (main effects)–if a factor’s gap varies by panel, that’s an interaction involving that factor and C. - Tools like <code>ggplot2::interaction.plot</code> or <code>ggplot2</code> with <code>facet_wrap(~C)</code> can create these. Visualization often guides which simple effects seem notable (though formal tests confirm it).</p>
+<p><strong>5. Theory to Practice:</strong> The colleague’s claim “Factor A matters only for one combination of B and C” implies: for that specific (b<em>, c</em>) condition, A has an effect; elsewhere, A’s effect is zero (or negligible). To verify: - Conduct simple main effect tests of A at each combination of B and C. Using <code>joint_tests</code> or separate subset analyses, find the p-value for A at (b<em>, c</em>), and at other (b, c). - Check that A is significant at (b<em>, c</em>) but non-significant at all other combinations. - Also confirm the three-way interaction was significant overall (which presumably it was if such a specific effect exists). - In R, one would do: <code>emm = emmeans(model, ~ A | B*C); joint_tests(emm, by=c("B","C"))</code>. - We’d report: “At B=b<em>, C=c</em>, factor A has a significant effect (F(…)=…, p=…), whereas in all other B–C conditions, A’s effect is not significant (all p &gt; 0.1). This pattern supports the claim that A matters only in that specific condition.” If some other condition shows a marginal effect, we’d nuance the claim. - This approach essentially probes all simple-simple effects of A to isolate where it’s active.</p>
+<p><strong>6. Degrees of Freedom:</strong> In a 2×2×2 design, each factor has 1 df (2 levels–1). Two-way interactions also have <span class="math inline">\((1*1)=1\)</span> df each. The three-way interaction A×B×C has <span class="math inline">\((1*1*1) = 1\)</span> df. If the F-test for A×B×C with 1 df is significant (p&lt;- 0.05), it implies that the difference between the two-way interactions at different levels of the third factor is significant. For 2×2×2, it means the single two-way interaction present at C=c1 differs from the one at C=c2. Essentially, either A×B is significant in one C level and not the other, or they have opposite signs, etc. (With 1 df, “interaction differs” basically means one condition has an interaction, the other doesn’t, since an interaction in 2x2 is a single number difference of differences.) In practical terms: <em>the pattern of A×B is not the same for C=1 vs C=2</em>. We could say: one simple two-way interaction is “strong” and the other is zero (or they’re different in magnitude). This satisfies the definition: a three-way interaction means a two-way interaction varies across the third variable.</p>
+<p><strong>7. Emmeans output interpretation:</strong> From the provided output, for C=c1, B=b1:</p>
+<ul>
+<li>The means for A=a1, a2, a3 are 50.0, 55.5, 57.0.</li>
+<li>So <code>a1 - a2</code> difference = 50.0 - 55.5 = <strong>-5.5</strong>. That’s the estimate for <code>a1 - a2</code>. It likely has SE 2.1 (same SE as others) and df 24, with t = -2.50 given and p = 0.020. That matches: -5.5/2.1 = -2.619, which is slightly more than -2.50, so perhaps the t was rounded or SE slightly different. But we’ll trust the display.</li>
+<li><code>a2 - a3</code>: difference = 55.5 - 57.0 = <strong>-1.5</strong>. The SE likely still 2.1, so t.ratio = -1.5/2.1 ≈ -0.714. The p.value would be high (around 0.48). Given the symmetry, if a1-a3 was -7.0 with p=0.002, and a1-a2 was -5.5 with p=0.020, the smallest difference is a2-a3 = -1.5, which should be nonsignificant.</li>
+<li>So for <code>a2 - a3</code>: t.ratio ≈ <strong>-0.71</strong>, p.value ≈ <strong>0.48</strong> (not significant).</li>
+</ul>
+<p>Is the simple main effect of A at (B=b1, C=c1) significant? The joint F test would combine these three means. Alternatively, seeing that a1 vs a3 is significant (p=0.002) and a1 vs a2 is marginal (0.02, usually considered significant at 0.05 level, but note with 3 pairwise tests one might adjust), it suggests an overall effect. Since at least one pairwise is significant and there are 3 groups, likely yes, the omnibus for A at (b1,c1) is significant. In fact, we could compute <span class="math inline">\(F(2,24)\)</span> by hand: The differences seem sizeable (a1 is quite lower than a3). So yes, it appears significant. To be thorough: the means (50, 55.5, 57) have an obvious upward trend. We would report “At B=b1, C=c1, there is a significant effect of A (F(2,24)=…, p&lt;- 0.05); specifically, a1 is significantly lower than a3 (difference = -7.0, p=0.002) and lower than a2 (difference = -5.5, p=0.02), while a2 and a3 do not differ significantly (p=0.48).”</p>
+<p><strong>8. Interpreting a non-significant simple effect:</strong> If <code>joint_tests(emmeans(model, ~ A | B*C))</code> gives p = 0.8 for the test of A at B=b2, C=c3, that implies <em>no evidence that A has any effect at that specific condition</em>. In other words, the means for different levels of A at B=b2, C=c3 are statistically equal (high p-value means we fail to reject that all A means are equal). We would report: “At B = b2 and C = c3, factor A does not significantly influence the outcome (F(df1, df2)=…, p = 0.80). In that condition, the means for A’s levels were very similar.” This supports the notion that in the (b2,c3) group, changing A doesn’t change the response in any meaningful way. It’s an example of how a factor can be important in one context but not in another, which is the essence of interaction.</p>
+<p><strong>9. Following up a significant two-way interaction (no three-way):</strong> If A×B is significant and no triple interaction, we assume the effect is consistent across C (if a third factor exists, but maybe we had only two factors? The question said three-way ANOVA, but found no 3-way, so likely still 3 factors overall). If the design has three factors and only A×B is significant: - First, confirm which two-way: A×B is significant. We then examine <strong>simple main effects of one factor at levels of the other</strong> (since no 3-way, we can even average over C if C is present, because we didn’t find interactions with C). - For each level of A, see the effect of B (or vice versa). For instance: <code>emmeans(model, ~ B | A)</code> and do <code>pairs()</code> or <code>joint_tests()</code> by A. This yields B’s simple effect at each A. - Or <code>emmeans(model, ~ A | B)</code> to get A’s simple effect at each B. Either approach is valid; typically one chooses the simpler interpretation. If A and B both have &gt;2 levels, you might do both directions to fully describe the interaction. - In R code:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, pairwise <span class="sc">~</span> A <span class="sc">|</span> B)  <span class="co"># gives A’s pairwise diffs at each B</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, pairwise <span class="sc">~</span> B <span class="sc">|</span> A)  <span class="co"># B’s diffs at each A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code> and/or</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">joint_tests</span>(<span class="fu">emmeans</span>(model, <span class="sc">~</span> A <span class="sc">|</span> B))  <span class="co"># omnibus F for A at each B</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What to look for: Which simple effects are significant. E.g., maybe at B1, A has no effect; at B2, A has a strong effect. That would mean the interaction was driven by those differences.</li>
+<li>Since no three-way, these patterns should hold regardless of C (we could also confirm no differences across C by doing the same and seeing consistency, but given no 3-way, it’s redundant).</li>
+<li>Then report: “We followed up the A×B interaction with simple effects. For each level of B, we tested the effect of A. Results showed that… (describe which levels differ).” For example, “At B = high, factor A had a significant effect (F(…)=…, p&lt;- …); specifically, A1 differed from A2 (p=…) etc. At B = low, however, A’s effect was not significant (p=…). This indicates the effect of A is present only under the high B condition, driving the A×B interaction.”</li>
+</ul>
+<p><strong>10. Extracting cell means and computing a simple effect manually:</strong> Using <code>emmeans</code>, to get all cell means for a 3-way, we do:</p>
+<pre><code>emm &lt;- emmeans(model, ~ A * B * C)
+emm</code></pre>
+<p>This <code>emm</code> object will have <span class="math inline">\(a \times b \times c\)</span> rows, each a cell mean with its SE. To get them as a data frame, one can do <code>as.data.frame(emm)</code>. Now, to compute the simple effect of A at C=c2 (averaging over B): Essentially we want means of A at C=c2 (collapsing B). We could:</p>
+<ul>
+<li><p>Use <code>emmeans(model, ~ A | C, at = list(C = c2))</code>. But if we want to “manually” compute from cell means:</p></li>
+<li><p>Filter <code>emm</code> for C == c2. Now we have means for each combination of A and B at that C.</p></li>
+<li><p>To average over B for each A, we take those means and average them (weighted by equal n if balanced; <code>emmeans</code> by default will already give you the correct marginal mean if you specify <code>emmeans(model, ~ A | C)</code> directly).</p></li>
+<li><p>For manual: if <code>emm_df</code> has columns A, B, C, and response (emmean), do:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>cell_means <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">emmeans</span>(model, <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">*</span> C))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># filter C = c2</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>cm_c2 <span class="ot">&lt;-</span> cell_means <span class="sc">|&gt;</span> <span class="fu">filter</span>(C <span class="sc">==</span> <span class="st">"c2"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now cm_c2 has all combos of A and B at C=c2 with their means.</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute mean over B for each A:</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>simpleA_c2 <span class="ot">&lt;-</span> cm_c2 <span class="sc">|&gt;</span> <span class="fu">group_by</span>(A) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">mean_at_c2 =</span> <span class="fu">mean</span>(emmean))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>simpleA_c2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><code>simpleA_c2</code> now contains the marginal means of A at C=c2. If the design is balanced, that’s the simple effect means (if unbalanced, the above equal averaging might not equal the model’s marginal - but <code>emmeans</code> handles that automatically with weighting).</p></li>
+<li><p>Then to compare A levels, compute differences: take differences of those means. You could also simulate an F by computing variance between those means and using the error variance from the model (though easier is to use <code>joint_tests</code> as done).</p></li>
+<li><p>The question expects: “extract cell means for all combinations”–answer: use <code>emmeans(model, ~ A * B * C)</code>. To compute a simple effect of A at C=c2 (averaging B), either use <code>emmeans(model, ~ A | C, at = list(C=c2))</code> for direct approach, or manually average the cell means for C=c2 across B.</p></li>
+<li><p>Emphasize that <code>emmeans</code> does this heavy lifting easily, so manual is just for concept.</p></li>
+</ul>
+<p><strong>11. Explaining the <code>emmeans</code> warning:</strong> The warning <code>"Results may be misleading due to involvement in interactions"</code> appears when you request marginal means (or comparisons thereof) of a factor that participates in a significant interaction in the model. For example, if A×B is significant and you ask for <code>emmeans(model, ~ A)</code> (the main effect of A), <code>emmeans</code> warns that the marginal means of A <em>may not make sense</em> because A’s effect varies by B. It doesn’t mean the numbers are wrong; it means <em>interpreting them as “the effect of A” is potentially misleading</em>. In your colleague’s case, they did <code>emmeans(model, pairwise ~ A | B)</code>. If there is an A×B or A×something interaction, <code>emmeans</code> will warn. However, <code>emmeans(model, pairwise ~ A | B)</code> is actually the <em>simple effect of A at each B</em>, which is usually a fine thing to do when probing an interaction–so why a warning? Because likely there is a higher-order interaction (maybe A×B×C) that involves A and B. If A×B×C is significant, any marginal of A|B still averages over C, which might be problematic. The safe route is to include all interacting factors in <code>emmeans</code> specs, then use <code>by</code> or <code>|</code> appropriately.</p>
+<p>So I would explain: The warning appears because A’s effects are not consistent across some other factor in the model (an interaction exists). The solution:</p>
+<ul>
+<li>If probing an interaction, include the interacting factor in the conditioning. For instance, if there’s A×B×C, instead of <code>emmeans(~A|B)</code> (which averages over C and hence can mislead), do <code>emmeans(~A|B*C)</code> or even better <code>emmeans(~A| B* C)</code> which will give A’s effect at each combination of B and C.</li>
+<li>If you truly want the marginal A|B means (averaging C), you can still get them, but you must be careful in interpretation, acknowledging they are averaged over C which has an interaction.</li>
+<li>In practice: advise them to do <code>emmeans(model, pairwise ~ A | B * C)</code> if a three-way exists. If only A×B two-way is significant (no third factor), <code>emmeans(~A|B)</code> is fine (that’s exactly the simple effects of A at each B).</li>
+<li>The key: always condition on <em>all</em> other factors involved in interactions when examining simple effects, so you’re not averaging over an interaction in progress.</li>
+<li>Summing up: <em>“<code>emmeans</code> warns you because A is involved in an interaction, meaning its effect changes across another factor. To properly examine A’s effect, you should look at it within levels of that factor. The code <code>emmeans(model, pairwise ~ A | B)</code> is correct for probing the A×B interaction, and the warning is just a reminder. If there was a C factor also interacting, you’d include C too (e.g., <code>| B * C</code>). Always interpret such results as conditional on the other factor(s).”</em></li>
+</ul>
+<p><strong>12. Determining A×B at each level of C:</strong> To see if A×B exists at each C level: - Use <code>emmeans</code> to get A×B means within each C. E.g. <code>emm_AB = emmeans(model, ~ A * B | C)</code>. - Then do <code>joint_tests(emm_AB, by="C")</code>, which will test the A×B interaction (as a model term) at each C level. - Alternatively, since A×B in each C is just a two-way ANOVA in that slice, you could split data by C and run an ANOVA each time. But <code>emmeans</code> approach is quick and uses the pooled error. - Code:</p>
+<pre><code> ```r
+ emm_AB &lt;- emmeans(model, ~ A * B | C)
+ joint_tests(emm_AB, by = "C")
+ ```
+
+ This would output for each C = c1, c2, …:
+
+ ```r
+ C = c1:
+   model term    df1 df2  F.ratio p.value
+   A:B            (a-1)*(b-1)  residualDF  …   …
+ C = c2:
+   model term    df1 df2  F.ratio p.value
+   A:B            …   …   …   …
+ ```</code></pre>
+<ul>
+<li>If at C=c1, p &lt;- .05, that means significant A×B interaction when C=c1. If at C=c2, p &gt; .05, no significant A×B when C=c2. That pattern itself is evidence of an A×B×C three-way (one two-way significant, the other not).</li>
+<li>Interpretation: <em>“We found that the A×B interaction is significant at C = c1 (F(df)=…, p=…), but not at C = c2 (p = …). This indicates that the nature of the A×B interaction differs depending on C. In fact, only under c1 do A and B interact significantly.”</em> If both were significant but maybe to different degrees, you’d still note differences in F magnitude.</li>
+<li>If both are significant, you might then compare whether they are <em>different in magnitude</em> via a contrast of contrasts (which is essentially the three-way test). But the question specifically: if 3-way is significant, they likely differ.</li>
+<li>In summary, the <code>emmeans</code> code needed is shown above. If we didn’t have <code>joint_tests</code>, one could get simple two-way cells and run contrasts: e.g., <code>contrast(emm_AB, interaction = "pairwise", by = "C")</code> might directly give differences of differences per C. But <code>joint_tests</code> is straightforward for omnibus.</li>
+</ul>
+<p>These solutions underscore the logical flow: identify interactions, break them down stepwise, use <code>emmeans</code> to get estimates and tests, and interpret contextually. By answering these, one demonstrates not only mechanical usage of R but an understanding of the statistical reasoning behind probing interactions.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
+<footer class="site-footer">
+    <div class="container text-center">
+        <hr> 
+        © <span id="current-year"></span> Dr. Davood Tofighi |
+        <a href="https://canvasinfo.unm.edu/">UNM Canvas</a> |
+        <a href="https://data-wise.github.io/doe">Course GitHub Page</a> |
+    </div>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Data-Wise\.github\.io\/doe\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.41">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>assignment3_solution_key – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 3: Multiple Comparisons and Contrasts – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,10 +71,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-79108a0fc1995748cbd19a5b0e3e3e7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,6 +105,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
@@ -133,16 +138,16 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 3: Multiple Comparisons and Contrasts – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Solution Key">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/assignment_solutions/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -199,14 +204,50 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignment 3: Multiple Comparisons and Contrasts</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Assignment 3: Multiple Comparisons and Contrasts</h1>
+            <p class="subtitle lead">Solution Key</p>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">03-Mar-2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -320,55 +361,1274 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-</div>
-
-
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Department of Mathematics and Statistics, University of New Mexico
-          </p>
-      </div>
-  </div>
-
-<div class="quarto-title-meta">
-
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#buoyancy-experiment" id="toc-buoyancy-experiment" class="nav-link active" data-scroll-target="#buoyancy-experiment">1. Buoyancy Experiment</a>
+  <ul class="collapse">
+  <li><a href="#step-1-experimental-planning-checklist" id="toc-step-1-experimental-planning-checklist" class="nav-link" data-scroll-target="#step-1-experimental-planning-checklist"><strong>Step 1: Experimental Planning Checklist</strong></a></li>
+  <li><a href="#step-2-conduct-a-pilot-experiment" id="toc-step-2-conduct-a-pilot-experiment" class="nav-link" data-scroll-target="#step-2-conduct-a-pilot-experiment"><strong>Step 2: Conduct a Pilot Experiment</strong></a></li>
+  <li><a href="#step-3-finalizing-the-experiment-design" id="toc-step-3-finalizing-the-experiment-design" class="nav-link" data-scroll-target="#step-3-finalizing-the-experiment-design"><strong>Step 3: Finalizing the Experiment Design</strong></a></li>
+  </ul></li>
+  <li><a href="#cotton-spinning-experiment-continuation-from-section-2.3-p.-13" id="toc-cotton-spinning-experiment-continuation-from-section-2.3-p.-13" class="nav-link" data-scroll-target="#cotton-spinning-experiment-continuation-from-section-2.3-p.-13">2. Cotton-Spinning Experiment (Continuation from Section 2.3, P. 13)</a></li>
+  <li><a href="#solution-key-and-grading-rubric-for-cotton-spinning-experiment" id="toc-solution-key-and-grading-rubric-for-cotton-spinning-experiment" class="nav-link" data-scroll-target="#solution-key-and-grading-rubric-for-cotton-spinning-experiment">Solution Key and Grading Rubric for Cotton-Spinning Experiment</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#key-experimental-variables" id="toc-key-experimental-variables" class="nav-link" data-scroll-target="#key-experimental-variables">Key Experimental Variables</a></li>
+  <li><a href="#question-identify-and-define-contrasts-or-functions-of-interest.-specify-which-effects-or-comparisons-will-provide-insight-into-the-experimental-objectives.-provide-contrast-coefficients-for-your-selected-contrasts." id="toc-question-identify-and-define-contrasts-or-functions-of-interest.-specify-which-effects-or-comparisons-will-provide-insight-into-the-experimental-objectives.-provide-contrast-coefficients-for-your-selected-contrasts." class="nav-link" data-scroll-target="#question-identify-and-define-contrasts-or-functions-of-interest.-specify-which-effects-or-comparisons-will-provide-insight-into-the-experimental-objectives.-provide-contrast-coefficients-for-your-selected-contrasts.">Question: Identify and define contrasts or functions of interest. Specify which effects or comparisons will provide insight into the experimental objectives. Provide contrast coefficients for your selected contrasts.</a></li>
+  </ul></li>
+  <li><a href="#meat-cooking-experiment-continuation-from-exercise-14-chapter-3" id="toc-meat-cooking-experiment-continuation-from-exercise-14-chapter-3" class="nav-link" data-scroll-target="#meat-cooking-experiment-continuation-from-exercise-14-chapter-3">3. Meat Cooking Experiment (Continuation from Exercise 14, Chapter 3)</a>
+  <ul class="collapse">
+  <li><a href="#solution-key-for-meat-cooking-experiment" id="toc-solution-key-for-meat-cooking-experiment" class="nav-link" data-scroll-target="#solution-key-for-meat-cooking-experiment">Solution Key for Meat Cooking Experiment</a></li>
+  </ul></li>
+  <li><a href="#reaction-time-experiment" id="toc-reaction-time-experiment" class="nav-link" data-scroll-target="#reaction-time-experiment"><strong>4. Reaction Time Experiment</strong></a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-structure-of-the-data" id="toc-understanding-the-structure-of-the-data" class="nav-link" data-scroll-target="#understanding-the-structure-of-the-data"><strong>Understanding the Structure of the Data</strong></a></li>
+  <li><a href="#contrast-explanation" id="toc-contrast-explanation" class="nav-link" data-scroll-target="#contrast-explanation"><strong>Contrast Explanation</strong></a></li>
+  <li><a href="#interpretation-of-contrasts" id="toc-interpretation-of-contrasts" class="nav-link" data-scroll-target="#interpretation-of-contrasts"><strong>Interpretation of Contrasts</strong></a></li>
+  </ul></li>
+  <li><a href="#grading-allocation" id="toc-grading-allocation" class="nav-link" data-scroll-target="#grading-allocation">Grading Allocation</a></li>
+  <li><a href="#grading-rubric-for-the-assignment" id="toc-grading-rubric-for-the-assignment" class="nav-link" data-scroll-target="#grading-rubric-for-the-assignment">Grading Rubric for the Assignment</a></li>
+  </ul>
+</nav>
     </div>
-  </div>
-  
-    
-  </div>
-  
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
-</header>
 
 
-<section id="grading-rubric-for-the-assignment" class="level1">
-<h1>Grading Rubric for the Assignment</h1>
-<table class="caption-top table">
+
+<section id="buoyancy-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="buoyancy-experiment">1. Buoyancy Experiment</h2>
+<section id="step-1-experimental-planning-checklist" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-experimental-planning-checklist"><strong>Step 1: Experimental Planning Checklist</strong></h3>
+<ul>
+<li><strong>(a) Define the objectives of the experiment</strong>
+<ul>
+<li>The primary objective is to examine how different salt concentrations in water affect the buoyancy of an object.</li>
+<li>Expected outcome: A relationship between salinity and buoyant force.</li>
+</ul></li>
+<li><strong>(b) Identify sources of variation</strong>
+<ul>
+<li><strong>Treatment Factors</strong>: Different levels of salt concentration.</li>
+<li><strong>Experimental Units</strong>: The objects being submerged.</li>
+<li><strong>Nuisance Factors</strong>: Temperature of the water, object shape, measurement inconsistencies.</li>
+</ul></li>
+<li><strong>(c) Assignment rule for experimental units</strong>
+<ul>
+<li>Randomized assignment of objects to different water samples with varying salt concentrations.</li>
+<li>Replication of measurements to improve accuracy.</li>
+</ul></li>
+<li><strong>(d) Measurement and Procedures</strong>
+<ul>
+<li>Measuring the density of water with a hydrometer.</li>
+<li>Measuring buoyant force by tracking object displacement or using a force sensor.</li>
+</ul></li>
+<li><strong>(e) Specify preplanned contrasts</strong>
+<ul>
+<li>Compare the mean buoyant force across different salt levels.</li>
+<li>Trend analysis to determine if buoyancy increases linearly or follows a different pattern.</li>
+</ul></li>
+<li><strong>(f) Select multiple comparison methods</strong>
+<ul>
+<li><strong>ANOVA</strong> for detecting significant differences.</li>
+<li><strong>Tukey’s HSD</strong> for post-hoc comparisons.</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-2-conduct-a-pilot-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-conduct-a-pilot-experiment"><strong>Step 2: Conduct a Pilot Experiment</strong></h3>
+<ul>
+<li><strong>Simulating Data in R (if no cotton_df)set is provided)</strong></li>
+</ul>
+<div class="cell" data-tbl-cap="Simulated Buoyancy Data">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating buoyancy data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>salt_concentration <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>), <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>buoyancy_force <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="dv">10</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> salt_concentration, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>buoyancy_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(salt_concentration, buoyancy_force)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(buoyancy_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> salt_concentration buoyancy_force 
+ Min.   : 0         Min.   : 9.44  
+ 1st Qu.: 5         1st Qu.:11.81  
+ Median :10         Median :15.36  
+ Mean   :10         Mean   :14.97  
+ 3rd Qu.:15         3rd Qu.:18.20  
+ Max.   :20         Max.   :19.78  </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Summarize findings</strong>:
+<ul>
+<li>The variance in buoyancy at different salt concentrations helps refine sample size decisions.</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-3-finalizing-the-experiment-design" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-finalizing-the-experiment-design"><strong>Step 3: Finalizing the Experiment Design</strong></h3>
+<ul>
+<li>Adjusting sample size based on preliminary variance estimates.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="cotton-spinning-experiment-continuation-from-section-2.3-p.-13" class="level2">
+<h2 class="anchored" data-anchor-id="cotton-spinning-experiment-continuation-from-section-2.3-p.-13">2. Cotton-Spinning Experiment (Continuation from Section 2.3, P. 13)</h2>
+<p>For the cotton-spinning experiment:</p>
+<p>2.1 Identify and define contrasts or functions of interest. Specify which effects or comparisons will provide insight into the experimental objectives. 2.2 Provide contrast coefficients for your selected contrasts.</p>
+</section>
+<section id="solution-key-and-grading-rubric-for-cotton-spinning-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="solution-key-and-grading-rubric-for-cotton-spinning-experiment">Solution Key and Grading Rubric for Cotton-Spinning Experiment</h2>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
+<p>The purpose of the experiment was twofold; first, to investigate the way in which different degrees of twist (measured in turns per inch) affected the breakage rate of the roving, and secondly, to compare the ordinary flyer with the newly devised special flyer.</p>
+<ul>
+<li>The treatment factors are “type of flyer” and “degree of twist.”</li>
+<li>The “type of flyer” factor has two levels: “ordinary” and “special”, coded as 1 and 2, respectively.</li>
+<li>The “degree of twist” factor has four levels: 1.63, 1.69, 1.78, and 1.90 turns per inch.</li>
+<li>The experiment was run with six treatment combinations: 12, 13, 14, 21, 22, and 23.</li>
+<li>The two treatment combinations 11 and 24 were omitted from the experiment.</li>
+</ul>
+</section>
+<section id="key-experimental-variables" class="level3">
+<h3 class="anchored" data-anchor-id="key-experimental-variables">Key Experimental Variables</h3>
+<ul>
+<li><strong>Block:</strong> The experimental blocking factor (to account for variation).</li>
+<li><strong>Treatment (Trtmt):</strong> The applied combination of Flyer and Twist. Not all combinations were used.</li>
+<li><strong>Flyer:</strong> The flyer type used in the spinning process (categorical: 1 for Ordinary, 2 for Special).</li>
+<li><strong>Twist:</strong> The level of twist applied to the yarn (continuous), measured in turns per inch. There are four levels.</li>
+<li><strong>Break:</strong> The breakage rate of the roving (response variable)</li>
+</ul>
+</section>
+<section id="question-identify-and-define-contrasts-or-functions-of-interest.-specify-which-effects-or-comparisons-will-provide-insight-into-the-experimental-objectives.-provide-contrast-coefficients-for-your-selected-contrasts." class="level3">
+<h3 class="anchored" data-anchor-id="question-identify-and-define-contrasts-or-functions-of-interest.-specify-which-effects-or-comparisons-will-provide-insight-into-the-experimental-objectives.-provide-contrast-coefficients-for-your-selected-contrasts.">Question: Identify and define contrasts or functions of interest. Specify which effects or comparisons will provide insight into the experimental objectives. Provide contrast coefficients for your selected contrasts.</h3>
+<p>To asnwer this question, we need to identify the key contrasts or comparisons that will help us understand the effects of the treatment factors (Flyer and Twist) on the breakage rate of the roving. These contrasts should be relevant to the research questions and provide meaningful insights into the experimental outcomes. Note that we need to use the variable <code>Trtmt</code> to define the contrasts with 6 levels as described in the experiment: 12, 13, 14, 21, 22, and 23, corresponding to different combinations of Flyer and Twist</p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 24%">
+<col style="width: 16%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Coefficients</th>
+<th>Trtmt Levels</th>
+<th>Flyer Type</th>
+<th>Twist Level 1.69 vs 1.78</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(c_1\)</span></td>
+<td>“ordinary-1.69”</td>
+<td>-1/2</td>
+<td>-1/2</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(c_2\)</span></td>
+<td>“ordinary-1.78”</td>
+<td>-1/2</td>
+<td>+1/2</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(c_3\)</span></td>
+<td>“ordinary-1.90”</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(c_4\)</span></td>
+<td>“special-1.63”</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(c_5\)</span></td>
+<td>“special-1.69”</td>
+<td>1/2</td>
+<td>-1/2</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(c_6\)</span></td>
+<td>“special-1.78”</td>
+<td>1/2</td>
+<td>1/2</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><strong>Contrasts of Interest:</strong>
+<ul>
+<li><strong>Contrast 1: Flyer Type (Special vs.&nbsp;Ordinary)</strong>: This contrast will help us compare the breakage rates between the special and ordinary flyers, regardless of the twist level.</li>
+<li>The cofficients for this contrast are:
+<ul>
+<li><span class="math inline">\(c_1 = -1/2\)</span>, <span class="math inline">\(c_2 = -1/2\)</span>, <span class="math inline">\(c_3 = 0\)</span>, <span class="math inline">\(c_4 = 0\)</span>, <span class="math inline">\(c_5 = 1/2\)</span>, <span class="math inline">\(c_6 = 1/2\)</span></li>
+<li>Explanation: This contrast will allow us to determine if there is a significant difference in breakage rates between the special and ordinary flyers. Note that <span class="math inline">\(c_1=c_2=-1/2\)</span> and <span class="math inline">\(c_5=c_6=1/2\)</span> provided marginal means for the two levels of the Flyer factor, respectively. The negative and positive signs indicate the direction of the comparison, which is the contrast between the two flyer types.</li>
+</ul></li>
+<li><strong>Contrast 2: Twist Level (1.69 vs.&nbsp;1.78)</strong>: This contrast will help us compare the breakage rates between the twist levels of 1.69 and 1.78, regardless of the flyer type. We chose these levels as they are both present in each flyer type while the other levels are not. Now, we need to choose coefficients for this contrast.
+<ul>
+<li><span class="math inline">\(c_1 = -1/2\)</span>, <span class="math inline">\(c_2 = 1/2\)</span>, <span class="math inline">\(c_3 = 0\)</span>, <span class="math inline">\(c_4 = 0\)</span>, <span class="math inline">\(c_5 = -1/2\)</span>, <span class="math inline">\(c_6 = 1/2\)</span></li>
+<li>Explanation: This contrast will allow us to determine if there is a significant difference in breakage rates between the twist levels of 1.69 and 1.78. The coefficients are chosen to first calculate the marginal means for the two levels of the Twist factor, respectively. The negative and positive signs indicate the direction of the comparison, which is the contrast between the two twist levels.</li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="meat-cooking-experiment-continuation-from-exercise-14-chapter-3" class="level2">
+<h2 class="anchored" data-anchor-id="meat-cooking-experiment-continuation-from-exercise-14-chapter-3">3. Meat Cooking Experiment (Continuation from Exercise 14, Chapter 3)</h2>
+<p>An experiment was run to investigate the amount of weight lost (in grams) by ground beef hamburgers after grilling or frying, and how much the weight loss is affected by the percentage fat in the beef before cooking. The experiment involved two factors: cooking method (factor A, with two levels frying and grilling, coded 1, 2), and fat content (factor B, with three levels 10, 15, and 20%, coded 1, 2, 3). Thus there were six treatment combinations 11, 12, 13, 21, 22, 23, relabeled as treatment levels 1, 2, …, 6, respectively. Hamburger patties weighing 110 g each were prepared from meat with the required fat content. There were 30 “cooking time slots” which were randomly assigned to the treatments in such a way that each treatment was observed five times (r = 5). The patty weights after cooking are shown in Table 3.14.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, car, lme4, emmeans, here, multcomp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>meat_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"meat.cooking.txt"</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">header =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">method =</span> <span class="fu">factor</span>(Method, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Frying"</span>, <span class="st">"Grilling"</span>)),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">fat =</span> <span class="fu">factor</span>(Fat, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"10%"</span>, <span class="st">"15%"</span>, <span class="st">"20%"</span>)),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">trt =</span> <span class="fu">interaction</span>(Method, Fat),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">trt =</span> <span class="fu">factor</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            trt,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1.1"</span>, <span class="st">"1.2"</span>, <span class="st">"1.3"</span>, <span class="st">"2.1"</span>, <span class="st">"2.2"</span>, <span class="st">"2.3"</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Frying-10%"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Frying-15%"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Frying-20%"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Grilling-10%"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Grilling-15%"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Grilling-20%"</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(meat_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Method         Fat        WtLoss           method    fat    
+ Min.   :1.0   Min.   :1   Min.   :71.00   Frying  :15   10%:10  
+ 1st Qu.:1.0   1st Qu.:1   1st Qu.:80.00   Grilling:15   15%:10  
+ Median :1.5   Median :2   Median :82.00                 20%:10  
+ Mean   :1.5   Mean   :2   Mean   :81.67                         
+ 3rd Qu.:2.0   3rd Qu.:3   3rd Qu.:84.75                         
+ Max.   :2.0   Max.   :3   Max.   :88.00                         
+           trt   
+ Frying-10%  :5  
+ Frying-15%  :5  
+ Frying-20%  :5  
+ Grilling-10%:5  
+ Grilling-15%:5  
+ Grilling-20%:5  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(meat_df<span class="sc">$</span>trt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Frying-10%"   "Frying-15%"   "Frying-20%"   "Grilling-10%" "Grilling-15%"
+[6] "Grilling-20%"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>meat_df <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(trt) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(WtLoss), <span class="at">SD =</span> <span class="fu">sd</span>(WtLoss), <span class="at">N =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">trt</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: right;">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Frying-10%</td>
+<td style="text-align: right;">84.4</td>
+<td style="text-align: right;">2.509980</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Frying-15%</td>
+<td style="text-align: right;">81.8</td>
+<td style="text-align: right;">2.049390</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Frying-20%</td>
+<td style="text-align: right;">76.0</td>
+<td style="text-align: right;">4.301163</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Grilling-10%</td>
+<td style="text-align: right;">83.4</td>
+<td style="text-align: right;">1.949359</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Grilling-15%</td>
+<td style="text-align: right;">86.0</td>
+<td style="text-align: right;">2.121320</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Grilling-20%</td>
+<td style="text-align: right;">78.4</td>
+<td style="text-align: right;">2.509980</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>anova_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(WtLoss <span class="sc">~</span> trt, <span class="at">data =</span> meat_df)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+trt          5  360.3   72.05   9.916 3.08e-05 ***
+Residuals   24  174.4    7.27                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The ANOVA results indicate a statistically significant difference among the six treatments (<span class="math inline">\(F = 9.92\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>), suggesting that at least one treatment group differs from the others.</p>
+<ol type="a">
+<li><p>Conduct pairwise comparisons for the six treatments using Scheffé’s method with a 95% overall confidence level. Present your results with appropriate statistical summaries and visualizations.</p></li>
+<li><p>Analyze the expressions <span class="math inline">\(\mu + \frac{(\tau_1 + \tau_4)}{2}\)</span>, <span class="math inline">\(\mu + \frac{(\tau_2 + \tau_5)}{2}\)</span>, and <span class="math inline">\(\mu + \frac{(\tau_3 + \tau_6)}{2}\)</span>:</p></li>
+</ol>
+<ul>
+<li>Interpret what these expressions represent in the context of the experimental setup.</li>
+<li>Perform pairwise comparisons among these three treatment averages using Scheffé’s method with a 95% confidence level.</li>
+<li>Summarize and interpret the findings in terms of practical significance and experimental insights.</li>
+</ul>
+<section id="solution-key-for-meat-cooking-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="solution-key-for-meat-cooking-experiment">Solution Key for Meat Cooking Experiment</h3>
+<ol type="a">
+<li><strong>Pairwise Comparisons:</strong> Use Scheffé’s method with a 95% confidence level.</li>
+</ol>
+<ul>
+<li>Calculate confidence intervals using: <span class="math inline">\(CI = \bar{y}_i - \bar{y}_j \pm S \sqrt{\frac{1}{n_i} + \frac{1}{n_j}}\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(anova_model, <span class="sc">~</span>trt)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pairwise_meat <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">contrast</span>(emm, <span class="st">"pairwise"</span>, <span class="at">adjust =</span> <span class="st">"scheffe"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>pairwise_meat <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 27%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 2%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">null.value</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">adj.p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-10%) - (Frying-15%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-3.5714537</td>
+<td style="text-align: right;">8.771454</td>
+<td style="text-align: right;">1.5250207</td>
+<td style="text-align: right;">0.7982621</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-10%) - (Frying-20%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">2.2285463</td>
+<td style="text-align: right;">14.571454</td>
+<td style="text-align: right;">4.9269899</td>
+<td style="text-align: right;">0.0032956</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-10%) - (Grilling-10%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-5.1714537</td>
+<td style="text-align: right;">7.171454</td>
+<td style="text-align: right;">0.5865464</td>
+<td style="text-align: right;">0.9963016</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-10%) - (Grilling-15%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-7.7714537</td>
+<td style="text-align: right;">4.571454</td>
+<td style="text-align: right;">-0.9384743</td>
+<td style="text-align: right;">0.9689331</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-10%) - (Grilling-20%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-0.1714537</td>
+<td style="text-align: right;">12.171454</td>
+<td style="text-align: right;">3.5192785</td>
+<td style="text-align: right;">0.0604895</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-15%) - (Frying-20%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-0.3714537</td>
+<td style="text-align: right;">11.971454</td>
+<td style="text-align: right;">3.4019692</td>
+<td style="text-align: right;">0.0751629</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-15%) - (Grilling-10%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-7.7714537</td>
+<td style="text-align: right;">4.571454</td>
+<td style="text-align: right;">-0.9384743</td>
+<td style="text-align: right;">0.9689331</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-15%) - (Grilling-15%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-4.2</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-10.3714537</td>
+<td style="text-align: right;">1.971454</td>
+<td style="text-align: right;">-2.4634949</td>
+<td style="text-align: right;">0.3329171</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-15%) - (Grilling-20%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-2.7714537</td>
+<td style="text-align: right;">9.571454</td>
+<td style="text-align: right;">1.9942578</td>
+<td style="text-align: right;">0.5636477</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-20%) - (Grilling-10%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-7.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-13.5714537</td>
+<td style="text-align: right;">-1.228546</td>
+<td style="text-align: right;">-4.3404435</td>
+<td style="text-align: right;">0.0116608</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-20%) - (Grilling-15%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-10.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-16.1714537</td>
+<td style="text-align: right;">-3.828546</td>
+<td style="text-align: right;">-5.8654642</td>
+<td style="text-align: right;">0.0004115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Frying-20%) - (Grilling-20%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-2.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-8.5714537</td>
+<td style="text-align: right;">3.771454</td>
+<td style="text-align: right;">-1.4077114</td>
+<td style="text-align: right;">0.8464299</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Grilling-10%) - (Grilling-15%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-2.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-8.7714537</td>
+<td style="text-align: right;">3.571454</td>
+<td style="text-align: right;">-1.5250207</td>
+<td style="text-align: right;">0.7982621</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Grilling-10%) - (Grilling-20%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-1.1714537</td>
+<td style="text-align: right;">11.171454</td>
+<td style="text-align: right;">2.9327321</td>
+<td style="text-align: right;">0.1683079</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt</td>
+<td style="text-align: left;">(Grilling-15%) - (Grilling-20%)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1.4285463</td>
+<td style="text-align: right;">13.771454</td>
+<td style="text-align: right;">4.4577528</td>
+<td style="text-align: right;">0.0090943</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pairwise_meat <span class="sc">|&gt;</span> <span class="fu">summary</span>(<span class="at">infer =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 3%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+<th style="text-align: right;">t.ratio</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Frying-10%) - (Frying-15%)</td>
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-3.5714537</td>
+<td style="text-align: right;">8.771454</td>
+<td style="text-align: right;">1.5250207</td>
+<td style="text-align: right;">0.7982621</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Frying-10%) - (Frying-20%)</td>
+<td style="text-align: right;">8.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">2.2285463</td>
+<td style="text-align: right;">14.571454</td>
+<td style="text-align: right;">4.9269899</td>
+<td style="text-align: right;">0.0032956</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Frying-10%) - (Grilling-10%)</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-5.1714537</td>
+<td style="text-align: right;">7.171454</td>
+<td style="text-align: right;">0.5865464</td>
+<td style="text-align: right;">0.9963016</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Frying-10%) - (Grilling-15%)</td>
+<td style="text-align: right;">-1.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-7.7714537</td>
+<td style="text-align: right;">4.571454</td>
+<td style="text-align: right;">-0.9384743</td>
+<td style="text-align: right;">0.9689331</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Frying-10%) - (Grilling-20%)</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-0.1714537</td>
+<td style="text-align: right;">12.171454</td>
+<td style="text-align: right;">3.5192785</td>
+<td style="text-align: right;">0.0604895</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Frying-15%) - (Frying-20%)</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-0.3714537</td>
+<td style="text-align: right;">11.971454</td>
+<td style="text-align: right;">3.4019692</td>
+<td style="text-align: right;">0.0751629</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Frying-15%) - (Grilling-10%)</td>
+<td style="text-align: right;">-1.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-7.7714537</td>
+<td style="text-align: right;">4.571454</td>
+<td style="text-align: right;">-0.9384743</td>
+<td style="text-align: right;">0.9689331</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Frying-15%) - (Grilling-15%)</td>
+<td style="text-align: right;">-4.2</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-10.3714537</td>
+<td style="text-align: right;">1.971454</td>
+<td style="text-align: right;">-2.4634949</td>
+<td style="text-align: right;">0.3329171</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Frying-15%) - (Grilling-20%)</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-2.7714537</td>
+<td style="text-align: right;">9.571454</td>
+<td style="text-align: right;">1.9942578</td>
+<td style="text-align: right;">0.5636477</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Frying-20%) - (Grilling-10%)</td>
+<td style="text-align: right;">-7.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-13.5714537</td>
+<td style="text-align: right;">-1.228546</td>
+<td style="text-align: right;">-4.3404435</td>
+<td style="text-align: right;">0.0116608</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Frying-20%) - (Grilling-15%)</td>
+<td style="text-align: right;">-10.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-16.1714537</td>
+<td style="text-align: right;">-3.828546</td>
+<td style="text-align: right;">-5.8654642</td>
+<td style="text-align: right;">0.0004115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Frying-20%) - (Grilling-20%)</td>
+<td style="text-align: right;">-2.4</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-8.5714537</td>
+<td style="text-align: right;">3.771454</td>
+<td style="text-align: right;">-1.4077114</td>
+<td style="text-align: right;">0.8464299</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Grilling-10%) - (Grilling-15%)</td>
+<td style="text-align: right;">-2.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-8.7714537</td>
+<td style="text-align: right;">3.571454</td>
+<td style="text-align: right;">-1.5250207</td>
+<td style="text-align: right;">0.7982621</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(Grilling-10%) - (Grilling-20%)</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-1.1714537</td>
+<td style="text-align: right;">11.171454</td>
+<td style="text-align: right;">2.9327321</td>
+<td style="text-align: right;">0.1683079</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Grilling-15%) - (Grilling-20%)</td>
+<td style="text-align: right;">7.6</td>
+<td style="text-align: right;">1.704895</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1.4285463</td>
+<td style="text-align: right;">13.771454</td>
+<td style="text-align: right;">4.4577528</td>
+<td style="text-align: right;">0.0090943</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(meat_df, <span class="fu">aes</span>(<span class="at">x =</span> trt, <span class="at">y =</span> WtLoss, <span class="at">fill =</span> trt)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Weight Loss Across Treatments"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Weight Loss"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="assignment3_solution_key_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="assignment3_solution_key_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li><strong>Expressions:</strong></li>
+</ol>
+<ul>
+<li><p>Answer: <span class="math inline">\(\mu + \frac{\tau_1 + \tau_4}{2}\)</span>: Average (marginal) mean of Frying-10% and Grilling-10% treatments. That is, the average weight loss for the 10% fat content patties cooked.</p></li>
+<li><p>Perform pairwise comparisons with similar methods and interpret results (e.g., 95% CI does not contain zero indicates a significant difference).</p></li>
+<li><p>Answer: This question is not very clear. Accept the answer from the part a and interpret the results in the context of the experimental setup.</p></li>
+</ul>
+</section>
+</section>
+<section id="reaction-time-experiment" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="reaction-time-experiment"><strong>4. Reaction Time Experiment</strong></h2>
+<p><strong>Factors and Levels:</strong></p>
+<ul>
+<li><strong>Cue Stimulus</strong>: Auditory or Visual</li>
+<li><strong>Elapsed Time</strong>: 5, 10, or 15 seconds</li>
+</ul>
+<p><strong>Treatment Combinations and Codes:</strong></p>
+<ul>
+<li>1 = Auditory, 5 seconds</li>
+<li>2 = Auditory, 10 seconds</li>
+<li>3 = Auditory, 15 seconds</li>
+<li>4 = Visual, 5 seconds</li>
+<li>5 = Visual, 10 seconds</li>
+<li>6 = Visual, 15 seconds</li>
+</ul>
+<p><strong>Table 4.4</strong>: Reaction times, in seconds, for the reaction time experiment (order of collection in parentheses).</p>
+<table class="table">
 <colgroup>
 <col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Treatment Combination</th>
+<th>Reaction Time 1 (s) (Order)</th>
+<th>Reaction Time 2 (s) (Order)</th>
+<th>Reaction Time 3 (s) (Order)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.181 (18)</td>
+<td>0.204 (9)</td>
+<td>0.170 (10)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.187 (12)</td>
+<td>0.167 (3)</td>
+<td>0.182 (5)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.236 (17)</td>
+<td>0.202 (13)</td>
+<td>0.198 (16)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.269 (15)</td>
+<td>0.257 (7)</td>
+<td>0.279 (14)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.260 (11)</td>
+<td>0.283 (6)</td>
+<td>0.235 (8)</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>0.258 (4)</td>
+<td>0.256 (1)</td>
+<td>0.281 (2)</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe for the Reaction Time Experiment</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Treatment =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>), <span class="co"># Treatment combinations 1 to 6</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Cue =</span> <span class="fu">rep</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="st">"Auditory"</span>, <span class="st">"Auditory"</span>, <span class="st">"Auditory"</span>, <span class="st">"Visual"</span>, <span class="st">"Visual"</span>, <span class="st">"Visual"</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">each =</span> <span class="dv">3</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ReactionTime =</span> <span class="fu">c</span>(</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.181</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.204</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.170</span>, <span class="co"># Treatment 1</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.187</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.167</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.182</span>, <span class="co"># Treatment 2</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.236</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.202</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.198</span>, <span class="co"># Treatment 3</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.269</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.257</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.279</span>, <span class="co"># Treatment 4</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.260</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.283</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.235</span>, <span class="co"># Treatment 5</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.258</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.256</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.281</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    ), <span class="co"># Treatment 6</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">Order =</span> <span class="fu">c</span>(</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>        <span class="dv">18</span>,</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>        <span class="dv">9</span>,</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>        <span class="dv">10</span>, <span class="co"># Treatment 1</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>        <span class="dv">12</span>,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>, <span class="co"># Treatment 2</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>        <span class="dv">17</span>,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>        <span class="dv">13</span>,</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>        <span class="dv">16</span>, <span class="co"># Treatment 3</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>        <span class="dv">15</span>,</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>        <span class="dv">7</span>,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>        <span class="dv">14</span>, <span class="co"># Treatment 4</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>        <span class="dv">11</span>,</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>        <span class="dv">6</span>,</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>        <span class="dv">8</span>, <span class="co"># Treatment 5</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span>,</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>,</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># Treatment 6</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables to factors</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="ot">&lt;-</span> reaction_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>        <span class="at">Cue =</span> <span class="fu">factor</span>(Cue, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Auditory"</span>, <span class="st">"Visual"</span>)),</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">Time =</span> <span class="fu">factor</span>(Time, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)),</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">Treatment =</span> <span class="fu">factor</span>(</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>            Treatment,</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>                <span class="st">"auditory_5"</span>,</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>                <span class="st">"auditory_10"</span>,</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>                <span class="st">"auditory_15"</span>,</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>                <span class="st">"visual_5"</span>,</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>                <span class="st">"visual_10"</span>,</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>                <span class="st">"visual_15"</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a><span class="co"># View the structured data</span></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(reaction_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Treatment      Cue Time ReactionTime Order
+1   auditory_5 Auditory    5        0.181    18
+2   auditory_5 Auditory    5        0.204     9
+3   auditory_5 Auditory    5        0.170    10
+4  auditory_10 Auditory   10        0.187    12
+5  auditory_10 Auditory   10        0.167     3
+6  auditory_10 Auditory   10        0.182     5
+7  auditory_15 Auditory   15        0.236    17
+8  auditory_15 Auditory   15        0.202    13
+9  auditory_15 Auditory   15        0.198    16
+10    visual_5   Visual    5        0.269    15
+11    visual_5   Visual    5        0.257     7
+12    visual_5   Visual    5        0.279    14
+13   visual_10   Visual   10        0.260    11
+14   visual_10   Visual   10        0.283     6
+15   visual_10   Visual   10        0.235     8
+16   visual_15   Visual   15        0.258     4
+17   visual_15   Visual   15        0.256     1
+18   visual_15   Visual   15        0.281     2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reaction_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Treatment       Cue    Time    ReactionTime        Order      
+ auditory_5 :3   Auditory:9   5 :6   Min.   :0.1670   Min.   : 1.00  
+ auditory_10:3   Visual  :9   10:6   1st Qu.:0.1898   1st Qu.: 5.25  
+ auditory_15:3                15:6   Median :0.2355   Median : 9.50  
+ visual_5   :3                       Mean   :0.2281   Mean   : 9.50  
+ visual_10  :3                       3rd Qu.:0.2595   3rd Qu.:13.75  
+ visual_15  :3                       Max.   :0.2830   Max.   :18.00  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify factor levels</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(reaction_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   18 obs. of  5 variables:
+ $ Treatment   : Factor w/ 6 levels "auditory_5","auditory_10",..: 1 1 1 2 2 2 3 3 3 4 ...
+ $ Cue         : Factor w/ 2 levels "Auditory","Visual": 1 1 1 1 1 1 1 1 1 2 ...
+ $ Time        : Factor w/ 3 levels "5","10","15": 1 1 1 2 2 2 3 3 3 1 ...
+ $ ReactionTime: num  0.181 0.204 0.17 0.187 0.167 0.182 0.236 0.202 0.198 0.269 ...
+ $ Order       : num  18 9 10 12 3 5 17 13 16 15 ...</code></pre>
+</div>
+</div>
+<p><strong>Tasks:</strong> (a) <strong>Identify Preplanned Contrasts</strong>:</p>
+<ul>
+<li>Determine contrasts of interest, such as comparing auditory versus visual treatments. Specify the contrasts mathematically, including coefficients for the comparisons.</li>
+</ul>
+<p>Given the treatment condition and preserving its order, the contrasts of interest are:</p>
+<section id="understanding-the-structure-of-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-the-structure-of-the-data"><strong>Understanding the Structure of the Data</strong></h3>
+<p>The <strong>Reaction Time Experiment</strong> data consists of observations measuring how quickly a participant responds to an auditory or visual cue. The study manipulates <strong>two factors</strong>:</p>
+<ol type="1">
+<li><strong>Cue Stimulus (Factor A)</strong>: Auditory (A1) or Visual (A2).</li>
+<li><strong>Elapsed Time (Factor B)</strong>: 5 seconds (B1), 10 seconds (B2), or 15 seconds (B3).</li>
+</ol>
+<p>Each <strong>treatment combination</strong> represents a specific pairing of these two factors:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Treatment Combination</th>
+<th>Cue Type</th>
+<th>Elapsed Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Auditory (A1)</td>
+<td>5 sec (B1)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Auditory (A1)</td>
+<td>10 sec (B2)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Auditory (A1)</td>
+<td>15 sec (B3)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Visual (A2)</td>
+<td>5 sec (B1)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Visual (A2)</td>
+<td>10 sec (B2)</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Visual (A2)</td>
+<td>15 sec (B3)</td>
+</tr>
+</tbody>
+</table>
+<p>For each treatment combination, <strong>reaction times</strong> were recorded over multiple trials, with the order of data collection also noted.</p>
+</section>
+<section id="contrast-explanation" class="level3">
+<h3 class="anchored" data-anchor-id="contrast-explanation"><strong>Contrast Explanation</strong></h3>
+<p>A <strong>contrast</strong> is a <strong>linear combination of treatment means</strong> that tests specific hypotheses about differences among treatments.</p>
+<section id="main-effect-of-cue-type-auditory-vs.-visual" class="level4">
+<h4 class="anchored" data-anchor-id="main-effect-of-cue-type-auditory-vs.-visual"><strong>1. Main Effect of Cue Type (Auditory vs.&nbsp;Visual)</strong></h4>
+<p>This contrast examines whether auditory cues lead to significantly different reaction times than visual cues. The contrast formula:</p>
+<p><span class="math display">\[
+C_1 = \frac{1}{3} (Y_{A1B1} + Y_{A1B2} + Y_{A1B3}) - \frac{1}{3} (Y_{A2B1} + Y_{A2B2} + Y_{A2B3})
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(Y_{A1B1}\)</span> represents the mean reaction time for <strong>Auditory, 5s</strong>.</li>
+<li><span class="math inline">\(Y_{A1B2}\)</span> represents the mean reaction time for <strong>Auditory, 10s</strong>.</li>
+<li><span class="math inline">\(Y_{A1B3}\)</span> represents the mean reaction time for <strong>Auditory, 15s</strong>.</li>
+<li><span class="math inline">\(Y_{A2B1}\)</span>, <span class="math inline">\(Y_{A2B2}\)</span>, and <span class="math inline">\(Y_{A2B3}\)</span> are the corresponding means for <strong>Visual</strong> cues.</li>
+</ul>
+<p>This contrast has weights <strong>(+1/3, +1/3, +1/3, -1/3, -1/3, -1/3)</strong>, which compare the <strong>average</strong> reaction time for auditory and visual cues.</p>
+</section>
+<section id="main-effect-of-elapsed-time-linear-trend" class="level4">
+<h4 class="anchored" data-anchor-id="main-effect-of-elapsed-time-linear-trend"><strong>2. Main Effect of Elapsed Time (Linear Trend)</strong></h4>
+<p>This contrast tests whether increasing elapsed time affects reaction time <strong>linearly</strong>. The contrast formula:</p>
+<p><span class="math display">\[
+C_2 = (-1)Y_{B1} + 0 Y_{B2} + (+1) Y_{B3}
+\]</span></p>
+<p>where <span class="math inline">\(Y_{B1}, Y_{B2}, Y_{B3}\)</span> are the means across cue types at 5s, 10s, and 15s, respectively. The weights <strong>(-1, 0, +1)</strong> assume a <strong>linear increase or decrease</strong> in reaction time with elapsed time.</p>
+</section>
+<section id="interaction-between-cue-type-and-elapsed-time" class="level4">
+<h4 class="anchored" data-anchor-id="interaction-between-cue-type-and-elapsed-time"><strong>3. Interaction Between Cue Type and Elapsed Time</strong></h4>
+<p>This contrast examines whether the effect of elapsed time on reaction time <strong>differs</strong> between auditory and visual cues. The formula:</p>
+<p><span class="math display">\[
+C_3 = (Y_{A1B1} - Y_{A1B3}) - (Y_{A2B1} - Y_{A2B3})
+\]</span></p>
+<p>This measures whether the <strong>difference between 5s and 15s</strong> is the same for auditory and visual cues. If this contrast is significant, it indicates an <strong>interaction effect</strong>, meaning the impact of elapsed time depends on the cue type.</p>
+</section>
+</section>
+<section id="interpretation-of-contrasts" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="interpretation-of-contrasts"><strong>Interpretation of Contrasts</strong></h3>
+<ul>
+<li><strong>If <span class="math inline">\(C_1\)</span> is significant</strong> → Auditory cues lead to significantly different reaction times than visual cues.</li>
+<li><strong>If <span class="math inline">\(C_2\)</span> is significant</strong> → Reaction time systematically changes as elapsed time increases.</li>
+<li><strong>If <span class="math inline">\(C_3\)</span> is significant</strong> → The effect of elapsed time on reaction time is <strong>not the same</strong> for auditory and visual cues.— <strong>We do not discuss the interaction contrast in this assignment.</strong></li>
+</ul>
+<ol start="2" type="a">
+<li><strong>Plot Data:</strong></li>
+</ol>
+<p>Note that there multiple ways to plot the data. Here is one example: - Create bar/line plot in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(reaction_data, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> ReactionTime, <span class="at">color =</span> Cue)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add individual points</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add mean points</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> mean,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.1</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Connect means with lines</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span> Cue)) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Reaction Times by Cue Type and Elapsed Time"</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Elapsed Time (seconds)"</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Reaction Time (seconds)"</span>,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Cue Stimulus"</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="assignment3_solution_key_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="assignment3_solution_key_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here is another way to plot data.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the reaction times with superimposed boxplots</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(reaction_data, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> ReactionTime, <span class="at">fill =</span> Cue)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Reaction Times by Cue Type and Elapsed Time"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Elapsed Time (seconds)"</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Reaction Time (seconds)"</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"Cue Stimulus"</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">alpha =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-reaction-time-plot" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-reaction-time-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assignment3_solution_key_files/figure-html/fig-reaction-time-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Reaction times for different treatment combinations"><img src="assignment3_solution_key_files/figure-html/fig-reaction-time-plot-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-reaction-time-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Reaction times for different treatment combinations
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li><strong>Hypothesis Testing:</strong></li>
+</ol>
+<p>The experiment tested the hypothesis:</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: No difference in reaction times between treatments.</li>
+<li><span class="math inline">\(H_1\)</span>: At least one treatment has a different effect.</li>
+</ul>
+<p>A <strong>two-way ANOVA</strong> was conducted to analyze the data:</p>
+<div id="tbl-code-reaction-time-anova" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-code-reaction-time-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fit_reaction <span class="ot">&lt;-</span> <span class="fu">aov</span>(ReactionTime <span class="sc">~</span> Treatment, <span class="at">data =</span> reaction_data)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_reaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df   Sum Sq  Mean Sq F value   Pr(&gt;F)    
+Treatment    5 0.025549 0.005110   17.66 3.66e-05 ***
+Residuals   12 0.003472 0.000289                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-code-reaction-time-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: ANOVA results for the Reaction Time Experiment
+</figcaption>
+</figure>
+</div>
+<ol start="4" type="a">
+<li><strong>Simultaneous Confidence Intervals:</strong></li>
+</ol>
+<p>Let’s create two contrasts and compute the simultaneous 90% confidence intervals using the <strong>Sidak’s method</strong>:</p>
+<ol type="1">
+<li><strong>Visual vs.&nbsp;Auditory</strong>: This contrast compares the average reaction times between auditory and visual cues, regardless of the elapsed time.</li>
+<li><strong>Linear Trend</strong>: This contrast tests whether increasing elapsed time affects reaction time linearly.</li>
+</ol>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>emm_reaction <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_reaction, <span class="at">specs =</span> <span class="st">"Treatment"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>emm_reaction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Treatment   emmean      SE df lower.CL upper.CL
+ auditory_5   0.185 0.00982 12    0.164    0.206
+ auditory_10  0.179 0.00982 12    0.157    0.200
+ auditory_15  0.212 0.00982 12    0.191    0.233
+ visual_5     0.268 0.00982 12    0.247    0.290
+ visual_10    0.259 0.00982 12    0.238    0.281
+ visual_15    0.265 0.00982 12    0.244    0.286
+
+Confidence level used: 0.95 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrast 1: Auditory vs. Visual; build custom contrasts</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cntr1 <span class="ot">&lt;-</span> <span class="fu">contrast</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    emm_reaction,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">Visual_Auditory =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">linear_trend =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">adjust =</span> <span class="st">"sidak"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.90</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(cntr1, <span class="at">level =</span> <span class="fl">0.90</span>, <span class="at">adjust =</span> <span class="st">"sidak"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the contrasts and confidence intervals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-code-reaction-time-contrasts" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-code-reaction-time-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Visual_Auditory</td>
+<td style="text-align: right;">0.2170000</td>
+<td style="text-align: right;">0.0240555</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.1649371</td>
+<td style="text-align: right;">0.2690629</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">linear_trend</td>
+<td style="text-align: right;">0.0236667</td>
+<td style="text-align: right;">0.0196412</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-0.0188425</td>
+<td style="text-align: right;">0.0661759</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-code-reaction-time-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Contrasts and Simultaneous 90% Confidence Intervals for the Reaction Time Experiment
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The <strong>simultaneous 90% confidence intervals</strong> for the contrasts are:</p>
+<ol type="1">
+<li><strong>Auditory vs.&nbsp;Visual</strong>: The difference in reaction times between auditory and visual cues is estimated to be between 0.165 and 0.269 seconds.</li>
+<li><strong>Linear Trend</strong>: The linear trend in reaction times across elapsed times is estimated to be between -0.019 and 0.066 seconds.</li>
+<li><strong>Interpretation</strong>: The confidence intervals suggest that visual cues lead to significantly faster reaction times than auditory cues. However, the linear trend in reaction times across elapsed times is not statistically significant.</li>
+</ol>
+</section>
+</section>
+<section id="grading-allocation" class="level1">
+<h1>Grading Allocation</h1>
+<p>Each question is worth 25 points, distributed as follows:</p>
+<ul>
+<li>Completeness (10 points): Address all aspects of the question.</li>
+<li>Accuracy (10 points): Provide correct methods, calculations, and R code.</li>
+<li>Clarity (5 points): Present results in a clear, logical, and concise manner.</li>
+</ul>
+</section>
+<section id="grading-rubric-for-the-assignment" class="level1">
+<h1>Grading Rubric for the Assignment</h1>
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 24%">
+<col style="width: 21%">
 <col style="width: 20%">
 </colgroup>
 <thead>
@@ -411,127 +1671,51 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<hr>
-</section>
-<section id="solution-key" class="level1">
-<h1>Solution Key</h1>
-<section id="buoyancy-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="buoyancy-experiment"><strong>1. Buoyancy Experiment</strong></h2>
-<ol type="a">
-<li><strong>Checklist:</strong></li>
-</ol>
-<ul>
-<li><strong>Objective:</strong> To determine if salt concentration affects the buoyancy of an object.</li>
-<li><strong>Sources of variation:</strong>
-<ul>
-<li><strong>Treatment factors:</strong> Salt concentrations.</li>
-<li><strong>Experimental units:</strong> Objects being tested.</li>
-<li><strong>Nuisance factors:</strong> Temperature, object shape, water impurities.</li>
-</ul></li>
-<li><strong>Assignment rule:</strong> Randomize objects to treatments to reduce bias.</li>
-<li><strong>Measurements and procedures:</strong> Use calibrated instruments to measure buoyant force, ensure consistent methodology.</li>
-<li><strong>Preplanned contrasts:</strong> Compare low versus high salt concentrations.</li>
-<li><strong>Multiple comparisons:</strong> Use Tukey’s method for pairwise treatment comparisons.</li>
-</ul>
-<ol start="2" type="a">
-<li><strong>Pilot Experiment in R:</strong></li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>salt_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Salt =</span> <span class="fu">rep</span>(salt_levels, <span class="at">each =</span> <span class="dv">5</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Buoyancy =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">1</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">1</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">1</span>))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(Buoyancy <span class="sc">~</span> Salt, <span class="at">data =</span> data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Simulated results indicate variance for revising the checklist.</p>
-<ol start="3" type="a">
-<li><strong>Checklist Update:</strong> Include adjustments based on variance estimates to improve design robustness.</li>
-</ol>
-<hr>
-</section>
-<section id="cotton-spinning-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="cotton-spinning-experiment"><strong>2. Cotton-Spinning Experiment</strong></h2>
-<ul>
-<li><strong>Contrasts:</strong> Compare effect of different spinning methods:
-<ul>
-<li>Contrast 1: (Method A vs.&nbsp;Method B): <span class="math inline">\(1, -1, 0, 0, 0, 0\)</span>.</li>
-<li>Contrast 2: Interaction of method and machine type.</li>
-</ul></li>
-<li><strong>Coefficients:</strong> Should align with chosen contrasts to partition variation effectively.</li>
-</ul>
-<hr>
-</section>
-<section id="meat-cooking-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="meat-cooking-experiment"><strong>3. Meat Cooking Experiment</strong></h2>
-<ol type="a">
-<li><strong>Pairwise Comparisons:</strong> Use Scheffé’s method with a 95% confidence level.</li>
-</ol>
-<ul>
-<li>Calculate confidence intervals using: <span class="math inline">\(CI = \bar{y}_i - \bar{y}_j \pm S \sqrt{\frac{1}{n_i} + \frac{1}{n_j}}\)</span></li>
-</ul>
-<ol start="2" type="a">
-<li><strong>Expressions:</strong></li>
-</ol>
-<ul>
-<li><span class="math inline">\(\mu + \frac{\tau_1 + \tau_4}{2}\)</span>: Average treatment effect for treatments 1 and 4.</li>
-<li>Perform pairwise comparisons with similar methods and interpret results (e.g., 95% CI does not contain zero indicates a significant difference).</li>
-</ul>
-<hr>
-</section>
-<section id="reaction-time-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="reaction-time-experiment"><strong>4. Reaction Time Experiment</strong></h2>
-<ol type="a">
-<li><strong>Preplanned Contrasts:</strong></li>
-</ol>
-<ul>
-<li>Compare auditory (<span class="math inline">\(1, 1, 1, -1, -1, -1\)</span>) vs.&nbsp;visual (<span class="math inline">\(-1, -1, -1, 1, 1, 1\)</span>).</li>
-</ul>
-<ol start="2" type="a">
-<li><strong>Plot Data:</strong></li>
-</ol>
-<ul>
-<li>Create bar/line plot in R:</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Auditory"</span>, <span class="st">"Visual"</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ElapsedTime =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>), <span class="dv">2</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ReactionTime =</span> <span class="fu">c</span>(<span class="fl">0.181</span>, <span class="fl">0.204</span>, <span class="fl">0.170</span>, <span class="fl">0.269</span>, <span class="fl">0.260</span>, <span class="fl">0.258</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> ElapsedTime, <span class="at">y =</span> ReactionTime, <span class="at">color =</span> Treatment)) <span class="sc">+</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reaction Time Experiment"</span>, <span class="at">x =</span> <span class="st">"Elapsed Time (s)"</span>, <span class="at">y =</span> <span class="st">"Reaction Time (s)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="a">
-<li><strong>Hypothesis Testing:</strong></li>
-</ol>
-<ul>
-<li><span class="math inline">\(H_0\)</span>: All treatment means are equal.</li>
-<li>Perform ANOVA:</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(ReactionTime <span class="sc">~</span> Treatment <span class="sc">*</span> ElapsedTime, <span class="at">data =</span> data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="a">
-<li><strong>Simultaneous Confidence Intervals:</strong></li>
-</ol>
-<ul>
-<li>Use Tukey’s method:</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(<span class="fu">aov</span>(ReactionTime <span class="sc">~</span> Treatment <span class="sc">*</span> ElapsedTime, <span class="at">data =</span> data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Interpret intervals and identify significant contrasts.</p>
-<hr>
-</section>
-</section>
-<section id="grading-allocation" class="level1">
-<h1>Grading Allocation</h1>
-<p>Each question is worth 25 points, distributed as follows:</p>
-<ul>
-<li>Completeness (10 points): Address all aspects of the question.</li>
-<li>Accuracy (10 points): Provide correct methods, calculations, and R code.</li>
-<li>Clarity (5 points): Present results in a clear, logical, and concise manner.</li>
-</ul>
+<!-- 
+## Question 1: Buoyancy Experiment
+
+| **Criteria**                                    | **Full Credit (10 points)**                                   | **Partial Credit (5 points)**                   | **No Credit (0 points)**               |
+| ----------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------- | -------------------------------------- |
+| **Objective Clarity**                           | Clearly defines objectives and expected results               | Vague objectives but relevant                   | No clear objective stated              |
+| **Identification of Variation Sources**         | Lists all relevant factors (treatment, nuisance)              | Missing some key variation sources              | Does not identify sources of variation |
+| **Experimental Design Justification**           | Well-structured randomization and replication plan            | Partially justified but lacks full structure    | No explanation of randomization        |
+| **Measurement Methods**                         | Describes instruments, calibration, and cotton_df) collection | Somewhat detailed but lacks precision           | No clear measurement description       |
+| **Data Analysis Plan**                          | Correct use of statistical tests and justification            | Uses tests but lacks justification              | No planned cotton_df) analysis         |
+| **Pilot Study Implementation**                  | Conducts and interprets a well-planned pilot study            | Pilot study but incomplete interpretation       | No pilot study                         |
+| **Final Adjustments Based on Pilot Study**      | Uses pilot cotton_df) to refine design                        | Mentions pilot but does not adjust experiment   | Ignores pilot study cotton_df)         |
+| **Preplanned Contrasts & Multiple Comparisons** | Thoughtfully selects contrasts and multiple comparison tests  | Mentions multiple comparisons but lacks depth   | No mention of contrasts                |
+| **Data Presentation & Interpretation**          | Clear summary statistics, plots, and interpretations          | Data analysis is present but not well explained | No cotton_df) presentation             |
+| **Overall Quality & Clarity**                   | Professionally written, logically structured                  | Understandable but with clarity issues          | Disorganized and unclear               |
+
+## Question 2: Cotton-Spinning Experiment
+
+| **Criteria**                           | **Full Credit (10 points)**                                  | **Partial Credit (5 points)**                                   | **No Credit (0 points)**                       |
+| -------------------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------- | ---------------------------------------------- |
+| **Data Loading & Inspection**          | Data is correctly loaded, formatted, and summarized          | Data is loaded but formatting is incorrect                      | No cotton_df) is loaded or inspected           |
+| **Exploratory Data Analysis (EDA)**    | Clear visualizations with proper labels and descriptions     | Some plots missing or incomplete explanations                   | No EDA performed                               |
+| **ANOVA Implementation**               | Correct model specification with justified interpretations   | Model applied but missing interpretation or incorrect variables | No model applied or incorrect approach         |
+| **Model Assumption Checks**            | Complete residual diagnostics with tests                     | Only residual plots or assumption tests, but not both           | No assumption checks                           |
+| **Multiple Comparisons (Tukey's HSD)** | Correct post-hoc analysis with clear explanations            | Tukey's HSD performed but without interpretation                | No multiple comparisons conducted              |
+| **Statistical Interpretation**         | Meaningful insights from ANOVA and post-hoc tests            | Some interpretation but missing key insights                    | No interpretation of statistical results       |
+| **Code Readability and Documentation** | Well-commented and structured R script                       | Some comments but unclear code structure                        | No comments or disorganized code               |
+| **Overall Completeness & Clarity**     | Answers are thorough, well-explained, and properly formatted | Some explanations missing or unclear                            | No clear structure or missing major components | -->
 
 
 </section>
 
 </main> <!-- /main -->
+<!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
+<footer class="site-footer">
+    <div class="container text-center">
+        <hr> 
+        © <span id="current-year"></span> Dr. Davood Tofighi |
+        <a href="https://canvasinfo.unm.edu/">UNM Canvas</a> |
+        <a href="https://data-wise.github.io/doe">Course GitHub Page</a> |
+    </div>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</footer>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -950,8 +2134,41 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
