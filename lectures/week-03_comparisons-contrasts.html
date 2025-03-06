@@ -383,6 +383,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#fishers-least-significant-difference-lsd" id="toc-fishers-least-significant-difference-lsd" class="nav-link" data-scroll-target="#fishers-least-significant-difference-lsd">Fisher’s Least Significant Difference (LSD)</a></li>
   <li><a href="#tukeys-honest-significant-difference-hsd" id="toc-tukeys-honest-significant-difference-hsd" class="nav-link" data-scroll-target="#tukeys-honest-significant-difference-hsd">Tukey’s Honest Significant Difference (HSD)</a></li>
+  <li><a href="#tukeys-hsd-procedure" id="toc-tukeys-hsd-procedure" class="nav-link" data-scroll-target="#tukeys-hsd-procedure">Tukey’s HSD Procedure</a></li>
   <li><a href="#bonferroni-method" id="toc-bonferroni-method" class="nav-link" data-scroll-target="#bonferroni-method">Bonferroni Method</a></li>
   <li><a href="#scheffés-method" id="toc-scheffés-method" class="nav-link" data-scroll-target="#scheffés-method">Scheffé’s Method</a></li>
   </ul></li>
@@ -531,7 +532,7 @@ L = \frac{\mu_A + \mu_B}{2} - \frac{\mu_C + \mu_D}{2}.
 </section>
 </section>
 </section>
-<section id="multiple-comparison-procedures-mcps" class="level1">
+<section id="multiple-comparison-procedures-mcps" class="level1 page-columns page-full">
 <h1>Multiple Comparison Procedures (MCPs)</h1>
 <p>After ANOVA, MCPs help identify which treatments differ while controlling the Type I error rate across all comparisons:</p>
 <section id="fishers-least-significant-difference-lsd" class="level2">
@@ -543,7 +544,7 @@ L = \frac{\mu_A + \mu_B}{2} - \frac{\mu_C + \mu_D}{2}.
 <li><strong>Cons:</strong> Higher chance of Type I errors when many comparisons are made.</li>
 </ul>
 </section>
-<section id="tukeys-honest-significant-difference-hsd" class="level2">
+<section id="tukeys-honest-significant-difference-hsd" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="tukeys-honest-significant-difference-hsd">Tukey’s Honest Significant Difference (HSD)</h2>
 <ul>
 <li>Designed for pairwise comparisons.</li>
@@ -554,6 +555,17 @@ L = \frac{\mu_A + \mu_B}{2} - \frac{\mu_C + \mu_D}{2}.
 \text{HSD} = q_{\alpha,v,n-v} \sqrt{\frac{\text{MSE}}{r}},
 \]</span></p>
 <p>where <span class="math inline">\(q\)</span> is from the studentized range distribution, <span class="math inline">\(v\)</span> is the number of groups, <span class="math inline">\(n\)</span> is the total sample size, and <span class="math inline">\(r\)</span> is the number of observations per group.</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>For a more detailed explanation of Tukey’s HSD, see the tutorial page <a href="../appendix/stat-topics/standardized-range-distribution.html">Tukey’s HSD</a> in the appendix.</p>
+</div></div></section>
+<section id="tukeys-hsd-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="tukeys-hsd-procedure">Tukey’s HSD Procedure</h2>
+<ol type="1">
+<li>Compute all pairwise differences.</li>
+<li>Calculate the HSD value.</li>
+<li>If the difference between two means exceeds the HSD, they are significantly different.</li>
+</ol>
 </section>
 <section id="bonferroni-method" class="level2">
 <h2 class="anchored" data-anchor-id="bonferroni-method">Bonferroni Method</h2>
@@ -594,11 +606,16 @@ L = \frac{\mu_A + \mu_B}{2} - \frac{\mu_C + \mu_D}{2}.
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Response =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">25</span>, <span class="dv">2</span>))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Treatment, <span class="at">data =</span> data)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Response =</span> <span class="fu">c</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">2</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">2</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">25</span>, <span class="dv">2</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Treatment, <span class="at">data =</span> data)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 Treatment    3  631.3  210.43    47.7 3.33e-08 ***

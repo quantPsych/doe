@@ -1489,7 +1489,14 @@
     "href": "lectures/week-03_comparisons-contrasts.html#tukeys-honest-significant-difference-hsd",
     "title": "Multiple Comparisons and Contrasts",
     "section": "Tukey’s Honest Significant Difference (HSD)",
-    "text": "Tukey’s Honest Significant Difference (HSD)\n\nDesigned for pairwise comparisons.\nControls the family-wise error rate (FWER).\nFor equal sample sizes:\n\n\\[\n\\text{HSD} = q_{\\alpha,v,n-v} \\sqrt{\\frac{\\text{MSE}}{r}},\n\\]\nwhere \\(q\\) is from the studentized range distribution, \\(v\\) is the number of groups, \\(n\\) is the total sample size, and \\(r\\) is the number of observations per group."
+    "text": "Tukey’s Honest Significant Difference (HSD)\n\nDesigned for pairwise comparisons.\nControls the family-wise error rate (FWER).\nFor equal sample sizes:\n\n\\[\n\\text{HSD} = q_{\\alpha,v,n-v} \\sqrt{\\frac{\\text{MSE}}{r}},\n\\]\nwhere \\(q\\) is from the studentized range distribution, \\(v\\) is the number of groups, \\(n\\) is the total sample size, and \\(r\\) is the number of observations per group.\n\n\nFor a more detailed explanation of Tukey’s HSD, see the tutorial page Tukey’s HSD in the appendix."
+  },
+  {
+    "objectID": "lectures/week-03_comparisons-contrasts.html#tukeys-hsd-procedure",
+    "href": "lectures/week-03_comparisons-contrasts.html#tukeys-hsd-procedure",
+    "title": "Multiple Comparisons and Contrasts",
+    "section": "Tukey’s HSD Procedure",
+    "text": "Tukey’s HSD Procedure\n\nCompute all pairwise differences.\nCalculate the HSD value.\nIf the difference between two means exceeds the HSD, they are significantly different."
   },
   {
     "objectID": "lectures/week-03_comparisons-contrasts.html#bonferroni-method",
@@ -1510,7 +1517,7 @@
     "href": "lectures/week-03_comparisons-contrasts.html#example-1-pairwise-comparisons-with-tukeys-hsd",
     "title": "Multiple Comparisons and Contrasts",
     "section": "Example 1: Pairwise Comparisons with Tukey’s HSD",
-    "text": "Example 1: Pairwise Comparisons with Tukey’s HSD\nData Setup (Simulated):\n\n\n\nset.seed(123)\ndata &lt;- data.frame(\n    Treatment = rep(c(\"A\", \"B\", \"C\", \"D\"), each = 5),\n    Response = c(rnorm(5, 10, 2), rnorm(5, 15, 2), rnorm(5, 20, 2), rnorm(5, 25, 2))\n)\n\nfit &lt;- aov(Response ~ Treatment, data = data)\nsummary(fit)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nTreatment    3  631.3  210.43    47.7 3.33e-08 ***\nResiduals   16   70.6    4.41                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nTable 1: ANOVA Data\n\n\n\n\n\n\n# Apply Tukey’s HSD if ANOVA is significant\nTukeyHSD(fit)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = Response ~ Treatment, data = data)\n\n$Treatment\n         diff        lwr       upr     p adj\nB-A  4.524222  0.7237295  8.324714 0.0170952\nC-A 10.228663  6.4281709 14.029155 0.0000050\nD-A 14.831544 11.0310518 18.632036 0.0000000\nC-B  5.704441  1.9039494  9.504933 0.0028150\nD-B 10.307322  6.5068303 14.107814 0.0000045\nD-C  4.602881  0.8023889  8.403373 0.0151748\n\n\n\nTable 2: Tukey’s HSD for Pairwise Comparisons\n\n\n\n\nInterpretation\n\nLook at the output: intervals that do not include zero indicate significant differences.\nTukey is effective for all pairs while maintaining the overall confidence level."
+    "text": "Example 1: Pairwise Comparisons with Tukey’s HSD\nData Setup (Simulated):\n\n\n\nset.seed(123)\ndata &lt;- data.frame(\n    Treatment = rep(c(\"A\", \"B\", \"C\", \"D\"), each = 5),\n    Response = c(\n        rnorm(5, 10, 2),\n        rnorm(5, 15, 2),\n        rnorm(5, 20, 2),\n        rnorm(5, 25, 2)\n    )\n)\n\nfit &lt;- aov(Response ~ Treatment, data = data)\nsummary(fit)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nTreatment    3  631.3  210.43    47.7 3.33e-08 ***\nResiduals   16   70.6    4.41                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nTable 1: ANOVA Data\n\n\n\n\n\n\n# Apply Tukey’s HSD if ANOVA is significant\nTukeyHSD(fit)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = Response ~ Treatment, data = data)\n\n$Treatment\n         diff        lwr       upr     p adj\nB-A  4.524222  0.7237295  8.324714 0.0170952\nC-A 10.228663  6.4281709 14.029155 0.0000050\nD-A 14.831544 11.0310518 18.632036 0.0000000\nC-B  5.704441  1.9039494  9.504933 0.0028150\nD-B 10.307322  6.5068303 14.107814 0.0000045\nD-C  4.602881  0.8023889  8.403373 0.0151748\n\n\n\nTable 2: Tukey’s HSD for Pairwise Comparisons\n\n\n\n\nInterpretation\n\nLook at the output: intervals that do not include zero indicate significant differences.\nTukey is effective for all pairs while maintaining the overall confidence level."
   },
   {
     "objectID": "lectures/week-03_comparisons-contrasts.html#example-2-testing-a-specific-contrast",
