@@ -238,7 +238,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">04-Mar-2025</p>
+        <p class="date">05-Mar-2025</p>
       </div>
     </div>
     
@@ -466,8 +466,8 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's Test in R</span></span>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, emmeans)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">167</span>, <span class="dv">171</span>, <span class="dv">178</span>, <span class="dv">175</span>, <span class="dv">184</span>, <span class="dv">176</span>, <span class="dv">185</span>, <span class="dv">172</span>, <span class="dv">178</span>, <span class="dv">178</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">231</span>, <span class="dv">233</span>, <span class="dv">236</span>, <span class="dv">252</span>, <span class="dv">233</span>, <span class="dv">225</span>, <span class="dv">241</span>, <span class="dv">248</span>, <span class="dv">239</span>, <span class="dv">248</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">176</span>, <span class="dv">168</span>, <span class="dv">171</span>, <span class="dv">172</span>, <span class="dv">178</span>, <span class="dv">176</span>, <span class="dv">169</span>, <span class="dv">164</span>, <span class="dv">169</span>, <span class="dv">171</span>)</span>
@@ -475,7 +475,61 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(y1, y2, y3, y4)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">10</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>margarine_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>margarine_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, group) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> <span class="fu">factor</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            group,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Brand 1"</span>, <span class="st">"Brand 2"</span>, <span class="st">"Brand 3"</span>, <span class="st">"Butter"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>margarine_data <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-margarine-data" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-margarine-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">y</th>
+<th style="text-align: left;">group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">167</td>
+<td style="text-align: left;">Brand 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">171</td>
+<td style="text-align: left;">Brand 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">178</td>
+<td style="text-align: left;">Brand 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">175</td>
+<td style="text-align: left;">Brand 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">184</td>
+<td style="text-align: left;">Brand 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">176</td>
+<td style="text-align: left;">Brand 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-margarine-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Margarine Melting Times Data
+</figcaption>
+</figure>
+</div>
 </div>
 <section id="a-check-the-equal-variance-assumption" class="level2">
 <h2 class="anchored" data-anchor-id="a-check-the-equal-variance-assumption">(a) Check the Equal-Variance Assumption</h2>
@@ -573,7 +627,7 @@ Bartlett's K-squared = 5.472, df = 3, p-value = 0.1403</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bc_res<span class="sc">$</span>x[<span class="fu">which.max</span>(bc_res<span class="sc">$</span>y)] <span class="co"># Optimal lambda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.272727</code></pre>
+<pre><code>[1] -1</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -584,16 +638,16 @@ Bartlett's K-squared = 5.472, df = 3, p-value = 0.1403</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>bcPower Transformation to Normality 
    Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
-Y1   -2.3025           0      -5.2312       0.6261
+Y1   -0.9917           0       -2.711       0.7276
 
 Likelihood ratio test that transformation parameter is equal to 0
  (log transformation)
                            LRT df    pval
-LR test, lambda = (0) 2.428166  1 0.11917
+LR test, lambda = (0) 1.300691  1 0.25409
 
 Likelihood ratio test that no transformation is needed
                            LRT df     pval
-LR test, lambda = (1) 5.028346  1 0.024936</code></pre>
+LR test, lambda = (1) 5.256619  1 0.021863</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(pt, <span class="at">round =</span> <span class="cn">TRUE</span>) <span class="co"># Estimated lambda using the Box-Cox method and coef() function in R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -647,17 +701,17 @@ Bartlett's K-squared = 2.1063, df = 3, p-value = 0.5506</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">group</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0.0154810</td>
-<td style="text-align: right;">0.015481</td>
-<td style="text-align: right;">0.7933681</td>
-<td style="text-align: right;">0.3786886</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.7158610</td>
+<td style="text-align: right;">0.2386203</td>
+<td style="text-align: right;">208.9471</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Residuals</td>
-<td style="text-align: right;">38</td>
-<td style="text-align: right;">0.7414925</td>
-<td style="text-align: right;">0.019513</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0.0411125</td>
+<td style="text-align: right;">0.0011420</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 </tr>
@@ -667,15 +721,14 @@ Bartlett's K-squared = 2.1063, df = 3, p-value = 0.5506</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-fit-transformed-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: ANOVA on Log-Transformed Data
+Table&nbsp;2: ANOVA on Log-Transformed Data
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggResidpanel)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ggResidpanel<span class="sc">::</span><span class="fu">resid_panel</span>(fit_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ggResidpanel<span class="sc">::</span><span class="fu">resid_panel</span>(fit_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-resid-panel" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -693,8 +746,7 @@ Figure&nbsp;1: Residual Plot for ANOVA on Log-Transformed Data
 <section id="conclusion-a" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion-a">Conclusion (a)</h3>
 <ul>
-<li>The original data likely violate the homoscedasticity assumption.<br>
-</li>
+<li>The original data likely violate the homoscedasticity assumption.</li>
 <li><strong>Log transforming</strong> the melting times stabilizes the variances, making it appropriate to proceed with ANOVA on the log scale.</li>
 </ul>
 </section>
@@ -704,7 +756,7 @@ Figure&nbsp;1: Residual Plot for ANOVA on Log-Transformed Data
 <section id="answer-1" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="answer-1">Answer</h3>
 <ol type="1">
-<li><strong>Set Up the Contrast: </strong> We compare the <strong>average melting time of the three margarines (Brands 1, 2, 3)</strong> to the <strong>average melting time of the butter (Brand 4)</strong>. On the <strong>original scale</strong>, that contrast is: <span class="math display">\[
+<li><strong>Set Up the Contrast:</strong> We compare the <strong>average melting time of the three margarines (Brands 1, 2, 3)</strong> to the <strong>average melting time of the butter (Brand 4)</strong>. On the <strong>original scale</strong>, that contrast is: <span class="math display">\[
 L \;=\; \tfrac{1}{3}\bar{Y}_1 + \tfrac{1}{3}\bar{Y}_2 + \tfrac{1}{3}\bar{Y}_3 - \bar{Y}_4.
 \]</span></li>
 </ol>
@@ -729,7 +781,7 @@ L \;=\; \tfrac{1}{3}\bar{Y}_1 + \tfrac{1}{3}\bar{Y}_2 + \tfrac{1}{3}\bar{Y}_3 - 
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th style="text-align: right;">group</th>
+<th style="text-align: left;">group</th>
 <th style="text-align: right;">mean_log_y</th>
 <th style="text-align: right;">var_log_y</th>
 <th style="text-align: right;">n</th>
@@ -737,25 +789,25 @@ L \;=\; \tfrac{1}{3}\bar{Y}_1 + \tfrac{1}{3}\bar{Y}_2 + \tfrac{1}{3}\bar{Y}_3 - 
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">Brand 1</td>
 <td style="text-align: right;">5.172306</td>
 <td style="text-align: right;">0.0009955</td>
 <td style="text-align: right;">10</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">2</td>
+<td style="text-align: left;">Brand 2</td>
 <td style="text-align: right;">5.474197</td>
 <td style="text-align: right;">0.0013124</td>
 <td style="text-align: right;">10</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">3</td>
+<td style="text-align: left;">Brand 3</td>
 <td style="text-align: right;">5.143720</td>
 <td style="text-align: right;">0.0006222</td>
 <td style="text-align: right;">10</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">4</td>
+<td style="text-align: left;">Butter</td>
 <td style="text-align: right;">5.341119</td>
 <td style="text-align: right;">0.0016379</td>
 <td style="text-align: right;">10</td>
@@ -766,7 +818,7 @@ L \;=\; \tfrac{1}{3}\bar{Y}_1 + \tfrac{1}{3}\bar{Y}_2 + \tfrac{1}{3}\bar{Y}_3 - 
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-contrast-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Contrast on Log Scale
+Table&nbsp;3: Contrast on Log Scale
 </figcaption>
 </figure>
 </div>
@@ -774,12 +826,11 @@ Table&nbsp;2: Contrast on Log Scale
 <ol type="1">
 <li><strong>Estimate and Standard Error on the Log Scale</strong>
 <ul>
-<li>Compute each group’s sample mean on the log scale, <span class="math inline">\(\bar{Z}_i\)</span>.<br>
-</li>
+<li>Compute each group’s sample mean on the log scale, <span class="math inline">\(\bar{Z}_i\)</span>.</li>
 <li>Obtain the <strong>pooled variance</strong> <span class="math inline">\(\hat{\sigma}^2_Z\)</span> from the ANOVA fit on <span class="math inline">\(\log(y)\)</span>.</li>
 <li>Variance of the contrast <span class="math inline">\(\hat{L}_Z\)</span> is: <span class="math display">\[
-\text{Var}(\hat{L}_Z) \;=\; \hat{\sigma}^2_Z \,\Bigl[\tfrac{1}{3^2 n_1} + \tfrac{1}{3^2 n_2} + \tfrac{1}{3^2 n_3} + \tfrac{1}{n_4}\Bigr].
-\]</span></li>
+  \text{Var}(\hat{L}_Z) \;=\; \hat{\sigma}^2_Z \,\Bigl[\tfrac{1}{3^2 n_1} + \tfrac{1}{3^2 n_2} + \tfrac{1}{3^2 n_3} + \tfrac{1}{n_4}\Bigr].
+  \]</span></li>
 </ul></li>
 </ol>
 <div id="tbl-estimate-variance" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
@@ -789,11 +840,11 @@ Table&nbsp;2: Contrast on Log Scale
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>s2_z <span class="ot">&lt;-</span> <span class="fu">sigma</span>(fit_log)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> n <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> n <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> n <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> n)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>s2_z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.002601728</code></pre>
+<pre><code>[1] 0.0001522684</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl quarto-uncaptioned margin-caption" id="tbl-estimate-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3
+Table&nbsp;4
 </figcaption>
 </figure>
 </div>
@@ -810,21 +861,89 @@ Table&nbsp;3
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>t_crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">36</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>l_z <span class="sc">-</span> t_crit <span class="sc">*</span> <span class="fu">sqrt</span>(s2_z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.1811581</code></pre>
+<pre><code>[1] -0.102737</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>l_z <span class="sc">+</span> t_crit <span class="sc">*</span> <span class="fu">sqrt</span>(s2_z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0257364</code></pre>
+<pre><code>[1] -0.05268478</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-ci-log-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: 95% CI on Log Scale
+Table&nbsp;5: 95% CI on Log Scale
 </figcaption>
 </figure>
 </div>
-<pre><code>•   The contrast estimate comparing the three margarine brands to butter on the log scale was -0.0777.
-•   The 95% confidence interval on the log scale was [-0.1061, -0.0493].
-•   When back-transformed to the original scale, the confidence interval for the ratio of geometric means was [0.899, 0.952].</code></pre>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>margarit_emm <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit_log, <span class="sc">~</span>group)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>margarit_emm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> group   emmean     SE df lower.CL upper.CL
+ Brand 1  5.172 0.0107 36    5.151    5.194
+ Brand 2  5.474 0.0107 36    5.453    5.496
+ Brand 3  5.144 0.0107 36    5.122    5.165
+ Butter   5.341 0.0107 36    5.319    5.363
+
+Confidence level used: 0.95 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the levels of the factor in margarit_emm</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(margarit_emm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$group
+[1] "Brand 1" "Brand 2" "Brand 3" "Butter" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust the contrast coefficients to match the number of levels</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>margarit_emm_contrast <span class="ot">&lt;-</span> <span class="fu">contrast</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    margarit_emm,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">cntr1 =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>margarit_emm_contrast</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast estimate      SE df t.ratio p.value
+ cntr1       3.483 0.00712 36 488.893  &lt;.0001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(margarit_emm_contrast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-ci-log-scale-1" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-ci-log-scale-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">lower.CL</th>
+<th style="text-align: right;">upper.CL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">cntr1</td>
+<td style="text-align: right;">3.483035</td>
+<td style="text-align: right;">0.0071243</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">3.468586</td>
+<td style="text-align: right;">3.497484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-ci-log-scale-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: 95% CI on Log Scale
+</figcaption>
+</figure>
+</div>
+</div>
+<ul>
+<li>The contrast estimate comparing the three margarine brands to butter on the log scale was -0.0777.</li>
+<li>The 95% confidence interval on the log scale was [-0.1061, -0.0493].</li>
+<li>When back-transformed to the original scale, the confidence interval for the ratio of geometric means was [0.899, 0.952].</li>
+</ul>
 <ol start="4" type="1">
 <li><strong>Back-Transform (Optional)</strong>
 <ul>
@@ -859,14 +978,14 @@ L \;=\; \tfrac{1}{3}\bar{Y}_1 + \tfrac{1}{3}\bar{Y}_2 + \tfrac{1}{3}\bar{Y}_3 - 
 <div id="tbl-contrast-orig" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-contrast-orig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">sum</span>(margarit_sum<span class="sc">$</span>mean_log_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) <span class="sc">/</span> <span class="dv">3</span> <span class="sc">-</span> margarit_sum<span class="sc">$</span>mean_log_y[<span class="dv">4</span>]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">sum</span>(margarit_sum<span class="sc">$</span>mean_log_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) <span class="sc">/</span> <span class="dv">3</span> <span class="sc">-</span> margarit_sum<span class="sc">$</span>mean_log_y[<span class="dv">4</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.07771087</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl quarto-uncaptioned margin-caption" id="tbl-contrast-orig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5
+Table&nbsp;7
 </figcaption>
 </figure>
 </div>
@@ -1027,7 +1146,7 @@ Using the raw data:</p>
 20 (Code=4) | 59, 61, 61 | 60.3 | ~1.15 |<br>
 25 (Code=5) | 75, 73, 75 | 74.3 | ~1.15 |</div>
 <ul>
-<li>The variation at lower speeds (5–10 mph) is notably larger compared to the higher speeds (15–25 mph).</li>
+<li>The variation at lower speeds (5-10 mph) is notably larger compared to the higher speeds (15-25 mph).</li>
 </ul></li>
 <li><p><strong>Conclusion</strong></p>
 <ul>
@@ -1042,7 +1161,7 @@ Using the raw data:</p>
 <li><p><strong>Selecting a Transformation</strong></p>
 <ul>
 <li>Based on the pattern (larger spread at lower means), a <strong>log transform</strong> or a <strong>square-root transform</strong> often reduces the percentage-type heteroscedasticity.</li>
-<li>A Box–Cox approach might systematically find <span class="math inline">\(\lambda \approx 0\)</span> (log) or <span class="math inline">\(\lambda = 0.5\)</span> (square root).</li>
+<li>A Box-Cox approach might systematically find <span class="math inline">\(\lambda \approx 0\)</span> (log) or <span class="math inline">\(\lambda = 0.5\)</span> (square root).</li>
 <li>Assume a <strong>log transform</strong> is chosen (common in ratio-type data or where the spread grows proportionally to the mean).</li>
 </ul></li>
 <li><p><strong>Fit the One-Way ANOVA on Transformed Data</strong></p>
@@ -1062,7 +1181,7 @@ Using the raw data:</p>
 </ul>
 <p>With an overall <span class="math inline">\(\alpha=0.01\)</span>, you can either:</p>
 <ul>
-<li>Do two separate contrasts, each at a <strong>Bonferroni-adjusted</strong> <span class="math inline">\(\alpha\)</span> if desired (to keep an overall familywise error at 0.01).<br>
+<li>Do two separate contrasts, each at a <strong>Bonferroni-adjusted</strong> <span class="math inline">\(\alpha\)</span> if desired (to keep an overall family-wise error at 0.01).<br>
 </li>
 <li>Or use partial F-tests within a polynomial regression framework.</li>
 </ul></li>
@@ -1100,7 +1219,7 @@ Using the raw data:</p>
 </ul></li>
 <li><strong>Untransformed Data</strong> with Satterthwaite:
 <ul>
-<li>Accommodates unequal variance but does not necessarily solve issues like skewness or mean–variance relationships,</li>
+<li>Accommodates unequal variance but does not necessarily solve issues like skewness or mean-variance relationships,</li>
 <li>Tends to be less straightforward in interpretation of the variance structure.</li>
 </ul></li>
 </ul>
@@ -1209,17 +1328,17 @@ Using the raw data:</p>
 <tbody>
 <tr class="odd">
 <td>Excellent</td>
-<td>90–100%</td>
+<td>90-100%</td>
 <td>Comprehensive, accurate solutions with well-reasoned justifications and clarity.</td>
 </tr>
 <tr class="even">
 <td>Good</td>
-<td>80–89%</td>
+<td>80-89%</td>
 <td>Mostly correct solutions, minor errors in computation or explanations.</td>
 </tr>
 <tr class="odd">
 <td>Satisfactory</td>
-<td>70–79%</td>
+<td>70-79%</td>
 <td>Partial correctness; some significant errors in methodology or interpretation.</td>
 </tr>
 <tr class="even">
