@@ -141,7 +141,7 @@ window.Quarto = {
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -235,7 +235,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">08-Mar-2025</p>
+        <p class="date">09-Mar-2025</p>
       </div>
     </div>
     
@@ -374,7 +374,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
@@ -422,7 +422,7 @@ t = \frac{\psi}{SE(\psi)} \sim t_{\nu}
 <hr>
 </section>
 </section>
-<section id="numerical-example-in-r" class="level2">
+<section id="numerical-example-in-r" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="numerical-example-in-r">Numerical Example in R</h2>
 <p><strong>Data Generation</strong>: Simulate three groups with unequal variances:</p>
 <div class="cell">
@@ -437,18 +437,18 @@ t = \frac{\psi}{SE(\psi)} \sim t_{\nu}
 <p><strong>Manual Calculation</strong>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group statistics</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(y, group, mean)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">tapply</span>(y, group, var)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">tapply</span>(y, group, length)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(y, group, mean) <span class="co"># 10.19357 11.91136 15.92371</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">tapply</span>(y, group, var) <span class="co"># 0.6577564 5.4148322 3.6802184</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">tapply</span>(y, group, length) <span class="co"># 5 5 5</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear contrast coefficients (from contr.poly)</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>c_linear <span class="ot">&lt;-</span> <span class="fu">contr.poly</span>(<span class="dv">3</span>)[, <span class="dv">1</span>] <span class="co"># [-0.707, 0, 0.707]</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrast estimate</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>contrast_est <span class="ot">&lt;-</span> <span class="fu">sum</span>(c_linear <span class="sc">*</span> means) <span class="co"># ≈ -0.707*10 + 0*12 + 0.707*15 ≈ 3.54</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>contrast_est <span class="ot">&lt;-</span> <span class="fu">sum</span>(c_linear <span class="sc">*</span> means) <span class="co"># ≈ 4.051817</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard error</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((c_linear<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> vars) <span class="sc">/</span> ns)) <span class="co"># ≈ sqrt(0.5*1/5 + 0 + 0.5*9/5) ≈ 1.14</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((c_linear<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> vars) <span class="sc">/</span> ns)) <span class="co"># 0.658633</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Satterthwaite DF</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>df_num <span class="ot">&lt;-</span> (<span class="fu">sum</span>((c_linear<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> vars) <span class="sc">/</span> ns))<span class="sc">^</span><span class="dv">2</span></span>
@@ -456,8 +456,8 @@ t = \frac{\psi}{SE(\psi)} \sim t_{\nu}
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>df_satt <span class="ot">&lt;-</span> df_num <span class="sc">/</span> df_den <span class="co"># ≈ 5.6</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>t_ratio <span class="ot">&lt;-</span> contrast_est <span class="sc">/</span> se <span class="co"># ≈ 3.54 / 1.14 ≈ 3.10</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_ratio), df_satt, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># ≈ 0.026</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>t_ratio <span class="ot">&lt;-</span> contrast_est <span class="sc">/</span> se <span class="co"># ≈ 6.15</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_ratio), df_satt, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># output create a table</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(contrast_est, se, df_satt, t_ratio, p_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -486,8 +486,10 @@ t = \frac{\psi}{SE(\psi)} \sim t_{\nu}
 </div>
 </div>
 </div>
-<p><strong>Using R Packages</strong>:</p>
-<div class="cell">
+<!-- **Using R Packages**: -->
+<div id="tbl-conduct-trend-test-unequal-var" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-conduct-trend-test-unequal-var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(emmeans)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -504,7 +506,11 @@ t = \frac{\psi}{SE(\psi)} \sim t_{\nu}
 
 Degrees-of-freedom method: satterthwaite </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: t = 3.10, df = 5.6, p = 0.026</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-conduct-trend-test-unequal-var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Conducting a trend test with unequal variance
+</figcaption>
+</figure>
 </div>
 <hr>
 </section>
