@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">10-Mar-2025</p>
+        <p class="date">07-Feb-2025</p>
       </div>
     </div>
     
@@ -413,9 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    ggplot2,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    knitr,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    gt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-usage" class="level2 page-columns page-full">
@@ -425,14 +423,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-basicplot</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "A basic scatter plot with base R"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">plot(</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">    cars$speed,</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">    cars$dist,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">    main = "Speed vs. Stopping Distance",</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">    xlab = "Speed (mph)",</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">    ylab = "Distance (ft)"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">plot(cars$speed, cars$dist,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">    main = "Speed vs. Stopping Distance",</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">    xlab = "Speed (mph)",</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">    ylab = "Distance (ft)"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-basicplot" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -496,25 +492,22 @@ Figure&nbsp;2: Iris Data: Sepal Width vs.&nbsp;Sepal Length
 </div>
 </div>
 </section>
-<section id="quarto-chunk-options-for-tables" class="level2 page-columns page-full">
+<section id="quarto-chunk-options-for-tables" class="level2">
 <h2 class="anchored" data-anchor-id="quarto-chunk-options-for-tables">Quarto Chunk Options for Tables</h2>
 <p>Description: Similar to figures, Quarto also provides <code>table-cap</code> for a table caption and <code>label</code> for referencing.</p>
 <p>Syntax (not executed, just shown):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-label</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Table caption here"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tab-label</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| table-cap: "Table caption here"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Example:</p>
-<div class="cell page-columns page-full">
+<div class="cell" data-table-cap="Summary of the cars Dataset">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: tbl-kable-example</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| tbl-cap: "Summary of the cars dataset"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: tab-kable-example</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| table-cap: "Summary of the cars Dataset"</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">summary_table &lt;- knitr::kable(summary(cars))</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">summary_table</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-kable-example" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-kable-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -557,12 +550,6 @@ Figure&nbsp;2: Iris Data: Sepal Width vs.&nbsp;Sepal Length
 </table>
 </div>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-kable-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Summary of the cars dataset
-</figcaption>
-</figure>
-</div>
-</div>
 </section>
 </section>
 <section id="in-depth-examples" class="level1 page-columns page-full">
@@ -583,14 +570,10 @@ Table&nbsp;1: Summary of the cars dataset
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-iris</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Sepal Length vs. Petal Length in Iris dataset"</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">iris |&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::ggplot(ggplot2::aes(</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">        x = Sepal.Length,</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="in">        y = Petal.Length,</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="in">        color = Species</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="in">    )) +</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::geom_point() +</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::labs(title = "Iris: Sepal vs. Petal Length")</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::ggplot(ggplot2::aes(x = Sepal.Length, y = Petal.Length, color = Species)) +</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::geom_point() +</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::labs(title = "Iris: Sepal vs. Petal Length")</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-iris" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -607,15 +590,13 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
 <p>Output:</p>
 <ul>
 <li>A scatter plot labeled as “fig-iris,” automatically numbered by Quarto.</li>
-<li>To reference this figure in your text, use <code>Figure @fig-iris shows …</code>.</li>
+<li>To reference this figure in your text, use “Figure <a href="#fig-iris" class="quarto-xref">Figure&nbsp;3</a> shows …”.</li>
 </ul>
 </section>
-<section id="example-2-creating-and-referencing-a-table-with-gt" class="level2 page-columns page-full">
+<section id="example-2-creating-and-referencing-a-table-with-gt" class="level2">
 <h2 class="anchored" data-anchor-id="example-2-creating-and-referencing-a-table-with-gt">Example 2: Creating and Referencing a Table with Gt</h2>
-<ul>
-<li>Title: Summarizing mtcars with gt</li>
-<li>Objective: Produce a well-formatted table, then reference it in text.</li>
-</ul>
+<p>Title: Summarizing mtcars with gt</p>
+<p>Objective: Produce a well-formatted table, then reference it in text.</p>
 <p>Steps:</p>
 <ol type="1">
 <li>Use the mtcars dataset.</li>
@@ -623,36 +604,33 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
 <li>Create a table chunk with a label and caption.</li>
 <li>Cross-reference within text.</li>
 </ol>
-<div class="cell page-columns page-full">
+<div class="cell" data-table-cap="Average Horsepower by Number of Cylinders">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: tbl-gtexample</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| tbl-cap: "Average Horsepower by Number of Cylinders"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: tab-gt-example</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| table-cap: "Average Horsepower by Number of Cylinders"</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="in">mtcars |&gt;</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="in">    dplyr::group_by(cyl) |&gt;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="in">    dplyr::summarise(avg_hp = mean(hp)) |&gt;</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="in">    gt::gt()</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-gtexample" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-gtexample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="dgurftzjpu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dgurftzjpu table {
+<div id="lqupizymvd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lqupizymvd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dgurftzjpu thead, #dgurftzjpu tbody, #dgurftzjpu tfoot, #dgurftzjpu tr, #dgurftzjpu td, #dgurftzjpu th {
+#lqupizymvd thead, #lqupizymvd tbody, #lqupizymvd tfoot, #lqupizymvd tr, #lqupizymvd td, #lqupizymvd th {
   border-style: none;
 }
 
-#dgurftzjpu p {
+#lqupizymvd p {
   margin: 0;
   padding: 0;
 }
 
-#dgurftzjpu .gt_table {
+#lqupizymvd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -678,12 +656,12 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-left-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_caption {
+#lqupizymvd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dgurftzjpu .gt_title {
+#lqupizymvd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -695,7 +673,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-bottom-width: 0;
 }
 
-#dgurftzjpu .gt_subtitle {
+#lqupizymvd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -707,7 +685,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-top-width: 0;
 }
 
-#dgurftzjpu .gt_heading {
+#lqupizymvd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -719,13 +697,13 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-right-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_bottom_border {
+#lqupizymvd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_col_headings {
+#lqupizymvd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -740,7 +718,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-right-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_col_heading {
+#lqupizymvd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -760,7 +738,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   overflow-x: hidden;
 }
 
-#dgurftzjpu .gt_column_spanner_outer {
+#lqupizymvd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -772,15 +750,15 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   padding-right: 4px;
 }
 
-#dgurftzjpu .gt_column_spanner_outer:first-child {
+#lqupizymvd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dgurftzjpu .gt_column_spanner_outer:last-child {
+#lqupizymvd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dgurftzjpu .gt_column_spanner {
+#lqupizymvd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -792,11 +770,11 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   width: 100%;
 }
 
-#dgurftzjpu .gt_spanner_row {
+#lqupizymvd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dgurftzjpu .gt_group_heading {
+#lqupizymvd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -822,7 +800,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   text-align: left;
 }
 
-#dgurftzjpu .gt_empty_group_heading {
+#lqupizymvd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -837,15 +815,15 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   vertical-align: middle;
 }
 
-#dgurftzjpu .gt_from_md > :first-child {
+#lqupizymvd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dgurftzjpu .gt_from_md > :last-child {
+#lqupizymvd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dgurftzjpu .gt_row {
+#lqupizymvd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -864,7 +842,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   overflow-x: hidden;
 }
 
-#dgurftzjpu .gt_stub {
+#lqupizymvd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -877,7 +855,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   padding-right: 5px;
 }
 
-#dgurftzjpu .gt_stub_row_group {
+#lqupizymvd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -891,15 +869,15 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   vertical-align: top;
 }
 
-#dgurftzjpu .gt_row_group_first td {
+#lqupizymvd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dgurftzjpu .gt_row_group_first th {
+#lqupizymvd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dgurftzjpu .gt_summary_row {
+#lqupizymvd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -909,16 +887,16 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   padding-right: 5px;
 }
 
-#dgurftzjpu .gt_first_summary_row {
+#lqupizymvd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_first_summary_row.thick {
+#lqupizymvd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dgurftzjpu .gt_last_summary_row {
+#lqupizymvd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -928,7 +906,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-bottom-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_grand_summary_row {
+#lqupizymvd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -938,7 +916,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   padding-right: 5px;
 }
 
-#dgurftzjpu .gt_first_grand_summary_row {
+#lqupizymvd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +926,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-top-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_last_grand_summary_row_top {
+#lqupizymvd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -958,11 +936,11 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-bottom-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_striped {
+#lqupizymvd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dgurftzjpu .gt_table_body {
+#lqupizymvd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -971,7 +949,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-bottom-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_footnotes {
+#lqupizymvd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -985,7 +963,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-right-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_footnote {
+#lqupizymvd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -994,7 +972,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   padding-right: 5px;
 }
 
-#dgurftzjpu .gt_sourcenotes {
+#lqupizymvd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1008,7 +986,7 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   border-right-color: #D3D3D3;
 }
 
-#dgurftzjpu .gt_sourcenote {
+#lqupizymvd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1016,77 +994,77 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
   padding-right: 5px;
 }
 
-#dgurftzjpu .gt_left {
+#lqupizymvd .gt_left {
   text-align: left;
 }
 
-#dgurftzjpu .gt_center {
+#lqupizymvd .gt_center {
   text-align: center;
 }
 
-#dgurftzjpu .gt_right {
+#lqupizymvd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dgurftzjpu .gt_font_normal {
+#lqupizymvd .gt_font_normal {
   font-weight: normal;
 }
 
-#dgurftzjpu .gt_font_bold {
+#lqupizymvd .gt_font_bold {
   font-weight: bold;
 }
 
-#dgurftzjpu .gt_font_italic {
+#lqupizymvd .gt_font_italic {
   font-style: italic;
 }
 
-#dgurftzjpu .gt_super {
+#lqupizymvd .gt_super {
   font-size: 65%;
 }
 
-#dgurftzjpu .gt_footnote_marks {
+#lqupizymvd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dgurftzjpu .gt_asterisk {
+#lqupizymvd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dgurftzjpu .gt_indent_1 {
+#lqupizymvd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dgurftzjpu .gt_indent_2 {
+#lqupizymvd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dgurftzjpu .gt_indent_3 {
+#lqupizymvd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dgurftzjpu .gt_indent_4 {
+#lqupizymvd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dgurftzjpu .gt_indent_5 {
+#lqupizymvd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dgurftzjpu .katex-display {
+#lqupizymvd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dgurftzjpu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lqupizymvd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="cyl" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">cyl</th>
@@ -1112,16 +1090,10 @@ Figure&nbsp;3: Sepal Length vs.&nbsp;Petal Length in Iris dataset
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-gtexample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Average Horsepower by Number of Cylinders
-</figcaption>
-</figure>
-</div>
-</div>
 <p>Output:</p>
 <ul>
-<li>A formatted table with “tbl-gt-example” as the label.</li>
-<li>Reference it with <code>Table @tbl-gt-example displays …</code> in your text. This produces a clickable link in the output as follows: Table <a href="#tbl-gtexample" class="quarto-xref">Table&nbsp;2</a> displays …“.</li>
+<li>A formatted table with “tab-gt-example” as the label.</li>
+<li>Reference it with “Table <span class="citation" data-cites="tab-gt-example">(<a href="#ref-tab-gt-example" role="doc-biblioref"><strong>tab-gt-example?</strong></a>)</span> shows …”.</li>
 </ul>
 </section>
 </section>
@@ -1131,7 +1103,7 @@ Table&nbsp;2: Average Horsepower by Number of Cylinders
 <h2 class="anchored" data-anchor-id="customization">Customization</h2>
 <ul>
 <li>Adjust figure size with <code>fig-width</code> and <code>fig-height</code> to control appearance.</li>
-<li>Change plot themes in <code>ggplot2::theme()</code>.</li>
+<li>Change plot themes in ggplot2::theme().</li>
 <li>Use chunk options like <code>eval = FALSE</code> or <code>echo = FALSE</code> to control whether code is run or shown.</li>
 </ul>
 <p>Example of advanced customization for a figure:</p>
@@ -1142,15 +1114,11 @@ Table&nbsp;2: Average Horsepower by Number of Cylinders
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width: 7</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="in">iris |&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::ggplot(ggplot2::aes(</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="in">        x = Species,</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="in">        y = Sepal.Length,</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="in">        fill = Species</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="in">    )) +</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::geom_boxplot() +</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::theme_minimal() +</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::labs(title = "Iris Boxplot")</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::ggplot(ggplot2::aes(x = Species, y = Sepal.Length, fill = Species)) +</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::geom_boxplot() +</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::theme_minimal() +</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot2::labs(title = "Iris Boxplot")</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-custom-plot" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -1173,9 +1141,9 @@ Figure&nbsp;4: Customized Plot with Theme
 <li>Pipe operator <code>|&gt;</code> ensures code readability.</li>
 </ul>
 <p>Example:</p>
-<div id="tbl-integrated-example" class="cell anchored" data-table-cap="Iris Species Mean Measurements">
+<div class="cell" data-table-cap="Iris Species Mean Measurements">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: tbl-integrated-example</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: tab-integrated-example</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| table-cap: "Iris Species Mean Measurements"</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="in">iris |&gt;</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="in">    dplyr::group_by(Species) |&gt;</span></span>
@@ -1186,23 +1154,23 @@ Figure&nbsp;4: Customized Plot with Theme
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="in">    gt::gt()</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="lqznidbiow" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lqznidbiow table {
+<div id="mhnrboovgt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mhnrboovgt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lqznidbiow thead, #lqznidbiow tbody, #lqznidbiow tfoot, #lqznidbiow tr, #lqznidbiow td, #lqznidbiow th {
+#mhnrboovgt thead, #mhnrboovgt tbody, #mhnrboovgt tfoot, #mhnrboovgt tr, #mhnrboovgt td, #mhnrboovgt th {
   border-style: none;
 }
 
-#lqznidbiow p {
+#mhnrboovgt p {
   margin: 0;
   padding: 0;
 }
 
-#lqznidbiow .gt_table {
+#mhnrboovgt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1228,12 +1196,12 @@ Figure&nbsp;4: Customized Plot with Theme
   border-left-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_caption {
+#mhnrboovgt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lqznidbiow .gt_title {
+#mhnrboovgt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1245,7 +1213,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-bottom-width: 0;
 }
 
-#lqznidbiow .gt_subtitle {
+#mhnrboovgt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1257,7 +1225,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-top-width: 0;
 }
 
-#lqznidbiow .gt_heading {
+#mhnrboovgt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1269,13 +1237,13 @@ Figure&nbsp;4: Customized Plot with Theme
   border-right-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_bottom_border {
+#mhnrboovgt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_col_headings {
+#mhnrboovgt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1290,7 +1258,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-right-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_col_heading {
+#mhnrboovgt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1310,7 +1278,7 @@ Figure&nbsp;4: Customized Plot with Theme
   overflow-x: hidden;
 }
 
-#lqznidbiow .gt_column_spanner_outer {
+#mhnrboovgt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1322,15 +1290,15 @@ Figure&nbsp;4: Customized Plot with Theme
   padding-right: 4px;
 }
 
-#lqznidbiow .gt_column_spanner_outer:first-child {
+#mhnrboovgt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lqznidbiow .gt_column_spanner_outer:last-child {
+#mhnrboovgt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lqznidbiow .gt_column_spanner {
+#mhnrboovgt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1342,11 +1310,11 @@ Figure&nbsp;4: Customized Plot with Theme
   width: 100%;
 }
 
-#lqznidbiow .gt_spanner_row {
+#mhnrboovgt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lqznidbiow .gt_group_heading {
+#mhnrboovgt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1372,7 +1340,7 @@ Figure&nbsp;4: Customized Plot with Theme
   text-align: left;
 }
 
-#lqznidbiow .gt_empty_group_heading {
+#mhnrboovgt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1387,15 +1355,15 @@ Figure&nbsp;4: Customized Plot with Theme
   vertical-align: middle;
 }
 
-#lqznidbiow .gt_from_md > :first-child {
+#mhnrboovgt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lqznidbiow .gt_from_md > :last-child {
+#mhnrboovgt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lqznidbiow .gt_row {
+#mhnrboovgt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1414,7 +1382,7 @@ Figure&nbsp;4: Customized Plot with Theme
   overflow-x: hidden;
 }
 
-#lqznidbiow .gt_stub {
+#mhnrboovgt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1427,7 +1395,7 @@ Figure&nbsp;4: Customized Plot with Theme
   padding-right: 5px;
 }
 
-#lqznidbiow .gt_stub_row_group {
+#mhnrboovgt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1441,15 +1409,15 @@ Figure&nbsp;4: Customized Plot with Theme
   vertical-align: top;
 }
 
-#lqznidbiow .gt_row_group_first td {
+#mhnrboovgt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lqznidbiow .gt_row_group_first th {
+#mhnrboovgt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lqznidbiow .gt_summary_row {
+#mhnrboovgt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1459,16 +1427,16 @@ Figure&nbsp;4: Customized Plot with Theme
   padding-right: 5px;
 }
 
-#lqznidbiow .gt_first_summary_row {
+#mhnrboovgt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_first_summary_row.thick {
+#mhnrboovgt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lqznidbiow .gt_last_summary_row {
+#mhnrboovgt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1478,7 +1446,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-bottom-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_grand_summary_row {
+#mhnrboovgt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1488,7 +1456,7 @@ Figure&nbsp;4: Customized Plot with Theme
   padding-right: 5px;
 }
 
-#lqznidbiow .gt_first_grand_summary_row {
+#mhnrboovgt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1498,7 +1466,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-top-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_last_grand_summary_row_top {
+#mhnrboovgt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1508,11 +1476,11 @@ Figure&nbsp;4: Customized Plot with Theme
   border-bottom-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_striped {
+#mhnrboovgt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lqznidbiow .gt_table_body {
+#mhnrboovgt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1521,7 +1489,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-bottom-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_footnotes {
+#mhnrboovgt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1535,7 +1503,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-right-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_footnote {
+#mhnrboovgt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1544,7 +1512,7 @@ Figure&nbsp;4: Customized Plot with Theme
   padding-right: 5px;
 }
 
-#lqznidbiow .gt_sourcenotes {
+#mhnrboovgt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1558,7 +1526,7 @@ Figure&nbsp;4: Customized Plot with Theme
   border-right-color: #D3D3D3;
 }
 
-#lqznidbiow .gt_sourcenote {
+#mhnrboovgt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1566,72 +1534,72 @@ Figure&nbsp;4: Customized Plot with Theme
   padding-right: 5px;
 }
 
-#lqznidbiow .gt_left {
+#mhnrboovgt .gt_left {
   text-align: left;
 }
 
-#lqznidbiow .gt_center {
+#mhnrboovgt .gt_center {
   text-align: center;
 }
 
-#lqznidbiow .gt_right {
+#mhnrboovgt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lqznidbiow .gt_font_normal {
+#mhnrboovgt .gt_font_normal {
   font-weight: normal;
 }
 
-#lqznidbiow .gt_font_bold {
+#mhnrboovgt .gt_font_bold {
   font-weight: bold;
 }
 
-#lqznidbiow .gt_font_italic {
+#mhnrboovgt .gt_font_italic {
   font-style: italic;
 }
 
-#lqznidbiow .gt_super {
+#mhnrboovgt .gt_super {
   font-size: 65%;
 }
 
-#lqznidbiow .gt_footnote_marks {
+#mhnrboovgt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lqznidbiow .gt_asterisk {
+#mhnrboovgt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lqznidbiow .gt_indent_1 {
+#mhnrboovgt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lqznidbiow .gt_indent_2 {
+#mhnrboovgt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lqznidbiow .gt_indent_3 {
+#mhnrboovgt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lqznidbiow .gt_indent_4 {
+#mhnrboovgt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lqznidbiow .gt_indent_5 {
+#mhnrboovgt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lqznidbiow .katex-display {
+#mhnrboovgt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lqznidbiow div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mhnrboovgt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1691,12 +1659,12 @@ Figure&nbsp;4: Customized Plot with Theme
 <li><strong>Figure or table labels not found</strong>
 <ul>
 <li>Make sure you set <code>#| label: &lt;label_name&gt;</code> in the correct code chunk.</li>
-<li>Check that you are referencing it with <code>@fig-&lt;label_name&gt;</code> or <code>@tbl-&lt;label_name&gt;</code> in the text.</li>
+<li>Check that you are referencing it with <span class="citation" data-cites="fig">(<a href="#ref-fig" role="doc-biblioref"><strong>fig?</strong></a>)</span>-<label_name> or <span class="citation" data-cites="tab">(<a href="#ref-tab" role="doc-biblioref"><strong>tab?</strong></a>)</span>-<label_name> in the text.</label_name></label_name></li>
 </ul></li>
 <li><strong>Caption not displayed</strong>
 <ul>
-<li>Confirm you used <code>fig-cap</code> for figures or <code>tbl-cap</code> for tables.</li>
-<li>Ensure no conflicting chunk options are overriding your settings. å</li>
+<li>Confirm you used <code>fig-cap</code> for figures or <code>table-cap</code> for tables.</li>
+<li>Ensure no conflicting chunk options are overriding your settings.</li>
 </ul></li>
 <li><strong>Figures and tables appear in the wrong order</strong>
 <ul>
@@ -1713,7 +1681,7 @@ Figure&nbsp;4: Customized Plot with Theme
 </ul></li>
 <li><em>Can I reference a table as a figure or vice versa?</em>
 <ul>
-<li>Technically yes, but it’s best to use <code>fig-</code> for figures and <code>tbl-</code> for tables for clarity.</li>
+<li>Technically yes, but it’s best to use <code>fig-</code> for figures and <code>tab-</code> for tables for clarity.</li>
 </ul></li>
 <li><em>Why is my code block not producing a figure?</em>
 <ul>
@@ -1725,7 +1693,7 @@ Figure&nbsp;4: Customized Plot with Theme
 <section id="best-practices" class="level1">
 <h1>Best Practices</h1>
 <ul>
-<li>Always label your chunks clearly (e.g., <code>fig-mycars</code>, <code>tbl-irisstats</code>) for easy referencing.</li>
+<li>Always label your chunks clearly (e.g., <code>fig-mycars</code>, <code>tab-irisstats</code>) for easy referencing.</li>
 <li>Use descriptive captions that help readers understand the figure or table at a glance.</li>
 <li>Keep your R code organized and modular (avoid overly large code chunks).</li>
 <li>For reproducibility, set a seed before random processes or sampling.</li>
@@ -1735,7 +1703,7 @@ Figure&nbsp;4: Customized Plot with Theme
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>Summary:</p>
-<p>In this tutorial, we explored how to produce, label, and reference figures and tables in Quarto using chunk options like <code>fig-cap</code> and <code>tbl-cap</code>. We demonstrated how ggplot2 and gt can create attractive visuals and tables, and how Quarto automatically handles cross-referencing.</p>
+<p>In this tutorial, we explored how to produce, label, and reference figures and tables in Quarto using chunk options like <code>fig-cap</code> and <code>table-cap</code>. We demonstrated how ggplot2 and gt can create attractive visuals and tables, and how Quarto automatically handles cross-referencing.</p>
 <p>Next Steps:</p>
 <ul>
 <li>Explore more advanced formatting with packages like kableExtra or flextable.</li>

@@ -9,7 +9,7 @@
 <meta name="author" content="Davood Tofighi, Ph.D.">
 <meta name="dcterms.date" content="2025-01-06">
 
-<title>R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Tutorial on model.tables() Function in R – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +22,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,12 +104,13 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
 
-<meta property="og:title" content="R Help and Tutorial – STAT 454/545 - Analysis of Variance and Experimental Design">
-<meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:title" content="Tutorial on model.tables() Function in R – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-base/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
@@ -86,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +132,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Tutorial on <code>model.tables()</code> Function in R</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +183,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_help.html">R Code and Datasets</a></li><li class="breadcrumb-item"><a href="./r_help.html">R Help</a></li></ol></nav>
-      <h1 class="title">R Help and Tutorial</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Tutorial on <code>model.tables()</code> Function in R</h1>
                       </div>
   </div>
     
@@ -180,7 +215,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 10, 2025</p>
+        <p class="date-modified">January 7, 2025</p>
       </div>
     </div>
       
@@ -203,19 +238,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +267,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +290,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +319,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -306,32 +341,47 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-help-and-tutorial-provided-by-the-instructor" id="toc-r-help-and-tutorial-provided-by-the-instructor" class="nav-link active" data-scroll-target="#r-help-and-tutorial-provided-by-the-instructor">R Help and Tutorial Provided by the Instructor</a>
+  <li><a href="#tutorial-on-model.tables-function-in-r" id="toc-tutorial-on-model.tables-function-in-r" class="nav-link active" data-scroll-target="#tutorial-on-model.tables-function-in-r">Tutorial on <code>model.tables()</code> Function in R</a>
   <ul class="collapse">
-  <li><a href="#r-subjects-topics" id="toc-r-subjects-topics" class="nav-link" data-scroll-target="#r-subjects-topics">Subjects and Topics</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#subjects" id="toc-subjects" class="nav-link" data-scroll-target="#subjects">Subjects</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#r-base-functions" id="toc-r-base-functions" class="nav-link" data-scroll-target="#r-base-functions">Help by R Base Functions</a>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">Help by R Packages</a>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  </ul></li>
+  <li><a href="#key-functions-and-features" id="toc-key-functions-and-features" class="nav-link" data-scroll-target="#key-functions-and-features">Key Functions and Features</a>
   <ul class="collapse">
-  <li><a href="#data-manipulation" id="toc-data-manipulation" class="nav-link" data-scroll-target="#data-manipulation">Data Manipulation</a></li>
-  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
-  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">Statistical Analysis</a></li>
-  <li><a href="#quarto-tutorial" id="toc-quarto-tutorial" class="nav-link" data-scroll-target="#quarto-tutorial">Quarto Tutorial</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#general-online-r-help-and-resources" id="toc-general-online-r-help-and-resources" class="nav-link" data-scroll-target="#general-online-r-help-and-resources">General Online R Help and Resources</a>
+  <li><a href="#in-depth-examples" id="toc-in-depth-examples" class="nav-link" data-scroll-target="#in-depth-examples">In-Depth Examples</a>
   <ul class="collapse">
-  <li><a href="#by-subjects" id="toc-by-subjects" class="nav-link" data-scroll-target="#by-subjects">By Subjects:</a></li>
-  <li><a href="#general-r-help-and-resources" id="toc-general-r-help-and-resources" class="nav-link" data-scroll-target="#general-r-help-and-resources">General R Help and Resources:</a></li>
-  <li><a href="#software-tools-and-resources" id="toc-software-tools-and-resources" class="nav-link" data-scroll-target="#software-tools-and-resources">Software Tools and Resources</a></li>
-  <li><a href="#additional-online-resources" id="toc-additional-online-resources" class="nav-link" data-scroll-target="#additional-online-resources">Additional Online Resources</a></li>
+  <li><a href="#title-summarizing-mean-responses-in-a-three-factor-design" id="toc-title-summarizing-mean-responses-in-a-three-factor-design" class="nav-link" data-scroll-target="#title-summarizing-mean-responses-in-a-three-factor-design">Title: Summarizing Mean Responses in a Three-Factor Design</a></li>
+  <li><a href="#title-analyzing-effects-in-an-anova-model" id="toc-title-analyzing-effects-in-an-anova-model" class="nav-link" data-scroll-target="#title-analyzing-effects-in-an-anova-model">Title: Analyzing Effects in an ANOVA Model</a></li>
   </ul></li>
-  <li><a href="#how-to-use-this-help-guide" id="toc-how-to-use-this-help-guide" class="nav-link" data-scroll-target="#how-to-use-this-help-guide">How to Use This Help Guide</a></li>
-  <li><a href="#r-code-and-data-files-from-the-textbook" id="toc-r-code-and-data-files-from-the-textbook" class="nav-link" data-scroll-target="#r-code-and-data-files-from-the-textbook">R Code and Data Files from the Textbook</a></li>
+  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features">Advanced Features</a>
+  <ul class="collapse">
+  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
+  <li><a href="#integration-with-other-tools" id="toc-integration-with-other-tools" class="nav-link" data-scroll-target="#integration-with-other-tools">Integration with Other Tools</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting-and-faqs" id="toc-troubleshooting-and-faqs" class="nav-link" data-scroll-target="#troubleshooting-and-faqs">Troubleshooting and FAQs</a>
+  <ul class="collapse">
+  <li><a href="#common-issues" id="toc-common-issues" class="nav-link" data-scroll-target="#common-issues">Common Issues</a></li>
+  <li><a href="#faqs" id="toc-faqs" class="nav-link" data-scroll-target="#faqs">FAQs</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul></li>
+  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and Resources</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -342,184 +392,452 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="r-help-and-tutorial-provided-by-the-instructor" class="level1">
-<h1>R Help and Tutorial Provided by the Instructor</h1>
-<p>Welcome to the R Help and Tutorial Section. This resource organizes R help files into structured categories based on <strong>Subjects</strong>, <strong>Topics</strong>, and implementation through <strong>R Base</strong> and <strong>Packages</strong>.</p>
-<section id="r-subjects-topics" class="level2">
-<h2 class="anchored" data-anchor-id="r-subjects-topics">Subjects and Topics</h2>
-<p>Below are the available subjects and their corresponding topics. Select a topic to view detailed help pages.</p>
-<section id="subjects" class="level3">
-<h3 class="anchored" data-anchor-id="subjects">Subjects</h3>
+<section id="tutorial-on-model.tables-function-in-r" class="level1">
+<h1>Tutorial on <code>model.tables()</code> Function in R</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>The <code>model.tables()</code> function in the <code>stats</code> package generates summary tables for models fitted using <code>aov()</code>. It helps extract and interpret information such as effects or means for terms in a model. This function is particularly useful in analyzing complex ANOVA designs.</p>
+<p>Key components:</p>
 <ul>
-<li><strong>Data Manipulation</strong>
+<li><strong>Package</strong>: <code>stats</code></li>
+<li><strong>Function</strong>: <code>model.tables()</code></li>
+</ul>
+</section>
+<section id="use-cases" class="level3">
+<h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
 <ul>
-<li><a href="./appendix/r-topics/r-data-frames-basics.html">Creating Data Frames</a></li>
-<li><a href="./appendix/r-topics/r-factors-basics.html">Working with Factors</a></li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Subsetting Data</a></li>
-<li><a href="./appendix/r-topics/r-data-transformation.html">Data Transformation and Wrangling</a></li>
-<li><a href="./appendix/r-topics/r-data-import-basics.html">Inporting Data into R</a></li>
-</ul></li>
-<li><strong>Data Visualization</strong>
+<li>Summarizing model terms in ANOVA fits.</li>
+<li>Computing and displaying effects or means of factors.</li>
+<li>Adding standard errors for results, when required.</li>
+</ul>
+</section>
+<section id="benefits" class="level3">
+<h3 class="anchored" data-anchor-id="benefits">Benefits</h3>
 <ul>
-<li><a href="./appendix/r-topics/r-base-graphics-basics.html">Base R Graphics</a></li>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2 Basics</a></li>
-<li><a href="./appendix/r-packages/sjPlot.html">sjPlot Tutorial</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="./appendix/r-topics/r-hypothesis-testing-basics.html">Hypothesis Testing</a></li>
-<li><a href="./appendix/stat-topics/games-howell-test.html">Games-Howell Post-Hoc Comparison</a></li>
-<li><a href="./appendix/stat-topics/standardized-range-distribution.html">Standadized Rannge Distribution and ANOVA</a></li>
-</ul></li>
-<li><strong>Quarto Tutorial</strong>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure-extra.html">Figures and Tables in Quarto: Advanced Features</a></li>
-</ul></li>
+<li>Provides detailed summaries of complex ANOVA models.</li>
+<li>Facilitates interpretation of factor effects and mean responses.</li>
+<li>Seamless integration with other ANOVA tools in R.</li>
 </ul>
 </section>
 </section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<p>Here is a basic example using the <code>npk</code> dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(npk)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an ANOVA model</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">*</span> P <span class="sc">*</span> K, <span class="at">data =</span> npk)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a table of means</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tables of means
+Grand mean
+       
+54.875 
+
+ block 
+block
+    1     2     3     4     5     6 
+54.03 57.45 60.77 50.12 50.52 56.35 
+
+ N 
+N
+    0     1 
+52.07 57.68 
+
+ P 
+P
+    0     1 
+55.47 54.28 
+
+ K 
+K
+    0     1 
+56.87 52.88 
+
+ N:P 
+   P
+N   0     1    
+  0 51.72 52.42
+  1 59.22 56.15
+
+ N:K 
+   K
+N   0     1    
+  0 52.88 51.25
+  1 60.85 54.52
+
+ P:K 
+   K
+P   0     1    
+  0 57.60 53.33
+  1 56.13 52.43</code></pre>
+</div>
+</div>
+<p>This generates a table summarizing mean responses for each term.</p>
 </section>
-<section id="r-base-functions" class="level1">
-<h1>Help by R Base Functions</h1>
-<ul>
-<li><a href="./appendix/r-base/r-gl-basics.html">gl</a>: Generate Factor Levels</li>
-<li><a href="./appendix/r-base/r-interaction-basics.html">interaction</a>: Create Interaction Terms</li>
-<li><a href="./appendix/r-base/r-model.tables-basics.html">model.tables</a>: Extract Tables from Model Fits</li>
-<li><a href="./appendix/r-base/r-plot.design-basics.html">plot.design</a>: Plot Univariate Effects of a Design or Model</li>
-<li><a href="./appendix/r-base/r-rep-basics.html">rep</a>: Replicate Elements of Vectors and Lists</li>
-<li><a href="./appendix/r-base/r-replications-basics.html">replications</a>: Generate Replicate Numbers</li>
-<li><a href="./appendix/r-base/r-sample-basics.html">sample</a>: Randomly Sample Elements from a Vector</li>
-<li><a href="./appendix/r-base/r-base-plot-basics.html">Base R Plotting</a></li>
-</ul>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">Help by R Packages</h2>
-<section id="data-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="data-manipulation">Data Manipulation</h3>
-<ul>
-<li><a href="./appendix/r-packages/dplyr.html">dplyr</a></li>
-<li><a href="./appendix/r-packages/tidyr.html">tidyr</a></li>
-<li><a href="./appendix/r-packages/purrr.html">purrr</a></li>
-<li><a href="./appendix/r-packages/stringr.html">stringr</a></li>
-</ul>
 </section>
-<section id="data-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="data-visualization">Data Visualization</h3>
-<ul>
-<li><a href="./appendix/r-packages/ggplot2.html">ggplot2</a></li>
-<li><a href="./appendix/r-packages/sjPlot.html">sjPlot Tutorial</a></li>
-</ul>
+<section id="key-functions-and-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-functions-and-features">Key Functions and Features</h2>
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
+<p>The <code>model.tables()</code> function computes summary tables of effects or means for terms in an <code>aov</code> model.</p>
 </section>
-<section id="statistical-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h3>
+<section id="syntax" class="level3">
+<h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(x, <span class="at">type =</span> <span class="st">"effects"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, cterms, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="arguments" class="level4">
+<h4 class="anchored" data-anchor-id="arguments">Arguments</h4>
 <ul>
-<li><a href="./appendix/r-packages/emmeans.html">emmeans</a></li>
-<li><a href="./appendix/r-packages/multcomp.html">multcomp</a></li>
-<li><a href="./appendix/r-packages/pwr.html">pwr</a></li>
-<li><a href="./appendix/stat-topics/games-howell-test.html">Games-Howell Post-Hoc Comparison</a></li>
-<li><a href="appendix/stat-topics/standardized-range.qmd">Standadized Rannge Distribution and ANOVA</a></li>
-</ul>
-</section>
-<section id="quarto-tutorial" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-tutorial">Quarto Tutorial</h3>
-<ul>
-<li><a href="./appendix/r-packages/quarto-tutorial.html">Quarto Tutorial</a></li>
-<li><a href="./appendix/r-topics/r-quarto-table-figure.html">Figures, Tables, Captions, and Referencing in Quarto</a></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="general-online-r-help-and-resources" class="level1">
-<h1>General Online R Help and Resources</h1>
-<p>Here are some general online resources to help you learn R programming and data analysis:</p>
-<section id="by-subjects" class="level2">
-<h2 class="anchored" data-anchor-id="by-subjects">By Subjects:</h2>
-<ul>
-<li><strong>Data Manipulation</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/r-data-import-tutorial">How to Import Data Into R</a> from <a href="https://www.datacamp.com/">DataCamp</a>.</li>
-</ul></li>
-<li><strong>Data Visualization</strong>
-<ul>
-<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">ggplot2 Basics</a></li>
-</ul></li>
-<li><strong>Statistical Analysis</strong>
-<ul>
-<li><a href="https://www.datacamp.com/tutorial/linear-regression-R">Regression</a> from DataCamp.</li>
-<li><a href="https://www.datanovia.com/en/lessons/anova-in-r/">ANOVA in R</a> from DataNovia.</li>
-</ul></li>
-<li><strong>Programming with R</strong>
-<ul>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/control-structures.html">Control Structures</a> from Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/functions.html">Writing Functions</a> from Hadley Wickham.</li>
-<li><a href="https://adv-r.hadley.nz/debugging.html">Debugging</a> from Hadley Wickham.</li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">Debugging with the RStudio IDE</a> from Positron RStudio Support.</li>
-</ul></li>
-</ul>
-</section>
-<section id="general-r-help-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="general-r-help-and-resources">General R Help and Resources:</h2>
-<ul>
-<li><a href="https://www.rdocumentation.org/">R Documentation</a>: User-friendly interface to R documentation.</li>
-<li><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a>: Quick reference guides for R and RStudio.</li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a>: Online book on data science with R by Hadley Wickham and Garrett Grolemund.</li>
-<li><a href="https://bookdown.org/rdpeng/rprogdatascience/">R Programming for Data Science</a> Online book by Roger D. Peng.</li>
-<li><a href="https://adv-r.hadley.nz/">Advanced R</a>: Online book on advanced R programming by Hadley Wickham.</li>
-<li><a href="https://forum.posit.co/">Posit Community</a>: Posit Community forum for R users.</li>
-<li><a href="https://www.r-bloggers.com/">R Bloggers</a>: Blog aggregator for R programming.</li>
-<li><a href="https://stackoverflow.com/questions/tagged/r">Stack Overflow R Tag</a>: Stack Overflow questions tagged with R.</li>
-</ul>
-</section>
-<section id="software-tools-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="software-tools-and-resources">Software Tools and Resources</h2>
-<p>To complete assignments and analyses, you will need access to R and related tools.</p>
-<ul>
-<li><strong>R Installation:</strong> <a href="https://cran.r-project.org/">Download R</a><br>
-</li>
-<li><strong>RStudio IDE:</strong> <a href="https://www.rstudio.com/products/rstudio/download/">Download RStudio</a><br>
-</li>
-<li><strong>VS Code IDE:</strong> <a href="https://code.visualstudio.com/">Download VS Code</a></li>
-<li><strong>Positron IDE</strong>: <a href="https://positron.posit.co/download">Download Positron</a></li>
-<li><a href="https://quarto.org/docs/tools/rstudio.html">RStudio IDE Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/hello/vscode.html">VS Code Editor Tutorial</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/rstudio.html">Quarto Authoring with RStudio</a></li>
-<li><a href="https://quarto.org/docs/get-started/authoring/vscode.html">Quarto Authoring with VS Code</a></li>
-</ul>
-</section>
-<section id="additional-online-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-online-resources">Additional Online Resources</h2>
-<ul>
-<li><strong>Quarto Documentation</strong>: <a href="https://quarto.org/docs/">Learn Quarto</a></li>
-<li><strong>Online R Help</strong>:
-<ul>
-<li><a href="https://cran.r-project.org/manuals.html">CRAN R Documentation</a></li>
-<li><a href="https://posit.co/resources/cheatsheets/">RStudio Cheat Sheets</a></li>
-</ul></li>
-<li><strong>Video Tutorials</strong>:
-<ul>
-<li><a href="https://www.youtube.com/results?search_query=r+programming+tutorial">R Programming for Beginners (YouTube)</a></li>
-</ul></li>
+<li><strong>x</strong>: An <code>aov</code> model object.</li>
+<li><strong>type</strong>: Type of table to compute: <code>"effects"</code> (default) or <code>"means"</code>.</li>
+<li><strong>se</strong>: Logical indicating whether standard errors should be included.</li>
+<li><strong>cterms</strong>: A character vector specifying terms for which tables are computed (default: all terms).</li>
+<li><strong>…</strong>: Additional arguments passed to methods.</li>
 </ul>
 </section>
 </section>
-<section id="how-to-use-this-help-guide" class="level1">
-<h1>How to Use This Help Guide</h1>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>Compute effects for all terms:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tables of effects
+
+ block 
+block
+     1      2      3      4      5      6 
+-0.850  2.575  5.900 -4.750 -4.350  1.475 
+
+ N 
+N
+      0       1 
+-2.8083  2.8083 
+
+ P 
+P
+      0       1 
+ 0.5917 -0.5917 
+
+ K 
+K
+      0       1 
+ 1.9917 -1.9917 
+
+ N:P 
+   P
+N   0       1      
+  0 -0.9417  0.9417
+  1  0.9417 -0.9417
+
+ N:K 
+   K
+N   0      1     
+  0 -1.175  1.175
+  1  1.175 -1.175
+
+ P:K 
+   K
+P   0        1       
+  0  0.14167 -0.14167
+  1 -0.14167  0.14167</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="in-depth-examples" class="level2">
+<h2 class="anchored" data-anchor-id="in-depth-examples">In-Depth Examples</h2>
+<section id="title-summarizing-mean-responses-in-a-three-factor-design" class="level3">
+<h3 class="anchored" data-anchor-id="title-summarizing-mean-responses-in-a-three-factor-design">Title: Summarizing Mean Responses in a Three-Factor Design</h3>
+<section id="objective" class="level4">
+<h4 class="anchored" data-anchor-id="objective">Objective</h4>
+<p>Summarize the mean responses for combinations of factors in the <code>npk</code> dataset.</p>
+</section>
+<section id="steps" class="level4">
+<h4 class="anchored" data-anchor-id="steps">Steps</h4>
 <ol type="1">
-<li><strong>Explore Subjects and Topics:</strong> Use the Subjects and Topics section to browse R concepts by category.</li>
-<li><strong>R Base Help:</strong> Click on the R Base links to learn about core R functions.</li>
-<li><strong>Packages Help:</strong> Dive into R packages to explore advanced features and functionalities.</li>
+<li><strong>Load the data</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Fit the ANOVA model</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">*</span> P <span class="sc">*</span> K, <span class="at">data =</span> npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Generate mean tables</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tables of means
+Grand mean
+       
+54.875 
+
+ block 
+block
+    1     2     3     4     5     6 
+54.03 57.45 60.77 50.12 50.52 56.35 
+
+ N 
+N
+    0     1 
+52.07 57.68 
+
+ P 
+P
+    0     1 
+55.47 54.28 
+
+ K 
+K
+    0     1 
+56.87 52.88 
+
+ N:P 
+   P
+N   0     1    
+  0 51.72 52.42
+  1 59.22 56.15
+
+ N:K 
+   K
+N   0     1    
+  0 52.88 51.25
+  1 60.85 54.52
+
+ P:K 
+   K
+P   0     1    
+  0 57.60 53.33
+  1 56.13 52.43
+
+Standard errors for differences of means
+        block     N     P     K   N:P   N:K   P:K
+        2.779 1.604 1.604 1.604 2.269 2.269 2.269
+replic.     4    12    12    12     6     6     6</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li><p><strong>Interpret output</strong>:</p>
+<ul>
+<li>Each term’s mean response is displayed.</li>
+<li>Standard errors are included.</li>
+</ul></li>
 </ol>
 </section>
-<section id="r-code-and-data-files-from-the-textbook" class="level1">
-<h1>R Code and Data Files from the Textbook</h1>
-<p>Here is a page for the R program files used in the textbook:</p>
+</section>
+<section id="title-analyzing-effects-in-an-anova-model" class="level3">
+<h3 class="anchored" data-anchor-id="title-analyzing-effects-in-an-anova-model">Title: Analyzing Effects in an ANOVA Model</h3>
+<section id="objective-1" class="level4">
+<h4 class="anchored" data-anchor-id="objective-1">Objective</h4>
+<p>Examine factor effects in the <code>npk</code> dataset.</p>
+</section>
+<section id="steps-1" class="level4">
+<h4 class="anchored" data-anchor-id="steps-1">Steps</h4>
+<ol type="1">
+<li><strong>Define the model</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>npk.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> block <span class="sc">+</span> N <span class="sc">+</span> P <span class="sc">+</span> K, <span class="at">data =</span> npk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Compute effects</strong>:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tables of effects
+
+ block 
+block
+     1      2      3      4      5      6 
+-0.850  2.575  5.900 -4.750 -4.350  1.475 
+
+ N 
+N
+      0       1 
+-2.8083  2.8083 
+
+ P 
+P
+      0       1 
+ 0.5917 -0.5917 
+
+ K 
+K
+      0       1 
+ 1.9917 -1.9917 
+
+Standard errors of effects
+        block     N     P     K
+        2.001 1.155 1.155 1.155
+replic.     4    12    12    12</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li><p><strong>Output explanation</strong>:</p>
 <ul>
-<li><a href="./r-code-data-book.html">R Code and Data Files from the Textbook</a></li>
-<li><a href="./data-files-book.html">Data Files from the Textbook</a></li>
+<li>Lists coefficients for each term.</li>
+<li>Includes standard errors, helping gauge variability.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="advanced-features" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-features">Advanced Features</h2>
+<section id="customization" class="level3">
+<h3 class="anchored" data-anchor-id="customization">Customization</h3>
+<p>Focus on specific terms using <code>cterms</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"means"</span>, <span class="at">cterms =</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"P"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tables of means
+Grand mean
+       
+54.875 
+
+ N 
+N
+    0     1 
+52.07 57.68 
+
+ P 
+P
+    0     1 
+55.47 54.28 </code></pre>
+</div>
+</div>
+</section>
+<section id="integration-with-other-tools" class="level3">
+<h3 class="anchored" data-anchor-id="integration-with-other-tools">Integration with Other Tools</h3>
+<p>Combine with <code>TukeyHSD()</code> for pairwise comparisons:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(npk.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = yield ~ block + N + P + K, data = npk)
+
+$block
+       diff        lwr       upr     p adj
+2-1   3.425  -5.768011 12.618011 0.8253019
+3-1   6.750  -2.443011 15.943011 0.2218775
+4-1  -3.900 -13.093011  5.293011 0.7386705
+5-1  -3.500 -12.693011  5.693011 0.8125420
+6-1   2.325  -6.868011 11.518011 0.9588314
+3-2   3.325  -5.868011 12.518011 0.8416850
+4-2  -7.325 -16.518011  1.868011 0.1601517
+5-2  -6.925 -16.118011  2.268011 0.2013480
+6-2  -1.100 -10.293011  8.093011 0.9985985
+4-3 -10.650 -19.843011 -1.456989 0.0189601
+5-3 -10.250 -19.443011 -1.056989 0.0248128
+6-3  -4.425 -13.618011  4.768011 0.6320049
+5-4   0.400  -8.793011  9.593011 0.9999902
+6-4   6.225  -2.968011 15.418011 0.2931556
+6-5   5.825  -3.368011 15.018011 0.3572937
+
+$N
+        diff      lwr     upr     p adj
+1-0 5.616667 2.134683 9.09865 0.0036596
+
+$P
+         diff       lwr     upr     p adj
+1-0 -1.183333 -4.665317 2.29865 0.4799905
+
+$K
+         diff       lwr        upr     p adj
+1-0 -3.983333 -7.465317 -0.5013496 0.0276673</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(npk.aov, <span class="at">type =</span> <span class="st">"effects"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tables of effects
+
+ block 
+block
+     1      2      3      4      5      6 
+-0.850  2.575  5.900 -4.750 -4.350  1.475 
+
+ N 
+N
+      0       1 
+-2.8083  2.8083 
+
+ P 
+P
+      0       1 
+ 0.5917 -0.5917 
+
+ K 
+K
+      0       1 
+ 1.9917 -1.9917 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="troubleshooting-and-faqs" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-and-faqs">Troubleshooting and FAQs</h2>
+<section id="common-issues" class="level3">
+<h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
+<ol type="1">
+<li><strong>Error: “Weighted aov fits are not supported”</strong>: Ensure the <code>aov</code> model is unweighted.</li>
+<li><strong>Missing terms in output</strong>: Use <code>cterms</code> to specify required terms explicitly.</li>
+</ol>
+</section>
+<section id="faqs" class="level3">
+<h3 class="anchored" data-anchor-id="faqs">FAQs</h3>
+<ul>
+<li><strong>What types of models are supported?</strong> Only <code>aov</code> objects and certain <code>aovlist</code> objects.</li>
+<li><strong>Can it handle nested designs?</strong> Yes, with appropriate formula specification.</li>
+</ul>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<ul>
+<li>Use <code>type = "effects"</code> to understand the contributions of each term.</li>
+<li>Always include <code>se = TRUE</code> for better interpretability.</li>
+<li>Validate model assumptions before interpreting tables.</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>The <code>model.tables()</code> function is a versatile tool for summarizing ANOVA model results, offering insights into factor effects and mean responses. Its ability to compute standard errors enhances its utility for interpreting results.</p>
+</section>
+<section id="next-steps" class="level3">
+<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
+<ul>
+<li>Explore <code>TukeyHSD()</code> for post-hoc comparisons.</li>
+<li>Combine with custom data preprocessing for more advanced analyses.</li>
+</ul>
+</section>
+</section>
+<section id="references-and-resources" class="level2">
+<h2 class="anchored" data-anchor-id="references-and-resources">References and Resources</h2>
+<ul>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/model.tables.html">R Documentation for <code>model.tables()</code></a></li>
+<li><a href="https://www.statmethods.net/stats/anova.html">ANOVA Techniques in R</a></li>
+<li><a href="https://cran.r-project.org/doc/manuals/R-intro.pdf">Comprehensive Guide to R ANOVA Models</a></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -957,5 +1275,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
