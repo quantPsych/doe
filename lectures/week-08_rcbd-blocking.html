@@ -238,7 +238,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">10-Mar-2025</p>
+        <p class="date">11-Mar-2025</p>
       </div>
     </div>
     
@@ -387,7 +387,9 @@ window.Quarto = {
   <li><a href="#anova-for-rcbds" id="toc-anova-for-rcbds" class="nav-link" data-scroll-target="#anova-for-rcbds">ANOVA for RCBDs</a>
   <ul class="collapse">
   <li><a href="#variance-decomposition" id="toc-variance-decomposition" class="nav-link" data-scroll-target="#variance-decomposition">Variance Decomposition</a></li>
-  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a></li>
+  </ul></li>
+  <li><a href="#anova-table" id="toc-anova-table" class="nav-link" data-scroll-target="#anova-table">ANOVA Table</a>
+  <ul class="collapse">
   <li><a href="#f-ratio-and-hypothesis-testing" id="toc-f-ratio-and-hypothesis-testing" class="nav-link" data-scroll-target="#f-ratio-and-hypothesis-testing">F-Ratio and Hypothesis Testing</a></li>
   </ul></li>
   </ul></li>
@@ -409,7 +411,7 @@ window.Quarto = {
   <li><a href="#scenario-1" id="toc-scenario-1" class="nav-link" data-scroll-target="#scenario-1">Scenario</a></li>
   <li><a href="#step-1-compute-means" id="toc-step-1-compute-means" class="nav-link" data-scroll-target="#step-1-compute-means">Step 1: Compute Means</a></li>
   <li><a href="#step-2-calculate-sums-of-squares" id="toc-step-2-calculate-sums-of-squares" class="nav-link" data-scroll-target="#step-2-calculate-sums-of-squares">Step 2: Calculate Sums of Squares</a></li>
-  <li><a href="#step-3-construct-anova-table" id="toc-step-3-construct-anova-table" class="nav-link" data-scroll-target="#step-3-construct-anova-table">Step 3: Construct ANOVA Table**</a></li>
+  <li><a href="#step-3-construct-anova-table" id="toc-step-3-construct-anova-table" class="nav-link" data-scroll-target="#step-3-construct-anova-table">Step 3: Construct ANOVA Table</a></li>
   <li><a href="#step-4-interpret-results" id="toc-step-4-interpret-results" class="nav-link" data-scroll-target="#step-4-interpret-results">Step 4: Interpret Results</a></li>
   </ul></li>
   <li><a href="#real-world-example-2-testing-teaching-methods" id="toc-real-world-example-2-testing-teaching-methods" class="nav-link" data-scroll-target="#real-world-example-2-testing-teaching-methods">Real-World Example 2: Testing Teaching Methods</a>
@@ -419,7 +421,7 @@ window.Quarto = {
   <li><a href="#step-2-sums-of-squares" id="toc-step-2-sums-of-squares" class="nav-link" data-scroll-target="#step-2-sums-of-squares">Step 2: Sums of Squares</a></li>
   <li><a href="#step-3-anova-table" id="toc-step-3-anova-table" class="nav-link" data-scroll-target="#step-3-anova-table">Step 3: ANOVA Table</a></li>
   <li><a href="#step-4-interpret-results-1" id="toc-step-4-interpret-results-1" class="nav-link" data-scroll-target="#step-4-interpret-results-1">Step 4: Interpret Results</a></li>
-  <li><a href="#key-insights" id="toc-key-insights" class="nav-link" data-scroll-target="#key-insights">6. Key Insights</a></li>
+  <li><a href="#key-insights" id="toc-key-insights" class="nav-link" data-scroll-target="#key-insights">Key Insights</a></li>
   </ul></li>
   <li><a href="#contrasts-in-rcbd" id="toc-contrasts-in-rcbd" class="nav-link" data-scroll-target="#contrasts-in-rcbd">2. Contrasts in RCBD</a>
   <ul class="collapse">
@@ -545,7 +547,7 @@ Y_{hi} = \mu + \theta_h + \tau_i + \epsilon_{hi}
 </ol>
 <p><strong>Deeper Insight:</strong> Assumption of no interaction is critical. If this assumption is violated, the RCBD model may not adequately capture the variability, leading to biased estimates of treatment effects. In such cases, more complex designs that account for interactions, like general complete block designs, are necessary.</p>
 </section>
-<section id="anova-for-rcbds" class="level2 page-columns page-full">
+<section id="anova-for-rcbds" class="level2">
 <h2 class="anchored" data-anchor-id="anova-for-rcbds">ANOVA for RCBDs</h2>
 <p>To analyze RCBDs, we employ <strong>Analysis of Variance (ANOVA)</strong>, which decomposes the total variability in the data into components attributable to blocks, treatments, and random error.</p>
 <section id="variance-decomposition" class="level3">
@@ -554,8 +556,9 @@ Y_{hi} = \mu + \theta_h + \tau_i + \epsilon_{hi}
 \text{Total SS} = \text{Block SS} + \text{Treatment SS} + \text{Error SS}
 \]</span></p>
 </section>
-<section id="anova-table" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="anova-table">ANOVA Table</h3>
+</section>
+<section id="anova-table" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="anova-table">ANOVA Table</h2>
 <div id="tbl-anova-table-rcbd" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-anova-table-rcbd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -586,21 +589,21 @@ Y_{hi} = \mu + \theta_h + \tau_i + \epsilon_{hi}
 </tr>
 <tr class="even">
 <td>Treatments</td>
-<td><span class="math inline">\(t - 1\)</span></td>
+<td><span class="math inline">\(\nu - 1\)</span></td>
 <td><span class="math inline">\(SS_\text{Treatment}\)</span></td>
-<td><span class="math inline">\(MS_\text{Treatment} = SS_\text{Treatment} / (t-1)\)</span></td>
+<td><span class="math inline">\(MS_\text{Treatment} = SS_\text{Treatment} / (\nu-1)\)</span></td>
 <td><span class="math inline">\(\frac{MS_\text{Treatment}}{MS_\text{Error}}\)</span></td>
 </tr>
 <tr class="odd">
 <td>Error</td>
-<td><span class="math inline">\((b-1)(t-1)\)</span></td>
+<td><span class="math inline">\((b-1)(\nu-1)\)</span></td>
 <td><span class="math inline">\(SS_\text{Error}\)</span></td>
-<td><span class="math inline">\(MS_\text{Error} = SS_\text{Error} / ((b-1)(t-1))\)</span></td>
+<td><span class="math inline">\(MS_\text{Error} = SS_\text{Error} / ((b-1)(\nu-1))\)</span></td>
 <td></td>
 </tr>
 <tr class="even">
 <td><strong>Total</strong></td>
-<td><span class="math inline">\(bt - 1\)</span></td>
+<td><span class="math inline">\(b\nu - 1\)</span></td>
 <td><span class="math inline">\(SS_\text{Total}\)</span></td>
 <td></td>
 <td></td>
@@ -613,7 +616,6 @@ Table&nbsp;1: ANOVA Table for Randomized Complete Block Designs
 </figcaption>
 </figure>
 </div>
-</section>
 <section id="f-ratio-and-hypothesis-testing" class="level3">
 <h3 class="anchored" data-anchor-id="f-ratio-and-hypothesis-testing">F-Ratio and Hypothesis Testing</h3>
 <ul>
@@ -622,7 +624,7 @@ Table&nbsp;1: ANOVA Table for Randomized Complete Block Designs
 <li><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>):</strong> All treatment means are equal (<span class="math inline">\(\tau_i = 0\)</span> for all <span class="math inline">\(i\)</span>).</li>
 <li><strong>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>):</strong> At least one treatment mean is different.</li>
 </ul></li>
-<li><strong>Decision Rule:</strong> Reject <span class="math inline">\(H_0\)</span> if the F-ratio exceeds the critical value from the F-distribution with degrees of freedom <span class="math inline">\((t-1, (b-1)(t-1))\)</span> at the chosen significance level (<span class="math inline">\(\alpha\)</span>).</li>
+<li><strong>Decision Rule:</strong> Reject <span class="math inline">\(H_0\)</span> if the F-ratio exceeds the critical value from the F-distribution with degrees of freedom <span class="math inline">\((\nu-1, (b-1)(\nu-1))\)</span> at the chosen significance level (<span class="math inline">\(\alpha\)</span>).</li>
 </ul>
 <p><strong>Intuitive Explanation:</strong> The F-ratio compares the variability due to treatments to the variability due to random error. A higher F-ratio indicates that treatments explain a significant portion of the variability in responses, suggesting that treatment effects are meaningful.</p>
 </section>
@@ -933,7 +935,7 @@ Table&nbsp;3: Plant Growth Data for Fertilizer Experiment
 <section id="step-1-compute-means" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-compute-means">Step 1: Compute Means</h2>
 <ol type="1">
-<li><strong>Overall Mean (<span class="math inline">\(\bar{Y}\)</span>):</strong></li>
+<li><strong>Overall Mean</strong> (<span class="math inline">\(\bar{Y}\)</span>):</li>
 </ol>
 <p><span class="math display">\[
 \bar{Y} = \frac{\text{Sum of all observations}}{\text{Total number of observations}} = \frac{20 + 25 + \dots + 21}{12} = 21.33
@@ -956,33 +958,33 @@ Table&nbsp;3: Plant Growth Data for Fertilizer Experiment
 </section>
 <section id="step-2-calculate-sums-of-squares" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-calculate-sums-of-squares">Step 2: Calculate Sums of Squares</h2>
-<ol type="1">
-<li><strong>Total Sum of Squares (<span class="math inline">\(SS_{\text{Total}}\)</span>):</strong></li>
-</ol>
+<ul>
+<li><strong>Total Sum of Squares</strong> (<span class="math inline">\(SS_{\text{Total}}\)</span>):</li>
+</ul>
 <p><span class="math display">\[
 SS_{\text{Total}} = \sum_{i,j} (Y_{ij} - \bar{Y})^2 = 35.33
 \]</span></p>
-<ol type="1">
-<li><strong>Treatment Sum of Squares (<span class="math inline">\(SS_{\text{Treatment}}\)</span>):</strong></li>
-</ol>
+<ul>
+<li><strong>Treatment Sum of Squares</strong> (<span class="math inline">\(SS_{\text{Treatment}}\)</span>):</li>
+</ul>
 <p><span class="math display">\[
 SS_{\text{Treatment}} = b \sum_i (\bar{Y}_{i\cdot} - \bar{Y})^2 = 4[(19.75 - 21.33)^2 + (22.50 - 21.33)^2 + (21.25 - 21.33)^2] = 12.67
 \]</span></p>
-<ol type="1">
-<li><strong>Block Sum of Squares (<span class="math inline">\(SS_{\text{Block}}\)</span>):</strong></li>
-</ol>
+<ul>
+<li><strong>Block Sum of Squares</strong> (<span class="math inline">\(SS_{\text{Block}}\)</span>):</li>
+</ul>
 <p><span class="math display">\[
 SS_{\text{Block}} = t \sum_j (\bar{Y}_{\cdot j} - \bar{Y})^2 = 3[(22.33 - 21.33)^2 + \dots + (20.00 - 21.33)^2] = 21.33
 \]</span></p>
-<ol type="1">
-<li><strong>Error Sum of Squares (<span class="math inline">\(SS_{\text{Error}}\)</span>):</strong></li>
-</ol>
+<ul>
+<li><strong>Error Sum of Squares</strong> (<span class="math inline">\(SS_{\text{Error}}\)</span>):</li>
+</ul>
 <p><span class="math display">\[
 SS_{\text{Error}} = SS_{\text{Total}} - SS_{\text{Treatment}} - SS_{\text{Block}} = 35.33 - 12.67 - 21.33 = 1.33
 \]</span></p>
 </section>
 <section id="step-3-construct-anova-table" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="step-3-construct-anova-table">Step 3: Construct ANOVA Table**</h2>
+<h2 class="anchored" data-anchor-id="step-3-construct-anova-table">Step 3: Construct ANOVA Table</h2>
 <div id="tbl-anova-table-fertilizer" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-anova-table-fertilizer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1036,7 +1038,7 @@ Table&nbsp;4: ANOVA Table for Fertilizer Experiment
 </section>
 <section id="step-4-interpret-results" class="level2">
 <h2 class="anchored" data-anchor-id="step-4-interpret-results">Step 4: Interpret Results</h2>
-<ol type="1">
+<ul>
 <li><strong>Treatment Effect</strong>:
 <ul>
 <li>The <span class="math inline">\(F\)</span>-statistic for treatments is <span class="math inline">\(19.02\)</span>, with a p-value <span class="math inline">\(&lt; 0.01\)</span>. This indicates a significant difference in plant growth between fertilizers.</li>
@@ -1046,7 +1048,7 @@ Table&nbsp;4: ANOVA Table for Fertilizer Experiment
 <ul>
 <li><span class="math inline">\(SS_{\text{Block}} = 21.33\)</span> indicates considerable variability between fields, confirming that blocking was necessary to control this variability.</li>
 </ul></li>
-</ol>
+</ul>
 </section>
 </section>
 <section id="real-world-example-2-testing-teaching-methods" class="level1 page-columns page-full">
@@ -1192,7 +1194,7 @@ Table&nbsp;6: ANOVA Table for Teaching Methods Experiment
 </ol>
 </section>
 <section id="key-insights" class="level2">
-<h2 class="anchored" data-anchor-id="key-insights">6. Key Insights</h2>
+<h2 class="anchored" data-anchor-id="key-insights">Key Insights</h2>
 <ol type="1">
 <li><strong>Blocking Matters</strong>:
 <ul>

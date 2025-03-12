@@ -775,7 +775,14 @@
     "href": "lectures/week-08_rcbd-blocking.html#anova-for-rcbds",
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
     "section": "ANOVA for RCBDs",
-    "text": "ANOVA for RCBDs\nTo analyze RCBDs, we employ Analysis of Variance (ANOVA), which decomposes the total variability in the data into components attributable to blocks, treatments, and random error.\n\nVariance Decomposition\n\\[\n\\text{Total SS} = \\text{Block SS} + \\text{Treatment SS} + \\text{Error SS}\n\\]\n\n\nANOVA Table\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource of Variation\nDegrees of Freedom (DF)\nSum of Squares (SS)\nMean Square (MS)\nF-ratio\n\n\n\n\nBlocks\n\\(b - 1\\)\n\\(SS_\\text{Block}\\)\n\\(MS_\\text{Block} = SS_\\text{Block} / (b-1)\\)\n\n\n\nTreatments\n\\(t - 1\\)\n\\(SS_\\text{Treatment}\\)\n\\(MS_\\text{Treatment} = SS_\\text{Treatment} / (t-1)\\)\n\\(\\frac{MS_\\text{Treatment}}{MS_\\text{Error}}\\)\n\n\nError\n\\((b-1)(t-1)\\)\n\\(SS_\\text{Error}\\)\n\\(MS_\\text{Error} = SS_\\text{Error} / ((b-1)(t-1))\\)\n\n\n\nTotal\n\\(bt - 1\\)\n\\(SS_\\text{Total}\\)\n\n\n\n\n\n\n\nTable 1: ANOVA Table for Randomized Complete Block Designs\n\n\n\n\n\nF-Ratio and Hypothesis Testing\n\nHypothesis Testing:\n\nNull Hypothesis (\\(H_0\\)): All treatment means are equal (\\(\\tau_i = 0\\) for all \\(i\\)).\nAlternative Hypothesis (\\(H_A\\)): At least one treatment mean is different.\n\nDecision Rule: Reject \\(H_0\\) if the F-ratio exceeds the critical value from the F-distribution with degrees of freedom \\((t-1, (b-1)(t-1))\\) at the chosen significance level (\\(\\alpha\\)).\n\nIntuitive Explanation: The F-ratio compares the variability due to treatments to the variability due to random error. A higher F-ratio indicates that treatments explain a significant portion of the variability in responses, suggesting that treatment effects are meaningful."
+    "text": "ANOVA for RCBDs\nTo analyze RCBDs, we employ Analysis of Variance (ANOVA), which decomposes the total variability in the data into components attributable to blocks, treatments, and random error.\n\nVariance Decomposition\n\\[\n\\text{Total SS} = \\text{Block SS} + \\text{Treatment SS} + \\text{Error SS}\n\\]"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#anova-table",
+    "href": "lectures/week-08_rcbd-blocking.html#anova-table",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "ANOVA Table",
+    "text": "ANOVA Table\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource of Variation\nDegrees of Freedom (DF)\nSum of Squares (SS)\nMean Square (MS)\nF-ratio\n\n\n\n\nBlocks\n\\(b - 1\\)\n\\(SS_\\text{Block}\\)\n\\(MS_\\text{Block} = SS_\\text{Block} / (b-1)\\)\n\n\n\nTreatments\n\\(\\nu - 1\\)\n\\(SS_\\text{Treatment}\\)\n\\(MS_\\text{Treatment} = SS_\\text{Treatment} / (\\nu-1)\\)\n\\(\\frac{MS_\\text{Treatment}}{MS_\\text{Error}}\\)\n\n\nError\n\\((b-1)(\\nu-1)\\)\n\\(SS_\\text{Error}\\)\n\\(MS_\\text{Error} = SS_\\text{Error} / ((b-1)(\\nu-1))\\)\n\n\n\nTotal\n\\(b\\nu - 1\\)\n\\(SS_\\text{Total}\\)\n\n\n\n\n\n\n\nTable 1: ANOVA Table for Randomized Complete Block Designs\n\n\n\n\nF-Ratio and Hypothesis Testing\n\nHypothesis Testing:\n\nNull Hypothesis (\\(H_0\\)): All treatment means are equal (\\(\\tau_i = 0\\) for all \\(i\\)).\nAlternative Hypothesis (\\(H_A\\)): At least one treatment mean is different.\n\nDecision Rule: Reject \\(H_0\\) if the F-ratio exceeds the critical value from the F-distribution with degrees of freedom \\((\\nu-1, (b-1)(\\nu-1))\\) at the chosen significance level (\\(\\alpha\\)).\n\nIntuitive Explanation: The F-ratio compares the variability due to treatments to the variability due to random error. A higher F-ratio indicates that treatments explain a significant portion of the variability in responses, suggesting that treatment effects are meaningful."
   },
   {
     "objectID": "lectures/week-08_rcbd-blocking.html#example-bread-baking-experiment",
@@ -851,8 +858,8 @@
     "objectID": "lectures/week-08_rcbd-blocking.html#step-3-construct-anova-table",
     "href": "lectures/week-08_rcbd-blocking.html#step-3-construct-anova-table",
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
-    "section": "Step 3: Construct ANOVA Table**",
-    "text": "Step 3: Construct ANOVA Table**\n\n\n\n\n\n\nSource\nDF\nSS\nMS\nF\n\n\n\n\nTreatment\n2\n12.67\n6.33\n19.02\n\n\nBlock\n3\n21.33\n7.11\n\n\n\nError\n6\n1.33\n0.22\n\n\n\nTotal\n11\n35.33\n\n\n\n\n\n\n\nTable 4: ANOVA Table for Fertilizer Experiment"
+    "section": "Step 3: Construct ANOVA Table",
+    "text": "Step 3: Construct ANOVA Table\n\n\n\n\n\n\nSource\nDF\nSS\nMS\nF\n\n\n\n\nTreatment\n2\n12.67\n6.33\n19.02\n\n\nBlock\n3\n21.33\n7.11\n\n\n\nError\n6\n1.33\n0.22\n\n\n\nTotal\n11\n35.33\n\n\n\n\n\n\n\nTable 4: ANOVA Table for Fertilizer Experiment"
   },
   {
     "objectID": "lectures/week-08_rcbd-blocking.html#step-4-interpret-results",
@@ -900,8 +907,8 @@
     "objectID": "lectures/week-08_rcbd-blocking.html#key-insights",
     "href": "lectures/week-08_rcbd-blocking.html#key-insights",
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
-    "section": "6. Key Insights",
-    "text": "6. Key Insights\n\nBlocking Matters:\n\nIgnoring blocks increases residual variability, reducing statistical power.\n\nPractical Use:\n\nRCBD is invaluable when variability between experimental units can be controlled through blocking."
+    "section": "Key Insights",
+    "text": "Key Insights\n\nBlocking Matters:\n\nIgnoring blocks increases residual variability, reducing statistical power.\n\nPractical Use:\n\nRCBD is invaluable when variability between experimental units can be controlled through blocking."
   },
   {
     "objectID": "lectures/week-08_rcbd-blocking.html#definition",
