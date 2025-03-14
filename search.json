@@ -733,7 +733,7 @@
     "href": "lectures/week-08_rcbd-blocking.html#r-packages",
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
     "section": "R Packages",
-    "text": "R Packages\nTo facilitate the analysis of Randomized Complete Block Designs (RCBDs) and contrasts, we will utilize the following R packages:\n\n# Required R Packages\npacman::p_load(dplyr, ggplot2, emmeans, ggpubr)\ntheme_set(ggpubr::theme_pubr())\n\n\nemmeans: For estimating marginal means and conducting pairwise comparisons.\nggplot2: For creating visualizations and diagnostic plots.\ndplyr: For data manipulation and summarization.\n\nEnsure that these packages are installed in your R environment to follow along with the examples and exercises."
+    "text": "R Packages\nTo facilitate the analysis of Randomized Complete Block Designs (RCBDs) and contrasts, we will utilize the following R packages:\n\n# Required R Packages\npacman::p_load(dplyr, ggplot2, emmeans, ggpubr, here, readr)\ntheme_set(ggpubr::theme_pubr())\n\n\nemmeans: For estimating marginal means and conducting pairwise comparisons.\nggplot2: For creating visualizations and diagnostic plots.\ndplyr: For data manipulation and summarization.\n\nEnsure that these packages are installed in your R environment to follow along with the examples and exercises."
   },
   {
     "objectID": "lectures/week-08_rcbd-blocking.html#what-are-complete-block-designs",
@@ -789,7 +789,7 @@
     "href": "lectures/week-08_rcbd-blocking.html#multiple-comparisons",
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
     "section": "Multiple Comparisons",
-    "text": "Multiple Comparisons\nAfter establishing the significance of treatment effects, we often conduct multiple comparisons to identify specific differences between treatments. This post-hoc analysis helps pinpoint which treatments significantly differ from each other.\nBonferroni, Scheffé, Tukey, and Dunnett tests are common methods for multiple comparisons in RCBDs for a contrast, \\(C=\\sum c_i \\tau_i\\)\n\\[\n\\sum c_i \\hat\\tau_i \\pm w \\; \\sqrt{\\frac{MSE}{b} \\sum c_i^2}\n\\]\nwhere \\(w\\) is determinded by the method used for multiple comparisons.\n\nBonferroni Test: \\(w_B = t_{\\alpha/(2m);\\, (\\nu-1)(b-1)}\\), where \\(m\\) is the number of contrasts.\nScheffé Test: \\(w_S = \\sqrt{(\\nu-1) F_{\\alpha;\\, \\nu-1, (b-1)(\\nu-1)}}\\)\nTukey Test: \\(w_T = q_{\\alpha;\\, \\nu, (b-1)(\\nu-1)}/\\sqrt{2}\\), where \\(q_{\\alpha;\\, \\nu, (b-1)(\\nu-1)}\\) is the critical value from the studentized range distribution."
+    "text": "Multiple Comparisons\nAfter establishing the significance of treatment effects, we often conduct multiple comparisons to identify specific differences between treatments. This post-hoc analysis helps pinpoint which treatments significantly differ from each other.\nBonferroni, Scheffé, Tukey, and Dunnett tests are common methods for multiple comparisons in RCBDs for a contrast, \\(C=\\sum c_i \\tau_i\\)\n\\[\n\\sum c_i \\hat\\tau_i \\pm w \\; \\sqrt{\\frac{MSE}{b} \\sum c_i^2}\n\\]\nwhere \\(w\\) is determined by the method used for multiple comparisons.\n\nBonferroni Test: \\(w_B = t_{\\alpha/(2m);\\, (\\nu-1)(b-1)}\\), where \\(m\\) is the number of contrasts.\nScheffé Test: \\(w_S = \\sqrt{(\\nu-1) F_{\\alpha;\\, \\nu-1, (b-1)(\\nu-1)}}\\)\nTukey Test: \\(w_T = q_{\\alpha;\\, \\nu, (b-1)(\\nu-1)}/\\sqrt{2}\\), where \\(q_{\\alpha;\\, \\nu, (b-1)(\\nu-1)}\\) is the critical value from the studentized range distribution."
   },
   {
     "objectID": "lectures/week-08_rcbd-blocking.html#example-bread-baking-experiment",
@@ -957,7 +957,7 @@
     "href": "lectures/week-08_rcbd-blocking.html#r-code-to-analyze-contrasts",
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
     "section": "3.4 R Code to Analyze Contrasts",
-    "text": "3.4 R Code to Analyze Contrasts\n\n# Data\ndata &lt;- data.frame(\n    Block = factor(rep(1:4, each = 3)),\n    Fertilizer = factor(rep(c(\"A\", \"B\", \"C\"), times = 4)),\n    Response = c(20, 25, 22, 18, 21, 19, 22, 24, 23, 19, 20, 21)\n)\n\n# Fit ANOVA Model\nmodel &lt;- aov(Response ~ Fertilizer + Block, data = data)\nsummary(model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nFertilizer   2 15.167   7.583   7.378 0.0242 *\nBlock        3 28.333   9.444   9.189 0.0116 *\nResiduals    6  6.167   1.028                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n# Contrasts\nlibrary(emmeans)\nem &lt;- emmeans(model, \"Fertilizer\")\n\n# Contrast 1: A vs B\ncontrast(em, list(\"A vs B\" = c(1, -1, 0)))\n\n contrast estimate    SE df t.ratio p.value\n A vs B      -2.75 0.717  6  -3.836  0.0086\n\nResults are averaged over the levels of: Block \n\n# Contrast 2: A vs (B + C)/2\ncontrast(em, list(\"A vs Avg(B, C)\" = c(1, -0.5, -0.5)))\n\n contrast       estimate    SE df t.ratio p.value\n A vs Avg(B, C)    -2.12 0.621  6  -3.423  0.0141\n\nResults are averaged over the levels of: Block"
+    "text": "3.4 R Code to Analyze Contrasts\n\n# Data\ndata &lt;- data.frame(\n    Block = factor(rep(1:4, each = 3)),\n    Fertilizer = factor(rep(c(\"A\", \"B\", \"C\"), times = 4)),\n    Response = c(20, 25, 22, 18, 21, 19, 22, 24, 23, 19, 20, 21)\n)\n\n# Fit ANOVA Model\nmodel &lt;- aov(Response ~ Fertilizer + Block, data = data)\nsummary(model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nFertilizer   2 15.167   7.583   7.378 0.0242 *\nBlock        3 28.333   9.444   9.189 0.0116 *\nResiduals    6  6.167   1.028                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n# Contrasts\nem &lt;- emmeans(model, \"Fertilizer\")\n\n# Contrast 1: A vs B\ncontrast(em, list(\"A vs B\" = c(1, -1, 0)))\n\n contrast estimate    SE df t.ratio p.value\n A vs B      -2.75 0.717  6  -3.836  0.0086\n\nResults are averaged over the levels of: Block \n\n# Contrast 2: A vs (B + C)/2\ncontrast(em, list(\"A vs Avg(B, C)\" = c(1, -0.5, -0.5)))\n\n contrast       estimate    SE df t.ratio p.value\n A vs Avg(B, C)    -2.12 0.621  6  -3.423  0.0141\n\nResults are averaged over the levels of: Block"
   },
   {
     "objectID": "lectures/week-08_rcbd-blocking.html#explanation-of-r-output",
@@ -979,6 +979,167 @@
     "title": "Randomized Complete Block Design (RCBD) with Blocking",
     "section": "Summary",
     "text": "Summary\n\nRCBD Benefits:\n\nControls variability from blocks (e.g., fields, classrooms).\nProvides more precise estimates of treatment effects.\n\nContrasts:\n\nUseful for testing specific hypotheses about treatment effects.\nAdd depth to the ANOVA by allowing targeted comparisons.\n\nR Analysis:\n\nANOVA identifies significant differences.\nContrasts pinpoint specific treatment relationships."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#r-packages-used",
+    "href": "lectures/week-08_rcbd-blocking.html#r-packages-used",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "R Packages Used",
+    "text": "R Packages Used\n\n# Load required packages using pacman for convenience.\npacman::p_load(dplyr, ggplot2, tidyr, knitr, readr, here, ggpubr)\ntheme_set(theme_pubr())\n\nExplanation:\n\ndplyr: data manipulation,\nggplot2: visualizations,\ntidyr: data reshaping,\nknitr: producing tables,\nreadr: reading in external data files. # Mathematical Foundations from Chapter 10"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#model-without-interaction",
+    "href": "lectures/week-08_rcbd-blocking.html#model-without-interaction",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Model without Interaction",
+    "text": "Model without Interaction\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + \\varepsilon_{hit}, \\quad \\varepsilon_{hit} \\sim N(0,\\sigma^2)\n\\]\n\n\\(\\mu\\) is the overall mean.\n\\(\\theta_h\\) is the effect of the \\(h\\)th block.\n\\(\\tau_i\\) is the effect of the \\(i\\)th treatment.\n\\(\\varepsilon_{hit}\\) is the random error.\n\\(Y_{hit}\\) is the response for treatment \\(i\\) in block \\(h\\) and replicate \\(t\\).\n\\(\\nu\\) is the number of treatments.\n\\(b\\) is the number of blocks.\n\\(s\\) is the number of replicates per treatment per block."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#sums-of-squares-computation",
+    "href": "lectures/week-08_rcbd-blocking.html#sums-of-squares-computation",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Sums of Squares Computation",
+    "text": "Sums of Squares Computation\n\nTotal Sum of Squares:\n\n\\[\nSS_{\\text{Total}} = \\sum_{h=1}^{b} \\sum_{i=1}^{v} \\sum_{t=1}^{s} (Y_{hit} - \\bar{Y}_{\\cdots})^2\n\\]\n\nBlock Sum of Squares:\n\n\\[\nSS_{\\theta} = vs\\sum_{h=1}^{b} (\\bar{Y}_{h..} - \\bar{Y}_{\\cdots})^2\n\\]\n\nTreatment Sum of Squares:\n\n\\[\nSS_{Treatment} = bs\\sum_{i=1}^{v} (\\bar{Y}_{.i.} - \\bar{Y}_{\\cdots})^2\n\\]\n\nError Sum of Squares:\n\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment}\n\\]\n\nDegrees of Freedom:\n\nBlocks: \\(b - 1\\)\nTreatments: \\(v - 1\\)\nError: \\(bvs - b - v + 1\\)\nTotal: \\(bvs - 1\\)"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#multiple-comparisons-1",
+    "href": "lectures/week-08_rcbd-blocking.html#multiple-comparisons-1",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Multiple Comparisons",
+    "text": "Multiple Comparisons\n\nContrast Estimation: For any contrast \\(\\sum c_i \\tau_i\\) (with \\(\\sum c_i=0\\)):\n\n\\[\n\\sum c_i \\tau_i \\in \\left(\\sum c_i \\bar{Y}_{.i.} \\pm w \\sqrt{\\frac{MS_{Error} \\sum c_i^2}{bs}}\\right)\n\\]\n\n\\(w\\) is the critical value from the chosen method (Bonferroni, Scheffé, Tukey, etc.).\nInterpretation: This provides a simultaneous confidence interval for contrasts, ensuring control over the familywise error rate."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#experiment-context",
+    "href": "lectures/week-08_rcbd-blocking.html#experiment-context",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Experiment Context",
+    "text": "Experiment Context\n\nBackground: Bananas are stored using two methods:\n\nCounter Storage: Conventional storage on a counter.\nHanging Storage: Using a banana hanging device to slow ripening.\n\nMeasured Outcome: The response variable \\(y\\) represents the percentage of black color on the banana peel (an indicator of ripeness).\nExperimental Factors:\n\nBlock: Grouping factor (e.g., repeated measures over time or location).\nLight: Level of illumination (affecting ripening).\nStorage: Storage method (1 = counter, 2 = hanging)."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#data-overview",
+    "href": "lectures/week-08_rcbd-blocking.html#data-overview",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Data Overview",
+    "text": "Data Overview\nThe banana.txt file has the following columns:\n\nblock: Block identifier.\nlight: Light condition (1 or 2).\nstorage: Storage method (1 = counter, 2 = hanging).\ny: Measured percentage of black color."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#computational-formulae",
+    "href": "lectures/week-08_rcbd-blocking.html#computational-formulae",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "“Computational” Formulae",
+    "text": "“Computational” Formulae\n\nBlocks are indexed by \\(h\\) (from 1 to \\(v\\)).\nTreatments indexed by \\(i\\).\nReplicates indexed by \\(t\\).\n\\(s\\) replicates per block-treatment combination.\nObserved response: \\(y_{hit}\\).\nDot notation represents summation over the omitted index.\n\nThen, the corrected equations are:\n\nTreatment Sum of Squares (Blocks), \\(SS_{\\theta}\\)\n\\[\nSS_{\\theta} = v s \\sum_{h=1}^{b} \\bar{y}_{h..}^2 - b v s \\bar{y}_{…}^2\n\\]\n\n\nTotal Sum of Squares, \\(SS_{\\text{Total}}\\)\n\\[\nSS_{\\text{Total}} = \\sum_{h=1}^{b}\\sum_{i=1}^{v}\\sum_{t=1}^{s} y_{hit}^2 - b v s \\bar{y}_{…}^2\n\\]\n\n\nTreatment Sum of Squares, \\(SS_{Treatment}\\)\n\\[\nSS_{Treatment} = b s \\sum_{i=1}^{v} \\bar{y}_{.i.}^2 - b v s \\bar{y}_{…}^2\n\\]\n\n\nError Sum of Squares, \\(SS_{Error}\\)\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment}\n\\]\n\n\nDefinitions of Means Used\n\nOverall mean (\\(\\bar{y}_{…}\\)):\n\n\\[\n\\bar{y}_{…} = \\frac{1}{b v s}\\sum_{h=1}^{b}\\sum_{i=1}^{v}\\sum_{t=1}^{s}y_{hit}\n\\]\n\nBlock Means (\\(\\bar{y}_{h..}\\)):\n\n\\[\n\\bar{y}_{h..} = \\frac{1}{v s}\\sum_{i=1}^{v}\\sum_{t=1}^{s}y_{hit}\n\\]\n\nTreatment Means (\\(\\bar{y}_{.i.}\\)):\n\n\\[\n\\bar{y}_{.i.} = \\frac{1}{b s}\\sum_{h=1}^{b}\\sum_{t=1}^{s}y_{hit}\n\\]\n\n\nError Sum of Squares, \\(SS_{Error}\\)\nDefined as:\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment}\n\\]\n\n\nExplanation of Terms\n\n\\(b\\): Number of blocks\n\\(v\\): Number of treatment levels\n\\(s\\): Number of replicates per block-treatment combination\n\\(y_{hit}\\): Observed response at block \\(h\\), treatment \\(i\\), and replicate \\(t\\)\n\n\n\nInterpretation\n\n\\(SS_{\\theta}\\): Measures the variability due to differences between blocks.\n\\(SS_{Treatment}\\): Measures the variability due to treatment differences.\n\\(SS_{Error}\\): Captures residual (unexplained) variability after accounting for block and treatment effects."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#anova-decision-rule",
+    "href": "lectures/week-08_rcbd-blocking.html#anova-decision-rule",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "3. ANOVA Decision Rule",
+    "text": "3. ANOVA Decision Rule\nThe F-test for treatments in a complete block design is:\n\\[\nF = \\frac{MS_{Treatment}}{MS_{Error}}\n\\]\nwhere:\n\n\\(MS_{Treatment} = \\frac{SS_{Treatment}}{v-1}\\)\n\\(MS_{Error} = \\frac{SS_{Error}}{bvs - b - v + 1}\\)\n\nReject the null hypothesis \\(H_0: \\tau_1 = \\tau_2\\) if:\n\\[\nF &gt; F_{\\alpha; \\, \\nu-1, b\\nu s-b-\\nu+1}\n\\]"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#data-import-and-preparation",
+    "href": "lectures/week-08_rcbd-blocking.html#data-import-and-preparation",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Data Import and Preparation",
+    "text": "Data Import and Preparation\n\nbanana_data &lt;- read.table(\n    here(\"data\", \"dean2017\", \"banana.txt\"),\n    header = TRUE\n) |&gt;\n    mutate(\n        block = factor(block),\n        storage = factor(\n            storage,\n            levels = c(1, 2),\n            labels = c(\"Counter\", \"Hanging\")\n        )\n    )\nbanana_data |&gt; head()\n\n\n\n\n\n\n\n\nblock\nlight\nstorage\ny\n\n\n\n\n1\n1\nCounter\n30\n\n\n1\n1\nCounter\n30\n\n\n1\n1\nCounter\n17\n\n\n1\n1\nCounter\n43\n\n\n1\n1\nHanging\n43\n\n\n1\n1\nHanging\n35\n\n\n\n\n\n\n\nTable 9: First Few Rows of Banana Data"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#descriptive-statistics-and-treatment-means",
+    "href": "lectures/week-08_rcbd-blocking.html#descriptive-statistics-and-treatment-means",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Descriptive Statistics and Treatment Means",
+    "text": "Descriptive Statistics and Treatment Means\n# Summary statistics for marginal means and cell means\nstorage_cell_means &lt;- banana_data |&gt;\n    group_by(block, storage) |&gt;\n    summarize(Mean = mean(y), n = n()) |&gt;\n    ungroup()\n\nstorage_cell_means\n## marginal means for storage\nstorage_margin_means &lt;- banana_data |&gt;\n    group_by(storage) |&gt;\n    summarize(Mean = mean(y), n = n()) |&gt;\n    ungroup()\nstorage_margin_means\n## marginal means for block\nstorage_block_means &lt;- banana_data |&gt;\n    group_by(block) |&gt;\n    summarize(Mean = mean(y), n = n()) |&gt;\n    ungroup()\nstorage_block_means\n\n\n\n\n\n\n\n\nblock\nstorage\nMean\nn\n\n\n\n\n1\nCounter\n33.875\n8\n\n\n1\nHanging\n37.875\n8\n\n\n2\nCounter\n49.000\n8\n\n\n2\nHanging\n44.875\n8\n\n\n3\nCounter\n41.625\n8\n\n\n3\nHanging\n31.000\n8\n\n\n\n\n\n\n\n\nstorage\nMean\nn\n\n\n\n\nCounter\n41.50000\n24\n\n\nHanging\n37.91667\n24\n\n\n\n\n\n\n\n\nblock\nMean\nn\n\n\n\n\n1\n35.8750\n16\n\n\n2\n46.9375\n16\n\n\n3\n36.3125\n16\n\n\n\n\n\n\n\nTable 10: [“Summary Statistics for Banana Data”,“Marginal Means for Storage Method”,“Marginal Means for Block”]"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#calculating-sums-of-squares",
+    "href": "lectures/week-08_rcbd-blocking.html#calculating-sums-of-squares",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Calculating Sums of Squares",
+    "text": "Calculating Sums of Squares\n\n# Compute the sums of squares\nb &lt;- length(unique(banana_data$block))\nv &lt;- length(unique(banana_data$storage))\ns &lt;- storage_cell_means$n[1]\nn &lt;- nrow(banana_data)\n\n# Overall mean\ny_bar &lt;- mean(banana_data$y)\n\n# Block sum of squares\nSS_theta &lt;- v *\n    s *\n    sum((storage_block_means$Mean - y_bar)^2) -\n    b * v * s * (mean(storage_block_means$Mean) - y_bar)^2\n\n# Treatment sum of squares\nSS_Treatment &lt;- b *\n    s *\n    sum((storage_margin_means$Mean - y_bar)^2) -\n    b * v * s * (mean(storage_margin_means$Mean) - y_bar)^2\n\n# Total sum of squares\nSS_Total &lt;- sum(banana_data$y^2) - b * v * s * y_bar^2\n\n# Error sum of squares\nSS_Error &lt;- SS_Total - SS_theta - SS_Treatment\n\n# Degrees of freedom\ndf_theta &lt;- b - 1\ndf_Treatment &lt;- v - 1\ndf_Error &lt;- b * v * s - b - v + 1\ndf_Total &lt;- b * v * s - 1\n\n# MS for Treatment and Error\nMS_Treatment &lt;- SS_Treatment / df_Treatment\nMS_Error &lt;- SS_Error / df_Error\n\n# F-statistic\nF_stat &lt;- MS_Treatment / MS_Error\n\nres_aov_storage_block &lt;- data.frame(\n    Component = c(\"Block\", \"Treatment\", \"Error\", \"Total\"),\n    SS = c(SS_theta, SS_Treatment, SS_Error, SS_Total),\n    DF = c(df_theta, df_Treatment, df_Error, df_Total),\n    MS = c(SS_theta / df_theta, MS_Treatment, MS_Error, NA),\n    F = c(NA, F_stat, NA, NA),\n    p_value = c(\n        NA,\n        pf(F_stat, df_Treatment, df_Error, lower.tail = FALSE),\n        NA,\n        NA\n    )\n)\n\nres_aov_storage_block |&gt;\n    knitr::kable(\n        caption = \"ANOVA Components for Banana Experiment\"\n    )\n\n\n\n\n\n\n\nComponent\nSS\nDF\nMS\nF\np_value\n\n\n\n\nBlock\n1255.7917\n2\n627.8958\nNA\nNA\n\n\nTreatment\n154.0833\n1\n154.0833\n0.8302268\n0.367172\n\n\nError\n8166.0417\n44\n185.5919\nNA\nNA\n\n\nTotal\n9575.9167\n47\nNA\nNA\nNA\n\n\n\n\n\n\nTable 11: ANOVA Components for Banana Experiment"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#fitting-the-block-design-model",
+    "href": "lectures/week-08_rcbd-blocking.html#fitting-the-block-design-model",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Fitting the Block Design Model",
+    "text": "Fitting the Block Design Model\nAssuming ‘block’ is our blocking factor and ‘storage’ is the treatment factor, we fit the model:\n\nfit_banana &lt;- aov(y ~ block + storage, data = banana_data)\nanova_banana &lt;- summary(fit_banana)[[1]]\nknitr::kable(anova_banana, caption = \"ANOVA Table for Banana Experiment\")\n\n\n\n\n\n\n\n\nDf\nSum Sq\nMean Sq\nF value\nPr(&gt;F)\n\n\n\n\nblock\n2\n1255.7917\n627.8958\n3.3832079\n0.0429809\n\n\nstorage\n1\n154.0833\n154.0833\n0.8302268\n0.3671720\n\n\nResiduals\n44\n8166.0417\n185.5919\nNA\nNA\n\n\n\n\n\n\nTable 12: ANOVA Table for Banana Experiment\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nCompare the results from the ANOVA table with the computed Anova components from the previous code chunk."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#derivation-of-treatment-contrast-variance",
+    "href": "lectures/week-08_rcbd-blocking.html#derivation-of-treatment-contrast-variance",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Derivation of Treatment Contrast Variance",
+    "text": "Derivation of Treatment Contrast Variance\nFor a contrast \\(L = \\sum c_i \\tau_i\\), the estimated contrast is:\n\\[\n\\hat{L} = \\sum c_i \\bar{Y}_{.i.}\n\\]\nwith variance given by:\n\\[\n\\text{Var}(\\hat{L}) = \\sigma^2 \\sum \\frac{c_i^2}{bs}\n\\]\nThus, a \\(100(1-\\alpha)\\%\\) confidence interval for \\(L\\) is:\n\\[\n\\hat{L} \\pm w \\sqrt{MS_{Error} \\sum \\frac{c_i^2}{bs}}\n\\]\nwhere \\(w\\) is the critical value from the chosen method:\n\nTukey’s method: \\(w_T = q_{\\alpha;\\, \\nu, bvs-b-v+1}/ \\sqrt{2}\\)\nScheffé’s method: \\(w_S = \\sqrt{(\\nu-1) F_{\\alpha; \\,\\nu-1, bvs-b-v+1}}\\)\nBonferroni’s method: \\(w_B = t_{\\alpha/2m;\\, bvs-b-v+1}\\), where \\(m\\) is the number of contrasts."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#model-overview",
+    "href": "lectures/week-08_rcbd-blocking.html#model-overview",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Model Overview",
+    "text": "Model Overview\nFor experiments with replicated treatments within blocks, the model extends to include block × treatment interaction:\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)_{hi} + \\epsilon_{hit}\n\\]\nWhere:\n\n\\(Y_{hit}\\): Response for treatment \\(i\\) in block \\(h\\) on replicate \\(t\\).\n\\(\\mu\\): Overall mean.\n\\(\\theta_h\\): Effect of block \\(h\\).\n\\(\\tau_i\\): Effect of treatment \\(i\\).\n\\((\\theta \\tau)_{hi}\\): Interaction effect between block \\(h\\) and treatment \\(i\\).\n\\(\\epsilon_{hit}\\): Random error, assumed \\(N(0,\\sigma^2)\\)."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#component-explanation",
+    "href": "lectures/week-08_rcbd-blocking.html#component-explanation",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Component Explanation",
+    "text": "Component Explanation\n\n1. Overall Mean and Block Effects\n\nOverall Mean \\(\\mu\\): The grand average of all observations.\nBlock Effect \\(\\theta_h\\): Adjusts for systematic differences among blocks (e.g., different environmental conditions).\n\n\n\n2. Treatment Effect and Interaction\n\nTreatment Effect \\(\\tau_i\\): The deviation of treatment \\(i\\)’s mean from \\(\\mu\\).\nInteraction \\((\\theta \\tau)_{hi}\\): Captures how treatment \\(i\\)’s effect varies in block \\(h\\). Example: A storage method might perform differently in Block 1 than in Block 2 due to unobserved factors.\n\n\n\n3. Random Error \\(\\epsilon_{hit}\\)\n\nAccounts for unexplained variation.\nAssumed to be independent and normally distributed."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#data-overview-1",
+    "href": "lectures/week-08_rcbd-blocking.html#data-overview-1",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Data Overview",
+    "text": "Data Overview\nThe banana data includes:\n\nblock: Block identifier (e.g., location or time).\nlight: Light condition (1 = low light, 2 = high light).\nstorage: Storage method (1 = Counter, 2 = Hanging).\ny: Percentage of black color on banana peel (measure of ripeness).\n\nWe will focus on “storage” as the treatment and “block” as the blocking factor, and illustrate the block-by-treatment interaction."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#step-1.-compute-means",
+    "href": "lectures/week-08_rcbd-blocking.html#step-1.-compute-means",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Step 1. Compute Means",
+    "text": "Step 1. Compute Means\n\nOverall Mean:\n\n\\[\n\\bar{Y}_{…} = \\frac{1}{n}\\sum y\n\\]\n\nTreatment (Storage) Mean:\n\n\\[\n\\bar{Y}_{.i.} = \\frac{1}{n_i}\\sum_{\\text{storage}=i} y\n\\]\n\nBlock Mean:\n\n\\[\n\\bar{Y}_{h..} = \\frac{1}{n_h}\\sum_{\\text{block}=h} y\n\\]"
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#step-2.-sums-of-squares",
+    "href": "lectures/week-08_rcbd-blocking.html#step-2.-sums-of-squares",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Step 2. Sums of Squares",
+    "text": "Step 2. Sums of Squares\n\nTotal Sum of Squares:\n\n\\[\nSS_{\\text{Total}} = \\sum (y - \\bar{Y}_{…})^2\n\\]\n\nBlock Sum of Squares:\n\n\\[\nSS_{\\theta} = vs\\sum_{h} (\\bar{Y}_{h..} - \\bar{Y}_{…})^2\n\\]\n\nTreatment Sum of Squares:\n\n\\[\nSS_{Treatment} = bs\\sum_{i} (\\bar{Y}_{.i.} - \\bar{Y}_{…})^2\n\\]\n\nInteraction Sum of Squares:\n\n\\[\nSS_{\\theta\\tau} = \\sum_{h}\\sum_{i} \\left(\\bar{Y}_{hi.} - \\bar{Y}_{h..} - \\bar{Y}_{.i.} + \\bar{Y}_{…}\\right)^2\n\\]\n\nError Sum of Squares:\n\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment} - SS_{\\theta\\tau}\n\\]\nHere, \\(b\\) is the number of blocks, \\(v\\) the number of treatments, and \\(s\\) the number of replicates per treatment per block."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#fitting-the-general-complete-block-design-model",
+    "href": "lectures/week-08_rcbd-blocking.html#fitting-the-general-complete-block-design-model",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Fitting the General Complete Block Design Model",
+    "text": "Fitting the General Complete Block Design Model\nWe now fit the model that includes the block, treatment (storage), and their interaction.\n\n\n\n# including block:storage interaction.\nfit_banana_int &lt;- aov(y ~ block * storage, data = banana_data)\nsummary(fit_banana_int)\n\n              Df Sum Sq Mean Sq F value Pr(&gt;F)  \nblock          2   1256   627.9   3.409 0.0425 *\nstorage        1    154   154.1   0.836 0.3656  \nblock:storage  2    430   214.8   1.166 0.3215  \nResiduals     42   7736   184.2                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nTable 13: Treatment Means by Storage Method\n\n\n\nInterpretation: - Block: Variation among blocks. - Storage (Treatment): Main effect of storage method. - Block:Storage: Interaction term, indicating if storage method performance varies by block. - Residuals: Unexplained variability."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#detailed-interpretation-of-anova-results",
+    "href": "lectures/week-08_rcbd-blocking.html#detailed-interpretation-of-anova-results",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Detailed Interpretation of ANOVA Results",
+    "text": "Detailed Interpretation of ANOVA Results\n\nF-statistics: Compare the mean squares (MS) for storage and the interaction against the error MS.\np-values: Determine if storage method and/or the interaction is statistically significant.\n\nIf the interaction term is significant, it suggests that the effect of the storage method on ripening (percentage black) differs among blocks."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#deriving-a-contrast-for-storage-methods",
+    "href": "lectures/week-08_rcbd-blocking.html#deriving-a-contrast-for-storage-methods",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Deriving a Contrast for Storage Methods",
+    "text": "Deriving a Contrast for Storage Methods\nAssume we want to compare:\n\\[\nL = \\tau_1 - \\tau_2\n\\]\nwith:\n\\[\n\\hat{L} = \\bar{Y}_{.1.} - \\bar{Y}_{.2.}\n\\]\nThe estimated variance of \\(\\hat{L}\\) is:\n\\[\n\\text{Var}(\\hat{L}) = \\sigma^2 \\left(\\frac{1}{bs} + \\frac{1}{bs}\\right) = \\frac{2\\sigma^2}{bs}\n\\]\nThus, a 95% confidence interval for \\(L\\) is given by:\n\\[\n\\hat{L} \\pm t_{df,0.025} \\sqrt{\\frac{2MS_{Error} }{bs}}\n\\]\nwhere \\(MS_{Error}\\) is the error mean square from the ANOVA."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#r-code-for-contrast-and-confidence-interval",
+    "href": "lectures/week-08_rcbd-blocking.html#r-code-for-contrast-and-confidence-interval",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "R Code for Contrast and Confidence Interval",
+    "text": "R Code for Contrast and Confidence Interval\n\n\n\nstorage_means &lt;- banana_data |&gt;\n    group_by(storage) |&gt;\n    summarize(Mean = mean(y))\n\n# Extract the error mean square from the ANOVA table\nmse &lt;- anova_banana[\"Residuals\", \"Mean Sq\"]\n# Define number of blocks (b) and replicates per cell (s)\nb &lt;- length(unique(banana_data$block))\n# For simplicity, assume equal replication: s = n / (b * number_of_treatments)\ns &lt;- nrow(banana_data) / (b * 2)\n\n# Compute contrast: difference between storage method 1 and 2\nL_hat &lt;- storage_means$Mean[1] - storage_means$Mean[2]\n# Degrees of freedom for error from ANOVA table\ndf_error &lt;- anova_banana[\"Residuals\", \"Df\"]\n\n# Calculate standard error of the contrast\nSE_L &lt;- sqrt(2 * mse / (b * s))\n\n# Critical t-value for 95% CI\nt_val &lt;- qt(0.975, df = df_error)\n\n# Confidence Interval for the contrast\nCI_lower &lt;- L_hat - t_val * SE_L\nCI_upper &lt;- L_hat + t_val * SE_L\n\ncat(\"Contrast (Storage 1 - Storage 2):\", L_hat, \"\\n\")\n\nContrast (Storage 1 - Storage 2): 3.583333 \n\ncat(\"95% CI: [\", CI_lower, \",\", CI_upper, \"]\\n\")\n\n95% CI: [ -4.342467 , 11.50913 ]\n\n# Conform with emmeans package\n\nlibrary(emmeans)\nemm &lt;- emmeans(fit_banana, ~storage)\ncontrast(emm, list(\"1 - 2\" = c(1, -1)))\n\n contrast estimate   SE df t.ratio p.value\n 1 - 2        3.58 3.93 44   0.911  0.3672\n\nResults are averaged over the levels of: block \n\n\n\nTable 14: Treatment Means by Storage Method\n\n\n\nInterpretation: This code computes the difference in means between storage methods, its standard error, and a 95% confidence interval using the error variance from the ANOVA table."
+  },
+  {
+    "objectID": "lectures/week-08_rcbd-blocking.html#summary-and-takeaways",
+    "href": "lectures/week-08_rcbd-blocking.html#summary-and-takeaways",
+    "title": "Randomized Complete Block Design (RCBD) with Blocking",
+    "section": "Summary and Takeaways",
+    "text": "Summary and Takeaways\n\nWe extended the basic block design model to include a block-by-treatment interaction.\nDetailed computations:\n\nMeans, Sums of Squares, and Variance Components are essential for constructing the ANOVA.\nContrast and Confidence Intervals: Demonstrated using storage method differences.\n\nThe R code illustrates how to read data, fit the model, and interpret the outputs.\nAlways check the significance of the interaction to decide whether to interpret the main effects directly."
   },
   {
     "objectID": "lectures/week-07_midterm-review.html",
@@ -6369,32 +6530,165 @@
     "href": "lectures/week-09_complete-blocks.html",
     "title": "Complete Blocks Design",
     "section": "",
-    "text": "For designs where treatments are replicated within blocks, the model extends to include interaction effects:\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hit}\n\\]\nWhere:\n\n\\(Y_{hit}\\): Response for treatment \\(i\\) in block \\(h\\), replicate \\(t\\).\n\\(\\theta_h\\): Effect of block \\(h\\).\n\\(\\tau_i\\): Effect of treatment \\(i\\).\n\\((\\theta \\tau)_{hi}\\): Interaction effect between block \\(h\\) and treatment \\(i\\).\n\\(\\epsilon_{hit}\\): Random error.\n\n\n\n\nDetermining the appropriate sample size is crucial for ensuring adequate power in detecting treatment effects.\n\\[\nn \\geq \\frac{2 v \\sigma^2 \\phi^2}{b \\Delta^2}\n\\]\nWhere:\n\n\\(n\\): Number of replicates per treatment.\n\\(v\\): Number of treatments.\n\\(\\sigma^2\\): Variance estimate.\n\\(\\phi\\): Desired power.\n\\(b\\): Number of blocks.\n\\(\\Delta\\): Minimum detectable effect size.\n\nDeeper Insight:\nSample size calculations consider the balance between desired statistical power and the practical constraints of the experiment. Increasing the number of blocks or replicates can enhance the power but may require more resources.\nReference:\nMontgomery (2019) discusses power analysis and sample size determination in Design and Analysis of Experiments.\n\n\n\n\nIn scenarios where interaction effects are suspected, it’s essential to include them in the model to avoid biased estimates.\n\n\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hit}\n\\]\nImplications:\n\nSignificant Interaction: Indicates that the effect of treatments varies across blocks, necessitating separate treatment effect analyses within each block.\nNon-Significant Interaction: Supports the additive model, validating the use of standard RCBD analysis.\n\nReference:\nKempthorne (1977) elaborates on the importance of accounting for interactions in Design and Analysis of Experiments."
+    "text": "Introduce complete and general complete block designs.\nDerive the analysis of variance (ANOVA) components and explain multiple comparisons.\nUnderstand how to check model assumptions.\nExplore factorial experiments with real-world data: a banana ripening experiment.\nEmphasize interactive learning with quizzes, detailed mathematical derivations, and annotated R code examples.\n\n\nReferences: Dean et al. (2017), Montgomery & Runger (2010), Christensen (2018), and the Libre Textbook from Penn State University.\n\n\n\n\n\n# Load required packages using pacman for convenience.\npacman::p_load(dplyr, ggplot2, tidyr, knitr, readr, here)\n\nExplanation:\n\ndplyr: data manipulation,\nggplot2: visualizations,\ntidyr: data reshaping,\nknitr: producing tables,\nreadr: reading in external data files. # Mathematical Foundations from Chapter 10"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#general-complete-block-designs",
-    "href": "lectures/week-09_complete-blocks.html#general-complete-block-designs",
+    "objectID": "lectures/week-09_complete-blocks.html#overview-and-learning-objectives",
+    "href": "lectures/week-09_complete-blocks.html#overview-and-learning-objectives",
     "title": "Complete Blocks Design",
     "section": "",
-    "text": "For designs where treatments are replicated within blocks, the model extends to include interaction effects:\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hit}\n\\]\nWhere:\n\n\\(Y_{hit}\\): Response for treatment \\(i\\) in block \\(h\\), replicate \\(t\\).\n\\(\\theta_h\\): Effect of block \\(h\\).\n\\(\\tau_i\\): Effect of treatment \\(i\\).\n\\((\\theta \\tau)_{hi}\\): Interaction effect between block \\(h\\) and treatment \\(i\\).\n\\(\\epsilon_{hit}\\): Random error.\n\n\n\n\nDetermining the appropriate sample size is crucial for ensuring adequate power in detecting treatment effects.\n\\[\nn \\geq \\frac{2 v \\sigma^2 \\phi^2}{b \\Delta^2}\n\\]\nWhere:\n\n\\(n\\): Number of replicates per treatment.\n\\(v\\): Number of treatments.\n\\(\\sigma^2\\): Variance estimate.\n\\(\\phi\\): Desired power.\n\\(b\\): Number of blocks.\n\\(\\Delta\\): Minimum detectable effect size.\n\nDeeper Insight:\nSample size calculations consider the balance between desired statistical power and the practical constraints of the experiment. Increasing the number of blocks or replicates can enhance the power but may require more resources.\nReference:\nMontgomery (2019) discusses power analysis and sample size determination in Design and Analysis of Experiments."
+    "text": "Introduce complete and general complete block designs.\nDerive the analysis of variance (ANOVA) components and explain multiple comparisons.\nUnderstand how to check model assumptions.\nExplore factorial experiments with real-world data: a banana ripening experiment.\nEmphasize interactive learning with quizzes, detailed mathematical derivations, and annotated R code examples.\n\n\nReferences: Dean et al. (2017), Montgomery & Runger (2010), Christensen (2018), and the Libre Textbook from Penn State University."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#r-packages-used",
+    "href": "lectures/week-09_complete-blocks.html#r-packages-used",
+    "title": "Complete Blocks Design",
+    "section": "",
+    "text": "# Load required packages using pacman for convenience.\npacman::p_load(dplyr, ggplot2, tidyr, knitr, readr, here)\n\nExplanation:\n\ndplyr: data manipulation,\nggplot2: visualizations,\ntidyr: data reshaping,\nknitr: producing tables,\nreadr: reading in external data files. # Mathematical Foundations from Chapter 10"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#model-without-interaction",
+    "href": "lectures/week-09_complete-blocks.html#model-without-interaction",
+    "title": "Complete Blocks Design",
+    "section": "Model without Interaction",
+    "text": "Model without Interaction\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + \\varepsilon_{hit}, \\quad \\varepsilon_{hit} \\sim N(0,\\sigma^2)\n\\]\n\n\\(\\mu\\) is the overall mean.\n\\(\\theta_h\\) is the effect of the \\(h\\)th block.\n\\(\\tau_i\\) is the effect of the \\(i\\)th treatment.\n\\(\\varepsilon_{hit}\\) is the random error.\n\\(Y_{hit}\\) is the response for treatment \\(i\\) in block \\(h\\) and replicate \\(t\\).\n\\(\\nu\\) is the number of treatments.\n\\(b\\) is the number of blocks.\n\\(s\\) is the number of replicates per treatment per block."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#sums-of-squares-computation",
+    "href": "lectures/week-09_complete-blocks.html#sums-of-squares-computation",
+    "title": "Complete Blocks Design",
+    "section": "Sums of Squares Computation",
+    "text": "Sums of Squares Computation\n\nTotal Sum of Squares:\n\n\\[\nSS_{\\text{Total}} = \\sum_{h=1}^{b} \\sum_{i=1}^{v} \\sum_{t=1}^{s} (Y_{hit} - \\bar{Y}_{\\cdots})^2\n\\]\n\nBlock Sum of Squares:\n\n\\[\nSS_{\\theta} = vs\\sum_{h=1}^{b} (\\bar{Y}_{h..} - \\bar{Y}_{\\cdots})^2\n\\]\n\nTreatment Sum of Squares:\n\n\\[\nSS_{Treatment} = bs\\sum_{i=1}^{v} (\\bar{Y}_{.i.} - \\bar{Y}_{\\cdots})^2\n\\]\n\nError Sum of Squares:\n\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment}\n\\]\n\nDegrees of Freedom:\n\nBlocks: \\(b - 1\\)\nTreatments: \\(v - 1\\)\nError: \\(bvs - b - v + 1\\)"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks",
+    "href": "lectures/week-09_complete-blocks.html#quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks",
+    "title": "Complete Blocks Design",
+    "section": "Quiz: Which component of the ANOVA for a complete block design captures the variability due to blocks?",
+    "text": "Quiz: Which component of the ANOVA for a complete block design captures the variability due to blocks?\n\n\n(A): \\(SS_{Treatment}\\) {data-explanation=“Incorrect. \\(SS_{Treatment}\\) is for treatment effects.”}\n[(B): \\(SS_{\\theta}\\) captures the variability among blocks]{.correct {data-explanation=“Correct. \\(SS_{\\theta}\\) quantifies block variability.”}}\n(C): \\(SS_{Error}\\) {data-explanation=“Incorrect. \\(SS_{Error}\\) is the error sum of squares.”}\n(D): \\(SS_{\\text{Total}}\\) {data-explanation=“Incorrect. \\(SS_{\\text{Total}}\\) is the total variability.”}"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#multiple-comparisons",
+    "href": "lectures/week-09_complete-blocks.html#multiple-comparisons",
+    "title": "Complete Blocks Design",
+    "section": "Multiple Comparisons",
+    "text": "Multiple Comparisons\n\nContrast Estimation: For any contrast \\(\\sum c_i \\tau_i\\) (with \\(\\sum c_i=0\\)):\n\n\\[\n\\sum c_i \\tau_i \\in \\left(\\sum c_i \\bar{Y}_{.i.} \\pm w \\sqrt{\\frac{MS_{Error} \\sum c_i^2}{bs}}\\right)\n\\]\n\n\\(w\\) is the critical value from the chosen method (Bonferroni, Scheffé, Tukey, etc.).\nInterpretation: This provides a simultaneous confidence interval for contrasts, ensuring control over the familywise error rate."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#experiment-context",
+    "href": "lectures/week-09_complete-blocks.html#experiment-context",
+    "title": "Complete Blocks Design",
+    "section": "Experiment Context",
+    "text": "Experiment Context\n\nBackground: Bananas are stored using two methods:\n\nCounter Storage: Conventional storage on a counter.\nHanging Storage: Using a banana hanging device to slow ripening.\n\nMeasured Outcome: The response variable \\(y\\) represents the percentage of black color on the banana peel (an indicator of ripeness).\nExperimental Factors:\n\nBlock: Grouping factor (e.g., repeated measures over time or location).\nLight: Level of illumination (affecting ripening).\nStorage: Storage method (1 = counter, 2 = hanging)."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#data-overview",
+    "href": "lectures/week-09_complete-blocks.html#data-overview",
+    "title": "Complete Blocks Design",
+    "section": "Data Overview",
+    "text": "Data Overview\nThe attached banana.txt file has the following columns:\n\nblock: Block identifier.\nlight: Light condition (1 or 2).\nstorage: Storage method (1 = counter, 2 = hanging).\ny: Measured percentage of black color.\n\n\nExample Data (first few rows): 1 1 1 30 1 1 1 30 1 1 1 17 1 1 1 43 1 1 2 43"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#computation-of-treatment-means-and-overall-mean",
+    "href": "lectures/week-09_complete-blocks.html#computation-of-treatment-means-and-overall-mean",
+    "title": "Complete Blocks Design",
+    "section": "1. Computation of Treatment Means and Overall Mean",
+    "text": "1. Computation of Treatment Means and Overall Mean\n\nOverall Mean:\n\n\\[\n\\bar{Y}_{\\cdots} = \\frac{1}{n}\\sum_{h,l,s} y_{hls}\n\\]\n\nTreatment (Storage) Mean: For storage type \\(i\\):\n\n\\[\n\\bar{Y}_{.i.} = \\frac{1}{n_i}\\sum_{h,l \\text{ where storage}=i} y_{hls}\n\\]"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#sums-of-squares",
+    "href": "lectures/week-09_complete-blocks.html#sums-of-squares",
+    "title": "Complete Blocks Design",
+    "section": "2. Sums of Squares",
+    "text": "2. Sums of Squares\nUsing the banana data, suppose we define:\n\n\\(b\\) = number of blocks,\n\\(v\\) = number of storage methods (here, \\(v=2\\)),\n\\(s\\) = number of observations per block per storage type.\n\nThen, following the formulas from Chapter 10:\n\nTotal Sum of Squares:\n\n\\[\nSS_{\\text{Total}} = \\sum (y_{hls} - \\bar{Y}_{\\cdots})^2\n\\]\n\nBlock Sum of Squares:\n\n\\[\nSS_{\\theta} = vs\\sum_{h} (\\bar{Y}_{h..} - \\bar{Y}_{\\cdots})^2\n\\]\n\nTreatment Sum of Squares:\n\n\\[\nSS_{Treatment} = bs \\sum_{i=1}^{2} (\\bar{Y}_{.i.} - \\bar{Y}_{\\cdots})^2\n\\]\n\nError Sum of Squares:\n\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment}\n\\]"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#anova-decision-rule",
+    "href": "lectures/week-09_complete-blocks.html#anova-decision-rule",
+    "title": "Complete Blocks Design",
+    "section": "3. ANOVA Decision Rule",
+    "text": "3. ANOVA Decision Rule\nThe F-test for treatments in a complete block design is:\n\\[\nF = \\frac{MS_{Treatment}}{MS_{Error}}\n\\]\nwhere:\n\n\\(MS_{Treatment} = \\frac{SS_{Treatment}}{v-1}\\)\n\\(MS_{Error} = \\frac{SS_{Error}}{bvs - b - v + 1}\\)\n\nReject the null hypothesis \\(H_0: \\tau_1 = \\tau_2\\) if:\n\\[\nF &gt; F_{v-1, bvs-b-v+1,\\alpha}\n\\]"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#data-import-and-preparation",
+    "href": "lectures/week-09_complete-blocks.html#data-import-and-preparation",
+    "title": "Complete Blocks Design",
+    "section": "Data Import and Preparation",
+    "text": "Data Import and Preparation\n\n# Read the banana data from the attached text file.\nbanana_data &lt;- read.table(here(\"data\", \"dean2017\", \"banana.txt\"), header = TRUE)\nbanana_data |&gt; head()\n\n\n\n\n\n\n\n\nblock\nlight\nstorage\ny\n\n\n\n\n1\n1\n1\n30\n\n\n1\n1\n1\n30\n\n\n1\n1\n1\n17\n\n\n1\n1\n1\n43\n\n\n1\n1\n2\n43\n\n\n1\n1\n2\n35\n\n\n\n\n\n\n\nTable 1: First Few Rows of Banana Data\n\n\n\n\n\nDescriptive Statistics and Treatment Means\n\nbanana_summary &lt;- banana_data %&gt;%\n  group_by(storage) %&gt;%\n  summarize(Mean = mean(y), SD = sd(y), n = n())\nbanana_summary \n\n\n\n\n\n\n\n\nstorage\nMean\nSD\nn\n\n\n\n\n1\n41.50000\n15.52557\n24\n\n\n2\n37.91667\n12.98466\n24\n\n\n\n\n\n\n\nTable 2: Summary Statistics by Storage Method\n\n\n\n\n\n\nFitting the Block Design Model\nAssuming ‘block’ is our blocking factor and ‘storage’ is the treatment factor, we fit the model:\n\n# Fit the complete block design model (ignoring the 'light' factor for simplicity)\nfit_banana &lt;- aov(y ~ factor(block) + factor(storage), data = banana_data)\nanova_banana &lt;- summary(fit_banana)[[1]]\nknitr::kable(anova_banana, caption = \"ANOVA Table for Banana Experiment\")\n\n\n\n\n\nANOVA Table for Banana Experiment\n\n\n\nDf\nSum Sq\nMean Sq\nF value\nPr(&gt;F)\n\n\n\n\nfactor(block)\n2\n1255.7917\n627.8958\n3.3832079\n0.0429809\n\n\nfactor(storage)\n1\n154.0833\n154.0833\n0.8302268\n0.3671720\n\n\nResiduals\n44\n8166.0417\n185.5919\nNA\nNA\n\n\n\n\n\n\nTable 3: ANOVA Table for Banana Experiment"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#detailed-explanation-of-the-computation",
+    "href": "lectures/week-09_complete-blocks.html#detailed-explanation-of-the-computation",
+    "title": "Complete Blocks Design",
+    "section": "Detailed Explanation of the Computation",
+    "text": "Detailed Explanation of the Computation\n\nStep 1: Compute Means The overall mean \\(\\bar{Y}_{\\cdots}\\) is computed from all \\(y\\) values. The treatment mean \\(\\bar{Y}_{.i.}\\) for each storage type is calculated from data where storage equals 1 or 2.\nStep 2: Sums of Squares The R function aov() internally computes the sums of squares for blocks, treatments, and error. These values are then used to calculate mean squares.\nStep 3: F-Test The ratio \\(F = MS_{Treatment/MS_{Error}\\) is compared against the critical F-value at the chosen significance level (typically 0.05) to test whether storage method affects the percentage of black color (ripeness)."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn",
+    "href": "lectures/week-09_complete-blocks.html#quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn",
+    "title": "Complete Blocks Design",
+    "section": "Quiz: In the context of the banana experiment, if the F-value for the treatment effect (storage method) exceeds the critical F-value, what conclusion can be drawn?",
+    "text": "Quiz: In the context of the banana experiment, if the F-value for the treatment effect (storage method) exceeds the critical F-value, what conclusion can be drawn?\n\n(A): The block effect is significant {data-explanation=“Incorrect. A significant F-value here pertains to the treatment (storage) effect.”}\n(B): There is a statistically significant difference in ripening between the storage methods {data-explanation=“Correct. This indicates that the method of storage significantly affects banana ripening.”}\n(C): The overall mean is incorrect {data-explanation=“Incorrect. The overall mean is not assessed via the F-test.”}\n(D): Light conditions are more important than storage {data-explanation=“Incorrect. The test here is for storage effects.”}"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#derivation-of-treatment-contrast-variance",
+    "href": "lectures/week-09_complete-blocks.html#derivation-of-treatment-contrast-variance",
+    "title": "Complete Blocks Design",
+    "section": "Derivation of Treatment Contrast Variance",
+    "text": "Derivation of Treatment Contrast Variance\nFor a contrast \\(L = \\sum c_i \\tau_i\\), the estimated contrast is:\n\\[\n\\hat{L} = \\sum c_i \\bar{Y}_{.i.}\n\\]\nwith variance given by:\n\\[\n\\text{Var}(\\hat{L}) = \\sigma^2 \\sum \\frac{c_i^2}{bs}\n\\]\nThus, a \\(100(1-\\alpha)\\%\\) confidence interval for \\(L\\) is:\n\\[\n\\hat{L} \\pm t_{df,\\alpha/2} \\sqrt{MS_{Error} \\sum \\frac{c_i^2}{bs}}\n\\]\n\nExplanation: The factor \\(\\sqrt{MS_{Error} \\sum c_i^2/bs}\\) provides the standard error for the contrast based on the error mean square \\(MS_{Error}\\) estimated from the ANOVA table."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#residual-diagnostics",
+    "href": "lectures/week-09_complete-blocks.html#residual-diagnostics",
+    "title": "Complete Blocks Design",
+    "section": "Residual Diagnostics",
+    "text": "Residual Diagnostics\n\n# Calculate fitted values and residuals for banana model\nbanana_data$Fitted &lt;- fitted(fit_banana)\nbanana_data$Residuals &lt;- resid(fit_banana)\nggplot(banana_data, aes(x = Fitted, y = Residuals, color = factor(block))) +\n    geom_point(size = 3) +\n    geom_hline(yintercept = 0, linetype = \"dashed\") +\n    labs(\n        title = \"Residuals vs Fitted Values (Banana Experiment)\",\n        x = \"Fitted Values\",\n        y = \"Residuals\",\n        color = \"Block\"\n    )\n\n\n\n\n\n\n\nFigure 1: Residuals vs. Fitted Values (Banana Experiment)"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model",
+    "href": "lectures/week-09_complete-blocks.html#quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model",
+    "title": "Complete Blocks Design",
+    "section": "Quiz: Which diagnostic plot is used to assess homoscedasticity in the banana experiment model?",
+    "text": "Quiz: Which diagnostic plot is used to assess homoscedasticity in the banana experiment model?\n\n(A): Residuals vs Fitted Plot {data-explanation=“Correct. This plot is key to checking constant variance.”}\n(B): Q-Q Plot {data-explanation=“This plot checks normality, not homoscedasticity.”}\n(C): Boxplot of Residuals {data-explanation=“Not specifically used for variance checks.”}\n(D): Scatter plot of Raw Data {data-explanation=“This does not directly assess model residuals.”}"
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#recap-of-key-takeaways",
+    "href": "lectures/week-09_complete-blocks.html#recap-of-key-takeaways",
+    "title": "Complete Blocks Design",
+    "section": "Recap of Key Takeaways",
+    "text": "Recap of Key Takeaways\n\nDesign Impact: Complete block designs reduce variability due to nuisance factors.\nMathematical Rigor: Detailed derivations (sums of squares, degrees of freedom, variance of contrasts) are essential for understanding the statistical model.\nPractical Application: The banana experiment illustrates how these designs are applied to real-world data.\nModel Diagnostics: Residual plots and diagnostic tests are crucial for verifying model assumptions."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#final-discussion",
+    "href": "lectures/week-09_complete-blocks.html#final-discussion",
+    "title": "Complete Blocks Design",
+    "section": "Final Discussion",
+    "text": "Final Discussion\n\nExercise: Revisit the banana experiment analysis and discuss how adding a light factor (from the data) might further improve the model. Consider extending the model to:\n\n\\[\ny \\sim \\text{block} + \\text{light} + \\text{storage}\n\\]\nand compare the ANOVA results."
+  },
+  {
+    "objectID": "lectures/week-09_complete-blocks.html#model",
+    "href": "lectures/week-09_complete-blocks.html#model",
+    "title": "Complete Blocks Design",
+    "section": "Model",
+    "text": "Model\nFor designs where treatments are replicated within blocks, the model extends to include interaction effects:\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)_{hi} + \\epsilon_{hit}\n\\]\nWhere:\n\n\\(Y_{hit}\\): Response for treatment \\(i\\) in block \\(h\\), replicate \\(t\\).\n\\(\\theta_h\\): Effect of block \\(h\\).\n\\(\\tau_i\\): Effect of treatment \\(i\\).\n\\((\\theta \\tau)_{hi}\\): Interaction effect between block \\(h\\) and treatment \\(i\\).\n\\(\\epsilon_{hit}\\): Random error."
   },
   {
     "objectID": "lectures/week-09_complete-blocks.html#handling-block-treatment-interactions",
     "href": "lectures/week-09_complete-blocks.html#handling-block-treatment-interactions",
     "title": "Complete Blocks Design",
-    "section": "",
-    "text": "In scenarios where interaction effects are suspected, it’s essential to include them in the model to avoid biased estimates.\n\n\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hit}\n\\]\nImplications:\n\nSignificant Interaction: Indicates that the effect of treatments varies across blocks, necessitating separate treatment effect analyses within each block.\nNon-Significant Interaction: Supports the additive model, validating the use of standard RCBD analysis.\n\nReference:\nKempthorne (1977) elaborates on the importance of accounting for interactions in Design and Analysis of Experiments."
+    "section": "Handling Block-Treatment Interactions",
+    "text": "Handling Block-Treatment Interactions\nIn scenarios where interaction effects are suspected, it’s essential to include them in the model to avoid biased estimates.\nImplications:\n\nSignificant Interaction: Indicates that the effect of treatments varies across blocks, necessitating separate treatment effect analyses within each block.\nNon-Significant Interaction: Supports the additive model, validating the use of standard RCBD analysis.\n\nReference:\nKempthorne (1977) elaborates on the importance of accounting for interactions in Design and Analysis of Experiments."
   },
   {
     "objectID": "lectures/week-09_complete-blocks.html#example-resting-metabolic-rate",
     "href": "lectures/week-09_complete-blocks.html#example-resting-metabolic-rate",
     "title": "Complete Blocks Design",
     "section": "Example: Resting Metabolic Rate",
-    "text": "Example: Resting Metabolic Rate\n\nScenario\nA study aims to compare three different exercise protocols (Treatments A, B, C) on subjects’ resting metabolic rates. The subjects are grouped into four blocks based on age groups to control for age-related variability.\n\n\nStep-by-Step R Code\n\n1. Load and Prepare Data\n\n# Set seed for reproducibility\nset.seed(123)\n\n# Define blocks and treatments\nblocks &lt;- factor(rep(1:4, each = 3))\ntreatments &lt;- factor(rep(c(\"A\", \"B\", \"C\"), times = 4))\n\n# Simulate response variable (e.g., resting metabolic rate in kcal/day)\nresponse &lt;- c(\n    rnorm(3, mean = 1500, sd = 50), # Block 1\n    rnorm(3, mean = 1550, sd = 50), # Block 2\n    rnorm(3, mean = 1480, sd = 50), # Block 3\n    rnorm(3, mean = 1520, sd = 50) # Block 4\n)\n\n# Create data frame\ndata &lt;- data.frame(blocks, treatments, response)\n\n# View the data\nprint(data)\n\n\n\n2. Fit the RCBD Model\n\n# Fit the RCBD model using ANOVA\n\nmodel &lt;- aov(response ~ blocks + treatments, data = data)\n# Summary of the model\nsummary(model)\n\nInterpretation:\n\nBlocks: Account for age-related variability.\nTreatments: Assess the impact of exercise protocols on metabolic rate after controlling for age.\n\n\n\n3. Diagnostic Plots\n\n# Diagnostic plots for the ANOVA model\n\npar(mfrow = c(2, 2))\nplot(model)\npar(mfrow = c(1, 1))\n\nInterpretation:\nEnsure that residuals meet ANOVA assumptions. Look for random scatter in Residuals vs Fitted, linearity in Scale-Location, and normality in Q-Q plots.\n\n\n4. Post-Hoc Analysis\n\n# Load emmeans package for estimated marginal means\nlibrary(emmeans)\n# Estimated marginal means for treatments\nemm &lt;- emmeans(model, ~treatments)\n# Pairwise comparisons\npairwise_comparisons &lt;- contrast(emm, method = \"pairwise\")\nsummary(pairwise_comparisons)\n\nInterpretation:\nDetermine which exercise protocols significantly differ in their effect on resting metabolic rates after adjusting for age."
+    "text": "Example: Resting Metabolic Rate\n\nScenario\nA study aims to compare three different exercise protocols (Treatments A, B, C) on subjects’ resting metabolic rates. The subjects are grouped into four blocks based on age groups to control for age-related variability.\n\n\nStep-by-Step R Code\n\n1. Load and Prepare Data\n\n# Set seed for reproducibility\nset.seed(123)\n\n# Define blocks and treatments\nblocks &lt;- factor(rep(1:4, each = 3))\ntreatments &lt;- factor(rep(c(\"A\", \"B\", \"C\"), times = 4))\n\n# Simulate response variable (e.g., resting metabolic rate in kcal/day)\nresponse &lt;- c(\n    rnorm(3, mean = 1500, sd = 50), # Block 1\n    rnorm(3, mean = 1550, sd = 50), # Block 2\n    rnorm(3, mean = 1480, sd = 50), # Block 3\n    rnorm(3, mean = 1520, sd = 50) # Block 4\n)\n\n# Create data frame\ndata &lt;- data.frame(blocks, treatments, response)\n\n# View the data\nprint(data)\n\n   blocks treatments response\n1       1          A 1471.976\n2       1          B 1488.491\n3       1          C 1577.935\n4       2          A 1553.525\n5       2          B 1556.464\n6       2          C 1635.753\n7       3          A 1503.046\n8       3          B 1416.747\n9       3          C 1445.657\n10      4          A 1497.717\n11      4          B 1581.204\n12      4          C 1537.991\n\n\n\n\n2. Fit the RCBD Model\n\n# Fit the RCBD model using ANOVA\n\nmodel &lt;- aov(response ~ blocks + treatments, data = data)\n# Summary of the model\nsummary(model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nblocks       3  25293    8431   3.679 0.0819 .\ntreatments   2   4449    2225   0.971 0.4312  \nResiduals    6  13749    2291                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nInterpretation:\n\nBlocks: Account for age-related variability.\nTreatments: Assess the impact of exercise protocols on metabolic rate after controlling for age.\n\n\n\n3. Diagnostic Plots\n\n# Diagnostic plots for the ANOVA model\n\npar(mfrow = c(2, 2))\nplot(model)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\nInterpretation:\nEnsure that residuals meet ANOVA assumptions. Look for random scatter in Residuals vs Fitted, linearity in Scale-Location, and normality in Q-Q plots.\n\n\n4. Post-Hoc Analysis\n\n# Load emmeans package for estimated marginal means\nlibrary(emmeans)\n# Estimated marginal means for treatments\nemm &lt;- emmeans(model, ~treatments)\n# Pairwise comparisons\npairwise_comparisons &lt;- contrast(emm, method = \"pairwise\")\nsummary(pairwise_comparisons)\n\n\n\n\n\ncontrast\nestimate\nSE\ndf\nt.ratio\np.value\n\n\n\n\nA - B\n-4.160548\n33.84833\n6\n-0.1229174\n0.9917165\n\n\nA - C\n-42.768091\n33.84833\n6\n-1.2635216\n0.4632421\n\n\nB - C\n-38.607543\n33.84833\n6\n-1.1406042\n0.5265273\n\n\n\n\n\n\nInterpretation:\nDetermine which exercise protocols significantly differ in their effect on resting metabolic rates after adjusting for age."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#conclusion",
-    "href": "lectures/week-09_complete-blocks.html#conclusion",
+    "objectID": "lectures/week-09_complete-blocks.html#conclusion-1",
+    "href": "lectures/week-09_complete-blocks.html#conclusion-1",
     "title": "Complete Blocks Design",
     "section": "Conclusion",
     "text": "Conclusion\nComplete Block Designs (CBDs), particularly Randomized Complete Block Designs (RCBDs), are indispensable in experimental research for controlling variability due to nuisance factors. By structuring experiments to include blocks where each treatment is represented, CBDs enhance the precision and reliability of treatment effect estimates. The integration of ANOVA facilitates robust analysis, allowing researchers to discern meaningful differences among treatments while accounting for block-induced variability."
@@ -6426,153 +6720,6 @@
     "title": "Complete Blocks Design",
     "section": "Sample Size Calculations for RCBDs",
     "text": "Sample Size Calculations for RCBDs\nDetermining the appropriate sample size is essential for achieving sufficient power to detect treatment effects.\n\nFormula\n\\[\nn \\geq \\frac{2 v \\sigma^2 \\phi^2}{b \\Delta^2}\n\\]\nWhere:\n\n\\(n\\): Number of replicates per treatment.\n\\(v\\): Number of treatments.\n\\(\\sigma^2\\): Estimated variance of the response.\n\\(\\phi\\): Desired power (e.g., 0.80).\n\\(b\\): Number of blocks.\n\\(\\Delta\\): Minimum detectable effect size.\n\n\n\nDerivation\n\nPower Analysis:\n\nBased on the desired power (\\(\\phi\\)) and significance level (\\(\\alpha\\)), determine the non-centrality parameter needed to detect effect size \\(\\Delta\\).\n\nRearrange for \\(n\\):\n\nSolving the power equation for \\(n\\) yields the sample size formula.\nExample Calculation:\nSuppose you have 4 treatments (\\(v = 4\\)), 5 blocks (\\(b = 5\\)), an estimated variance (\\(\\sigma^2 = 20\\)), desire a power of 0.80 (\\(\\phi = 0.84\\)), and aim to detect a minimum effect size of 5 units (\\(\\Delta = 5\\)).\n\\[\nn \\geq \\frac{2 \\times 4 \\times 20 \\times 0.84^2}{5 \\times 5^2} = \\frac{2 \\times 4 \\times 20 \\times 0.7056}{125} \\approx \\frac{113.792}{125} \\approx 0.91\n\\]\nSince \\(n\\) must be an integer, at least 1 replicate per treatment is needed. However, practical considerations often necessitate larger sample sizes.\nReference:\nMontgomery (2019) elaborates on sample size determination in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#medium-difficulty",
-    "href": "lectures/week-09_complete-blocks.html#medium-difficulty",
-    "title": "Complete Blocks Design",
-    "section": "Medium Difficulty",
-    "text": "Medium Difficulty\n\nTwo-Way ANCOVA with Interaction:\n\n\nDataset: Simulate a dataset with three treatments and one covariate.\nTasks:\nGenerate data for treatments A, B, C with a covariate X.\nFit an ANCOVA model adjusting for X.\nTest the significance of treatment effects and the covariate.\nGenerate diagnostic plots and interpret them.\n\nR Code Example:\n\nset.seed(123)\n\n# Define factors and covariate\nTreatment &lt;- factor(rep(c(\"A\", \"B\", \"C\"), each = 30))\nX &lt;- rnorm(90, mean = 50, sd = 10)\n\n# Simulate responses with treatment effects and covariate effect\nY &lt;- 5 + ifelse(Treatment == \"A\", 0, ifelse(Treatment == \"B\", 2, 4)) + 0.5 * (X - mean(X)) + rnorm(90, mean = 0, sd = 3)\ndata_sim &lt;- data.frame(Treatment, X, Y)\n\n# Fit ANCOVA model\nmodel_sim &lt;- lm(Y ~ Treatment + X, data = data_sim)\nsummary(model_sim)\n\n# Diagnostic plots\npar(mfrow = c(2, 2))\nplot(model_sim)\n\n# Estimated marginal means\nlibrary(emmeans)\nemm_sim &lt;- emmeans(model_sim, ~Treatment)\npairwise_sim &lt;- contrast(emm_sim, method = \"pairwise\")\nsummary(pairwise_sim)\n\nQuestions:\n\nWhat are the main effects of Treatment and the covariate X?\nAre there significant differences between treatments after adjusting for X?\nDo the diagnostic plots suggest any assumption violations?\n\n\nBalloon Data Analysis:\n\n\nScenario: Reanalyze the balloon data, testing for equality of slopes.\nTasks:\nFit an ANCOVA model.\nTest the homogeneity of regression slopes.\nInterpret the adjusted treatment means.\n\nR Code Example:\n\nlibrary(car)\nlibrary(emmeans)\n\n# Load and prepare data\nballoon.data &lt;- read.table(\"data/dean2017/balloon.txt\", header = TRUE)\n\nballoon.data |&gt; dplyr::glimpse()\n\nballoon.data &lt;- within(balloon.data, {\n    x &lt;- Order - mean(Order)\n    fColor &lt;- factor(Color)\n})\n\n# Fit ANCOVA model\n\nmodel &lt;- lm(Time ~ fColor + x, data = balloon.data)\nsummary(model)\n\n# Test homogeneity of slopes\n\nmodel_interaction &lt;- lm(Time ~ fColor * x, data = balloon.data)\nanova(model, model_interaction)\n\n# Estimated marginal means\n\nemm_balloon &lt;- emmeans(model, ~fColor)\npairwise_balloon &lt;- contrast(emm_balloon, method = \"pairwise\")\nsummary(pairwise_balloon)\n\nQuestions:\n\nDoes the interaction term indicate equality of slopes across treatments?\nHow do the adjusted means compare across balloon colors?\nWhat conclusions can be drawn about the effect of balloon color on inflation time after adjusting for run order?"
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#challenging-problems",
-    "href": "lectures/week-09_complete-blocks.html#challenging-problems",
-    "title": "Complete Blocks Design",
-    "section": "Challenging Problems",
-    "text": "Challenging Problems\n\nUnbalanced Two-Factor ANCOVA Analysis:\n\n\nDataset: Utilize a dataset with unequal numbers of replicates across treatment combinations.\nTasks:\nSimulate an unbalanced dataset with two factors and one covariate.\nFit an ANCOVA model using both Type II and Type III sums of squares.\nCompare the results and discuss how imbalance affects the interpretation of main and interaction effects.\n\nR Code Example:\n\nlibrary(car)\nset.seed(456)\n# Simulate unbalanced data\n\nFactorA &lt;- factor(rep(c(\"A1\", \"A2\", \"A3\"), times = c(4, 6, 5)))\nFactorB &lt;- factor(rep(c(\"B1\", \"B2\"), each = 7, times = 2))\nX &lt;- rnorm(15, mean = 50, sd = 10)\n# Simulate responses with treatment and covariate effects\n\nY &lt;- 5 + ifelse(FactorA == \"A1\", 0, ifelse(FactorA == \"A2\", 2, 4)) + ifelse(FactorB == \"B1\", 0, 3) + 0.5 * (X - mean(X)) + rnorm(15, mean = 0, sd = 3)\ndata_unbalanced &lt;- data.frame(FactorA, FactorB, X, Y)\n\n# Fit ANCOVA model\n\nfit_unbalanced &lt;- lm(Y ~ FactorA * FactorB + X, data = data_unbalanced)\n# Type II Sum of Squares\n\ntypeII &lt;- car::Anova(fit_unbalanced, type = \"II\")\nprint(typeII)\n\n# Type III Sum of Squares\n\ntypeIII &lt;- car::Anova(fit_unbalanced, type = \"III\")\nprint(typeIII)"
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#discussion-points",
-    "href": "lectures/week-09_complete-blocks.html#discussion-points",
-    "title": "Complete Blocks Design",
-    "section": "Discussion Points",
-    "text": "Discussion Points\n\nType II vs. Type III SS:\nType II: Tests main effects after accounting for other main effects but ignores interactions.\nType III: Tests main effects after accounting for all other factors, including interactions.\nImpact of Imbalance:\nImbalanced designs can lead to different interpretations under Type II and Type III SS.\nType I SS is not appropriate here as it is sequential and depends on the order of factors.\nSignificance of Effects:\nIdentify which factors and interactions are significant under each type.\nDiscuss how imbalance might inflate or deflate the significance levels of certain effects.\nImplications for Experimental Conclusions:\nChoosing the appropriate type of sums of squares is crucial for accurate inference.\nMisinterpretation can lead to incorrect conclusions about factor effects and interactions.\n\nReference:\nChristensen (2018) provides guidance on handling unbalanced designs and selecting appropriate sums of squares types in Analysis of Variance, Design, and Regression.\n\nThree-Factor Interaction Interpretation:\n\n\nDataset: Use a simulated dataset with three factors exhibiting a significant three-way interaction.\nTasks:\nSimulate data with three factors and one covariate.\nFit a three-way ANCOVA model.\nVisualize the three-way interaction.\nUse emmeans to estimate marginal means and perform pairwise comparisons.\nExplain how the three-way interaction affects the interpretation of main and two-way interactions."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#r-code-example",
-    "href": "lectures/week-09_complete-blocks.html#r-code-example",
-    "title": "Complete Blocks Design",
-    "section": "R Code Example",
-    "text": "R Code Example\n\nlibrary(emmeans)\n\nlibrary(ggplot2)\n\nset.seed(789)\n\n# Simulate data\n\nFactorA &lt;- factor(rep(c(\"A1\", \"A2\", \"A3\"), each = 24))\n\nFactorB &lt;- factor(rep(c(\"B1\", \"B2\"), each = 12, times = 3))\n\nFactorC &lt;- factor(rep(c(\"C1\", \"C2\", \"C3\"), times = 8))\n\nX &lt;- rnorm(72, mean = 50, sd = 10)\n\n# Simulate responses with three-way interaction\n\nY &lt;- 5 + ifelse(FactorA == \"A1\", 0, ifelse(FactorA == \"A2\", 2, 4)) + ifelse(FactorB == \"B1\", 0, 3) + ifelse(FactorC == \"C1\", 0, ifelse(FactorC == \"C2\", 1.5, 3)) + 0.5 * (X - mean(X)) + ifelse(FactorA == \"A1\" & FactorB == \"B1\", 0, ifelse(FactorA == \"A2\" & FactorB == \"B2\", 1, 2) + rnorm(72, mean = 0, sd = 3)\n\ndata_three &lt;- data.frame(FactorA, FactorB, FactorC, X, Y)\n\n# Fit three-way ANCOVA model\n\nfit_three &lt;- lm(Y ~ FactorA * FactorB * FactorC + X, data = data_three)\n\nsummary(fit_three)\n\n# Plot three-way interaction\n\nggplot(data_three, aes(x = FactorA, y = Y, color = FactorB, group = FactorB)) +\ngeom_point() +\ngeom_line() +\nfacet_wrap(~FactorC) +\nlabs(title = \"Three-Way Interaction Plot\", x = \"Factor A\", y = \"Response\") +\ntheme_minimal()\n\n# Estimated marginal means\n\nemm_three &lt;- emmeans(fit_three, ~ FactorA * FactorB * FactorC)\ncontrast_results &lt;- contrast(emm_three, method = \"pairwise\", adjust = \"none\")\nsummary(contrast_results)"
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#interpretation",
-    "href": "lectures/week-09_complete-blocks.html#interpretation",
-    "title": "Complete Blocks Design",
-    "section": "Interpretation",
-    "text": "Interpretation\n\nThree-Way Interaction:\n\nThe interaction plot shows how the interaction between Factor A and Factor B varies across levels of Factor C. Non-parallel lines across different facets (Factor C levels) indicate a significant three-way interaction.\n\nImpact on Main and Two-Way Interactions:\n\nSignificant higher-order interactions imply that main effects and two-way interactions cannot be interpreted in isolation. The effect of one factor depends on the combination of other factors.\n\nPractical Implications:\n\nUnderstanding three-way interactions allows for more nuanced insights into how multiple factors jointly influence the response variable, leading to better-informed decisions and strategies.\nReference:\nDean, Voss & Draguljić (2017) elaborate on interpreting higher-order interactions in Design and Analysis of Experiments.\n\nMathematical Proof of Interaction Contrasts:\n\n\nTask: Derive formulas for interaction contrasts in a three-factor design and prove that they measure deviations from additivity.\nRequirements:\nShow how to construct interaction contrasts.\nProve that if all interaction contrasts are zero, the model is additive.\n\nHints:\n\nUtilize the definitions of main effects and interaction terms.\nEmploy properties of linear algebra to demonstrate the relationship between interaction contrasts and additivity.\nReference Dean et al. (2017) and Christensen (2018) for theoretical foundations."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#proof-outline-1",
-    "href": "lectures/week-09_complete-blocks.html#proof-outline-1",
-    "title": "Complete Blocks Design",
-    "section": "Proof Outline",
-    "text": "Proof Outline\n\nDefine the Three-Factor Model:\n\n\\[\nY_{ijk} = \\mu + \\alpha_i + \\beta_j + \\gamma_k + (\\alpha\\beta)^*_{ij} + (\\alpha\\gamma)^*_{ik} + (\\beta\\gamma)^*_{jk} + (\\alpha\\beta\\gamma)^*_{ijk} + \\epsilon_{ijk}\n\\]\nwhere \\(\\sum \\alpha_i = \\sum \\beta_j = \\sum \\gamma_k = 0\\).\n\nConstruct Interaction Contrasts:\n\n\nTwo-Way Interactions:\n\\((\\alpha\\beta)_{ij}\\) measures the interaction between Factors A and B.\nSimilarly for \\((\\alpha\\gamma)^*_{ik}\\) and \\((\\beta\\gamma)^*_{jk}\\).\nThree-Way Interaction:\n\\((\\alpha\\beta\\gamma)_{ijk}\\) measures the deviation from additivity among all three factors.\n\n\nProof of Additivity:\n\n\nAdditive Model:\n\nIf all interaction terms are zero (\\((\\alpha\\beta)^*_{ij} = (\\alpha\\gamma)^*_{ik} = (\\beta\\gamma)*{jk} = (\\alpha\\beta\\gamma)^*_{ijk} = 0\\)), the model simplifies to:\n\\[\nY_{ijk} = \\mu + \\alpha_i + \\beta_j + \\gamma_k + \\epsilon_{ijk}\n\\]\nindicating that the response is purely additive with respect to the main effects.\n\nZero Interaction Contrasts:\n\nIf all interaction contrasts are zero, the model exhibits additivity. Thus, interaction contrasts quantify how much the actual model deviates from an additive one.\n\nConclusion:\n\nInteraction contrasts provide a mathematical measure of the presence and magnitude of interactions. Non-zero contrasts indicate that the combined effect of factors is not merely the sum of their individual effects, highlighting the importance of considering interactions in experimental analysis.\nReference:\nDean, Voss & Draguljić (2017) offer detailed mathematical treatments of interaction contrasts in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#proof-of-rcbd-model-assumptions-1",
-    "href": "lectures/week-09_complete-blocks.html#proof-of-rcbd-model-assumptions-1",
-    "title": "Complete Blocks Design",
-    "section": "Proof of RCBD Model Assumptions",
-    "text": "Proof of RCBD Model Assumptions\n\n1. Variance Decomposition\nThe RCBD model is expressed as:\n\\[\nY_{hi} = \\mu + \\theta_h + \\tau_i + \\epsilon_{hi}\n\\]\nWhere:\n\n\\(Y_{hi}\\): Response for treatment \\(i\\) in block \\(h\\).\n\\(\\mu\\): Overall mean.\n\\(\\theta_h\\): Effect of block \\(h\\).\n\\(\\tau_i\\): Effect of treatment \\(i\\).\n\\(\\epsilon_{hi} \\sim N(0, \\sigma^2)\\): Error term.\n\nAssumptions:\n\nNormality: \\(\\epsilon_{hi}\\) are normally distributed.\nIndependence: Observations are independent.\nHomoscedasticity: \\(\\sigma^2\\) is constant across all treatments and blocks.\nNo Interaction: Effects of blocks and treatments are additive.\n\nVariance Decomposition:\n\\[\n\\text{Total SS} = \\text{Block SS} + \\text{Treatment SS} + \\text{Error SS}\n\\]\nDerivation:\n\nTotal Sum of Squares (SS\\(_\\text{Total}\\)):\n\n\\[\nSS_\\text{Total} = \\sum_{h=1}^b \\sum_{i=1}^t (Y_{hi} - \\bar{Y})^2\n\\]\nWhere \\(\\bar{Y}\\) is the grand mean.\n\nBlock Sum of Squares (SS\\(_\\text{Block}\\)):\n\n\\[\nSS_\\text{Block} = t \\sum_{h=1}^b (\\bar{Y}_h - \\bar{Y})^2\n\\]\nWhere \\(\\bar{Y}_h\\) is the mean of block \\(h\\).\n\nTreatment Sum of Squares (SS\\(_\\text{Treatment}\\)):\n\n\\[\nSS_\\text{Treatment} = b \\sum_{i=1}^t (\\bar{Y}_i - \\bar{Y})^2\n\\]\nWhere \\(\\bar{Y}_i\\) is the mean of treatment \\(i\\).\n\nError Sum of Squares (SS\\(_\\text{Error}\\)):\n\n\\[\nSS_\\text{Error} = \\sum_{h=1}^b \\sum_{i=1}^t (Y_{hi} - \\bar{Y}_h - \\bar{Y}_i + \\bar{Y})^2\n\\]\nRepresents variability not explained by blocks or treatments.\nConclusion:\nThe variance decomposition allows for the assessment of how much variability in the response is attributable to blocks, treatments, and random error.\nReference:\nMontgomery (2019) provides a detailed derivation of ANOVA components in Design and Analysis of Experiments.\n\n\n2. Effects of Ignoring Block-Treatment Interaction\nIn the RCBD model, it is assumed that there is no interaction between blocks and treatments. Ignoring a significant block-treatment interaction can lead to biased estimates of treatment effects.\nMathematical Illustration:\nSuppose the true model includes an interaction term:\n\\[\nY_{hi} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hi}\n\\]\nIf the interaction term \\((\\theta \\tau)_{hi}\\) is significant and is omitted from the model, the estimates of \\(\\tau_i\\) will be biased because the model incorrectly attributes part of the interaction effect to treatment effects.\nProof Outline:\n\nFull Model: Includes interaction.\nReduced Model: Omits interaction.\nBias Derivation: Show that \\(\\hat{\\tau}_i\\) in the reduced model includes components of the interaction effect.\n\nConclusion:\nIt is crucial to test for block-treatment interactions. If significant, a more complex model that includes interaction terms should be employed.\nReference:\nKempthorne (1977) discusses the implications of model misspecification in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#sample-size-calculations-for-rcbds-1",
-    "href": "lectures/week-09_complete-blocks.html#sample-size-calculations-for-rcbds-1",
-    "title": "Complete Blocks Design",
-    "section": "Sample Size Calculations for RCBDs",
-    "text": "Sample Size Calculations for RCBDs\nDetermining the appropriate sample size is essential for ensuring adequate power to detect treatment effects.\n\nFormula\n\\[\nn \\geq \\frac{2 v \\sigma^2 \\phi^2}{b \\Delta^2}\n\\]\nWhere:\n\n\\(n\\): Number of replicates per treatment.\n\\(v\\): Number of treatments.\n\\(\\sigma^2\\): Variance estimate.\n\\(\\phi\\): Desired power (e.g., 0.80).\n\\(b\\): Number of blocks.\n\\(\\Delta\\): Minimum detectable effect size.\n\n\n\nDerivation\n\nPower Analysis:\n\nBased on the desired power (\\(\\phi\\)) and significance level (\\(\\alpha\\)), determine the non-centrality parameter needed to detect effect size \\(\\Delta\\).\n\nRearrange for \\(n\\):\n\nSolving the power equation for \\(n\\) yields the sample size formula.\nExample Calculation:\nSuppose you have 4 treatments (\\(v = 4\\)), 5 blocks (\\(b = 5\\)), an estimated variance (\\(\\sigma^2 = 20\\)), desire a power of 0.80 (\\(\\phi = 0.84\\)), and aim to detect a minimum effect size of 5 units (\\(\\Delta = 5\\)).\n\\[\nn \\geq \\frac{2 \\times 4 \\times 20 \\times 0.84^2}{5 \\times 5^2} = \\frac{2 \\times 4 \\times 20 \\times 0.7056}{125} \\approx \\frac{113.792}{125} \\approx 0.91\n\\]\nSince \\(n\\) must be an integer, at least 1 replicate per treatment is needed. However, practical considerations often necessitate larger sample sizes.\nReference:\nMontgomery (2019) elaborates on sample size determination in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#handling-block-treatment-interactions-1",
-    "href": "lectures/week-09_complete-blocks.html#handling-block-treatment-interactions-1",
-    "title": "Complete Blocks Design",
-    "section": "Handling Block-Treatment Interactions",
-    "text": "Handling Block-Treatment Interactions\nIn scenarios where interaction effects between blocks and treatments are suspected, it is essential to include them in the model to avoid biased estimates and incorrect inferences.\n\nModel with Interaction\n\\[\nY_{hi} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hi}\n\\]\nImplications:\n\nSignificant Interaction: Suggests that the effect of treatments varies across blocks. Separate treatment effect analyses within each block may be necessary.\nNon-Significant Interaction: Supports the additive model, validating the use of standard RCBD analysis.\n\nReference:\nKempthorne (1977) elaborates on the importance of accounting for interactions in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#sample-size-calculation-example-in-r",
-    "href": "lectures/week-09_complete-blocks.html#sample-size-calculation-example-in-r",
-    "title": "Complete Blocks Design",
-    "section": "Sample Size Calculation Example in R",
-    "text": "Sample Size Calculation Example in R\nTo determine the necessary number of replicates per treatment in an RCBD, you can use R for power and sample size calculations.\n\n# Parameters\nv &lt;- 4 # Number of treatments\nb &lt;- 5 # Number of blocks\nsigma2 &lt;- 20 # Variance estimate\nphi &lt;- 0.84 # Desired power (approx 0.80)\nDelta &lt;- 5 # Minimum detectable effect size\n\n# Calculate sample size\nn &lt;- ceiling((2 * v * sigma2 * phi^2) / (b * Delta^2))\nprint(n)\n\nInterpretation:\nThe ceiling function ensures that the sample size is rounded up to the next integer, ensuring adequate power."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#medium-difficulty-1",
-    "href": "lectures/week-09_complete-blocks.html#medium-difficulty-1",
-    "title": "Complete Blocks Design",
-    "section": "Medium Difficulty",
-    "text": "Medium Difficulty\n\nTwo-Way ANCOVA with Interaction:\n\n\nDataset: Simulate a dataset with three treatments and one covariate.\nTasks:\nGenerate data for treatments A, B, C with a covariate X.\nFit an ANCOVA model adjusting for X.\nTest the significance of treatment effects and the covariate.\nGenerate diagnostic plots and interpret them.\n\nR Code Example:\n\nset.seed(123)\n# Define factors and covariate\n\nTreatment &lt;- factor(rep(c(\"A\", \"B\", \"C\"), each=30))\nX &lt;- rnorm(90, mean=50, sd=10)\n\n# Simulate responses with treatment effects and covariate effect\nY &lt;- ifelse(Treatment == \"A\", 0, ifelse(Treatment == \"B\", 2, 4) + 0.5 * (X - mean(X)) + rnorm(90, mean=0, sd=3)\ndata_sim &lt;- data.frame(Treatment, X, Y)\n\n# Fit ANCOVA model\nmodel_sim &lt;- lm(Y ~ Treatment + X, data = data_sim)\nsummary(model_sim)\n# Diagnostic plots\n\npar(mfrow = c(2, 2))\nplot(model_sim)\n\n# Estimated marginal means\n\nlibrary(emmeans)\nemm_sim &lt;- emmeans(model_sim ~ Treatment)\npairwise_sim &lt;- contrast(emm_sim, method = \"pairwise\")\nsummary(pairwise_sim)\n\nQuestions:\n\nWhat are the main effects of Treatment and the covariate X?\nAre there significant differences between treatments after adjusting for X?\nDo the diagnostic plots suggest any assumption violations?\n\n\nBalloon Data Analysis:\n\n\nScenario: Reanalyze the balloon data, testing for equality of slopes.\nTasks:\nFit an ANCOVA model.\nTest the homogeneity of regression slopes.\nInterpret the adjusted treatment means.\n\n\nR Code Example\n\nlibrary(car)\nlibrary(emmeans)\n\n# Load and prepare data\nballoon.data &lt;- read.table(\"data/balloon.txt\", header = TRUE)\nballoon.data &lt;- within({\n  balloon.data\n, x &lt;- Order - mean(Order),\nfColor &lt;- factor(Color)\n})\n\n# Fit ANCOVA model\nmodel &lt;- lm(Time ~ fColor + x, data = balloon.data)\nsummary(model)\n\n# Test homogeneity of slopes\nmodel_interaction &lt;- lm(Time ~ fColor * x, data = balloon.data)\nanova(model, model_interaction)\n\n# Estimated marginal means\nemm_balloon &lt;- emmeans(model ~ fColor)\npairwise_balloon &lt;- contrast(emm_balloon, method = \"pairwise\")\nsummary(pairwise_balloon)\n\nQuestions:\n\nDoes the interaction term indicate equality of slopes across treatments?\nHow do the adjusted means compare across balloon colors?\nWhat conclusions can be drawn about the effect of balloon color on inflation time after adjusting for run order?"
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#challenging-problems-1",
-    "href": "lectures/week-09_complete-blocks.html#challenging-problems-1",
-    "title": "Complete Blocks Design",
-    "section": "Challenging Problems",
-    "text": "Challenging Problems\n\nUnbalanced Two-Factor ANCOVA Analysis:\n\n\nDataset: Utilize a dataset with unequal numbers of replicates across treatment combinations.\nTasks:\nSimulate an unbalanced dataset with two factors and one covariate.\nFit an ANCOVA model using both Type II and Type III sums of squares.\nCompare the results and discuss how imbalance affects the interpretation of main and interaction effects.\n\n\nR Code Example\n\nlibrary(car)\nset.seed(456)\n# Simulate unbalanced data\nFactorA &lt;- factor(rep(c(\"A1\", \"A2\", \"A3\"), times = c(4, 6, 5)))\nFactorB &lt;- factor(rep(c(\"B1\", \"B2\"), each = 7, times = 2))\nX &lt;- rnorm(15, mean = 50, sd = 10)\n# Simulate responses with treatment and covariate effects\nY &lt;- 5 + ifelse(FactorA == \"A1\", 0, ifelse(FactorA == \"A2\", 2, 4)) + ifelse(FactorB == \"B1\", 0, 3) + 0.5 * (X - mean(X)) + rnorm(15, mean = 0, sd = 3)\ndata_unbalanced &lt;- data.frame(FactorA, FactorB, X, Y)\n\n# Fit ANCOVA model\nfit_unbalanced &lt;- lm(Y ~ FactorA * FactorB + X, data = data_unbalanced)\n\n# Type II Sum of Squares\ntypeII &lt;- Anova(fit_unbalanced, type = \"II\")\nprint(typeII)\n\n# Type III Sum of Squares\ntypeIII &lt;- Anova(fit_unbalanced, type = \"III\")\nprint(typeIII)"
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#discussion-points-1",
-    "href": "lectures/week-09_complete-blocks.html#discussion-points-1",
-    "title": "Complete Blocks Design",
-    "section": "Discussion Points",
-    "text": "Discussion Points\n\nType II vs. Type III SS:\nType II: Tests main effects after accounting for other main effects but ignores interactions.\nType III: Tests main effects after accounting for all other factors, including interactions.\nImpact of Imbalance:\nImbalanced designs can lead to different interpretations under Type II and Type III SS.\nType I SS is not appropriate here as it is sequential and depends on the order of factors.\nSignificance of Effects:\nIdentify which factors and interactions are significant under each type.\nDiscuss how imbalance might inflate or deflate the significance levels of certain effects.\nImplications for Experimental Conclusions:\nChoosing the appropriate type of sums of squares is crucial for accurate inference.\nMisinterpretation can lead to incorrect conclusions about factor effects and interactions.\n\nReference:\nChristensen (2018) provides guidance on handling unbalanced designs and selecting appropriate sums of squares types in Analysis of Variance, Design, and Regression.\n\nThree-Factor Interaction Interpretation:\n\n\nDataset: Use a simulated dataset with three factors exhibiting a significant three-way interaction.\nTasks:\nSimulate data with three factors and one covariate.\nFit a three-way ANCOVA model.\nVisualize the three-way interaction.\nUse emmeans to estimate marginal means and perform pairwise comparisons.\nExplain how the three-way interaction affects the interpretation of main and two-way interactions.\n\n\nR Code Example\n\nlibrary(emmeans)\nlibrary(ggplot2)\nset.seed(789)\n\n# Simulate data\n\nFactorA &lt;- factor(rep(c(\"A1\", \"A2\", \"A3\"), each = 24))\nFactorB &lt;- factor(rep(c(\"B1\", \"B2\"), each = 12, times = 3))\nFactorC &lt;- factor(rep(c(\"C1\", \"C2\", \"C3\"), times = 8))\nX &lt;- rnorm(72, mean = 50, sd = 10)\n\n# Simulate responses with three-way interaction\n\nY &lt;- 5 + ifelse(FactorA == \"A1\", 0, ifelse(FactorA == \"A2\", 2, 4)) + ifelse(FactorB == \"B1\", 0, 3) + ifelse(FactorC == \"C1\", 0, ifelse(FactorC == \"C2\", 1.5, 3)) + 0.5 * (X - mean(X)) + ifelse(FactorA == \"A1\" & FactorB == \"B1\", 0, ifelse(FactorA == \"A2\" & FactorB == \"B2\", 1, 2)) + rnorm(72, mean = 0, sd = 3)\n\ndata_three &lt;- data.frame(FactorA, FactorB, FactorC, X, Y)\n\n# Fit three-way ANCOVA model\n\nfit_three &lt;- lm(Y ~ FactorA * FactorB * FactorC + X, data = data_three)\n\nsummary(fit_three)\n\n# Plot three-way interaction\n\nggplot(data_three, aes(x = FactorA, y = Y, color = FactorB, group = FactorB)) +\n    geom_point() +\n    geom_line() +\n    facet_wrap(~FactorC) +\n    labs(title = \"Three-Way Interaction Plot\", x = \"Factor A\", y = \"Response\") +\n    theme_minimal()\n\n# Estimated marginal means\n\nemm_three &lt;- emmeans(fit_three, ~ FactorA * FactorB * FactorC)\ncontrast_results &lt;- contrast(emm_three, method = \"pairwise\", adjust = \"none\")\nsummary(contrast_results)"
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#interpretation-1",
-    "href": "lectures/week-09_complete-blocks.html#interpretation-1",
-    "title": "Complete Blocks Design",
-    "section": "Interpretation",
-    "text": "Interpretation\n\nThree-Way Interaction:\n\nThe interaction plot illustrates how the interaction between Factor A and Factor B varies across different levels of Factor C. Non-parallel lines across facets indicate a significant three-way interaction.\n\nImpact on Main and Two-Way Interactions:\n\nSignificant higher-order interactions imply that main effects and two-way interactions cannot be interpreted in isolation. The effect of one factor depends on the combination of other factors.\n\nPractical Implications:\n\nUnderstanding three-way interactions allows for more nuanced insights into how multiple factors jointly influence the response variable, leading to better-informed decisions and strategies.\nReference:\nDean, Voss & Draguljić (2017) elaborate on interpreting higher-order interactions in Design and Analysis of Experiments.\n\nMathematical Proof of Interaction Contrasts:\n\n\nTask: Derive formulas for interaction contrasts in a three-factor design and prove that they measure deviations from additivity.\nRequirements:\nShow how to construct interaction contrasts.\nProve that if all interaction contrasts are zero, the model is additive.\n\nHints:\n\nUtilize the definitions of main effects and interaction terms.\nEmploy properties of linear algebra to demonstrate the relationship between interaction contrasts and additivity.\nReference Dean et al. (2017) and Christensen (2018) for theoretical foundations."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#proof-outline-2",
-    "href": "lectures/week-09_complete-blocks.html#proof-outline-2",
-    "title": "Complete Blocks Design",
-    "section": "Proof Outline",
-    "text": "Proof Outline\n\nDefine the Three-Factor Model:\n\n\\[\nY_{ijk} = \\mu + \\alpha_i + \\beta_j + \\gamma_k + (\\alpha\\beta)^*_{ij} + (\\alpha\\gamma)^*{ik} + (\\beta\\gamma)^*_{jk} + (\\alpha\\beta\\gamma)^*_{ijk} + \\epsilon_{ijk}\n\\]\nwhere \\(\\sum \\alpha_i = \\sum \\beta_j = \\sum \\gamma_k = 0\\).\n\nConstruct Interaction Contrasts:\n\n\nTwo-Way Interactions:\n\\((\\alpha\\beta)_{ij}\\) measures the interaction between Factors A and B.\nSimilarly for \\((\\alpha\\gamma)^*_{ik}\\) and \\((\\beta\\gamma)^*_{jk}\\).\nThree-Way Interaction:\n\\((\\alpha\\beta\\gamma)_{ijk}\\) measures the deviation from additivity among all three factors.\n\n\nProof of Additivity:\n\n\nAdditive Model:\n\nIf all interaction terms are zero (\\((\\alpha\\beta)^*_{ij} = (\\alpha\\gamma)^*_{ik} = (\\beta\\gamma)^*_{jk} = (\\alpha\\beta\\gamma)^*_{ijk} = 0\\)), the model simplifies to:\n\\[\nY_{ijk} = \\mu + \\alpha_i + \\beta_j + \\gamma_k + \\epsilon_{ijk}\n\\]\nindicating that the response is purely additive with respect to the main effects.\n\nZero Interaction Contrasts:\n\nIf all interaction contrasts are zero, the model exhibits additivity. Thus, interaction contrasts quantify how much the actual model deviates from an additive one.\n\nConclusion:\n\nInteraction contrasts provide a mathematical measure of the presence and magnitude of interactions. Non-zero contrasts indicate that the combined effect of factors is not merely the sum of their individual effects, highlighting the importance of considering interactions in experimental analysis.\nReference:\nDean, Voss & Draguljić (2017) offer detailed mathematical treatments of interaction contrasts in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#adjusted-treatment-means",
-    "href": "lectures/week-09_complete-blocks.html#adjusted-treatment-means",
-    "title": "Complete Blocks Design",
-    "section": "Adjusted Treatment Means",
-    "text": "Adjusted Treatment Means\nThe adjusted mean for treatment \\(i\\) accounts for the influence of the covariate, providing a more accurate estimate of the treatment effect.\n\\[\n\\mu + \\tau_i = \\bar{Y}_i - \\beta (\\bar{X}_i - \\bar{X})\n\\]\nWhere:\n\n\\(\\mu\\): Overall mean.\n\\(\\tau_i\\): Treatment effect for treatment \\(i\\).\n\\(\\bar{Y}_i\\): Mean response for treatment \\(i\\).\n\\(\\beta\\): Regression coefficient for the covariate.\n\\(\\bar{X}_i\\): Mean covariate value for treatment \\(i\\).\n\\(\\bar{X}\\): Overall mean of the covariate."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#derivation-3",
-    "href": "lectures/week-09_complete-blocks.html#derivation-3",
-    "title": "Complete Blocks Design",
-    "section": "Derivation",
-    "text": "Derivation\n\nModel Equation:\n\n\\[\nY_{ij} = \\mu + \\tau_i + \\beta (X_{ij} - \\bar{X}) + \\epsilon_{ij}\n\\]\n\nTaking the Mean for Treatment \\(i\\):\n\n\\[\n\\bar{Y}_i = \\mu + \\tau_i + \\beta (\\bar{X}_i - \\bar{X}) + \\bar{\\epsilon}_i\n\\]\nSince \\(\\bar{\\epsilon}_i = 0\\) (assuming errors have mean zero),\n\\[\n\\bar{Y}_i = \\mu + \\tau_i + \\beta (\\bar{X}_i - \\bar{X})\n\\]\n\nSolving for Adjusted Mean:\n\n\\[\n\\mu + \\tau_i = \\bar{Y}_i - \\beta (\\bar{X}_i - \\bar{X})\n\\]\nThis equation represents the adjusted treatment mean, accounting for differences in the covariate.\nReference:\nMontgomery (2019) and Scheffé (1959) provide detailed derivations of adjusted means in ANCOVA.\n\nF-Test for Homogeneity of Slopes\nTesting the assumption of homogeneity of regression slopes ensures that the relationship between the covariate and the response is consistent across all treatment groups.\n\n\nModel Comparison\n\nModel Without Interaction (Assuming Homogeneous Slopes):\n\n\\[\nY_{hi} = \\mu + \\theta_h + \\tau_i + \\beta X_{hi} + \\epsilon_{hi}\n\\]\nWhere \\(\\beta\\) is the common slope for all treatments.\n\nModel With Interaction (Allowing Slopes to Vary):\n\n\\[\nY_{hi} = \\mu + \\theta_h + \\tau_i + \\beta X_{hi} + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hi}\n\\]\nWhere \\((\\theta \\tau)_{hi}\\) allows the slope of the covariate to vary with treatments.\n\n\nHypothesis Testing\n\nNull Hypothesis (\\(H_0\\)): Homogeneity of slopes (\\(\\beta\\) is the same across treatments).\nAlternative Hypothesis (\\(H_A\\)): Slopes vary across treatments (\\(\\beta_i \\neq \\beta_j\\) for some \\(i, j\\)).\n\n\n\nTest Statistic\n\\[\nF = \\frac{\\text{SSR}^*_{\\text{Interaction}} / \\text{DF}^*_{\\text{Interaction}}}{\\text{SSE} / \\text{DF}_{\\text{Error}}}\n\\]\nWhere:\n\n\\(\\text{SSR}_{\\text{Interaction}}\\): Sum of squares for the interaction term.\n\\(\\text{DF}_{\\text{Interaction}}\\): Degrees of freedom for the interaction.\n\\(\\text{SSE}\\): Sum of squares for error.\n\\(\\text{DF}_{\\text{Error}}\\): Degrees of freedom for error.\n\nDecision Rule:\nReject \\(H_0\\) if \\(F\\) exceeds the critical value from the F-distribution with degrees of freedom \\((\\text{DF}*{\\text{Interaction}}, \\text{DF}*{\\text{Error}})\\).\nConclusion:\nA significant \\(F\\)-statistic indicates that the slopes are not homogeneous, violating a key ANCOVA assumption.\nReference:\nScheffé (1959) elaborates on hypothesis testing for interaction terms in ANCOVA."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#confidence-intervals-for-higher-order-contrasts",
-    "href": "lectures/week-09_complete-blocks.html#confidence-intervals-for-higher-order-contrasts",
-    "title": "Complete Blocks Design",
-    "section": "Confidence Intervals for Higher-Order Contrasts",
-    "text": "Confidence Intervals for Higher-Order Contrasts\nFor higher-order interactions involving multiple factors, confidence intervals for contrasts provide insights into the magnitude and significance of these interactions.\n\nFormula\n\\[\n\\text{CI} = \\hat{L} \\pm t_{\\alpha/2, df} \\sqrt{\\text{Var}(\\hat{L})}\n\\]\nWhere:\n\n\\(\\hat{L}\\): Estimated contrast.\n\\(t_{\\alpha/2, df}\\): Critical value from the t-distribution.\n\\(\\text{Var}(\\hat{L})\\): Variance of the contrast estimate.\n\n\n\nSteps in R\n\nEstimate the Contrast:\n\nUsing the emmeans package to define and estimate contrasts.\n\nCalculate the Confidence Interval:\n\nThe emmeans package automatically provides confidence intervals when performing contrasts.\n\n\nExample\n\nlibrary(emmeans)\n# Fit the ANCOVA model\nmodel &lt;- lm(Y ~ Treatment + X, data = data_sim)\n# Define estimated marginal means\nemm &lt;- emmeans(model, ~Treatment)\n# Define a contrast (e.g., Treatment B vs. Treatment A)\ncontrast_AB &lt;- contrast(emm, method = \"pairwise\")\nsummary(contrast_AB, infer = TRUE)\n\n\n\nInterpretation\nThe output provides the estimated difference, standard error, t-value, and confidence interval for the contrast. If the confidence interval does not include zero, the contrast is statistically significant.\nReference:\nChristensen (2018) discusses confidence intervals for contrasts in Analysis of Variance, Design, and Regression."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#conclusion-1",
-    "href": "lectures/week-09_complete-blocks.html#conclusion-1",
-    "title": "Complete Blocks Design",
-    "section": "Conclusion",
-    "text": "Conclusion\nComplete Block Designs (CBDs), particularly Randomized Complete Block Designs (RCBDs), are invaluable in experimental research for controlling variability due to nuisance factors. By structuring experiments to include blocks where each treatment is represented, CBDs enhance the precision and reliability of treatment effect estimates. The integration of ANOVA facilitates robust analysis, allowing researchers to discern meaningful differences among treatments while accounting for block-induced variability."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#key-takeaways-1",
-    "href": "lectures/week-09_complete-blocks.html#key-takeaways-1",
-    "title": "Complete Blocks Design",
-    "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nBlocking: Reduces variability from known sources, increasing the efficiency of treatment comparisons.\nANOVA in RCBDs: Decomposes variability to isolate treatment effects, providing a clear framework for hypothesis testing.\nGeneral Complete Block Designs: Extend the utility of CBDs to more complex scenarios involving treatment replications within blocks.\nPractical Implementation: R offers comprehensive tools for designing, analyzing, and interpreting CBDs, empowering researchers with robust statistical capabilities.\nAdvanced Topics: Understanding interactions and sample size considerations enhances the depth and applicability of CBDs in diverse research contexts."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#references",
-    "href": "lectures/week-09_complete-blocks.html#references",
-    "title": "Complete Blocks Design",
-    "section": "References",
-    "text": "References\n\nDean, A., Voss, D., & Draguljić, D. (2017). Design and Analysis of Experiments. Springer.\nMontgomery, D. C., & Runger, G. C. (2010). Applied Statistics and Probability for Engineers. Wiley.\nChristensen, R. (2018). Analysis of Variance, Design, and Regression. Chapman and Hall/CRC.\nKempthorne, O. (1977). Design and Analysis of Experiments. Robert E. Krieger Publishing Company.\nScheffé, H. (1959). The Analysis of Variance. Wiley."
   },
   {
     "objectID": "lectures/week-11_row-column.html",

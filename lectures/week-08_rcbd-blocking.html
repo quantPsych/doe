@@ -238,7 +238,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">12-Mar-2025</p>
+        <p class="date">14-Mar-2025</p>
       </div>
     </div>
     
@@ -439,6 +439,71 @@ window.Quarto = {
   <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">3.6 Interpretation</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
+  <li><a href="#general-complete-block-designs-1" id="toc-general-complete-block-designs-1" class="nav-link" data-scroll-target="#general-complete-block-designs-1">General Complete Block Designs</a>
+  <ul class="collapse">
+  <li><a href="#r-packages-used" id="toc-r-packages-used" class="nav-link" data-scroll-target="#r-packages-used">R Packages Used</a></li>
+  </ul></li>
+  <li><a href="#general-complete-block-designs-without-interaction" id="toc-general-complete-block-designs-without-interaction" class="nav-link" data-scroll-target="#general-complete-block-designs-without-interaction">General Complete Block Designs without Interaction</a>
+  <ul class="collapse">
+  <li><a href="#model-without-interaction" id="toc-model-without-interaction" class="nav-link" data-scroll-target="#model-without-interaction">Model without Interaction</a></li>
+  <li><a href="#sums-of-squares-computation" id="toc-sums-of-squares-computation" class="nav-link" data-scroll-target="#sums-of-squares-computation">Sums of Squares Computation</a></li>
+  <li><a href="#multiple-comparisons-1" id="toc-multiple-comparisons-1" class="nav-link" data-scroll-target="#multiple-comparisons-1">Multiple Comparisons</a></li>
+  </ul></li>
+  <li><a href="#analysis-of-the-banana-experiment-example-10.8.1" id="toc-analysis-of-the-banana-experiment-example-10.8.1" class="nav-link" data-scroll-target="#analysis-of-the-banana-experiment-example-10.8.1">Analysis of the Banana Experiment (Example 10.8.1)</a>
+  <ul class="collapse">
+  <li><a href="#experiment-context" id="toc-experiment-context" class="nav-link" data-scroll-target="#experiment-context">Experiment Context</a></li>
+  <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview">Data Overview</a></li>
+  </ul></li>
+  <li><a href="#detailed-computations" id="toc-detailed-computations" class="nav-link" data-scroll-target="#detailed-computations">Detailed Computations</a>
+  <ul class="collapse">
+  <li><a href="#computational-formulae" id="toc-computational-formulae" class="nav-link" data-scroll-target="#computational-formulae">“Computational” Formulae</a>
+  <ul class="collapse">
+  <li><a href="#treatment-sum-of-squares-blocks-ss_theta" id="toc-treatment-sum-of-squares-blocks-ss_theta" class="nav-link" data-scroll-target="#treatment-sum-of-squares-blocks-ss_theta">Treatment Sum of Squares (Blocks), <span class="math inline">\(SS_{\theta}\)</span></a></li>
+  <li><a href="#total-sum-of-squares-ss_texttotal" id="toc-total-sum-of-squares-ss_texttotal" class="nav-link" data-scroll-target="#total-sum-of-squares-ss_texttotal">Total Sum of Squares, <span class="math inline">\(SS_{\text{Total}}\)</span></a></li>
+  <li><a href="#treatment-sum-of-squares-ss_treatment" id="toc-treatment-sum-of-squares-ss_treatment" class="nav-link" data-scroll-target="#treatment-sum-of-squares-ss_treatment">Treatment Sum of Squares, <span class="math inline">\(SS_{Treatment}\)</span></a></li>
+  <li><a href="#error-sum-of-squares-ss_error" id="toc-error-sum-of-squares-ss_error" class="nav-link" data-scroll-target="#error-sum-of-squares-ss_error">Error Sum of Squares, <span class="math inline">\(SS_{Error}\)</span></a></li>
+  <li><a href="#definitions-of-means-used" id="toc-definitions-of-means-used" class="nav-link" data-scroll-target="#definitions-of-means-used">Definitions of Means Used</a></li>
+  <li><a href="#error-sum-of-squares-ss_error-1" id="toc-error-sum-of-squares-ss_error-1" class="nav-link" data-scroll-target="#error-sum-of-squares-ss_error-1">Error Sum of Squares, <span class="math inline">\(SS_{Error}\)</span></a></li>
+  <li><a href="#explanation-of-terms" id="toc-explanation-of-terms" class="nav-link" data-scroll-target="#explanation-of-terms">Explanation of Terms</a></li>
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation</a></li>
+  </ul></li>
+  <li><a href="#anova-decision-rule" id="toc-anova-decision-rule" class="nav-link" data-scroll-target="#anova-decision-rule">3. ANOVA Decision Rule</a></li>
+  </ul></li>
+  <li><a href="#r-implementation-for-the-banana-data" id="toc-r-implementation-for-the-banana-data" class="nav-link" data-scroll-target="#r-implementation-for-the-banana-data">R Implementation for the Banana Data</a>
+  <ul class="collapse">
+  <li><a href="#data-import-and-preparation" id="toc-data-import-and-preparation" class="nav-link" data-scroll-target="#data-import-and-preparation">Data Import and Preparation</a></li>
+  <li><a href="#descriptive-statistics-and-treatment-means" id="toc-descriptive-statistics-and-treatment-means" class="nav-link" data-scroll-target="#descriptive-statistics-and-treatment-means">Descriptive Statistics and Treatment Means</a></li>
+  <li><a href="#calculating-sums-of-squares" id="toc-calculating-sums-of-squares" class="nav-link" data-scroll-target="#calculating-sums-of-squares">Calculating Sums of Squares</a></li>
+  <li><a href="#fitting-the-block-design-model" id="toc-fitting-the-block-design-model" class="nav-link" data-scroll-target="#fitting-the-block-design-model">Fitting the Block Design Model</a></li>
+  <li><a href="#derivation-of-treatment-contrast-variance" id="toc-derivation-of-treatment-contrast-variance" class="nav-link" data-scroll-target="#derivation-of-treatment-contrast-variance">Derivation of Treatment Contrast Variance</a></li>
+  </ul></li>
+  <li><a href="#general-complete-block-designs-with-interaction" id="toc-general-complete-block-designs-with-interaction" class="nav-link" data-scroll-target="#general-complete-block-designs-with-interaction">General Complete Block Designs with Interaction</a>
+  <ul class="collapse">
+  <li><a href="#model-overview" id="toc-model-overview" class="nav-link" data-scroll-target="#model-overview">Model Overview</a></li>
+  <li><a href="#component-explanation" id="toc-component-explanation" class="nav-link" data-scroll-target="#component-explanation">Component Explanation</a>
+  <ul class="collapse">
+  <li><a href="#overall-mean-and-block-effects" id="toc-overall-mean-and-block-effects" class="nav-link" data-scroll-target="#overall-mean-and-block-effects">1. Overall Mean and Block Effects</a></li>
+  <li><a href="#treatment-effect-and-interaction" id="toc-treatment-effect-and-interaction" class="nav-link" data-scroll-target="#treatment-effect-and-interaction">2. Treatment Effect and Interaction</a></li>
+  <li><a href="#random-error-epsilon_hit" id="toc-random-error-epsilon_hit" class="nav-link" data-scroll-target="#random-error-epsilon_hit">3. Random Error <span class="math inline">\(\epsilon_{hit}\)</span></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#numerical-example-using-banana-data" id="toc-numerical-example-using-banana-data" class="nav-link" data-scroll-target="#numerical-example-using-banana-data">Numerical Example Using Banana Data</a>
+  <ul class="collapse">
+  <li><a href="#data-overview-1" id="toc-data-overview-1" class="nav-link" data-scroll-target="#data-overview-1">Data Overview</a></li>
+  </ul></li>
+  <li><a href="#step-by-step-computation" id="toc-step-by-step-computation" class="nav-link" data-scroll-target="#step-by-step-computation">Step-by-Step Computation</a>
+  <ul class="collapse">
+  <li><a href="#step-1.-compute-means" id="toc-step-1.-compute-means" class="nav-link" data-scroll-target="#step-1.-compute-means">Step 1. Compute Means</a></li>
+  <li><a href="#step-2.-sums-of-squares" id="toc-step-2.-sums-of-squares" class="nav-link" data-scroll-target="#step-2.-sums-of-squares">Step 2. Sums of Squares</a></li>
+  </ul></li>
+  <li><a href="#r-code-implementation-and-interpretation" id="toc-r-code-implementation-and-interpretation" class="nav-link" data-scroll-target="#r-code-implementation-and-interpretation">R Code Implementation and Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#fitting-the-general-complete-block-design-model" id="toc-fitting-the-general-complete-block-design-model" class="nav-link" data-scroll-target="#fitting-the-general-complete-block-design-model">Fitting the General Complete Block Design Model</a></li>
+  <li><a href="#detailed-interpretation-of-anova-results" id="toc-detailed-interpretation-of-anova-results" class="nav-link" data-scroll-target="#detailed-interpretation-of-anova-results">Detailed Interpretation of ANOVA Results</a></li>
+  <li><a href="#deriving-a-contrast-for-storage-methods" id="toc-deriving-a-contrast-for-storage-methods" class="nav-link" data-scroll-target="#deriving-a-contrast-for-storage-methods">Deriving a Contrast for Storage Methods</a></li>
+  <li><a href="#r-code-for-contrast-and-confidence-interval" id="toc-r-code-for-contrast-and-confidence-interval" class="nav-link" data-scroll-target="#r-code-for-contrast-and-confidence-interval">R Code for Contrast and Confidence Interval</a></li>
+  <li><a href="#summary-and-takeaways" id="toc-summary-and-takeaways" class="nav-link" data-scroll-target="#summary-and-takeaways">Summary and Takeaways</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -475,7 +540,7 @@ window.Quarto = {
 <p>To facilitate the analysis of Randomized Complete Block Designs (RCBDs) and contrasts, we will utilize the following R packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Required R Packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, emmeans, ggpubr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, emmeans, ggpubr, here, readr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
@@ -565,11 +630,11 @@ Y_{hi} = \mu + \theta_h + \tau_i + \epsilon_{hi}
 <div aria-describedby="tbl-anova-table-rcbd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 14%">
-<col style="width: 13%">
-<col style="width: 32%">
-<col style="width: 28%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 25%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -622,8 +687,8 @@ Table&nbsp;1: ANOVA Table for Randomized Complete Block Designs
 <ul>
 <li><strong>Hypothesis Testing:</strong>
 <ul>
-<li><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>):</strong> All treatment means are equal (<span class="math inline">\(\tau_i = 0\)</span> for all <span class="math inline">\(i\)</span>).</li>
-<li><strong>Alternative Hypothesis (<span class="math inline">\(H_A\)</span>):</strong> At least one treatment mean is different.</li>
+<li><strong>Null Hypothesis (</strong><span class="math inline">\(H_0\)</span>): All treatment means are equal (<span class="math inline">\(\tau_i = 0\)</span> for all <span class="math inline">\(i\)</span>).</li>
+<li><strong>Alternative Hypothesis (</strong><span class="math inline">\(H_A\)</span>): At least one treatment mean is different.</li>
 </ul></li>
 <li><strong>Decision Rule:</strong> Reject <span class="math inline">\(H_0\)</span> if the F-ratio exceeds the critical value from the F-distribution with degrees of freedom <span class="math inline">\((\nu-1, (b-1)(\nu-1))\)</span> at the chosen significance level (<span class="math inline">\(\alpha\)</span>).</li>
 </ul>
@@ -637,7 +702,7 @@ Table&nbsp;1: ANOVA Table for Randomized Complete Block Designs
 <p><span class="math display">\[
 \sum c_i \hat\tau_i \pm w \; \sqrt{\frac{MSE}{b} \sum c_i^2}
 \]</span></p>
-<p>where <span class="math inline">\(w\)</span> is determinded by the method used for multiple comparisons.</p>
+<p>where <span class="math inline">\(w\)</span> is determined by the method used for multiple comparisons.</p>
 <ol type="1">
 <li><strong>Bonferroni Test</strong>: <span class="math inline">\(w_B = t_{\alpha/(2m);\, (\nu-1)(b-1)}\)</span>, where <span class="math inline">\(m\)</span> is the number of contrasts.</li>
 <li><strong>Scheffé Test</strong>: <span class="math inline">\(w_S = \sqrt{(\nu-1) F_{\alpha;\, \nu-1, (b-1)(\nu-1)}}\)</span></li>
@@ -956,13 +1021,13 @@ Table&nbsp;3: Plant Growth Data for Fertilizer Experiment
 \bar{Y} = \frac{\text{Sum of all observations}}{\text{Total number of observations}} = \frac{20 + 25 + \dots + 21}{12} = 21.33
 \]</span></p>
 <ol type="1">
-<li><strong>Treatment Means (<span class="math inline">\(\bar{Y}_{i\cdot}\)</span>):</strong>
+<li><strong>Treatment Means (</strong><span class="math inline">\(\bar{Y}_{i\cdot}\)</span>):
 <ul>
 <li>Fertilizer <span class="math inline">\(A\)</span>: <span class="math inline">\(\bar{Y}_A = \frac{20 + 18 + 22 + 19}{4} = 19.75\)</span></li>
 <li>Fertilizer <span class="math inline">\(B\)</span>: <span class="math inline">\(\bar{Y}_B = \frac{25 + 21 + 24 + 20}{4} = 22.50\)</span></li>
 <li>Fertilizer <span class="math inline">\(C\)</span>: <span class="math inline">\(\bar{Y}_C = \frac{22 + 19 + 23 + 21}{4} = 21.25\)</span></li>
 </ul></li>
-<li><strong>Block Means (<span class="math inline">\(\bar{Y}_{\cdot j}\)</span>):</strong>
+<li><strong>Block Means (</strong><span class="math inline">\(\bar{Y}_{\cdot j}\)</span>):
 <ul>
 <li>Block 1: <span class="math inline">\(\bar{Y}_{\cdot 1} = \frac{20 + 25 + 22}{3} = 22.33\)</span></li>
 <li>Block 2: <span class="math inline">\(\bar{Y}_{\cdot 2} = \frac{18 + 21 + 19}{3} = 19.33\)</span></li>
@@ -1373,13 +1438,13 @@ Table&nbsp;8: ANOVA Table for Fertilizer Experiment
 <ul>
 <li><span class="math inline">\(\bar{Y}_A = 19.75, \; \bar{Y}_B = 22.50, \; \bar{Y}_C = 21.25\)</span>.</li>
 </ul></li>
-<li><strong>Contrast 1 (<span class="math inline">\(A\)</span> vs <span class="math inline">\(B\)</span>):</strong></li>
+<li><strong>Contrast 1 (</strong><span class="math inline">\(A\)</span> vs <span class="math inline">\(B\)</span>):</li>
 </ol>
 <p><span class="math display">\[
 C_1 = \bar{Y}_A - \bar{Y}_B = 19.75 - 22.50 = -2.75
 \]</span></p>
 <ol type="1">
-<li><strong>Contrast 2 (<span class="math inline">\(A\)</span> vs Average of <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span>):</strong></li>
+<li><strong>Contrast 2 (</strong><span class="math inline">\(A\)</span> vs Average of <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span>):</li>
 </ol>
 <p><span class="math display">\[
 C_2 = \bar{Y}_A - \frac{\bar{Y}_B + \bar{Y}_C}{2} = 19.75 - \frac{22.50 + 21.25}{2} = -2.63
@@ -1444,11 +1509,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrasts</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>em <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="st">"Fertilizer"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrast 1: A vs B</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(em, <span class="fu">list</span>(<span class="st">"A vs B"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>em <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="st">"Fertilizer"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrast 1: A vs B</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(em, <span class="fu">list</span>(<span class="st">"A vs B"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast estimate    SE df t.ratio p.value
  A vs B      -2.75 0.717  6  -3.836  0.0086
@@ -1483,7 +1547,7 @@ Results are averaged over the levels of: Block </code></pre>
 <li><strong>Contrast Results</strong>:</li>
 </ol>
 <ul>
-<li><strong><span class="math inline">\(A\)</span> vs <span class="math inline">\(B\)</span></strong>:</li>
+<li><span class="math inline">\(A\)</span> vs <span class="math inline">\(B\)</span>:</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a> contrast estimate    SE df t.ratio p.value</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a> A vs B      <span class="sc">-</span><span class="fl">2.75</span> <span class="fl">0.717</span>  <span class="dv">6</span>  <span class="sc">-</span><span class="fl">3.836</span>  <span class="fl">0.0086</span></span>
@@ -1491,7 +1555,7 @@ Results are averaged over the levels of: Block </code></pre>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Results are averaged over the levels of<span class="sc">:</span> Block</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Fertilizer <span class="math inline">\(B\)</span> significantly outperforms <span class="math inline">\(A\)</span>.</li>
-<li><strong><span class="math inline">\(A\)</span> vs <span class="math inline">\((B+C)/2\)</span></strong>:</li>
+<li><span class="math inline">\(A\)</span> vs <span class="math inline">\((B+C)/2\)</span>:</li>
 </ul>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a> contrast       estimate    SE df t.ratio p.value</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a> A vs <span class="fu">Avg</span>(B, C)    <span class="sc">-</span><span class="fl">2.12</span> <span class="fl">0.621</span>  <span class="dv">6</span>  <span class="sc">-</span><span class="fl">3.423</span>  <span class="fl">0.0141</span></span>
@@ -1539,6 +1603,894 @@ Results are averaged over the levels of: Block </code></pre>
 <li>Contrasts pinpoint specific treatment relationships.</li>
 </ul></li>
 </ol>
+</section>
+</section>
+<section id="general-complete-block-designs-1" class="level1">
+<h1>General Complete Block Designs</h1>
+<section id="r-packages-used" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages-used">R Packages Used</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages using pacman for convenience.</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, tidyr, knitr, readr, here, ggpubr)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_pubr</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Explanation:</p>
+<ul>
+<li>dplyr: data manipulation,</li>
+<li>ggplot2: visualizations,</li>
+<li>tidyr: data reshaping,</li>
+<li>knitr: producing tables,</li>
+<li>readr: reading in external data files. # Mathematical Foundations from Chapter 10</li>
+</ul>
+</section>
+</section>
+<section id="general-complete-block-designs-without-interaction" class="level1">
+<h1>General Complete Block Designs without Interaction</h1>
+<section id="model-without-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="model-without-interaction">Model without Interaction</h2>
+<p><span class="math display">\[
+Y_{hit} = \mu + \theta_h + \tau_i + \varepsilon_{hit}, \quad \varepsilon_{hit} \sim N(0,\sigma^2)
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is the overall mean.</li>
+<li><span class="math inline">\(\theta_h\)</span> is the effect of the <span class="math inline">\(h\)</span>th block.</li>
+<li><span class="math inline">\(\tau_i\)</span> is the effect of the <span class="math inline">\(i\)</span>th treatment.</li>
+<li><span class="math inline">\(\varepsilon_{hit}\)</span> is the random error.</li>
+<li><span class="math inline">\(Y_{hit}\)</span> is the response for treatment <span class="math inline">\(i\)</span> in block <span class="math inline">\(h\)</span> and replicate <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(\nu\)</span> is the number of treatments.</li>
+<li><span class="math inline">\(b\)</span> is the number of blocks.</li>
+<li><span class="math inline">\(s\)</span> is the number of replicates per treatment per block.</li>
+</ul>
+</section>
+<section id="sums-of-squares-computation" class="level2">
+<h2 class="anchored" data-anchor-id="sums-of-squares-computation">Sums of Squares Computation</h2>
+<ul>
+<li><strong>Total Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\text{Total}} = \sum_{h=1}^{b} \sum_{i=1}^{v} \sum_{t=1}^{s} (Y_{hit} - \bar{Y}_{\cdots})^2
+\]</span></p>
+<ul>
+<li><strong>Block Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\theta} = vs\sum_{h=1}^{b} (\bar{Y}_{h..} - \bar{Y}_{\cdots})^2
+\]</span></p>
+<ul>
+<li><strong>Treatment Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{Treatment} = bs\sum_{i=1}^{v} (\bar{Y}_{.i.} - \bar{Y}_{\cdots})^2
+\]</span></p>
+<ul>
+<li><strong>Error Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{Error} = SS_{\text{Total}} - SS_{\theta} - SS_{Treatment}
+\]</span></p>
+<ul>
+<li><strong>Degrees of Freedom:</strong>
+<ul>
+<li>Blocks: <span class="math inline">\(b - 1\)</span></li>
+<li>Treatments: <span class="math inline">\(v - 1\)</span></li>
+<li>Error: <span class="math inline">\(bvs - b - v + 1\)</span></li>
+<li>Total: <span class="math inline">\(bvs - 1\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="multiple-comparisons-1" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-comparisons-1">Multiple Comparisons</h2>
+<ul>
+<li><strong>Contrast Estimation:</strong> For any contrast <span class="math inline">\(\sum c_i \tau_i\)</span> (with <span class="math inline">\(\sum c_i=0\)</span>):</li>
+</ul>
+<p><span class="math display">\[
+\sum c_i \tau_i \in \left(\sum c_i \bar{Y}_{.i.} \pm w \sqrt{\frac{MS_{Error} \sum c_i^2}{bs}}\right)
+\]</span></p>
+<ul>
+<li><span class="math inline">\(w\)</span> is the critical value from the chosen method (Bonferroni, Scheffé, Tukey, etc.).</li>
+<li><strong>Interpretation:</strong> This provides a simultaneous confidence interval for contrasts, ensuring control over the familywise error rate.</li>
+</ul>
+</section>
+</section>
+<section id="analysis-of-the-banana-experiment-example-10.8.1" class="level1">
+<h1>Analysis of the Banana Experiment (Example 10.8.1)</h1>
+<section id="experiment-context" class="level2">
+<h2 class="anchored" data-anchor-id="experiment-context">Experiment Context</h2>
+<ul>
+<li><strong>Background:</strong> Bananas are stored using two methods:
+<ul>
+<li><strong>Counter Storage:</strong> Conventional storage on a counter.</li>
+<li><strong>Hanging Storage:</strong> Using a banana hanging device to slow ripening.</li>
+</ul></li>
+<li><strong>Measured Outcome:</strong> The response variable <span class="math inline">\(y\)</span> represents the percentage of black color on the banana peel (an indicator of ripeness).</li>
+<li><strong>Experimental Factors:</strong>
+<ul>
+<li><strong>Block:</strong> Grouping factor (e.g., repeated measures over time or location).</li>
+<li><strong>Light:</strong> Level of illumination (affecting ripening).</li>
+<li><strong>Storage:</strong> Storage method (1 = counter, 2 = hanging).</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-overview" class="level2">
+<h2 class="anchored" data-anchor-id="data-overview">Data Overview</h2>
+<p>The <code>banana.txt</code> file has the following columns:</p>
+<ul>
+<li><strong>block:</strong> Block identifier.</li>
+<li><strong>light:</strong> Light condition (1 or 2).</li>
+<li><strong>storage:</strong> Storage method (1 = counter, 2 = hanging).</li>
+<li><strong>y:</strong> Measured percentage of black color.</li>
+</ul>
+</section>
+</section>
+<section id="detailed-computations" class="level1">
+<h1>Detailed Computations</h1>
+<section id="computational-formulae" class="level2">
+<h2 class="anchored" data-anchor-id="computational-formulae">“Computational” Formulae</h2>
+<ul>
+<li>Blocks are indexed by <span class="math inline">\(h\)</span> (from 1 to <span class="math inline">\(v\)</span>).</li>
+<li>Treatments indexed by <span class="math inline">\(i\)</span>.</li>
+<li>Replicates indexed by <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(s\)</span> replicates per block-treatment combination.</li>
+<li>Observed response: <span class="math inline">\(y_{hit}\)</span>.</li>
+<li>Dot notation represents summation over the omitted index.</li>
+</ul>
+<p>Then, the corrected equations are:</p>
+<section id="treatment-sum-of-squares-blocks-ss_theta" class="level3">
+<h3 class="anchored" data-anchor-id="treatment-sum-of-squares-blocks-ss_theta">Treatment Sum of Squares (Blocks), <span class="math inline">\(SS_{\theta}\)</span></h3>
+<p><span class="math display">\[
+SS_{\theta} = v s \sum_{h=1}^{b} \bar{y}_{h..}^2 - b v s \bar{y}_{…}^2
+\]</span></p>
+</section>
+<section id="total-sum-of-squares-ss_texttotal" class="level3">
+<h3 class="anchored" data-anchor-id="total-sum-of-squares-ss_texttotal">Total Sum of Squares, <span class="math inline">\(SS_{\text{Total}}\)</span></h3>
+<p><span class="math display">\[
+SS_{\text{Total}} = \sum_{h=1}^{b}\sum_{i=1}^{v}\sum_{t=1}^{s} y_{hit}^2 - b v s \bar{y}_{…}^2
+\]</span></p>
+</section>
+<section id="treatment-sum-of-squares-ss_treatment" class="level3">
+<h3 class="anchored" data-anchor-id="treatment-sum-of-squares-ss_treatment">Treatment Sum of Squares, <span class="math inline">\(SS_{Treatment}\)</span></h3>
+<p><span class="math display">\[
+SS_{Treatment} = b s \sum_{i=1}^{v} \bar{y}_{.i.}^2 - b v s \bar{y}_{…}^2
+\]</span></p>
+</section>
+<section id="error-sum-of-squares-ss_error" class="level3">
+<h3 class="anchored" data-anchor-id="error-sum-of-squares-ss_error">Error Sum of Squares, <span class="math inline">\(SS_{Error}\)</span></h3>
+<p><span class="math display">\[
+SS_{Error} = SS_{\text{Total}} - SS_{\theta} - SS_{Treatment}
+\]</span></p>
+</section>
+<section id="definitions-of-means-used" class="level3">
+<h3 class="anchored" data-anchor-id="definitions-of-means-used">Definitions of Means Used</h3>
+<ul>
+<li><strong>Overall mean</strong> (<span class="math inline">\(\bar{y}_{…}\)</span>):</li>
+</ul>
+<p><span class="math display">\[
+\bar{y}_{…} = \frac{1}{b v s}\sum_{h=1}^{b}\sum_{i=1}^{v}\sum_{t=1}^{s}y_{hit}
+\]</span></p>
+<ul>
+<li><strong>Block Means</strong> (<span class="math inline">\(\bar{y}_{h..}\)</span>):</li>
+</ul>
+<p><span class="math display">\[
+\bar{y}_{h..} = \frac{1}{v s}\sum_{i=1}^{v}\sum_{t=1}^{s}y_{hit}
+\]</span></p>
+<ul>
+<li><strong>Treatment Means</strong> (<span class="math inline">\(\bar{y}_{.i.}\)</span>):</li>
+</ul>
+<p><span class="math display">\[
+\bar{y}_{.i.} = \frac{1}{b s}\sum_{h=1}^{b}\sum_{t=1}^{s}y_{hit}
+\]</span></p>
+</section>
+<section id="error-sum-of-squares-ss_error-1" class="level3">
+<h3 class="anchored" data-anchor-id="error-sum-of-squares-ss_error-1">Error Sum of Squares, <span class="math inline">\(SS_{Error}\)</span></h3>
+<p>Defined as:</p>
+<p><span class="math display">\[
+SS_{Error} = SS_{\text{Total}} - SS_{\theta} - SS_{Treatment}
+\]</span></p>
+</section>
+<section id="explanation-of-terms" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-terms">Explanation of Terms</h3>
+<ul>
+<li><span class="math inline">\(b\)</span>: Number of blocks</li>
+<li><span class="math inline">\(v\)</span>: Number of treatment levels</li>
+<li><span class="math inline">\(s\)</span>: Number of replicates per block-treatment combination</li>
+<li><span class="math inline">\(y_{hit}\)</span>: Observed response at block <span class="math inline">\(h\)</span>, treatment <span class="math inline">\(i\)</span>, and replicate <span class="math inline">\(t\)</span></li>
+</ul>
+</section>
+<section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
+<ul>
+<li><span class="math inline">\(SS_{\theta}\)</span>: Measures the variability due to differences between blocks.</li>
+<li><span class="math inline">\(SS_{Treatment}\)</span>: Measures the variability due to treatment differences.</li>
+<li><span class="math inline">\(SS_{Error}\)</span>: Captures residual (unexplained) variability after accounting for block and treatment effects.</li>
+</ul>
+</section>
+</section>
+<section id="anova-decision-rule" class="level2">
+<h2 class="anchored" data-anchor-id="anova-decision-rule">3. ANOVA Decision Rule</h2>
+<p>The F-test for treatments in a complete block design is:</p>
+<p><span class="math display">\[
+F = \frac{MS_{Treatment}}{MS_{Error}}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(MS_{Treatment} = \frac{SS_{Treatment}}{v-1}\)</span></li>
+<li><span class="math inline">\(MS_{Error} = \frac{SS_{Error}}{bvs - b - v + 1}\)</span></li>
+</ul>
+<p>Reject the null hypothesis <span class="math inline">\(H_0: \tau_1 = \tau_2\)</span> if:</p>
+<p><span class="math display">\[
+F &gt; F_{\alpha; \, \nu-1, b\nu s-b-\nu+1}
+\]</span></p>
+</section>
+</section>
+<section id="r-implementation-for-the-banana-data" class="level1 page-columns page-full">
+<h1>R Implementation for the Banana Data</h1>
+<section id="data-import-and-preparation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="data-import-and-preparation">Data Import and Preparation</h2>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>banana_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"banana.txt"</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">header =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">block =</span> <span class="fu">factor</span>(block),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">storage =</span> <span class="fu">factor</span>(</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>            storage,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Counter"</span>, <span class="st">"Hanging"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>banana_data <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-banana-read" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-banana-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">block</th>
+<th style="text-align: right;">light</th>
+<th style="text-align: left;">storage</th>
+<th style="text-align: right;">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hanging</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hanging</td>
+<td style="text-align: right;">35</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9: First Few Rows of Banana Data
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="descriptive-statistics-and-treatment-means" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="descriptive-statistics-and-treatment-means">Descriptive Statistics and Treatment Means</h2>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for marginal means and cell means</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>storage_cell_means <span class="ot">&lt;-</span> banana_data <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(block, storage) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(y), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>storage_cell_means</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="do">## marginal means for storage</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>storage_margin_means <span class="ot">&lt;-</span> banana_data <span class="sc">|&gt;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(storage) <span class="sc">|&gt;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(y), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>storage_margin_means</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">## marginal means for block</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>storage_block_means <span class="ot">&lt;-</span> banana_data <span class="sc">|&gt;</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(block) <span class="sc">|&gt;</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(y), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>storage_block_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-banana-summary" class="quarto-layout-panel anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-banana-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="kable-table quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<table class="do-not-create-environment cell table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">block</th>
+<th style="text-align: left;">storage</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">33.875</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Hanging</td>
+<td style="text-align: right;">37.875</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">49.000</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Hanging</td>
+<td style="text-align: right;">44.875</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">41.625</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Hanging</td>
+<td style="text-align: right;">31.000</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="kable-table quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<table class="do-not-create-environment cell table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">storage</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Counter</td>
+<td style="text-align: right;">41.50000</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hanging</td>
+<td style="text-align: right;">37.91667</td>
+<td style="text-align: right;">24</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="kable-table quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<table class="do-not-create-environment cell table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">block</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">35.8750</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">46.9375</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">36.3125</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10: [“Summary Statistics for Banana Data”,“Marginal Means for Storage Method”,“Marginal Means for Block”]
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="calculating-sums-of-squares" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="calculating-sums-of-squares">Calculating Sums of Squares</h2>
+<div class="cell page-columns page-full" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the sums of squares</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(banana_data<span class="sc">$</span>block))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(banana_data<span class="sc">$</span>storage))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> storage_cell_means<span class="sc">$</span>n[<span class="dv">1</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(banana_data)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Overall mean</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>y_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(banana_data<span class="sc">$</span>y)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Block sum of squares</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>SS_theta <span class="ot">&lt;-</span> v <span class="sc">*</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    s <span class="sc">*</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>((storage_block_means<span class="sc">$</span>Mean <span class="sc">-</span> y_bar)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">*</span> v <span class="sc">*</span> s <span class="sc">*</span> (<span class="fu">mean</span>(storage_block_means<span class="sc">$</span>Mean) <span class="sc">-</span> y_bar)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Treatment sum of squares</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>SS_Treatment <span class="ot">&lt;-</span> b <span class="sc">*</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    s <span class="sc">*</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>((storage_margin_means<span class="sc">$</span>Mean <span class="sc">-</span> y_bar)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">*</span> v <span class="sc">*</span> s <span class="sc">*</span> (<span class="fu">mean</span>(storage_margin_means<span class="sc">$</span>Mean) <span class="sc">-</span> y_bar)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Total sum of squares</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>SS_Total <span class="ot">&lt;-</span> <span class="fu">sum</span>(banana_data<span class="sc">$</span>y<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> b <span class="sc">*</span> v <span class="sc">*</span> s <span class="sc">*</span> y_bar<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Error sum of squares</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>SS_Error <span class="ot">&lt;-</span> SS_Total <span class="sc">-</span> SS_theta <span class="sc">-</span> SS_Treatment</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Degrees of freedom</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>df_theta <span class="ot">&lt;-</span> b <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>df_Treatment <span class="ot">&lt;-</span> v <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>df_Error <span class="ot">&lt;-</span> b <span class="sc">*</span> v <span class="sc">*</span> s <span class="sc">-</span> b <span class="sc">-</span> v <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>df_Total <span class="ot">&lt;-</span> b <span class="sc">*</span> v <span class="sc">*</span> s <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="co"># MS for Treatment and Error</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>MS_Treatment <span class="ot">&lt;-</span> SS_Treatment <span class="sc">/</span> df_Treatment</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>MS_Error <span class="ot">&lt;-</span> SS_Error <span class="sc">/</span> df_Error</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="co"># F-statistic</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>F_stat <span class="ot">&lt;-</span> MS_Treatment <span class="sc">/</span> MS_Error</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>res_aov_storage_block <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">Component =</span> <span class="fu">c</span>(<span class="st">"Block"</span>, <span class="st">"Treatment"</span>, <span class="st">"Error"</span>, <span class="st">"Total"</span>),</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">SS =</span> <span class="fu">c</span>(SS_theta, SS_Treatment, SS_Error, SS_Total),</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">DF =</span> <span class="fu">c</span>(df_theta, df_Treatment, df_Error, df_Total),</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">MS =</span> <span class="fu">c</span>(SS_theta <span class="sc">/</span> df_theta, MS_Treatment, MS_Error, <span class="cn">NA</span>),</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">F =</span> <span class="fu">c</span>(<span class="cn">NA</span>, F_stat, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_value =</span> <span class="fu">c</span>(</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>        <span class="cn">NA</span>,</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pf</span>(F_stat, df_Treatment, df_Error, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>        <span class="cn">NA</span>,</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>        <span class="cn">NA</span></span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>res_aov_storage_block <span class="sc">|&gt;</span></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"ANOVA Components for Banana Experiment"</span></span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-banana-ss" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full" data-output-location="slide">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-banana-ss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Component</th>
+<th style="text-align: right;">SS</th>
+<th style="text-align: right;">DF</th>
+<th style="text-align: right;">MS</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Block</td>
+<td style="text-align: right;">1255.7917</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">627.8958</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Treatment</td>
+<td style="text-align: right;">154.0833</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">154.0833</td>
+<td style="text-align: right;">0.8302268</td>
+<td style="text-align: right;">0.367172</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Error</td>
+<td style="text-align: right;">8166.0417</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">185.5919</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">9575.9167</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-ss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11: ANOVA Components for Banana Experiment
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="fitting-the-block-design-model" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="fitting-the-block-design-model">Fitting the Block Design Model</h2>
+<p>Assuming ‘block’ is our blocking factor and ‘storage’ is the treatment factor, we fit the model:</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fit_banana <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> block <span class="sc">+</span> storage, <span class="at">data =</span> banana_data)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>anova_banana <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_banana)[[<span class="dv">1</span>]]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(anova_banana, <span class="at">caption =</span> <span class="st">"ANOVA Table for Banana Experiment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-banana-anova-1" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-banana-anova-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">block</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1255.7917</td>
+<td style="text-align: right;">627.8958</td>
+<td style="text-align: right;">3.3832079</td>
+<td style="text-align: right;">0.0429809</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">storage</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">154.0833</td>
+<td style="text-align: right;">154.0833</td>
+<td style="text-align: right;">0.8302268</td>
+<td style="text-align: right;">0.3671720</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">8166.0417</td>
+<td style="text-align: right;">185.5919</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-anova-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12: ANOVA Table for Banana Experiment
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Compare the results from the ANOVA table with the computed Anova components from the previous code chunk.</p>
+</div>
+</div>
+</section>
+<section id="derivation-of-treatment-contrast-variance" class="level2">
+<h2 class="anchored" data-anchor-id="derivation-of-treatment-contrast-variance">Derivation of Treatment Contrast Variance</h2>
+<p>For a contrast <span class="math inline">\(L = \sum c_i \tau_i\)</span>, the estimated contrast is:</p>
+<p><span class="math display">\[
+\hat{L} = \sum c_i \bar{Y}_{.i.}
+\]</span></p>
+<p>with variance given by:</p>
+<p><span class="math display">\[
+\text{Var}(\hat{L}) = \sigma^2 \sum \frac{c_i^2}{bs}
+\]</span></p>
+<p>Thus, a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(L\)</span> is:</p>
+<p><span class="math display">\[
+\hat{L} \pm w \sqrt{MS_{Error} \sum \frac{c_i^2}{bs}}
+\]</span></p>
+<p>where <span class="math inline">\(w\)</span> is the critical value from the chosen method:</p>
+<ol type="1">
+<li>Tukey’s method: <span class="math inline">\(w_T = q_{\alpha;\, \nu, bvs-b-v+1}/ \sqrt{2}\)</span></li>
+<li>Scheffé’s method: <span class="math inline">\(w_S = \sqrt{(\nu-1) F_{\alpha; \,\nu-1, bvs-b-v+1}}\)</span></li>
+<li>Bonferroni’s method: <span class="math inline">\(w_B = t_{\alpha/2m;\, bvs-b-v+1}\)</span>, where <span class="math inline">\(m\)</span> is the number of contrasts.</li>
+</ol>
+</section>
+</section>
+<section id="general-complete-block-designs-with-interaction" class="level1">
+<h1>General Complete Block Designs with Interaction</h1>
+<section id="model-overview" class="level2">
+<h2 class="anchored" data-anchor-id="model-overview">Model Overview</h2>
+<p>For experiments with replicated treatments within blocks, the model extends to include block × treatment interaction:</p>
+<p><span class="math display">\[
+Y_{hit} = \mu + \theta_h + \tau_i + (\theta \tau)_{hi} + \epsilon_{hit}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Y_{hit}\)</span>: Response for treatment <span class="math inline">\(i\)</span> in block <span class="math inline">\(h\)</span> on replicate <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(\mu\)</span>: Overall mean.</li>
+<li><span class="math inline">\(\theta_h\)</span>: Effect of block <span class="math inline">\(h\)</span>.</li>
+<li><span class="math inline">\(\tau_i\)</span>: Effect of treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\((\theta \tau)_{hi}\)</span>: Interaction effect between block <span class="math inline">\(h\)</span> and treatment <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\epsilon_{hit}\)</span>: Random error, assumed <span class="math inline">\(N(0,\sigma^2)\)</span>.</li>
+</ul>
+</section>
+<section id="component-explanation" class="level2">
+<h2 class="anchored" data-anchor-id="component-explanation">Component Explanation</h2>
+<section id="overall-mean-and-block-effects" class="level3">
+<h3 class="anchored" data-anchor-id="overall-mean-and-block-effects">1. Overall Mean and Block Effects</h3>
+<ul>
+<li><strong>Overall Mean</strong> <span class="math inline">\(\mu\)</span>: The grand average of all observations.</li>
+<li><strong>Block Effect</strong> <span class="math inline">\(\theta_h\)</span>: Adjusts for systematic differences among blocks (e.g., different environmental conditions).</li>
+</ul>
+</section>
+<section id="treatment-effect-and-interaction" class="level3">
+<h3 class="anchored" data-anchor-id="treatment-effect-and-interaction">2. Treatment Effect and Interaction</h3>
+<ul>
+<li><strong>Treatment Effect</strong> <span class="math inline">\(\tau_i\)</span>: The deviation of treatment <span class="math inline">\(i\)</span>’s mean from <span class="math inline">\(\mu\)</span>.</li>
+<li><strong>Interaction</strong> <span class="math inline">\((\theta \tau)_{hi}\)</span>: Captures how treatment <span class="math inline">\(i\)</span>’s effect varies in block <span class="math inline">\(h\)</span>. <strong>Example:</strong> A storage method might perform differently in Block 1 than in Block 2 due to unobserved factors.</li>
+</ul>
+</section>
+<section id="random-error-epsilon_hit" class="level3">
+<h3 class="anchored" data-anchor-id="random-error-epsilon_hit">3. Random Error <span class="math inline">\(\epsilon_{hit}\)</span></h3>
+<ul>
+<li>Accounts for unexplained variation.</li>
+<li>Assumed to be independent and normally distributed.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="numerical-example-using-banana-data" class="level1">
+<h1>Numerical Example Using Banana Data</h1>
+<section id="data-overview-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-overview-1">Data Overview</h2>
+<p>The banana data includes:</p>
+<ul>
+<li><strong>block:</strong> Block identifier (e.g., location or time).</li>
+<li><strong>light:</strong> Light condition (1 = low light, 2 = high light).</li>
+<li><strong>storage:</strong> Storage method (1 = Counter, 2 = Hanging).</li>
+<li><strong>y:</strong> Percentage of black color on banana peel (measure of ripeness).</li>
+</ul>
+<p><em>We will focus on “storage” as the treatment and “block” as the blocking factor, and illustrate the block-by-treatment interaction.</em></p>
+</section>
+</section>
+<section id="step-by-step-computation" class="level1">
+<h1>Step-by-Step Computation</h1>
+<section id="step-1.-compute-means" class="level2">
+<h2 class="anchored" data-anchor-id="step-1.-compute-means">Step 1. Compute Means</h2>
+<ul>
+<li><strong>Overall Mean:</strong></li>
+</ul>
+<p><span class="math display">\[
+\bar{Y}_{…} = \frac{1}{n}\sum y
+\]</span></p>
+<ul>
+<li><strong>Treatment (Storage) Mean:</strong></li>
+</ul>
+<p><span class="math display">\[
+\bar{Y}_{.i.} = \frac{1}{n_i}\sum_{\text{storage}=i} y
+\]</span></p>
+<ul>
+<li><strong>Block Mean:</strong></li>
+</ul>
+<p><span class="math display">\[
+\bar{Y}_{h..} = \frac{1}{n_h}\sum_{\text{block}=h} y
+\]</span></p>
+</section>
+<section id="step-2.-sums-of-squares" class="level2">
+<h2 class="anchored" data-anchor-id="step-2.-sums-of-squares">Step 2. Sums of Squares</h2>
+<ul>
+<li><strong>Total Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\text{Total}} = \sum (y - \bar{Y}_{…})^2
+\]</span></p>
+<ul>
+<li><strong>Block Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\theta} = vs\sum_{h} (\bar{Y}_{h..} - \bar{Y}_{…})^2
+\]</span></p>
+<ul>
+<li><strong>Treatment Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{Treatment} = bs\sum_{i} (\bar{Y}_{.i.} - \bar{Y}_{…})^2
+\]</span></p>
+<ul>
+<li><strong>Interaction Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\theta\tau} = \sum_{h}\sum_{i} \left(\bar{Y}_{hi.} - \bar{Y}_{h..} - \bar{Y}_{.i.} + \bar{Y}_{…}\right)^2
+\]</span></p>
+<ul>
+<li><strong>Error Sum of Squares:</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{Error} = SS_{\text{Total}} - SS_{\theta} - SS_{Treatment} - SS_{\theta\tau}
+\]</span></p>
+<p><em>Here,</em> <span class="math inline">\(b\)</span> is the number of blocks, <span class="math inline">\(v\)</span> the number of treatments, and <span class="math inline">\(s\)</span> the number of replicates per treatment per block.</p>
+</section>
+</section>
+<section id="r-code-implementation-and-interpretation" class="level1 page-columns page-full">
+<h1>R Code Implementation and Interpretation</h1>
+<section id="fitting-the-general-complete-block-design-model" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="fitting-the-general-complete-block-design-model">Fitting the General Complete Block Design Model</h2>
+<p>We now fit the model that includes the block, treatment (storage), and their interaction.</p>
+<div id="tbl-banana-1" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-banana-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># including block:storage interaction.</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fit_banana_int <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> block <span class="sc">*</span> storage, <span class="at">data =</span> banana_data)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_banana_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Df Sum Sq Mean Sq F value Pr(&gt;F)  
+block          2   1256   627.9   3.409 0.0425 *
+storage        1    154   154.1   0.836 0.3656  
+block:storage  2    430   214.8   1.166 0.3215  
+Residuals     42   7736   184.2                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;13: Treatment Means by Storage Method
+</figcaption>
+</figure>
+</div>
+<p><em>Interpretation:</em> - <strong>Block:</strong> Variation among blocks. - <strong>Storage (Treatment):</strong> Main effect of storage method. - <strong>Block:Storage:</strong> Interaction term, indicating if storage method performance varies by block. - <strong>Residuals:</strong> Unexplained variability.</p>
+</section>
+<section id="detailed-interpretation-of-anova-results" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-interpretation-of-anova-results">Detailed Interpretation of ANOVA Results</h2>
+<ul>
+<li><strong>F-statistics:</strong> Compare the mean squares (MS) for storage and the interaction against the error MS.</li>
+<li><strong>p-values:</strong> Determine if storage method and/or the interaction is statistically significant.</li>
+</ul>
+<p>If the interaction term is significant, it suggests that the effect of the storage method on ripening (percentage black) differs among blocks.</p>
+</section>
+<section id="deriving-a-contrast-for-storage-methods" class="level2">
+<h2 class="anchored" data-anchor-id="deriving-a-contrast-for-storage-methods">Deriving a Contrast for Storage Methods</h2>
+<p>Assume we want to compare:</p>
+<p><span class="math display">\[
+L = \tau_1 - \tau_2
+\]</span></p>
+<p>with:</p>
+<p><span class="math display">\[
+\hat{L} = \bar{Y}_{.1.} - \bar{Y}_{.2.}
+\]</span></p>
+<p>The estimated variance of <span class="math inline">\(\hat{L}\)</span> is:</p>
+<p><span class="math display">\[
+\text{Var}(\hat{L}) = \sigma^2 \left(\frac{1}{bs} + \frac{1}{bs}\right) = \frac{2\sigma^2}{bs}
+\]</span></p>
+<p>Thus, a 95% confidence interval for <span class="math inline">\(L\)</span> is given by:</p>
+<p><span class="math display">\[
+\hat{L} \pm t_{df,0.025} \sqrt{\frac{2MS_{Error} }{bs}}
+\]</span></p>
+<p>where <span class="math inline">\(MS_{Error}\)</span> is the error mean square from the ANOVA.</p>
+</section>
+<section id="r-code-for-contrast-and-confidence-interval" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="r-code-for-contrast-and-confidence-interval">R Code for Contrast and Confidence Interval</h2>
+<div id="tbl-banana-contrast" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-banana-contrast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>storage_means <span class="ot">&lt;-</span> banana_data <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(storage) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(y))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the error mean square from the ANOVA table</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">&lt;-</span> anova_banana[<span class="st">"Residuals"</span>, <span class="st">"Mean Sq"</span>]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define number of blocks (b) and replicates per cell (s)</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(banana_data<span class="sc">$</span>block))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For simplicity, assume equal replication: s = n / (b * number_of_treatments)</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">nrow</span>(banana_data) <span class="sc">/</span> (b <span class="sc">*</span> <span class="dv">2</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute contrast: difference between storage method 1 and 2</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>L_hat <span class="ot">&lt;-</span> storage_means<span class="sc">$</span>Mean[<span class="dv">1</span>] <span class="sc">-</span> storage_means<span class="sc">$</span>Mean[<span class="dv">2</span>]</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Degrees of freedom for error from ANOVA table</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>df_error <span class="ot">&lt;-</span> anova_banana[<span class="st">"Residuals"</span>, <span class="st">"Df"</span>]</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate standard error of the contrast</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>SE_L <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> mse <span class="sc">/</span> (b <span class="sc">*</span> s))</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Critical t-value for 95% CI</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>t_val <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> df_error)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence Interval for the contrast</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>CI_lower <span class="ot">&lt;-</span> L_hat <span class="sc">-</span> t_val <span class="sc">*</span> SE_L</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>CI_upper <span class="ot">&lt;-</span> L_hat <span class="sc">+</span> t_val <span class="sc">*</span> SE_L</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Contrast (Storage 1 - Storage 2):"</span>, L_hat, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Contrast (Storage 1 - Storage 2): 3.583333 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"95% CI: ["</span>, CI_lower, <span class="st">","</span>, CI_upper, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>95% CI: [ -4.342467 , 11.50913 ]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conform with emmeans package</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_banana, <span class="sc">~</span>storage)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm, <span class="fu">list</span>(<span class="st">"1 - 2"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast estimate   SE df t.ratio p.value
+ 1 - 2        3.58 3.93 44   0.911  0.3672
+
+Results are averaged over the levels of: block </code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-contrast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;14: Treatment Means by Storage Method
+</figcaption>
+</figure>
+</div>
+<p><em>Interpretation:</em> This code computes the difference in means between storage methods, its standard error, and a 95% confidence interval using the error variance from the ANOVA table.</p>
+</section>
+<section id="summary-and-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="summary-and-takeaways">Summary and Takeaways</h2>
+<ul>
+<li>We extended the basic block design model to include a block-by-treatment interaction.</li>
+<li>Detailed computations:
+<ul>
+<li><strong>Means, Sums of Squares, and Variance Components</strong> are essential for constructing the ANOVA.</li>
+<li><strong>Contrast and Confidence Intervals:</strong> Demonstrated using storage method differences.</li>
+</ul></li>
+<li>The R code illustrates how to read data, fit the model, and interpret the outputs.</li>
+<li>Always check the significance of the interaction to decide whether to interpret the main effects directly.</li>
+</ul>
 
 
 </section>
