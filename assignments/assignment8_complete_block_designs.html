@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
 
-<title>📚 Assignments – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 8: Complete Block Designs – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,20 +72,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
 
-<meta property="og:title" content="📚 Assignments – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Assignment 8: Complete Block Designs – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +96,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_assignments.html">Assignments</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignment 8: Complete Block Designs</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +147,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_assignments.html">Assignments</a></li></ol></nav>
-      <h1 class="title">📚 Assignments</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Assignment 8: Complete Block Designs</h1>
                       </div>
   </div>
     
@@ -173,16 +172,10 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">16-Mar-2025</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 16, 2025</p>
-      </div>
-    </div>
       
     </div>
     
@@ -203,19 +196,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +225,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link active">
+  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +248,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link">
+  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +277,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -301,7 +294,28 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#effervescent-experiment" id="toc-effervescent-experiment" class="nav-link" data-scroll-target="#effervescent-experiment">Effervescent Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  </ul></li>
+  <li><a href="#insole-cushion-experiment" id="toc-insole-cushion-experiment" class="nav-link" data-scroll-target="#insole-cushion-experiment">Insole Cushion Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1">Questions</a></li>
+  </ul></li>
+  <li><a href="#yeast-experiment" id="toc-yeast-experiment" class="nav-link" data-scroll-target="#yeast-experiment">Yeast Experiment</a>
+  <ul class="collapse">
+  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2">Questions</a></li>
+  </ul></li>
+  <li><a href="#grading-allocation" id="toc-grading-allocation" class="nav-link" data-scroll-target="#grading-allocation">Grading Allocation</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -309,80 +323,448 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note: Late submissions will not be accepted.</p>
-</div>
-</div>
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
-<li><strong>Visit the Assignment Page</strong>: Click on the <a href="https://Data-Wise.github.io/doe/home_assignments.html">Assignments</a> page to access the assignment list. Then, click on the assignment link you wish to complete.</li>
-<li><strong>Download the Assignment Template Quarto File</strong>: Download <a href="https://raw.githubusercontent.com/Data-Wise/misc/refs/heads/main/template_assignment_quarto.qmd">Assignment Template file</a> and <a href="./resources/Assignment Submission Instructions.pdf">Assignment Instruction file</a>. For the template file, right-click on page and select <code>Save As</code>, type the file name as <code>assignmentX_yourlastname.qmd</code>, and save it to your local machine.
-<ul>
-<li><em>Note</em>. Make sure the extension of the file is <code>.qmd</code> and not <code>.txt</code>.</li>
-</ul></li>
-<li><strong>Open in Quarto IDE</strong>: Use your preferred Quarto-supported IDE (e.g., RStudio, VS Code).</li>
-<li><strong>Complete the Assignment</strong>: Follow the instructions provided for each assignment and complete the tasks.
-<ul>
-<li>Esnure that you provide your name and the date at the top of the file in the YAML metadata section located at the beginning of the file (e.g., <code>title</code>, <code>author</code>).</li>
-<li>You do <strong>not</strong> need to modify other parts of the YAML metadata.</li>
-</ul></li>
-<li><strong>Render to PDF</strong>: Render the quartofile. The default output format is PDF.
-<ul>
-<li><strong>RStudio</strong>: Click on the <code>Knit</code> button.</li>
-<li><strong>VS Code</strong>: Use the Quarto extension to render the PDF. Make sure the Quarto extension is installed.</li>
-</ul></li>
-<li><strong>Submit on Canvas</strong>: Upload the rendered PDF on <a href="https://canvasinfo.unm.edu">Canvas</a> under the corresponding assignment section.</li>
+<li><strong>Objective</strong>: Analyze complete block designs, including block-treatment interactions, post-hoc tests, and trend analyses.</li>
+<li>Use R to conduct the statistical analysis for each exercise. Submit your results, including code and explanations, in a clear format.</li>
+<li>Clearly explain your analysis process for full credit.</li>
+<li>Submit your assignment as a single PDF file.</li>
 </ol>
+<p><strong>Total Points</strong>: 100</p>
 </section>
-<section id="assignment-list" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-list">Assignment List</h2>
-<p>Below is a list of all assignments for this course. Click on the links to access the assignment details and instructions. Ensure that you have the necessary software (e.g., Quarto, R, RStudio, or VS Code) to render and complete the assignments.</p>
-<ol type="1">
-<li><p><a href="./assignments/assignment1_basics_of_experimental_design.html">Assignment 1: Introduction to Experimental Design</a><br>
-<strong>Due Date</strong>: February 6, 2025</p></li>
-<li><p><a href="./assignments/assignment2_completely_randomized_design.html">Assignment 2: Completely Randomized Design (CRD)</a><br>
-<strong>Due Date</strong>: February 13, 2025</p></li>
-<li><p><a href="./assignments/assignment3_multiple_comparisons_and_contrasts.html">Assignment 3: Multiple Comparisons and Contrasts</a><br>
-<strong>Due Date</strong>: February 20, 2025</p></li>
-<li><p><a href="./assignments/assignment4_checking_model_assumptions.html">Assignment 4: Checking Model Assumptions</a><br>
-<strong>Due Date</strong>: February 27, 2025</p></li>
-<li><p><a href="./assignments/assignment5_two_factor_anova.html">Assignment 5: Two-Factor ANOVA</a><br>
-<strong>Due Date</strong>: March 6, 2025</p></li>
-<li><p><a href="./assignments/assignment6_higher_order_factorial_designs.html">Assignment 6: Higher-Order Factorial Designs</a><br>
-<strong>Due Date</strong>: March 25, 2025</p></li>
-<li><p><a href="./assignments/assignment7_randomized_complete_block_design.html">Assignment 7: Randomized Complete Block Design (RCBD)</a><br>
-<strong>Due Date</strong>: April 3, 2025</p></li>
-<li><p><a href="./assignments/assignment8_complete_block_designs.html">Assignment 8: Complete Block Designs</a><br>
-<strong>Due Date</strong>: April 10, 2025</p></li>
-<li><p><a href="./assignments/assignment9_analysis_of_covariance.html">Assignment 9: Analysis of Covariance (ANCOVA)</a><br>
-<strong>Due Date</strong>: April 17, 2025</p></li>
-<li><p><a href="./assignments/assignment10_row_column_designs.html">Assignment 10: Row-Column (Latin Square) Designs</a><br>
-<strong>Due Date</strong>: April 24, 2025</p></li>
-<li><p><a href="./assignments/assignment11_random_and_mixed_effects_models.html">Assignment 11: Random and Mixed Effects Models</a><br>
-<strong>Due Date</strong>: May 1, 2025</p></li>
-<li><p><a href="./assignments/assignment12_nested_models.html">Assignment 12: Nested Models</a><br>
-<strong>Due Date</strong>: May 6, 2025</p></li>
-<li><p><a href="./assignments/assignment13_split_plot_designs.html">Assignment 13: Split-Plot Designs</a><br>
-<strong>Due Date</strong>: May 13, 2025</p></li>
-</ol>
-</section>
-<section id="need-help" class="level2">
-<h2 class="anchored" data-anchor-id="need-help">Need Help?</h2>
+<section id="effervescent-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="effervescent-experiment">Effervescent Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 10, Exercise 13</strong></p>
+<p>The effervescent experiment, conducted by B. Bailey, J. Lewis, J. Speiser, Z. Thomas, and S. White (2011), aimed to compare the dissolving times of two brands of cold medicine tablets in different water temperatures.</p>
 <ul>
-<li>Refer to the <a href="https://Data-Wise.github.io/doe">Course GitHub Repository</a> for additional resources and examples.</li>
-<li>Post questions on the <a href="https://canvasinfo.unm.edu">Discussion Forum</a> on Canvas.</li>
-<li>Schedule a meeting with the instructor for further clarification.</li>
+<li><strong>Factors and Levels</strong>:
+<ul>
+<li>Brand: 1 (Name Brand), 2 (Store Brand)</li>
+<li>Water Temperature: 1 (6°C), 2 (23°C), 3 (40°C)</li>
+</ul></li>
+<li><strong>Design</strong>: A complete block design with:
+<ul>
+<li>Blocks:
+<ul>
+<li>Block I: Stirred liquid at 350 RPM using a magnetic stirring plate.</li>
+<li>Block II: Unstirred liquid.</li>
+</ul></li>
+<li>Observations: Four per treatment combination, with a total of six treatment combinations.</li>
+<li>Each observation represents an average of times measured by four experimenters.</li>
+</ul></li>
+<li><strong>Response Variable</strong>: Dissolving time in seconds.</li>
 </ul>
+<p>The data is provided in Table 10.26.</p>
+<table class="table">
+<caption>Dissolving time for the effervescent experiment (Order of observation in parentheses)</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Treatment Combination</strong></th>
+<th><strong>Block I (Stirred)</strong></th>
+<th><strong>Block II (Unstirred)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>75.525 (8), 70.325 (9), 69.925 (17), 69.800 (23)</td>
+<td>83.475 (34), 86.800 (41), 83.750 (44), 79.575 (46)</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>68.125 (3), 47.525 (4), 61.475 (6), 58.625 (14)</td>
+<td>71.759 (36), 70.825 (37), 73.925 (42), 71.550 (48)</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>44.825 (7), 36.200 (10), 39.350 (11), 37.425 (13)</td>
+<td>51.975 (28), 50.100 (29), 51.225 (33), 53.700 (47)</td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td>78.350 (1), 76.050 (12), 78.425 (15), 71.525 (16)</td>
+<td>92.725 (31), 77.957 (35), 85.425 (39), 87.333 (45)</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>40.575 (2), 40.000 (5), 39.500 (20), 40.400 (22)</td>
+<td>42.275 (30), 44.425 (32), 42.475 (38), 44.300 (42)</td>
+</tr>
+<tr class="even">
+<td>23</td>
+<td>27.450 (18), 26.600 (19), 24.950 (21), 26.325 (24)</td>
+<td>25.400 (25), 26.333 (26), 25.875 (27), 26.650 (40)</td>
+</tr>
+</tbody>
+</table>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<ol type="a">
+<li><p><strong>Plot and Explore the Data</strong>: Create appropriate plots to visualize the dissolving time for each treatment combination, such as interaction plots, boxplots, or scatterplots. Comment on any patterns, anomalies, or interesting features observed in the data.</p></li>
+<li><p><strong>Fit a Block-Treatment Model</strong>:</p></li>
+</ol>
+<ul>
+<li>Fit a linear model with block and treatment factors.</li>
+<li>Examine residuals to check assumptions, including outlier detection, variance equality, and normality of residuals.</li>
+<li>Report and interpret results.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Analyze Temperature Effects</strong>:</li>
+</ol>
+<ul>
+<li>Perform pairwise comparisons between the three temperature levels using appropriate post-hoc tests.</li>
+<li>Test for linear and quadratic trends in temperature effects on dissolving time, assuming these trends were pre-planned in the experimental design.</li>
+</ul>
+</section>
+</section>
+<section id="insole-cushion-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="insole-cushion-experiment">Insole Cushion Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 10, Exercise 15</strong></p>
+<p>This experiment, conducted in 1995 by V. Agresti, S. Decker, T. Karakostas, E. Patterson, and S. Schwartz, investigated how different insole cushions and brands affect the vertical ground reaction force.</p>
+<ul>
+<li><strong>Factors and Levels</strong>:
+<ul>
+<li>Cushion Type (C): 1 (Regular), 2 (Heel)</li>
+<li>Brand (D): 1 (Name Brand), 2 (Store Brand)</li>
+</ul></li>
+<li><strong>Design</strong>:
+<ul>
+<li>Single participant, alternating between dominant (right) and non-dominant (left) legs over two blocks (days).</li>
+<li>Each of the four treatment combinations measured five times in randomized order per block.</li>
+</ul></li>
+<li><strong>Response Variable</strong>: Maximum deceleration of the vertical ground reaction force (in Newtons).</li>
+</ul>
+<p>The data is provided in Table 10.28.</p>
+<table class="table">
+<caption>Data for the insole cushion experiment (Order of observation in parentheses)</caption>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>C</strong></th>
+<th><strong>D</strong></th>
+<th><strong>Response in Newtons (Order)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><strong>Block I (Right Leg)</strong></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+<td>899.99 (3), 910.81 (5), 927.79 (10), 888.77 (11), 911.93 (16)</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>924.92 (2), 900.10 (6), 923.55 (12), 891.56 (17), 885.73 (20)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>888.09 (4), 954.11 (7), 937.41 (9), 911.85 (14), 908.41 (18)</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+<td>884.01 (1), 918.36 (8), 880.23 (13), 891.16 (15), 917.16 (19)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><strong>Block II (Left Leg)</strong></td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>852.94 (22), 866.28 (27), 886.65 (28), 851.14 (33), 869.80 (34)</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>2</td>
+<td>882.95 (21), 865.58 (24), 868.15 (25), 893.82 (37), 875.98 (38)</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1</td>
+<td>920.93 (26), 880.26 (31), 897.10 (35), 893.78 (39), 885.80 (40)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>872.50 (23), 892.76 (29), 895.93 (30), 899.44 (32), 912.00 (36)</td>
+</tr>
+</tbody>
+</table>
+<section id="questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="questions-1">Questions</h3>
+<ol type="a">
+<li><strong>Fit a Model with Interaction</strong>:</li>
+</ol>
+<ul>
+<li>Include block-treatment interactions in the ANOVA model.</li>
+<li>Create and interpret an analysis of variance (ANOVA) table.</li>
+</ul>
+<ol start="2" type="a">
+<li><strong>Generate Interaction Plots</strong>:</li>
+</ol>
+<ul>
+<li>Create plots for:
+<ul>
+<li>Cushion (C) × Brand (D) interaction.</li>
+<li>Cushion (C) × Block interaction.</li>
+<li>Brand (D) × Block interaction.</li>
+<li>Treatment combination × Block interaction.</li>
+</ul></li>
+<li>Identify and describe contrasts of interest for further analysis.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Confidence Intervals</strong>:</li>
+</ol>
+<ul>
+<li>Compute confidence intervals for means and contrasts identified in (b). Use these intervals to validate observed differences or interactions.</li>
+</ul>
+<ol start="4" type="a">
+<li><strong>Re-examine the Data</strong>:</li>
+</ol>
+<ul>
+<li>Check assumptions, focusing on the two potential outliers.</li>
+<li>Re-analyze the data excluding one or both outliers.</li>
+<li>Discuss whether the conclusions differ between analyses and justify which analysis should be reported.</li>
+</ul>
+</section>
+</section>
+<section id="yeast-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="yeast-experiment">Yeast Experiment</h2>
+<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 10, Exercise 16</strong></p>
+<p>This experiment explored the effects of yeast type, initial temperature, and water bath temperature on the rate of yeast rising.</p>
+<ul>
+<li><strong>Factors and Levels</strong>:
+<ul>
+<li>Initial Water Temperature (C): 100°F, 115°F, 130°F</li>
+<li>Yeast Type (D): 1 (Rapid Rise), 2 (Regular)</li>
+<li>Bath Temperature (E): 70°F, 85°F</li>
+</ul></li>
+<li><strong>Design</strong>:
+<ul>
+<li>Three blocks, with each experimenter-team forming a block.</li>
+<li>Each treatment combination observed twice per block.</li>
+</ul></li>
+<li><strong>Response Variable</strong>: Percentage gain in height after 15 minutes.</li>
+</ul>
+<p>The data is provided in Table 10.29.</p>
+<table class="table">
+<caption>Data for the yeast experiment (percentage rise). Treatment combinations are the levels of (water temperature, yeast, bath temperature)</caption>
+<thead>
+<tr class="header">
+<th><strong>Treatment Combination</strong></th>
+<th><strong>Block 1</strong></th>
+<th><strong>Block 2</strong></th>
+<th><strong>Block 3</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>111</td>
+<td>8.2, 2.7</td>
+<td>10.9, 1.8</td>
+<td>11.4, 4.8</td>
+</tr>
+<tr class="even">
+<td>112</td>
+<td>30.0, 39.8</td>
+<td>31.8, 36.0</td>
+<td>42.4, 20.0</td>
+</tr>
+<tr class="odd">
+<td>121</td>
+<td>12.6, 17.7</td>
+<td>3.5, 3.4</td>
+<td>3.4, 8.5</td>
+</tr>
+<tr class="even">
+<td>122</td>
+<td>64.7, 73.9</td>
+<td>42.0, 32.6</td>
+<td>34.5, 30.0</td>
+</tr>
+<tr class="odd">
+<td>211</td>
+<td>18.1, 5.4</td>
+<td>12.3, 18.3</td>
+<td>8.5, 8.0</td>
+</tr>
+<tr class="even">
+<td>212</td>
+<td>63.5, 66.3</td>
+<td>23.7, 57.5</td>
+<td>30.6, 45.3</td>
+</tr>
+<tr class="odd">
+<td>221</td>
+<td>4.2, 12.2</td>
+<td>7.7, 8.3</td>
+<td>6.0, 8.2</td>
+</tr>
+<tr class="even">
+<td>222</td>
+<td>96.8, 71.1</td>
+<td>34.1, 40.9</td>
+<td>49.3, 46.0</td>
+</tr>
+<tr class="odd">
+<td>311</td>
+<td>44.4, 16.4</td>
+<td>5.0, 4.8</td>
+<td>8.5, 3.3</td>
+</tr>
+<tr class="even">
+<td>312</td>
+<td>58.2, 63.3</td>
+<td>29.2, 27.8</td>
+<td>37.5, 18.2</td>
+</tr>
+<tr class="odd">
+<td>321</td>
+<td>19.8, 9.4</td>
+<td>4.8, 6.7</td>
+<td>6.4, 12.9</td>
+</tr>
+<tr class="even">
+<td>322</td>
+<td>99.7, 92.3</td>
+<td>53.2, 58.9</td>
+<td>43.9, 73.7</td>
+</tr>
+</tbody>
+</table>
+<section id="questions-2" class="level3">
+<h3 class="anchored" data-anchor-id="questions-2">Questions</h3>
+<ol type="a">
+<li><p><strong>Randomization Justification</strong>: Explain why treatment combinations should be randomized within each block before measurements.</p></li>
+<li><p><strong>Residual Normality</strong>:</p></li>
+</ol>
+<ul>
+<li>Discuss the general importance of checking residual normality.</li>
+<li>Explain its relevance to this experiment’s context.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Sample Size for Precision</strong>:</li>
+</ol>
+<ul>
+<li>Calculate the minimum number of observations per treatment combination required to achieve a 99% confidence interval with a half-width of ≤5%. Use an error variance estimate of 9 percent².</li>
+</ul>
+<ol start="4" type="a">
+<li><strong>ANOVA Table</strong>:</li>
+</ol>
+<ul>
+<li>Construct an ANOVA table for the data.</li>
+<li>Discuss the significance of main effects, interactions, and their implications.</li>
+</ul>
+<ol start="5" type="a">
+<li><strong>Visualize Treatment Effects</strong>:</li>
+</ol>
+<ul>
+<li>Create two plots to illustrate the main points about treatment effects. Justify the choice of these plots.</li>
+</ul>
+<ol start="6" type="a">
+<li><strong>Trend Analysis</strong>:</li>
+</ol>
+<ul>
+<li>Test for a significant linear trend in percentage height gain as initial water temperature increases. Use a significance level of 0.01 and state conclusions.</li>
+</ul>
+</section>
+</section>
+<section id="grading-allocation" class="level2">
+<h2 class="anchored" data-anchor-id="grading-allocation">Grading Allocation</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Exercise Title</strong></th>
+<th><strong>Part</strong></th>
+<th><strong>Grade Weight (%)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Effervescent Experiment</td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(b)</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(c)</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>Insole Cushion Experiment</td>
+<td>(a)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(b)</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(c)</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(d)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Yeast Experiment</td>
+<td>(a)</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(b)</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(c)</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(d)</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(e)</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(f)</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
@@ -822,5 +1204,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

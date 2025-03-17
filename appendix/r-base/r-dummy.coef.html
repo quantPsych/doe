@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
+<meta name="dcterms.date" content="2025-03-15">
 
-<title>📚 Assignments – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>r-dummy.coef – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +22,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,20 +107,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
 
-<meta property="og:title" content="📚 Assignments – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/appendix/r-base/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +131,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_assignments.html">Assignments</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +182,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_assignments.html">Assignments</a></li></ol></nav>
-      <h1 class="title">📚 Assignments</h1>
+    <div class="quarto-title column-body">
+      
                       </div>
   </div>
     
@@ -173,14 +207,14 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">March 15, 2025</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 16, 2025</p>
+        <p class="date-modified">March 15, 2025</p>
       </div>
     </div>
       
@@ -203,19 +237,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +266,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +289,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link">
+  <a href="../../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +318,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -301,7 +335,9 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -309,83 +345,176 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note: Late submissions will not be accepted.</p>
-</div>
-</div>
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<ol type="1">
-<li><strong>Visit the Assignment Page</strong>: Click on the <a href="https://Data-Wise.github.io/doe/home_assignments.html">Assignments</a> page to access the assignment list. Then, click on the assignment link you wish to complete.</li>
-<li><strong>Download the Assignment Template Quarto File</strong>: Download <a href="https://raw.githubusercontent.com/Data-Wise/misc/refs/heads/main/template_assignment_quarto.qmd">Assignment Template file</a> and <a href="./resources/Assignment Submission Instructions.pdf">Assignment Instruction file</a>. For the template file, right-click on page and select <code>Save As</code>, type the file name as <code>assignmentX_yourlastname.qmd</code>, and save it to your local machine.
+<p>This function is particularly useful when dealing with linear models that include factors (categorical variables). It helps you extract and understand the coefficients associated with those factors, considering the way R handles factor levels.</p>
+<p><strong>1. What is <code>dummy.coef</code>?</strong></p>
+<p>The <code>dummy.coef</code> function is a generic function in R. It extracts the coefficients associated with the dummy variables that are implicitly created when you include a factor variable in a linear model (using <code>lm</code>). It’s an S3 method, meaning it has specific implementations for different classes of objects, most notably for <code>lm</code> objects (linear models).</p>
+<p><strong>2. Why do we need it?</strong></p>
+<p>When you include a factor variable in a linear model, R internally creates dummy variables (also known as indicator variables) to represent the different levels of that factor. For example, if you have a factor variable “Color” with levels “Red”, “Green”, and “Blue”, R will create two dummy variables (one less than the number of levels). One level is implicitly treated as the “baseline” or “reference” level. The coefficients of the other dummy variables represent the <em>difference</em> in the response variable compared to the baseline level.</p>
+<p><code>dummy.coef</code> makes it easier to see these coefficients and their relationship to the original factor levels. It can be particularly helpful when you have interactions between factors or when you want to get a clear picture of the effect of each factor level.</p>
+<p><strong>3. Basic Usage</strong></p>
+<p>The general syntax is:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dummy.coef</span>(object, <span class="at">use.na =</span> <span class="cn">FALSE</span>, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><em>Note</em>. Make sure the extension of the file is <code>.qmd</code> and not <code>.txt</code>.</li>
-</ul></li>
-<li><strong>Open in Quarto IDE</strong>: Use your preferred Quarto-supported IDE (e.g., RStudio, VS Code).</li>
-<li><strong>Complete the Assignment</strong>: Follow the instructions provided for each assignment and complete the tasks.
-<ul>
-<li>Esnure that you provide your name and the date at the top of the file in the YAML metadata section located at the beginning of the file (e.g., <code>title</code>, <code>author</code>).</li>
-<li>You do <strong>not</strong> need to modify other parts of the YAML metadata.</li>
-</ul></li>
-<li><strong>Render to PDF</strong>: Render the quartofile. The default output format is PDF.
-<ul>
-<li><strong>RStudio</strong>: Click on the <code>Knit</code> button.</li>
-<li><strong>VS Code</strong>: Use the Quarto extension to render the PDF. Make sure the Quarto extension is installed.</li>
-</ul></li>
-<li><strong>Submit on Canvas</strong>: Upload the rendered PDF on <a href="https://canvasinfo.unm.edu">Canvas</a> under the corresponding assignment section.</li>
-</ol>
-</section>
-<section id="assignment-list" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-list">Assignment List</h2>
-<p>Below is a list of all assignments for this course. Click on the links to access the assignment details and instructions. Ensure that you have the necessary software (e.g., Quarto, R, RStudio, or VS Code) to render and complete the assignments.</p>
-<ol type="1">
-<li><p><a href="./assignments/assignment1_basics_of_experimental_design.html">Assignment 1: Introduction to Experimental Design</a><br>
-<strong>Due Date</strong>: February 6, 2025</p></li>
-<li><p><a href="./assignments/assignment2_completely_randomized_design.html">Assignment 2: Completely Randomized Design (CRD)</a><br>
-<strong>Due Date</strong>: February 13, 2025</p></li>
-<li><p><a href="./assignments/assignment3_multiple_comparisons_and_contrasts.html">Assignment 3: Multiple Comparisons and Contrasts</a><br>
-<strong>Due Date</strong>: February 20, 2025</p></li>
-<li><p><a href="./assignments/assignment4_checking_model_assumptions.html">Assignment 4: Checking Model Assumptions</a><br>
-<strong>Due Date</strong>: February 27, 2025</p></li>
-<li><p><a href="./assignments/assignment5_two_factor_anova.html">Assignment 5: Two-Factor ANOVA</a><br>
-<strong>Due Date</strong>: March 6, 2025</p></li>
-<li><p><a href="./assignments/assignment6_higher_order_factorial_designs.html">Assignment 6: Higher-Order Factorial Designs</a><br>
-<strong>Due Date</strong>: March 25, 2025</p></li>
-<li><p><a href="./assignments/assignment7_randomized_complete_block_design.html">Assignment 7: Randomized Complete Block Design (RCBD)</a><br>
-<strong>Due Date</strong>: April 3, 2025</p></li>
-<li><p><a href="./assignments/assignment8_complete_block_designs.html">Assignment 8: Complete Block Designs</a><br>
-<strong>Due Date</strong>: April 10, 2025</p></li>
-<li><p><a href="./assignments/assignment9_analysis_of_covariance.html">Assignment 9: Analysis of Covariance (ANCOVA)</a><br>
-<strong>Due Date</strong>: April 17, 2025</p></li>
-<li><p><a href="./assignments/assignment10_row_column_designs.html">Assignment 10: Row-Column (Latin Square) Designs</a><br>
-<strong>Due Date</strong>: April 24, 2025</p></li>
-<li><p><a href="./assignments/assignment11_random_and_mixed_effects_models.html">Assignment 11: Random and Mixed Effects Models</a><br>
-<strong>Due Date</strong>: May 1, 2025</p></li>
-<li><p><a href="./assignments/assignment12_nested_models.html">Assignment 12: Nested Models</a><br>
-<strong>Due Date</strong>: May 6, 2025</p></li>
-<li><p><a href="./assignments/assignment13_split_plot_designs.html">Assignment 13: Split-Plot Designs</a><br>
-<strong>Due Date</strong>: May 13, 2025</p></li>
-</ol>
-</section>
-<section id="need-help" class="level2">
-<h2 class="anchored" data-anchor-id="need-help">Need Help?</h2>
-<ul>
-<li>Refer to the <a href="https://Data-Wise.github.io/doe">Course GitHub Repository</a> for additional resources and examples.</li>
-<li>Post questions on the <a href="https://canvasinfo.unm.edu">Discussion Forum</a> on Canvas.</li>
-<li>Schedule a meeting with the instructor for further clarification.</li>
+<li><code>object</code>: This is the fitted <code>lm</code> object (the result of running <code>lm()</code>).</li>
+<li><code>use.na</code>: A logical value. If <code>TRUE</code>, coefficients for the <code>NA</code> level of a factor (if present) will be included in the output. Defaults to <code>FALSE</code>.</li>
+<li><code>...</code>: Other arguments passed to or from other methods.</li>
 </ul>
+<p><strong>4. Example with Simulated Data</strong></p>
+<p>Let’s create a simple example to illustrate how <code>dummy.coef</code> works:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Group =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">20</span>)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Treatment =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>), <span class="at">times =</span> <span class="dv">30</span>)),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">rnorm</span>(<span class="dv">60</span>, <span class="at">mean =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">8</span>), <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>), <span class="at">times =</span> <span class="dv">30</span>) <span class="sc">==</span> <span class="st">"Y"</span>, <span class="dv">3</span>, <span class="dv">0</span>) <span class="co"># Treatment effect</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Value <span class="sc">~</span> Group <span class="sc">+</span> Treatment, <span class="at">data =</span> data)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use dummy.coef</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>dummy_coefs <span class="ot">&lt;-</span> <span class="fu">dummy.coef</span>(model)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dummy_coefs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Full coefficients are 
+                                                
+(Intercept):      10.30044                      
+Group:                   A          B          C
+                 0.0000000 -0.5857619 -0.1702771
+Treatment:               X          Y           
+                  0.000000   3.165612           </code></pre>
+</div>
+</div>
+<p><strong>Explanation:</strong></p>
+<ol type="1">
+<li><p><strong>Data Creation:</strong></p>
+<ul>
+<li>We create a data frame with two factor variables: <code>Group</code> (levels A, B, C) and <code>Treatment</code> (levels X, Y).</li>
+<li><code>Value</code> is a continuous variable that depends on both <code>Group</code> and <code>Treatment</code>. We introduce a treatment effect, so “Y” consistently increases the value. We also give different mean values for the groups.</li>
+</ul></li>
+<li><p><strong>Model Fitting:</strong></p>
+<ul>
+<li><code>lm(Value ~ Group + Treatment, data = data)</code> fits a linear model where <code>Value</code> is predicted by <code>Group</code> and <code>Treatment</code>.</li>
+</ul></li>
+<li><p><strong><code>dummy.coef</code> Application:</strong></p>
+<ul>
+<li><code>dummy.coef(model)</code> extracts the coefficients related to the factor variables.</li>
+</ul></li>
+<li><p><strong>Output Interpretation:</strong></p>
+<p>The output of <code>print(dummy_coefs)</code> will be a list. It will contain elements like:</p>
+<ul>
+<li><code>(Intercept)</code>: This is the intercept of the model. It represents the predicted <code>Value</code> when all factor variables are at their baseline levels. R chooses one level as the baseline (usually the first alphabetically).</li>
+<li><code>Group</code>: This will contain coefficients for <code>GroupB</code> and <code>GroupC</code>. These coefficients represent the <em>difference</em> in <code>Value</code> between Group B and Group A (the baseline), and between Group C and Group A.</li>
+<li><code>Treatment</code>: This will contain a coefficient for <code>TreatmentY</code>. This coefficient represents the <em>difference</em> in <code>Value</code> between Treatment Y and Treatment X (the baseline).</li>
+</ul></li>
+</ol>
+<p><strong>5. Example with Interactions</strong></p>
+<p><code>dummy.coef</code> is even more helpful when you have interactions between factor variables. Let’s add an interaction term to the model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model with interaction</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model_interaction <span class="ot">&lt;-</span> <span class="fu">lm</span>(Value <span class="sc">~</span> Group <span class="sc">*</span> Treatment, <span class="at">data =</span> data)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use dummy.coef</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dummy_coefs_interaction <span class="ot">&lt;-</span> <span class="fu">dummy.coef</span>(model_interaction)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dummy_coefs_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Full coefficients are 
+                                                                        
+(Intercept):          10.63396                                          
+Group:                       A          B          C                    
+                     0.0000000 -0.9595787 -0.7970170                    
+Treatment:                   X          Y                               
+                      0.000000   2.498574                               
+Group:Treatment:           A:X        B:X        C:X       A:Y       B:Y
+                     0.0000000  0.0000000  0.0000000 0.0000000 0.7476336
+                             
+(Intercept):                 
+Group:                       
+                             
+Treatment:                   
+                             
+Group:Treatment:          C:Y
+                    1.2534796</code></pre>
+</div>
+</div>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li><code>Value ~ Group * Treatment</code> includes both the main effects of <code>Group</code> and <code>Treatment</code> and their interaction.</li>
+<li>The output of <code>dummy.coef</code> will now include coefficients for the interaction terms, such as <code>GroupB:TreatmentY</code> and <code>GroupC:TreatmentY</code>. These coefficients represent the <em>additional</em> effect of Treatment Y on Groups B and C, <em>beyond</em> the main effects of Group and Treatment.</li>
+</ul>
+<p><strong>6. Changing the Baseline Level</strong></p>
+<p>Sometimes you want to change the baseline level of a factor. You can do this using the <code>relevel()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change the baseline level of Group to "B"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data<span class="sc">$</span>Group, <span class="at">ref =</span> <span class="st">"B"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>model_relevel <span class="ot">&lt;-</span> <span class="fu">lm</span>(Value <span class="sc">~</span> Group <span class="sc">+</span> Treatment, <span class="at">data =</span> data)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use dummy.coef</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>dummy_coefs_relevel <span class="ot">&lt;-</span> <span class="fu">dummy.coef</span>(model_relevel)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dummy_coefs_relevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Full coefficients are 
+                                             
+(Intercept):      9.71468                    
+Group:                  B         A         C
+                0.0000000 0.5857619 0.4154848
+Treatment:              X         Y          
+                 0.000000  3.165612          </code></pre>
+</div>
+</div>
+<p>Now, the <code>(Intercept)</code> will represent the predicted <code>Value</code> when <code>Group</code> is at level “B” and <code>Treatment</code> is at level “X”. The <code>Group</code> coefficients will now represent the differences between Groups A and B, and Groups C and B.</p>
+<p><strong>7. Handling <code>NA</code> Values</strong></p>
+<p>If your factor variable contains <code>NA</code> values, you can use the <code>use.na = TRUE</code> argument to include the coefficient for the <code>NA</code> level in the output. However, be cautious about interpreting this coefficient, as <code>NA</code> values often indicate missing or problematic data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Introduce some NAs</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Group[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data), <span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model_na <span class="ot">&lt;-</span> <span class="fu">lm</span>(Value <span class="sc">~</span> Group <span class="sc">+</span> Treatment, <span class="at">data =</span> data)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use dummy.coef with use.na = TRUE</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>dummy_coefs_na <span class="ot">&lt;-</span> <span class="fu">dummy.coef</span>(model_na, <span class="at">use.na =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dummy_coefs_na)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Full coefficients are 
+                                             
+(Intercept):     9.602415                    
+Group:                  B         A         C
+                0.0000000 0.6096867 0.5201619
+Treatment:              X         Y          
+                 0.000000  3.180788          </code></pre>
+</div>
+</div>
+<p><strong>8. Key Takeaways</strong></p>
+<ul>
+<li><code>dummy.coef</code> is a valuable tool for understanding the coefficients associated with factor variables in linear models.</li>
+<li>It helps you see the effects of each factor level relative to the baseline level.</li>
+<li>It’s particularly useful when dealing with interactions between factors.</li>
+<li>You can change the baseline level using <code>relevel()</code>.</li>
+<li>Use <code>use.na = TRUE</code> to include coefficients for <code>NA</code> levels (but interpret with caution).</li>
+</ul>
+<p><strong>9. Where to Go Next</strong></p>
+<ul>
+<li><strong><code>?dummy.coef</code>:</strong> Read the official R documentation for <code>dummy.coef</code>.</li>
+<li><strong><code>?lm</code>:</strong> Review the documentation for the <code>lm</code> function to understand how it handles factor variables.</li>
+<li><strong>Books on Regression Analysis:</strong> Consult a good textbook on regression analysis to deepen your understanding of dummy variables and model interpretation. Examples include “Applied Regression Analysis” by Draper and Smith or “Regression Models for Categorical and Limited Dependent Variables” by Long.</li>
+<li><strong>Online Tutorials:</strong> Search for tutorials on “dummy variables in R” or “factor variables in linear models R”.</li>
+</ul>
+<p>This tutorial should give you a solid foundation for using the <code>dummy.coef</code> function effectively. Remember to experiment with different models and datasets to gain a deeper understanding of its capabilities. Good luck!</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
@@ -822,5 +951,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

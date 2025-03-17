@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
 
-<title>📚 Assignments – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Assignment 9: Analysis of Covariance (ANCOVA) – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,21 +71,50 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
-<meta property="og:title" content="📚 Assignments – STAT 454/545 - Analysis of Variance and Experimental Design">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Assignment 9: Analysis of Covariance (ANCOVA) – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/assignments/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +125,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_assignments.html">Assignments</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignment 9: Analysis of Covariance (ANCOVA)</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +176,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_assignments.html">Assignments</a></li></ol></nav>
-      <h1 class="title">📚 Assignments</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Assignment 9: Analysis of Covariance (ANCOVA)</h1>
                       </div>
   </div>
     
@@ -173,16 +201,10 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">16-Mar-2025</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 16, 2025</p>
-      </div>
-    </div>
       
     </div>
     
@@ -203,19 +225,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +254,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link active">
+  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +277,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link">
+  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +306,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -301,7 +323,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#exercise-7.7-coating-experiment" id="toc-exercise-7.7-coating-experiment" class="nav-link" data-scroll-target="#exercise-7.7-coating-experiment"><strong>Exercise 7.7: Coating Experiment</strong></a></li>
+  <li><a href="#exercise-7.11-antifungal-antibiotic-experiment" id="toc-exercise-7.11-antifungal-antibiotic-experiment" class="nav-link" data-scroll-target="#exercise-7.11-antifungal-antibiotic-experiment"><strong>Exercise 7.11: Antifungal Antibiotic Experiment</strong></a></li>
+  <li><a href="#exercise-7.12-antifungal-antibiotic-experiment-extended" id="toc-exercise-7.12-antifungal-antibiotic-experiment-extended" class="nav-link" data-scroll-target="#exercise-7.12-antifungal-antibiotic-experiment-extended"><strong>Exercise 7.12: Antifungal Antibiotic Experiment (Extended)</strong></a>
+  <ul class="collapse">
+  <li><a href="#summary-table-of-grades-and-rubric" id="toc-summary-table-of-grades-and-rubric" class="nav-link" data-scroll-target="#summary-table-of-grades-and-rubric">Summary Table of Grades and Rubric</a></li>
+  <li><a href="#grade-summary-table" id="toc-grade-summary-table" class="nav-link" data-scroll-target="#grade-summary-table"><strong>Grade Summary Table</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -309,82 +346,371 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note: Late submissions will not be accepted.</p>
-</div>
-</div>
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
-<li><strong>Visit the Assignment Page</strong>: Click on the <a href="https://Data-Wise.github.io/doe/home_assignments.html">Assignments</a> page to access the assignment list. Then, click on the assignment link you wish to complete.</li>
-<li><strong>Download the Assignment Template Quarto File</strong>: Download <a href="https://raw.githubusercontent.com/Data-Wise/misc/refs/heads/main/template_assignment_quarto.qmd">Assignment Template file</a> and <a href="./resources/Assignment Submission Instructions.pdf">Assignment Instruction file</a>. For the template file, right-click on page and select <code>Save As</code>, type the file name as <code>assignmentX_yourlastname.qmd</code>, and save it to your local machine.
-<ul>
-<li><em>Note</em>. Make sure the extension of the file is <code>.qmd</code> and not <code>.txt</code>.</li>
-</ul></li>
-<li><strong>Open in Quarto IDE</strong>: Use your preferred Quarto-supported IDE (e.g., RStudio, VS Code).</li>
-<li><strong>Complete the Assignment</strong>: Follow the instructions provided for each assignment and complete the tasks.
-<ul>
-<li>Esnure that you provide your name and the date at the top of the file in the YAML metadata section located at the beginning of the file (e.g., <code>title</code>, <code>author</code>).</li>
-<li>You do <strong>not</strong> need to modify other parts of the YAML metadata.</li>
-</ul></li>
-<li><strong>Render to PDF</strong>: Render the quartofile. The default output format is PDF.
-<ul>
-<li><strong>RStudio</strong>: Click on the <code>Knit</code> button.</li>
-<li><strong>VS Code</strong>: Use the Quarto extension to render the PDF. Make sure the Quarto extension is installed.</li>
-</ul></li>
-<li><strong>Submit on Canvas</strong>: Upload the rendered PDF on <a href="https://canvasinfo.unm.edu">Canvas</a> under the corresponding assignment section.</li>
+<li><strong>Objective</strong>: Explore the analysis of covariance (ANCOVA) and its applications in experimental designs.</li>
+<li>Use R to conduct the analyses for each exercise. Submit your results, including code and explanations, in a clear format.</li>
+<li>Clearly explain your analysis process for full credit.</li>
+<li>Submit your assignment as a single PDF file.</li>
 </ol>
+<p><strong>Total points</strong>: 155</p>
 </section>
-<section id="assignment-list" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-list">Assignment List</h2>
-<p>Below is a list of all assignments for this course. Click on the links to access the assignment details and instructions. Ensure that you have the necessary software (e.g., Quarto, R, RStudio, or VS Code) to render and complete the assignments.</p>
-<ol type="1">
-<li><p><a href="./assignments/assignment1_basics_of_experimental_design.html">Assignment 1: Introduction to Experimental Design</a><br>
-<strong>Due Date</strong>: February 6, 2025</p></li>
-<li><p><a href="./assignments/assignment2_completely_randomized_design.html">Assignment 2: Completely Randomized Design (CRD)</a><br>
-<strong>Due Date</strong>: February 13, 2025</p></li>
-<li><p><a href="./assignments/assignment3_multiple_comparisons_and_contrasts.html">Assignment 3: Multiple Comparisons and Contrasts</a><br>
-<strong>Due Date</strong>: February 20, 2025</p></li>
-<li><p><a href="./assignments/assignment4_checking_model_assumptions.html">Assignment 4: Checking Model Assumptions</a><br>
-<strong>Due Date</strong>: February 27, 2025</p></li>
-<li><p><a href="./assignments/assignment5_two_factor_anova.html">Assignment 5: Two-Factor ANOVA</a><br>
-<strong>Due Date</strong>: March 6, 2025</p></li>
-<li><p><a href="./assignments/assignment6_higher_order_factorial_designs.html">Assignment 6: Higher-Order Factorial Designs</a><br>
-<strong>Due Date</strong>: March 25, 2025</p></li>
-<li><p><a href="./assignments/assignment7_randomized_complete_block_design.html">Assignment 7: Randomized Complete Block Design (RCBD)</a><br>
-<strong>Due Date</strong>: April 3, 2025</p></li>
-<li><p><a href="./assignments/assignment8_complete_block_designs.html">Assignment 8: Complete Block Designs</a><br>
-<strong>Due Date</strong>: April 10, 2025</p></li>
-<li><p><a href="./assignments/assignment9_analysis_of_covariance.html">Assignment 9: Analysis of Covariance (ANCOVA)</a><br>
-<strong>Due Date</strong>: April 17, 2025</p></li>
-<li><p><a href="./assignments/assignment10_row_column_designs.html">Assignment 10: Row-Column (Latin Square) Designs</a><br>
-<strong>Due Date</strong>: April 24, 2025</p></li>
-<li><p><a href="./assignments/assignment11_random_and_mixed_effects_models.html">Assignment 11: Random and Mixed Effects Models</a><br>
-<strong>Due Date</strong>: May 1, 2025</p></li>
-<li><p><a href="./assignments/assignment12_nested_models.html">Assignment 12: Nested Models</a><br>
-<strong>Due Date</strong>: May 6, 2025</p></li>
-<li><p><a href="./assignments/assignment13_split_plot_designs.html">Assignment 13: Split-Plot Designs</a><br>
-<strong>Due Date</strong>: May 13, 2025</p></li>
-</ol>
-</section>
-<section id="need-help" class="level2">
-<h2 class="anchored" data-anchor-id="need-help">Need Help?</h2>
+<section id="exercise-7.7-coating-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-7.7-coating-experiment"><strong>Exercise 7.7: Coating Experiment</strong></h2>
+<p>This exercise examines the effects of spray parameters on the thermal spray coating properties of alumina (<span class="math inline">\(\text{Al}_2\text{O}_3\)</span>). The experimental factors and levels are as follows:</p>
 <ul>
-<li>Refer to the <a href="https://Data-Wise.github.io/doe">Course GitHub Repository</a> for additional resources and examples.</li>
-<li>Post questions on the <a href="https://canvasinfo.unm.edu">Discussion Forum</a> on Canvas.</li>
-<li>Schedule a meeting with the instructor for further clarification.</li>
+<li><strong>Fuel ratio (A):</strong> 1:2.8 and 1:2.0</li>
+<li><strong>Carrier gas flow rate (B):</strong> 1.33 and 3.21 <span class="math inline">\(\text{L/s}^{-1}\)</span></li>
+<li><strong>Frequency of detonations (C):</strong> 2 and 4 Hz</li>
+<li><strong>Spray distance (D):</strong> 180 and 220 mm</li>
 </ul>
+<p>The response variable is porosity (vol.&nbsp;%). Data are shown in <strong>Table 7.19</strong>.</p>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><strong>Design an Analysis</strong></li>
+</ol>
+<p>Assuming negligible threeand four-factor interactions, outline the steps required to analyze the data (refer to Step (g) of the checklist in Chapter 2).</p>
+<ol type="1">
+<li><strong>Check Model Assumptions</strong></li>
+</ol>
+<p>Evaluate whether the assumptions underlying the model are valid.</p>
+<ol type="1">
+<li><strong>Perform the Analysis</strong></li>
+</ol>
+<p>Conduct the analysis you outlined in part (1), including interaction plots if appropriate. Clearly state your conclusions.</p>
+<p><strong>Table 7.19</strong>: Data for the Coating Experiment</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th><span class="math inline">\(y_{ijkl}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>5.95</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>4.57</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>4.03</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>2.17</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>3.43</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p><em>Source: Adapted from Saravanan et al.&nbsp;(2001), Journal of Physics D: Applied Physics.</em></p>
+</section>
+<section id="exercise-7.11-antifungal-antibiotic-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-7.11-antifungal-antibiotic-experiment"><strong>Exercise 7.11: Antifungal Antibiotic Experiment</strong></h2>
+<p>This exercise investigates the effects of incubation conditions on the yield of an antifungal antibiotic.</p>
+<ul>
+<li><strong>Factors and Levels:</strong></li>
+<li>Incubation temperature (A): 25, 30, and 37 <span class="math inline">\(^\circ \text{C}\)</span></li>
+<li>Carbon concentration (B): 2%, 5%, and 7.5%</li>
+<li>Nitrogen concentration (C): 0.5%, 1%, and 3%</li>
+</ul>
+<p>The response variable is the antifungal yield (measured in activity against <em>Candida albicans</em>). Data are shown in <strong>Table 7.23</strong>.</p>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><strong>Assess Main Effects</strong></li>
+</ol>
+<p>Construct plots to assess the significance of main effects of <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span> on the response. What are your conclusions?</p>
+<ol type="1">
+<li><strong>Interaction Assumptions</strong></li>
+</ol>
+<p>State the assumptions you made regarding interactions while analyzing main effects in part (1).</p>
+<ol type="1">
+<li><strong>Two-Way Interactions</strong></li>
+</ol>
+<p>Construct plots to assess the significance of two-way interactions. Do they alter your conclusions from part (1)?</p>
+<ol type="1">
+<li><strong>Fit a Model</strong></li>
+</ol>
+<p>Assuming no three-way interaction, fit a model with all main effects and two-way interactions. Discuss the significance of the effects and compare with your conclusions from part (3).</p>
+<ol type="1">
+<li><strong>Model Diagnostics</strong></li>
+</ol>
+<p>Evaluate whether the assumptions of normality and equal error variances are satisfied. Identify potential outliers.</p>
+<p><strong>Table 7.23</strong>: Data for Antifungal Antibiotic Experiment</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th><span class="math inline">\(y_{ijk}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>25</td>
+<td>2</td>
+<td>0.5</td>
+<td>25.84</td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>2</td>
+<td>1</td>
+<td>51.86</td>
+</tr>
+<tr class="odd">
+<td>25</td>
+<td>2</td>
+<td>3</td>
+<td>32.59</td>
+</tr>
+<tr class="even">
+<td>30</td>
+<td>5</td>
+<td>1</td>
+<td>41.11</td>
+</tr>
+<tr class="odd">
+<td>37</td>
+<td>7.5</td>
+<td>0.5</td>
+<td>51.86</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p><em>Source: Gupte and Kulkarni (2003), Journal of Chemical Technology and Biotechnology.</em></p>
+</section>
+<section id="exercise-7.12-antifungal-antibiotic-experiment-extended" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-7.12-antifungal-antibiotic-experiment-extended"><strong>Exercise 7.12: Antifungal Antibiotic Experiment (Extended)</strong></h2>
+<p>For this exercise, consider the data from <strong>Table 7.23</strong> but assume no negligible three-factor interaction. Modify levels of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> so their third levels are 35 and 8, respectively, to ensure equal spacing.</p>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><strong>Trend Contrasts</strong></li>
+</ol>
+<p>Create a table listing the 27 treatment combinations. Include contrast coefficients for:</p>
+<ul>
+<li>Linear and quadratic trends in <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span></li>
+<li>Interaction trends (<span class="math inline">\(A \times B\)</span>: Linear-Linear, Linear-Quadratic, etc.)</li>
+</ul>
+<ol type="1">
+<li><strong>Normalize Contrasts</strong></li>
+</ol>
+<p>Identify divisors to normalize each contrast and manually compute least squares estimates for normalized Linear <span class="math inline">\(A\)</span> and Quadratic <span class="math inline">\(A\)</span> contrasts.</p>
+<ol type="1">
+<li><strong>Orthogonal Contrasts for <span class="math inline">\(C\)</span></strong></li>
+</ol>
+<p>Propose two orthogonal contrasts for <span class="math inline">\(C\)</span> to address its uneven spacing and add them to the table in part (1).</p>
+<ol type="1">
+<li><strong>Orthogonal Contrasts Analysis</strong></li>
+</ol>
+<p>Use software to calculate least squares estimates for all 26 orthogonal contrasts. Generate a half-normal probability plot and interpret the results.</p>
+<ol type="1">
+<li><strong>Alternative Analysis</strong></li>
+</ol>
+<p>Apply the Voss and Wang method to analyze the orthogonal contrasts. Compare these findings to part (4).</p>
+<section id="summary-table-of-grades-and-rubric" class="level3">
+<h3 class="anchored" data-anchor-id="summary-table-of-grades-and-rubric">Summary Table of Grades and Rubric</h3>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 19%">
+<col style="width: 7%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Exercise</strong></th>
+<th><strong>Criteria</strong></th>
+<th><strong>Max Points</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Exercise 7.7</strong></td>
+<td><strong>Part (a): Analysis Design</strong></td>
+<td>10</td>
+<td>Outline the analysis steps, assumptions, and appropriate statistical methods (e.g., ANOVA, interaction plots).</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>Part (b): Model Assumptions</strong></td>
+<td>10</td>
+<td>Assess normality, homoscedasticity, and independence of residuals using statistical tests and plots.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>Part (c): Analysis and Plots</strong></td>
+<td>20</td>
+<td>Conduct ANOVA, interpret significant effects, create interaction plots, and draw meaningful conclusions.</td>
+</tr>
+<tr class="even">
+<td><strong>Total for Exercise 7.7</strong></td>
+<td></td>
+<td><strong>40</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Exercise 7.11</strong></td>
+<td><strong>Part (a): Main Effects</strong></td>
+<td>10</td>
+<td>Construct main effects plots and evaluate their significance.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>Part (b): Interaction Assumptions</strong></td>
+<td>5</td>
+<td>Clearly state and justify interaction assumptions.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>Part (c): Two-Way Interactions</strong></td>
+<td>15</td>
+<td>Construct interaction plots, interpret results, and update conclusions from main effects analysis.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>Part (d): Model Fitting</strong></td>
+<td>15</td>
+<td>Fit a model including all main effects and two-way interactions, interpret significant effects.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>Part (e): Diagnostics</strong></td>
+<td>10</td>
+<td>Evaluate residual diagnostics for normality, homoscedasticity, and outliers.</td>
+</tr>
+<tr class="even">
+<td><strong>Total for Exercise 7.11</strong></td>
+<td></td>
+<td><strong>55</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Exercise 7.12</strong></td>
+<td><strong>Part (a): Trend Contrasts</strong></td>
+<td>15</td>
+<td>Create a table with contrast coefficients for linear, quadratic, and interaction terms.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>Part (b): Normalization</strong></td>
+<td>10</td>
+<td>Compute normalization divisors and least squares estimates.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>Part (c): Orthogonal Contrasts</strong></td>
+<td>10</td>
+<td>Propose and justify two orthogonal contrasts for CC.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>Part (d): Computer Analysis</strong></td>
+<td>15</td>
+<td>Compute estimates, create a half-normal probability plot, and interpret results.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>Part (e): Voss and Wang Method</strong></td>
+<td>10</td>
+<td>Apply the method to examine orthogonal contrasts and compare with results from the half-normal plot.</td>
+</tr>
+<tr class="even">
+<td><strong>Total for Exercise 7.12</strong></td>
+<td></td>
+<td><strong>60</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="grade-summary-table" class="level3">
+<h3 class="anchored" data-anchor-id="grade-summary-table"><strong>Grade Summary Table</strong></h3>
+<table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 23%">
+<col style="width: 28%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Exercise</strong></th>
+<th><strong>Max Points</strong></th>
+<th><strong>Earned Points</strong></th>
+<th><strong>Comments</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Exercise 7.7</strong></td>
+<td><strong>40</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Exercise 7.11</strong></td>
+<td><strong>55</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Exercise 7.12</strong></td>
+<td><strong>60</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Overall Total</strong></td>
+<td><strong>155</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -822,5 +1148,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
