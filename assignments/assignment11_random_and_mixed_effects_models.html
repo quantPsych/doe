@@ -201,7 +201,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">05-Jan-2025</p>
+        <p class="date">17-Mar-2025</p>
       </div>
     </div>
     
@@ -329,17 +329,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#random-effects-model" id="toc-random-effects-model" class="nav-link" data-scroll-target="#random-effects-model">17.3 Random Effects Model</a>
-  <ul class="collapse">
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
-  </ul></li>
   <li><a href="#buttermilk-biscuit-experiment" id="toc-buttermilk-biscuit-experiment" class="nav-link" data-scroll-target="#buttermilk-biscuit-experiment">12.4 Buttermilk Biscuit Experiment</a>
   <ul class="collapse">
-  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1">Questions</a></li>
-  </ul></li>
-  <li><a href="#golf-ball-experiment" id="toc-golf-ball-experiment" class="nav-link" data-scroll-target="#golf-ball-experiment">12.6 Golf Ball Experiment</a>
-  <ul class="collapse">
-  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2">Questions</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   </ul></li>
   <li><a href="#grading-allocation" id="toc-grading-allocation" class="nav-link" data-scroll-target="#grading-allocation">Grading Allocation</a></li>
   </ul>
@@ -360,39 +352,14 @@ window.Quarto = {
 <li>Clearly explain your analysis process for full credit.</li>
 <li>Submit your assignment as a single PDF file.</li>
 </ol>
-<p><strong>Total Points</strong>: 130</p>
-</section>
-<section id="random-effects-model" class="level2">
-<h2 class="anchored" data-anchor-id="random-effects-model">17.3 Random Effects Model</h2>
-<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 17, Exercise 3</strong></p>
-<p>Consider the following random-effects model:</p>
-<p><span class="math display">\[
-Y_{ijkmt} = \mu + A_i + B_j + C_k + D_m + (AB)_{ij} + (BC)_{jk} + (BD)_{jm} + \epsilon_{ijkmt}
-\]</span></p>
-<p>Where:</p>
-<ul>
-<li><span class="math inline">\(i = 1, \dots, a\)</span>, <span class="math inline">\(j = 1, \dots, b\)</span>, <span class="math inline">\(k = 1, \dots, c\)</span>, <span class="math inline">\(m = 1, \dots, d\)</span>, <span class="math inline">\(t = 1, \dots, r\)</span>.</li>
-<li><span class="math inline">\(A_i \sim N(0, \sigma^2_A)\)</span>, <span class="math inline">\(B_j \sim N(0, \sigma^2_B)\)</span>, <span class="math inline">\(C_k \sim N(0, \sigma^2_C)\)</span>, <span class="math inline">\(D_m \sim N(0, \sigma^2_D)\)</span>.</li>
-<li><span class="math inline">\((AB)_{ij} \sim N(0, \sigma^2_{AB})\)</span>, <span class="math inline">\((BC)_{jk} \sim N(0, \sigma^2_{BC})\)</span>, <span class="math inline">\((BD)_{jm} \sim N(0, \sigma^2_{BD})\)</span>.</li>
-<li><span class="math inline">\(\epsilon_{ijkmt} \sim N(0, \sigma^2)\)</span>.</li>
-</ul>
-<section id="questions" class="level3">
-<h3 class="anchored" data-anchor-id="questions">Questions</h3>
-<ol type="a">
-<li><p>Write out the expected mean squares for all main effects and interactions in the model.</p></li>
-<li><p>How would you test the null hypothesis <span class="math inline">\(H_0^A: \sigma^2_A = 0\)</span> against the alternative <span class="math inline">\(H_A^A: \sigma^2_A &gt; 0\)</span>?</p></li>
-<li><p>How would you test the null hypothesis <span class="math inline">\(H_0^B: \sigma^2_B = 0\)</span> against the alternative <span class="math inline">\(H_A^B: \sigma^2_B &gt; 0\)</span>?</p></li>
-<li><p>Give formulae for unbiased estimates of <span class="math inline">\(\sigma^2_{BD}\)</span> and <span class="math inline">\(\sigma^2_B\)</span>.</p></li>
-<li><p>Provide formulae for individual 95% confidence intervals for <span class="math inline">\(\sigma^2_{BD}\)</span> and <span class="math inline">\(\sigma^2_B\)</span>. What is the overall confidence level?</p></li>
-</ol>
-</section>
+<p><strong>Total Points</strong>: 60</p>
 </section>
 <section id="buttermilk-biscuit-experiment" class="level2">
 <h2 class="anchored" data-anchor-id="buttermilk-biscuit-experiment">12.4 Buttermilk Biscuit Experiment</h2>
 <p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 12, Exercise 4</strong></p>
 <p>The buttermilk biscuit experiment was conducted by Stacie Taylor in 1995 to compare three brands of refrigerated buttermilk biscuits (Factor <span class="math inline">\(A\)</span>, 3 levels, fixed effect) on their fluffiness. The biscuits were baked on a tray for 7 minutes at 425°F, with 6 biscuits baked at a time. The experiment was run as a general complete block design with blocks of size <span class="math inline">\(k = 6\)</span>.</p>
-<section id="questions-1" class="level3">
-<h3 class="anchored" data-anchor-id="questions-1">Questions</h3>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
 <ol type="a">
 <li><p>Use a mixed model with interaction to represent the data, where the random effect represents the block (run of the oven) and the fixed effect represents the biscuit brand. Write out the model including all assumptions.</p></li>
 <li><p>Check the assumptions of the model for the data in Table 17.20 as far as possible.</p></li>
@@ -473,95 +440,6 @@ Y_{ijkmt} = \mu + A_i + B_j + C_k + D_m + (AB)_{ij} + (BC)_{jk} + (BD)_{jm} + \e
 </table>
 </section>
 </section>
-<section id="golf-ball-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="golf-ball-experiment">12.6 Golf Ball Experiment</h2>
-<p><strong><em>Data Source:</em> Dean et al.&nbsp;(2017), Chapter 12, Exercise 6</strong></p>
-<p>An experiment by Tim Kelaghan (1995) examined whether different brands of golf balls travel the same distance when hit by amateur golfers. Three brands (<span class="math inline">\(v = 3\)</span>) were selected, and some number of golfers (<span class="math inline">\(b\)</span>) determined. A pilot study was conducted with two golfers, each hitting <span class="math inline">\(s = 6\)</span> balls per brand in a random order.</p>
-<section id="questions-2" class="level3">
-<h3 class="anchored" data-anchor-id="questions-2">Questions</h3>
-<ol type="a">
-<li><p>Using the pilot data (Table 17.22), calculate a 95% upper bound for the error variance <span class="math inline">\(\sigma^2\)</span>.</p></li>
-<li><p>For the main experiment, determine the number of golfers (<span class="math inline">\(b\)</span>) needed to ensure that simultaneous 95% confidence intervals for the pairwise differences between brands have a width of at most 20 yards.</p></li>
-</ol>
-<table class="table">
-<caption>Table 17.22: Golf Ball Distances (in Yards)</caption>
-<thead>
-<tr class="header">
-<th>Golfer</th>
-<th>Brand</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>1</td>
-<td>209</td>
-<td>204</td>
-<td>179</td>
-<td>230</td>
-<td>233</td>
-<td>245</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>2</td>
-<td>188</td>
-<td>211</td>
-<td>242</td>
-<td>222</td>
-<td>187</td>
-<td>233</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>3</td>
-<td>219</td>
-<td>204</td>
-<td>247</td>
-<td>215</td>
-<td>197</td>
-<td>161</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>1</td>
-<td>240</td>
-<td>207</td>
-<td>192</td>
-<td>190</td>
-<td>226</td>
-<td>188</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>2</td>
-<td>216</td>
-<td>195</td>
-<td>240</td>
-<td>215</td>
-<td>219</td>
-<td>238</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>3</td>
-<td>195</td>
-<td>221</td>
-<td>205</td>
-<td>192</td>
-<td>183</td>
-<td>230</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
 <section id="grading-allocation" class="level2">
 <h2 class="anchored" data-anchor-id="grading-allocation">Grading Allocation</h2>
 <table class="table">
@@ -574,68 +452,33 @@ Y_{ijkmt} = \mu + A_i + B_j + C_k + D_m + (AB)_{ij} + (BC)_{jk} + (BD)_{jm} + \e
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Random Effects Model</strong></td>
-<td>(a)</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>(b)</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>(c)</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>(d)</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>(e)</td>
-<td>10</td>
-</tr>
-<tr class="even">
 <td><strong>Biscuit Experiment</strong></td>
 <td>(a)</td>
 <td>10</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>(b)</td>
 <td>10</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>(c)</td>
 <td>10</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>(d)</td>
 <td>10</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>(e)</td>
 <td>10</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>(f)</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td><strong>Golf Ball Experiment</strong></td>
-<td>(a)</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>(b)</td>
 <td>10</td>
 </tr>
 </tbody>
