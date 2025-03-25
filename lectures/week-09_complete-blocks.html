@@ -8,7 +8,7 @@
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
 
-<title>Complete Blocks Design – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Power Analysis in One-Way and Two-Way ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,9 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,12 +135,13 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Complete Blocks Design – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:title" content="Power Analysis in One-Way and Two-Way ANOVA – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
 <meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed slimcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -203,7 +201,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Complete Blocks Design</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Power Analysis in One-Way and Two-Way ANOVA</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -213,7 +211,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Complete Blocks Design</h1>
+      <h1 class="title">Power Analysis in One-Way and Two-Way ANOVA</h1>
                       </div>
   </div>
     
@@ -237,7 +235,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">12-Mar-2025</p>
+        <p class="date">25-Mar-2025</p>
       </div>
     </div>
     
@@ -364,918 +362,351 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#power-analysis-for-one-way-anova" id="toc-power-analysis-for-one-way-anova" class="nav-link active" data-scroll-target="#power-analysis-for-one-way-anova">1. Power Analysis for One-Way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#overview-and-learning-objectives" id="toc-overview-and-learning-objectives" class="nav-link" data-scroll-target="#overview-and-learning-objectives">Overview and Learning Objectives</a></li>
-  <li><a href="#r-packages-used" id="toc-r-packages-used" class="nav-link" data-scroll-target="#r-packages-used">R Packages Used</a></li>
+  <li><a href="#what-is-one-way-anova" id="toc-what-is-one-way-anova" class="nav-link" data-scroll-target="#what-is-one-way-anova">What is One-Way ANOVA?</a></li>
+  <li><a href="#key-concepts-in-power-analysis" id="toc-key-concepts-in-power-analysis" class="nav-link" data-scroll-target="#key-concepts-in-power-analysis">Key Concepts in Power Analysis</a></li>
+  <li><a href="#effect-size-cohens-f" id="toc-effect-size-cohens-f" class="nav-link" data-scroll-target="#effect-size-cohens-f">Effect Size: Cohen’s F</a></li>
+  <li><a href="#example-calculation-of-cohens-f" id="toc-example-calculation-of-cohens-f" class="nav-link" data-scroll-target="#example-calculation-of-cohens-f">Example Calculation of Cohen’s f</a></li>
+  <li><a href="#noncentrality-parameter-λ" id="toc-noncentrality-parameter-λ" class="nav-link" data-scroll-target="#noncentrality-parameter-λ">Noncentrality Parameter (λ)</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#power-calculation" id="toc-power-calculation" class="nav-link" data-scroll-target="#power-calculation">Power Calculation</a></li>
+  <li><a href="#numerical-example" id="toc-numerical-example" class="nav-link" data-scroll-target="#numerical-example">Numerical Example</a></li>
+  <li><a href="#using-rs-pwr-package" id="toc-using-rs-pwr-package" class="nav-link" data-scroll-target="#using-rs-pwr-package">Using R’s <code>pwr</code> Package</a></li>
+  <li><a href="#manual-verification" id="toc-manual-verification" class="nav-link" data-scroll-target="#manual-verification">Manual Verification</a></li>
   </ul></li>
-  <li><a href="#general-complete-block-designs-without-interaction" id="toc-general-complete-block-designs-without-interaction" class="nav-link" data-scroll-target="#general-complete-block-designs-without-interaction">General Complete Block Designs without Interaction</a>
+  <li><a href="#power-analysis-for-two-way-anova" id="toc-power-analysis-for-two-way-anova" class="nav-link" data-scroll-target="#power-analysis-for-two-way-anova">2. Power Analysis for Two-Way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#model-without-interaction" id="toc-model-without-interaction" class="nav-link" data-scroll-target="#model-without-interaction">Model without Interaction</a></li>
-  <li><a href="#sums-of-squares-computation" id="toc-sums-of-squares-computation" class="nav-link" data-scroll-target="#sums-of-squares-computation">Sums of Squares Computation</a></li>
-  <li><a href="#quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks" id="toc-quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks" class="nav-link" data-scroll-target="#quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks">Quiz: Which component of the ANOVA for a complete block design captures the variability due to blocks?</a></li>
-  <li><a href="#multiple-comparisons" id="toc-multiple-comparisons" class="nav-link" data-scroll-target="#multiple-comparisons">Multiple Comparisons</a></li>
+  <li><a href="#what-is-two-way-anova" id="toc-what-is-two-way-anova" class="nav-link" data-scroll-target="#what-is-two-way-anova">What is Two-Way ANOVA?</a></li>
+  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key Concepts</a></li>
+  <li><a href="#effect-size-cohens-f-for-two-way-anova" id="toc-effect-size-cohens-f-for-two-way-anova" class="nav-link" data-scroll-target="#effect-size-cohens-f-for-two-way-anova">Effect Size: Cohen’s F for Two-Way ANOVA</a></li>
+  <li><a href="#noncentrality-parameter-λ-1" id="toc-noncentrality-parameter-λ-1" class="nav-link" data-scroll-target="#noncentrality-parameter-λ-1">Noncentrality Parameter (λ)</a></li>
+  <li><a href="#degrees-of-freedom" id="toc-degrees-of-freedom" class="nav-link" data-scroll-target="#degrees-of-freedom">Degrees of Freedom</a></li>
+  <li><a href="#numerical-example-1" id="toc-numerical-example-1" class="nav-link" data-scroll-target="#numerical-example-1">Numerical Example</a></li>
+  <li><a href="#step-1-define-the-effect" id="toc-step-1-define-the-effect" class="nav-link" data-scroll-target="#step-1-define-the-effect">Step 1: Define the Effect</a></li>
+  <li><a href="#step-2-noncentrality-parameter" id="toc-step-2-noncentrality-parameter" class="nav-link" data-scroll-target="#step-2-noncentrality-parameter">Step 2: Noncentrality Parameter</a></li>
+  <li><a href="#step-3-degrees-of-freedom" id="toc-step-3-degrees-of-freedom" class="nav-link" data-scroll-target="#step-3-degrees-of-freedom">Step 3: Degrees of Freedom</a></li>
+  <li><a href="#step-4-manual-power-calculation" id="toc-step-4-manual-power-calculation" class="nav-link" data-scroll-target="#step-4-manual-power-calculation">Step 4: Manual Power Calculation</a></li>
+  <li><a href="#using-r-approximation-via-pwr" id="toc-using-r-approximation-via-pwr" class="nav-link" data-scroll-target="#using-r-approximation-via-pwr">Using R (Approximation via <code>pwr</code>)</a></li>
   </ul></li>
-  <li><a href="#analysis-of-the-banana-experiment-example-10.8.1" id="toc-analysis-of-the-banana-experiment-example-10.8.1" class="nav-link" data-scroll-target="#analysis-of-the-banana-experiment-example-10.8.1">Analysis of the Banana Experiment (Example 10.8.1)</a>
-  <ul class="collapse">
-  <li><a href="#experiment-context" id="toc-experiment-context" class="nav-link" data-scroll-target="#experiment-context">Experiment Context</a></li>
-  <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview">Data Overview</a></li>
-  </ul></li>
-  <li><a href="#detailed-mathematical-computations" id="toc-detailed-mathematical-computations" class="nav-link" data-scroll-target="#detailed-mathematical-computations">Detailed Mathematical Computations</a>
-  <ul class="collapse">
-  <li><a href="#computation-of-treatment-means-and-overall-mean" id="toc-computation-of-treatment-means-and-overall-mean" class="nav-link" data-scroll-target="#computation-of-treatment-means-and-overall-mean">1. Computation of Treatment Means and Overall Mean</a></li>
-  <li><a href="#sums-of-squares" id="toc-sums-of-squares" class="nav-link" data-scroll-target="#sums-of-squares">2. Sums of Squares</a></li>
-  <li><a href="#anova-decision-rule" id="toc-anova-decision-rule" class="nav-link" data-scroll-target="#anova-decision-rule">3. ANOVA Decision Rule</a></li>
-  </ul></li>
-  <li><a href="#r-implementation-for-the-banana-data" id="toc-r-implementation-for-the-banana-data" class="nav-link" data-scroll-target="#r-implementation-for-the-banana-data">R Implementation for the Banana Data</a>
-  <ul class="collapse">
-  <li><a href="#data-import-and-preparation" id="toc-data-import-and-preparation" class="nav-link" data-scroll-target="#data-import-and-preparation">Data Import and Preparation</a>
-  <ul class="collapse">
-  <li><a href="#descriptive-statistics-and-treatment-means" id="toc-descriptive-statistics-and-treatment-means" class="nav-link" data-scroll-target="#descriptive-statistics-and-treatment-means">Descriptive Statistics and Treatment Means</a></li>
-  <li><a href="#fitting-the-block-design-model" id="toc-fitting-the-block-design-model" class="nav-link" data-scroll-target="#fitting-the-block-design-model">Fitting the Block Design Model</a></li>
-  </ul></li>
-  <li><a href="#detailed-explanation-of-the-computation" id="toc-detailed-explanation-of-the-computation" class="nav-link" data-scroll-target="#detailed-explanation-of-the-computation">Detailed Explanation of the Computation</a></li>
-  <li><a href="#quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn" id="toc-quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn" class="nav-link" data-scroll-target="#quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn">Quiz: In the context of the banana experiment, if the F-value for the treatment effect (storage method) exceeds the critical F-value, what conclusion can be drawn?</a></li>
-  </ul></li>
-  <li><a href="#advanced-math-derivation-example" id="toc-advanced-math-derivation-example" class="nav-link" data-scroll-target="#advanced-math-derivation-example">Advanced Math: Derivation Example</a>
-  <ul class="collapse">
-  <li><a href="#derivation-of-treatment-contrast-variance" id="toc-derivation-of-treatment-contrast-variance" class="nav-link" data-scroll-target="#derivation-of-treatment-contrast-variance">Derivation of Treatment Contrast Variance</a></li>
-  </ul></li>
-  <li><a href="#interactive-visualization-and-further-analysis" id="toc-interactive-visualization-and-further-analysis" class="nav-link" data-scroll-target="#interactive-visualization-and-further-analysis">Interactive Visualization and Further Analysis</a>
-  <ul class="collapse">
-  <li><a href="#residual-diagnostics" id="toc-residual-diagnostics" class="nav-link" data-scroll-target="#residual-diagnostics">Residual Diagnostics</a></li>
-  <li><a href="#quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model" id="toc-quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model" class="nav-link" data-scroll-target="#quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model">Quiz: Which diagnostic plot is used to assess homoscedasticity in the banana experiment model?</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
-  <li><a href="#recap-of-key-takeaways" id="toc-recap-of-key-takeaways" class="nav-link" data-scroll-target="#recap-of-key-takeaways">Recap of Key Takeaways</a></li>
-  <li><a href="#final-discussion" id="toc-final-discussion" class="nav-link" data-scroll-target="#final-discussion">Final Discussion</a></li>
-  </ul></li>
-  <li><a href="#general-complete-block-designs" id="toc-general-complete-block-designs" class="nav-link" data-scroll-target="#general-complete-block-designs">General Complete Block Designs</a>
-  <ul class="collapse">
-  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
-  <li><a href="#handling-block-treatment-interactions" id="toc-handling-block-treatment-interactions" class="nav-link" data-scroll-target="#handling-block-treatment-interactions">Handling Block-Treatment Interactions</a></li>
-  </ul></li>
-  <li><a href="#practical-applications" id="toc-practical-applications" class="nav-link" data-scroll-target="#practical-applications">Practical Applications</a>
-  <ul class="collapse">
-  <li><a href="#example-resting-metabolic-rate" id="toc-example-resting-metabolic-rate" class="nav-link" data-scroll-target="#example-resting-metabolic-rate">Example: Resting Metabolic Rate</a>
-  <ul class="collapse">
-  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
-  <li><a href="#step-by-step-r-code" id="toc-step-by-step-r-code" class="nav-link" data-scroll-target="#step-by-step-r-code">Step-by-Step R Code</a></li>
-  </ul></li>
-  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
-  </ul></li>
-  <li><a href="#appendix-advanced-mathematical-derivations" id="toc-appendix-advanced-mathematical-derivations" class="nav-link" data-scroll-target="#appendix-advanced-mathematical-derivations">Appendix: Advanced Mathematical Derivations</a>
-  <ul class="collapse">
-  <li><a href="#proof-of-rcbd-model-assumptions" id="toc-proof-of-rcbd-model-assumptions" class="nav-link" data-scroll-target="#proof-of-rcbd-model-assumptions">Proof of RCBD Model Assumptions</a>
-  <ul class="collapse">
-  <li><a href="#variance-decomposition" id="toc-variance-decomposition" class="nav-link" data-scroll-target="#variance-decomposition">1. Variance Decomposition</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
-  <li><a href="#variance-decomposition-1" id="toc-variance-decomposition-1" class="nav-link" data-scroll-target="#variance-decomposition-1">Variance Decomposition</a></li>
-  <li><a href="#derivation" id="toc-derivation" class="nav-link" data-scroll-target="#derivation">Derivation</a></li>
-  </ul></li>
-  <li><a href="#effects-of-ignoring-block-treatment-interaction" id="toc-effects-of-ignoring-block-treatment-interaction" class="nav-link" data-scroll-target="#effects-of-ignoring-block-treatment-interaction">Effects of Ignoring Block-Treatment Interaction</a>
-  <ul class="collapse">
-  <li><a href="#mathematical-illustration" id="toc-mathematical-illustration" class="nav-link" data-scroll-target="#mathematical-illustration">Mathematical Illustration</a></li>
-  <li><a href="#proof-outline" id="toc-proof-outline" class="nav-link" data-scroll-target="#proof-outline">Proof Outline</a></li>
-  </ul></li>
-  <li><a href="#sample-size-calculations-for-rcbds" id="toc-sample-size-calculations-for-rcbds" class="nav-link" data-scroll-target="#sample-size-calculations-for-rcbds">Sample Size Calculations for RCBDs</a>
-  <ul class="collapse">
-  <li><a href="#formula" id="toc-formula" class="nav-link" data-scroll-target="#formula">Formula</a></li>
-  <li><a href="#derivation-1" id="toc-derivation-1" class="nav-link" data-scroll-target="#derivation-1">Derivation</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<section id="overview-and-learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="overview-and-learning-objectives">Overview and Learning Objectives</h2>
-<ul>
-<li>Introduce complete and general complete block designs.</li>
-<li>Derive the analysis of variance (ANOVA) components and explain multiple comparisons.</li>
-<li>Understand how to check model assumptions.</li>
-<li>Explore factorial experiments with real-world data: a banana ripening experiment.</li>
-<li>Emphasize interactive learning with quizzes, detailed mathematical derivations, and annotated R code examples.</li>
-</ul>
-<blockquote class="blockquote">
-<p><strong>References:</strong> Dean et al.&nbsp;(2017), Montgomery &amp; Runger (2010), Christensen (2018), and the Libre Textbook from Penn State University.</p>
-</blockquote>
+<section id="power-analysis-for-one-way-anova" class="level1">
+<h1>1. Power Analysis for One-Way ANOVA</h1>
+<section id="what-is-one-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-one-way-anova">What is One-Way ANOVA?</h2>
+<p>One-way ANOVA tests whether the means of three or more groups differ significantly. For example, imagine comparing the average test scores of students taught using three teaching methods (Method A, Method B, Method C).</p>
 </section>
-<section id="r-packages-used" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages-used">R Packages Used</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages using pacman for convenience.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, ggplot2, tidyr, knitr, readr, here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Explanation:</p>
+<section id="key-concepts-in-power-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="key-concepts-in-power-analysis">Key Concepts in Power Analysis</h2>
 <ul>
-<li>dplyr: data manipulation,</li>
-<li>ggplot2: visualizations,</li>
-<li>tidyr: data reshaping,</li>
-<li>knitr: producing tables,</li>
-<li>readr: reading in external data files. # Mathematical Foundations from Chapter 10</li>
+<li><strong>Power (1 - β)</strong>: The probability of correctly rejecting a false null hypothesis (typically targeted at 0.80 or higher).</li>
+<li><strong>Significance Level (α)</strong>: The probability of a Type I error (rejecting a true null hypothesis), often set at 0.05.</li>
+<li><strong>Effect Size</strong>: A measure of the magnitude of differences between group means, quantified in ANOVA using <strong>Cohen’s f</strong>.</li>
+<li><strong>Sample Size (r)</strong>: The number of observations per group, which we often solve for in power analysis.</li>
+<li><strong>Noncentrality Parameter (λ)</strong>: A parameter that shifts the F-distribution under the alternative hypothesis, used to compute power.</li>
 </ul>
 </section>
-</section>
-<section id="general-complete-block-designs-without-interaction" class="level1">
-<h1>General Complete Block Designs without Interaction</h1>
-<section id="model-without-interaction" class="level2">
-<h2 class="anchored" data-anchor-id="model-without-interaction">Model without Interaction</h2>
+<section id="effect-size-cohens-f" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-cohens-f">Effect Size: Cohen’s F</h2>
+<p>Cohen’s f measures the standardized difference between group means relative to within-group variability. The formula is:</p>
 <p><span class="math display">\[
-Y_{hit} = \mu + \theta_h + \tau_i + \varepsilon_{hit}, \quad \varepsilon_{hit} \sim N(0,\sigma^2)
-\]</span></p>
-<ul>
-<li><span class="math inline">\(\mu\)</span> is the overall mean.</li>
-<li><span class="math inline">\(\theta_h\)</span> is the effect of the <span class="math inline">\(h\)</span>th block.</li>
-<li><span class="math inline">\(\tau_i\)</span> is the effect of the <span class="math inline">\(i\)</span>th treatment.</li>
-<li><span class="math inline">\(\varepsilon_{hit}\)</span> is the random error.</li>
-<li><span class="math inline">\(Y_{hit}\)</span> is the response for treatment <span class="math inline">\(i\)</span> in block <span class="math inline">\(h\)</span> and replicate <span class="math inline">\(t\)</span>.</li>
-<li><span class="math inline">\(\nu\)</span> is the number of treatments.</li>
-<li><span class="math inline">\(b\)</span> is the number of blocks.</li>
-<li><span class="math inline">\(s\)</span> is the number of replicates per treatment per block.</li>
-</ul>
-</section>
-<section id="sums-of-squares-computation" class="level2">
-<h2 class="anchored" data-anchor-id="sums-of-squares-computation">Sums of Squares Computation</h2>
-<ul>
-<li><strong>Total Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{\text{Total}} = \sum_{h=1}^{b} \sum_{i=1}^{v} \sum_{t=1}^{s} (Y_{hit} - \bar{Y}_{\cdots})^2
-\]</span></p>
-<ul>
-<li><strong>Block Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{\theta} = vs\sum_{h=1}^{b} (\bar{Y}_{h..} - \bar{Y}_{\cdots})^2
-\]</span></p>
-<ul>
-<li><strong>Treatment Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{Treatment} = bs\sum_{i=1}^{v} (\bar{Y}_{.i.} - \bar{Y}_{\cdots})^2
-\]</span></p>
-<ul>
-<li><strong>Error Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{Error} = SS_{\text{Total}} - SS_{\theta} - SS_{Treatment}
-\]</span></p>
-<ul>
-<li><strong>Degrees of Freedom:</strong>
-<ul>
-<li>Blocks: <span class="math inline">\(b - 1\)</span></li>
-<li>Treatments: <span class="math inline">\(v - 1\)</span></li>
-<li>Error: <span class="math inline">\(bvs - b - v + 1\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks" class="level2 quiz-question">
-<h2 class="quiz-question anchored" data-anchor-id="quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks">Quiz: Which component of the ANOVA for a complete block design captures the variability due to blocks?</h2>
-<blockquote class="blockquote">
-<ul>
-<li>(A): <span class="math inline">\(SS_{Treatment}\)</span> {data-explanation=“Incorrect. <span class="math inline">\(SS_{Treatment}\)</span> is for treatment effects.”}</li>
-<li>[(B): <span class="math inline">\(SS_{\theta}\)</span> captures the variability among blocks]{.correct {data-explanation=“Correct. <span class="math inline">\(SS_{\theta}\)</span> quantifies block variability.”}}</li>
-<li>(C): <span class="math inline">\(SS_{Error}\)</span> {data-explanation=“Incorrect. <span class="math inline">\(SS_{Error}\)</span> is the error sum of squares.”}</li>
-<li>(D): <span class="math inline">\(SS_{\text{Total}}\)</span> {data-explanation=“Incorrect. <span class="math inline">\(SS_{\text{Total}}\)</span> is the total variability.”}</li>
-</ul>
-</blockquote>
-</section>
-<section id="multiple-comparisons" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-comparisons">Multiple Comparisons</h2>
-<ul>
-<li><strong>Contrast Estimation:</strong> For any contrast <span class="math inline">\(\sum c_i \tau_i\)</span> (with <span class="math inline">\(\sum c_i=0\)</span>):</li>
-</ul>
-<p><span class="math display">\[
-\sum c_i \tau_i \in \left(\sum c_i \bar{Y}_{.i.} \pm w \sqrt{\frac{MS_{Error} \sum c_i^2}{bs}}\right)
-\]</span></p>
-<ul>
-<li><span class="math inline">\(w\)</span> is the critical value from the chosen method (Bonferroni, Scheffé, Tukey, etc.).</li>
-<li><strong>Interpretation:</strong> This provides a simultaneous confidence interval for contrasts, ensuring control over the familywise error rate.</li>
-</ul>
-</section>
-</section>
-<section id="analysis-of-the-banana-experiment-example-10.8.1" class="level1">
-<h1>Analysis of the Banana Experiment (Example 10.8.1)</h1>
-<section id="experiment-context" class="level2">
-<h2 class="anchored" data-anchor-id="experiment-context">Experiment Context</h2>
-<ul>
-<li><strong>Background:</strong> Bananas are stored using two methods:
-<ul>
-<li><strong>Counter Storage:</strong> Conventional storage on a counter.</li>
-<li><strong>Hanging Storage:</strong> Using a banana hanging device to slow ripening.</li>
-</ul></li>
-<li><strong>Measured Outcome:</strong> The response variable <span class="math inline">\(y\)</span> represents the percentage of black color on the banana peel (an indicator of ripeness).</li>
-<li><strong>Experimental Factors:</strong>
-<ul>
-<li><strong>Block:</strong> Grouping factor (e.g., repeated measures over time or location).</li>
-<li><strong>Light:</strong> Level of illumination (affecting ripening).</li>
-<li><strong>Storage:</strong> Storage method (1 = counter, 2 = hanging).</li>
-</ul></li>
-</ul>
-</section>
-<section id="data-overview" class="level2">
-<h2 class="anchored" data-anchor-id="data-overview">Data Overview</h2>
-<p>The attached <code>banana.txt</code> file has the following columns:</p>
-<ul>
-<li><strong>block:</strong> Block identifier.</li>
-<li><strong>light:</strong> Light condition (1 or 2).</li>
-<li><strong>storage:</strong> Storage method (1 = counter, 2 = hanging).</li>
-<li><strong>y:</strong> Measured percentage of black color.</li>
-</ul>
-<blockquote class="blockquote">
-<p><strong>Example Data (first few rows):</strong> 1 1 1 30 1 1 1 30 1 1 1 17 1 1 1 43 1 1 2 43</p>
-</blockquote>
-</section>
-</section>
-<section id="detailed-mathematical-computations" class="level1">
-<h1>Detailed Mathematical Computations</h1>
-<section id="computation-of-treatment-means-and-overall-mean" class="level2">
-<h2 class="anchored" data-anchor-id="computation-of-treatment-means-and-overall-mean">1. Computation of Treatment Means and Overall Mean</h2>
-<ul>
-<li><strong>Overall Mean:</strong></li>
-</ul>
-<p><span class="math display">\[
-\bar{Y}_{\cdots} = \frac{1}{n}\sum_{h,l,s} y_{hls}
-\]</span></p>
-<ul>
-<li><strong>Treatment (Storage) Mean:</strong> For storage type <span class="math inline">\(i\)</span>:</li>
-</ul>
-<p><span class="math display">\[
-\bar{Y}_{.i.} = \frac{1}{n_i}\sum_{h,l \text{ where storage}=i} y_{hls}
-\]</span></p>
-</section>
-<section id="sums-of-squares" class="level2">
-<h2 class="anchored" data-anchor-id="sums-of-squares">2. Sums of Squares</h2>
-<p>Using the banana data, suppose we define:</p>
-<ul>
-<li><span class="math inline">\(b\)</span> = number of blocks,</li>
-<li><span class="math inline">\(v\)</span> = number of storage methods (here, <span class="math inline">\(v=2\)</span>),</li>
-<li><span class="math inline">\(s\)</span> = number of observations per block per storage type.</li>
-</ul>
-<p>Then, following the formulas from Chapter 10:</p>
-<ul>
-<li><strong>Total Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{\text{Total}} = \sum (y_{hls} - \bar{Y}_{\cdots})^2
-\]</span></p>
-<ul>
-<li><strong>Block Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{\theta} = vs\sum_{h} (\bar{Y}_{h..} - \bar{Y}_{\cdots})^2
-\]</span></p>
-<ul>
-<li><strong>Treatment Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{Treatment} = bs \sum_{i=1}^{2} (\bar{Y}_{.i.} - \bar{Y}_{\cdots})^2
-\]</span></p>
-<ul>
-<li><strong>Error Sum of Squares:</strong></li>
-</ul>
-<p><span class="math display">\[
-SS_{Error} = SS_{\text{Total}} - SS_{\theta} - SS_{Treatment}
-\]</span></p>
-</section>
-<section id="anova-decision-rule" class="level2">
-<h2 class="anchored" data-anchor-id="anova-decision-rule">3. ANOVA Decision Rule</h2>
-<p>The F-test for treatments in a complete block design is:</p>
-<p><span class="math display">\[
-F = \frac{MS_{Treatment}}{MS_{Error}}
-\]</span></p>
-<p>where:</p>
-<ul>
-<li><span class="math inline">\(MS_{Treatment} = \frac{SS_{Treatment}}{v-1}\)</span></li>
-<li><span class="math inline">\(MS_{Error} = \frac{SS_{Error}}{bvs - b - v + 1}\)</span></li>
-</ul>
-<p>Reject the null hypothesis <span class="math inline">\(H_0: \tau_1 = \tau_2\)</span> if:</p>
-<p><span class="math display">\[
-F &gt; F_{v-1, bvs-b-v+1,\alpha}
-\]</span></p>
-</section>
-</section>
-<section id="r-implementation-for-the-banana-data" class="level1 page-columns page-full">
-<h1>R Implementation for the Banana Data</h1>
-<section id="data-import-and-preparation" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="data-import-and-preparation">Data Import and Preparation</h2>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the banana data from the attached text file.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>banana_data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"dean2017"</span>, <span class="st">"banana.txt"</span>), <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>banana_data <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-banana-read" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-banana-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="do-not-create-environment cell table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">block</th>
-<th style="text-align: right;">light</th>
-<th style="text-align: right;">storage</th>
-<th style="text-align: right;">y</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">30</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">17</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">43</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">43</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">35</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: First Few Rows of Banana Data
-</figcaption>
-</figure>
-</div>
-</div>
-<section id="descriptive-statistics-and-treatment-means" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="descriptive-statistics-and-treatment-means">Descriptive Statistics and Treatment Means</h3>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>banana_summary <span class="ot">&lt;-</span> banana_data <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(storage) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(y), <span class="at">SD =</span> <span class="fu">sd</span>(y), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>banana_summary </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-banana-summary" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-banana-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="do-not-create-environment cell table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">storage</th>
-<th style="text-align: right;">Mean</th>
-<th style="text-align: right;">SD</th>
-<th style="text-align: right;">n</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">41.50000</td>
-<td style="text-align: right;">15.52557</td>
-<td style="text-align: right;">24</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">37.91667</td>
-<td style="text-align: right;">12.98466</td>
-<td style="text-align: right;">24</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Summary Statistics by Storage Method
-</figcaption>
-</figure>
-</div>
-</div>
-</section>
-<section id="fitting-the-block-design-model" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="fitting-the-block-design-model">Fitting the Block Design Model</h3>
-<p>Assuming ‘block’ is our blocking factor and ‘storage’ is the treatment factor, we fit the model:</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the complete block design model (ignoring the 'light' factor for simplicity)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fit_banana <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> <span class="fu">factor</span>(block) <span class="sc">+</span> <span class="fu">factor</span>(storage), <span class="at">data =</span> banana_data)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>anova_banana <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_banana)[[<span class="dv">1</span>]]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(anova_banana, <span class="at">caption =</span> <span class="st">"ANOVA Table for Banana Experiment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-banana-anova" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-banana-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment cell table table-sm table-striped small">
-<caption>ANOVA Table for Banana Experiment</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">Df</th>
-<th style="text-align: right;">Sum Sq</th>
-<th style="text-align: right;">Mean Sq</th>
-<th style="text-align: right;">F value</th>
-<th style="text-align: right;">Pr(&gt;F)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">factor(block)</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1255.7917</td>
-<td style="text-align: right;">627.8958</td>
-<td style="text-align: right;">3.3832079</td>
-<td style="text-align: right;">0.0429809</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(storage)</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">154.0833</td>
-<td style="text-align: right;">154.0833</td>
-<td style="text-align: right;">0.8302268</td>
-<td style="text-align: right;">0.3671720</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Residuals</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: right;">8166.0417</td>
-<td style="text-align: right;">185.5919</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-banana-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: ANOVA Table for Banana Experiment
-</figcaption>
-</figure>
-</div>
-</div>
-</section>
-</section>
-<section id="detailed-explanation-of-the-computation" class="level2">
-<h2 class="anchored" data-anchor-id="detailed-explanation-of-the-computation">Detailed Explanation of the Computation</h2>
-<ul>
-<li><strong>Step 1: Compute Means</strong> The overall mean <span class="math inline">\(\bar{Y}_{\cdots}\)</span> is computed from all <span class="math inline">\(y\)</span> values. The treatment mean <span class="math inline">\(\bar{Y}_{.i.}\)</span> for each storage type is calculated from data where storage equals 1 or 2.</li>
-<li><strong>Step 2: Sums of Squares</strong> The R function <code>aov()</code> internally computes the sums of squares for blocks, treatments, and error. These values are then used to calculate mean squares.</li>
-<li><strong>Step 3: F-Test</strong> The ratio <span class="math inline">\(F = MS_{Treatment/MS_{Error}\)</span> is compared against the critical F-value at the chosen significance level (typically 0.05) to test whether storage method affects the percentage of black color (ripeness).</li>
-</ul>
-</section>
-<section id="quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn" class="level2 quiz-question">
-<h2 class="quiz-question anchored" data-anchor-id="quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn">Quiz: In the context of the banana experiment, if the F-value for the treatment effect (storage method) exceeds the critical F-value, what conclusion can be drawn?</h2>
-<ul>
-<li>(A): The block effect is significant {data-explanation=“Incorrect. A significant F-value here pertains to the treatment (storage) effect.”}</li>
-<li>(B): There is a statistically significant difference in ripening between the storage methods {data-explanation=“Correct. This indicates that the method of storage significantly affects banana ripening.”}</li>
-<li>(C): The overall mean is incorrect {data-explanation=“Incorrect. The overall mean is not assessed via the F-test.”}</li>
-<li>(D): Light conditions are more important than storage {data-explanation=“Incorrect. The test here is for storage effects.”}</li>
-</ul>
-</section>
-</section>
-<section id="advanced-math-derivation-example" class="level1">
-<h1>Advanced Math: Derivation Example</h1>
-<section id="derivation-of-treatment-contrast-variance" class="level2">
-<h2 class="anchored" data-anchor-id="derivation-of-treatment-contrast-variance">Derivation of Treatment Contrast Variance</h2>
-<p>For a contrast <span class="math inline">\(L = \sum c_i \tau_i\)</span>, the estimated contrast is:</p>
-<p><span class="math display">\[
-\hat{L} = \sum c_i \bar{Y}_{.i.}
-\]</span></p>
-<p>with variance given by:</p>
-<p><span class="math display">\[
-\text{Var}(\hat{L}) = \sigma^2 \sum \frac{c_i^2}{bs}
-\]</span></p>
-<p>Thus, a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(L\)</span> is:</p>
-<p><span class="math display">\[
-\hat{L} \pm t_{df,\alpha/2} \sqrt{MS_{Error} \sum \frac{c_i^2}{bs}}
-\]</span></p>
-<ul>
-<li><strong>Explanation:</strong> The factor <span class="math inline">\(\sqrt{MS_{Error} \sum c_i^2/bs}\)</span> provides the standard error for the contrast based on the error mean square <span class="math inline">\(MS_{Error}\)</span> estimated from the ANOVA table.</li>
-</ul>
-</section>
-</section>
-<section id="interactive-visualization-and-further-analysis" class="level1 page-columns page-full">
-<h1>Interactive Visualization and Further Analysis</h1>
-<section id="residual-diagnostics" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="residual-diagnostics">Residual Diagnostics</h2>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate fitted values and residuals for banana model</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>banana_data<span class="sc">$</span>Fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(fit_banana)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>banana_data<span class="sc">$</span>Residuals <span class="ot">&lt;-</span> <span class="fu">resid</span>(fit_banana)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(banana_data, <span class="fu">aes</span>(<span class="at">x =</span> Fitted, <span class="at">y =</span> Residuals, <span class="at">color =</span> <span class="fu">factor</span>(block))) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Residuals vs Fitted Values (Banana Experiment)"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Fitted Values"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Block"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div id="fig-banana-residuals" class="quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-banana-residuals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="week-09_complete-blocks_files/figure-html/fig-banana-residuals-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Residuals vs.&nbsp;Fitted Values (Banana Experiment)"><img src="week-09_complete-blocks_files/figure-html/fig-banana-residuals-1.png" class="img-fluid figure-img" width="672"></a>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-banana-residuals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Residuals vs.&nbsp;Fitted Values (Banana Experiment)
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model" class="level2 quiz-question">
-<h2 class="quiz-question anchored" data-anchor-id="quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model">Quiz: Which diagnostic plot is used to assess homoscedasticity in the banana experiment model?</h2>
-<ul>
-<li>(A): Residuals vs Fitted Plot {data-explanation=“Correct. This plot is key to checking constant variance.”}</li>
-<li>(B): Q-Q Plot {data-explanation=“This plot checks normality, not homoscedasticity.”}</li>
-<li>(C): Boxplot of Residuals {data-explanation=“Not specifically used for variance checks.”}</li>
-<li>(D): Scatter plot of Raw Data {data-explanation=“This does not directly assess model residuals.”}</li>
-</ul>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<section id="recap-of-key-takeaways" class="level2">
-<h2 class="anchored" data-anchor-id="recap-of-key-takeaways">Recap of Key Takeaways</h2>
-<ul>
-<li><strong>Design Impact:</strong> Complete block designs reduce variability due to nuisance factors.</li>
-<li><strong>Mathematical Rigor:</strong> Detailed derivations (sums of squares, degrees of freedom, variance of contrasts) are essential for understanding the statistical model.</li>
-<li><strong>Practical Application:</strong> The banana experiment illustrates how these designs are applied to real-world data.</li>
-<li><strong>Model Diagnostics:</strong> Residual plots and diagnostic tests are crucial for verifying model assumptions.</li>
-</ul>
-</section>
-<section id="final-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="final-discussion">Final Discussion</h2>
-<ul>
-<li><strong>Exercise:</strong> Revisit the banana experiment analysis and discuss how adding a light factor (from the data) might further improve the model. Consider extending the model to:</li>
-</ul>
-<p><span class="math display">\[
-y \sim \text{block} + \text{light} + \text{storage}
-\]</span></p>
-<p>and compare the ANOVA results.</p>
-</section>
-</section>
-<section id="general-complete-block-designs" class="level1">
-<h1>General Complete Block Designs</h1>
-<section id="model" class="level2">
-<h2 class="anchored" data-anchor-id="model">Model</h2>
-<p>For designs where treatments are replicated within blocks, the model extends to include interaction effects:</p>
-<p><span class="math display">\[
-Y_{hit} = \mu + \theta_h + \tau_i + (\theta \tau)_{hi} + \epsilon_{hit}
+f = \sqrt{\frac{\sum_{i=1}^k (\mu_i - \mu)^2 / k}{\sigma^2}}
 \]</span></p>
 <p>Where:</p>
 <ul>
-<li><span class="math inline">\(Y_{hit}\)</span>: Response for treatment <span class="math inline">\(i\)</span> in block <span class="math inline">\(h\)</span>, replicate <span class="math inline">\(t\)</span>.</li>
-<li><span class="math inline">\(\theta_h\)</span>: Effect of block <span class="math inline">\(h\)</span>.</li>
-<li><span class="math inline">\(\tau_i\)</span>: Effect of treatment <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\((\theta \tau)_{hi}\)</span>: Interaction effect between block <span class="math inline">\(h\)</span> and treatment <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(\epsilon_{hit}\)</span>: Random error.</li>
+<li><span class="math inline">\(k\)</span>: Number of groups– In the textbook, <span class="math inline">\(\nu\)</span> is used instead of <span class="math inline">\(k\)</span>.</li>
+<li><span class="math inline">\(\mu_i\)</span>: Mean of group <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\mu\)</span>: Overall mean across all groups.</li>
+<li><span class="math inline">\(\sigma^2\)</span>: Within-group variance (assumed equal across groups).</li>
 </ul>
-</section>
-<section id="handling-block-treatment-interactions" class="level2">
-<h2 class="anchored" data-anchor-id="handling-block-treatment-interactions">Handling Block-Treatment Interactions</h2>
-<p>In scenarios where interaction effects are suspected, it’s essential to include them in the model to avoid biased estimates.</p>
-<p><strong>Implications:</strong></p>
+<p><strong>Interpretation (Cohen’s benchmarks)</strong>:</p>
 <ul>
-<li><strong>Significant Interaction:</strong> Indicates that the effect of treatments varies across blocks, necessitating separate treatment effect analyses within each block.</li>
-<li><strong>Non-Significant Interaction:</strong> Supports the additive model, validating the use of standard RCBD analysis.</li>
+<li>Small: <span class="math inline">\(f = 0.1\)</span></li>
+<li>Medium: <span class="math inline">\(f = 0.25\)</span></li>
+<li>Large: <span class="math inline">\(f = 0.4\)</span></li>
 </ul>
-<p><strong>Reference:</strong></p>
-<p>Kempthorne (1977) elaborates on the importance of accounting for interactions in <em>Design and Analysis of Experiments</em>.</p>
 </section>
+<section id="example-calculation-of-cohens-f" class="level2">
+<h2 class="anchored" data-anchor-id="example-calculation-of-cohens-f">Example Calculation of Cohen’s f</h2>
+<p>Suppose we have three groups (<span class="math inline">\(k = 3\)</span>) with means <span class="math inline">\(\mu_1 = 10\)</span>, <span class="math inline">\(\mu_2 = 12\)</span>, <span class="math inline">\(\mu_3 = 14\)</span>, and within-group variance <span class="math inline">\(\sigma^2 = 16\)</span>. The overall mean is:</p>
+<p><span class="math display">\[
+\mu = \frac{10 + 12 + 14}{3} = 12
+\]</span></p>
+<p>Numerator of <span class="math inline">\(f^2\)</span>:</p>
+<p><span class="math display">\[
+\frac{\sum (\mu_i - \mu)^2}{k} = \frac{(10 - 12)^2 + (12 - 12)^2 + (14 - 12)^2}{3} = \frac{4 + 0 + 4}{3} = \frac{8}{3} \approx 2.667
+\]</span></p>
+<p><span class="math display">\[
+f = \sqrt{\frac{2.667}{16}} = \sqrt{0.1667} \approx 0.408
+\]</span></p>
+<p>This is a large effect size, close to Cohen’s <span class="math inline">\(f = 0.4\)</span>.</p>
 </section>
-<section id="practical-applications" class="level1">
-<h1>Practical Applications</h1>
-<section id="example-resting-metabolic-rate" class="level2">
-<h2 class="anchored" data-anchor-id="example-resting-metabolic-rate">Example: Resting Metabolic Rate</h2>
-<section id="scenario" class="level3">
-<h3 class="anchored" data-anchor-id="scenario">Scenario</h3>
-<p>A study aims to compare three different exercise protocols (Treatments A, B, C) on subjects’ resting metabolic rates. The subjects are grouped into four blocks based on age groups to control for age-related variability.</p>
+<section id="noncentrality-parameter-λ" class="level2">
+<h2 class="anchored" data-anchor-id="noncentrality-parameter-λ">Noncentrality Parameter (λ)</h2>
+<p>The noncentrality parameter quantifies the shift in the F-distribution under the alternative hypothesis:</p>
+<p><span class="math display">\[
+\lambda = \frac{r \sum_{i=1}^k (\mu_i - \mu)^2}{\sigma^2}
+\]</span></p>
+<p>Where <span class="math inline">\(r\)</span> is the sample size per group (assuming balanced design). Using Cohen’s f:</p>
+<p><span class="math display">\[
+\lambda = r k f^2
+\]</span></p>
 </section>
-<section id="step-by-step-r-code" class="level3">
-<h3 class="anchored" data-anchor-id="step-by-step-r-code">Step-by-Step R Code</h3>
-<section id="load-and-prepare-data" class="level4">
-<h4 class="anchored" data-anchor-id="load-and-prepare-data">1. Load and Prepare Data</h4>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Using the above means and <span class="math inline">\(\sigma^2 = 16\)</span>, with <span class="math inline">\(r = 10\)</span> per group:</p>
+<p><span class="math display">\[
+\sum (\mu_i - \mu)^2 = 4 + 0 + 4 = 8
+\]</span></p>
+<p><span class="math display">\[
+\lambda = \frac{10 \times 8}{16} = 5
+\]</span></p>
+<p>Or via <span class="math inline">\(f\)</span>:</p>
+<p><span class="math display">\[
+\lambda = 10 \times 3 \times (0.408)^2 = 30 \times 0.1665 \approx 5
+\]</span></p>
+</section>
+<section id="power-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="power-calculation">Power Calculation</h2>
+<p>Power is calculated using the noncentral F-distribution:</p>
+<ul>
+<li><strong>Numerator degrees of freedom</strong>: <span class="math inline">\(df_1 = k - 1\)</span></li>
+<li><strong>Denominator degrees of freedom</strong>: <span class="math inline">\(df_2 = N - k\)</span>, where <span class="math inline">\(N = r k\)</span></li>
+<li><strong>Critical F-value</strong>: <span class="math inline">\(F_{\text{crit}}\)</span> at <span class="math inline">\(\alpha\)</span>, found from the F-distribution.</li>
+<li><strong>Power</strong>: <span class="math inline">\(1 - P(F &lt;-  F_{\text{crit}} | \lambda)\)</span>, where <span class="math inline">\(F\)</span> follows a noncentral F-distribution.</li>
+</ul>
+</section>
+<section id="numerical-example" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-example">Numerical Example</h2>
+<p><strong>Goal</strong>: Determine the sample size per group (<span class="math inline">\(r\)</span>) for <span class="math inline">\(k = 3\)</span> groups, medium effect size (<span class="math inline">\(f = 0.25\)</span>), <span class="math inline">\(\alpha = 0.05\)</span>, and power = 0.80.</p>
+</section>
+<section id="using-rs-pwr-package" class="level2">
+<h2 class="anchored" data-anchor-id="using-rs-pwr-package">Using R’s <code>pwr</code> Package</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define blocks and treatments</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">3</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">times =</span> <span class="dv">4</span>))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate response variable (e.g., resting metabolic rate in kcal/day)</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1500</span>, <span class="at">sd =</span> <span class="dv">50</span>), <span class="co"># Block 1</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1550</span>, <span class="at">sd =</span> <span class="dv">50</span>), <span class="co"># Block 2</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1480</span>, <span class="at">sd =</span> <span class="dv">50</span>), <span class="co"># Block 3</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1520</span>, <span class="at">sd =</span> <span class="dv">50</span>) <span class="co"># Block 4</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(blocks, treatments, response)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># View the data</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fl">0.80</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">pwr.anova.test</span>(<span class="at">k =</span> k, <span class="at">f =</span> f, <span class="at">sig.level =</span> alpha, <span class="at">power =</span> power)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   blocks treatments response
-1       1          A 1471.976
-2       1          B 1488.491
-3       1          C 1577.935
-4       2          A 1553.525
-5       2          B 1556.464
-6       2          C 1635.753
-7       3          A 1503.046
-8       3          B 1416.747
-9       3          C 1445.657
-10      4          A 1497.717
-11      4          B 1581.204
-12      4          C 1537.991</code></pre>
+<pre><code>
+     Balanced one-way analysis of variance power calculation 
+
+              k = 3
+              n = 52.3966
+              f = 0.25
+      sig.level = 0.05
+          power = 0.8
+
+NOTE: n is number in each group</code></pre>
 </div>
 </div>
+<p><strong>Output</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>     Balanced one<span class="sc">-</span>way analysis of variance power calculation </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>              n <span class="ot">=</span> <span class="fl">52.39771</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>              f <span class="ot">=</span> <span class="fl">0.25</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      sig.level <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          power <span class="ot">=</span> <span class="fl">0.8</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>NOTE<span class="sc">:</span> n is number <span class="cf">in</span> each group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We need approximately <span class="math inline">\(r = 53\)</span> subjects per group, so total <span class="math inline">\(N = 3 \times 53 = 159\)</span>.</p>
 </section>
-<section id="fit-the-rcbd-model" class="level4">
-<h4 class="anchored" data-anchor-id="fit-the-rcbd-model">2. Fit the RCBD Model</h4>
+<section id="manual-verification" class="level2">
+<h2 class="anchored" data-anchor-id="manual-verification">Manual Verification</h2>
+<ol type="1">
+<li><strong>Degrees of Freedom</strong>:
+<ul>
+<li><span class="math inline">\(df_1 = k - 1 = 2\)</span></li>
+<li><span class="math inline">\(df_2 = N - k = 3 \times 53 - 3 = 156\)</span></li>
+</ul></li>
+<li><strong>Noncentrality Parameter</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\lambda = r k f^2 = 53 \times 3 \times 0.25^2 = 159 \times 0.0625 = 9.9375
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Critical F-value</strong>:</li>
+</ol>
+<p><span class="math display">\[
+F_{\text{crit}} = qf(0.95, 2, 156) \approx 3.05
+\]</span></p>
+<ol start="4" type="1">
+<li><strong>Power</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Power} = 1 - pf(3.05, 2, 156, ncp = 9.9375)
+\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the RCBD model using ANOVA</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> blocks <span class="sc">+</span> treatments, <span class="at">data =</span> data)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>power_manual <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(<span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="dv">2</span>, <span class="dv">156</span>), <span class="dv">2</span>, <span class="dv">156</span>, <span class="at">ncp =</span> <span class="fl">9.9375</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power_manual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
-blocks       3  25293    8431   3.679 0.0819 .
-treatments   2   4449    2225   0.971 0.4312  
-Residuals    6  13749    2291                 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<pre><code>[1] 0.8048873</code></pre>
 </div>
 </div>
-<p><strong>Interpretation:</strong></p>
+<p><strong>Output</strong>: Approximately 0.803, confirming the power is close to 0.80, validating the <code>pwr</code> result.</p>
+<hr>
+</section>
+</section>
+<section id="power-analysis-for-two-way-anova" class="level1">
+<h1>2. Power Analysis for Two-Way ANOVA</h1>
+<section id="what-is-two-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-two-way-anova">What is Two-Way ANOVA?</h2>
+<p>Two-way ANOVA examines the effects of two categorical factors (e.g., teaching method and study time) on a response variable, testing:</p>
 <ul>
-<li><strong>Blocks:</strong> Account for age-related variability.</li>
-<li><strong>Treatments:</strong> Assess the impact of exercise protocols on metabolic rate after controlling for age.</li>
+<li><strong>Main Effect of Factor A</strong></li>
+<li><strong>Main Effect of Factor B</strong></li>
+<li><strong>Interaction Effect (A × B)</strong></li>
 </ul>
 </section>
-<section id="diagnostic-plots" class="level4">
-<h4 class="anchored" data-anchor-id="diagnostic-plots">3. Diagnostic Plots</h4>
+<section id="key-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="key-concepts">Key Concepts</h2>
+<p>Power analysis in two-way ANOVA requires separate calculations for each effect, adjusting effect sizes and degrees of freedom accordingly.</p>
+</section>
+<section id="effect-size-cohens-f-for-two-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-cohens-f-for-two-way-anova">Effect Size: Cohen’s F for Two-Way ANOVA</h2>
+<p>For each effect, Cohen’s f is the ratio of the effect’s standard deviation to the within-group standard deviation (<span class="math inline">\(\sigma\)</span>).</p>
+<ul>
+<li><strong>Main Effect A</strong>:</li>
+</ul>
+<p><span class="math display">\[
+f_A = \frac{\sigma_A}{\sigma}, \quad \sigma_A = \sqrt{\frac{\sum_{i=1}^a (\alpha_i)^2}{a}}
+\]</span></p>
+<p>where <span class="math inline">\(\alpha_i = \mu_{i.} - \mu\)</span> (deviation of Factor A’s level means from the grand mean).</p>
+<ul>
+<li><strong>Main Effect B</strong>:</li>
+</ul>
+<p><span class="math display">\[
+f_B = \frac{\sigma_B}{\sigma}, \quad \sigma_B = \sqrt{\frac{\sum_{j=1}^b (\beta_j)^2}{b}}
+\]</span></p>
+<p>where <span class="math inline">\(\beta_j = \mu_{.j} - \mu\)</span>.</p>
+<ul>
+<li><strong>Interaction Effect</strong>:</li>
+</ul>
+<p><span class="math display">\[
+f_{AB} = \frac{\sigma_{AB}}{\sigma}, \quad \sigma_{AB} = \sqrt{\frac{\sum_{i=1}^a \sum_{j=1}^b (\gamma_{ij})^2}{a b}}
+\]</span></p>
+<p>where <span class="math inline">\(\gamma_{ij} = \mu_{ij} - \mu_{i.} - \mu_{.j} + \mu\)</span> (interaction terms).</p>
+</section>
+<section id="noncentrality-parameter-λ-1" class="level2">
+<h2 class="anchored" data-anchor-id="noncentrality-parameter-λ-1">Noncentrality Parameter (λ)</h2>
+<p>Assuming <span class="math inline">\(r\)</span> replicates per cell, <span class="math inline">\(a\)</span> levels of Factor A, and <span class="math inline">\(b\)</span> levels of Factor B:</p>
+<ul>
+<li><strong>Main Effect A</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\lambda_A = \frac{r b \sum_{i=1}^a (\alpha_i)^2}{\sigma^2} = r b a f_A^2
+\]</span></p>
+<ul>
+<li><strong>Main Effect B</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\lambda_B = \frac{r a \sum_{j=1}^b (\beta_j)^2}{\sigma^2} = r a b f_B^2
+\]</span></p>
+<ul>
+<li><strong>Interaction</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\lambda_{AB} = \frac{r \sum_{i=1}^a \sum_{j=1}^b (\gamma_{ij})^2}{\sigma^2} = r a b f_{AB}^2
+\]</span></p>
+</section>
+<section id="degrees-of-freedom" class="level2">
+<h2 class="anchored" data-anchor-id="degrees-of-freedom">Degrees of Freedom</h2>
+<ul>
+<li>Total sample size: <span class="math inline">\(N = a b r\)</span></li>
+<li>Main Effect A: <span class="math inline">\(df_1 = a - 1\)</span>, <span class="math inline">\(df_2 = N - a b\)</span></li>
+<li>Main Effect B: <span class="math inline">\(df_1 = b - 1\)</span>, <span class="math inline">\(df_2 = N - a b\)</span></li>
+<li>Interaction: <span class="math inline">\(df_1 = (a - 1)(b - 1)\)</span>, <span class="math inline">\(df_2 = N - a b\)</span></li>
+</ul>
+</section>
+<section id="numerical-example-1" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-example-1">Numerical Example</h2>
+<p><strong>Scenario</strong>: A 2×2 design (Factor A: 2 levels, Factor B: 2 levels). We want to detect a main effect of Factor A with a difference of 4 units between levels, <span class="math inline">\(\sigma^2 = 7.5\)</span>, power = 0.80, <span class="math inline">\(\alpha = 0.05\)</span>. Find <span class="math inline">\(r\)</span> (replicates per cell).</p>
+</section>
+<section id="step-1-define-the-effect" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-define-the-effect">Step 1: Define the Effect</h2>
+<p>Suppose Factor A’s marginal means are <span class="math inline">\(\mu_{1.} = 12\)</span>, <span class="math inline">\(\mu_{2.} = 8\)</span>, so <span class="math inline">\(\mu_{1.} - \mu_{2.} = 4\)</span>. Grand mean <span class="math inline">\(\mu = 10\)</span>. Effects are:</p>
+<p><span class="math display">\[
+\alpha_1 = 12 - 10 = 2, \quad \alpha_2 = 8 - 10 = -2
+\]</span></p>
+<p><span class="math display">\[
+\sum \alpha_i^2 = 2^2 + (-2)^2 = 8
+\]</span></p>
+</section>
+<section id="step-2-noncentrality-parameter" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-noncentrality-parameter">Step 2: Noncentrality Parameter</h2>
+<p><span class="math display">\[
+\lambda_A = \frac{r b \sum \alpha_i^2}{\sigma^2} = \frac{r \times 2 \times 8}{7.5} = \frac{16 r}{7.5}
+\]</span></p>
+</section>
+<section id="step-3-degrees-of-freedom" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-degrees-of-freedom">Step 3: Degrees of Freedom</h2>
+<ul>
+<li><span class="math inline">\(df_1 = a - 1 = 1\)</span></li>
+<li><span class="math inline">\(df_2 = N - a b = 2 \times 2 \times r - 4 = 4r - 4\)</span></li>
+</ul>
+</section>
+<section id="step-4-manual-power-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-manual-power-calculation">Step 4: Manual Power Calculation</h2>
+<p>For <span class="math inline">\(r = 5\)</span>:</p>
+<ul>
+<li><span class="math inline">\(N = 2 \times 2 \times 5 = 20\)</span></li>
+<li><span class="math inline">\(df_2 = 20 - 4 = 16\)</span></li>
+<li><span class="math inline">\(\lambda_A = \frac{16 \times 5}{7.5} \approx 10.67\)</span></li>
+<li><span class="math inline">\(F_{\text{crit}} = qf(0.95, 1, 16) \approx 4.49\)</span></li>
+</ul>
+<p><span class="math display">\[
+\text{Power} = 1 - pf(4.49, 1, 16, ncp = 10.67)
+\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic plots for the ANOVA model</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="week-09_complete-blocks_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week-09_complete-blocks_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(<span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="dv">1</span>, <span class="dv">16</span>), <span class="dv">1</span>, <span class="dv">16</span>, <span class="at">ncp =</span> <span class="fl">10.67</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8654718</code></pre>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Interpretation:</strong></p>
-<p>Ensure that residuals meet ANOVA assumptions. Look for random scatter in Residuals vs Fitted, linearity in Scale-Location, and normality in Q-Q plots.</p>
-</section>
-<section id="post-hoc-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="post-hoc-analysis">4. Post-Hoc Analysis</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load emmeans package for estimated marginal means</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated marginal means for treatments</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="sc">~</span>treatments)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>pairwise_comparisons <span class="ot">&lt;-</span> <span class="fu">contrast</span>(emm, <span class="at">method =</span> <span class="st">"pairwise"</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pairwise_comparisons)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">contrast</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">SE</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">t.ratio</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">A - B</td>
-<td style="text-align: right;">-4.160548</td>
-<td style="text-align: right;">33.84833</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-0.1229174</td>
-<td style="text-align: right;">0.9917165</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">A - C</td>
-<td style="text-align: right;">-42.768091</td>
-<td style="text-align: right;">33.84833</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-1.2635216</td>
-<td style="text-align: right;">0.4632421</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">B - C</td>
-<td style="text-align: right;">-38.607543</td>
-<td style="text-align: right;">33.84833</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-1.1406042</td>
-<td style="text-align: right;">0.5265273</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p><strong>Interpretation:</strong></p>
-<p>Determine which exercise protocols significantly differ in their effect on resting metabolic rates after adjusting for age.</p>
-</section>
-</section>
-</section>
-<section id="conclusion-1" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion-1">Conclusion</h2>
-<p><strong>Complete Block Designs (CBDs)</strong>, particularly <strong>Randomized Complete Block Designs (RCBDs)</strong>, are indispensable in experimental research for controlling variability due to nuisance factors. By structuring experiments to include blocks where each treatment is represented, CBDs enhance the precision and reliability of treatment effect estimates. The integration of ANOVA facilitates robust analysis, allowing researchers to discern meaningful differences among treatments while accounting for block-induced variability.</p>
-</section>
-<section id="key-takeaways" class="level2">
-<h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
+<p><strong>Output</strong>: ~0.85 &gt; 0.80.</p>
+<p>For <span class="math inline">\(r = 4\)</span>:</p>
 <ul>
-<li><strong>Blocking:</strong> Reduces variability from known sources, increasing the efficiency of treatment comparisons.</li>
-<li><strong>ANOVA in RCBDs:</strong> Decomposes variability to isolate treatment effects, providing a clear framework for hypothesis testing.</li>
-<li><strong>General Complete Block Designs:</strong> Extend the utility of CBDs to more complex scenarios involving treatment replications within blocks.</li>
-<li><strong>Practical Implementation:</strong> R offers comprehensive tools for designing, analyzing, and interpreting CBDs, empowering researchers with robust statistical capabilities.</li>
-<li><strong>Advanced Topics:</strong> Understanding interactions and sample size considerations enhances the depth and applicability of CBDs in diverse research contexts.</li>
+<li><span class="math inline">\(df_2 = 4 \times 4 - 4 = 12\)</span></li>
+<li><span class="math inline">\(\lambda_A = \frac{16 \times 4}{7.5} \approx 8.53\)</span></li>
+<li><span class="math inline">\(F_{\text{crit}} \approx 4.75\)</span></li>
+<li>Power ~0.71 &lt;- 0.80.</li>
 </ul>
-<p>Mastery of Complete Block Designs equips graduate students with the methodological rigor necessary for conducting sophisticated experiments, ensuring that findings are both accurate and generalizable.</p>
+<p>Thus, <span class="math inline">\(r = 5\)</span> is the smallest integer satisfying power ≥ 0.80.</p>
 </section>
-</section>
-<section id="appendix-advanced-mathematical-derivations" class="level1">
-<h1>Appendix: Advanced Mathematical Derivations</h1>
-<section id="proof-of-rcbd-model-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="proof-of-rcbd-model-assumptions">Proof of RCBD Model Assumptions</h2>
-<section id="variance-decomposition" class="level3">
-<h3 class="anchored" data-anchor-id="variance-decomposition">1. Variance Decomposition</h3>
-<p>The RCBD model is expressed as:</p>
+<section id="using-r-approximation-via-pwr" class="level2">
+<h2 class="anchored" data-anchor-id="using-r-approximation-via-pwr">Using R (Approximation via <code>pwr</code>)</h2>
+<p>Since <code>pwr</code> doesn’t directly handle two-way ANOVA, we approximate the main effect as a t-test (since <span class="math inline">\(df_1 = 1\)</span>):</p>
 <p><span class="math display">\[
-Y_{hi} = \mu + \theta_h + \tau_i + \epsilon_{hi}
+d = \frac{\mu_{1.} - \mu_{2.}}{\sqrt{\sigma^2 / (r b)}} = \frac{4}{\sqrt{7.5 / (r \times 2)}}
 \]</span></p>
-<p>Where:</p>
+<p>But for precision, use manual F-test or specialized tools like G*Power. The <code>pwr2</code> package isn’t standard for this; we rely on <code>pwr</code> for one-way or custom calculations.</p>
+<hr>
+</section>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
 <ul>
-<li><span class="math inline">\(Y_{hi}\)</span>: Response for treatment <span class="math inline">\(i\)</span> in block <span class="math inline">\(h\)</span>.</li>
-<li><span class="math inline">\(\mu\)</span>: Overall mean.</li>
-<li><span class="math inline">\(\theta_h\)</span>: Effect of block <span class="math inline">\(h\)</span>.</li>
-<li><span class="math inline">\(\tau_i\)</span>: Effect of treatment <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(\epsilon_{hi} \sim N(0, \sigma^2)\)</span>: Error term.</li>
+<li><strong>One-Way ANOVA</strong>: Use <span class="math inline">\(k\)</span>, <span class="math inline">\(f\)</span>, <span class="math inline">\(\alpha\)</span>, and power to find <span class="math inline">\(r\)</span> per group (e.g., <span class="math inline">\(r = 53\)</span> for <span class="math inline">\(k = 3\)</span>, <span class="math inline">\(f = 0.25\)</span>). Verify with <code>pwr.anova.test</code>.</li>
+<li><strong>Two-Way ANOVA</strong>: Calculate power for each effect separately, defining <span class="math inline">\(f\)</span> and <span class="math inline">\(\lambda\)</span> per effect. For a 2×2 main effect with a difference of 4, <span class="math inline">\(r = 5\)</span> per cell suffices.</li>
 </ul>
-</section>
-<section id="assumptions" class="level3">
-<h3 class="anchored" data-anchor-id="assumptions">Assumptions</h3>
-<ol type="1">
-<li><strong>Normality:</strong> <span class="math inline">\(\epsilon_{hi}\)</span> are normally distributed.</li>
-<li><strong>Independence:</strong> Observations are independent.</li>
-<li><strong>Homoscedasticity:</strong> <span class="math inline">\(\sigma^2\)</span> is constant across all treatments and blocks.</li>
-<li><strong>No Interaction:</strong> Effects of blocks and treatments are additive.</li>
-</ol>
-</section>
-<section id="variance-decomposition-1" class="level3">
-<h3 class="anchored" data-anchor-id="variance-decomposition-1">Variance Decomposition</h3>
-<p><span class="math display">\[
-\text{Total SS} = \text{Block SS} + \text{Treatment SS} + \text{Error SS}
-\]</span></p>
-</section>
-<section id="derivation" class="level3">
-<h3 class="anchored" data-anchor-id="derivation">Derivation</h3>
-<ol type="1">
-<li><strong>Total Sum of Squares (SS<span class="math inline">\(_\text{Total}\)</span>):</strong></li>
-</ol>
-<p><span class="math display">\[
-SS_\text{Total} = \sum_{h=1}^b \sum_{i=1}^t (Y_{hi} - \bar{Y})^2
-\]</span></p>
-<p>Where <span class="math inline">\(\bar{Y}\)</span> is the grand mean.</p>
-<ol type="1">
-<li><strong>Block Sum of Squares (SS<span class="math inline">\(_\text{Block}\)</span>):</strong></li>
-</ol>
-<p><span class="math display">\[
-SS_\text{Block} = t \sum_{h=1}^b (\bar{Y}_h - \bar{Y})^2
-\]</span></p>
-<p>Where <span class="math inline">\(\bar{Y}_h\)</span> is the mean of block <span class="math inline">\(h\)</span>.</p>
-<ol type="1">
-<li><strong>Treatment Sum of Squares (SS<span class="math inline">\(_\text{Treatment}\)</span>):</strong></li>
-</ol>
-<p><span class="math display">\[
-SS_\text{Treatment} = b \sum_{i=1}^t (\bar{Y}_i - \bar{Y})^2
-\]</span></p>
-<p>Where <span class="math inline">\(\bar{Y}_i\)</span> is the mean of treatment <span class="math inline">\(i\)</span>.</p>
-<ol type="1">
-<li><strong>Error Sum of Squares (SS<span class="math inline">\(_\text{Error}\)</span>):</strong></li>
-</ol>
-<p><span class="math display">\[
-SS_\text{Error} = \sum_{h=1}^b \sum_{i=1}^t (Y_{hi} - \bar{Y}_h - \bar{Y}_i + \bar{Y})^2
-\]</span></p>
-<p>Represents variability not explained by blocks or treatments.</p>
-<p><strong>Conclusion:</strong></p>
-<p>The variance decomposition allows for the assessment of how much variability in the response is attributable to blocks, treatments, and random error.</p>
-<p><strong>Reference:</strong></p>
-<p>Montgomery (2019) provides a detailed derivation of ANOVA components in <em>Design and Analysis of Experiments</em>.</p>
-</section>
-</section>
-<section id="effects-of-ignoring-block-treatment-interaction" class="level2">
-<h2 class="anchored" data-anchor-id="effects-of-ignoring-block-treatment-interaction">Effects of Ignoring Block-Treatment Interaction</h2>
-<p>In the RCBD model, it is assumed that there is no interaction between blocks and treatments. Ignoring a significant block-treatment interaction can lead to biased estimates of treatment effects.</p>
-<section id="mathematical-illustration" class="level3">
-<h3 class="anchored" data-anchor-id="mathematical-illustration">Mathematical Illustration</h3>
-<p>Suppose the true model includes an interaction term:</p>
-<p><span class="math display">\[
-Y_{hi} = \mu + \theta_h + \tau_i + (\theta \tau)^*_{hi} + \epsilon^*_{hi}
-\]</span></p>
-<p>If the interaction term <span class="math inline">\((\theta \tau)_{hi}\)</span> is significant and is omitted from the model, the estimates of <span class="math inline">\(\tau_i\)</span> will be biased because the model incorrectly attributes part of the interaction effect to treatment effects.</p>
-</section>
-<section id="proof-outline" class="level3">
-<h3 class="anchored" data-anchor-id="proof-outline">Proof Outline</h3>
-<ol type="1">
-<li><strong>Full Model:</strong> Includes interaction.</li>
-<li><strong>Reduced Model:</strong> Omits interaction.</li>
-<li><strong>Bias Derivation:</strong> Show that <span class="math inline">\(\hat{\tau}_i\)</span> in the reduced model includes components of the interaction effect.</li>
-</ol>
-<p><strong>Conclusion:</strong></p>
-<p>It is crucial to test for block-treatment interactions. If significant, a more complex model that includes interaction terms should be employed.</p>
-<p><strong>Reference:</strong></p>
-<p>Kempthorne (1977) discusses the implications of model misspecification in <em>Design and Analysis of Experiments</em>.</p>
-</section>
-</section>
-<section id="sample-size-calculations-for-rcbds" class="level2">
-<h2 class="anchored" data-anchor-id="sample-size-calculations-for-rcbds">Sample Size Calculations for RCBDs</h2>
-<p>Determining the appropriate sample size is essential for achieving sufficient power to detect treatment effects.</p>
-<section id="formula" class="level3">
-<h3 class="anchored" data-anchor-id="formula">Formula</h3>
-<p><span class="math display">\[
-n \geq \frac{2 v \sigma^2 \phi^2}{b \Delta^2}
-\]</span></p>
-<p>Where:</p>
-<ul>
-<li><span class="math inline">\(n\)</span>: Number of replicates per treatment.</li>
-<li><span class="math inline">\(v\)</span>: Number of treatments.</li>
-<li><span class="math inline">\(\sigma^2\)</span>: Estimated variance of the response.</li>
-<li><span class="math inline">\(\phi\)</span>: Desired power (e.g., 0.80).</li>
-<li><span class="math inline">\(b\)</span>: Number of blocks.</li>
-<li><span class="math inline">\(\Delta\)</span>: Minimum detectable effect size.</li>
-</ul>
-</section>
-<section id="derivation-1" class="level3">
-<h3 class="anchored" data-anchor-id="derivation-1">Derivation</h3>
-<ol type="1">
-<li><strong>Power Analysis:</strong></li>
-</ol>
-<p>Based on the desired power (<span class="math inline">\(\phi\)</span>) and significance level (<span class="math inline">\(\alpha\)</span>), determine the non-centrality parameter needed to detect effect size <span class="math inline">\(\Delta\)</span>.</p>
-<ol type="1">
-<li><strong>Rearrange for <span class="math inline">\(n\)</span>:</strong></li>
-</ol>
-<p>Solving the power equation for <span class="math inline">\(n\)</span> yields the sample size formula.</p>
-<p><strong>Example Calculation:</strong></p>
-<p>Suppose you have 4 treatments (<span class="math inline">\(v = 4\)</span>), 5 blocks (<span class="math inline">\(b = 5\)</span>), an estimated variance (<span class="math inline">\(\sigma^2 = 20\)</span>), desire a power of 0.80 (<span class="math inline">\(\phi = 0.84\)</span>), and aim to detect a minimum effect size of 5 units (<span class="math inline">\(\Delta = 5\)</span>).</p>
-<p><span class="math display">\[
-n \geq \frac{2 \times 4 \times 20 \times 0.84^2}{5 \times 5^2} = \frac{2 \times 4 \times 20 \times 0.7056}{125} \approx \frac{113.792}{125} \approx 0.91
-\]</span></p>
-<p>Since <span class="math inline">\(n\)</span> must be an integer, at least 1 replicate per treatment is needed. However, practical considerations often necessitate larger sample sizes.</p>
-<p><strong>Reference:</strong></p>
-<p>Montgomery (2019) elaborates on sample size determination in <em>Design and Analysis of Experiments</em>.</p>
-</section>
-</section>
-</section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
+<p>These methods ensure your experiment is well-powered to detect meaningful differences!</p>
 
 
 </section>
@@ -1711,38 +1142,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

@@ -2245,14 +2245,7 @@
     "href": "assignments/assignment7_randomized_complete_block_design.html#exercise-1-randomized-complete-block-design",
     "title": "Assignment 7: Randomized Complete Block Design",
     "section": "Exercise 1: Randomized Complete Block Design",
-    "text": "Exercise 1: Randomized Complete Block Design\nData Source: Dean et al. (2017), Chapter 10, Exercise 1\nTask: Conduct a randomization for a randomized complete block design with:\n\n\\(v = 4\\) treatments,\n\\(b = 5\\) blocks,\nEach treatment is observed \\(s = 1\\) time in each block.\n\nDeliverables:\n\nShow the randomized treatment allocation within each block.\nProvide the final design in tabular format, with rows representing blocks and columns representing treatment allocations."
-  },
-  {
-    "objectID": "assignments/assignment7_randomized_complete_block_design.html#exercise-2-respiratory-exchange-ratio-experiment-ex.-10.4",
-    "href": "assignments/assignment7_randomized_complete_block_design.html#exercise-2-respiratory-exchange-ratio-experiment-ex.-10.4",
-    "title": "Assignment 7: Randomized Complete Block Design",
-    "section": "Exercise 2: Respiratory Exchange Ratio Experiment (Ex. 10.4)",
-    "text": "Exercise 2: Respiratory Exchange Ratio Experiment (Ex. 10.4)\nData Source: Dean et al. (2017), Chapter 10, Exercise 4\nScenario: In the resting metabolic rate experiment introduced in Example 10.4.1 (p. 311), the experimenters also measured the respiratory exchange ratio, another measure of energy expenditure. The data for the second 30 minutes of testing are provided below.\n\nThe data are from Example 10.4.1, but the respiratory exchange ratio data are used here.\n\n\nSubject\nProtocol 1\nProtocol 2\nProtocol 3\n\n\n\n\n1\n0.79\n0.80\n0.83\n\n\n2\n0.84\n0.84\n0.81\n\n\n3\n0.84\n0.93\n0.88\n\n\n4\n0.83\n0.85\n0.79\n\n\n5\n0.84\n0.78\n0.88\n\n\n6\n0.83\n0.75\n0.86\n\n\n7\n0.77\n0.76\n0.71\n\n\n8\n0.83\n0.85\n0.78\n\n\n9\n0.81\n0.77\n0.72\n\n\n\nTasks:\n\nEvaluate Assumptions:\n\nEvaluate the assumptions of the block-treatment model (Equation 10.4.1) for these data.\n\nANOVA Analysis:\n\nConstruct an analysis of variance (ANOVA) table.\nTest for equality of the effects of the protocols on the respiratory exchange ratio. Report your conclusions.\n\nEvaluate the usefulness of blocking.\n\nDeliverables:\n\nDiscuss the assumptions of the block-treatment model for the respiratory exchange ratio data.\nPresent the ANOVA table and results for the respiratory exchange ratio data.\nEvaluate the usefulness of blocking in this experiment.\nInclude any R code used for the analysis.\nProvide a clear explanation of the process and results."
+    "text": "Exercise 1: Randomized Complete Block Design\nData Source: Dean et al. (2017), Chapter 10, Exercise 1\nTask: Conduct a randomization for a randomized complete block design with:\n\n\\(v = 4\\) treatments,\n\\(b = 5\\) blocks,\nEach treatment is observed \\(s = 1\\) time in each block.\n\nDeliverables:\n\nShow the randomized treatment allocation within each block.\nProvide the final design in tabular format, with rows representing blocks and columns representing treatment allocations.\nInclude any R code used for the randomization. ## Exercise 2: Respiratory Exchange Ratio Experiment (Ex. 10.4)\n\nData Source: Dean et al. (2017), Chapter 10, Exercise 4\nScenario: In the resting metabolic rate experiment introduced in Example 10.4.1 (p. 311), the experimenters also measured the respiratory exchange ratio, another measure of energy expenditure. The data for the second 30 minutes of testing are provided below.\n\nThe data are from Example 10.4.1, but the respiratory exchange ratio data are used here.\n\n\nSubject\nProtocol 1\nProtocol 2\nProtocol 3\n\n\n\n\n1\n0.79\n0.80\n0.83\n\n\n2\n0.84\n0.84\n0.81\n\n\n3\n0.84\n0.93\n0.88\n\n\n4\n0.83\n0.85\n0.79\n\n\n5\n0.84\n0.78\n0.88\n\n\n6\n0.83\n0.75\n0.86\n\n\n7\n0.77\n0.76\n0.71\n\n\n8\n0.83\n0.85\n0.78\n\n\n9\n0.81\n0.77\n0.72\n\n\n\nTasks:\n\nEvaluate Assumptions:\n\nEvaluate the assumptions of the block-treatment model (Equation 10.4.1) for these data.\n\nANOVA Analysis:\n\nConstruct an analysis of variance (ANOVA) table.\nTest for equality of the effects of the protocols on the respiratory exchange ratio. Report your conclusions.\n\nEvaluate the usefulness of blocking.\n\nDeliverables:\n\nDiscuss the assumptions of the block-treatment model for the respiratory exchange ratio data.\nPresent the ANOVA table and results for the respiratory exchange ratio data.\nEvaluate the usefulness of blocking in this experiment.\nInclude any R code used for the analysis.\nProvide a clear explanation of the process and results."
   },
   {
     "objectID": "assignments/assignment7_randomized_complete_block_design.html#grading-rubric",
@@ -6542,198 +6535,156 @@
   {
     "objectID": "lectures/week-09_complete-blocks.html",
     "href": "lectures/week-09_complete-blocks.html",
-    "title": "Complete Blocks Design",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
     "section": "",
-    "text": "Introduce complete and general complete block designs.\nDerive the analysis of variance (ANOVA) components and explain multiple comparisons.\nUnderstand how to check model assumptions.\nExplore factorial experiments with real-world data: a banana ripening experiment.\nEmphasize interactive learning with quizzes, detailed mathematical derivations, and annotated R code examples.\n\n\nReferences: Dean et al. (2017), Montgomery & Runger (2010), Christensen (2018), and the Libre Textbook from Penn State University.\n\n\n\n\n\n# Load required packages using pacman for convenience.\npacman::p_load(dplyr, ggplot2, tidyr, knitr, readr, here)\n\nExplanation:\n\ndplyr: data manipulation,\nggplot2: visualizations,\ntidyr: data reshaping,\nknitr: producing tables,\nreadr: reading in external data files. # Mathematical Foundations from Chapter 10"
+    "text": "One-way ANOVA tests whether the means of three or more groups differ significantly. For example, imagine comparing the average test scores of students taught using three teaching methods (Method A, Method B, Method C).\n\n\n\n\nPower (1 - β): The probability of correctly rejecting a false null hypothesis (typically targeted at 0.80 or higher).\nSignificance Level (α): The probability of a Type I error (rejecting a true null hypothesis), often set at 0.05.\nEffect Size: A measure of the magnitude of differences between group means, quantified in ANOVA using Cohen’s f.\nSample Size (r): The number of observations per group, which we often solve for in power analysis.\nNoncentrality Parameter (λ): A parameter that shifts the F-distribution under the alternative hypothesis, used to compute power.\n\n\n\n\nCohen’s f measures the standardized difference between group means relative to within-group variability. The formula is:\n\\[\nf = \\sqrt{\\frac{\\sum_{i=1}^k (\\mu_i - \\mu)^2 / k}{\\sigma^2}}\n\\]\nWhere:\n\n\\(k\\): Number of groups– In the textbook, \\(\\nu\\) is used instead of \\(k\\).\n\\(\\mu_i\\): Mean of group \\(i\\).\n\\(\\mu\\): Overall mean across all groups.\n\\(\\sigma^2\\): Within-group variance (assumed equal across groups).\n\nInterpretation (Cohen’s benchmarks):\n\nSmall: \\(f = 0.1\\)\nMedium: \\(f = 0.25\\)\nLarge: \\(f = 0.4\\)\n\n\n\n\nSuppose we have three groups (\\(k = 3\\)) with means \\(\\mu_1 = 10\\), \\(\\mu_2 = 12\\), \\(\\mu_3 = 14\\), and within-group variance \\(\\sigma^2 = 16\\). The overall mean is:\n\\[\n\\mu = \\frac{10 + 12 + 14}{3} = 12\n\\]\nNumerator of \\(f^2\\):\n\\[\n\\frac{\\sum (\\mu_i - \\mu)^2}{k} = \\frac{(10 - 12)^2 + (12 - 12)^2 + (14 - 12)^2}{3} = \\frac{4 + 0 + 4}{3} = \\frac{8}{3} \\approx 2.667\n\\]\n\\[\nf = \\sqrt{\\frac{2.667}{16}} = \\sqrt{0.1667} \\approx 0.408\n\\]\nThis is a large effect size, close to Cohen’s \\(f = 0.4\\).\n\n\n\nThe noncentrality parameter quantifies the shift in the F-distribution under the alternative hypothesis:\n\\[\n\\lambda = \\frac{r \\sum_{i=1}^k (\\mu_i - \\mu)^2}{\\sigma^2}\n\\]\nWhere \\(r\\) is the sample size per group (assuming balanced design). Using Cohen’s f:\n\\[\n\\lambda = r k f^2\n\\]\n\n\n\nUsing the above means and \\(\\sigma^2 = 16\\), with \\(r = 10\\) per group:\n\\[\n\\sum (\\mu_i - \\mu)^2 = 4 + 0 + 4 = 8\n\\]\n\\[\n\\lambda = \\frac{10 \\times 8}{16} = 5\n\\]\nOr via \\(f\\):\n\\[\n\\lambda = 10 \\times 3 \\times (0.408)^2 = 30 \\times 0.1665 \\approx 5\n\\]\n\n\n\nPower is calculated using the noncentral F-distribution:\n\nNumerator degrees of freedom: \\(df_1 = k - 1\\)\nDenominator degrees of freedom: \\(df_2 = N - k\\), where \\(N = r k\\)\nCritical F-value: \\(F_{\\text{crit}}\\) at \\(\\alpha\\), found from the F-distribution.\nPower: \\(1 - P(F &lt;-  F_{\\text{crit}} | \\lambda)\\), where \\(F\\) follows a noncentral F-distribution.\n\n\n\n\nGoal: Determine the sample size per group (\\(r\\)) for \\(k = 3\\) groups, medium effect size (\\(f = 0.25\\)), \\(\\alpha = 0.05\\), and power = 0.80.\n\n\n\n\nlibrary(pwr)\n\nk &lt;- 3\nf &lt;- 0.25\nalpha &lt;- 0.05\npower &lt;- 0.80\n\nresult &lt;- pwr.anova.test(k = k, f = f, sig.level = alpha, power = power)\nprint(result)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 3\n              n = 52.3966\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\nOutput:\n     Balanced one-way analysis of variance power calculation \n\n              k = 3\n              n = 52.39771\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\nWe need approximately \\(r = 53\\) subjects per group, so total \\(N = 3 \\times 53 = 159\\).\n\n\n\n\nDegrees of Freedom:\n\n\\(df_1 = k - 1 = 2\\)\n\\(df_2 = N - k = 3 \\times 53 - 3 = 156\\)\n\nNoncentrality Parameter:\n\n\\[\n\\lambda = r k f^2 = 53 \\times 3 \\times 0.25^2 = 159 \\times 0.0625 = 9.9375\n\\]\n\nCritical F-value:\n\n\\[\nF_{\\text{crit}} = qf(0.95, 2, 156) \\approx 3.05\n\\]\n\nPower:\n\n\\[\n\\text{Power} = 1 - pf(3.05, 2, 156, ncp = 9.9375)\n\\]\n\npower_manual &lt;- 1 - pf(qf(0.95, 2, 156), 2, 156, ncp = 9.9375)\nprint(power_manual)\n\n[1] 0.8048873\n\n\nOutput: Approximately 0.803, confirming the power is close to 0.80, validating the pwr result."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#overview-and-learning-objectives",
-    "href": "lectures/week-09_complete-blocks.html#overview-and-learning-objectives",
-    "title": "Complete Blocks Design",
+    "objectID": "lectures/week-09_complete-blocks.html#what-is-one-way-anova",
+    "href": "lectures/week-09_complete-blocks.html#what-is-one-way-anova",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
     "section": "",
-    "text": "Introduce complete and general complete block designs.\nDerive the analysis of variance (ANOVA) components and explain multiple comparisons.\nUnderstand how to check model assumptions.\nExplore factorial experiments with real-world data: a banana ripening experiment.\nEmphasize interactive learning with quizzes, detailed mathematical derivations, and annotated R code examples.\n\n\nReferences: Dean et al. (2017), Montgomery & Runger (2010), Christensen (2018), and the Libre Textbook from Penn State University."
+    "text": "One-way ANOVA tests whether the means of three or more groups differ significantly. For example, imagine comparing the average test scores of students taught using three teaching methods (Method A, Method B, Method C)."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#r-packages-used",
-    "href": "lectures/week-09_complete-blocks.html#r-packages-used",
-    "title": "Complete Blocks Design",
+    "objectID": "lectures/week-09_complete-blocks.html#key-concepts-in-power-analysis",
+    "href": "lectures/week-09_complete-blocks.html#key-concepts-in-power-analysis",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
     "section": "",
-    "text": "# Load required packages using pacman for convenience.\npacman::p_load(dplyr, ggplot2, tidyr, knitr, readr, here)\n\nExplanation:\n\ndplyr: data manipulation,\nggplot2: visualizations,\ntidyr: data reshaping,\nknitr: producing tables,\nreadr: reading in external data files. # Mathematical Foundations from Chapter 10"
+    "text": "Power (1 - β): The probability of correctly rejecting a false null hypothesis (typically targeted at 0.80 or higher).\nSignificance Level (α): The probability of a Type I error (rejecting a true null hypothesis), often set at 0.05.\nEffect Size: A measure of the magnitude of differences between group means, quantified in ANOVA using Cohen’s f.\nSample Size (r): The number of observations per group, which we often solve for in power analysis.\nNoncentrality Parameter (λ): A parameter that shifts the F-distribution under the alternative hypothesis, used to compute power."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#model-without-interaction",
-    "href": "lectures/week-09_complete-blocks.html#model-without-interaction",
-    "title": "Complete Blocks Design",
-    "section": "Model without Interaction",
-    "text": "Model without Interaction\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + \\varepsilon_{hit}, \\quad \\varepsilon_{hit} \\sim N(0,\\sigma^2)\n\\]\n\n\\(\\mu\\) is the overall mean.\n\\(\\theta_h\\) is the effect of the \\(h\\)th block.\n\\(\\tau_i\\) is the effect of the \\(i\\)th treatment.\n\\(\\varepsilon_{hit}\\) is the random error.\n\\(Y_{hit}\\) is the response for treatment \\(i\\) in block \\(h\\) and replicate \\(t\\).\n\\(\\nu\\) is the number of treatments.\n\\(b\\) is the number of blocks.\n\\(s\\) is the number of replicates per treatment per block."
+    "objectID": "lectures/week-09_complete-blocks.html#effect-size-cohens-f",
+    "href": "lectures/week-09_complete-blocks.html#effect-size-cohens-f",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "Cohen’s f measures the standardized difference between group means relative to within-group variability. The formula is:\n\\[\nf = \\sqrt{\\frac{\\sum_{i=1}^k (\\mu_i - \\mu)^2 / k}{\\sigma^2}}\n\\]\nWhere:\n\n\\(k\\): Number of groups– In the textbook, \\(\\nu\\) is used instead of \\(k\\).\n\\(\\mu_i\\): Mean of group \\(i\\).\n\\(\\mu\\): Overall mean across all groups.\n\\(\\sigma^2\\): Within-group variance (assumed equal across groups).\n\nInterpretation (Cohen’s benchmarks):\n\nSmall: \\(f = 0.1\\)\nMedium: \\(f = 0.25\\)\nLarge: \\(f = 0.4\\)"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#sums-of-squares-computation",
-    "href": "lectures/week-09_complete-blocks.html#sums-of-squares-computation",
-    "title": "Complete Blocks Design",
-    "section": "Sums of Squares Computation",
-    "text": "Sums of Squares Computation\n\nTotal Sum of Squares:\n\n\\[\nSS_{\\text{Total}} = \\sum_{h=1}^{b} \\sum_{i=1}^{v} \\sum_{t=1}^{s} (Y_{hit} - \\bar{Y}_{\\cdots})^2\n\\]\n\nBlock Sum of Squares:\n\n\\[\nSS_{\\theta} = vs\\sum_{h=1}^{b} (\\bar{Y}_{h..} - \\bar{Y}_{\\cdots})^2\n\\]\n\nTreatment Sum of Squares:\n\n\\[\nSS_{Treatment} = bs\\sum_{i=1}^{v} (\\bar{Y}_{.i.} - \\bar{Y}_{\\cdots})^2\n\\]\n\nError Sum of Squares:\n\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment}\n\\]\n\nDegrees of Freedom:\n\nBlocks: \\(b - 1\\)\nTreatments: \\(v - 1\\)\nError: \\(bvs - b - v + 1\\)"
+    "objectID": "lectures/week-09_complete-blocks.html#example-calculation-of-cohens-f",
+    "href": "lectures/week-09_complete-blocks.html#example-calculation-of-cohens-f",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "Suppose we have three groups (\\(k = 3\\)) with means \\(\\mu_1 = 10\\), \\(\\mu_2 = 12\\), \\(\\mu_3 = 14\\), and within-group variance \\(\\sigma^2 = 16\\). The overall mean is:\n\\[\n\\mu = \\frac{10 + 12 + 14}{3} = 12\n\\]\nNumerator of \\(f^2\\):\n\\[\n\\frac{\\sum (\\mu_i - \\mu)^2}{k} = \\frac{(10 - 12)^2 + (12 - 12)^2 + (14 - 12)^2}{3} = \\frac{4 + 0 + 4}{3} = \\frac{8}{3} \\approx 2.667\n\\]\n\\[\nf = \\sqrt{\\frac{2.667}{16}} = \\sqrt{0.1667} \\approx 0.408\n\\]\nThis is a large effect size, close to Cohen’s \\(f = 0.4\\)."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks",
-    "href": "lectures/week-09_complete-blocks.html#quiz-which-component-of-the-anova-for-a-complete-block-design-captures-the-variability-due-to-blocks",
-    "title": "Complete Blocks Design",
-    "section": "Quiz: Which component of the ANOVA for a complete block design captures the variability due to blocks?",
-    "text": "Quiz: Which component of the ANOVA for a complete block design captures the variability due to blocks?\n\n\n(A): \\(SS_{Treatment}\\) {data-explanation=“Incorrect. \\(SS_{Treatment}\\) is for treatment effects.”}\n[(B): \\(SS_{\\theta}\\) captures the variability among blocks]{.correct {data-explanation=“Correct. \\(SS_{\\theta}\\) quantifies block variability.”}}\n(C): \\(SS_{Error}\\) {data-explanation=“Incorrect. \\(SS_{Error}\\) is the error sum of squares.”}\n(D): \\(SS_{\\text{Total}}\\) {data-explanation=“Incorrect. \\(SS_{\\text{Total}}\\) is the total variability.”}"
+    "objectID": "lectures/week-09_complete-blocks.html#noncentrality-parameter-λ",
+    "href": "lectures/week-09_complete-blocks.html#noncentrality-parameter-λ",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "The noncentrality parameter quantifies the shift in the F-distribution under the alternative hypothesis:\n\\[\n\\lambda = \\frac{r \\sum_{i=1}^k (\\mu_i - \\mu)^2}{\\sigma^2}\n\\]\nWhere \\(r\\) is the sample size per group (assuming balanced design). Using Cohen’s f:\n\\[\n\\lambda = r k f^2\n\\]"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#multiple-comparisons",
-    "href": "lectures/week-09_complete-blocks.html#multiple-comparisons",
-    "title": "Complete Blocks Design",
-    "section": "Multiple Comparisons",
-    "text": "Multiple Comparisons\n\nContrast Estimation: For any contrast \\(\\sum c_i \\tau_i\\) (with \\(\\sum c_i=0\\)):\n\n\\[\n\\sum c_i \\tau_i \\in \\left(\\sum c_i \\bar{Y}_{.i.} \\pm w \\sqrt{\\frac{MS_{Error} \\sum c_i^2}{bs}}\\right)\n\\]\n\n\\(w\\) is the critical value from the chosen method (Bonferroni, Scheffé, Tukey, etc.).\nInterpretation: This provides a simultaneous confidence interval for contrasts, ensuring control over the familywise error rate."
+    "objectID": "lectures/week-09_complete-blocks.html#example",
+    "href": "lectures/week-09_complete-blocks.html#example",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "Using the above means and \\(\\sigma^2 = 16\\), with \\(r = 10\\) per group:\n\\[\n\\sum (\\mu_i - \\mu)^2 = 4 + 0 + 4 = 8\n\\]\n\\[\n\\lambda = \\frac{10 \\times 8}{16} = 5\n\\]\nOr via \\(f\\):\n\\[\n\\lambda = 10 \\times 3 \\times (0.408)^2 = 30 \\times 0.1665 \\approx 5\n\\]"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#experiment-context",
-    "href": "lectures/week-09_complete-blocks.html#experiment-context",
-    "title": "Complete Blocks Design",
-    "section": "Experiment Context",
-    "text": "Experiment Context\n\nBackground: Bananas are stored using two methods:\n\nCounter Storage: Conventional storage on a counter.\nHanging Storage: Using a banana hanging device to slow ripening.\n\nMeasured Outcome: The response variable \\(y\\) represents the percentage of black color on the banana peel (an indicator of ripeness).\nExperimental Factors:\n\nBlock: Grouping factor (e.g., repeated measures over time or location).\nLight: Level of illumination (affecting ripening).\nStorage: Storage method (1 = counter, 2 = hanging)."
+    "objectID": "lectures/week-09_complete-blocks.html#power-calculation",
+    "href": "lectures/week-09_complete-blocks.html#power-calculation",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "Power is calculated using the noncentral F-distribution:\n\nNumerator degrees of freedom: \\(df_1 = k - 1\\)\nDenominator degrees of freedom: \\(df_2 = N - k\\), where \\(N = r k\\)\nCritical F-value: \\(F_{\\text{crit}}\\) at \\(\\alpha\\), found from the F-distribution.\nPower: \\(1 - P(F &lt;-  F_{\\text{crit}} | \\lambda)\\), where \\(F\\) follows a noncentral F-distribution."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#data-overview",
-    "href": "lectures/week-09_complete-blocks.html#data-overview",
-    "title": "Complete Blocks Design",
-    "section": "Data Overview",
-    "text": "Data Overview\nThe attached banana.txt file has the following columns:\n\nblock: Block identifier.\nlight: Light condition (1 or 2).\nstorage: Storage method (1 = counter, 2 = hanging).\ny: Measured percentage of black color.\n\n\nExample Data (first few rows): 1 1 1 30 1 1 1 30 1 1 1 17 1 1 1 43 1 1 2 43"
+    "objectID": "lectures/week-09_complete-blocks.html#numerical-example",
+    "href": "lectures/week-09_complete-blocks.html#numerical-example",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "Goal: Determine the sample size per group (\\(r\\)) for \\(k = 3\\) groups, medium effect size (\\(f = 0.25\\)), \\(\\alpha = 0.05\\), and power = 0.80."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#computation-of-treatment-means-and-overall-mean",
-    "href": "lectures/week-09_complete-blocks.html#computation-of-treatment-means-and-overall-mean",
-    "title": "Complete Blocks Design",
-    "section": "1. Computation of Treatment Means and Overall Mean",
-    "text": "1. Computation of Treatment Means and Overall Mean\n\nOverall Mean:\n\n\\[\n\\bar{Y}_{\\cdots} = \\frac{1}{n}\\sum_{h,l,s} y_{hls}\n\\]\n\nTreatment (Storage) Mean: For storage type \\(i\\):\n\n\\[\n\\bar{Y}_{.i.} = \\frac{1}{n_i}\\sum_{h,l \\text{ where storage}=i} y_{hls}\n\\]"
+    "objectID": "lectures/week-09_complete-blocks.html#using-rs-pwr-package",
+    "href": "lectures/week-09_complete-blocks.html#using-rs-pwr-package",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "library(pwr)\n\nk &lt;- 3\nf &lt;- 0.25\nalpha &lt;- 0.05\npower &lt;- 0.80\n\nresult &lt;- pwr.anova.test(k = k, f = f, sig.level = alpha, power = power)\nprint(result)\n\n\n     Balanced one-way analysis of variance power calculation \n\n              k = 3\n              n = 52.3966\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\n\n\nOutput:\n     Balanced one-way analysis of variance power calculation \n\n              k = 3\n              n = 52.39771\n              f = 0.25\n      sig.level = 0.05\n          power = 0.8\n\nNOTE: n is number in each group\nWe need approximately \\(r = 53\\) subjects per group, so total \\(N = 3 \\times 53 = 159\\)."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#sums-of-squares",
-    "href": "lectures/week-09_complete-blocks.html#sums-of-squares",
-    "title": "Complete Blocks Design",
-    "section": "2. Sums of Squares",
-    "text": "2. Sums of Squares\nUsing the banana data, suppose we define:\n\n\\(b\\) = number of blocks,\n\\(v\\) = number of storage methods (here, \\(v=2\\)),\n\\(s\\) = number of observations per block per storage type.\n\nThen, following the formulas from Chapter 10:\n\nTotal Sum of Squares:\n\n\\[\nSS_{\\text{Total}} = \\sum (y_{hls} - \\bar{Y}_{\\cdots})^2\n\\]\n\nBlock Sum of Squares:\n\n\\[\nSS_{\\theta} = vs\\sum_{h} (\\bar{Y}_{h..} - \\bar{Y}_{\\cdots})^2\n\\]\n\nTreatment Sum of Squares:\n\n\\[\nSS_{Treatment} = bs \\sum_{i=1}^{2} (\\bar{Y}_{.i.} - \\bar{Y}_{\\cdots})^2\n\\]\n\nError Sum of Squares:\n\n\\[\nSS_{Error} = SS_{\\text{Total}} - SS_{\\theta} - SS_{Treatment}\n\\]"
+    "objectID": "lectures/week-09_complete-blocks.html#manual-verification",
+    "href": "lectures/week-09_complete-blocks.html#manual-verification",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "",
+    "text": "Degrees of Freedom:\n\n\\(df_1 = k - 1 = 2\\)\n\\(df_2 = N - k = 3 \\times 53 - 3 = 156\\)\n\nNoncentrality Parameter:\n\n\\[\n\\lambda = r k f^2 = 53 \\times 3 \\times 0.25^2 = 159 \\times 0.0625 = 9.9375\n\\]\n\nCritical F-value:\n\n\\[\nF_{\\text{crit}} = qf(0.95, 2, 156) \\approx 3.05\n\\]\n\nPower:\n\n\\[\n\\text{Power} = 1 - pf(3.05, 2, 156, ncp = 9.9375)\n\\]\n\npower_manual &lt;- 1 - pf(qf(0.95, 2, 156), 2, 156, ncp = 9.9375)\nprint(power_manual)\n\n[1] 0.8048873\n\n\nOutput: Approximately 0.803, confirming the power is close to 0.80, validating the pwr result."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#anova-decision-rule",
-    "href": "lectures/week-09_complete-blocks.html#anova-decision-rule",
-    "title": "Complete Blocks Design",
-    "section": "3. ANOVA Decision Rule",
-    "text": "3. ANOVA Decision Rule\nThe F-test for treatments in a complete block design is:\n\\[\nF = \\frac{MS_{Treatment}}{MS_{Error}}\n\\]\nwhere:\n\n\\(MS_{Treatment} = \\frac{SS_{Treatment}}{v-1}\\)\n\\(MS_{Error} = \\frac{SS_{Error}}{bvs - b - v + 1}\\)\n\nReject the null hypothesis \\(H_0: \\tau_1 = \\tau_2\\) if:\n\\[\nF &gt; F_{v-1, bvs-b-v+1,\\alpha}\n\\]"
+    "objectID": "lectures/week-09_complete-blocks.html#what-is-two-way-anova",
+    "href": "lectures/week-09_complete-blocks.html#what-is-two-way-anova",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "What is Two-Way ANOVA?",
+    "text": "What is Two-Way ANOVA?\nTwo-way ANOVA examines the effects of two categorical factors (e.g., teaching method and study time) on a response variable, testing:\n\nMain Effect of Factor A\nMain Effect of Factor B\nInteraction Effect (A × B)"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#data-import-and-preparation",
-    "href": "lectures/week-09_complete-blocks.html#data-import-and-preparation",
-    "title": "Complete Blocks Design",
-    "section": "Data Import and Preparation",
-    "text": "Data Import and Preparation\n\n# Read the banana data from the attached text file.\nbanana_data &lt;- read.table(here(\"data\", \"dean2017\", \"banana.txt\"), header = TRUE)\nbanana_data |&gt; head()\n\n\n\n\n\n\n\n\nblock\nlight\nstorage\ny\n\n\n\n\n1\n1\n1\n30\n\n\n1\n1\n1\n30\n\n\n1\n1\n1\n17\n\n\n1\n1\n1\n43\n\n\n1\n1\n2\n43\n\n\n1\n1\n2\n35\n\n\n\n\n\n\n\nTable 1: First Few Rows of Banana Data\n\n\n\n\n\nDescriptive Statistics and Treatment Means\n\nbanana_summary &lt;- banana_data %&gt;%\n  group_by(storage) %&gt;%\n  summarize(Mean = mean(y), SD = sd(y), n = n())\nbanana_summary \n\n\n\n\n\n\n\n\nstorage\nMean\nSD\nn\n\n\n\n\n1\n41.50000\n15.52557\n24\n\n\n2\n37.91667\n12.98466\n24\n\n\n\n\n\n\n\nTable 2: Summary Statistics by Storage Method\n\n\n\n\n\n\nFitting the Block Design Model\nAssuming ‘block’ is our blocking factor and ‘storage’ is the treatment factor, we fit the model:\n\n# Fit the complete block design model (ignoring the 'light' factor for simplicity)\nfit_banana &lt;- aov(y ~ factor(block) + factor(storage), data = banana_data)\nanova_banana &lt;- summary(fit_banana)[[1]]\nknitr::kable(anova_banana, caption = \"ANOVA Table for Banana Experiment\")\n\n\n\n\n\nANOVA Table for Banana Experiment\n\n\n\nDf\nSum Sq\nMean Sq\nF value\nPr(&gt;F)\n\n\n\n\nfactor(block)\n2\n1255.7917\n627.8958\n3.3832079\n0.0429809\n\n\nfactor(storage)\n1\n154.0833\n154.0833\n0.8302268\n0.3671720\n\n\nResiduals\n44\n8166.0417\n185.5919\nNA\nNA\n\n\n\n\n\n\nTable 3: ANOVA Table for Banana Experiment"
+    "objectID": "lectures/week-09_complete-blocks.html#key-concepts",
+    "href": "lectures/week-09_complete-blocks.html#key-concepts",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Key Concepts",
+    "text": "Key Concepts\nPower analysis in two-way ANOVA requires separate calculations for each effect, adjusting effect sizes and degrees of freedom accordingly."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#detailed-explanation-of-the-computation",
-    "href": "lectures/week-09_complete-blocks.html#detailed-explanation-of-the-computation",
-    "title": "Complete Blocks Design",
-    "section": "Detailed Explanation of the Computation",
-    "text": "Detailed Explanation of the Computation\n\nStep 1: Compute Means The overall mean \\(\\bar{Y}_{\\cdots}\\) is computed from all \\(y\\) values. The treatment mean \\(\\bar{Y}_{.i.}\\) for each storage type is calculated from data where storage equals 1 or 2.\nStep 2: Sums of Squares The R function aov() internally computes the sums of squares for blocks, treatments, and error. These values are then used to calculate mean squares.\nStep 3: F-Test The ratio \\(F = MS_{Treatment/MS_{Error}\\) is compared against the critical F-value at the chosen significance level (typically 0.05) to test whether storage method affects the percentage of black color (ripeness)."
+    "objectID": "lectures/week-09_complete-blocks.html#effect-size-cohens-f-for-two-way-anova",
+    "href": "lectures/week-09_complete-blocks.html#effect-size-cohens-f-for-two-way-anova",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Effect Size: Cohen’s F for Two-Way ANOVA",
+    "text": "Effect Size: Cohen’s F for Two-Way ANOVA\nFor each effect, Cohen’s f is the ratio of the effect’s standard deviation to the within-group standard deviation (\\(\\sigma\\)).\n\nMain Effect A:\n\n\\[\nf_A = \\frac{\\sigma_A}{\\sigma}, \\quad \\sigma_A = \\sqrt{\\frac{\\sum_{i=1}^a (\\alpha_i)^2}{a}}\n\\]\nwhere \\(\\alpha_i = \\mu_{i.} - \\mu\\) (deviation of Factor A’s level means from the grand mean).\n\nMain Effect B:\n\n\\[\nf_B = \\frac{\\sigma_B}{\\sigma}, \\quad \\sigma_B = \\sqrt{\\frac{\\sum_{j=1}^b (\\beta_j)^2}{b}}\n\\]\nwhere \\(\\beta_j = \\mu_{.j} - \\mu\\).\n\nInteraction Effect:\n\n\\[\nf_{AB} = \\frac{\\sigma_{AB}}{\\sigma}, \\quad \\sigma_{AB} = \\sqrt{\\frac{\\sum_{i=1}^a \\sum_{j=1}^b (\\gamma_{ij})^2}{a b}}\n\\]\nwhere \\(\\gamma_{ij} = \\mu_{ij} - \\mu_{i.} - \\mu_{.j} + \\mu\\) (interaction terms)."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn",
-    "href": "lectures/week-09_complete-blocks.html#quiz-in-the-context-of-the-banana-experiment-if-the-f-value-for-the-treatment-effect-storage-method-exceeds-the-critical-f-value-what-conclusion-can-be-drawn",
-    "title": "Complete Blocks Design",
-    "section": "Quiz: In the context of the banana experiment, if the F-value for the treatment effect (storage method) exceeds the critical F-value, what conclusion can be drawn?",
-    "text": "Quiz: In the context of the banana experiment, if the F-value for the treatment effect (storage method) exceeds the critical F-value, what conclusion can be drawn?\n\n(A): The block effect is significant {data-explanation=“Incorrect. A significant F-value here pertains to the treatment (storage) effect.”}\n(B): There is a statistically significant difference in ripening between the storage methods {data-explanation=“Correct. This indicates that the method of storage significantly affects banana ripening.”}\n(C): The overall mean is incorrect {data-explanation=“Incorrect. The overall mean is not assessed via the F-test.”}\n(D): Light conditions are more important than storage {data-explanation=“Incorrect. The test here is for storage effects.”}"
+    "objectID": "lectures/week-09_complete-blocks.html#noncentrality-parameter-λ-1",
+    "href": "lectures/week-09_complete-blocks.html#noncentrality-parameter-λ-1",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Noncentrality Parameter (λ)",
+    "text": "Noncentrality Parameter (λ)\nAssuming \\(r\\) replicates per cell, \\(a\\) levels of Factor A, and \\(b\\) levels of Factor B:\n\nMain Effect A:\n\n\\[\n\\lambda_A = \\frac{r b \\sum_{i=1}^a (\\alpha_i)^2}{\\sigma^2} = r b a f_A^2\n\\]\n\nMain Effect B:\n\n\\[\n\\lambda_B = \\frac{r a \\sum_{j=1}^b (\\beta_j)^2}{\\sigma^2} = r a b f_B^2\n\\]\n\nInteraction:\n\n\\[\n\\lambda_{AB} = \\frac{r \\sum_{i=1}^a \\sum_{j=1}^b (\\gamma_{ij})^2}{\\sigma^2} = r a b f_{AB}^2\n\\]"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#derivation-of-treatment-contrast-variance",
-    "href": "lectures/week-09_complete-blocks.html#derivation-of-treatment-contrast-variance",
-    "title": "Complete Blocks Design",
-    "section": "Derivation of Treatment Contrast Variance",
-    "text": "Derivation of Treatment Contrast Variance\nFor a contrast \\(L = \\sum c_i \\tau_i\\), the estimated contrast is:\n\\[\n\\hat{L} = \\sum c_i \\bar{Y}_{.i.}\n\\]\nwith variance given by:\n\\[\n\\text{Var}(\\hat{L}) = \\sigma^2 \\sum \\frac{c_i^2}{bs}\n\\]\nThus, a \\(100(1-\\alpha)\\%\\) confidence interval for \\(L\\) is:\n\\[\n\\hat{L} \\pm t_{df,\\alpha/2} \\sqrt{MS_{Error} \\sum \\frac{c_i^2}{bs}}\n\\]\n\nExplanation: The factor \\(\\sqrt{MS_{Error} \\sum c_i^2/bs}\\) provides the standard error for the contrast based on the error mean square \\(MS_{Error}\\) estimated from the ANOVA table."
+    "objectID": "lectures/week-09_complete-blocks.html#degrees-of-freedom",
+    "href": "lectures/week-09_complete-blocks.html#degrees-of-freedom",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Degrees of Freedom",
+    "text": "Degrees of Freedom\n\nTotal sample size: \\(N = a b r\\)\nMain Effect A: \\(df_1 = a - 1\\), \\(df_2 = N - a b\\)\nMain Effect B: \\(df_1 = b - 1\\), \\(df_2 = N - a b\\)\nInteraction: \\(df_1 = (a - 1)(b - 1)\\), \\(df_2 = N - a b\\)"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#residual-diagnostics",
-    "href": "lectures/week-09_complete-blocks.html#residual-diagnostics",
-    "title": "Complete Blocks Design",
-    "section": "Residual Diagnostics",
-    "text": "Residual Diagnostics\n\n# Calculate fitted values and residuals for banana model\nbanana_data$Fitted &lt;- fitted(fit_banana)\nbanana_data$Residuals &lt;- resid(fit_banana)\nggplot(banana_data, aes(x = Fitted, y = Residuals, color = factor(block))) +\n    geom_point(size = 3) +\n    geom_hline(yintercept = 0, linetype = \"dashed\") +\n    labs(\n        title = \"Residuals vs Fitted Values (Banana Experiment)\",\n        x = \"Fitted Values\",\n        y = \"Residuals\",\n        color = \"Block\"\n    )\n\n\n\n\n\n\n\nFigure 1: Residuals vs. Fitted Values (Banana Experiment)"
+    "objectID": "lectures/week-09_complete-blocks.html#numerical-example-1",
+    "href": "lectures/week-09_complete-blocks.html#numerical-example-1",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Numerical Example",
+    "text": "Numerical Example\nScenario: A 2×2 design (Factor A: 2 levels, Factor B: 2 levels). We want to detect a main effect of Factor A with a difference of 4 units between levels, \\(\\sigma^2 = 7.5\\), power = 0.80, \\(\\alpha = 0.05\\). Find \\(r\\) (replicates per cell)."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model",
-    "href": "lectures/week-09_complete-blocks.html#quiz-which-diagnostic-plot-is-used-to-assess-homoscedasticity-in-the-banana-experiment-model",
-    "title": "Complete Blocks Design",
-    "section": "Quiz: Which diagnostic plot is used to assess homoscedasticity in the banana experiment model?",
-    "text": "Quiz: Which diagnostic plot is used to assess homoscedasticity in the banana experiment model?\n\n(A): Residuals vs Fitted Plot {data-explanation=“Correct. This plot is key to checking constant variance.”}\n(B): Q-Q Plot {data-explanation=“This plot checks normality, not homoscedasticity.”}\n(C): Boxplot of Residuals {data-explanation=“Not specifically used for variance checks.”}\n(D): Scatter plot of Raw Data {data-explanation=“This does not directly assess model residuals.”}"
+    "objectID": "lectures/week-09_complete-blocks.html#step-1-define-the-effect",
+    "href": "lectures/week-09_complete-blocks.html#step-1-define-the-effect",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Step 1: Define the Effect",
+    "text": "Step 1: Define the Effect\nSuppose Factor A’s marginal means are \\(\\mu_{1.} = 12\\), \\(\\mu_{2.} = 8\\), so \\(\\mu_{1.} - \\mu_{2.} = 4\\). Grand mean \\(\\mu = 10\\). Effects are:\n\\[\n\\alpha_1 = 12 - 10 = 2, \\quad \\alpha_2 = 8 - 10 = -2\n\\]\n\\[\n\\sum \\alpha_i^2 = 2^2 + (-2)^2 = 8\n\\]"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#recap-of-key-takeaways",
-    "href": "lectures/week-09_complete-blocks.html#recap-of-key-takeaways",
-    "title": "Complete Blocks Design",
-    "section": "Recap of Key Takeaways",
-    "text": "Recap of Key Takeaways\n\nDesign Impact: Complete block designs reduce variability due to nuisance factors.\nMathematical Rigor: Detailed derivations (sums of squares, degrees of freedom, variance of contrasts) are essential for understanding the statistical model.\nPractical Application: The banana experiment illustrates how these designs are applied to real-world data.\nModel Diagnostics: Residual plots and diagnostic tests are crucial for verifying model assumptions."
+    "objectID": "lectures/week-09_complete-blocks.html#step-2-noncentrality-parameter",
+    "href": "lectures/week-09_complete-blocks.html#step-2-noncentrality-parameter",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Step 2: Noncentrality Parameter",
+    "text": "Step 2: Noncentrality Parameter\n\\[\n\\lambda_A = \\frac{r b \\sum \\alpha_i^2}{\\sigma^2} = \\frac{r \\times 2 \\times 8}{7.5} = \\frac{16 r}{7.5}\n\\]"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#final-discussion",
-    "href": "lectures/week-09_complete-blocks.html#final-discussion",
-    "title": "Complete Blocks Design",
-    "section": "Final Discussion",
-    "text": "Final Discussion\n\nExercise: Revisit the banana experiment analysis and discuss how adding a light factor (from the data) might further improve the model. Consider extending the model to:\n\n\\[\ny \\sim \\text{block} + \\text{light} + \\text{storage}\n\\]\nand compare the ANOVA results."
+    "objectID": "lectures/week-09_complete-blocks.html#step-3-degrees-of-freedom",
+    "href": "lectures/week-09_complete-blocks.html#step-3-degrees-of-freedom",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Step 3: Degrees of Freedom",
+    "text": "Step 3: Degrees of Freedom\n\n\\(df_1 = a - 1 = 1\\)\n\\(df_2 = N - a b = 2 \\times 2 \\times r - 4 = 4r - 4\\)"
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#model",
-    "href": "lectures/week-09_complete-blocks.html#model",
-    "title": "Complete Blocks Design",
-    "section": "Model",
-    "text": "Model\nFor designs where treatments are replicated within blocks, the model extends to include interaction effects:\n\\[\nY_{hit} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)_{hi} + \\epsilon_{hit}\n\\]\nWhere:\n\n\\(Y_{hit}\\): Response for treatment \\(i\\) in block \\(h\\), replicate \\(t\\).\n\\(\\theta_h\\): Effect of block \\(h\\).\n\\(\\tau_i\\): Effect of treatment \\(i\\).\n\\((\\theta \\tau)_{hi}\\): Interaction effect between block \\(h\\) and treatment \\(i\\).\n\\(\\epsilon_{hit}\\): Random error."
+    "objectID": "lectures/week-09_complete-blocks.html#step-4-manual-power-calculation",
+    "href": "lectures/week-09_complete-blocks.html#step-4-manual-power-calculation",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Step 4: Manual Power Calculation",
+    "text": "Step 4: Manual Power Calculation\nFor \\(r = 5\\):\n\n\\(N = 2 \\times 2 \\times 5 = 20\\)\n\\(df_2 = 20 - 4 = 16\\)\n\\(\\lambda_A = \\frac{16 \\times 5}{7.5} \\approx 10.67\\)\n\\(F_{\\text{crit}} = qf(0.95, 1, 16) \\approx 4.49\\)\n\n\\[\n\\text{Power} = 1 - pf(4.49, 1, 16, ncp = 10.67)\n\\]\n\npower &lt;- 1 - pf(qf(0.95, 1, 16), 1, 16, ncp = 10.67)\nprint(power)\n\n[1] 0.8654718\n\n\nOutput: ~0.85 &gt; 0.80.\nFor \\(r = 4\\):\n\n\\(df_2 = 4 \\times 4 - 4 = 12\\)\n\\(\\lambda_A = \\frac{16 \\times 4}{7.5} \\approx 8.53\\)\n\\(F_{\\text{crit}} \\approx 4.75\\)\nPower ~0.71 &lt;- 0.80.\n\nThus, \\(r = 5\\) is the smallest integer satisfying power ≥ 0.80."
   },
   {
-    "objectID": "lectures/week-09_complete-blocks.html#handling-block-treatment-interactions",
-    "href": "lectures/week-09_complete-blocks.html#handling-block-treatment-interactions",
-    "title": "Complete Blocks Design",
-    "section": "Handling Block-Treatment Interactions",
-    "text": "Handling Block-Treatment Interactions\nIn scenarios where interaction effects are suspected, it’s essential to include them in the model to avoid biased estimates.\nImplications:\n\nSignificant Interaction: Indicates that the effect of treatments varies across blocks, necessitating separate treatment effect analyses within each block.\nNon-Significant Interaction: Supports the additive model, validating the use of standard RCBD analysis.\n\nReference:\nKempthorne (1977) elaborates on the importance of accounting for interactions in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#example-resting-metabolic-rate",
-    "href": "lectures/week-09_complete-blocks.html#example-resting-metabolic-rate",
-    "title": "Complete Blocks Design",
-    "section": "Example: Resting Metabolic Rate",
-    "text": "Example: Resting Metabolic Rate\n\nScenario\nA study aims to compare three different exercise protocols (Treatments A, B, C) on subjects’ resting metabolic rates. The subjects are grouped into four blocks based on age groups to control for age-related variability.\n\n\nStep-by-Step R Code\n\n1. Load and Prepare Data\n\n# Set seed for reproducibility\nset.seed(123)\n\n# Define blocks and treatments\nblocks &lt;- factor(rep(1:4, each = 3))\ntreatments &lt;- factor(rep(c(\"A\", \"B\", \"C\"), times = 4))\n\n# Simulate response variable (e.g., resting metabolic rate in kcal/day)\nresponse &lt;- c(\n    rnorm(3, mean = 1500, sd = 50), # Block 1\n    rnorm(3, mean = 1550, sd = 50), # Block 2\n    rnorm(3, mean = 1480, sd = 50), # Block 3\n    rnorm(3, mean = 1520, sd = 50) # Block 4\n)\n\n# Create data frame\ndata &lt;- data.frame(blocks, treatments, response)\n\n# View the data\nprint(data)\n\n   blocks treatments response\n1       1          A 1471.976\n2       1          B 1488.491\n3       1          C 1577.935\n4       2          A 1553.525\n5       2          B 1556.464\n6       2          C 1635.753\n7       3          A 1503.046\n8       3          B 1416.747\n9       3          C 1445.657\n10      4          A 1497.717\n11      4          B 1581.204\n12      4          C 1537.991\n\n\n\n\n2. Fit the RCBD Model\n\n# Fit the RCBD model using ANOVA\n\nmodel &lt;- aov(response ~ blocks + treatments, data = data)\n# Summary of the model\nsummary(model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nblocks       3  25293    8431   3.679 0.0819 .\ntreatments   2   4449    2225   0.971 0.4312  \nResiduals    6  13749    2291                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nInterpretation:\n\nBlocks: Account for age-related variability.\nTreatments: Assess the impact of exercise protocols on metabolic rate after controlling for age.\n\n\n\n3. Diagnostic Plots\n\n# Diagnostic plots for the ANOVA model\n\npar(mfrow = c(2, 2))\nplot(model)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\nInterpretation:\nEnsure that residuals meet ANOVA assumptions. Look for random scatter in Residuals vs Fitted, linearity in Scale-Location, and normality in Q-Q plots.\n\n\n4. Post-Hoc Analysis\n\n# Load emmeans package for estimated marginal means\nlibrary(emmeans)\n# Estimated marginal means for treatments\nemm &lt;- emmeans(model, ~treatments)\n# Pairwise comparisons\npairwise_comparisons &lt;- contrast(emm, method = \"pairwise\")\nsummary(pairwise_comparisons)\n\n\n\n\n\ncontrast\nestimate\nSE\ndf\nt.ratio\np.value\n\n\n\n\nA - B\n-4.160548\n33.84833\n6\n-0.1229174\n0.9917165\n\n\nA - C\n-42.768091\n33.84833\n6\n-1.2635216\n0.4632421\n\n\nB - C\n-38.607543\n33.84833\n6\n-1.1406042\n0.5265273\n\n\n\n\n\n\nInterpretation:\nDetermine which exercise protocols significantly differ in their effect on resting metabolic rates after adjusting for age."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#conclusion-1",
-    "href": "lectures/week-09_complete-blocks.html#conclusion-1",
-    "title": "Complete Blocks Design",
-    "section": "Conclusion",
-    "text": "Conclusion\nComplete Block Designs (CBDs), particularly Randomized Complete Block Designs (RCBDs), are indispensable in experimental research for controlling variability due to nuisance factors. By structuring experiments to include blocks where each treatment is represented, CBDs enhance the precision and reliability of treatment effect estimates. The integration of ANOVA facilitates robust analysis, allowing researchers to discern meaningful differences among treatments while accounting for block-induced variability."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#key-takeaways",
-    "href": "lectures/week-09_complete-blocks.html#key-takeaways",
-    "title": "Complete Blocks Design",
-    "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nBlocking: Reduces variability from known sources, increasing the efficiency of treatment comparisons.\nANOVA in RCBDs: Decomposes variability to isolate treatment effects, providing a clear framework for hypothesis testing.\nGeneral Complete Block Designs: Extend the utility of CBDs to more complex scenarios involving treatment replications within blocks.\nPractical Implementation: R offers comprehensive tools for designing, analyzing, and interpreting CBDs, empowering researchers with robust statistical capabilities.\nAdvanced Topics: Understanding interactions and sample size considerations enhances the depth and applicability of CBDs in diverse research contexts.\n\nMastery of Complete Block Designs equips graduate students with the methodological rigor necessary for conducting sophisticated experiments, ensuring that findings are both accurate and generalizable."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#proof-of-rcbd-model-assumptions",
-    "href": "lectures/week-09_complete-blocks.html#proof-of-rcbd-model-assumptions",
-    "title": "Complete Blocks Design",
-    "section": "Proof of RCBD Model Assumptions",
-    "text": "Proof of RCBD Model Assumptions\n\n1. Variance Decomposition\nThe RCBD model is expressed as:\n\\[\nY_{hi} = \\mu + \\theta_h + \\tau_i + \\epsilon_{hi}\n\\]\nWhere:\n\n\\(Y_{hi}\\): Response for treatment \\(i\\) in block \\(h\\).\n\\(\\mu\\): Overall mean.\n\\(\\theta_h\\): Effect of block \\(h\\).\n\\(\\tau_i\\): Effect of treatment \\(i\\).\n\\(\\epsilon_{hi} \\sim N(0, \\sigma^2)\\): Error term.\n\n\n\nAssumptions\n\nNormality: \\(\\epsilon_{hi}\\) are normally distributed.\nIndependence: Observations are independent.\nHomoscedasticity: \\(\\sigma^2\\) is constant across all treatments and blocks.\nNo Interaction: Effects of blocks and treatments are additive.\n\n\n\nVariance Decomposition\n\\[\n\\text{Total SS} = \\text{Block SS} + \\text{Treatment SS} + \\text{Error SS}\n\\]\n\n\nDerivation\n\nTotal Sum of Squares (SS\\(_\\text{Total}\\)):\n\n\\[\nSS_\\text{Total} = \\sum_{h=1}^b \\sum_{i=1}^t (Y_{hi} - \\bar{Y})^2\n\\]\nWhere \\(\\bar{Y}\\) is the grand mean.\n\nBlock Sum of Squares (SS\\(_\\text{Block}\\)):\n\n\\[\nSS_\\text{Block} = t \\sum_{h=1}^b (\\bar{Y}_h - \\bar{Y})^2\n\\]\nWhere \\(\\bar{Y}_h\\) is the mean of block \\(h\\).\n\nTreatment Sum of Squares (SS\\(_\\text{Treatment}\\)):\n\n\\[\nSS_\\text{Treatment} = b \\sum_{i=1}^t (\\bar{Y}_i - \\bar{Y})^2\n\\]\nWhere \\(\\bar{Y}_i\\) is the mean of treatment \\(i\\).\n\nError Sum of Squares (SS\\(_\\text{Error}\\)):\n\n\\[\nSS_\\text{Error} = \\sum_{h=1}^b \\sum_{i=1}^t (Y_{hi} - \\bar{Y}_h - \\bar{Y}_i + \\bar{Y})^2\n\\]\nRepresents variability not explained by blocks or treatments.\nConclusion:\nThe variance decomposition allows for the assessment of how much variability in the response is attributable to blocks, treatments, and random error.\nReference:\nMontgomery (2019) provides a detailed derivation of ANOVA components in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#effects-of-ignoring-block-treatment-interaction",
-    "href": "lectures/week-09_complete-blocks.html#effects-of-ignoring-block-treatment-interaction",
-    "title": "Complete Blocks Design",
-    "section": "Effects of Ignoring Block-Treatment Interaction",
-    "text": "Effects of Ignoring Block-Treatment Interaction\nIn the RCBD model, it is assumed that there is no interaction between blocks and treatments. Ignoring a significant block-treatment interaction can lead to biased estimates of treatment effects.\n\nMathematical Illustration\nSuppose the true model includes an interaction term:\n\\[\nY_{hi} = \\mu + \\theta_h + \\tau_i + (\\theta \\tau)^*_{hi} + \\epsilon^*_{hi}\n\\]\nIf the interaction term \\((\\theta \\tau)_{hi}\\) is significant and is omitted from the model, the estimates of \\(\\tau_i\\) will be biased because the model incorrectly attributes part of the interaction effect to treatment effects.\n\n\nProof Outline\n\nFull Model: Includes interaction.\nReduced Model: Omits interaction.\nBias Derivation: Show that \\(\\hat{\\tau}_i\\) in the reduced model includes components of the interaction effect.\n\nConclusion:\nIt is crucial to test for block-treatment interactions. If significant, a more complex model that includes interaction terms should be employed.\nReference:\nKempthorne (1977) discusses the implications of model misspecification in Design and Analysis of Experiments."
-  },
-  {
-    "objectID": "lectures/week-09_complete-blocks.html#sample-size-calculations-for-rcbds",
-    "href": "lectures/week-09_complete-blocks.html#sample-size-calculations-for-rcbds",
-    "title": "Complete Blocks Design",
-    "section": "Sample Size Calculations for RCBDs",
-    "text": "Sample Size Calculations for RCBDs\nDetermining the appropriate sample size is essential for achieving sufficient power to detect treatment effects.\n\nFormula\n\\[\nn \\geq \\frac{2 v \\sigma^2 \\phi^2}{b \\Delta^2}\n\\]\nWhere:\n\n\\(n\\): Number of replicates per treatment.\n\\(v\\): Number of treatments.\n\\(\\sigma^2\\): Estimated variance of the response.\n\\(\\phi\\): Desired power (e.g., 0.80).\n\\(b\\): Number of blocks.\n\\(\\Delta\\): Minimum detectable effect size.\n\n\n\nDerivation\n\nPower Analysis:\n\nBased on the desired power (\\(\\phi\\)) and significance level (\\(\\alpha\\)), determine the non-centrality parameter needed to detect effect size \\(\\Delta\\).\n\nRearrange for \\(n\\):\n\nSolving the power equation for \\(n\\) yields the sample size formula.\nExample Calculation:\nSuppose you have 4 treatments (\\(v = 4\\)), 5 blocks (\\(b = 5\\)), an estimated variance (\\(\\sigma^2 = 20\\)), desire a power of 0.80 (\\(\\phi = 0.84\\)), and aim to detect a minimum effect size of 5 units (\\(\\Delta = 5\\)).\n\\[\nn \\geq \\frac{2 \\times 4 \\times 20 \\times 0.84^2}{5 \\times 5^2} = \\frac{2 \\times 4 \\times 20 \\times 0.7056}{125} \\approx \\frac{113.792}{125} \\approx 0.91\n\\]\nSince \\(n\\) must be an integer, at least 1 replicate per treatment is needed. However, practical considerations often necessitate larger sample sizes.\nReference:\nMontgomery (2019) elaborates on sample size determination in Design and Analysis of Experiments."
+    "objectID": "lectures/week-09_complete-blocks.html#using-r-approximation-via-pwr",
+    "href": "lectures/week-09_complete-blocks.html#using-r-approximation-via-pwr",
+    "title": "Power Analysis in One-Way and Two-Way ANOVA",
+    "section": "Using R (Approximation via pwr)",
+    "text": "Using R (Approximation via pwr)\nSince pwr doesn’t directly handle two-way ANOVA, we approximate the main effect as a t-test (since \\(df_1 = 1\\)):\n\\[\nd = \\frac{\\mu_{1.} - \\mu_{2.}}{\\sqrt{\\sigma^2 / (r b)}} = \\frac{4}{\\sqrt{7.5 / (r \\times 2)}}\n\\]\nBut for precision, use manual F-test or specialized tools like G*Power. The pwr2 package isn’t standard for this; we rely on pwr for one-way or custom calculations."
   },
   {
     "objectID": "lectures/week-11_row-column.html",
