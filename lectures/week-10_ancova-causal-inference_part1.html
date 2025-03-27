@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Davood Tofighi, Ph.D.">
+
+<title>ANCOVA and Causal Inference Using the Potential Outcomes Framework – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="ANCOVA and Causal Inference Using the Potential Outcomes Framework – STAT 454/545 - Analysis of Variance and Experimental Design">
+<meta property="og:description" content="Analysis of Variance and Experimental Design">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/lectures/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 545</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_lectures.html"> 
+<span class="menu-text">Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../r_help.html"> 
+<span class="menu-text">R Help</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../home_appendix.html"> 
+<span class="menu-text">Appendix</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contents.html"> 
+<span class="menu-text">Contents</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">ANCOVA and Causal Inference Using the Potential Outcomes Framework</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ANCOVA and Causal Inference Using the Potential Outcomes Framework</h1>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://Data-Wise.github.io/doe">Davood Tofighi, Ph.D.</a> <a href="mailto:dtofighi@unm.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8523-7776" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Department of Mathematics and Statistics, University of New Mexico
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">27-Mar-2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Materials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">R Code and Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Help</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-code-data-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Code and Datasets from the Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data-files-book.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets from the Book</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../contents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contents</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#lecture-notes-causal-inference-using-the-potential-outcomes-framework" id="toc-lecture-notes-causal-inference-using-the-potential-outcomes-framework" class="nav-link active" data-scroll-target="#lecture-notes-causal-inference-using-the-potential-outcomes-framework">📘 Lecture Notes: Causal Inference Using the Potential Outcomes Framework</a>
+  <ul class="collapse">
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">🧭 Objectives</a></li>
+  </ul></li>
+  <li><a href="#intuitionwhat-is-a-causal-effect" id="toc-intuitionwhat-is-a-causal-effect" class="nav-link" data-scroll-target="#intuitionwhat-is-a-causal-effect">📌 Intuition–What Is a Causal Effect?</a>
+  <ul class="collapse">
+  <li><a href="#the-big-question" id="toc-the-big-question" class="nav-link" data-scroll-target="#the-big-question">🧠 The Big Question</a></li>
+  <li><a href="#understanding-potential-outcomes" id="toc-understanding-potential-outcomes" class="nav-link" data-scroll-target="#understanding-potential-outcomes">🔍 Understanding Potential Outcomes</a></li>
+  <li><a href="#scaffolding-example-two-students" id="toc-scaffolding-example-two-students" class="nav-link" data-scroll-target="#scaffolding-example-two-students">🧾 Scaffolding Example: Two Students</a>
+  <ul class="collapse">
+  <li><a href="#calculating-causal-effects" id="toc-calculating-causal-effects" class="nav-link" data-scroll-target="#calculating-causal-effects">🧮 Calculating Causal Effects</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-2-estimating-effects-with-randomized-experiments" id="toc-part-2-estimating-effects-with-randomized-experiments" class="nav-link" data-scroll-target="#part-2-estimating-effects-with-randomized-experiments">🧪 Part 2: Estimating Effects with Randomized Experiments</a>
+  <ul class="collapse">
+  <li><a href="#why-random-assignment-helps" id="toc-why-random-assignment-helps" class="nav-link" data-scroll-target="#why-random-assignment-helps">💡 Why Random Assignment Helps</a></li>
+  <li><a href="#mathematical-justification" id="toc-mathematical-justification" class="nav-link" data-scroll-target="#mathematical-justification">🔍 Mathematical Justification</a></li>
+  <li><a href="#detailed-numerical-example" id="toc-detailed-numerical-example" class="nav-link" data-scroll-target="#detailed-numerical-example">🧾 Detailed Numerical Example</a></li>
+  </ul></li>
+  <li><a href="#using-anova-as-a-causal-tool" id="toc-using-anova-as-a-causal-tool" class="nav-link" data-scroll-target="#using-anova-as-a-causal-tool">📊Using ANOVA as a Causal Tool</a>
+  <ul class="collapse">
+  <li><a href="#causal-use-of-anova" id="toc-causal-use-of-anova" class="nav-link" data-scroll-target="#causal-use-of-anova">✅ Causal Use of ANOVA</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">🧾 Worked Example</a></li>
+  </ul></li>
+  <li><a href="#adjusting-for-covariates-using-ancova" id="toc-adjusting-for-covariates-using-ancova" class="nav-link" data-scroll-target="#adjusting-for-covariates-using-ancova">📈 Adjusting for Covariates Using ANCOVA</a>
+  <ul class="collapse">
+  <li><a href="#what-is-ancova" id="toc-what-is-ancova" class="nav-link" data-scroll-target="#what-is-ancova">🔎 What is ANCOVA?</a></li>
+  <li><a href="#detailed-example-with-covariates" id="toc-detailed-example-with-covariates" class="nav-link" data-scroll-target="#detailed-example-with-covariates">🧾 Detailed Example with Covariates</a></li>
+  <li><a href="#without-adjustment" id="toc-without-adjustment" class="nav-link" data-scroll-target="#without-adjustment">Without Adjustment</a></li>
+  </ul></li>
+  <li><a href="#part-5-assumptions-for-causal-interpretation" id="toc-part-5-assumptions-for-causal-interpretation" class="nav-link" data-scroll-target="#part-5-assumptions-for-causal-interpretation">⚙️ Part 5: Assumptions for Causal Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#sutva-stable-unit-treatment-value-assumption" id="toc-sutva-stable-unit-treatment-value-assumption" class="nav-link" data-scroll-target="#sutva-stable-unit-treatment-value-assumption">✅ 1. SUTVA (Stable Unit Treatment Value Assumption)</a></li>
+  <li><a href="#ignorability-or-unconfoundedness" id="toc-ignorability-or-unconfoundedness" class="nav-link" data-scroll-target="#ignorability-or-unconfoundedness">✅ 2. Ignorability (or Unconfoundedness)</a></li>
+  <li><a href="#overlap-common-support" id="toc-overlap-common-support" class="nav-link" data-scroll-target="#overlap-common-support">✅ 3. Overlap (Common Support)</a></li>
+  <li><a href="#final-thoughts-and-practice" id="toc-final-thoughts-and-practice" class="nav-link" data-scroll-target="#final-thoughts-and-practice">Final Thoughts and Practice</a></li>
+  </ul></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a>
+  <ul class="collapse">
+  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">🧪 Scenario</a></li>
+  <li><a href="#step-1-heres-the-full-table-of-potential-outcomes-both-y1-and-y0" id="toc-step-1-heres-the-full-table-of-potential-outcomes-both-y1-and-y0" class="nav-link" data-scroll-target="#step-1-heres-the-full-table-of-potential-outcomes-both-y1-and-y0">🔷 Step 1: Here’s the Full Table of Potential Outcomes (both Y(1) and Y(0))</a></li>
+  <li><a href="#step-2-treatment-assignment" id="toc-step-2-treatment-assignment" class="nav-link" data-scroll-target="#step-2-treatment-assignment">🧷 Step 2: Treatment Assignment</a></li>
+  <li><a href="#step-3-can-you-fill-in-the-table-below" id="toc-step-3-can-you-fill-in-the-table-below" class="nav-link" data-scroll-target="#step-3-can-you-fill-in-the-table-below">🔷 Step 3: Can You Fill in the Table Below?</a></li>
+  <li><a href="#completed-table-observed-and-unobserved-outcomes" id="toc-completed-table-observed-and-unobserved-outcomes" class="nav-link" data-scroll-target="#completed-table-observed-and-unobserved-outcomes">✅ <strong>Completed Table: Observed and Unobserved Outcomes</strong></a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">🧠 Interpretation</a></li>
+  <li><a href="#next-step-estimate-the-ate" id="toc-next-step-estimate-the-ate" class="nav-link" data-scroll-target="#next-step-estimate-the-ate">🔷 Next Step: Estimate the ATE</a></li>
+  <li><a href="#try-this" id="toc-try-this" class="nav-link" data-scroll-target="#try-this">✏️ Try This</a></li>
+  <li><a href="#step-1-compute-group-means" id="toc-step-1-compute-group-means" class="nav-link" data-scroll-target="#step-1-compute-group-means">✅ <strong>Step 1: Compute Group Means</strong></a>
+  <ul class="collapse">
+  <li><a href="#treated-group-maya-liam" id="toc-treated-group-maya-liam" class="nav-link" data-scroll-target="#treated-group-maya-liam">Treated Group: Maya, Liam</a></li>
+  <li><a href="#control-group-zoe-ray" id="toc-control-group-zoe-ray" class="nav-link" data-scroll-target="#control-group-zoe-ray">Control Group: Zoe, Ray</a></li>
+  </ul></li>
+  <li><a href="#step-2-estimate-ate" id="toc-step-2-estimate-ate" class="nav-link" data-scroll-target="#step-2-estimate-ate">✅ <strong>Step 2: Estimate ATE</strong></a>
+  <ul class="collapse">
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">🎯 Interpretation</a></li>
+  </ul></li>
+  <li><a href="#next-step-whats-the-problem-confounding" id="toc-next-step-whats-the-problem-confounding" class="nav-link" data-scroll-target="#next-step-whats-the-problem-confounding">🔎 Next Step: <strong>What’s the Problem? (Confounding!)</strong></a></li>
+  <li><a href="#lets-fix-it-with-ancova" id="toc-lets-fix-it-with-ancova" class="nav-link" data-scroll-target="#lets-fix-it-with-ancova">🎯 Let’s Fix It with ANCOVA</a></li>
+  </ul></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
+  <ul class="collapse">
+  <li><a href="#data-recap" id="toc-data-recap" class="nav-link" data-scroll-target="#data-recap">🧾 Data Recap</a></li>
+  <li><a href="#ancova-model-recap" id="toc-ancova-model-recap" class="nav-link" data-scroll-target="#ancova-model-recap">🎯 ANCOVA Model (recap)</a></li>
+  <li><a href="#step-by-step-ancova-table" id="toc-step-by-step-ancova-table" class="nav-link" data-scroll-target="#step-by-step-ancova-table">📋 Step-by-Step ANCOVA Table</a></li>
+  <li><a href="#want-to-estimate-tau-the-adjusted-treatment-effect" id="toc-want-to-estimate-tau-the-adjusted-treatment-effect" class="nav-link" data-scroll-target="#want-to-estimate-tau-the-adjusted-treatment-effect">🔢 Want to Estimate <span class="math inline">\(\tau\)</span> (the Adjusted Treatment effect)?</a></li>
+  <li><a href="#step-1-data-summary" id="toc-step-1-data-summary" class="nav-link" data-scroll-target="#step-1-data-summary">🧾 Step 1: Data Summary</a></li>
+  <li><a href="#step-2-compute-group-means" id="toc-step-2-compute-group-means" class="nav-link" data-scroll-target="#step-2-compute-group-means">📊 Step 2: Compute Group Means</a>
+  <ul class="collapse">
+  <li><a href="#treated-group-maya-liam-1" id="toc-treated-group-maya-liam-1" class="nav-link" data-scroll-target="#treated-group-maya-liam-1">✅ Treated Group (Maya, Liam)</a></li>
+  <li><a href="#control-group-zoe-ray-1" id="toc-control-group-zoe-ray-1" class="nav-link" data-scroll-target="#control-group-zoe-ray-1">❌ Control Group (Zoe, Ray)</a></li>
+  </ul></li>
+  <li><a href="#step-3-problem-with-simple-comparison" id="toc-step-3-problem-with-simple-comparison" class="nav-link" data-scroll-target="#step-3-problem-with-simple-comparison">🤔 Step 3: Problem with Simple Comparison</a></li>
+  <li><a href="#step-4-adjust-post-test-means-to-a-common-pre-test" id="toc-step-4-adjust-post-test-means-to-a-common-pre-test" class="nav-link" data-scroll-target="#step-4-adjust-post-test-means-to-a-common-pre-test">🧮 Step 4: Adjust Post-Test Means to a Common Pre-Test</a></li>
+  <li><a href="#step-5-estimate-the-slope-beta" id="toc-step-5-estimate-the-slope-beta" class="nav-link" data-scroll-target="#step-5-estimate-the-slope-beta">🪜 Step 5: Estimate the Slope <span class="math inline">\(\beta\)</span></a></li>
+  <li><a href="#step-6-adjust-means-using-slope" id="toc-step-6-adjust-means-using-slope" class="nav-link" data-scroll-target="#step-6-adjust-means-using-slope">🧮 Step 6: Adjust Means Using Slope</a>
+  <ul class="collapse">
+  <li><a href="#control-group" id="toc-control-group" class="nav-link" data-scroll-target="#control-group">Control Group</a></li>
+  <li><a href="#treated-group" id="toc-treated-group" class="nav-link" data-scroll-target="#treated-group">Treated Group</a></li>
+  </ul></li>
+  <li><a href="#step-7-estimate-adjusted-treatment-effect" id="toc-step-7-estimate-adjusted-treatment-effect" class="nav-link" data-scroll-target="#step-7-estimate-adjusted-treatment-effect">🎉 Step 7: Estimate Adjusted Treatment Effect</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-2" id="toc-interpretation-2" class="nav-link" data-scroll-target="#interpretation-2">🧠 Interpretation</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="lecture-notes-causal-inference-using-the-potential-outcomes-framework" class="level1">
+<h1>📘 Lecture Notes: Causal Inference Using the Potential Outcomes Framework</h1>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">🧭 Objectives</h2>
+<p>By the end of this lesson, you will be able to:</p>
+<ul>
+<li><strong>Define potential outcomes and causal effects</strong>: Understand what each outcome represents and why we cannot observe both for a single unit.</li>
+<li><strong>Describe the assumptions required for causal inference</strong>: Learn the key conditions needed to draw causal conclusions.</li>
+<li><strong>Connect potential outcomes to classical methods</strong>: See how ANOVA and ANCOVA relate to causal inference.</li>
+<li><strong>Interpret numerical examples</strong>: Use examples to visualize and calculate treatment effects.</li>
+<li><strong>Practice with problems</strong>: Build your skills through structured practice.</li>
+</ul>
+</section>
+</section>
+<section id="intuitionwhat-is-a-causal-effect" class="level1">
+<h1>📌 Intuition–What Is a Causal Effect?</h1>
+<section id="the-big-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-big-question">🧠 The Big Question</h2>
+<p>Imagine you want to know if a treatment—whether it’s a tutoring session, a new medication, or a teaching method—leads to better outcomes. The key challenge is: <strong>How do we know if the treatment actually causes the improvement?</strong></p>
+</section>
+<section id="understanding-potential-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-potential-outcomes">🔍 Understanding Potential Outcomes</h2>
+<p>Every unit (like a student, patient, or plant) in our study has two potential outcomes:</p>
+<ul>
+<li><strong><span class="math inline">\(Y_i(1)\)</span></strong>: The outcome if unit <em>i</em> <strong>receives the treatment</strong>.</li>
+<li><strong><span class="math inline">\(Y_i(0)\)</span></strong>: The outcome if unit <em>i</em> <strong>does not receive the treatment (control condition)</strong>.</li>
+</ul>
+<p><strong>Key Intuition:</strong> Each unit has a “what if” scenario for both conditions. However, in reality, we only observe one of these scenarios—the one that actually happens. The unobserved outcome is called the <strong>counterfactual</strong>.</p>
+<blockquote class="blockquote">
+<p><strong>Why is this tricky?</strong> If we can only see one outcome per unit, comparing outcomes directly might mix up the treatment effect with differences inherent to the units.</p>
+</blockquote>
+</section>
+<section id="scaffolding-example-two-students" class="level2">
+<h2 class="anchored" data-anchor-id="scaffolding-example-two-students">🧾 Scaffolding Example: Two Students</h2>
+<p>Consider two students:</p>
+<ul>
+<li><strong>Alice:</strong> If she receives a special tutoring program, her test score might be 90. Without tutoring, it might be 80.</li>
+<li><strong>Ben:</strong> If he receives tutoring, his score might be 85; without it, perhaps it remains 85.</li>
+</ul>
+<p>We can only observe one outcome per student. For instance, if Alice is tutored, we see her score as 90. We never get to see what her score would have been without tutoring. This missing information (80 for Alice) is our counterfactual.</p>
+<section id="calculating-causal-effects" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-causal-effects">🧮 Calculating Causal Effects</h3>
+<ul>
+<li><strong>Individual Causal Effect:</strong></li>
+</ul>
+<p><span class="math display">\[
+\text{Effect}_i = Y_i(1) - Y_i(0)
+\]</span></p>
+<p>For Alice, the causal effect would be <span class="math inline">\(90 - 80 = 10\)</span>.</p>
+<ul>
+<li><strong>Average Treatment Effect (ATE):</strong> This is the average of the individual effects over all units:</li>
+</ul>
+<p><span class="math display">\[
+\text{ATE} = \mathbb{E}[Y(1) - Y(0)]
+\]</span></p>
+<p>It tells us the overall expected improvement if everyone were to receive the treatment.</p>
+<ul>
+<li><strong>Average Treatment on the Treated (ATT):</strong> Sometimes we care only about those who actually received the treatment:</li>
+</ul>
+<p><span class="math display">\[
+\text{ATT} = \mathbb{E}[Y(1) - Y(0) \mid T = 1]
+\]</span></p>
+<p>This average is calculated only for the treated group.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> Since we can’t observe both outcomes for a single unit, we use various strategies (like randomization) to estimate these averages.</p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="part-2-estimating-effects-with-randomized-experiments" class="level1">
+<h1>🧪 Part 2: Estimating Effects with Randomized Experiments</h1>
+<section id="why-random-assignment-helps" class="level3">
+<h3 class="anchored" data-anchor-id="why-random-assignment-helps">💡 Why Random Assignment Helps</h3>
+<p>Randomly assigning treatment helps ensure that the only systematic difference between the treated and control groups is the treatment itself. This is crucial because it minimizes the risk that differences in outcomes are due to factors other than the treatment.</p>
+<p><strong>Intuition:</strong> Imagine shuffling a deck of cards thoroughly before dealing. The randomness makes it likely that each hand is similar on average. Likewise, random assignment in experiments creates groups that are similar on all observed and unobserved characteristics.</p>
+</section>
+<section id="mathematical-justification" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-justification">🔍 Mathematical Justification</h2>
+<p>With random assignment:</p>
+<p><span class="math display">\[
+\mathbb{E}[Y(1) \mid T = 1] = \mathbb{E}[Y(1)]
+\]</span></p>
+<p><span class="math display">\[
+\mathbb{E}[Y(0) \mid T = 0] = \mathbb{E}[Y(0)]
+\]</span></p>
+<p>Thus, the <strong>Average Treatment Effect (ATE)</strong> can be estimated as:</p>
+<p><span class="math display">\[
+\text{ATE} \approx \mathbb{E}[Y \mid T = 1] - \mathbb{E}[Y \mid T = 0]
+\]</span></p>
+</section>
+<section id="detailed-numerical-example" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-numerical-example">🧾 Detailed Numerical Example</h2>
+<p>Imagine we have two groups:</p>
+<ul>
+<li><strong>Group A (Control):</strong> Scores = [70, 75, 80]</li>
+<li><strong>Group B (Treatment):</strong> Scores = [85, 88, 90]</li>
+</ul>
+<p><strong>Step 1:</strong> Compute the group means: - Mean for Group A:</p>
+<p><span class="math display">\[
+\text{Mean A} = \frac{70 + 75 + 80}{3} = 75
+\]</span></p>
+<ul>
+<li>Mean for Group B:</li>
+</ul>
+<p><span class="math display">\[
+\text{Mean B} = \frac{85 + 88 + 90}{3} \approx 87.67
+\]</span></p>
+<p><strong>Step 2:</strong> Estimate the ATE:</p>
+<p><span class="math display">\[
+\text{Estimated ATE} = 87.67 - 75 \approx 12.67
+\]</span></p>
+<p>This means that, on average, the treatment is associated with a score increase of about 12.67 points.</p>
+</section>
+</section>
+<section id="using-anova-as-a-causal-tool" class="level1">
+<h1>📊Using ANOVA as a Causal Tool</h1>
+<!-- ## 🔎 What is ANOVA?
+
+**ANOVA** (Analysis of Variance) is a statistical method used to compare the means of different groups to see if they are significantly different from each other. When treatments are randomly assigned, differences in means can be interpreted as causal effects.
+
+**ANOVA Model:**
+
+$$
+Y_{ij} = \mu + \tau_j + \epsilon_{ij}
+$$
+
+Where:
+
+- $\mu$ is the overall mean across all groups.
+- $\tau_j$ is the effect specific to group $j$ (i.e., how much group $j$'s mean deviates from the overall mean).
+- $\epsilon_{ij}$ is the random error for each observation. -->
+<section id="causal-use-of-anova" class="level2">
+<h2 class="anchored" data-anchor-id="causal-use-of-anova">✅ Causal Use of ANOVA</h2>
+<p><strong>ANOVA Model:</strong></p>
+<p><span class="math display">\[
+Y_{ij} = \mu + \tau_j + \epsilon_{ij}
+\]</span></p>
+<p>When groups are formed via random assignment, any observed difference in means can be attributed to the treatment effect. Specifically, for group <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[
+\tau_j = \mathbb{E}[Y \mid T = j] - \mu
+\]</span></p>
+</section>
+<section id="worked-example" class="level2">
+<h2 class="anchored" data-anchor-id="worked-example">🧾 Worked Example</h2>
+<p>Consider the two groups from our numerical example:</p>
+<ul>
+<li><strong>Group A (Control):</strong> Mean = 75</li>
+<li><strong>Group B (Treatment):</strong> Mean = 87.67</li>
+</ul>
+<p>The treatment effect for Group B can be seen as:</p>
+<p><span class="math display">\[
+\tau_B = 87.67 - 75 \approx 12.67
+\]</span></p>
+<p>This confirms that the treatment (Group B) is associated with a 12.67 point increase in the outcome compared to the overall mean.</p>
+</section>
+</section>
+<section id="adjusting-for-covariates-using-ancova" class="level1">
+<h1>📈 Adjusting for Covariates Using ANCOVA</h1>
+<section id="what-is-ancova" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-ancova">🔎 What is ANCOVA?</h2>
+<p><strong>ANCOVA</strong> (Analysis of Covariance) extends ANOVA by adjusting for one or more covariates—variables that might influence the outcome. This method helps us control for differences that existed before the treatment, allowing a clearer picture of the treatment’s effect.</p>
+<p><strong>Basic ANCOVA Model:</strong></p>
+<p><span class="math display">\[
+Y_i = \alpha + \tau T_i + \beta X_i + \epsilon_i
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(T_i\)</span> is a binary indicator for treatment (1 if treated, 0 if control).</li>
+<li><span class="math inline">\(X_i\)</span> is a covariate, such as a pre-test score.</li>
+<li><span class="math inline">\(\tau\)</span> represents the treatment effect <em>after</em> controlling for the covariate.</li>
+<li><span class="math inline">\(\beta\)</span> measures how the covariate influences the outcome.</li>
+</ul>
+</section>
+<section id="detailed-example-with-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-example-with-covariates">🧾 Detailed Example with Covariates</h2>
+<p>Suppose we have the following data:</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 31%">
+<col style="width: 25%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Person</th>
+<th>Pre-Test Score (<span class="math inline">\(X_i\)</span>)</th>
+<th>Treatment (<span class="math inline">\(T_i\)</span>)</th>
+<th>Post-Test Score (<span class="math inline">\(Y_i\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Alice</td>
+<td>80</td>
+<td>1</td>
+<td>90</td>
+</tr>
+<tr class="even">
+<td>Ben</td>
+<td>70</td>
+<td>0</td>
+<td>75</td>
+</tr>
+<tr class="odd">
+<td>Carla</td>
+<td>85</td>
+<td>1</td>
+<td>95</td>
+</tr>
+<tr class="even">
+<td>Dave</td>
+<td>65</td>
+<td>0</td>
+<td>70</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="without-adjustment" class="level2">
+<h2 class="anchored" data-anchor-id="without-adjustment">Without Adjustment</h2>
+<ul>
+<li>The treated group’s mean post-test might appear higher simply because they had higher pre-test scores.</li>
+<li>Treated group post-test mean: <span class="math inline">\((90 + 95)/2 = 92.5\)</span></li>
+<li>Control group post-test mean: <span class="math inline">\((75 + 70)/2 = 72.5\)</span></li>
+<li>Difference = 20</li>
+</ul>
+<p><strong>Why Adjust?</strong> The difference of 20 could be inflated because the treated group was already more prepared (higher pre-tests). ANCOVA helps us adjust the post-test scores by accounting for pre-test differences, thereby estimating the treatment effect (<span class="math inline">\(\tau\)</span>) more accurately.</p>
+<p><strong>How It Works:</strong> - The model “removes” the part of the outcome variation that is explained by the covariate (the pre-test score). - What remains is a cleaner comparison between the treatment and control groups.</p>
+</section>
+</section>
+<section id="part-5-assumptions-for-causal-interpretation" class="level1">
+<h1>⚙️ Part 5: Assumptions for Causal Interpretation</h1>
+<p>For our causal interpretations to be valid, we need to meet several assumptions:</p>
+<section id="sutva-stable-unit-treatment-value-assumption" class="level2">
+<h2 class="anchored" data-anchor-id="sutva-stable-unit-treatment-value-assumption">✅ 1. SUTVA (Stable Unit Treatment Value Assumption)</h2>
+<ul>
+<li><strong>Meaning:</strong> Each unit’s potential outcomes are unaffected by the treatments given to other units, and the treatment itself is clearly defined.</li>
+<li><strong>Intuition:</strong> Imagine a classroom: if one student’s treatment (like receiving extra tutoring) somehow affects another student’s performance, then the assumption is violated.</li>
+</ul>
+</section>
+<section id="ignorability-or-unconfoundedness" class="level2">
+<h2 class="anchored" data-anchor-id="ignorability-or-unconfoundedness">✅ 2. Ignorability (or Unconfoundedness)</h2>
+<ul>
+<li><strong>Meaning:</strong> Given the covariates (and with randomization, naturally), the treatment assignment is independent of the potential outcomes.</li>
+<li><strong>Intuition:</strong> This is like saying that there are no hidden factors that both affect who gets the treatment and the outcomes. If we control for observed factors, the treatment assignment should be “as good as random.”</li>
+</ul>
+</section>
+<section id="overlap-common-support" class="level2">
+<h2 class="anchored" data-anchor-id="overlap-common-support">✅ 3. Overlap (Common Support)</h2>
+<ul>
+<li><strong>Meaning:</strong> Every unit has a positive probability of receiving either the treatment or the control.</li>
+<li><strong>Intuition:</strong> If some individuals are never eligible for treatment, then comparing them to those who can be treated can lead to biased estimates.</li>
+</ul>
+</section>
+<section id="final-thoughts-and-practice" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts-and-practice">Final Thoughts and Practice</h2>
+<ul>
+<li><p><strong>Why All This Matters:</strong> Understanding these concepts helps you rigorously think about what it means to say one thing causes another. Whether you’re running an experiment or analyzing observational data, these ideas guide your interpretation.</p></li>
+<li><p><strong>Scaffolding Your Learning:</strong></p>
+<ol type="1">
+<li><strong>Start Simple:</strong> Work through individual examples like the ones above.</li>
+<li><strong>Build Complexity:</strong> Gradually introduce additional variables (like covariates in ANCOVA) and consider their impact.</li>
+<li><strong>Practice Problems:</strong> Apply these concepts in simulated data scenarios to see how the methods work in practice.</li>
+</ol></li>
+</ul>
+</section>
+</section>
+<section id="examples" class="level1">
+<h1>Examples</h1>
+<p>Let’s walk through this step-by-step. I’ll guide you, but <strong>you’ll be the one filling in the table</strong>. Ready?</p>
+<section id="scenario" class="level3">
+<h3 class="anchored" data-anchor-id="scenario">🧪 Scenario</h3>
+<p>We’re testing a new reading app to help students improve reading scores.</p>
+<p>You have data from 4 students.</p>
+</section>
+<section id="step-1-heres-the-full-table-of-potential-outcomes-both-y1-and-y0" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-heres-the-full-table-of-potential-outcomes-both-y1-and-y0">🔷 Step 1: Here’s the Full Table of Potential Outcomes (both Y(1) and Y(0))</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Student</th>
+<th><span class="math inline">\(Y(1)\)</span> (if treated)</th>
+<th><span class="math inline">\(Y(0)\)</span> (if control)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maya</td>
+<td>88</td>
+<td>82</td>
+</tr>
+<tr class="even">
+<td>Zoe</td>
+<td>92</td>
+<td>92</td>
+</tr>
+<tr class="odd">
+<td>Liam</td>
+<td>85</td>
+<td>75</td>
+</tr>
+<tr class="even">
+<td>Ray</td>
+<td>90</td>
+<td>83</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="step-2-treatment-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-treatment-assignment">🧷 Step 2: Treatment Assignment</h2>
+<p>Now let’s say this is how treatment was assigned:</p>
+<ul>
+<li>Maya: ✅ Treated</li>
+<li>Zoe: ❌ Control</li>
+<li>Liam: ✅ Treated</li>
+<li>Ray: ❌ Control</li>
+</ul>
+</section>
+<section id="step-3-can-you-fill-in-the-table-below" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-can-you-fill-in-the-table-below">🔷 Step 3: Can You Fill in the Table Below?</h2>
+<p>➡️ Use what we know about <span class="math inline">\(Y(1), Y(0)\)</span>, and treatment assignment to complete the <strong>observed outcome</strong> for each student. You’ll also indicate which potential outcome is <strong>unobserved</strong>.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 26%">
+<col style="width: 31%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Student</th>
+<th>Treatment Given? (T)</th>
+<th>Outcome <span class="math inline">\(Y^{\text{obs}}\)</span></th>
+<th>Unobserved Counterfactual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maya</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Zoe</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Liam</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ray</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Try filling this in! You only need to:</p>
+<ul>
+<li>Choose the observed outcome based on treatment</li>
+<li>Label the counterfactual (the outcome we don’t get to see)</li>
+</ul>
+<p>Great effort! Let’s fill in the table step-by-step together and then move forward. 😊</p>
+</section>
+<section id="completed-table-observed-and-unobserved-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="completed-table-observed-and-unobserved-outcomes">✅ <strong>Completed Table: Observed and Unobserved Outcomes</strong></h2>
+<table class="table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 27%">
+<col style="width: 37%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Student</th>
+<th>Treatment Given? (<span class="math inline">\(T\)</span>)</th>
+<th>Observed Outcome <span class="math inline">\(Y^{\text{obs}}\)</span></th>
+<th>Unobserved Counterfactual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maya</td>
+<td>✅ 1 (Treated)</td>
+<td>88</td>
+<td><span class="math inline">\(Y(0) = 82\)</span></td>
+</tr>
+<tr class="even">
+<td>Zoe</td>
+<td>❌ 0 (Control)</td>
+<td>92</td>
+<td><span class="math inline">\(Y(1) = 92\)</span></td>
+</tr>
+<tr class="odd">
+<td>Liam</td>
+<td>✅ 1 (Treated)</td>
+<td>85</td>
+<td><span class="math inline">\(Y(0) = 75\)</span></td>
+</tr>
+<tr class="even">
+<td>Ray</td>
+<td>❌ 0 (Control)</td>
+<td>83</td>
+<td><span class="math inline">\(Y(1) = 90\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">🧠 Interpretation</h2>
+<p>We observe:</p>
+<ul>
+<li><span class="math inline">\(Y(1)\)</span> for Maya and Liam (treated)</li>
+<li><span class="math inline">\(Y(0)\)</span> for Zoe and Ray (control)</li>
+</ul>
+<p>We <strong>never</strong> observe both for any student!</p>
+</section>
+<section id="next-step-estimate-the-ate" class="level2">
+<h2 class="anchored" data-anchor-id="next-step-estimate-the-ate">🔷 Next Step: Estimate the ATE</h2>
+<p>Let’s calculate:</p>
+<ol type="1">
+<li>The <strong>mean outcome for treated students</strong></li>
+<li>The <strong>mean outcome for control students</strong></li>
+<li>Estimate the <strong>Average Treatment Effect (ATE)</strong> using observed data</li>
+</ol>
+</section>
+<section id="try-this" class="level2">
+<h2 class="anchored" data-anchor-id="try-this">✏️ Try This</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Students</th>
+<th>Observed Scores</th>
+<th>Mean Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treated</td>
+<td>Maya, Liam</td>
+<td>[88, 85]</td>
+<td>?</td>
+</tr>
+<tr class="even">
+<td>Control</td>
+<td>Zoe, Ray</td>
+<td>[92, 83]</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\text{Estimated ATE} = \text{Mean Treated} - \text{Mean Control}
+\]</span></p>
+<p>Can you fill in the mean scores and calculate the estimated ATE? Give it a try!</p>
+<p>Awesome! Let’s solve it together. ✅</p>
+</section>
+<section id="step-1-compute-group-means" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-compute-group-means">✅ <strong>Step 1: Compute Group Means</strong></h2>
+<section id="treated-group-maya-liam" class="level3">
+<h3 class="anchored" data-anchor-id="treated-group-maya-liam">Treated Group: Maya, Liam</h3>
+<p>Observed scores: [88, 85]</p>
+<p><span class="math display">\[
+\text{Mean Treated} = \frac{88 + 85}{2} = \frac{173}{2} = 86.5
+\]</span></p>
+</section>
+<section id="control-group-zoe-ray" class="level3">
+<h3 class="anchored" data-anchor-id="control-group-zoe-ray">Control Group: Zoe, Ray</h3>
+<p>Observed scores: [92, 83]</p>
+<p><span class="math display">\[
+\text{Mean Control} = \frac{92 + 83}{2} = \frac{175}{2} = 87.5
+\]</span></p>
+</section>
+</section>
+<section id="step-2-estimate-ate" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-estimate-ate">✅ <strong>Step 2: Estimate ATE</strong></h2>
+<p><span class="math display">\[
+\text{Estimated ATE} = \text{Mean Treated} - \text{Mean Control} = 86.5 - 87.5 = -1.0
+\]</span></p>
+<hr>
+<section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">🎯 Interpretation</h3>
+<ul>
+<li>The <strong>observed estimate</strong> suggests the treatment <strong>reduced</strong> scores by 1 point.</li>
+<li>But we know from the <strong>true potential outcomes</strong> (from earlier) that the treatment actually helped all treated students!</li>
+</ul>
+<p>Hmm… something’s off. Why?</p>
+</section>
+</section>
+<section id="next-step-whats-the-problem-confounding" class="level2">
+<h2 class="anchored" data-anchor-id="next-step-whats-the-problem-confounding">🔎 Next Step: <strong>What’s the Problem? (Confounding!)</strong></h2>
+<p>Let’s go deeper. Look again:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Student</th>
+<th>Pre-Treatment Score</th>
+<th>Treated?</th>
+<th><span class="math inline">\(Y(1)\)</span></th>
+<th><span class="math inline">\(Y(0)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maya</td>
+<td>88</td>
+<td>✅</td>
+<td>88</td>
+<td>82</td>
+</tr>
+<tr class="even">
+<td>Zoe</td>
+<td>92</td>
+<td>❌</td>
+<td>92</td>
+<td>92</td>
+</tr>
+<tr class="odd">
+<td>Liam</td>
+<td>85</td>
+<td>✅</td>
+<td>85</td>
+<td>75</td>
+</tr>
+<tr class="even">
+<td>Ray</td>
+<td>83</td>
+<td>❌</td>
+<td>90</td>
+<td>83</td>
+</tr>
+</tbody>
+</table>
+<p>Zoe and Ray were already stronger readers <strong>before treatment</strong>.</p>
+<p>So even though the treatment helped, it <strong>looks harmful</strong> if we don’t adjust for the pre-treatment scores!</p>
+</section>
+<section id="lets-fix-it-with-ancova" class="level2">
+<h2 class="anchored" data-anchor-id="lets-fix-it-with-ancova">🎯 Let’s Fix It with ANCOVA</h2>
+<p>ANCOVA helps us <strong>adjust</strong> for pre-treatment differences.</p>
+<p>Let’s write the model:</p>
+<p><span class="math display">\[
+\text{Post-Test} = \alpha + \tau \cdot \text{Treatment} + \beta \cdot \text{Pre-Test} + \epsilon
+\]</span></p>
+<p>Here:</p>
+<ul>
+<li><span class="math inline">\(\tau\)</span>: treatment effect <strong>after adjusting for pre-test</strong></li>
+<li><span class="math inline">\(\beta\)</span>: effect of pre-test score</li>
+</ul>
+</section>
+</section>
+<section id="example" class="level1">
+<h1>Example</h1>
+<p>Let’s build a <strong>simple ANCOVA table</strong> step by step using our data. We’ll organize it to see how <strong>pre-test scores</strong> might be confounding the treatment effect.</p>
+<section id="data-recap" class="level2">
+<h2 class="anchored" data-anchor-id="data-recap">🧾 Data Recap</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Student</th>
+<th>Pre-Test (X)</th>
+<th>Treatment (T)</th>
+<th>Post-Test (Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maya</td>
+<td>88</td>
+<td>1</td>
+<td>88</td>
+</tr>
+<tr class="even">
+<td>Zoe</td>
+<td>92</td>
+<td>0</td>
+<td>92</td>
+</tr>
+<tr class="odd">
+<td>Liam</td>
+<td>85</td>
+<td>1</td>
+<td>85</td>
+</tr>
+<tr class="even">
+<td>Ray</td>
+<td>83</td>
+<td>0</td>
+<td>83</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ancova-model-recap" class="level2">
+<h2 class="anchored" data-anchor-id="ancova-model-recap">🎯 ANCOVA Model (recap)</h2>
+<p>We want to fit a linear model:</p>
+<p><span class="math display">\[
+Y_i = \alpha + \tau T_i + \beta X_i + \epsilon_i
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Y_i\)</span>: post-test score</li>
+<li><span class="math inline">\(T_i\)</span>: treatment (1 = yes, 0 = no)</li>
+<li><span class="math inline">\(X_i\)</span>: pre-test score</li>
+<li><span class="math inline">\(\tau\)</span>: <strong>adjusted</strong> treatment effect</li>
+<li><span class="math inline">\(\beta\)</span>: effect of pre-test on post-test</li>
+</ul>
+</section>
+<section id="step-by-step-ancova-table" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-ancova-table">📋 Step-by-Step ANCOVA Table</h2>
+<p>Let’s compute a few key quantities.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 21%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Student</th>
+<th>Pre-Test <span class="math inline">\(X\)</span></th>
+<th>Treatment <span class="math inline">\(T\)</span></th>
+<th>Post-Test <span class="math inline">\(Y\)</span></th>
+<th>Contribution to Regression</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maya</td>
+<td>88</td>
+<td>1</td>
+<td>88</td>
+<td>Helps estimate <span class="math inline">\(\tau\)</span> &amp; <span class="math inline">\(\beta\)</span></td>
+</tr>
+<tr class="even">
+<td>Zoe</td>
+<td>92</td>
+<td>0</td>
+<td>92</td>
+<td>Helps estimate <span class="math inline">\(\beta\)</span></td>
+</tr>
+<tr class="odd">
+<td>Liam</td>
+<td>85</td>
+<td>1</td>
+<td>85</td>
+<td>Helps estimate <span class="math inline">\(\tau\)</span> &amp; <span class="math inline">\(\beta\)</span></td>
+</tr>
+<tr class="even">
+<td>Ray</td>
+<td>83</td>
+<td>0</td>
+<td>83</td>
+<td>Helps estimate <span class="math inline">\(\beta\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We can already spot something:</p>
+<p>🔹 Students with higher <strong>pre-tests</strong> also have higher <strong>post-tests</strong>, regardless of treatment.</p>
+<p>So without controlling for <span class="math inline">\(X\)</span>, the treatment might look worse than it is.</p>
+</section>
+<section id="want-to-estimate-tau-the-adjusted-treatment-effect" class="level2">
+<h2 class="anchored" data-anchor-id="want-to-estimate-tau-the-adjusted-treatment-effect">🔢 Want to Estimate <span class="math inline">\(\tau\)</span> (the Adjusted Treatment effect)?</h2>
+<p>Nice choice! 😊 Using <strong>group averages adjusted by covariates</strong> is a very intuitive way to see how ANCOVA works without full regression formulas. Let’s walk through it <strong>step by step</strong>.</p>
+</section>
+<section id="step-1-data-summary" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-data-summary">🧾 Step 1: Data Summary</h2>
+<p>Here’s our data again:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Student</th>
+<th>Pre-Test (X)</th>
+<th>Treatment (T)</th>
+<th>Post-Test (Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maya</td>
+<td>88</td>
+<td>1</td>
+<td>88</td>
+</tr>
+<tr class="even">
+<td>Zoe</td>
+<td>92</td>
+<td>0</td>
+<td>92</td>
+</tr>
+<tr class="odd">
+<td>Liam</td>
+<td>85</td>
+<td>1</td>
+<td>85</td>
+</tr>
+<tr class="even">
+<td>Ray</td>
+<td>83</td>
+<td>0</td>
+<td>83</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="step-2-compute-group-means" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-compute-group-means">📊 Step 2: Compute Group Means</h2>
+<section id="treated-group-maya-liam-1" class="level3">
+<h3 class="anchored" data-anchor-id="treated-group-maya-liam-1">✅ Treated Group (Maya, Liam)</h3>
+<ul>
+<li>Pre-test avg: <span class="math inline">\(\frac{88 + 85}{2} = 86.5\)</span></li>
+<li>Post-test avg: <span class="math inline">\(\frac{88 + 85}{2} = 86.5\)</span></li>
+</ul>
+</section>
+<section id="control-group-zoe-ray-1" class="level3">
+<h3 class="anchored" data-anchor-id="control-group-zoe-ray-1">❌ Control Group (Zoe, Ray)</h3>
+<ul>
+<li>Pre-test avg: <span class="math inline">\(\frac{92 + 83}{2} = 87.5\)</span></li>
+<li>Post-test avg: <span class="math inline">\(\frac{92 + 83}{2} = 87.5\)</span></li>
+</ul>
+</section>
+</section>
+<section id="step-3-problem-with-simple-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-problem-with-simple-comparison">🤔 Step 3: Problem with Simple Comparison</h2>
+<p><span class="math display">\[
+\text{Post-test difference} = 86.5 - 87.5 = -1.0
+\]</span></p>
+<p>It <strong>looks</strong> like the treatment made things worse. But look again:</p>
+<ul>
+<li>The control group started with higher pre-test scores!</li>
+<li>We need to <strong>adjust</strong> for this.</li>
+</ul>
+</section>
+<section id="step-4-adjust-post-test-means-to-a-common-pre-test" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-adjust-post-test-means-to-a-common-pre-test">🧮 Step 4: Adjust Post-Test Means to a Common Pre-Test</h2>
+<p>Let’s <strong>adjust both groups</strong> to a common pre-test level, like the <strong>overall mean pre-test</strong>:</p>
+<p><span class="math display">\[
+\text{Overall pre-test mean} = \frac{88 + 92 + 85 + 83}{4} = \frac{348}{4} = 87
+\]</span></p>
+<p>Now assume post-test scores rise linearly with pre-test (using a slope we’ll estimate soon).</p>
+</section>
+<section id="step-5-estimate-the-slope-beta" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-estimate-the-slope-beta">🪜 Step 5: Estimate the Slope <span class="math inline">\(\beta\)</span></h2>
+<p>Let’s look at <strong>control group</strong> only:</p>
+<ul>
+<li>Zoe: X = 92, Y = 92</li>
+<li>Ray: X = 83, Y = 83</li>
+</ul>
+<p>So for controls, <strong>Post = Pre</strong> → slope <span class="math inline">\(\beta = 1\)</span></p>
+</section>
+<section id="step-6-adjust-means-using-slope" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-adjust-means-using-slope">🧮 Step 6: Adjust Means Using Slope</h2>
+<section id="control-group" class="level3">
+<h3 class="anchored" data-anchor-id="control-group">Control Group</h3>
+<p>Their pre-test avg = 87.5, but we want to adjust to 87.</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{Adjust by } \beta (87 - 87.5) &amp;= 1 \cdot (-0.5) = -0.5 \\
+\text{Adjusted mean} &amp;= 87.5 - 0.5 = 87.0
+\end{align*}
+\]</span></p>
+</section>
+<section id="treated-group" class="level3">
+<h3 class="anchored" data-anchor-id="treated-group">Treated Group</h3>
+<p>Pre-test avg = 86.5 → adjust by:</p>
+<p><span class="math display">\[
+\begin{align*}
+1 \cdot (87 - 86.5) &amp;= 1 \cdot (+0.5) \\
+\text{Adjusted mean} &amp;= 86.5 + 0.5 = 87.0
+\end{align*}
+\]</span></p>
+</section>
+</section>
+<section id="step-7-estimate-adjusted-treatment-effect" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-estimate-adjusted-treatment-effect">🎉 Step 7: Estimate Adjusted Treatment Effect</h2>
+<p><span class="math display">\[
+\text{Adjusted ATE} = 87.0 - 87.0 = 0
+\]</span></p>
+<section id="interpretation-2" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-2">🧠 Interpretation</h3>
+<p>Before adjustment:</p>
+<p>📉 It looked like the treatment had a <strong>negative</strong> effect (-1).</p>
+<p>After adjustment:</p>
+<p>📏 The treatment effect is <strong>0</strong> → students improved at the same rate once we control for starting point.</p>
+<p>✅ ANCOVA lets us <strong>level the playing field</strong>, so we don’t mistake “high scorers” for “treatment success.”</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- filepath: /Users/dt/Library/CloudStorage/Dropbox/Teaching/DOE/assets/includes/footer.html -->
+<footer class="site-footer">
+    <div class="container text-center">
+        <hr> 
+        © <span id="current-year"></span> Dr. Davood Tofighi |
+        <a href="https://canvasinfo.unm.edu/">UNM Canvas</a> |
+        <a href="https://data-wise.github.io/doe">Course GitHub Page</a> |
+    </div>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Data-Wise\.github\.io\/doe\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
