@@ -560,8 +560,8 @@ Y_{hqi} = \mu + \theta_h + \phi_q + \tau_i + \epsilon_{hqi},
 <colgroup>
 <col style="width: 10%">
 <col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 35%">
+<col style="width: 11%">
+<col style="width: 36%">
 <col style="width: 29%">
 </colgroup>
 <thead>
@@ -589,7 +589,7 @@ Y_{hqi} = \mu + \theta_h + \phi_q + \tau_i + \epsilon_{hqi},
 <td><span class="math inline">\(F = \frac{MS_{\text{Columns}}}{MS_{\text{Error}}}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Treatments</td>
+<td>Treatments adj</td>
 <td><span class="math inline">\(v - 1\)</span></td>
 <td><span class="math inline">\(SS_{\text{Trt adj}}\)</span></td>
 <td><span class="math inline">\(MS_{\text{Trt adj}} = \frac{SS_{\text{Trt adj}}}{v - 1}\)</span></td>
@@ -791,10 +791,10 @@ Y_{hqi} = \mu + \theta_h + \phi_q + \tau_i + \epsilon_{hqi},
 <h2 class="anchored" data-anchor-id="example-anova-table-for-latin-square">Example ANOVA Table for Latin Square</h2>
 <table class="table">
 <colgroup>
+<col style="width: 15%">
 <col style="width: 14%">
-<col style="width: 13%">
-<col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 15%">
 <col style="width: 38%">
 </colgroup>
 <thead>
@@ -1013,6 +1013,7 @@ where:
 
 
 
+
 ::: {.cell tbl-cap='Two-Way Factorial in Row–Column Design Example 1'}
 
 ```{.r .cell-code}
@@ -1093,6 +1094,7 @@ anova(fit)
 
 
 
+
 **Interpretation:**
 
 - **Main Effects:** Assess the individual impact of factors A and B.
@@ -1113,6 +1115,7 @@ A study aims to compare three different exercise protocols (Treatments A, B, C) 
 ### Step-by-Step R Code
 
 #### 1. Load and Prepare Data
+
 
 
 
@@ -1165,10 +1168,12 @@ print(data)
 
 
 
+
 **Output Interpretation:**
 The dataset comprises four blocks, each containing three treatments. The response variable represents the resting metabolic rate, simulated with slight block-specific means to reflect age-related variability.
 
 #### 2. Fit the RCBD Model
+
 
 
 
@@ -1197,12 +1202,14 @@ Residuals    6  10664    1777
 
 
 
+
 **Interpretation:**
 - **Blocks:** Capture the variability due to different age groups.
 - **Treatments:** Assess the effect of exercise protocols after accounting for age-related variability.
 - **Error:** Represents unexplained variability in resting metabolic rates.
 
 #### 3. Diagnostic Plots
+
 
 
 
@@ -1221,10 +1228,12 @@ plot(model)
 
 
 
+
 **Interpretation:**
 Examine residual plots to ensure that assumptions of normality, homoscedasticity, and independence are met. Look for random scatter in Residuals vs Fitted and Q-Q plots to assess normality.
 
 #### 4. Post-Hoc Analysis (Multiple Comparisons)
+
 
 
 
@@ -1254,6 +1263,7 @@ summary(pairwise_comparisons)
 </div>
 :::
 :::
+
 
 
 
