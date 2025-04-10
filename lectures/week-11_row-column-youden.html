@@ -403,10 +403,7 @@ window.Quarto = {
   <li><a href="#why-they-are-the-same" id="toc-why-they-are-the-same" class="nav-link" data-scroll-target="#why-they-are-the-same">Why They Are the Same</a></li>
   <li><a href="#when-they-might-differ" id="toc-when-they-might-differ" class="nav-link" data-scroll-target="#when-they-might-differ">When They Might Differ</a></li>
   <li><a href="#example-anova-table-for-latin-square" id="toc-example-anova-table-for-latin-square" class="nav-link" data-scroll-target="#example-anova-table-for-latin-square">Example ANOVA Table for Latin Square</a></li>
-  <li><a href="#example-in-r" id="toc-example-in-r" class="nav-link" data-scroll-target="#example-in-r">Example in R</a>
-  <ul class="collapse">
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation:</a></li>
-  </ul></li>
+  <li><a href="#example-in-r" id="toc-example-in-r" class="nav-link" data-scroll-target="#example-in-r">Example in R</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -770,6 +767,7 @@ SS_\text{Trt adj} = \sum_{i=1}^{v} Q_i \hat{\tau}_i
 <li>This formula arises directly from the theory of linear models.</li>
 <li>The adjusted sum of squares for a factor (here, treatments) can be expressed as the quadratic form <span class="math inline">\(\hat{\tau}' Q\)</span>, where <span class="math inline">\(\hat{\tau}\)</span> is the vector of estimated treatment effects (solutions to the reduced normal equations <span class="math inline">\(C \hat{\tau} = Q\)</span>) and <span class="math inline">\(Q\)</span> is the vector of adjusted totals.</li>
 <li>Expanding <span class="math inline">\(\hat{\tau}' Q\)</span> gives the summation <span class="math inline">\(\sum Q_i \hat{\tau}_i\)</span>.</li>
+<li>Alternative computational formulas often exist, especially for balanced designs (e.g., involving <span class="math inline">\(\sum Q_i^2\)</span>), but this form is theoretically fundamental.</li>
 </ul>
 </section>
 </section>
@@ -851,11 +849,11 @@ If blocking factors and treatments are not arranged in an orthogonal way (as in 
 <td><span class="math inline">\(F = \frac{MS_\text{Columns}}{MS_\text{Error}}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Treatments</td>
+<td>Treatments Adjusted</td>
 <td><span class="math inline">\(v - 1\)</span></td>
-<td><span class="math inline">\(SS_\text{Trt}\)</span></td>
-<td><span class="math inline">\(MS_\text{Trt}\)</span></td>
-<td><span class="math inline">\(F = \frac{MS_\text{Trt}}{MS_\text{Error}}\)</span></td>
+<td><span class="math inline">\(SS_\text{Trt Adj}\)</span></td>
+<td><span class="math inline">\(MS_\text{Trt adj}\)</span></td>
+<td><span class="math inline">\(F = \frac{MS_\text{Trt adj}}{MS_\text{Error}}\)</span></td>
 </tr>
 <tr class="even">
 <td>Error</td>
@@ -873,19 +871,6 @@ If blocking factors and treatments are not arranged in an orthogonal way (as in 
 </tr>
 </tbody>
 </table>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Orthogonality:</strong> In a Latin Square, the design is constructed so that treatments are orthogonal (statistically independent) to the row and column factors. As a result, when you estimate the effect of treatments, you are not “borrowing” or “confounding” variation that belongs to the row or column blocks.</p>
-</div>
-</div>
 <p><strong>Hypothesis Testing:</strong></p>
 <ul>
 <li><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>):</strong> All treatment means are equal (<span class="math inline">\(\tau_k = 0\)</span> for all <span class="math inline">\(k\)</span>).</li>
@@ -959,15 +944,7 @@ Important
 </div>
 </div>
 </div>
-<section id="interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="interpretation">Interpretation:</h3>
-<ul>
-<li><strong>Rows and Columns:</strong> Control for row and column effects, ensuring that treatment comparisons are not confounded by these blocking factors.</li>
-<li><strong>Treatments:</strong> Assess the main effect of treatments on the response variable after accounting for row and column effects.</li>
-<li>Because the Latin Square is fully balanced, the treatment SS is invariant to whether you consider it “adjusted” or “unadjusted.”</li>
-<li><strong>Error:</strong> Represents variability not explained by rows, columns, or treatments.</li>
-</ul>
-<!-- 
+<p><strong>Interpretation:</strong> - <strong>Rows and Columns:</strong> Control for row and column effects, ensuring that treatment comparisons are not confounded by these blocking factors. - <strong>Treatments:</strong> Assess the main effect of treatments on the response variable after accounting for row and column effects. - <strong>Error:</strong> Represents variability not explained by rows, columns, or treatments. <!-- 
 # Youden Designs
 
 ## Definition
@@ -1063,6 +1040,8 @@ where:
 
 
 
+
+
 ::: {.cell tbl-cap='Two-Way Factorial in Row–Column Design Example 1'}
 
 ```{.r .cell-code}
@@ -1143,6 +1122,8 @@ anova(fit)
 
 
 
+
+
 **Interpretation:**
 
 - **Main Effects:** Assess the individual impact of factors A and B.
@@ -1163,6 +1144,8 @@ A study aims to compare three different exercise protocols (Treatments A, B, C) 
 ### Step-by-Step R Code
 
 #### 1. Load and Prepare Data
+
+
 
 
 
@@ -1215,10 +1198,14 @@ print(data)
 
 
 
+
+
 **Output Interpretation:**
 The dataset comprises four blocks, each containing three treatments. The response variable represents the resting metabolic rate, simulated with slight block-specific means to reflect age-related variability.
 
 #### 2. Fit the RCBD Model
+
+
 
 
 
@@ -1247,12 +1234,16 @@ Residuals    6  10664    1777
 
 
 
+
+
 **Interpretation:**
 - **Blocks:** Capture the variability due to different age groups.
 - **Treatments:** Assess the effect of exercise protocols after accounting for age-related variability.
 - **Error:** Represents unexplained variability in resting metabolic rates.
 
 #### 3. Diagnostic Plots
+
+
 
 
 
@@ -1265,9 +1256,11 @@ plot(model)
 ```
 
 ::: {.cell-output-display}
-![](week-11_row-column_files/figure-html/tab-rcbd-diagnostic-plots-example2-1.png){width=672}
+![](week-11_row-column-youden_files/figure-html/tab-rcbd-diagnostic-plots-example2-1.png){width=672}
 :::
 :::
+
+
 
 
 
@@ -1275,6 +1268,8 @@ plot(model)
 Examine residual plots to ensure that assumptions of normality, homoscedasticity, and independence are met. Look for random scatter in Residuals vs Fitted and Q-Q plots to assess normality.
 
 #### 4. Post-Hoc Analysis (Multiple Comparisons)
+
+
 
 
 
@@ -1304,6 +1299,8 @@ summary(pairwise_comparisons)
 </div>
 :::
 :::
+
+
 
 
 
@@ -1453,10 +1450,9 @@ $$
    Interaction contrasts ($(\alpha\beta)_{ij}$, $(\alpha\gamma)_{ik}$, $(\beta\gamma)_{jk}$, and $(\alpha\beta\gamma)_{ijk}$) measure the extent to which the observed responses deviate from an additive model. Non-zero contrasts signify the presence of interactions, emphasizing the importance of considering these higher-order effects in experimental analysis.
 
 **Reference:**
-Dean, Voss & Draguljić (2017). *Design and Analysis of Experiments*. Springer. -->
+Dean, Voss & Draguljić (2017). *Design and Analysis of Experiments*. Springer. --></p>
 
 
-</section>
 </section>
 </section>
 

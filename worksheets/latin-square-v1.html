@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Davood Tofighi, Ph.D.">
-<meta name="dcterms.date" content="2025-01-06">
+<meta name="dcterms.date" content="2025-04-08">
 
-<title>📝 Lecture Notes – STAT 454/545 - Analysis of Variance and Experimental Design</title>
+<title>Latin Square Design: Step-by-Step Worksheet – STAT 454/545 - Analysis of Variance and Experimental Design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4f17641596142cbde708c01b3a465e62.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-4f17641596142cbde708c01b3a465e62.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-68b729f92b170261f1b1556cc4834a67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,21 +72,50 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;family=Montserrat:wght@400;700&amp;family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
-<meta property="og:title" content="📝 Lecture Notes – STAT 454/545 - Analysis of Variance and Experimental Design">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Latin Square Design: Step-by-Step Worksheet – STAT 454/545 - Analysis of Variance and Experimental Design">
 <meta property="og:description" content="Analysis of Variance and Experimental Design">
-<meta property="og:image" content="https://Data-Wise.github.io/doe/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://Data-Wise.github.io/doe/worksheets/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="STAT 454/545 - Analysis of Variance and Experimental Design">
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">STAT 545</span>
     </a>
   </div>
@@ -97,35 +126,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/syllabus-final.html"> 
+    <a class="nav-link" href="../syllabus/syllabus-final.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_lectures.html"> 
+    <a class="nav-link" href="../home_lectures.html"> 
 <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus/schedule.html"> 
+    <a class="nav-link" href="../syllabus/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_assignments.html"> 
+    <a class="nav-link" href="../home_assignments.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_help.html"> 
+    <a class="nav-link" href="../r_help.html"> 
 <span class="menu-text">R Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./home_appendix.html"> 
+    <a class="nav-link" href="../home_appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contents.html"> 
+    <a class="nav-link" href="../contents.html"> 
 <span class="menu-text">Contents</span></a>
   </li>  
 </ul>
@@ -139,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_lectures.html">Lecture Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Latin Square Design: Step-by-Step Worksheet</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,8 +177,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./home_lectures.html">Course Materials</a></li><li class="breadcrumb-item"><a href="./home_lectures.html">Lecture Notes</a></li></ol></nav>
-      <h1 class="title">📝 Lecture Notes</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Latin Square Design: Step-by-Step Worksheet</h1>
                       </div>
   </div>
     
@@ -173,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">April 8, 2025</p>
       </div>
     </div>
     
@@ -203,19 +232,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/syllabus-final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -232,13 +261,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_lectures.html" class="sidebar-item-text sidebar-link active">
+  <a href="../home_lectures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
@@ -255,19 +284,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_help.html" class="sidebar-item-text sidebar-link">
+  <a href="../r_help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Help</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-code-data-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../r-code-data-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Code and Datasets from the Book</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-files-book.html" class="sidebar-item-text sidebar-link">
+  <a href="../data-files-book.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets from the Book</span></a>
   </div>
 </li>
@@ -284,13 +313,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_appendix.html" class="sidebar-item-text sidebar-link">
+  <a href="../home_appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contents.html" class="sidebar-item-text sidebar-link">
+  <a href="../contents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contents</span></a>
   </div>
 </li>
@@ -301,7 +330,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background-scenario" id="toc-background-scenario" class="nav-link active" data-scroll-target="#background-scenario">Background / Scenario</a>
+  <ul class="collapse">
+  <li><a href="#example-layout-one-possible-random-assignment" id="toc-example-layout-one-possible-random-assignment" class="nav-link" data-scroll-target="#example-layout-one-possible-random-assignment">Example Layout (one possible random assignment)</a></li>
+  </ul></li>
+  <li><a href="#learning-objective" id="toc-learning-objective" class="nav-link" data-scroll-target="#learning-objective">Learning Objective</a></li>
+  <li><a href="#step-by-step-scaffolding-tasks" id="toc-step-by-step-scaffolding-tasks" class="nav-link" data-scroll-target="#step-by-step-scaffolding-tasks">Step-by-Step Scaffolding Tasks</a>
+  <ul class="collapse">
+  <li><a href="#part-a-setting-up-the-latin-square" id="toc-part-a-setting-up-the-latin-square" class="nav-link" data-scroll-target="#part-a-setting-up-the-latin-square">Part A: Setting Up the Latin Square</a></li>
+  <li><a href="#part-b-data-collection-planning" id="toc-part-b-data-collection-planning" class="nav-link" data-scroll-target="#part-b-data-collection-planning">Part B: Data Collection Planning</a></li>
+  <li><a href="#part-c-analysis-anova-steps" id="toc-part-c-analysis-anova-steps" class="nav-link" data-scroll-target="#part-c-analysis-anova-steps">Part C: Analysis (ANOVA) Steps</a></li>
+  <li><a href="#part-d-reflection-discussion-questions" id="toc-part-d-reflection-discussion-questions" class="nav-link" data-scroll-target="#part-d-reflection-discussion-questions">Part D: Reflection / Discussion Questions</a></li>
+  </ul></li>
+  <li><a href="#optional-challenge" id="toc-optional-challenge" class="nav-link" data-scroll-target="#optional-challenge">Optional Challenge</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="latin-square-v1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -309,233 +358,182 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="lecture-notes---stat-454545" class="level1">
-<h1>Lecture Notes - STAT 454/545</h1>
-<p>Welcome to the <strong>Lecture Notes</strong> page for <strong>STAT 454/545: Analysis of Variance and Experimental Design</strong>. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.</p>
-<section id="weekly-lecture-notes" class="level2">
-<h2 class="anchored" data-anchor-id="weekly-lecture-notes">Weekly Lecture Notes</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-<th>Lecture Notes Link</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>1</strong></td>
-<td>Introduction to Experimental Design</td>
-<td><a href="./lectures/week-01_intro-design_part1.html">Week 1 Notes: Introduction to Experimental Design</a></td>
-</tr>
-<tr class="even">
-<td><strong>1</strong></td>
-<td>Introduction to Experimental Design</td>
-<td><a href="./lectures/week-01_intro-design_part2.html">Week 1 Notes: Introduction to Experimental Design</a></td>
-</tr>
-<tr class="odd">
-<td><strong>2</strong></td>
-<td>Completely Randomized Designs (CRD)</td>
-<td><a href="./lectures/week-02_crd-overview.html">Week 2 Notes: Completely Randomized Designs (CRD)</a></td>
-</tr>
-<tr class="even">
-<td><strong>3</strong></td>
-<td>Multiple Comparisons</td>
-<td><a href="./lectures/week-03_comparisons-contrasts.html">Week 3 Notes: Multiple Comparisons</a></td>
-</tr>
-<tr class="odd">
-<td><strong>4</strong></td>
-<td>Checking Model Assumptions</td>
-<td><a href="./lectures/week-04_model-diagnostics.html">Week 4 Notes: Checking Model Assumptions</a></td>
-</tr>
-<tr class="even">
-<td><strong>5</strong></td>
-<td>Two-Way Factorial Designs</td>
-<td><a href="./lectures/week-05_factorial-anova.html">Week 5 Notes: Two-Way Factorial Designs</a></td>
-</tr>
-<tr class="odd">
-<td><strong>6</strong></td>
-<td>Higher-Order Factorial Designs</td>
-<td><a href="./lectures/week-06_higher-order.html">Week 6 Notes: Higher-Order Factorial Designs</a></td>
-</tr>
-<tr class="even">
-<td><strong>7</strong></td>
-<td>Midterm Review</td>
-<td><a href="./lectures/week-07_midterm-review.html">Week 7 Notes: Midterm Review</a></td>
-</tr>
-<tr class="odd">
-<td><strong>8</strong></td>
-<td>Blocking &amp; RCBD</td>
-<td><a href="./lectures/week-08_rcbd-blocking.html">Week 8 Notes: Blocking &amp; RCBD</a></td>
-</tr>
-<tr class="even">
-<td><strong>9</strong></td>
-<td>Power Analysis</td>
-<td><a href="./lectures/week-09_power-analysis.html">Week 9 Notes: Power Analysis</a></td>
-</tr>
-<tr class="odd">
-<td><strong>10</strong></td>
-<td>Analysis of Covariance (ANCOVA)</td>
-<td><a href="./lectures/week-10_ancova-causal-inference_part1.html">Week 10 Notes: Analysis of Covariance (ANCOVA) and Causal Inference</a></td>
-</tr>
-<tr class="even">
-<td><strong>10</strong></td>
-<td>Analysis of Covariance (ANCOVA)</td>
-<td><a href="./lectures/week-10_ancova-part2.html">Week 10 Notes: Analysis of Covariance (ANCOVA)</a></td>
-</tr>
-<tr class="odd">
-<td><strong>11</strong></td>
-<td>Row–Column Designs (Latin Square)</td>
-<td><a href="./lectures/week-11_row-column.html">Week 11 Notes: Row–Column Designs (Latin Square)</a></td>
-</tr>
-<tr class="even">
-<td><strong>12</strong></td>
-<td>Random &amp; Mixed Models</td>
-<td><a href="./lectures/week-12_mixed-models.html">Week 12 Notes: Random &amp; Mixed Models</a></td>
-</tr>
-<tr class="odd">
-<td><strong>13</strong></td>
-<td>Nested Models</td>
-<td><a href="./lectures/week-13_nested-models.html">Week 13 Notes: Nested Models</a></td>
-</tr>
-<tr class="even">
-<td><strong>14</strong></td>
-<td>Split-Plot Designs</td>
-<td><a href="./lectures/week-14_split-plot.html">Week 14 Notes: Split-Plot Designs</a></td>
-</tr>
-<tr class="odd">
-<td><strong>15</strong></td>
-<td>Catch-Up and Review</td>
-<td><a href="./lectures/week-15_final-review.html">Week 15 Notes: Catch-Up and Review</a></td>
-</tr>
-<tr class="even">
-<td><strong>16</strong></td>
-<td>Final Exam Review Notes</td>
-<td><a href="./lectures/week-15_final-review.html">Final Exam Review Notes</a></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="worksheets" class="level2">
-<h2 class="anchored" data-anchor-id="worksheets">Worksheets</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-<th>Worksheet Link</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>1</strong></td>
-<td>Introduction to Experimental Design</td>
-<td>[Week 1 Worksheet: Introduction to Experimental Design</td>
-</tr>
-<tr class="even">
-<td><strong>2</strong></td>
-<td>Completely Randomized Designs (CRD)</td>
-<td>[Week 2 Worksheet: Completely Randomized Designs (CRD)]</td>
-</tr>
-<tr class="odd">
-<td><strong>3</strong></td>
-<td>Multiple Comparisons</td>
-<td>[Week 3 Worksheet: Multiple Comparisons]</td>
-</tr>
-<tr class="even">
-<td><strong>4</strong></td>
-<td>Checking Model Assumptions</td>
-<td>[Week 4 Worksheet: Model Diagnostics]</td>
-</tr>
-<tr class="odd">
-<td><strong>5</strong></td>
-<td>Two-Way Factorial Designs</td>
-<td>[Week 5 Worksheet: Two-Way Factorial Designs]</td>
-</tr>
-<tr class="even">
-<td><strong>6</strong></td>
-<td>Higher-Order Factorial Designs</td>
-<td>[Week 6 Worksheet: Higher-Order Factorial Designs]</td>
-</tr>
-<tr class="odd">
-<td><strong>8</strong></td>
-<td>Blocking &amp; RCBD</td>
-<td>[Week 8 Worksheet: Blocking &amp; RCBD]</td>
-</tr>
-<tr class="even">
-<td><strong>9</strong></td>
-<td>Power Analysis</td>
-<td>[Week 9 Worksheet: Power Analysis]</td>
-</tr>
-<tr class="odd">
-<td><strong>10</strong></td>
-<td>Analysis of Covariance (ANCOVA)</td>
-<td><a href="./worksheets/potential-outcome.html">Week 10 Worksheet: ANCOVA</a></td>
-</tr>
-<tr class="even">
-<td><strong>11</strong></td>
-<td>Row–Column Designs</td>
-<td><a href="./worksheets/latin-square-v1.pdf">Week 11 Worksheet: Row–Column Designs</a></td>
-</tr>
-<tr class="odd">
-<td><strong>12</strong></td>
-<td>Random &amp; Mixed Models</td>
-<td>[Week 12 Worksheet: Mixed Models]</td>
-</tr>
-<tr class="even">
-<td><strong>13</strong></td>
-<td>Nested Models</td>
-<td>[Week 13 Worksheet: Nested Models]</td>
-</tr>
-<tr class="odd">
-<td><strong>14</strong></td>
-<td>Split-Plot Designs</td>
-<td>[Week 14 Worksheet: Split-Plot Designs]</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="supplemental-resources" class="level2">
-<h2 class="anchored" data-anchor-id="supplemental-resources">Supplemental Resources</h2>
-<p>In addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.</p>
+<section id="background-scenario" class="level1">
+<h1>Background / Scenario</h1>
+<p>You want to compare <strong>four teaching methods</strong> (A, B, C, D) to see their effect on student performance. Meanwhile:</p>
 <ul>
-<li>📁 <strong>GitHub Repository:</strong> <a href="https://github.com/course-page-url">Course Repository</a><br>
-</li>
-<li>🔗 <strong>Supplemental Readings:</strong> Available on Canvas or shared links.</li>
+<li><strong>Teacher</strong> differences (labeled T1–T4) may affect outcomes.</li>
+<li><strong>Classroom</strong> differences (labeled R1–R4) may also affect outcomes.</li>
 </ul>
+<p>You suspect large teacher-to-teacher (row) differences and classroom-to-classroom (column) differences. You decide to use a <strong>Latin Square</strong> design, with rows = teachers, columns = classrooms, so each row and column has exactly one instance of each teaching method.</p>
+<section id="example-layout-one-possible-random-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="example-layout-one-possible-random-assignment">Example Layout (one possible random assignment)</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">R1</th>
+<th style="text-align: center;">R2</th>
+<th style="text-align: center;">R3</th>
+<th style="text-align: center;">R4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T1</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">D</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T2</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T3</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T4</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">C</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>Each cell is the assigned teaching method for that Teacher–Classroom combination. In practice, label rows and columns randomly, and also label A/B/C/D randomly, so the order above is just an example.</p>
+</blockquote>
 </section>
-<section id="how-to-use-lecture-notes" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use-lecture-notes">How to Use Lecture Notes</h2>
+</section>
+<section id="learning-objective" class="level1">
+<h1>Learning Objective</h1>
+<p><strong>Goal</strong>: Understand how a Latin Square design blocks on two nuisance factors—Teachers (rows) and Classrooms (columns)—while comparing four primary treatments (teaching methods). By the end of this worksheet, you should be able to:</p>
 <ol type="1">
-<li><strong>Pre-Class Preparation</strong>: Read the lecture notes and supplemental readings <strong>before each class</strong> to familiarize yourself with the topics.<br>
-</li>
-<li><strong>During Class</strong>: Focus on key points highlighted in the notes. Participate in group activities and discussions.<br>
-</li>
-<li><strong>Post-Class Review</strong>: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.</li>
+<li>Construct a valid 4x4 Latin Square layout.</li>
+<li>Outline the data collection process and identify the measured responses.</li>
+<li>Compute the analysis-of-variance (ANOVA) decomposition for a Latin Square.</li>
+<li>Interpret which factors (rows, columns, or treatments) have significant effects.</li>
 </ol>
 </section>
-<section id="troubleshooting-github-pages" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting-github-pages">Troubleshooting GitHub Pages</h2>
-<p>If you experience issues accessing the lecture notes:<br>
-1. Refresh your browser as noted earlier.<br>
-2. Try accessing the page in <strong>incognito mode</strong>.<br>
-3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).</p>
-<p>If problems persist, contact the instructor via <strong>Canvas Email</strong> for further assistance.</p>
+<section id="step-by-step-scaffolding-tasks" class="level1">
+<h1>Step-by-Step Scaffolding Tasks</h1>
+<section id="part-a-setting-up-the-latin-square" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-setting-up-the-latin-square">Part A: Setting Up the Latin Square</h2>
+<ol type="1">
+<li><strong>Identify the row factor</strong>: Teachers T1–T4 are assigned as the rows.</li>
+<li><strong>Identify the column factor</strong>: Classrooms R1–R4 are assigned as the columns.</li>
+<li><strong>Label the four teaching methods</strong>: A, B, C, D.</li>
+<li><strong>Fill in a 4×4 table</strong> so that each letter (A/B/C/D) appears exactly once in each row and once in each column.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Guiding Question</strong>: Why must each treatment appear exactly once per row and column?</p>
+</blockquote>
+<p><strong>(Hint</strong>: Each row factor sees all methods once, each column factor sees all methods once. This balances out row and column differences.<strong>)</strong></p>
 </section>
-<section id="contact-information" class="level2">
-<h2 class="anchored" data-anchor-id="contact-information">Contact Information</h2>
+<section id="part-b-data-collection-planning" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-data-collection-planning">Part B: Data Collection Planning</h2>
+<ol type="1">
+<li><strong>Measurement</strong>: Decide how you will measure student performance. Will you use test scores, or average quiz scores? Are there multiple students in each cell?</li>
+<li><strong>Data Table</strong>: Sketch out your blank 4×4 grid. Each cell will hold the observed average test score (for example) under the assigned teaching method, with that particular teacher–classroom combination.</li>
+<li><strong>Randomization</strong>: Randomly label T1–T4 and R1–R4, and also randomly assign methods A–D to the four symbols in the square pattern.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Guiding Question</strong>: How can randomization reduce systematic bias?</p>
+</blockquote>
+</section>
+<section id="part-c-analysis-anova-steps" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-analysis-anova-steps">Part C: Analysis (ANOVA) Steps</h2>
+<p>Using your completed data table (once you have real or example scores):</p>
+<ol type="1">
+<li><strong>Compute row means</strong> (Teacher means). For teacher T1, average the four cells in row T1. Repeat for T2, T3, T4.</li>
+<li><strong>Compute column means</strong> (Classroom means). For classroom R1, average the four cells in column R1, etc.</li>
+<li><strong>Compute treatment means</strong> (Method A, B, C, D). Each method appears exactly once in each row and column, for 4 total observations per method.</li>
+<li><strong>Find the grand mean</strong> of all 16 responses,</li>
+</ol>
+<p><span class="math display">\[
+\bar{Y} = \frac{1}{16}\sum_{i,j}Y_{ij}.
+\]</span></p>
+<ol start="5" type="1">
+<li><p><strong>Sums of Squares</strong>:</p>
 <ul>
-<li><strong>Instructor:</strong> Dr.&nbsp;Davood Tofighi<br>
-</li>
-<li><strong>Office Hours:</strong> By appointment<br>
-</li>
-<li><strong>Course GitHub Page:</strong> <a href="https://github.com/course-page-url">Access Here</a><br>
-</li>
-<li><strong>Canvas Course Page:</strong> <a href="https://canvasinfo.unm.edu/">UNM Canvas</a></li>
-</ul>
-
-
+<li><strong>Total SS</strong>:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+\text{SST} = \sum_{i=1}^4 \sum_{j=1}^4 (Y_{ij} - \bar{Y})^2.
+\]</span> - <strong>Row SS</strong> (Teachers):</p>
+<p><span class="math display">\[
+\text{SS}_{\mathrm{rows}} = 4 \sum_{i=1}^4 (\bar{Y}_{\mathrm{row}, i} - \bar{Y})^2.
+\]</span> - <strong>Column SS</strong> (Classrooms):</p>
+<p><span class="math display">\[
+\text{SS}_{\mathrm{cols}} = 4 \sum_{j=1}^4 (\bar{Y}_{\mathrm{col}, j} - \bar{Y})^2.
+\]</span> - <strong>Treatment SS</strong> (Methods A/B/C/D): <span class="math display">\[
+\text{SS}_{\mathrm{treat}} = 4 \sum_{k=A,B,C,D} (\bar{Y}_{k} - \bar{Y})^2.
+\]</span> - <strong>Error SS</strong>:</p>
+<p><span class="math display">\[
+\text{SS}_{\mathrm{error}} = \text{SST} - (\text{SS}_{\mathrm{rows}} + \text{SS}_{\mathrm{cols}} + \text{SS}_{\mathrm{treat}}).
+\]</span></p>
+<ol start="6" type="1">
+<li><strong>Degrees of Freedom</strong>:
+<ul>
+<li>Rows, Columns, Treatments each has 3 degrees of freedom.</li>
+<li>Total df = 16–1 = 15.</li>
+<li>Error df = 15–(3 + 3 + 3) = 6.</li>
+</ul></li>
+<li><strong>Mean Squares</strong>: MS = SS / df for Rows, Columns, Treatments, and Error.</li>
+<li><strong>F-ratios</strong>:
+<ul>
+<li><span class="math inline">\(F_{\mathrm{rows}} = \frac{\mathrm{MS}_{\mathrm{rows}}}{\mathrm{MS}_{\mathrm{error}}}.\)</span></li>
+<li><span class="math inline">\(F_{\mathrm{cols}} = \frac{\mathrm{MS}_{\mathrm{cols}}}{\mathrm{MS}_{\mathrm{error}}}.\)</span></li>
+<li><span class="math inline">\(F_{\mathrm{treat}} = \frac{\mathrm{MS}_{\mathrm{treat}}}{\mathrm{MS}_{\mathrm{error}}}.\)</span></li>
+</ul></li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Guiding Question</strong>: What does it mean if <span class="math inline">\(F_{\mathrm{treat}}\)</span> is large compared to 1?</p>
+</blockquote>
 </section>
+<section id="part-d-reflection-discussion-questions" class="level2">
+<h2 class="anchored" data-anchor-id="part-d-reflection-discussion-questions">Part D: Reflection / Discussion Questions</h2>
+<ol type="1">
+<li><strong>Interpretation</strong>:
+<ul>
+<li>If the <span class="math inline">\(F\)</span>-ratio for Treatments is significant, what does that imply about the four methods?</li>
+<li>How would you follow up with pairwise comparisons?</li>
+</ul></li>
+<li><strong>Block Factors</strong>:
+<ul>
+<li>Did you see a significant Teacher effect?</li>
+<li>Did you see a significant Classroom effect?</li>
+</ul></li>
+<li><strong>Check Assumptions</strong>:
+<ul>
+<li>How would you evaluate normality, constant variance, or outliers in this design?</li>
+<li>Are there any clues that the teacher or classroom might interact with the teaching method?</li>
+</ul></li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Think about</strong>: If a teacher–method interaction is suspected, a Latin Square might not fully handle that. You might need a more complex design.</p>
+</blockquote>
+</section>
+</section>
+<section id="optional-challenge" class="level1">
+<h1>Optional Challenge</h1>
+<ol type="1">
+<li><strong>Replication</strong>: Suppose you can replicate the entire 4×4 Latin Square twice. How does that change your Error df, and how might it improve your ability to detect differences?</li>
+<li><strong>Higher Factor Interactions</strong>: If teacher–classroom–method interactions are suspected, what alternative designs could address those? (Hint: Possibly a Graeco-Latin square or more advanced row–column approach.)</li>
+<li><strong>Data Visualization</strong>: Plot row effects, column effects, and method effects on a single chart. Compare the relative spread in each to see visually which factor has the largest influence.</li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -973,5 +971,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
