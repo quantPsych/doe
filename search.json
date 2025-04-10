@@ -780,11 +780,18 @@
     "text": "Mean Squares\n\n\\(MS_\\text{Row} = \\frac{SS_\\text{Row}}{v s - 1}\\)\n\\(MS_\\text{Col} = \\frac{SS_\\text{Col}}{v - 1}\\)\n\\(MS_\\text{Treatment adj} = \\frac{SS_\\text{Total adj}}{v - 1}\\)\n\\(MS_\\text{Error} = \\frac{SS_\\text{Error}}{(v s - 2)(v - 1)}\\)"
   },
   {
-    "objectID": "lectures/week-11_row-column-s-replicate.html#experiment-description",
-    "href": "lectures/week-11_row-column-s-replicate.html#experiment-description",
+    "objectID": "lectures/week-11_row-column-s-replicate.html#dairy-cow-experiment-overview",
+    "href": "lectures/week-11_row-column-s-replicate.html#dairy-cow-experiment-overview",
     "title": "Row and Column Designs",
-    "section": "Experiment Description",
-    "text": "Experiment Description\n\nObjective: Study the effect of three diets (roughage, limited grain, full grain) on milk yield.\nDesign: 2-replicate Latin square (\\(v = 3\\), \\(s = 2\\)).\n\nRows: \\(b = v s = 6\\) cows.\nColumns: \\(c = v = 3\\) periods.\nTotal observations: \\(N = v^2 s = 18\\).\nEach diet appears \\(r = v s = 6\\) times.\n\nData: Table 12.8 (unrandomized plan with observed milk yields in parentheses).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRow\nColumn 1\nColumn 2\nColumn 3\nCow\nPeriod 1\nPeriod 2\nPeriod 3\n\n\n\n\n1\nA (63)\nB (101)\nC (1)\n6\n2 (63)\n3 (101)\n1 (1)\n\n\n2\nB (76)\nC (86)\nA (46)\n4\n3 (76)\n1 (86)\n2 (46)\n\n\n3\nC (86)\nA (109)\nB (39)\n2\n3 (86)\n2 (109)\n1 (39)\n\n\n4\nA (35)\nC (75)\nB (34)\n5\n1 (35)\n2 (75)\n3 (34)\n\n\n5\nB (25)\nA (38)\nC (15)\n1\n2 (25)\n1 (38)\n3 (15)\n\n\n6\nC (72)\nB (124)\nA (27)\n3\n1 (72)\n3 (124)\n2 (27)"
+    "section": "Dairy Cow Experiment Overview",
+    "text": "Dairy Cow Experiment Overview\n\nExperiment Description: The study (Cochran and Cox, 1957) investigated the effects of three diets on milk production in dairy cows.\n\nTreatments (Diets):\n\nRoughage\nLimited Grain\nFull Grain\n\n\nDesign: A crossover experiment was conducted in which each of the \\(b = 6\\) cows received each of the \\(v = 3\\) diets in different periods.\n\nPeriods: Each diet was administered for a six-week period.\nRandomization: A 2-replicate Plan 2 Latin square was used, ensuring that:\n\nEach treatment appears exactly once in each row (cow) and column (period).\nEach treatment is observed \\(r = 6\\) times in total.\n\n\nResponse Variable: Milk yield measured at the end of each six-week period.\nAssumptions: A sufficient washout period between diet changes minimizes potential carryover effects. Thus, a model without carryover effects adequately describes the data."
+  },
+  {
+    "objectID": "lectures/week-11_row-column-s-replicate.html#experiment-data",
+    "href": "lectures/week-11_row-column-s-replicate.html#experiment-data",
+    "title": "Row and Column Designs",
+    "section": "Experiment Data",
+    "text": "Experiment Data\n\nDesign: 2-replicate Latin square (\\(v = 3\\), \\(s = 2\\)).\n\nRows: \\(b = v s = 6\\) cows.\nColumns: \\(c = v = 3\\) periods.\nTotal observations: \\(N = v^2 s = 18\\).\nEach diet appears \\(r = v s = 6\\) times.\n\nData: Table 12.8 (unrandomized plan with observed milk yields in parentheses).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRow\nColumn 1\nColumn 2\nColumn 3\nCow\nPeriod 1\nPeriod 2\nPeriod 3\n\n\n\n\n1\nA (63)\nB (101)\nC (1)\n6\n2 (63)\n3 (101)\n1 (1)\n\n\n2\nB (76)\nC (86)\nA (46)\n4\n3 (76)\n1 (86)\n2 (46)\n\n\n3\nC (86)\nA (109)\nB (39)\n2\n3 (86)\n2 (109)\n1 (39)\n\n\n4\nA (35)\nC (75)\nB (34)\n5\n1 (35)\n2 (75)\n3 (34)\n\n\n5\nB (25)\nA (38)\nC (15)\n1\n2 (25)\n1 (38)\n3 (15)\n\n\n6\nC (72)\nB (124)\nA (27)\n3\n1 (72)\n3 (124)\n2 (27)"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#anova-table-table-12.9",

@@ -387,7 +387,8 @@ window.Quarto = {
   <li><a href="#evaluating-blocking-effectiveness" id="toc-evaluating-blocking-effectiveness" class="nav-link" data-scroll-target="#evaluating-blocking-effectiveness">Evaluating Blocking Effectiveness</a></li>
   <li><a href="#example-dairy-cow-experiment" id="toc-example-dairy-cow-experiment" class="nav-link" data-scroll-target="#example-dairy-cow-experiment">Example: Dairy Cow Experiment</a>
   <ul class="collapse">
-  <li><a href="#experiment-description" id="toc-experiment-description" class="nav-link" data-scroll-target="#experiment-description">Experiment Description</a></li>
+  <li><a href="#dairy-cow-experiment-overview" id="toc-dairy-cow-experiment-overview" class="nav-link" data-scroll-target="#dairy-cow-experiment-overview">Dairy Cow Experiment Overview</a></li>
+  <li><a href="#experiment-data" id="toc-experiment-data" class="nav-link" data-scroll-target="#experiment-data">Experiment Data</a></li>
   <li><a href="#anova-table-table-12.9" id="toc-anova-table-table-12.9" class="nav-link" data-scroll-target="#anova-table-table-12.9">ANOVA Table (Table 12.9)</a></li>
   <li><a href="#computations" id="toc-computations" class="nav-link" data-scroll-target="#computations">Computations</a></li>
   </ul></li>
@@ -730,10 +731,34 @@ F = \frac{MS_\text{Treatment adj}}{MS_\text{Error}}
 </section>
 <section id="example-dairy-cow-experiment" class="level1">
 <h1>Example: Dairy Cow Experiment</h1>
-<section id="experiment-description" class="level2">
-<h2 class="anchored" data-anchor-id="experiment-description">Experiment Description</h2>
+<section id="dairy-cow-experiment-overview" class="level2">
+<h2 class="anchored" data-anchor-id="dairy-cow-experiment-overview">Dairy Cow Experiment Overview</h2>
 <ul>
-<li><strong>Objective</strong>: Study the effect of three diets (roughage, limited grain, full grain) on milk yield.</li>
+<li><p><strong>Experiment Description:</strong> The study (Cochran and Cox, 1957) investigated the effects of three diets on milk production in dairy cows.</p>
+<ul>
+<li><strong>Treatments (Diets):</strong>
+<ol type="1">
+<li>Roughage</li>
+<li>Limited Grain</li>
+<li>Full Grain</li>
+</ol></li>
+</ul></li>
+<li><p><strong>Design:</strong> A <strong>crossover experiment</strong> was conducted in which each of the <span class="math inline">\(b = 6\)</span> cows received each of the <span class="math inline">\(v = 3\)</span> diets in different periods.</p>
+<ul>
+<li><strong>Periods:</strong> Each diet was administered for a six-week period.</li>
+<li><strong>Randomization:</strong> A 2-replicate Plan 2 Latin square was used, ensuring that:
+<ul>
+<li>Each treatment appears exactly once in each row (cow) and column (period).</li>
+<li>Each treatment is observed <span class="math inline">\(r = 6\)</span> times in total.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Response Variable:</strong> Milk yield measured at the end of each six-week period.</p></li>
+<li><p><strong>Assumptions:</strong> A sufficient washout period between diet changes minimizes potential <strong>carryover effects</strong>. Thus, a model without carryover effects adequately describes the data.</p></li>
+</ul>
+</section>
+<section id="experiment-data" class="level2">
+<h2 class="anchored" data-anchor-id="experiment-data">Experiment Data</h2>
+<ul>
 <li><strong>Design</strong>: 2-replicate Latin square (<span class="math inline">\(v = 3\)</span>, <span class="math inline">\(s = 2\)</span>).
 <ul>
 <li>Rows: <span class="math inline">\(b = v s = 6\)</span> cows.</li>
