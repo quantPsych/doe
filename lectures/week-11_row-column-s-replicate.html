@@ -410,8 +410,8 @@ window.Quarto = {
   <li><a href="#pairwise-differences" id="toc-pairwise-differences" class="nav-link" data-scroll-target="#pairwise-differences">Pairwise Differences</a></li>
   <li><a href="#r-code-with-emmeans" id="toc-r-code-with-emmeans" class="nav-link" data-scroll-target="#r-code-with-emmeans">R Code with <code>emmeans</code></a></li>
   <li><a href="#step-1-data-preparation" id="toc-step-1-data-preparation" class="nav-link" data-scroll-target="#step-1-data-preparation">Step 1: Data Preparation</a></li>
-  <li><a href="#step-2-fit-the-model" id="toc-step-2-fit-the-model" class="nav-link" data-scroll-target="#step-2-fit-the-model">Step 2: Fit the Model</a></li>
-  <li><a href="#step-3-anova" id="toc-step-3-anova" class="nav-link" data-scroll-target="#step-3-anova">Step 3: ANOVA</a></li>
+  <li><a href="#step-2-fit-the-model-and-anova" id="toc-step-2-fit-the-model-and-anova" class="nav-link" data-scroll-target="#step-2-fit-the-model-and-anova">Step 2: Fit the Model and ANOVA</a></li>
+  <li><a href="#step-3-type-iii-ss" id="toc-step-3-type-iii-ss" class="nav-link" data-scroll-target="#step-3-type-iii-ss">Step 3: Type III SS</a></li>
   <li><a href="#step-4-pairwise-comparisons" id="toc-step-4-pairwise-comparisons" class="nav-link" data-scroll-target="#step-4-pairwise-comparisons">Step 4: Pairwise Comparisons</a></li>
   </ul></li>
   </ul>
@@ -1182,100 +1182,67 @@ F = \frac{1138.39}{103.06} = 11.05
 </section>
 <section id="step-1-data-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-data-preparation">Step 1: Data Preparation</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cow_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Cow =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Period =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times =</span> <span class="dv">6</span>)),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Diet =</span> <span class="fu">factor</span>(<span class="fu">c</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B"</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"C"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"C"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"C"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"C"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B"</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span>,</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"C"</span>,</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"C"</span>,</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B"</span>,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    )),</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="fu">c</span>(</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="dv">63</span>,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="dv">101</span>,</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="dv">76</span>,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="dv">86</span>,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="dv">46</span>,</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="dv">86</span>,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="dv">109</span>,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="dv">39</span>,</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="dv">35</span>,</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="dv">75</span>,</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="dv">34</span>,</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="dv">25</span>,</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="dv">38</span>,</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="dv">15</span>,</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="dv">72</span>,</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="dv">124</span>,</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="dv">27</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># print as table where rows are cow and cols are period</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(Yield <span class="sc">~</span> Cow <span class="sc">+</span> Period <span class="sc">+</span> Diet, <span class="at">data =</span> cow_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-tbl-cap="Dairy Cow Data">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,emmeans, here)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cow_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">cow =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each=</span><span class="dv">3</span>)),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">period =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">times=</span><span class="dv">6</span>)),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">diet =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">yield =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">38</span>,<span class="dv">15</span>, <span class="dv">86</span>,<span class="dv">109</span>,<span class="dv">39</span>, <span class="dv">72</span>,<span class="dv">124</span>,<span class="dv">27</span>, <span class="dv">76</span>,<span class="dv">86</span>,<span class="dv">46</span>, <span class="dv">35</span>,<span class="dv">75</span>,<span class="dv">34</span>, <span class="dv">63</span>,<span class="dv">101</span>,<span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cow_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>, , Diet = A
-
-   Period
-Cow   1   2   3
-  1  63   0   0
-  2   0   0  46
-  3   0 109   0
-  4  35   0   0
-  5   0  38   0
-  6   0   0  27
-
-, , Diet = B
-
-   Period
-Cow   1   2   3
-  1   0 101   0
-  2  76   0   0
-  3   0   0  39
-  4   0   0  34
-  5  25   0   0
-  6   0 124   0
-
-, , Diet = C
-
-   Period
-Cow   1   2   3
-  1   0   0   1
-  2   0  86   0
-  3  86   0   0
-  4   0  75   0
-  5   0   0  15
-  6  72   0   0</code></pre>
+<pre><code>   cow period diet yield
+1    1      1    B    25
+2    1      2    A    38
+3    1      3    C    15
+4    2      1    C    86
+5    2      2    B   109
+6    2      3    A    39
+7    3      1    A    72
+8    3      2    C   124
+9    3      3    B    27
+10   4      1    C    76
+11   4      2    A    86
+12   4      3    B    46
+13   5      1    A    35
+14   5      2    B    75
+15   5      3    C    34
+16   6      1    B    63
+17   6      2    C   101
+18   6      3    A     1</code></pre>
 </div>
 </div>
 </section>
-<section id="step-2-fit-the-model" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-fit-the-model">Step 2: Fit the Model</h2>
-<div class="cell" data-tbl-cap="Fitting the Cow Model">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cow_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Yield <span class="sc">~</span> Cow <span class="sc">+</span> Period <span class="sc">+</span> Diet, <span class="at">data =</span> cow_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step-2-fit-the-model-and-anova" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-2-fit-the-model-and-anova">Step 2: Fit the Model and ANOVA</h2>
+<div id="tbl-fit-cow-model" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-fit-cow-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cow_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> cow <span class="sc">+</span> period <span class="sc">+</span> diet, <span class="at">data =</span> cow_df)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cow_fit) <span class="co"># Type I SS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+cow          5   5781    1156   11.22  0.00187 ** 
+period       2  11480    5740   55.70 2.02e-05 ***
+diet         2   2277    1138   11.05  0.00499 ** 
+Residuals    8    824     103                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-fit-cow-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: ANOVA for Dairy Cow Experiment with Type I SS
+</figcaption>
+</figure>
 </div>
 </section>
-<section id="step-3-anova" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="step-3-anova">Step 3: ANOVA</h2>
+<section id="step-3-type-iii-ss" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-3-type-iii-ss">Step 3: Type III SS</h2>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(cow_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(cow_fit, <span class="sc">~</span>., <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-anova" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1286,44 +1253,49 @@ Cow   1   2   3
 <tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: right;">Df</th>
-<th style="text-align: right;">Sum Sq</th>
-<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">Sum of Sq</th>
+<th style="text-align: right;">RSS</th>
+<th style="text-align: right;">AIC</th>
 <th style="text-align: right;">F value</th>
 <th style="text-align: right;">Pr(&gt;F)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Cow</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5781.1111</td>
-<td style="text-align: right;">1156.2222</td>
-<td style="text-align: right;">3.7101346</td>
-<td style="text-align: right;">0.0492524</td>
+<td style="text-align: left;"><none></none></td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">824.4444</td>
+<td style="text-align: right;">88.83808</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Period</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">11480.1111</td>
-<td style="text-align: right;">5740.0556</td>
-<td style="text-align: right;">18.4189322</td>
-<td style="text-align: right;">0.0010134</td>
+<td style="text-align: left;">cow</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5781.111</td>
+<td style="text-align: right;">6605.5556</td>
+<td style="text-align: right;">116.29530</td>
+<td style="text-align: right;">11.21941</td>
+<td style="text-align: right;">0.0018704</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Diet</td>
+<td style="text-align: left;">period</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">608.1111</td>
-<td style="text-align: right;">304.0556</td>
-<td style="text-align: right;">0.9756663</td>
-<td style="text-align: right;">0.4176716</td>
+<td style="text-align: right;">11480.111</td>
+<td style="text-align: right;">12304.5556</td>
+<td style="text-align: right;">133.49236</td>
+<td style="text-align: right;">55.69865</td>
+<td style="text-align: right;">0.0000202</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Residuals</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">2493.1111</td>
-<td style="text-align: right;">311.6389</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: left;">diet</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2276.778</td>
+<td style="text-align: right;">3101.2222</td>
+<td style="text-align: right;">108.68524</td>
+<td style="text-align: right;">11.04636</td>
+<td style="text-align: right;">0.0049948</td>
 </tr>
 </tbody>
 </table>
@@ -1331,80 +1303,46 @@ Cow   1   2   3
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: ANOVA Table for Dairy Cow Experiment
+Table&nbsp;2: ANOVA Table for Dairy Cow Experiment with Type III SS
 </figcaption>
 </figure>
 </div>
 </div>
-<p><strong>Output</strong>:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note. Because the design is balanced, Type I and Type III SS give the same results.</p>
+</div>
+</div>
 </section>
 <section id="step-4-pairwise-comparisons" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="step-4-pairwise-comparisons">Step 4: Pairwise Comparisons</h2>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(cow_fit, <span class="sc">~</span>Diet) <span class="co"># Corrected model reference</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emm)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm, <span class="at">adjust =</span> <span class="st">"tukey"</span>) <span class="co"># Added comment for clarity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> contrast estimate   SE df t.ratio p.value
- A - B      -13.50 10.2  8  -1.325  0.4217
- A - C       -2.83 10.2  8  -0.278  0.9585
- B - C       10.67 10.2  8   1.047  0.5706
-
-Results are averaged over the levels of: Cow, Period 
-P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
-</div>
 <div id="tbl-pairwise-comparisons" class="cell quarto-float quarto-figure quarto-figure-left anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-pairwise-comparisons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="do-not-create-environment cell table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Diet</th>
-<th style="text-align: right;">emmean</th>
-<th style="text-align: right;">SE</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">lower.CL</th>
-<th style="text-align: right;">upper.CL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">53.00000</td>
-<td style="text-align: right;">7.206928</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">36.38079</td>
-<td style="text-align: right;">69.61921</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">66.50000</td>
-<td style="text-align: right;">7.206928</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">49.88079</td>
-<td style="text-align: right;">83.11921</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">C</td>
-<td style="text-align: right;">55.83333</td>
-<td style="text-align: right;">7.206928</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">39.21413</td>
-<td style="text-align: right;">72.45254</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(cow_fit, <span class="sc">~</span>diet) <span class="co"># Corrected model reference</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm, <span class="at">adjust =</span> <span class="st">"tukey"</span>) <span class="co"># Added comment for clarity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast estimate   SE df t.ratio p.value
+ A - B       -12.3 5.86  8  -2.104  0.1503
+ A - C       -27.5 5.86  8  -4.692  0.0039
+ B - C       -15.2 5.86  8  -2.588  0.0744
+
+Results are averaged over the levels of: cow, period 
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-pairwise-comparisons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Pairwise Comparisons of Diets
+Table&nbsp;3: Pairwise Comparisons of Diets
 </figcaption>
 </figure>
-</div>
 </div>
 
 
