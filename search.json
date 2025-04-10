@@ -763,7 +763,7 @@
     "href": "lectures/week-11_row-column-s-replicate.html#sums-of-squares",
     "title": "Row and Column Designs",
     "section": "Sums of Squares",
-    "text": "Sums of Squares\n\nTotal Sum of Squares (\\(SS_\\text{Total}\\)):\n\n\\[\nSS_\\text{Total} = \\sum_{h=1}^{vs} \\sum_{q=1}^v (y_{hqi} - \\bar{y}_{…})^2\n\\]\n\nRow Sum of Squares (\\(SS_\\text{Row}\\)):\n\n\\[\n\\begin{aligned}\nSS_\\text{Rows} &= v \\sum_{h=1}^{vs} (\\bar{y}_{h..} - \\bar{y}_{…})^2  \\\\\n&=  \\frac{1}{v} \\sum_{h=1}^{b} B_h^2 - \\frac{G^2}{vs}\n\\end{aligned}\n\\]\nWhere: - \\(B_h\\): Sum of observations for row \\(h\\). - \\(\\bar{y}_{h..}\\): Mean of observations in row \\(h\\). - \\(\\bar{y}_{…}\\): Overall mean of all observations.\n\nColumn Sum of Squares (\\(SS_\\text{Col}\\)):\n\n\\[\n\\begin{aligned}\nSS_\\text{Col} &= v s \\sum_{q=1}^v (\\bar{y}_{.q.} - \\bar{y}_{…})^2 \\\\\n&= \\frac{1}{b} \\sum_{q=1}^{c} C_q^2 - \\frac{G^2}{bc}\n\\end{aligned}\n\\]\nWhere:\n\n\\(C_q\\): Sum of observations for column \\(q\\).\n\\(\\bar{y}_{.q.}\\): Mean of observations in column \\(q\\).\nTreatment Sum of Squares (\\(SS_\\text{Total adj}\\)):\n\n\\[\n\\hat{\\tau}_i = \\frac{1}{vs} Q_i\n\\]\nWhere:\n\\[\nQ_i= T_i - \\frac{1}{c} \\sum_{h=1}^{vs} n_{h.i} B_h= T_i - \\frac{G}{v}\n\\]\n\\[\nSS_\\text{Total adj} = \\frac{1}{v s} \\sum_{i=1}^v T_i^2 - \\frac{G^2}{v^2 s}\n\\]\nWhere:\n\n\\(T_i\\): Sum of observations for treatment \\(i\\).\n\\(G\\): Grand total of all observations.\nError Sum of Squares (\\(SS_\\text{Error}\\)):\n\n\\[\nSS_\\text{Error} = SS_\\text{Total} - SS_\\text{Row} - SS_\\text{Col} - SS_\\text{Total adj}\n\\]"
+    "text": "Sums of Squares\n\nTotal Sum of Squares (\\(SS_\\text{Total}\\)):\n\n\\[\nSS_\\text{Total} = \\sum_{h=1}^{vs} \\sum_{q=1}^v (y_{hqi} - \\bar{y}_{…})^2\n\\]\n\nRow Sum of Squares (\\(SS_\\text{Row}\\)):\n\n\\[\n\\begin{align*}\nSS_\\text{Rows} &= v \\sum_{h=1}^{vs} (\\bar{y}_{h..} - \\bar{y}_{…})^2  \\\\\n&=  \\frac{1}{v} \\sum_{h=1}^{b} B_h^2 - \\frac{G^2}{vs}\n\\end{align*}\n\\]\nWhere: - \\(B_h\\): Sum of observations for row \\(h\\). - \\(\\bar{y}_{h..}\\): Mean of observations in row \\(h\\). - \\(\\bar{y}_{…}\\): Overall mean of all observations.\n\nColumn Sum of Squares (\\(SS_\\text{Col}\\)):\n\n\\[\n\\begin{align*}\nSS_\\text{Col} &= v s \\sum_{q=1}^v (\\bar{y}_{.q.} - \\bar{y}_{…})^2 \\\\\n&= \\frac{1}{b} \\sum_{q=1}^{c} C_q^2 - \\frac{G^2}{bc}\n\\end{align*}\n\\]\nWhere:\n\n\\(C_q\\): Sum of observations for column \\(q\\).\n\\(\\bar{y}_{.q.}\\): Mean of observations in column \\(q\\).\nTreatment Sum of Squares (\\(SS_\\text{Total adj}\\)):\n\n\\[\n\\hat{\\tau}_i = \\frac{1}{vs} Q_i\n\\]\nWhere:\n\\[\nQ_i= T_i - \\frac{1}{c} \\sum_{h=1}^{vs} n_{h.i} B_h= T_i - \\frac{G}{v}\n\\]\n\\[\nSS_\\text{Total adj} = \\frac{1}{v s} \\sum_{i=1}^v T_i^2 - \\frac{G^2}{v^2 s}\n\\]\nWhere:\n\n\\(T_i\\): Sum of observations for treatment \\(i\\).\n\\(G\\): Grand total of all observations.\nError Sum of Squares (\\(SS_\\text{Error}\\)):\n\n\\[\nSS_\\text{Error} = SS_\\text{Total} - SS_\\text{Row} - SS_\\text{Col} - SS_\\text{Total adj}\n\\]"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#degrees-of-freedom",
@@ -861,14 +861,14 @@
     "href": "lectures/week-11_row-column-s-replicate.html#anova-results",
     "title": "Row and Column Designs",
     "section": "ANOVA Results",
-    "text": "ANOVA Results\n\n\n\nSource\nDF\nSS\nMS\nF\np-value\n\n\n\n\nCow (row)\n5\n5781.11\n1156.22\n-\n-\n\n\nPeriod (col)\n2\n11480.11\n5740.06\n-\n-\n\n\nDiets (trt)\n2\n2276.78\n1138.39\n11.05\n0.0050\n\n\nError\n8\n824.44\n103.06\n\n\n\n\nTotal\n17\n20362.44\n\n\n\n\n\n\n\n\\(MS_\\text{Error} = 103.06\\).\n\\(df_{\\text{error}} = 8\\).\nSignificant treatment effect (\\(p = 0.0050\\))."
+    "text": "ANOVA Results\n\n\n\nSource\nDF\nSS\nMS\nF\np-value\n\n\n\n\nCow (row)\n5\n5781.11\n1156.22\n-\n-\n\n\nPeriod (col)\n2\n11480.11\n5740.06\n-\n-\n\n\nDiets (trt)\n2\n2276.78\n1138.39\n11.05\n0.0050\n\n\nError\n8\n824.44\n103.06\n\n\n\n\nTotal\n17\n20362.44"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#treatment-means",
     "href": "lectures/week-11_row-column-s-replicate.html#treatment-means",
     "title": "Row and Column Designs",
     "section": "Treatment Means",
-    "text": "Treatment Means\n\nDiet A: \\(\\frac{63 + 46 + 109 + 35 + 38 + 27}{6} = 45.167\\)\nDiet B: \\(\\frac{101 + 76 + 39 + 34 + 25 + 124}{6} = 66.500\\)\nDiet C: \\(\\frac{1 + 86 + 86 + 75 + 15 + 72}{6} = 55.833\\)"
+    "text": "Treatment Means\n\nDiet A: \\(\\frac{63 + 46 + 109 + 35 + 38 + 27}{6} = 45.167\\)\nDiet B: \\(\\frac{101 + 76 + 39 + 34 + 25 + 124}{6} = 57.500\\)\nDiet C: \\(\\frac{1 + 86 + 86 + 75 + 15 + 72}{6} = 72.667\\)"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#manual-msd-calculation",
@@ -882,7 +882,7 @@
     "href": "lectures/week-11_row-column-s-replicate.html#pairwise-differences",
     "title": "Row and Column Designs",
     "section": "Pairwise Differences",
-    "text": "Pairwise Differences\n\nB–A: \\(66.500 - 45.167 = 21.333\\) (&gt; 16.743, significant).\nC–A: \\(55.833 - 45.167 = 10.666\\) (&lt; 16.743, not significant).\nB–C: \\(66.500 - 55.833 = 10.667\\) (&lt; 16.743, not significant)."
+    "text": "Pairwise Differences\n\nB–A: \\(57.500 - 45.167 = 12.333\\)\nC–A: \\(72.667 - 45.167 = 27.500\\)\nB–C: \\(57.500 - 72.667 = -15.167\\)"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#r-code-with-emmeans",
@@ -896,70 +896,28 @@
     "href": "lectures/week-11_row-column-s-replicate.html#step-1-data-preparation",
     "title": "Row and Column Designs",
     "section": "Step 1: Data Preparation",
-    "text": "Step 1: Data Preparation\ndata &lt;- data.frame(\n  Cow = factor(rep(1:6, each = 3)),\n  Period = factor(rep(1:3, times = 6)),\n  Diet = factor(c(\"A\", \"B\", \"C\", \"B\", \"C\", \"A\", \"C\", \"A\", \"B\", \"A\", \"C\", \"B\", \"B\", \"A\", \"C\", \"C\", \"B\", \"A\")),\n  Yield = c(63, 101, 1, 76, 86, 46, 86, 109, 39, 35, 75, 34, 25, 38, 15, 72, 124, 27)\n)"
+    "text": "Step 1: Data Preparation\n\ncow_df &lt;- data.frame(\n    Cow = factor(rep(1:6, each = 3)),\n    Period = factor(rep(1:3, times = 6)),\n    Diet = factor(c(\n        \"A\",\n        \"B\",\n        \"C\",\n        \"B\",\n        \"C\",\n        \"A\",\n        \"C\",\n        \"A\",\n        \"B\",\n        \"A\",\n        \"C\",\n        \"B\",\n        \"B\",\n        \"A\",\n        \"C\",\n        \"C\",\n        \"B\",\n        \"A\"\n    )),\n    Yield = c(\n        63,\n        101,\n        1,\n        76,\n        86,\n        46,\n        86,\n        109,\n        39,\n        35,\n        75,\n        34,\n        25,\n        38,\n        15,\n        72,\n        124,\n        27\n    )\n)\n\n# print as table where rows are cow and cols are period\nxtabs(Yield ~ Cow + Period + Diet, data = cow_df)\n\n, , Diet = A\n\n   Period\nCow   1   2   3\n  1  63   0   0\n  2   0   0  46\n  3   0 109   0\n  4  35   0   0\n  5   0  38   0\n  6   0   0  27\n\n, , Diet = B\n\n   Period\nCow   1   2   3\n  1   0 101   0\n  2  76   0   0\n  3   0   0  39\n  4   0   0  34\n  5  25   0   0\n  6   0 124   0\n\n, , Diet = C\n\n   Period\nCow   1   2   3\n  1   0   0   1\n  2   0  86   0\n  3  86   0   0\n  4   0  75   0\n  5   0   0  15\n  6  72   0   0"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#step-2-fit-the-model",
     "href": "lectures/week-11_row-column-s-replicate.html#step-2-fit-the-model",
     "title": "Row and Column Designs",
     "section": "Step 2: Fit the Model",
-    "text": "Step 2: Fit the Model\nmodel &lt;- lm(Yield ~ Cow + Period + Diet, data = data)"
+    "text": "Step 2: Fit the Model\n\ncow_fit &lt;- lm(Yield ~ Cow + Period + Diet, data = cow_df)"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#step-3-anova",
     "href": "lectures/week-11_row-column-s-replicate.html#step-3-anova",
     "title": "Row and Column Designs",
     "section": "Step 3: ANOVA",
-    "text": "Step 3: ANOVA\nanova(model)\nOutput:\nAnalysis of Variance Table\nResponse: Yield\n          Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nCow        5  5781.1 1156.22 11.218 0.001686 ** \nPeriod     2 11480.1 5740.06 55.690 1.138e-05 ***\nDiet       2  2276.8 1138.39 11.046 0.005002 ** \nResiduals  8   824.4  103.06"
+    "text": "Step 3: ANOVA\n\nanova(cow_fit)\n\n\n\n\n\n\n\n\n\nDf\nSum Sq\nMean Sq\nF value\nPr(&gt;F)\n\n\n\n\nCow\n5\n5781.1111\n1156.2222\n3.7101346\n0.0492524\n\n\nPeriod\n2\n11480.1111\n5740.0556\n18.4189322\n0.0010134\n\n\nDiet\n2\n608.1111\n304.0556\n0.9756663\n0.4176716\n\n\nResiduals\n8\n2493.1111\n311.6389\nNA\nNA\n\n\n\n\n\n\n\nTable 1: ANOVA Table for Dairy Cow Experiment\n\n\n\n\nOutput:"
   },
   {
     "objectID": "lectures/week-11_row-column-s-replicate.html#step-4-pairwise-comparisons",
     "href": "lectures/week-11_row-column-s-replicate.html#step-4-pairwise-comparisons",
     "title": "Row and Column Designs",
     "section": "Step 4: Pairwise Comparisons",
-    "text": "Step 4: Pairwise Comparisons\nlibrary(emmeans)\nemm &lt;- emmeans(model, ~ Diet)\npairs(emm, adjust = \"tukey\")\nOutput:\n contrast estimate    SE df t.ratio p.value\n A - B     -21.33 5.861  8 -3.639  0.0135\n A - C     -10.67 5.861  8 -1.820  0.1926\n B - C      10.67 5.861  8  1.820  0.1926"
-  },
-  {
-    "objectID": "lectures/week-11_row-column-s-replicate.html#comparison-of-results",
-    "href": "lectures/week-11_row-column-s-replicate.html#comparison-of-results",
-    "title": "Row and Column Designs",
-    "section": "Comparison of Results",
-    "text": "Comparison of Results"
-  },
-  {
-    "objectID": "lectures/week-11_row-column-s-replicate.html#treatment-means-1",
-    "href": "lectures/week-11_row-column-s-replicate.html#treatment-means-1",
-    "title": "Row and Column Designs",
-    "section": "Treatment Means",
-    "text": "Treatment Means\n\nManual: A = 45.167, B = 66.500, C = 55.833.\nR: Matches (implied by differences)."
-  },
-  {
-    "objectID": "lectures/week-11_row-column-s-replicate.html#pairwise-differences-1",
-    "href": "lectures/week-11_row-column-s-replicate.html#pairwise-differences-1",
-    "title": "Row and Column Designs",
-    "section": "Pairwise Differences",
-    "text": "Pairwise Differences\n\nManual:\n\nB–A = 21.333\nC–A = 10.666\nB–C = 10.667\n\nR:\n\nA–B = -21.33 (reverse sign, same magnitude)\nA–C = -10.67\nB–C = 10.67\n\nComparison: Exact match (noting direction of subtraction)."
-  },
-  {
-    "objectID": "lectures/week-11_row-column-s-replicate.html#standard-error",
-    "href": "lectures/week-11_row-column-s-replicate.html#standard-error",
-    "title": "Row and Column Designs",
-    "section": "Standard Error",
-    "text": "Standard Error\n\nManual: \\(\\sqrt{103.06 \\cdot \\frac{2}{6}} = \\sqrt{34.353} \\approx 5.861\\).\nR: SE = 5.861 for all contrasts.\nComparison: Identical."
-  },
-  {
-    "objectID": "lectures/week-11_row-column-s-replicate.html#significance",
-    "href": "lectures/week-11_row-column-s-replicate.html#significance",
-    "title": "Row and Column Designs",
-    "section": "Significance",
-    "text": "Significance\n\nManual (MSD = 16.743):\n\nB–A (21.333 &gt; 16.743): Significant.\nC–A (10.666 &lt; 16.743): Not significant.\nB–C (10.667 &lt; 16.743): Not significant.\n\nR (Tukey-adjusted p-values):\n\nA–B (p = 0.0135 &lt; 0.05): Significant.\nA–C (p = 0.1926 &gt; 0.05): Not significant.\nB–C (p = 0.1926 &gt; 0.05): Not significant.\n\nComparison: Consistent conclusions. R’s p-values align with MSD thresholds, confirming B differs from A but not from C, and A does not differ from C."
-  },
-  {
-    "objectID": "lectures/week-11_row-column-s-replicate.html#conclusion",
-    "href": "lectures/week-11_row-column-s-replicate.html#conclusion",
-    "title": "Row and Column Designs",
-    "section": "Conclusion",
-    "text": "Conclusion\nThe revised explanation clarifies that MSD is the threshold for significant pairwise differences in Tukey’s method, calculated using \\(w_T\\), \\(MS_\\text{Error}\\), and the design’s replication structure. The R code with emmeans replicates the manual analysis, providing identical differences, standard errors, and significance conclusions, enhancing reliability and ease of computation. This integration bridges theory and practice effectively."
+    "text": "Step 4: Pairwise Comparisons\n\nlibrary(emmeans)\nemm &lt;- emmeans(cow_fit, ~Diet) # Corrected model reference\nsummary(emm)\npairs(emm, adjust = \"tukey\") # Added comment for clarity\n\n contrast estimate   SE df t.ratio p.value\n A - B      -13.50 10.2  8  -1.325  0.4217\n A - C       -2.83 10.2  8  -0.278  0.9585\n B - C       10.67 10.2  8   1.047  0.5706\n\nResults are averaged over the levels of: Cow, Period \nP value adjustment: tukey method for comparing a family of 3 estimates \n\n\n\n\n\n\n\n\n\nDiet\nemmean\nSE\ndf\nlower.CL\nupper.CL\n\n\n\n\nA\n53.00000\n7.206928\n8\n36.38079\n69.61921\n\n\nB\n66.50000\n7.206928\n8\n49.88079\n83.11921\n\n\nC\n55.83333\n7.206928\n8\n39.21413\n72.45254\n\n\n\n\n\n\n\nTable 2: Pairwise Comparisons of Diets"
   },
   {
     "objectID": "lectures/week-10_ancova-causal-inference_part1.html",
@@ -5781,7 +5739,7 @@
     "href": "home_lectures.html",
     "title": "📝 Lecture Notes",
     "section": "",
-    "text": "Welcome to the Lecture Notes page for STAT 454/545: Analysis of Variance and Experimental Design. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.\n\n\n\n\n\nWeek\nTopic\nLecture Notes Link\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Introduction to Experimental Design\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Introduction to Experimental Design\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes: Completely Randomized Designs (CRD)\n\n\n3\nMultiple Comparisons\nWeek 3 Notes: Multiple Comparisons\n\n\n4\nChecking Model Assumptions\nWeek 4 Notes: Checking Model Assumptions\n\n\n5\nTwo-Way Factorial Designs\nWeek 5 Notes: Two-Way Factorial Designs\n\n\n6\nHigher-Order Factorial Designs\nWeek 6 Notes: Higher-Order Factorial Designs\n\n\n7\nMidterm Review\nWeek 7 Notes: Midterm Review\n\n\n8\nBlocking & RCBD\nWeek 8 Notes: Blocking & RCBD\n\n\n9\nPower Analysis\nWeek 9 Notes: Power Analysis\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes: Analysis of Covariance (ANCOVA) and Causal Inference\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes: Analysis of Covariance (ANCOVA)\n\n\n11\nRow–Column Designs (Latin Square)\nWeek 11 Notes: Row–Column Designs (Latin Square)\n\n\n11\nRow-Column Designs (s-replicate Latin Square)\nWeek 11 Notes: Row-Column Designs (s-replicate Latin Square)\n\n\n12\nRandom & Mixed Models\nWeek 12 Notes: Random & Mixed Models\n\n\n13\nNested Models\nWeek 13 Notes: Nested Models\n\n\n14\nSplit-Plot Designs\nWeek 14 Notes: Split-Plot Designs\n\n\n15\nCatch-Up and Review\nWeek 15 Notes: Catch-Up and Review\n\n\n16\nFinal Exam Review Notes\nFinal Exam Review Notes\n\n\n\n\n\n\n\n\n\nWeek\nTopic\nWorksheet Link\n\n\n\n\n1\nIntroduction to Experimental Design\n[Week 1 Worksheet: Introduction to Experimental Design\n\n\n2\nCompletely Randomized Designs (CRD)\n[Week 2 Worksheet: Completely Randomized Designs (CRD)]\n\n\n3\nMultiple Comparisons\n[Week 3 Worksheet: Multiple Comparisons]\n\n\n4\nChecking Model Assumptions\n[Week 4 Worksheet: Model Diagnostics]\n\n\n5\nTwo-Way Factorial Designs\n[Week 5 Worksheet: Two-Way Factorial Designs]\n\n\n6\nHigher-Order Factorial Designs\n[Week 6 Worksheet: Higher-Order Factorial Designs]\n\n\n8\nBlocking & RCBD\n[Week 8 Worksheet: Blocking & RCBD]\n\n\n9\nPower Analysis\n[Week 9 Worksheet: Power Analysis]\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Worksheet: ANCOVA\n\n\n11\nRow–Column Designs\nWeek 11 Worksheet: Row–Column Designs\n\n\n12\nRandom & Mixed Models\n[Week 12 Worksheet: Mixed Models]\n\n\n13\nNested Models\n[Week 13 Worksheet: Nested Models]\n\n\n14\nSplit-Plot Designs\n[Week 14 Worksheet: Split-Plot Designs]\n\n\n\n\n\n\nIn addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links.\n\n\n\n\n\nPre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.\n\n\n\n\nIf you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance.\n\n\n\n\nInstructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas",
+    "text": "Welcome to the Lecture Notes page for STAT 454/545: Analysis of Variance and Experimental Design. Here, you will find weekly lecture notes and additional resources in HTML format, accessible via the course GitHub page.\n\n\n\n\n\nWeek\nTopic\nLecture Notes Link\n\n\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Introduction to Experimental Design\n\n\n1\nIntroduction to Experimental Design\nWeek 1 Notes: Introduction to Experimental Design\n\n\n2\nCompletely Randomized Designs (CRD)\nWeek 2 Notes: Completely Randomized Designs (CRD)\n\n\n3\nMultiple Comparisons\nWeek 3 Notes: Multiple Comparisons\n\n\n4\nChecking Model Assumptions\nWeek 4 Notes: Checking Model Assumptions\n\n\n5\nTwo-Way Factorial Designs\nWeek 5 Notes: Two-Way Factorial Designs\n\n\n6\nHigher-Order Factorial Designs\nWeek 6 Notes: Higher-Order Factorial Designs\n\n\n7\nMidterm Review\nWeek 7 Notes: Midterm Review\n\n\n8\nBlocking & RCBD\nWeek 8 Notes: Blocking & RCBD\n\n\n9\nPower Analysis\nWeek 9 Notes: Power Analysis\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes: Analysis of Covariance (ANCOVA) and Causal Inference\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Notes: Analysis of Covariance (ANCOVA)\n\n\n11\nRow–Column Designs (Latin Square)\nWeek 11 Notes: Row–Column Designs (Latin Square)\n\n\n11\nRow-Column Designs (s-replicate Latin Square)\nWeek 11 Notes: Row-Column Designs (s-replicate Latin Square)\n\n\n12\nRandom & Mixed Models\nWeek 12 Notes: Random & Mixed Models\n\n\n13\nNested Models\nWeek 13 Notes: Nested Models\n\n\n14\nSplit-Plot Designs\nWeek 14 Notes: Split-Plot Designs\n\n\n15\nCatch-Up and Review\nWeek 15 Notes: Catch-Up and Review\n\n\n16\nFinal Exam Review Notes\nFinal Exam Review Notes\n\n\n\n\n\n\n\n\n\nWeek\nTopic\nWorksheet Link\n\n\n\n\n1\nIntroduction to Experimental Design\n[Week 1 Worksheet: Introduction to Experimental Design]\n\n\n2\nCompletely Randomized Designs (CRD)\n[Week 2 Worksheet: Completely Randomized Designs (CRD)]\n\n\n3\nMultiple Comparisons\n[Week 3 Worksheet: Multiple Comparisons]\n\n\n4\nChecking Model Assumptions\n[Week 4 Worksheet: Model Diagnostics]\n\n\n5\nTwo-Way Factorial Designs\n[Week 5 Worksheet: Two-Way Factorial Designs]\n\n\n6\nHigher-Order Factorial Designs\n[Week 6 Worksheet: Higher-Order Factorial Designs]\n\n\n8\nBlocking & RCBD\n[Week 8 Worksheet: Blocking & RCBD]\n\n\n9\nPower Analysis\n[Week 9 Worksheet: Power Analysis]\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Worksheet: ANCOVA\n\n\n11\nRow–Column Designs\nWeek 11 Worksheet: Row–Column Designs\n\n\n12\nRandom & Mixed Models\n[Week 12 Worksheet: Mixed Models]\n\n\n13\nNested Models\n[Week 13 Worksheet: Nested Models]\n\n\n14\nSplit-Plot Designs\n[Week 14 Worksheet: Split-Plot Designs]\n\n\n\n\n\n\nIn addition to lecture notes, supplemental materials such as examples, data files, and problem sets will be provided as needed.\n\n📁 GitHub Repository: Course Repository\n\n🔗 Supplemental Readings: Available on Canvas or shared links.\n\n\n\n\n\nPre-Class Preparation: Read the lecture notes and supplemental readings before each class to familiarize yourself with the topics.\n\nDuring Class: Focus on key points highlighted in the notes. Participate in group activities and discussions.\n\nPost-Class Review: Revisit the lecture notes and solve related assignments. Use the notes for exam preparation.\n\n\n\n\nIf you experience issues accessing the lecture notes:\n1. Refresh your browser as noted earlier.\n2. Try accessing the page in incognito mode.\n3. Clear your browser cache using the appropriate settings (Chrome, Firefox, Edge).\nIf problems persist, contact the instructor via Canvas Email for further assistance.\n\n\n\n\nInstructor: Dr. Davood Tofighi\n\nOffice Hours: By appointment\n\nCourse GitHub Page: Access Here\n\nCanvas Course Page: UNM Canvas",
     "crumbs": [
       "Home",
       "Course Materials",
@@ -5805,7 +5763,7 @@
     "href": "home_lectures.html#worksheets",
     "title": "📝 Lecture Notes",
     "section": "",
-    "text": "Week\nTopic\nWorksheet Link\n\n\n\n\n1\nIntroduction to Experimental Design\n[Week 1 Worksheet: Introduction to Experimental Design\n\n\n2\nCompletely Randomized Designs (CRD)\n[Week 2 Worksheet: Completely Randomized Designs (CRD)]\n\n\n3\nMultiple Comparisons\n[Week 3 Worksheet: Multiple Comparisons]\n\n\n4\nChecking Model Assumptions\n[Week 4 Worksheet: Model Diagnostics]\n\n\n5\nTwo-Way Factorial Designs\n[Week 5 Worksheet: Two-Way Factorial Designs]\n\n\n6\nHigher-Order Factorial Designs\n[Week 6 Worksheet: Higher-Order Factorial Designs]\n\n\n8\nBlocking & RCBD\n[Week 8 Worksheet: Blocking & RCBD]\n\n\n9\nPower Analysis\n[Week 9 Worksheet: Power Analysis]\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Worksheet: ANCOVA\n\n\n11\nRow–Column Designs\nWeek 11 Worksheet: Row–Column Designs\n\n\n12\nRandom & Mixed Models\n[Week 12 Worksheet: Mixed Models]\n\n\n13\nNested Models\n[Week 13 Worksheet: Nested Models]\n\n\n14\nSplit-Plot Designs\n[Week 14 Worksheet: Split-Plot Designs]",
+    "text": "Week\nTopic\nWorksheet Link\n\n\n\n\n1\nIntroduction to Experimental Design\n[Week 1 Worksheet: Introduction to Experimental Design]\n\n\n2\nCompletely Randomized Designs (CRD)\n[Week 2 Worksheet: Completely Randomized Designs (CRD)]\n\n\n3\nMultiple Comparisons\n[Week 3 Worksheet: Multiple Comparisons]\n\n\n4\nChecking Model Assumptions\n[Week 4 Worksheet: Model Diagnostics]\n\n\n5\nTwo-Way Factorial Designs\n[Week 5 Worksheet: Two-Way Factorial Designs]\n\n\n6\nHigher-Order Factorial Designs\n[Week 6 Worksheet: Higher-Order Factorial Designs]\n\n\n8\nBlocking & RCBD\n[Week 8 Worksheet: Blocking & RCBD]\n\n\n9\nPower Analysis\n[Week 9 Worksheet: Power Analysis]\n\n\n10\nAnalysis of Covariance (ANCOVA)\nWeek 10 Worksheet: ANCOVA\n\n\n11\nRow–Column Designs\nWeek 11 Worksheet: Row–Column Designs\n\n\n12\nRandom & Mixed Models\n[Week 12 Worksheet: Mixed Models]\n\n\n13\nNested Models\n[Week 13 Worksheet: Nested Models]\n\n\n14\nSplit-Plot Designs\n[Week 14 Worksheet: Split-Plot Designs]",
     "crumbs": [
       "Home",
       "Course Materials",
