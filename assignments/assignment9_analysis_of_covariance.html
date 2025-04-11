@@ -329,8 +329,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#exercise-7.11-antifungal-antibiotic-experiment" id="toc-exercise-7.11-antifungal-antibiotic-experiment" class="nav-link" data-scroll-target="#exercise-7.11-antifungal-antibiotic-experiment">Exercise 7.11: Antifungal Antibiotic Experiment</a></li>
-  <li><a href="#summary-table-of-grades-and-rubric" id="toc-summary-table-of-grades-and-rubric" class="nav-link" data-scroll-target="#summary-table-of-grades-and-rubric">Summary Table of Grades and Rubric</a></li>
+  <li><a href="#exercise-9.2-analysis-of-covariance-model" id="toc-exercise-9.2-analysis-of-covariance-model" class="nav-link" data-scroll-target="#exercise-9.2-analysis-of-covariance-model">Exercise 9.2: Analysis of Covariance Model</a></li>
+  <li><a href="#exercise-9.3-zinc-plating-experiment" id="toc-exercise-9.3-zinc-plating-experiment" class="nav-link" data-scroll-target="#exercise-9.3-zinc-plating-experiment">Exercise 9.3: Zinc Plating Experiment</a>
+  <ul class="collapse">
+  <li><a href="#grading-rubric-summary" id="toc-grading-rubric-summary" class="nav-link" data-scroll-target="#grading-rubric-summary">Grading Rubric Summary</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -349,115 +352,88 @@ window.Quarto = {
 <li>Clearly explain your analysis process for full credit.</li>
 <li>Submit your assignment as a single PDF file.</li>
 </ol>
-<p><strong>Total points</strong>: 55</p>
+<p><strong>Total points</strong>: 90</p>
 </section>
-<section id="exercise-7.11-antifungal-antibiotic-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7.11-antifungal-antibiotic-experiment">Exercise 7.11: Antifungal Antibiotic Experiment</h2>
-<p>This exercise investigates the effects of incubation conditions on the yield of an antifungal antibiotic.</p>
-<ul>
-<li><strong>Factors and Levels:</strong></li>
-<li>Incubation temperature (A): 25, 30, and 37 <span class="math inline">\(^\circ \text{C}\)</span></li>
-<li>Carbon concentration (B): 2%, 5%, and 7.5%</li>
-<li>Nitrogen concentration (C): 0.5%, 1%, and 3%</li>
-</ul>
-<p>The response variable is the antifungal yield (measured in activity against <em>Candida albicans</em>). Data are shown in <strong>Table 7.23</strong>.</p>
+<section id="exercise-9.2-analysis-of-covariance-model" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-9.2-analysis-of-covariance-model">Exercise 9.2: Analysis of Covariance Model</h2>
+<p><strong>Problem Statement:</strong> Assume the analysis of covariance model holds:</p>
+<p><span class="math display">\[
+Y_{it} = \mu + \tau_i + \beta (x_{it} - \bar{x}_{..}) + \epsilon_{it}.
+\]</span></p>
 <p><strong>Questions:</strong></p>
 <ol type="1">
-<li><p><strong>Assess Main Effects</strong> Construct plots to assess the significance of main effects of <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span> on the response. What are your conclusions?</p></li>
-<li><p><strong>Interaction Assumptions</strong> State the assumptions you made regarding interactions while analyzing main effects in part (1).</p></li>
-<li><p><strong>Two-Way Interactions</strong> Construct plots to assess the significance of two-way interactions. Do they alter your conclusions from part (1)?</p></li>
-<li><p><strong>Fit a Model</strong> Assuming no three-way interaction, fit a model with all main effects and two-way interactions. Discuss the significance of the effects and compare with your conclusions from part (3).</p></li>
-<li><p><strong>Model Diagnostics</strong></p>
-<p>Evaluate whether the assumptions of normality and equal error variances are satisfied. Identify potential outliers.</p></li>
+<li>Compute <span class="math inline">\(\mathbb{E}[Y_{it}]\)</span>.</li>
+<li>Verify that <span class="math inline">\(SS^*_{xY}= \sum_{it} (x_{it} - \bar{x}_i) Y_{it}\)</span>, given <span class="math inline">\(SS^*_{xY}= \sum_{it} (x_{it} - \bar{x}_i)(Y_{it} - \bar{Y}_i)\)</span>.</li>
+<li>Show that <span class="math inline">\(\mathbb{E}[\hat{\beta}] = \beta\)</span>, where</li>
 </ol>
-<p><strong>Table 7.23</strong>: Data for Antifungal Antibiotic Experiment</p>
+<p><span class="math display">\[
+\hat{\beta} = \frac{SS^*_{xY}}{SS^*_{xx}}, \quad SS^*_{xx} = \sum_{it} (x_{it} - \bar{x}_i)^2.
+\]</span></p>
+<ol start="4" type="1">
+<li>Verify that <span class="math inline">\(\text{Var}(\hat{\beta}) = \frac{\sigma^2}{SS^*_{xx}}\)</span> and <span class="math inline">\(\text{Cov}(\bar{Y}_i, \hat{\beta}) = 0\)</span>.</li>
+<li>Verify that <span class="math inline">\(\mathbb{E}[\hat{\mu} + \hat{\tau}_i] = \mu + \tau_i\)</span>, where:</li>
+</ol>
+<p><span class="math display">\[
+\hat{\mu} + \hat{\tau}_i = \bar{Y}_i - \hat{\beta}(\bar{x}_i - \bar{x}_{..}).
+\]</span></p>
+<ol start="6" type="1">
+<li>Using results from (3) and (5), argue that <span class="math inline">\(\mu + \tau_i\)</span>, <span class="math inline">\(\beta\)</span>, and all linear combinations of these are estimable.</li>
+</ol>
+<hr>
+</section>
+<section id="exercise-9.3-zinc-plating-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-9.3-zinc-plating-experiment">Exercise 9.3: Zinc Plating Experiment</h2>
+<p><strong>Problem Statement:</strong> Data from a zinc plating experiment by Hicks (1965) involve three vendors. Each vendor plated four steel brackets, with pre-plating thickness measured as a covariate. The response variable was the zinc plating thickness (in <span class="math inline">\(10^{-5}\)</span> inches).</p>
+<p><strong>Data:</strong></p>
 <table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 44%">
+<col style="width: 45%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th><span class="math inline">\(y_{ijk}\)</span></th>
+<th>Vendor</th>
+<th><span class="math inline">\(x_{it}\)</span> (Pre-plating thickness)</th>
+<th><span class="math inline">\(y_{it}\)</span> (Zinc plating thickness)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>25</td>
-<td>2</td>
-<td>0.5</td>
-<td>25.84</td>
+<td>1</td>
+<td>110, 75, 93, 97</td>
+<td>40, 38, 30, 47</td>
 </tr>
 <tr class="even">
-<td>25</td>
 <td>2</td>
-<td>1</td>
-<td>51.86</td>
+<td>60, 75, 38, 140</td>
+<td>25, 32, 13, 35</td>
 </tr>
 <tr class="odd">
-<td>25</td>
-<td>2</td>
 <td>3</td>
-<td>32.59</td>
-</tr>
-<tr class="even">
-<td>30</td>
-<td>5</td>
-<td>1</td>
-<td>41.11</td>
-</tr>
-<tr class="odd">
-<td>37</td>
-<td>7.5</td>
-<td>0.5</td>
-<td>51.86</td>
-</tr>
-<tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
+<td>62, 90, 45, 59</td>
+<td>27, 24, 20, 13</td>
 </tr>
 </tbody>
 </table>
-<p><em>Source: Gupte and Kulkarni (2003), Journal of Chemical Technology and Biotechnology.</em></p>
-<!-- 
-## Exercise 7.12: Antifungal Antibiotic Experiment (Extended)
-
-For this exercise, consider the data from **Table 7.23** but assume no negligible three-factor interaction. Modify levels of $A$ and $B$ so their third levels are 35 and 8, respectively, to ensure equal spacing.
-
-**Questions:**
-
-1. **Trend Contrasts**
-
-Create a table listing the 27 treatment combinations. Include contrast coefficients for:
-
-- Linear and quadratic trends in $A$ and $B$
-- Interaction trends ($A \times B$: Linear-Linear, Linear-Quadratic, etc.)
-
-2. **Normalize Contrasts**
-
-Identify divisors to normalize each contrast and manually compute least squares estimates for normalized Linear $A$ and Quadratic $A$ contrasts.
-
-3. **Orthogonal Contrasts for $C$**
-
-Propose two orthogonal contrasts for $C$ to address its uneven spacing and add them to the table in part (1).
-
-4. **Orthogonal Contrasts Analysis**
-
-Use software to calculate least squares estimates for all 26 orthogonal contrasts. Generate a half-normal probability plot and interpret the results.
-
-5. **Alternative Analysis**
-
-Apply the Voss and Wang method to analyze the orthogonal contrasts. Compare these findings to part (4).
- -->
-</section>
-<section id="summary-table-of-grades-and-rubric" class="level2">
-<h2 class="anchored" data-anchor-id="summary-table-of-grades-and-rubric">Summary Table of Grades and Rubric</h2>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li>Plot <span class="math inline">\(y_{it}\)</span> versus <span class="math inline">\(x_{it}\)</span>, using vendor index as the plotting symbol. Discuss the relationship and the appropriateness of the analysis of covariance (ANCOVA) model.</li>
+<li>Fit the ANCOVA model (<span class="math inline">\(Y_{it} = \mu + \tau_i + \beta (x_{it} - \bar{x}_{..}) + \epsilon_{it}\)</span>).</li>
+<li>Plot residuals against the covariate, predicted values, and normal scores. Evaluate model assumptions.</li>
+<li>Test for equality of slopes at <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+<li>Test for equality of vendor effects at <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+<li>Fit an ANOVA model ignoring the covariate.</li>
+<li>Using ANOVA, test for equality of vendor effects at <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+</ol>
+<hr>
+<section id="grading-rubric-summary" class="level3">
+<h3 class="anchored" data-anchor-id="grading-rubric-summary">Grading Rubric Summary</h3>
 <table class="table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 20%">
-<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 25%">
+<col style="width: 8%">
 <col style="width: 56%">
 </colgroup>
 <thead>
@@ -470,51 +446,28 @@ Apply the Voss and Wang method to analyze the orthogonal contrasts. Compare thes
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Exercise 7.11</strong></td>
-<td><strong>Part (a): Main Effects</strong></td>
-<td>10</td>
-<td>Construct main effects plots and evaluate their significance.</td>
+<td><strong>Exercise 8.2</strong></td>
+<td>Correct proofs for statistical properties.</td>
+<td><strong>40</strong></td>
+<td>Step-by-step verification of all expectations, variances, and covariances.</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><strong>Part (b): Interaction Assumptions</strong></td>
-<td>5</td>
-<td>Clearly state and justify interaction assumptions.</td>
+<td><strong>Exercise 8.3</strong></td>
+<td>Complete ANCOVA analysis, testing, plots.</td>
+<td><strong>50</strong></td>
+<td>Full statistical analysis using both ANCOVA and ANOVA, with diagnostics and hypothesis testing.</td>
 </tr>
 <tr class="odd">
+<td><strong>Overall Total</strong></td>
 <td></td>
-<td><strong>Part (c): Two-Way Interactions</strong></td>
-<td>15</td>
-<td>Construct interaction plots, interpret results, and update conclusions from main effects analysis.</td>
-</tr>
-<tr class="even">
-<td></td>
-<td><strong>Part (d): Model Fitting</strong></td>
-<td>15</td>
-<td>Fit a model including all main effects and two-way interactions, interpret significant effects.</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><strong>Part (e): Diagnostics</strong></td>
-<td>10</td>
-<td>Evaluate residual diagnostics for normality, homoscedasticity, and outliers.</td>
-</tr>
-<tr class="even">
-<td><strong>Total for Exercise 7.11</strong></td>
-<td></td>
-<td><strong>55</strong></td>
+<td><strong>90</strong></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<!-- | **Exercise 7.12**           | **Part (a): Trend Contrasts**         | 15             | Create a table with contrast coefficients for linear, quadratic, and interaction terms.              |
-|                             | **Part (b): Normalization**           | 10             | Compute normalization divisors and least squares estimates.                                          |
-|                             | **Part (c): Orthogonal Contrasts**    | 10             | Propose and justify two orthogonal contrasts for CC.                                                 |
-|                             | **Part (d): Computer Analysis**       | 15             | Compute estimates, create a half-normal probability plot, and interpret results.                     |
-|                             | **Part (e): Voss and Wang Method**    | 10             | Apply the method to examine orthogonal contrasts and compare with results from the half-normal plot. |
-| **Total for Exercise 7.12** |                                       | **60**         |                                                                                                      | -->
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
